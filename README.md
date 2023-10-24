@@ -1,1 +1,4 @@
-# PSEMolDyn_GroupD
+MolSim
+===
+
+The Molecular Dynamics teaching code.
