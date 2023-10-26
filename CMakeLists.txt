@@ -34,12 +34,19 @@ target_include_directories(MolSim
         PRIVATE
             ${CMAKE_CURRENT_SOURCE_DIR}/src
 )
+# Look for Xerces XML Parser, and raise an error if not found with instruction to install it
+find_package(XercesC QUIET)
+
+if(NOT XercesC_FOUND)
+    message(FATAL_ERROR "Xerces XML Parser not found. You can install it with: sudo apt-get install libxerces-c-dev")
+endif()
 
 target_link_libraries(MolSim
         # stuff that is used in headers and source files
         PUBLIC
             xerces-c
 )
+
 
 # activate all compiler warnings. Clean up your code :P
 # depending on the compiler different flags are used
