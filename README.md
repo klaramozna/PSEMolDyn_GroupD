@@ -1,7 +1,7 @@
 # MolSim
 
 Bachelor Practical course:  
-```PSE Molecular Dynamics:``` Developing a Molecular Dynamics Simulation  
+`PSE Molecular Dynamics:` Developing a Molecular Dynamics Simulation  
 
 
 
