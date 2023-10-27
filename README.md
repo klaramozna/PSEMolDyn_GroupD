@@ -39,6 +39,7 @@ Bachelor Practical course:
   - Cmake: ```sudo apt-get install cmake```
   - Make: ```sudo apt-get install make```
   - Xerces-C library: ```sudo apt-get install libxerces-c-dev```
+  - Boost program options: ```sudo apt-get install libboost-program-options-dev```
 
 <a name="gettingStarted"></a>
 ### Getting Started
@@ -53,6 +54,13 @@ Bachelor Practical course:
 <a name="usage"></a>
 ### Usage
 
+#### Command Line Usage:
+run the program with: ```./MolSim -p <input_file_path>```  
+
+##### Optional arguments:
+- ```-h , --help```: produces help message
+- ```-e, --t_end```: specifies end time of simulation(default: 1000)
+- ```-s, --delta_t```: specifies the step size between iterations(default: 0.014)
 
 
 <a name="documentation"></a>
