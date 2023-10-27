@@ -41,10 +41,17 @@ if(NOT XercesC_FOUND)
     message(FATAL_ERROR "Xerces XML Parser not found. You can install it with: sudo apt-get install libxerces-c-dev")
 endif()
 
+# Look for Boost program options
+find_package(Boost QUIET COMPONENTS program_options)
+if(NOT Boost_FOUND)
+    message(FATAL_ERROR "Boost program options not found. You can install it with: sudo apt-get install libboost-program-options-dev")
+endif()
+
 target_link_libraries(MolSim
         # stuff that is used in headers and source files
         PUBLIC
             xerces-c
+            Boost::program_options
 )
 
 
