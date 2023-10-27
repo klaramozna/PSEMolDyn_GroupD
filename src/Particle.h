@@ -9,6 +9,7 @@
 
 #include <array>
 #include <string>
+#include "VectorDouble.h"
 
 class Particle {
 
@@ -65,17 +66,25 @@ public:
 
     const std::array<double, 3> &getOldF() const;
 
+    VectorDouble getXVector() const;
+
+    VectorDouble getVVector() const;
+
+    VectorDouble getFVector() const;
+
+    VectorDouble getOldFVector() const;
+
     double getM() const;
 
     int getType() const;
 
-    void setX(const std::array<double, 3> &position);
+    void setX(const VectorDouble &position);
 
-    void setV(const std::array<double, 3> &velocity);
+    void setV(const VectorDouble &velocity);
 
-    void setF(const std::array<double, 3> &force);
+    void setF(const VectorDouble &force);
 
-    void setOldF(const std::array<double, 3> &oldForce);
+    void setOldF(const VectorDouble &oldForce);
 
     bool operator==(Particle &other);
 

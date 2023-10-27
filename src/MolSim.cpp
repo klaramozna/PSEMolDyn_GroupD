@@ -5,6 +5,8 @@
 
 #include <iostream>
 #include <list>
+#include "VectorDouble.h"
+#include <cmath>
 
 /**** forward declaration of the calculation functions ****/
 
@@ -77,21 +79,29 @@ void calculateF() {
     iterator = particles.begin();
 
     for (auto &p1: particles) {
+        p1.setOldF(p1.getFVector());
+        VectorDouble f_i(3);
         for (auto &p2: particles) {
-
+            if(!(p2 == p1)){
+                f_i += ((p1.getM() * p2.getM()) / pow((p1.getXVector() - p2.getXVector()).getL2Norm(), 3)) * (p2.getXVector() - p1.getXVector());
+            }
         }
+        p1.setF(f_i);
     }
 }
 
 void calculateX() {
     for (auto &p: particles) {
-        // @TODO: insert calculation of position updates here!
+        VectorDouble x_i = p.getXVector() + delta_t * p.getVVector()
+                + ((delta_t * delta_t) / (2. * p.getM())) * p.getOldFVector();
+        p.setX(x_i);
     }
 }
 
 void calculateV() {
     for (auto &p: particles) {
-        // @TODO: insert calculation of veclocity updates here!
+        VectorDouble v_i = p.getVVector() + (delta_t / (2. * p.getM()) * (p.getOldFVector() + p.getFVector()));
+        p.setV(v_i);
     }
 }
 

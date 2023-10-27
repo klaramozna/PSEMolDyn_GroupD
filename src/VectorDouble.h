@@ -7,6 +7,7 @@
 
 
 #include <vector>
+#include <array>
 
 class VectorDouble {
 private:
@@ -18,6 +19,8 @@ public:
 
     explicit VectorDouble(const std::vector<double> &vector);
 
+    explicit VectorDouble(const std::array<double, 3>& array);
+
     VectorDouble operator+=(const VectorDouble &other);
 
     VectorDouble operator-=(const VectorDouble &other);
@@ -25,6 +28,8 @@ public:
     double getL2Norm() const;
 
     void print() const;
+
+    std::array<double, 3> convertToArray() const;
 
     friend VectorDouble operator+(const VectorDouble &vec1, const VectorDouble &vec2);
 

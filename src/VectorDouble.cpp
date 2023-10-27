@@ -79,3 +79,20 @@ VectorDouble operator*(double scalar, const VectorDouble &vec) {
     }
     return result;
 }
+
+VectorDouble::VectorDouble(const std::array<double, 3> &array) {
+    for(double value : array){
+        values.push_back(value);
+    }
+}
+
+std::array<double, 3> VectorDouble::convertToArray() const {
+    if(values.size() != 3){
+        throw std::invalid_argument("This operation is only available for arrays with 3 elements.");
+    }
+    std::array<double, 3> result{};
+    for(int i = 0; i < 3; i++){
+        result[i] = values[i];
+    }
+    return result;
+}
