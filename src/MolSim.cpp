@@ -6,6 +6,8 @@
 #include <iostream>
 #include <list>
 
+#include <boost/program_options.hpp>
+
 /**** forward declaration of the calculation functions ****/
 
 /**
@@ -35,16 +37,50 @@ constexpr double delta_t = 0.014;
 // TODO: what data structure to pick?
 std::list<Particle> particles;
 
+namespace po = boost::program_options;
+
 int main(int argc, char *argsv[]) {
 
-  std::cout << "Hello from MolSim for PSE!" << std::endl;
-  if (argc != 2) {
-    std::cout << "Erroneous programme call! " << std::endl;
-    std::cout << "./molsym filename" << std::endl;
-  }
+    std::cout << "Hello from MolSim for PSE!" << std::endl;
+
+    //declaring the supported options
+    po::options_description desc("Allowed options");
+    desc.add_options()
+        ("help,h", "produce help message")
+        ("input_path,p", po::value<std::string>(), "the path to the input file")
+        ("t_end,e", po::value<double>()->default_value(1000),"end time of simulation")
+        ("delta_t,s", po::value<double>()->default_value(0.014),"step size between interations");
+
+    po::variables_map vm;
+    try{
+        po::store(po::parse_command_line(argc, argsv, desc), vm);
+        po::notify(vm);
+    }
+    //deal with any erroneous program(incorrect user input)
+    catch(po::error& e) {
+        std::cout << "Erroneous programm call! " << std::endl;
+        std::cout << desc << std::endl;
+        return 1;
+    }
+
+    if (vm.count("help")){
+        std::cout << desc << std::endl;
+        return 0;
+    }
+    std::string input_path;
+    if (vm.count("input_path")){
+        input_path = vm["input_path"].as<std::string>();
+        std::cout << "Input path: " << input_path << std::endl;
+    }
+    else {
+        std::cout << "Input file not specified." << std::endl;
+        std::cout << desc << std::endl;
+        return 1;
+    }
+
 
   FileReader fileReader;
-  fileReader.readFile(particles, argsv[1]);
+  fileReader.readFile(particles, input_path);
 
   double current_time = start_time;
 
