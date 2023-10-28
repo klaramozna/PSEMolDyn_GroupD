@@ -31,8 +31,8 @@ void calculateV();
 void plotParticles(int iteration);
 
 constexpr double start_time = 0;
-constexpr double end_time = 1000;
-constexpr double delta_t = 0.014;
+double end_time;
+double delta_t;
 
 // TODO: what data structure to pick?
 std::list<Particle> particles;
@@ -48,8 +48,8 @@ int main(int argc, char *argsv[]) {
     desc.add_options()
         ("help,h", "produce help message")
         ("input_path,p", po::value<std::string>(), "the path to the input file")
-        ("t_end,e", po::value<double>()->default_value(1000),"end time of simulation")
-        ("delta_t,s", po::value<double>()->default_value(0.014),"step size between interations");
+        ("t_end,e", po::value<double>(&end_time)->default_value(1000),"end time of simulation")
+        ("delta_t,s", po::value<double>(&delta_t)->default_value(0.014),"step size between interations");
 
     po::variables_map vm;
     try{
@@ -77,7 +77,6 @@ int main(int argc, char *argsv[]) {
         std::cout << desc << std::endl;
         return 1;
     }
-
 
   FileReader fileReader;
   fileReader.readFile(particles, input_path);
