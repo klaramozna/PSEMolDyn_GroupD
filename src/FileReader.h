@@ -14,8 +14,13 @@
 class FileReader {
 
 public:
-  FileReader();
-  virtual ~FileReader();
+    FileReader();
 
+<<<<<<< HEAD
   void readFile(std::list<Particle> &particles, std::string &filename);
+=======
+    virtual ~FileReader();
+
+    void readFile(std::list<Particle> &particles, char *filename);
+>>>>>>> task1.2
 };

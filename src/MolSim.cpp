@@ -5,6 +5,8 @@
 
 #include <iostream>
 #include <list>
+#include "VectorDouble.h"
+#include <cmath>
 
 #include <boost/program_options.hpp>
 
@@ -84,56 +86,64 @@ int main(int argc, char *argsv[]) {
   double current_time = start_time;
 
   int iteration = 0;
+  
+    // for this loop, we assume: current x, current f and current v are known
+    while (current_time < end_time) {
+        // calculate new x
+        calculateX();
+        // calculate new f
+        calculateF();
+        // calculate new v
+        calculateV();
 
-  // for this loop, we assume: current x, current f and current v are known
-  while (current_time < end_time) {
-    // calculate new x
-    calculateX();
-    // calculate new f
-    calculateF();
-    // calculate new v
-    calculateV();
+        iteration++;
+        if (iteration % 10 == 0) {
+            plotParticles(iteration);
+        }
+        std::cout << "Iteration " << iteration << " finished." << std::endl;
 
-    iteration++;
-    if (iteration % 10 == 0) {
-      plotParticles(iteration);
+        current_time += delta_t;
     }
-    std::cout << "Iteration " << iteration << " finished." << std::endl;
 
-    current_time += delta_t;
-  }
-
-  std::cout << "output written. Terminating..." << std::endl;
-  return 0;
+    std::cout << "output written. Terminating..." << std::endl;
+    return 0;
 }
 
 void calculateF() {
-  std::list<Particle>::iterator iterator;
-  iterator = particles.begin();
+    std::list<Particle>::iterator iterator;
+    iterator = particles.begin();
 
-  for (auto &p1 : particles) {
-    for (auto &p2 : particles) {
-      // @TODO: insert calculation of forces here!
+    for (auto &p1: particles) {
+        p1.setOldF(p1.getFVector());
+        VectorDouble f_i(3);
+        for (auto &p2: particles) {
+            if(!(p2 == p1)){
+                f_i += ((p1.getM() * p2.getM()) / pow((p1.getXVector() - p2.getXVector()).getL2Norm(), 3)) * (p2.getXVector() - p1.getXVector());
+            }
+        }
+        p1.setF(f_i);
     }
-  }
 }
 
 void calculateX() {
-  for (auto &p : particles) {
-    // @TODO: insert calculation of position updates here!
-  }
+    for (auto &p: particles) {
+        VectorDouble x_i = p.getXVector() + delta_t * p.getVVector()
+                + ((delta_t * delta_t) / (2. * p.getM())) * p.getOldFVector();
+        p.setX(x_i);
+    }
 }
 
 void calculateV() {
-  for (auto &p : particles) {
-    // @TODO: insert calculation of veclocity updates here!
-  }
+    for (auto &p: particles) {
+        VectorDouble v_i = p.getVVector() + (delta_t / (2. * p.getM()) * (p.getOldFVector() + p.getFVector()));
+        p.setV(v_i);
+    }
 }
 
 void plotParticles(int iteration) {
 
-  std::string out_name("MD_vtk");
+    std::string out_name("MD_vtk");
 
-  outputWriter::XYZWriter writer;
-  writer.plotParticles(particles, out_name, iteration);
+    outputWriter::XYZWriter writer;
+    writer.plotParticles(particles, out_name, iteration);
 }
