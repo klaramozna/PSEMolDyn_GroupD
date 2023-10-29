@@ -1,6 +1,7 @@
 
 #include "FileReader.h"
 #include "outputWriter/XYZWriter.h"
+#include "outputWriter/VTKWriter.h"
 #include "utils/ArrayUtils.h"
 
 #include <iostream>
@@ -144,6 +145,13 @@ void plotParticles(int iteration) {
 
     std::string out_name("MD_vtk");
 
-    outputWriter::XYZWriter writer;
-    writer.plotParticles(particles, out_name, iteration);
+    //outputWriter::XYZWriter writer;
+    //writer.plotParticles(particles, out_name, iteration);
+    
+    outputWriter::VTKWriter writer;
+    writer.initializeOutput(particles.size());
+    for (auto &p: particles) {
+           writer.plotParticle(p);
+        }
+    writer.writeFile(out_name, iteration);
 }
