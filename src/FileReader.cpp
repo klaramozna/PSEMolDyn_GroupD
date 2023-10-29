@@ -16,19 +16,11 @@ FileReader::FileReader() = default;
 
 FileReader::~FileReader() = default;
 
-<<<<<<< HEAD
 void FileReader::readFile(std::list<Particle> &particles, std::string &filename) {
   std::array<double, 3> x;
   std::array<double, 3> v;
   double m;
   int num_particles = 0;
-=======
-void FileReader::readFile(std::list<Particle> &particles, char *filename) {
-    std::array<double, 3> x;
-    std::array<double, 3> v;
-    double m;
-    int num_particles = 0;
->>>>>>> task1.2
 
     std::ifstream input_file(filename);
     std::string tmp_string;
