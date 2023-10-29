@@ -65,5 +65,11 @@ run the program with: ```./MolSim -p <input_file_path>```
 
 <a name="documentation"></a>
 ### Documentation
+This project is well-documented using Doxygen. To generate the documentation locally, follow these steps:  
+
+##### Build Doxygen Documentation 
+- Create Build Directory and navigate to it: ```mkdir build && cd build```  
+- Configure with CMake and enable the Doxygen documentation generation option: ```cmake -DBUILD_DOXYGEN=ON ..```
+- Compile the Project: ```make doc_doxygen``` 
 
 
