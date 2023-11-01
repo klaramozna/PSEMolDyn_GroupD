@@ -12,17 +12,20 @@ Members:
 
 
 # Report #
-## Task 1 ##
+## Task 1 ”First steps” 
 * 
 * 
 
-## Task 2 ##
+## Task 2 ”Completion of the program frame” ##
 *
 
-## Task 3 ##
+## Task 3 ”Simulation of Halley’s Comet”##
 * 
+* 
+* 
+<img src="planets_annotated.jpg">
 
-## Task 4 ##
+## Task 4 ”Refactoring and documentation”##
 *
 
 
