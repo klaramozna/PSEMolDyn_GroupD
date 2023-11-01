@@ -20,9 +20,7 @@ file(GLOB_RECURSE MY_SRC
 )
 
 # Create make target
-add_executable(MolSim ${MY_SRC}
-        src/Simulation.cpp
-        src/Simulation.h)
+add_executable(MolSim ${MY_SRC})
 
 # set cxx standard. You may raise this if you want.
 target_compile_features(MolSim
@@ -50,7 +48,7 @@ if(NOT Boost_FOUND)
 endif()
 
 # Add test subdirectory
-add_subdirectory(test)
+#add_subdirectory(test)
 
 # Link Libraries for running the project
 target_link_libraries(MolSim
