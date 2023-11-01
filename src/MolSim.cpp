@@ -7,6 +7,7 @@
 #include <iostream>
 #include <list>
 #include "VectorDouble.h"
+#include "Simulation.h"
 #include <cmath>
 
 #include <boost/program_options.hpp>
@@ -31,14 +32,11 @@ void calculateV();
 /**
  * plot the particles to a xyz-file
  */
-void plotParticles(int iteration);
+void plotParticles(int iteration, Simulation simulation);
 
 constexpr double start_time = 0;
 double end_time;
 double delta_t;
-
-// TODO: what data structure to pick?
-std::list<Particle> particles;
 
 namespace po = boost::program_options;
 
@@ -82,7 +80,9 @@ int main(int argc, char *argsv[]) {
     }
 
   FileReader fileReader;
-  fileReader.readFile(particles, input_path);
+  Simulation simulation(delta_t);
+
+  fileReader.readFile(simulation.getParticles(), input_path);
 
   double current_time = start_time;
 
@@ -91,15 +91,15 @@ int main(int argc, char *argsv[]) {
     // for this loop, we assume: current x, current f and current v are known
     while (current_time < end_time) {
         // calculate new x
-        calculateX();
+        simulation.calculateX();
         // calculate new f
-        calculateF();
+        simulation.calculateF();
         // calculate new v
-        calculateV();
+        simulation.calculateV();
 
         iteration++;
         if (iteration % 10 == 0) {
-            plotParticles(iteration);
+            plotParticles(iteration, simulation);
         }
         std::cout << "Iteration " << iteration << " finished." << std::endl;
 
@@ -110,38 +110,7 @@ int main(int argc, char *argsv[]) {
     return 0;
 }
 
-void calculateF() {
-    std::list<Particle>::iterator iterator;
-    iterator = particles.begin();
-
-    for (auto &p1: particles) {
-        p1.setOldF(p1.getFVector());
-        VectorDouble f_i(3);
-        for (auto &p2: particles) {
-            if(!(p2 == p1)){
-                f_i += ((p1.getM() * p2.getM()) / pow((p1.getXVector() - p2.getXVector()).getL2Norm(), 3)) * (p2.getXVector() - p1.getXVector());
-            }
-        }
-        p1.setF(f_i);
-    }
-}
-
-void calculateX() {
-    for (auto &p: particles) {
-        VectorDouble x_i = p.getXVector() + delta_t * p.getVVector()
-                + ((delta_t * delta_t) / (2. * p.getM())) * p.getOldFVector();
-        p.setX(x_i);
-    }
-}
-
-void calculateV() {
-    for (auto &p: particles) {
-        VectorDouble v_i = p.getVVector() + (delta_t / (2. * p.getM()) * (p.getOldFVector() + p.getFVector()));
-        p.setV(v_i);
-    }
-}
-
-void plotParticles(int iteration) {
+void plotParticles(int iteration, Simulation simulation) {
 
     std::string out_name("MD_vtk");
 
@@ -149,8 +118,8 @@ void plotParticles(int iteration) {
     //writer.plotParticles(particles, out_name, iteration);
     
     outputWriter::VTKWriter writer;
-    writer.initializeOutput(particles.size());
-    for (auto &p: particles) {
+    writer.initializeOutput(simulation.getParticles().size());
+    for (auto &p: simulation.getParticles()) {
            writer.plotParticle(p);
         }
     writer.writeFile(out_name, iteration);
