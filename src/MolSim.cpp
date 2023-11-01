@@ -61,7 +61,7 @@ int main(int argc, char *argsv[]) {
     }
     //deal with any erroneous program(incorrect user input)
     catch(po::error& e) {
-        std::cout << "Erroneous programm call! " << std::endl;
+        std::cout << "Erroneous program call! " << std::endl;
         std::cout << desc << std::endl;
         return 1;
     }

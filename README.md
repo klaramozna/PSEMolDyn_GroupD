@@ -40,6 +40,7 @@ Bachelor Practical course:
   - Make: ```sudo apt-get install make```
   - Xerces-C library: ```sudo apt-get install libxerces-c-dev```
   - Boost program options: ```sudo apt-get install libboost-program-options-dev```
+  - Boost test environment: ```sudo apt-get install libboost-test-dev ```
 
 <a name="gettingStarted"></a>
 ### Getting Started

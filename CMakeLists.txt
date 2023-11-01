@@ -19,7 +19,9 @@ file(GLOB_RECURSE MY_SRC
     "${CMAKE_CURRENT_SOURCE_DIR}/src/*.h"
 )
 
-# create make target
+# Create a STATIC library for your application's code
+add_library(MolSimLib STATIC ${MY_SRC})
+
 add_executable(MolSim ${MY_SRC})
 
 # set cxx standard. You may raise this if you want.
@@ -42,18 +44,19 @@ if(NOT XercesC_FOUND)
 endif()
 
 # Look for Boost program options
-find_package(Boost QUIET COMPONENTS program_options)
+find_package(Boost QUIET COMPONENTS program_options unit_test_framework)
 if(NOT Boost_FOUND)
-    message(FATAL_ERROR "Boost program options not found. You can install it with: sudo apt-get install libboost-program-options-dev")
+    message(FATAL_ERROR "Boost program options and/or test-dev not found. You can install it with: sudo apt-get install libboost-program-options-dev or sudo apt-get install libboost-test-dev")
 endif()
 
+# Link Libraries for running the project
 target_link_libraries(MolSim
         # stuff that is used in headers and source files
         PUBLIC
             xerces-c
             Boost::program_options
+            MolSimLib
 )
-
 
 # activate all compiler warnings. Clean up your code :P
 # depending on the compiler different flags are used
@@ -67,3 +70,17 @@ target_compile_options(MolSim
 list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 
 include(doxygen)
+
+# Enable testing
+enable_testing()
+
+# Create a test target for each test suite
+add_executable(TestSuiteFirstSheet src/tests/MotionTesting.cpp)
+
+# Link each test suite with Boost.Test and your application
+target_link_libraries(TestSuiteFirstSheet PRIVATE Boost::unit_test_framework MolSimLib)
+
+# Add a test for each test suite
+add_test(NAME TestSuiteFirstSheet COMMAND TestSuiteFirstSheet)
+
+
