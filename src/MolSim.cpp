@@ -43,7 +43,6 @@ std::list<Particle> particles;
 namespace po = boost::program_options;
 
 int main(int argc, char *argsv[]) {
-
     std::cout << "Hello from MolSim for PSE!" << std::endl;
 
     //declaring the supported options
