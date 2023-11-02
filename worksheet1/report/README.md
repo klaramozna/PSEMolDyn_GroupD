@@ -23,7 +23,10 @@ Members:
 * Using the provided parameters, we managed to run the simulation from the input file and visualize the particles in Paraview with a glyph filter. Moreover, to enhance the visual representation, we added circles to track the trajectories of Earth and Jupiter. 
 <img src=start_state.png>
 
-* We also provided a video of our result simulation: 
+* We also provided a video of our result simulation:
+  
+https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/00c0e27b-faaa-46da-9583-b0e2a427c47a
+
 <img src="planets_annotated.jpg">
 
 ## Task 4 ”Refactoring and documentation”##
