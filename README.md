@@ -13,12 +13,18 @@ Bachelor Practical course:
 
 ### Table of Contents
 
-  - [Introduction](#introduction)
-  - [Features](#features)
-  - [Requirements](#requirements)
-  - [Getting Started](#gettingStarted)
-  - [Usage](#usage)
-  - [Documentation](#documentation)
+- [MolSim](#molsim)
+    - [Team Members](#team-members)
+    - [Table of Contents](#table-of-contents)
+    - [Introduction](#introduction)
+    - [Features](#features)
+    - [Requirements](#requirements)
+    - [Getting Started](#getting-started)
+    - [Usage](#usage)
+      - [Command Line Usage:](#command-line-usage)
+        - [Optional arguments:](#optional-arguments)
+    - [Documentation](#documentation)
+        - [Build Doxygen Documentation](#build-doxygen-documentation)
 
 <a name="introduction"></a>
 ### Introduction
@@ -66,7 +72,9 @@ run the program with: ```./MolSim -p <input_file_path>```
 
 <a name="documentation"></a>
 ### Documentation
-This project is well-documented using Doxygen. To generate the documentation locally, follow these steps:  
+This project is well-documented using Doxygen.   
+The documentation is at the following Link: [Project Documentation](https://klaramozna.github.io/PSEMolDyn_GroupD/)  
+To generate it locally, follow these steps:  
 
 ##### Build Doxygen Documentation 
 - Create Build Directory and navigate to it: ```mkdir build && cd build```  
