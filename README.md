@@ -7,5 +7,5 @@ This branch is dedicated to creating detailed reports for each worksheet in the 
         * Worksheet<i>/  
            - presentation/  
            - report/  
-                README.md (Report detailing the analysis of Worksheet 1)  
+                README.md (Report detailing the analysis of Worksheet <i>)  
         
