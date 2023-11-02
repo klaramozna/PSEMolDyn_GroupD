@@ -83,3 +83,7 @@ ParticleContainer::PairIterator ParticleContainer::beginPair() {
 ParticleContainer::PairIterator ParticleContainer::endPair() {
     return PairIterator{particles.size(), particles.size(), particles};;
 }
+
+std::vector<Particle> &ParticleContainer::getParticleVector() {
+    return particles;
+}

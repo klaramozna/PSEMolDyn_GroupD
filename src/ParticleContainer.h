@@ -23,13 +23,12 @@ public:
     void addParticles(std::vector<Particle> toAdd);
     PairIterator beginPair();
     PairIterator endPair();
+    std::vector<Particle>& getParticleVector();
 
     class PairIterator {
     private:
         std::vector<Particle>::size_type outerIndex;
         std::vector<Particle>::size_type innerIndex;
-        using value_type = std::pair<Particle&, Particle&>;
-        using reference = std::pair<Particle&, Particle&>&;
         std::vector<Particle>& p;
         bool inRange() const;
     public:
