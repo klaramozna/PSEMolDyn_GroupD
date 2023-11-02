@@ -9,6 +9,7 @@
 #include "VectorDouble.h"
 #include "Simulation.h"
 #include <cmath>
+#include "ParticleContainer.h"
 
 #include <boost/program_options.hpp>
 
@@ -41,6 +42,23 @@ double delta_t;
 namespace po = boost::program_options;
 
 int main(int argc, char *argsv[]) {
+    /*Particle a, b, c, d;
+    a.setX(VectorDouble{std::vector<double>{1, 1, 1}});
+    b.setX(VectorDouble{std::vector<double>{2, 2, 2}});
+    c.setX(VectorDouble{std::vector<double>{3, 3, 3}});
+    d.setX(VectorDouble{std::vector<double>{4, 4, 4}});
+    ParticleContainer p{std::vector<Particle>{a, b, c, d}};
+    int count = 0;
+    for(auto iter = p.beginPair(); iter != p.endPair(); ++iter){
+        auto res = *iter;
+        std::cout << "first:";
+        res.first.getXVector().print();
+        std::cout << "second";
+        res.second.getXVector().print();
+        count++;
+    }
+    std::cout << count << std::endl;*/
+
 
     std::cout << "Hello from MolSim for PSE!" << std::endl;
 
