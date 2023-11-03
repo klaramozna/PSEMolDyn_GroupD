@@ -7,11 +7,18 @@
 
 #include "Simulation.h"
 #include "VectorDouble.h"
+#include "Particle.h"
 
 #include <complex>
+#include <utility>
 
 Simulation::Simulation(double delta_t) {
     this->delta_t = delta_t;
+}
+
+Simulation::Simulation(double delta_t, std::list<Particle> particles) {
+    this->delta_t = delta_t;
+    this->particles = std::move(particles);
 }
 
 Simulation::~Simulation() = default;

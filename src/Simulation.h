@@ -15,9 +15,9 @@ private:
     double delta_t;
 
 public:
+    Simulation(double delta_t, std::list<Particle> particles);
     explicit Simulation(double delta_t);
     virtual ~Simulation();
-
 
     /**
      * Getter for list of particles
