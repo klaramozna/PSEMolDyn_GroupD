@@ -23,18 +23,15 @@ Simulation::Simulation(double delta_t, std::list<Particle> particles) {
 
 Simulation::~Simulation() = default;
 
-std::list<Particle>& Simulation::getParticles() {
-    return this->particles;
+std::vector<Particle>& Simulation::getParticles() {
+    return container.getParticleVector();
 }
 
 void Simulation::calculateF() {
-    std::list<Particle>::iterator iterator;
-    iterator = this->particles.begin();
-
-    for (auto &p1: this->particles) {
+    for (auto &p1: container) {
         p1.setOldF(p1.getFVector());
         VectorDouble f_i(3);
-        for (auto &p2: this->particles) {
+        for (auto &p2: container) {
             if(!(p2 == p1)){
                 f_i += ((p1.getM() * p2.getM()) / pow((p1.getXVector() - p2.getXVector()).getL2Norm(), 3)) * (p2.getXVector() - p1.getXVector());
             }
@@ -44,14 +41,14 @@ void Simulation::calculateF() {
 }
 
 void Simulation::calculateV() {
-    for (auto &p: this->particles) {
+    for (auto &p: container) {
         VectorDouble v_i = p.getVVector() + (this->delta_t / (2. * p.getM()) * (p.getOldFVector() + p.getFVector()));
         p.setV(v_i);
     }
 }
 
 void Simulation::calculateX() {
-    for (auto &p: this->particles) {
+    for (auto &p: container) {
         VectorDouble x_i = p.getXVector() + this->delta_t * p.getVVector()
                            + ((this->delta_t * this->delta_t) / (2. * p.getM())) * p.getOldFVector();
         p.setX(x_i);

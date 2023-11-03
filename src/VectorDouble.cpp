@@ -7,6 +7,7 @@
 #include <cmath>
 #include <iostream>
 
+using lui = long unsigned int;
 
 VectorDouble::VectorDouble(std::vector<double>::size_type size) {
     values.resize(size, 0.);
@@ -20,7 +21,7 @@ VectorDouble VectorDouble::operator+=(const VectorDouble &other) {
     if (other.values.size() != values.size()) {
         throw std::invalid_argument("Vectors of different sizes cannot be added.");
     }
-    for (int i = 0; i < values.size(); i++) {
+    for (lui i = 0; i < values.size(); i++) {
         values[i] += other.values[i];
     }
     return *this;
@@ -30,7 +31,7 @@ VectorDouble VectorDouble::operator-=(const VectorDouble &other) {
     if (other.values.size() != values.size()) {
         throw std::invalid_argument("Vectors of different sizes cannot be subtracted.");
     }
-    for (int i = 0; i < values.size(); i++) {
+    for (lui i = 0; i < values.size(); i++) {
         values[i] -= other.values[i];
     }
     return *this;
@@ -55,7 +56,7 @@ VectorDouble operator+(const VectorDouble &vec1, const VectorDouble &vec2) {
         throw std::invalid_argument("Vectors of different sizes cannot be added.");
     }
     VectorDouble result(vec1.values.size());
-    for (int i = 0; i < result.values.size(); i++) {
+    for (lui i = 0; i < result.values.size(); i++) {
         result.values[i] = vec1.values[i] + vec2.values[i];
     }
     return result;
@@ -66,7 +67,7 @@ VectorDouble operator-(const VectorDouble &vec1, const VectorDouble &vec2) {
         throw std::invalid_argument("Vectors of different sizes cannot be subtracted.");
     }
     VectorDouble result(vec1.values.size());
-    for (int i = 0; i < result.values.size(); i++) {
+    for (lui i = 0; i < result.values.size(); i++) {
         result.values[i] = vec1.values[i] - vec2.values[i];
     }
     return result;
@@ -74,7 +75,7 @@ VectorDouble operator-(const VectorDouble &vec1, const VectorDouble &vec2) {
 
 VectorDouble operator*(double scalar, const VectorDouble &vec) {
     VectorDouble result(vec.values.size());
-    for (int i = 0; i < result.values.size(); i++) {
+    for (lui i = 0; i < result.values.size(); i++) {
         result.values[i] = scalar * vec.values[i];
     }
     return result;

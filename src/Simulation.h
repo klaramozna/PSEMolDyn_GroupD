@@ -7,22 +7,22 @@
 
 #include <list>
 #include "Particle.h"
+#include "ParticleContainer.h"
 
 class Simulation {
 private:
-    std::list<Particle> particles;
+    ParticleContainer container;
     double delta_t;
 
 public:
-    Simulation(double delta_t);
     Simulation(double delta_t, std::list<Particle> particles);
+    explicit Simulation(double delta_t);
     virtual ~Simulation();
-
 
     /**
      * Getter for list of particles
      */
-    std::list<Particle>& getParticles();
+    std::vector<Particle>& getParticles();
 
     /**
     * calculate the velocity for all particles

@@ -9,6 +9,7 @@
 #include "VectorDouble.h"
 #include "Simulation.h"
 #include <cmath>
+#include "ParticleContainer.h"
 
 #include <boost/program_options.hpp>
 
@@ -41,7 +42,6 @@ double delta_t;
 namespace po = boost::program_options;
 
 int main(int argc, char *argsv[]) {
-
     std::cout << "Hello from MolSim for PSE!" << std::endl;
 
     //declaring the supported options
