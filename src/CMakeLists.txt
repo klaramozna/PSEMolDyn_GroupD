@@ -5,10 +5,10 @@ file(GLOB_RECURSE MY_SRC
 )
 
 # Create a library target for the project code
-add_library(MolSimLib ${MY_SRC})
+add_executable(MolSim ${MY_SRC})
 
 # Include directories specific to the 'src' directory, if needed
-target_include_directories(MolSimLib
+target_include_directories(MolSim
         PUBLIC ${CMAKE_SOURCE_DIR}/libs/libxsd
         PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
 )
@@ -18,7 +18,7 @@ find_package(XercesC REQUIRED)
 find_package(Boost REQUIRED COMPONENTS program_options)
 
 # Link Libraries for running the project
-target_link_libraries(MolSimLib
+target_link_libraries(MolSim
         # stuff that is used in headers and source files
         PUBLIC
         xerces-c
@@ -27,7 +27,7 @@ target_link_libraries(MolSimLib
 
 # activate all compiler warnings. Clean up your code :P
 # depending on the compiler different flags are used
-target_compile_options(MolSimLib
+target_compile_options(MolSim
         PRIVATE
         $<$<CXX_COMPILER_ID:GNU>:-Wall>
         # disable some spam warnings for icpc...
@@ -35,7 +35,7 @@ target_compile_options(MolSimLib
 )
 
 # set cxx standard. You may raise this if you want.
-target_compile_features(MolSimLib
+target_compile_features(MolSim
         PRIVATE
         cxx_std_17
 )
