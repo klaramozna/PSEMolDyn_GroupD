@@ -7,8 +7,9 @@ Members:
 # Code #
 * Link:     https://github.com/klaramozna/PSEMolDyn_GroupD
 * Branch:   main
-* Revision:
-* Compiler: 
+* Revision: commit 932ada1
+* Compiler: g++ 11.4.0
+* Documentation: https://klaramozna.github.io/PSEMolDyn_GroupD/
 
 
 # Report #
@@ -36,7 +37,7 @@ By considering the third body's mass, significantly larger than Earth's and appr
 * We created a container for the particles, that enables us to simply iterate over particles using a range-based for loop. We further implemented a two-level iterator that simulates a nested for loop.
 * We have chosen std::vector as the data structure to store our particles. It is better suitable compared to std::list due to better use of caches (we typically iterate over the particles in succession from beginning to end). To avoid lower performance when adding a large number of molecules while reading from a file due to reallocating the vector many times, we resized the vector in the beginning to fit all of our molecules.
 * It is possible to refactor the IO and force calculation using a strategy pattern scheme, since both classes provide the same interface independent of their implementation. More concretely, the formula for calculating the force could very depending on the model assumptions, but the underlying mechanism that forces need to calculated pairwise for all particles or only among two applies to all formulations. The same principle also applies to file IO, since more than one type of input file would be possible, but the particle container interface stays the same
-* std::vector instead of array ? Copies vs references
+* We used std::vector instead of an array to store particles in our simulation because we didn't know the exact number of particles at the start. Unlike arrays, which have a fixed size, std::vector can resize dynamically during runtime, allowing us to handle particles without worrying about the size in advance.
 * We made ourselves familiar with Doxygen and used it to generate documentation from our annotated source code. It parses the source code, extracting information about classes, methods, variables, and relationships, and then generates clear and organized documentation in formats like HTML, PDF, and LaTeX. We set the main page of our Doxygen Documentation to our project's Readme file by adding the configuaration option ```USE_MDFILE_AS_MAINPAGE = README.md ``` and configured the .gitignore to avoid commiting the Doxygen output to our repository.
 * We have improved our project's documentation setup by adding a custom CMake module. This allows users to generate documentation with the command ```make doc doxygen```. Additionally, we provided a CMake option, enabling users to disable the Doxygen target creation if they don't have Doxygen installed on their machines. For a detailled explanation of how to run build the documentation have a look at the general README in main branch.
   
