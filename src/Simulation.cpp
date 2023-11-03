@@ -16,9 +16,9 @@ Simulation::Simulation(double delta_t) {
     this->delta_t = delta_t;
 }
 
-Simulation::Simulation(double delta_t, std::list<Particle> particles) {
+Simulation::Simulation(double delta_t, ParticleContainer container) {
     this->delta_t = delta_t;
-    this->particles = std::move(particles);
+    this->container = std::move(container);
 }
 
 Simulation::~Simulation() = default;
