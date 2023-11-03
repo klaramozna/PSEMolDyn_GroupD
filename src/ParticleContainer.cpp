@@ -19,7 +19,7 @@ ParticleContainer::ParticleContainer(std::vector<Particle> particles) {
     this->particles = std::move(particles);
 }
 
-void ParticleContainer::addParticle(Particle particle) {
+void ParticleContainer::addParticle(const Particle& particle) {
     this->particles.push_back(particle);
 }
 
@@ -81,7 +81,7 @@ ParticleContainer::PairIterator ParticleContainer::beginPair() {
 }
 
 ParticleContainer::PairIterator ParticleContainer::endPair() {
-    return PairIterator{particles.size(), particles.size(), particles};;
+    return PairIterator{particles.size(), particles.size(), particles};
 }
 
 std::vector<Particle> &ParticleContainer::getParticleVector() {
