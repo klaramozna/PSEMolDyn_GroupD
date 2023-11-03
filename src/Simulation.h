@@ -15,6 +15,7 @@ private:
 
 public:
     Simulation(double delta_t);
+    Simulation(double delta_t, std::list<Particle> particles);
     virtual ~Simulation();
 
 

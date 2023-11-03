@@ -1,30 +1,24 @@
 cmake_minimum_required(VERSION 3.10)
 
-# Project settings
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ".")
-set(PROJECT_UNIT_TESTS_NAME ${PROJECT_NAME_STR}_unit_tests)
+# Set the project name and version
+project(PSEMolDyn_GroupD_Tests VERSION 1.0)
 
-# Dependencies
-find_package(Boost COMPONENTS unit_test_framework REQUIRED)
+# Include Boost.Test
+find_package(Boost REQUIRED COMPONENTS unit_test_framework)
 
-# Gather the header and source files
-file(GLOB UNIT_TESTS_INC_FILES ${PROJECT_SOURCE_DIR}/test/*.hpp)
-file(GLOB UNIT_TESTS_SRC_FILES ${PROJECT_SOURCE_DIR}/test/*.cpp)
+# Gather the test source files
+file(GLOB TEST_SOURCE_FILES "*.cpp")
 
-# Include paths
-set(UNIT_TESTS_INCLUDES ${PROJECT_INCLUDE_DIR}
-        ${PROJECT_SOURCE_DIR}/src
-        ${Boost_INCLUDE_DIR})
+set(SRC_FILES
+        ${CMAKE_SOURCE_DIR}/src/Simulation.cpp
+)
 
-# Assign the include directories
-include_directories(${Boost_INCLUDE_DIRS})
-include_directories(${UNIT_TESTS_INCLUDES})
+# Create a test target for each test suite or case
+foreach(TEST_SOURCE_FILE ${TEST_SOURCE_FILES})
+    get_filename_component(TEST_NAME ${TEST_SOURCE_FILE} NAME_WE)
+    add_executable(${TEST_NAME} ${TEST_SOURCE_FILE})
+    target_link_libraries(${TEST_NAME} Boost::unit_test_framework MolSimLib)
+    # Register each test target with CTest
+    add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
+endforeach()
 
-# Build unit tests
-add_definitions(-DBOOST_TEST_DYN_LINK)
-
-add_executable(${PROJECT_UNIT_TESTS_NAME} ${UNIT_TESTS_SRC_FILES} ${SRC_FILES})
-target_link_libraries(${PROJECT_UNIT_TESTS_NAME} ${Boost_LIBRARIES})
-
-enable_testing()
-add_test(Task1Tests ${PROJECT_UNIT_TESTS_NAME})
