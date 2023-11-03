@@ -50,7 +50,7 @@ public:
      * @brief Adds the given particle to the collection.
      * @param particle is the particle to be added.
      */
-    void addParticle(Particle particle);
+    void addParticle(const Particle& particle);
 
     /**
      * @brief Adds the given particles to the collection.
