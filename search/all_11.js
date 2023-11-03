@@ -8,7 +8,7 @@ var searchData=
   ['severity_197',['severity',['../namespacexml__schema.html#aaac8e21420b35e58ad94533db40ccf41',1,'xml_schema']]],
   ['short_5f_198',['short_',['../namespacexml__schema.html#a705720c1fed1575ccdcfd21cb7ab39ab',1,'xml_schema']]],
   ['simple_5ftype_199',['simple_type',['../namespacexml__schema.html#a1aae3f3aaa6cf9d07828a4d36f76754b',1,'xml_schema']]],
-  ['simulation_200',['Simulation',['../classSimulation.html',1,'Simulation'],['../classSimulation.html#a262981f786fc0f5643550078dc1b0192',1,'Simulation::Simulation(double delta_t, std::list&lt; Particle &gt; particles)'],['../classSimulation.html#afb4e547010a5608100ff2733a8d7f37c',1,'Simulation::Simulation(double delta_t)']]],
+  ['simulation_200',['Simulation',['../classSimulation.html',1,'Simulation'],['../classSimulation.html#ae7ecc885fd6368828f98db70cefa01f3',1,'Simulation::Simulation(double delta_t, ParticleContainer container)'],['../classSimulation.html#afb4e547010a5608100ff2733a8d7f37c',1,'Simulation::Simulation(double delta_t)']]],
   ['simulation_2ecpp_201',['Simulation.cpp',['../Simulation_8cpp.html',1,'']]],
   ['simulation_2eh_202',['Simulation.h',['../Simulation_8h.html',1,'']]],
   ['start_5ftime_203',['start_time',['../MolSim_8cpp.html#a638f9bb439eac914b175531577dfa7da',1,'MolSim.cpp']]],
