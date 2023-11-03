@@ -20,22 +20,23 @@ public:
     virtual ~Simulation();
 
     /**
-     * Getter for list of particles
+     * @brief Returns a vector of particles.
+     * @return Vector of particles.
      */
     std::vector<Particle>& getParticles();
 
     /**
-    * calculate the velocity for all particles
+    * @brief calculate the velocity for all particles
     */
     void calculateV();
 
     /**
-    * calculate the position for all particles
+    * @brief calculate the position for all particles
     */
     void calculateX();
 
     /**
-     * calculate the force for all particles
+     * @brief calculate the force for all particles
     */
     void calculateF();
 };
