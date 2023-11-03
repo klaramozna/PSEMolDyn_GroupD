@@ -27,6 +27,9 @@ Members:
   
 https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/00c0e27b-faaa-46da-9583-b0e2a427c47a
 
+* In our analysis of the celestial bodies in the simulation, we employed a systematic approach based on their coordinates, masses, and velocities. The first body, stable at the origin of the coordinate system, was unmistakably identified as the Sun, the central star of our solar system. The second body, possessing a mass which is s approximately 333.000 times smaller than the Sun's mass, led us to conclude that it represents our home planet, Earth.    
+By considering the third body's mass, significantly larger than Earth's and approximately 1047 times smaller than the Sun's, we deduced it to be Jupiter. Lastly, the fourth body, located far away along the x-axis and characterized by an exceptionally small mass, coupled with its elliptic trajectory, matched the characteristics of Halley's Comet, a famous periodic comet known for its distinctive orbit.
+
 <img src="planets_annotated.jpg">
 
 ## Task 4 ”Refactoring and documentation”##
