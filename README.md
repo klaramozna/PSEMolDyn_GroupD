@@ -62,7 +62,7 @@ Bachelor Practical course:
 ### Usage
 
 #### Command Line Usage:
-run the program with: ```./MolSim -p <input_file_path>```  
+run the program with: ```./src/MolSim -p <input_file_path>```  
 
 ##### Optional arguments:
 - ```-h , --help```: produces help message
