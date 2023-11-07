@@ -87,3 +87,9 @@ ParticleContainer::PairIterator ParticleContainer::endPair() {
 std::vector<Particle> &ParticleContainer::getParticleVector() {
     return particles;
 }
+
+void ParticleContainer::applyToAll(const std::function<void(Particle &)>& function) {
+    for(auto & particle : particles){
+        function(particle);
+    }
+}
