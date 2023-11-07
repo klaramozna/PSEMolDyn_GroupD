@@ -5,7 +5,8 @@ file(GLOB_RECURSE MY_SRC
 )
 
 # Create a library target for the project code
-add_executable(MolSim ${MY_SRC})
+add_executable(MolSim ${MY_SRC}
+        GravitationalForce.cpp)
 
 # Include directories specific to the 'src' directory, if needed
 target_include_directories(MolSim

@@ -5,9 +5,9 @@
 
 class ForceCalculation {
 private:
-    VectorDouble result;
+    VectorDouble3 result;
 public:
-    virtual VectorDouble* CalculateForces(Particle& p1, Particle& p2) = 0;
+    virtual VectorDouble3* CalculateForces(Particle& p1, Particle& p2) = 0;
     virtual ~ForceCalculation() = default; // Virtual destructor for polymorphism.
 };
 
