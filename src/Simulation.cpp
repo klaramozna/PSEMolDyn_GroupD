@@ -12,8 +12,14 @@
 
 #include <complex>
 #include <utility>
+#include <iostream>
 
-Simulation::Simulation(double delta_t, ParticleContainer container, ForceCalculation *calculation) : container(std::move(container)), forceCalculation(calculation), delta_t(delta_t) {}
+Simulation::Simulation(double delta_t,
+                       ParticleContainer container,
+                       ForceCalculation *calculation) :
+                        container(std::move(container)),
+                        forceCalculation(calculation),
+                        delta_t(delta_t) {}
 
 Simulation::~Simulation() = default;
 
@@ -43,8 +49,16 @@ void Simulation::calculateV() {
 
 void Simulation::calculateX() {
     for (auto &p: container) {
-        VectorDouble x_i = p.getXVector() + this->delta_t * p.getVVector()
-                           + ((this->delta_t * this->delta_t) / (2. * p.getM())) * p.getOldFVector();
+        VectorDouble x_i = p.getXVector() + delta_t * p.getVVector()
+                           + ((delta_t * delta_t) / (2. * p.getM())) * p.getOldFVector();
         p.setX(x_i);
     }
+}
+
+void Simulation::runIteration() {
+    calculateX();
+    // calculate new f
+    calculateF();
+    // calculate new v
+    calculateV();
 }
