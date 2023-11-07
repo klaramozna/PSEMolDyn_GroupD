@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up G++
+        run: sudo apt-get install g++
+
+      - name: Install CMake
+        run: sudo apt-get install cmake
+
+      - name: Install make
+        run: sudo apt-get install make
+
+      - name: Install Xerces-C library
+        run: sudo apt-get install libxerces-c-dev
+
+      - name: Install boost library for program options
+        run: sudo apt-get install libboost-program-options-dev
+
+      - name: Install boost library for tests
+        run: sudo apt-get install libboost-test-dev
+
+      - name: Create a build directory
+        run: mkdir build && cd build
+
+      - name: Compile the project with address sanitizer enabled and run tests
+        run: cmake -DCMAKE_CXX_FLAGS="-fsanitize=address" ..
+             make
+             ctest
+
+      - name: Build documentation
+        run: cmake -DBUILD_DOXYGEN=ON ..
+             make doc_doxygen
+
