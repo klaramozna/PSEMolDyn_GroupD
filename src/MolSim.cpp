@@ -10,29 +10,11 @@
 #include "Simulation.h"
 #include <cmath>
 #include "ParticleContainer.h"
+#include "GravitationalForce.h"
+#include "ForceCalculation.h"
 
 #include <boost/program_options.hpp>
 
-/**** forward declaration of the calculation functions ****/
-
-/**
- * calculate the force for all particles
- */
-void calculateF();
-
-/**
- * calculate the position for all particles
- */
-void calculateX();
-
-/**
- * calculate the position for all particles
- */
-void calculateV();
-
-/**
- * plot the particles to a xyz-file
- */
 void plotParticles(int iteration, Simulation simulation);
 
 constexpr double start_time = 0;
@@ -79,32 +61,36 @@ int main(int argc, char *argsv[]) {
         return 1;
     }
 
-  FileReader fileReader;
-  Simulation simulation(delta_t);
+    FileReader fileReader;
 
-  fileReader.readFile(simulation.getParticles(), input_path);
+    GravitationalForce gravForce;
+    ParticleContainer container;
 
-  double current_time = start_time;
+    Simulation simulation(delta_t, container, &gravForce);
 
-  int iteration = 0;
+    fileReader.readFile(simulation.getParticles(), input_path);
+
+    double current_time = start_time;
+
+    int iteration = 0;
   
-    // for this loop, we assume: current x, current f and current v are known
-    while (current_time < end_time) {
-        // calculate new x
-        simulation.calculateX();
-        // calculate new f
-        simulation.calculateF();
-        // calculate new v
-        simulation.calculateV();
+        // for this loop, we assume: current x, current f and current v are known
+        while (current_time < end_time) {
+            // calculate new x
+            simulation.calculateX();
+            // calculate new f
+            simulation.calculateF();
+            // calculate new v
+            simulation.calculateV();
 
-        iteration++;
-        if (iteration % 10 == 0) {
-            plotParticles(iteration, simulation);
+            iteration++;
+            if (iteration % 10 == 0) {
+                plotParticles(iteration, simulation);
+            }
+            std::cout << "Iteration " << iteration << " finished." << std::endl;
+
+            current_time += delta_t;
         }
-        std::cout << "Iteration " << iteration << " finished." << std::endl;
-
-        current_time += delta_t;
-    }
 
     std::cout << "output written. Terminating..." << std::endl;
     return 0;

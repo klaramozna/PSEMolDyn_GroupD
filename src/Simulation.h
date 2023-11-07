@@ -8,15 +8,16 @@
 #include <list>
 #include "Particle.h"
 #include "ParticleContainer.h"
+#include "ForceCalculation.h"
 
 class Simulation {
 private:
     ParticleContainer container;
+    ForceCalculation* forceCalculation;
     double delta_t;
 
 public:
-    Simulation(double delta_t, ParticleContainer container);
-    explicit Simulation(double delta_t);
+    Simulation(double delta_t, ParticleContainer container, ForceCalculation *calculation);
     virtual ~Simulation();
 
     /**

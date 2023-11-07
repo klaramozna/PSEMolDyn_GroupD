@@ -8,18 +8,12 @@
 #include "Simulation.h"
 #include "VectorDouble.h"
 #include "Particle.h"
+#include "ForceCalculation.h"
 
 #include <complex>
 #include <utility>
 
-Simulation::Simulation(double delta_t) {
-    this->delta_t = delta_t;
-}
-
-Simulation::Simulation(double delta_t, ParticleContainer container) {
-    this->delta_t = delta_t;
-    this->container = std::move(container);
-}
+Simulation::Simulation(double delta_t, ParticleContainer container, ForceCalculation *calculation) : container(std::move(container)), forceCalculation(calculation), delta_t(delta_t) {}
 
 Simulation::~Simulation() = default;
 
@@ -33,7 +27,7 @@ void Simulation::calculateF() {
         VectorDouble f_i(3);
         for (auto &p2: container) {
             if(!(p2 == p1)){
-                f_i += ((p1.getM() * p2.getM()) / pow((p1.getXVector() - p2.getXVector()).getL2Norm(), 3)) * (p2.getXVector() - p1.getXVector());
+                f_i += *(this->forceCalculation->CalculateForces(p1,p2));
             }
         }
         p1.setF(f_i);
