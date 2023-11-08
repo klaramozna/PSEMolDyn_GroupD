@@ -34,10 +34,14 @@ jobs:
       - name: Create a build directory
         run: mkdir build && cd build
 
-      - name: Compile the project with address sanitizer enabled and run tests
+      - name: Run CMake with address sanitizer enabled
         run: cmake -DCMAKE_CXX_FLAGS="-fsanitize=address" ..
-             make
-             ctest
+
+      - name: Compile project
+        run: make
+
+      - name: Run tests
+        run: ctest
 
       - name: Build documentation
         run: cmake -DBUILD_DOXYGEN=ON ..
