@@ -43,7 +43,9 @@ jobs:
       - name: Run tests
         run: ctest
 
+      - name: Run CMake for Doxygen
+        run: cmake -DBUILD_DOXYGEN=ON ${{github.workspace}}
+
       - name: Build documentation
-        run: cmake -DBUILD_DOXYGEN=ON ..
-             make doc_doxygen
+        run: make doc_doxygen
 
