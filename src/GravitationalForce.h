@@ -5,9 +5,9 @@
 
 class GravitationalForce : public ForceCalculation {
 private:
-    VectorDouble result;
+    VectorDouble3 result;
 public:
-    VectorDouble* CalculateForces(Particle& p1, Particle& p2) override;
+    VectorDouble3* CalculateForces(Particle& p1, Particle& p2) override;
     ~GravitationalForce() override = default; // Virtual destructor for polymorphism.
 };
 

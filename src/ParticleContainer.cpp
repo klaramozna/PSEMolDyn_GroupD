@@ -95,3 +95,9 @@ std::vector<Particle> &ParticleContainer::getParticleVector() {
 void ParticleContainer::reserveInVector(size_t n) {
     particles.reserve(n);
 }
+
+void ParticleContainer::applyToAll(const std::function<void(Particle &)>& function) {
+    for(auto & particle : particles){
+        function(particle);
+    }
+}

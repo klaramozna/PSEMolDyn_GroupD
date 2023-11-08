@@ -7,6 +7,7 @@
 
 #include <vector>
 #include "Particle.h"
+#include <functional>
 
 /**
  * @file ParticleContainer.h
@@ -86,6 +87,12 @@ public:
      * @return the vector.
      */
     std::vector<Particle> &getParticleVector();
+
+    /**
+     * @brief Applies the given function to all particles
+     * @param function is the function to be use on the particles
+     */
+    void applyToAll(const std::function<void(Particle&)>& function);
 
     /**
      * @brief Implements an iterator that simulated a nested loop (two for loops), but skips the case where the particle in the outer loop is the same as the particle in the inner loop.

@@ -14,9 +14,6 @@
 #include "ParticleContainer.h"
 #include "GravitationalForce.h"
 
-
-void plotParticles(int iteration, Simulation simulation);
-
 constexpr double start_time = 0;
 double end_time;
 double delta_t;

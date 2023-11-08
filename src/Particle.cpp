@@ -62,35 +62,35 @@ bool Particle::operator==(Particle &other) {
            (type == other.type) and (m == other.m) and (old_f == other.old_f);
 }
 
-VectorDouble Particle::getXVector() const {
-    return VectorDouble(x);
+VectorDouble3 Particle::getXVector() const {
+    return VectorDouble3(x);
 }
 
-VectorDouble Particle::getVVector() const {
-    return VectorDouble(v);
+VectorDouble3 Particle::getVVector() const {
+    return VectorDouble3(v);
 }
 
-VectorDouble Particle::getFVector() const {
-    return VectorDouble(f);
+VectorDouble3 Particle::getFVector() const {
+    return VectorDouble3(f);
 }
 
-VectorDouble Particle::getOldFVector() const {
-    return VectorDouble(old_f);
+VectorDouble3 Particle::getOldFVector() const {
+    return VectorDouble3(old_f);
 }
 
-void Particle::setX(const VectorDouble &position) {
+void Particle::setX(const VectorDouble3 &position) {
     x = position.convertToArray();
 }
 
-void Particle::setV(const VectorDouble &velocity) {
+void Particle::setV(const VectorDouble3 &velocity) {
      v = velocity.convertToArray();
 }
 
-void Particle::setF(const VectorDouble &force) {
+void Particle::setF(const VectorDouble3 &force) {
     f = force.convertToArray();
 }
 
-void Particle::setOldF(const VectorDouble &oldForce) {
+void Particle::setOldF(const VectorDouble3 &oldForce) {
     old_f = oldForce.convertToArray();
 }
 
