@@ -66,12 +66,15 @@ int main(int argc, char *argsv[]) {
     GravitationalForce gravForce;
     ParticleContainer container;
 
+    outputWriter::VTKWriter writer;
+
     Simulation simulation(delta_t, container, &gravForce);
 
     fileReader.readFile(simulation.getParticles(), input_path);
 
     int iteration = 0;
     double current_time = start_time;
+    std::string out_name("MD_vtk");
 
     // for this loop, we assume: current x, current f and current v are known
     while (current_time < end_time) {
@@ -79,7 +82,7 @@ int main(int argc, char *argsv[]) {
 
         iteration++;
         if (iteration % 10 == 0) {
-            plotParticles(iteration, simulation);
+            writer.plotParticles(simulation.getParticles(), out_name, iteration);
         }
 
         std::cout << "Iteration " << iteration << " finished." << std::endl;
@@ -89,19 +92,4 @@ int main(int argc, char *argsv[]) {
 
     std::cout << "output written. Terminating..." << std::endl;
     return 0;
-}
-
-void plotParticles(int iteration, Simulation simulation) {
-
-    std::string out_name("MD_vtk");
-
-    //outputWriter::XYZWriter writer;
-    //writer.plotParticles(particles, out_name, iteration);
-    
-    outputWriter::VTKWriter writer;
-    writer.initializeOutput(simulation.getParticles().size());
-    for (auto &p: simulation.getParticles()) {
-           writer.plotParticle(p);
-        }
-    writer.writeFile(out_name, iteration);
 }

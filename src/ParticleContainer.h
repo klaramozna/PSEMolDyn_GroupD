@@ -47,6 +47,12 @@ public:
     iterator_type end();
 
     /**
+     * @brief Wrapper for std::vector::reserve(size_type n)
+     * @param n Number of elements to have capacity for
+     * */
+    void reserveInVector(size_t n);
+
+    /**
      * @brief Adds the given particle to the collection.
      * @param particle is the particle to be added.
      */
@@ -57,6 +63,11 @@ public:
      * @param toAdd contains the particles to be added.
      */
     void addParticles(std::vector<Particle> toAdd);
+
+    /**
+     * @brief returns the size of the underlying particle vector
+     * */
+    size_t getSize();
 
     /**
      * @brief Creates an iterator for pairs of particles at the starting position

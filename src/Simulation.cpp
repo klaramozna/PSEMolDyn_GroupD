@@ -23,8 +23,8 @@ Simulation::Simulation(double delta_t,
 
 Simulation::~Simulation() = default;
 
-std::vector<Particle>& Simulation::getParticles() {
-    return container.getParticleVector();
+ParticleContainer& Simulation::getParticles() {
+    return container;
 }
 
 void Simulation::calculateF() {

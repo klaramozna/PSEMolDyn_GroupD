@@ -38,9 +38,9 @@ public:
 
     /**
      * @brief Returns a vector of particles.
-     * @return Vector of particles.
+     * @return Vector Container.
      */
-    std::vector<Particle>& getParticles();
+    ParticleContainer& getParticles();
 
     /**
      * @brief run one iteration of the simulation, meaning position, force and then velocity
