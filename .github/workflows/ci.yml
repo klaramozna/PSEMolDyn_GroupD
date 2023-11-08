@@ -31,6 +31,9 @@ jobs:
       - name: Install boost library for tests
         run: sudo apt-get install libboost-test-dev
 
+      - name: Install doxygen
+        run: sudo apt-get install doxygen
+
       - name: Create a build directory
         run: mkdir build && cd build
 
