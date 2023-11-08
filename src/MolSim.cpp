@@ -108,7 +108,7 @@ int main(int argc, char *argsv[]) {
 
     std::cout << "output written. Terminating..." << std::endl;
     return 0;
-}
+
 
 void plotParticles(int iteration, Simulation simulation) {
 
