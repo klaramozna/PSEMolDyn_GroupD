@@ -97,3 +97,5 @@ std::array<double, 3> VectorDouble::convertToArray() const {
     }
     return result;
 }
+
+
