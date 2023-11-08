@@ -54,3 +54,5 @@ void Simulation::calculateX() {
         p.setX(x_i);
     }
 }
+
+
