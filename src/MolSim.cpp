@@ -47,47 +47,46 @@ int main(int argc, char *argsv[]) {
     //declaring the supported options
     po::options_description desc("Allowed options");
     desc.add_options()
-        ("help,h", "produce help message")
-        ("input_path,p", po::value<std::string>(), "the path to the input file")
-        ("t_end,e", po::value<double>(&end_time)->default_value(1000),"end time of simulation")
-        ("delta_t,s", po::value<double>(&delta_t)->default_value(0.014),"step size between interations");
+            ("help,h", "produce help message")
+            ("input_path,p", po::value<std::string>(), "the path to the input file")
+            ("t_end,e", po::value<double>(&end_time)->default_value(1000), "end time of simulation")
+            ("delta_t,s", po::value<double>(&delta_t)->default_value(0.014), "step size between interations");
 
     po::variables_map vm;
-    try{
+    try {
         po::store(po::parse_command_line(argc, argsv, desc), vm);
         po::notify(vm);
     }
-    //deal with any erroneous program(incorrect user input)
-    catch(po::error& e) {
+        //deal with any erroneous program(incorrect user input)
+    catch (po::error &e) {
         std::cout << "Erroneous program call! " << std::endl;
         std::cout << desc << std::endl;
         return 1;
     }
 
-    if (vm.count("help")){
+    if (vm.count("help")) {
         std::cout << desc << std::endl;
         return 0;
     }
     std::string input_path;
-    if (vm.count("input_path")){
+    if (vm.count("input_path")) {
         input_path = vm["input_path"].as<std::string>();
         std::cout << "Input path: " << input_path << std::endl;
-    }
-    else {
+    } else {
         std::cout << "Input file not specified." << std::endl;
         std::cout << desc << std::endl;
         return 1;
     }
 
-  FileReader fileReader;
-  Simulation simulation(delta_t);
+    FileReader fileReader;
+    Simulation simulation(delta_t);
 
-  fileReader.readFile(simulation.getParticles(), input_path);
+    fileReader.readFile(simulation.getParticles(), input_path);
 
-  double current_time = start_time;
+    double current_time = start_time;
 
-  int iteration = 0;
-  
+    int iteration = 0;
+
     // for this loop, we assume: current x, current f and current v are known
     while (current_time < end_time) {
         // calculate new x
@@ -108,7 +107,7 @@ int main(int argc, char *argsv[]) {
 
     std::cout << "output written. Terminating..." << std::endl;
     return 0;
-
+}
 
 void plotParticles(int iteration, Simulation simulation) {
 
