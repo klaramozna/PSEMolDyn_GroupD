@@ -46,9 +46,3 @@ jobs:
       - name: Run tests
         run: ctest
 
-      - name: Run CMake for Doxygen
-        run: cmake -DBUILD_DOXYGEN=ON
-
-      - name: Build documentation
-        run: make doc_doxygen
-
