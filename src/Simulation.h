@@ -8,23 +8,16 @@
 #include <list>
 #include "Particle.h"
 #include "ParticleContainer.h"
+#include "ForceCalculation.h"
 
 class Simulation {
 private:
+    static constexpr double start_time = 0;
+
     ParticleContainer container;
+    ForceCalculation* forceCalculation;
+
     double delta_t;
-
-public:
-    Simulation(double delta_t, ParticleContainer container);
-    explicit Simulation(double delta_t);
-    virtual ~Simulation();
-
-    /**
-     * @brief Returns a vector of particles.
-     * @return Vector of particles.
-     */
-    std::vector<Particle>& getParticles();
-
     /**
     * @brief calculate the velocity for all particles
     */
@@ -39,6 +32,20 @@ public:
      * @brief calculate the force for all particles
     */
     void calculateF();
+public:
+    Simulation(double delta_t, ParticleContainer container, ForceCalculation *calculation);
+    virtual ~Simulation();
+
+    /**
+     * @brief Returns a vector of particles.
+     * @return Vector Container.
+     */
+    ParticleContainer& getParticles();
+
+    /**
+     * @brief run one iteration of the simulation, meaning position, force and then velocity
+     */
+    void runIteration();
 };
 
 #endif //PSEMOLDYN_GROUPD_SIMULATION_H

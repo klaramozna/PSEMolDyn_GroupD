@@ -9,7 +9,7 @@
 
 #include <array>
 #include <string>
-#include "VectorDouble.h"
+#include "VectorDouble3.h"
 
 class Particle {
 
@@ -70,25 +70,25 @@ public:
      * @brief Returns the position as a DoubleVector.
      * @return Vector with the values of the position
      */
-    VectorDouble getXVector() const;
+    VectorDouble3 getXVector() const;
 
     /**
      * @brief Returns the velocity as a DoubleVector.
      * @return Vector with the values of the velocity
      */
-    VectorDouble getVVector() const;
+    VectorDouble3 getVVector() const;
 
     /**
      * @brief Returns the force as a DoubleVector.
      * @return Vector with the values of the force
      */
-    VectorDouble getFVector() const;
+    VectorDouble3 getFVector() const;
 
     /**
      * @brief Returns the position in the previous iteration as a DoubleVector.
      * @return Vector with the values of the force.
      */
-    VectorDouble getOldFVector() const;
+    VectorDouble3 getOldFVector() const;
 
     double getM() const;
 
@@ -98,25 +98,25 @@ public:
      * @brief Sets the values of the position based on the given vector.
      * @param position contains the values that will be assigned to the position, needs to be of size 3.
      */
-    void setX(const VectorDouble &position);
+    void setX(const VectorDouble3 &position);
 
     /**
      * @brief Sets the values of the velocity based on the given vector.
      * @param position contains the values that will be assigned to the velocity, needs to be of size 3.
      */
-    void setV(const VectorDouble &velocity);
+    void setV(const VectorDouble3 &velocity);
 
     /**
      * @brief Sets the values of the force based on the given vector.
      * @param position contains the values that will be assigned to the force, needs to be of size 3.
      */
-    void setF(const VectorDouble &force);
+    void setF(const VectorDouble3 &force);
 
     /**
      * @brief Sets the values of the force in the previous iteration based on the given vector.
      * @param position contains the values that will be assigned to the force, needs to be of size 3.
      */
-    void setOldF(const VectorDouble &oldForce);
+    void setOldF(const VectorDouble3 &oldForce);
 
     bool operator==(Particle &other);
 

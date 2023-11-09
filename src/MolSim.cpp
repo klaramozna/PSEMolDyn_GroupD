@@ -1,40 +1,19 @@
-
+/* File IO */
 #include "FileReader.h"
 #include "outputWriter/XYZWriter.h"
 #include "outputWriter/VTKWriter.h"
-#include "utils/ArrayUtils.h"
 
+/* Standard IO */
 #include <iostream>
-#include <list>
-#include "VectorDouble.h"
-#include "Simulation.h"
-#include <cmath>
-#include "ParticleContainer.h"
 
+/* Boost */
 #include <boost/program_options.hpp>
 #include <filesystem>
 
-/**** forward declaration of the calculation functions ****/
-
-/**
- * calculate the force for all particles
- */
-void calculateF();
-
-/**
- * calculate the position for all particles
- */
-void calculateX();
-
-/**
- * calculate the position for all particles
- */
-void calculateV();
-
-/**
- * plot the particles to a xyz-file
- */
-void plotParticles(int iteration, Simulation simulation);
+/* Simulation Logic */
+#include "Simulation.h"
+#include "ParticleContainer.h"
+#include "GravitationalForce.h"
 
 
 
@@ -95,27 +74,29 @@ int main(int argc, char *argsv[]) {
     }
 
     FileReader fileReader;
-    Simulation simulation(delta_t);
+
+    GravitationalForce gravForce;
+    ParticleContainer container;
+
+    outputWriter::VTKWriter writer;
+
+    Simulation simulation(delta_t, container, &gravForce);
 
     fileReader.readFile(simulation.getParticles(), input_path);
 
-    double current_time = start_time;
-
     int iteration = 0;
+    double current_time = start_time;
+    std::string out_name("MD_vtk");
 
     // for this loop, we assume: current x, current f and current v are known
     while (current_time < end_time) {
-        // calculate new x
-        simulation.calculateX();
-        // calculate new f
-        simulation.calculateF();
-        // calculate new v
-        simulation.calculateV();
+        simulation.runIteration();
 
         iteration++;
         if (iteration % 10 == 0) {
-            plotParticles(iteration, simulation);
+            writer.plotParticles(simulation.getParticles(), out_name, iteration);
         }
+
         std::cout << "Iteration " << iteration << " finished." << std::endl;
 
         current_time += delta_t;
@@ -123,17 +104,4 @@ int main(int argc, char *argsv[]) {
 
     std::cout << "output written. Terminating..." << std::endl;
     return 0;
-}
-
-void plotParticles(int iteration, Simulation simulation) {
-
-    std::string out_name("MD_vtk");
-    outputWriter::VTKWriter writer;
-    writer.initializeOutput(simulation.getParticles().size());
-
-    for (auto &p: simulation.getParticles()) {
-           writer.plotParticle(p);
-        }
-
-    writer.writeFile(out_name, iteration);
 }

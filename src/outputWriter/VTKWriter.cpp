@@ -7,7 +7,6 @@
 
 #include "VTKWriter.h"
 
-#include <cstdlib>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -16,7 +15,6 @@
 namespace outputWriter {
 
     VTKWriter::VTKWriter() = default;
-
     VTKWriter::~VTKWriter() = default;
 
     void VTKWriter::initializeOutput(int numParticles) {
@@ -97,5 +95,16 @@ namespace outputWriter {
         pointsIterator->push_back(p.getX()[1]);
         pointsIterator->push_back(p.getX()[2]);
     }
+
+    void VTKWriter::plotParticles(ParticleContainer &container, const std::string &filename, int iteration) {
+        initializeOutput(container.getSize());
+
+        for (auto &p: container) {
+            plotParticle(p);
+        }
+
+        writeFile(filename, iteration);
+    }
+
 
 } // namespace outputWriter

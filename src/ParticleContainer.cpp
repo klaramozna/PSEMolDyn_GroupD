@@ -23,6 +23,10 @@ void ParticleContainer::addParticle(const Particle& particle) {
     this->particles.push_back(particle);
 }
 
+size_t ParticleContainer::getSize() {
+    return particles.size();
+}
+
 void ParticleContainer::addParticles(std::vector<Particle> toAdd) {
     particles.insert(particles.end(), toAdd.begin(), toAdd.end());
 }
@@ -86,4 +90,14 @@ ParticleContainer::PairIterator ParticleContainer::endPair() {
 
 std::vector<Particle> &ParticleContainer::getParticleVector() {
     return particles;
+}
+
+void ParticleContainer::reserveInVector(size_t n) {
+    particles.reserve(n);
+}
+
+void ParticleContainer::applyToAll(const std::function<void(Particle &)>& function) {
+    for(auto & particle : particles){
+        function(particle);
+    }
 }
