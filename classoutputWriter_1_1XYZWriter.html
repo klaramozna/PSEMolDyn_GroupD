@@ -74,15 +74,27 @@ $(function() {
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="XYZWriter_8h_source.html">XYZWriter.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for outputWriter::XYZWriter:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classoutputWriter_1_1XYZWriter.png" usemap="#outputWriter::XYZWriter_map" alt=""/>
+  <map id="outputWriter::XYZWriter_map" name="outputWriter::XYZWriter_map">
+<area href="classParticleWriter.html" alt="ParticleWriter" shape="rect" coords="0,0,147,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a73b1eacd622152993f2fa6c181e69c8a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoutputWriter_1_1XYZWriter.html#a73b1eacd622152993f2fa6c181e69c8a">XYZWriter</a> ()</td></tr>
 <tr class="separator:a73b1eacd622152993f2fa6c181e69c8a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad3fe6dbb5e1aa5bdeffcc9986795309b"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoutputWriter_1_1XYZWriter.html#ad3fe6dbb5e1aa5bdeffcc9986795309b">~XYZWriter</a> ()</td></tr>
+<tr class="memitem:ad3fe6dbb5e1aa5bdeffcc9986795309b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoutputWriter_1_1XYZWriter.html#ad3fe6dbb5e1aa5bdeffcc9986795309b">~XYZWriter</a> ()</td></tr>
 <tr class="separator:ad3fe6dbb5e1aa5bdeffcc9986795309b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acebbeba31774cdec4bdd3a2da7e0238e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoutputWriter_1_1XYZWriter.html#acebbeba31774cdec4bdd3a2da7e0238e">plotParticles</a> (std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt; particles, const std::string &amp;filename, int iteration)</td></tr>
-<tr class="separator:acebbeba31774cdec4bdd3a2da7e0238e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a23ede7e340a71044b83eaab3f6460f8d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classoutputWriter_1_1XYZWriter.html#a23ede7e340a71044b83eaab3f6460f8d">plotParticles</a> (<a class="el" href="classParticleContainer.html">ParticleContainer</a> &amp;container, const std::string &amp;filename, int iteration) override</td></tr>
+<tr class="separator:a23ede7e340a71044b83eaab3f6460f8d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="inherit_header pub_methods_classParticleWriter"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classParticleWriter')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classParticleWriter.html">ParticleWriter</a></td></tr>
+<tr class="memitem:a41e4f4841d8db849294703fbaec3789f inherit pub_methods_classParticleWriter"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleWriter.html#a41e4f4841d8db849294703fbaec3789f">~ParticleWriter</a> ()=default</td></tr>
+<tr class="separator:a41e4f4841d8db849294703fbaec3789f inherit pub_methods_classParticleWriter"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a73b1eacd622152993f2fa6c181e69c8a"></a>
@@ -128,7 +140,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -136,17 +148,20 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="acebbeba31774cdec4bdd3a2da7e0238e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#acebbeba31774cdec4bdd3a2da7e0238e">&#9670;&nbsp;</a></span>plotParticles()</h2>
+<a id="a23ede7e340a71044b83eaab3f6460f8d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a23ede7e340a71044b83eaab3f6460f8d">&#9670;&nbsp;</a></span>plotParticles()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void outputWriter::XYZWriter::plotParticles </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&#160;</td>
-          <td class="paramname"><em>particles</em>, </td>
+          <td class="paramtype"><a class="el" href="classParticleContainer.html">ParticleContainer</a> &amp;&#160;</td>
+          <td class="paramname"><em>container</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -166,7 +181,14 @@ Public Member Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+
+<p>Implements <a class="el" href="classParticleWriter.html#a583080a239b7a3ad811fe5adbcd4a2e0">ParticleWriter</a>.</p>
 
 </div>
 </div>

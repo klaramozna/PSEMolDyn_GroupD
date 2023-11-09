@@ -78,23 +78,28 @@ $(function() {
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Particle_8h.html">Particle.h</a>&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &lt;list&gt;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="classFileReader.html">   14</a></span>&#160;<span class="keyword">class </span><a class="code" href="classFileReader.html">FileReader</a> {</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classFileReader.html#a615dcb2443cad1f2ca123c7c0c334480">   17</a></span>&#160;    <a class="code" href="classFileReader.html#a615dcb2443cad1f2ca123c7c0c334480">FileReader</a>();</div>
-<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classFileReader.html#a1382969e8f1468f3b04ad4b44ab39dee">   18</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classFileReader.html#a1382969e8f1468f3b04ad4b44ab39dee">~FileReader</a>();</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;     <span class="keywordtype">void</span> <a class="code" href="classFileReader.html#a2818039a14adac6f86bf34f5cf13ec03">readFile</a>(std::vector&lt;Particle&gt; &amp;particles, <a class="code" href="namespacexml__schema.html#a107bc4cd8f36e47026c8dbb154f9b587">std::string</a> &amp;filename);</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;};</div>
-<div class="ttc" id="aParticle_8h_html"><div class="ttname"><a href="Particle_8h.html">Particle.h</a></div><div class="ttdoc">Provides vector operations using simple operators.</div></div>
-<div class="ttc" id="aclassFileReader_html"><div class="ttname"><a href="classFileReader.html">FileReader</a></div><div class="ttdef"><b>Definition:</b> FileReader.h:14</div></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ParticleReader_8h.html">ParticleReader.h</a>&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ParticleContainer_8h.html">ParticleContainer.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160; </div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="classFileReader.html">   15</a></span>&#160;<span class="keyword">class </span><a class="code" href="classFileReader.html">FileReader</a> : <span class="keyword">public</span> <a class="code" href="classParticleReader.html">ParticleReader</a>  {</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classFileReader.html#a615dcb2443cad1f2ca123c7c0c334480">   18</a></span>&#160;    <a class="code" href="classFileReader.html#a615dcb2443cad1f2ca123c7c0c334480">FileReader</a>();</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classFileReader.html#a1382969e8f1468f3b04ad4b44ab39dee">   19</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classFileReader.html#a1382969e8f1468f3b04ad4b44ab39dee">~FileReader</a>();</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classFileReader.html#aefd7bb2cfa837baa0aeffe04184a3268">readFile</a>(<a class="code" href="classParticleContainer.html">ParticleContainer</a> &amp;<a class="code" href="namespacexml__schema.html#a395f5179c5fc4643909d66e9ff28d8ca">container</a>, <a class="code" href="namespacexml__schema.html#a107bc4cd8f36e47026c8dbb154f9b587">std::string</a> &amp;filename) <span class="keyword">override</span>;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;};</div>
+<div class="ttc" id="aParticleContainer_8h_html"><div class="ttname"><a href="ParticleContainer_8h.html">ParticleContainer.h</a></div><div class="ttdoc">Hides structure / implementation of particles.</div></div>
+<div class="ttc" id="aParticleReader_8h_html"><div class="ttname"><a href="ParticleReader_8h.html">ParticleReader.h</a></div></div>
+<div class="ttc" id="aclassFileReader_html"><div class="ttname"><a href="classFileReader.html">FileReader</a></div><div class="ttdef"><b>Definition:</b> FileReader.h:15</div></div>
 <div class="ttc" id="aclassFileReader_html_a1382969e8f1468f3b04ad4b44ab39dee"><div class="ttname"><a href="classFileReader.html#a1382969e8f1468f3b04ad4b44ab39dee">FileReader::~FileReader</a></div><div class="ttdeci">virtual ~FileReader()</div></div>
-<div class="ttc" id="aclassFileReader_html_a2818039a14adac6f86bf34f5cf13ec03"><div class="ttname"><a href="classFileReader.html#a2818039a14adac6f86bf34f5cf13ec03">FileReader::readFile</a></div><div class="ttdeci">void readFile(std::vector&lt; Particle &gt; &amp;particles, std::string &amp;filename)</div><div class="ttdef"><b>Definition:</b> FileReader.cpp:19</div></div>
 <div class="ttc" id="aclassFileReader_html_a615dcb2443cad1f2ca123c7c0c334480"><div class="ttname"><a href="classFileReader.html#a615dcb2443cad1f2ca123c7c0c334480">FileReader::FileReader</a></div><div class="ttdeci">FileReader()</div></div>
+<div class="ttc" id="aclassFileReader_html_aefd7bb2cfa837baa0aeffe04184a3268"><div class="ttname"><a href="classFileReader.html#aefd7bb2cfa837baa0aeffe04184a3268">FileReader::readFile</a></div><div class="ttdeci">void readFile(ParticleContainer &amp;container, std::string &amp;filename) override</div><div class="ttdef"><b>Definition:</b> FileReader.cpp:19</div></div>
+<div class="ttc" id="aclassParticleContainer_html"><div class="ttname"><a href="classParticleContainer.html">ParticleContainer</a></div><div class="ttdef"><b>Definition:</b> ParticleContainer.h:19</div></div>
+<div class="ttc" id="aclassParticleReader_html"><div class="ttname"><a href="classParticleReader.html">ParticleReader</a></div><div class="ttdef"><b>Definition:</b> ParticleReader.h:7</div></div>
 <div class="ttc" id="anamespacexml__schema_html_a107bc4cd8f36e47026c8dbb154f9b587"><div class="ttname"><a href="namespacexml__schema.html#a107bc4cd8f36e47026c8dbb154f9b587">xml_schema::string</a></div><div class="ttdeci">::xsd::cxx::tree::string&lt; char, simple_type &gt; string</div><div class="ttdoc">C++ type corresponding to the string XML Schema built-in type.</div><div class="ttdef"><b>Definition:</b> vtk-unstructured.h:269</div></div>
+<div class="ttc" id="anamespacexml__schema_html_a395f5179c5fc4643909d66e9ff28d8ca"><div class="ttname"><a href="namespacexml__schema.html#a395f5179c5fc4643909d66e9ff28d8ca">xml_schema::container</a></div><div class="ttdeci">::xsd::cxx::tree::type container</div><div class="ttdoc">Alias for the anyType type.</div><div class="ttdef"><b>Definition:</b> vtk-unstructured.h:129</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

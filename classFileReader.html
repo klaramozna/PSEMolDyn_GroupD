@@ -70,6 +70,15 @@ $(function() {
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="FileReader_8h_source.html">FileReader.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for FileReader:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classFileReader.png" usemap="#FileReader_map" alt=""/>
+  <map id="FileReader_map" name="FileReader_map">
+<area href="classParticleReader.html" alt="ParticleReader" shape="rect" coords="0,0,96,24"/>
+  </map>
+</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -77,8 +86,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a615dcb2443cad1f2ca123c7c0c334480"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1382969e8f1468f3b04ad4b44ab39dee"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFileReader.html#a1382969e8f1468f3b04ad4b44ab39dee">~FileReader</a> ()</td></tr>
 <tr class="separator:a1382969e8f1468f3b04ad4b44ab39dee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2818039a14adac6f86bf34f5cf13ec03"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFileReader.html#a2818039a14adac6f86bf34f5cf13ec03">readFile</a> (std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt; &amp;particles, std::string &amp;filename)</td></tr>
-<tr class="separator:a2818039a14adac6f86bf34f5cf13ec03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefd7bb2cfa837baa0aeffe04184a3268"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classFileReader.html#aefd7bb2cfa837baa0aeffe04184a3268">readFile</a> (<a class="el" href="classParticleContainer.html">ParticleContainer</a> &amp;container, std::string &amp;filename) override</td></tr>
+<tr class="separator:aefd7bb2cfa837baa0aeffe04184a3268"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a615dcb2443cad1f2ca123c7c0c334480"></a>
@@ -132,17 +141,20 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a2818039a14adac6f86bf34f5cf13ec03"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2818039a14adac6f86bf34f5cf13ec03">&#9670;&nbsp;</a></span>readFile()</h2>
+<a id="aefd7bb2cfa837baa0aeffe04184a3268"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefd7bb2cfa837baa0aeffe04184a3268">&#9670;&nbsp;</a></span>readFile()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void FileReader::readFile </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt; &amp;&#160;</td>
-          <td class="paramname"><em>particles</em>, </td>
+          <td class="paramtype"><a class="el" href="classParticleContainer.html">ParticleContainer</a> &amp;&#160;</td>
+          <td class="paramname"><em>container</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -156,7 +168,14 @@ Public Member Functions</h2></td></tr>
           <td></td><td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
+
+<p>Implements <a class="el" href="classParticleReader.html">ParticleReader</a>.</p>
 
 </div>
 </div>
