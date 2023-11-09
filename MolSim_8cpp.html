@@ -81,12 +81,11 @@ $(function() {
 <code>#include &quot;<a class="el" href="Simulation_8h_source.html">Simulation.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="ParticleContainer_8h_source.html">ParticleContainer.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="GravitationalForce_8h_source.html">GravitationalForce.h</a>&quot;</code><br />
+<code>#include &lt;spdlog/spdlog.h&gt;</code><br />
+<code>#include &lt;<a class="el" href="CL_8h_source.html">CL.h</a>&gt;</code><br />
 </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a34e05df29a256344f2e6519dcc766fbf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a34e05df29a256344f2e6519dcc766fbf">validate_positive</a> (const double &amp;value, const std::string &amp;option_name)</td></tr>
-<tr class="memdesc:a34e05df29a256344f2e6519dcc766fbf"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if a double value is positive or not (used to handle incorrect user input)  <a href="MolSim_8cpp.html#a34e05df29a256344f2e6519dcc766fbf">More...</a><br /></td></tr>
-<tr class="separator:a34e05df29a256344f2e6519dcc766fbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a329c95e85f063f49b0daaed5c5b56335"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a329c95e85f063f49b0daaed5c5b56335">main</a> (int argc, char *argsv[])</td></tr>
 <tr class="separator:a329c95e85f063f49b0daaed5c5b56335"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -98,6 +97,10 @@ Variables</h2></td></tr>
 <tr class="separator:a8c7ea5e69ce954c1d81db1732f9f426a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4cfc079302fe9a34fe24637c4e44303a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a4cfc079302fe9a34fe24637c4e44303a">delta_t</a></td></tr>
 <tr class="separator:a4cfc079302fe9a34fe24637c4e44303a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab5a71c2541c377b3d5b34fdb35964c2e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#ab5a71c2541c377b3d5b34fdb35964c2e">log_level</a></td></tr>
+<tr class="separator:ab5a71c2541c377b3d5b34fdb35964c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa14dbbb4b5614a1e7a5b4281baa64b89"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#aa14dbbb4b5614a1e7a5b4281baa64b89">input_path</a></td></tr>
+<tr class="separator:aa14dbbb4b5614a1e7a5b4281baa64b89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a329c95e85f063f49b0daaed5c5b56335"></a>
@@ -128,43 +131,6 @@ Variables</h2></td></tr>
 
 </div>
 </div>
-<a id="a34e05df29a256344f2e6519dcc766fbf"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34e05df29a256344f2e6519dcc766fbf">&#9670;&nbsp;</a></span>validate_positive()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void validate_positive </td>
-          <td>(</td>
-          <td class="paramtype">const double &amp;&#160;</td>
-          <td class="paramname"><em>value</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const std::string &amp;&#160;</td>
-          <td class="paramname"><em>option_name</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>checks if a double value is positive or not (used to handle incorrect user input) </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">value</td><td>the value to check </td></tr>
-    <tr><td class="paramname">option_name</td><td>specify which option </td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
 <h2 class="groupheader">Variable Documentation</h2>
 <a id="a4cfc079302fe9a34fe24637c4e44303a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4cfc079302fe9a34fe24637c4e44303a">&#9670;&nbsp;</a></span>delta_t</h2>
@@ -188,6 +154,34 @@ Variables</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">double end_time</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa14dbbb4b5614a1e7a5b4281baa64b89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa14dbbb4b5614a1e7a5b4281baa64b89">&#9670;&nbsp;</a></span>input_path</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::string input_path</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab5a71c2541c377b3d5b34fdb35964c2e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab5a71c2541c377b3d5b34fdb35964c2e">&#9670;&nbsp;</a></span>log_level</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int log_level</td>
         </tr>
       </table>
 </div><div class="memdoc">
