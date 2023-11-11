@@ -15,8 +15,9 @@
 #include "ParticleContainer.h"
 #include "GravitationalForce.h"
 
-/* Logging*/
-#include <spdlog/spdlog.h>
+/* Logging */
+#include "Logger.h"
+
 
 #include <CL.h>
 
@@ -61,11 +62,11 @@ int main(int argc, char *argsv[]) {
             writer.plotParticles(simulation.getParticles(), out_name, iteration);
         }
 
-        std::cout << "Iteration " << iteration << " finished." << std::endl;
+        Logger::console->info("Iteration {} finished.", iteration);
 
         current_time += delta_t;
     }
 
-    //console_logger->info("Output written. Terminating...");
+    Logger::console->info("Output written. Terminating...");
     return 0;
 }
