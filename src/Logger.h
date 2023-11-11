@@ -9,9 +9,9 @@
 #include<memory>
 
 /* Logging*/
-#include <spdlog/spdlog.h>
-#include "spdlog/sinks/stdout_color_sinks.h"
-#include "spdlog/sinks/basic_file_sink.h"
+#include <../libs/spdlog/spdlog.h>
+#include "../libs/spdlog/sinks/stdout_color_sinks.h"
+#include "../libs/spdlog/sinks/basic_file_sink.h"
 
 namespace Logger {
 
