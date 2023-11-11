@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['outputwriter_325',['outputWriter',['../namespaceoutputWriter.html',1,'']]]
+  ['logger_332',['Logger',['../namespaceLogger.html',1,'']]]
 ];
