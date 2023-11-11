@@ -5,15 +5,6 @@ file(GLOB_RECURSE MY_SRC
 )
 
 
-include(FetchContent)
-FetchContent_Declare(
-        spdlog
-        GIT_REPOSITORY https://github.com/gabime/spdlog.git
-        GIT_TAG v1.12.0
-)
-        
-FetchContent_MakeAvailable(spdlog)
-
 # Create a library target for the project code
 add_executable(MolSim ${MY_SRC}
         GravitationalForce.cpp)
@@ -21,6 +12,7 @@ add_executable(MolSim ${MY_SRC}
 # Include directories specific to the 'src' directory, if needed
 target_include_directories(MolSim
         PUBLIC ${CMAKE_SOURCE_DIR}/libs/libxsd
+        PUBLIC ${CMAKE_SOURCE_DIR}/libs/
         PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
@@ -30,7 +22,6 @@ target_link_libraries(MolSim
         PUBLIC
         xerces-c
         Boost::program_options
-        PRIVATE spdlog
 )
 
 # Configure dependencies - Boost, Xerces
