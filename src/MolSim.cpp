@@ -21,6 +21,9 @@
 
 #include <CL.h>
 
+#include "ParticleGenerator.h"
+#include "CuboidGenerator.h"
+
 constexpr double start_time = 0;
 double end_time;
 double delta_t;
