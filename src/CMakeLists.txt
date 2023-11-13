@@ -4,7 +4,6 @@ file(GLOB_RECURSE MY_SRC
         "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
 )
 
-
 # Create a library target for the project code
 add_executable(MolSim ${MY_SRC}
         GravitationalForce.cpp)
