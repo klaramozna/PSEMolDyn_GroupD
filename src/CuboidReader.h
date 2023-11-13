@@ -9,5 +9,5 @@ class CuboidReader : public ParticleReader {
                         std::array<double, 3> &coordinate,
                         std::array<double, 3> &numParticles,
                         std::array<double, 3> distance,
-                        std::array<double, 3> initialVelocity)
+                        std::array<double, 3> initialVelocity);
 };
