@@ -68,6 +68,7 @@ run the program with: ```./src/MolSim -p <input_file_path>```
 - ```-h , --help```: produces help message
 - ```-e, --t_end```: specifies end time of simulation(default: 1000)
 - ```-s, --delta_t```: specifies the step size between iterations(default: 0.014)
+- ```-l, --log_level```: specifies the log level [0: trace, 1: debug, 2: info, 3: warning, 4: error, 5: critical, 6: off] (default: 2)
 
 
 <a name="documentation"></a>

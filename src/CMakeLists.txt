@@ -3,19 +3,17 @@ file(GLOB_RECURSE MY_SRC
         "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
         "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
 )
+
 # Create a library target for the project code
 add_executable(MolSim ${MY_SRC}
         GravitationalForce.cpp)
-
+        
 # Include directories specific to the 'src' directory, if needed
 target_include_directories(MolSim
         PUBLIC ${CMAKE_SOURCE_DIR}/libs/libxsd
+        PUBLIC ${CMAKE_SOURCE_DIR}/libs/
         PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
 )
-
-# Configure dependencies - Boost, Xerces
-find_package(XercesC REQUIRED)
-find_package(Boost REQUIRED COMPONENTS program_options)
 
 # Link Libraries for running the project
 target_link_libraries(MolSim
@@ -24,6 +22,10 @@ target_link_libraries(MolSim
         xerces-c
         Boost::program_options
 )
+
+# Configure dependencies - Boost, Xerces
+find_package(XercesC REQUIRED)
+find_package(Boost REQUIRED COMPONENTS program_options)
 
 # activate all compiler warnings. Clean up your code :P
 # depending on the compiler different flags are used
@@ -39,3 +41,6 @@ target_compile_features(MolSim
         PRIVATE
         cxx_std_17
 )
+
+
+
