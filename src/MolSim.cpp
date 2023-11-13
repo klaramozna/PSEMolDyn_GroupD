@@ -26,12 +26,13 @@ double end_time;
 double delta_t;
 int log_level;
 std::string input_path;
+std::string input_mode;
 
 
 int main(int argc, char *argsv[]) {
     
     CL cl;
-    int status = cl.parse_arguments(argc, argsv, end_time, delta_t, log_level, input_path);
+    int status = cl.parse_arguments(argc, argsv, end_time, delta_t, log_level, input_path, input_mode);
     
     //any error in parsing
     if (status) {
