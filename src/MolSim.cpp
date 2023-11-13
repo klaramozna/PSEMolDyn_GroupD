@@ -32,6 +32,11 @@ std::string input_path;
 
 
 int main(int argc, char *argsv[]) {
+    CuboidGenerator c(std::array<double, 3>{0, 0,  0}, 2, 1, 2, 1, 1, std::array<double, 3>{0, 0,  0});
+    ParticleContainer cont = c.generateParticles();
+    for(auto & p : cont){
+        p.getXVector().print();
+    }
     
     CL cl;
     int status = cl.parse_arguments(argc, argsv, end_time, delta_t, log_level, input_path);

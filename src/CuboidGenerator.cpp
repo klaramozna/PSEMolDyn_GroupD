@@ -23,7 +23,7 @@ ParticleContainer CuboidGenerator::generateParticles() {
     for(int x = 0; x < n1; x++){
         for(int y = 0; y < n2; y++){
             for(int z = 0; z < n3; z++){
-                std::array<double, 3> particlePosition{xCorner - particleDistance * x, yCorner + particleDistance * y, z - particleDistance * z};
+                std::array<double, 3> particlePosition{xCorner - particleDistance * x, yCorner + particleDistance * y, zCorner + particleDistance * z};
                 particles.emplace_back(particlePosition, velocity, mass);
             }
         }
