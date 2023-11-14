@@ -1,4 +1,5 @@
 #include "CuboidReader.h"
+#include "CuboidMock.h"
 
 #include <cstdlib>
 #include <fstream>
@@ -9,7 +10,7 @@
 void CuboidReader::readFile(ParticleContainer &container, std::string &filename) {
     int numberOfCuboids = 0;
     std::array<double, 3> coordinate;
-    std::array<double, 3> numParticles;
+    std::array<int, 3> numParticles;
     std::array<double, 3> distance;
     std::array<double, 3> initialVelocity;
 
@@ -33,6 +34,9 @@ void CuboidReader::readFile(ParticleContainer &container, std::string &filename)
         std::istringstream numstream(tmp_string);
         numstream >> numberOfCuboids;
         Logger::console->info("Reading {} cuboids", numberOfCuboids);
+
+        // Reserve space for all the cuboids -> Testing feature
+        cuboids.reserve(numberOfCuboids);
 
         // Get next line before starting line processing
         getline(input_file, tmp_string);
@@ -77,7 +81,13 @@ void CuboidReader::readFile(ParticleContainer &container, std::string &filename)
             }
 
             // Generate cuboid and place all new particles onto ParticleContainer
-            CuboidReader::generateCuboid(numberOfCuboids, mass, container, coordinate, numParticles, distance, initialVelocity);
+            cuboids.emplace_back(
+                    coordinate,
+                    numParticles,
+                    distance,
+                    initialVelocity,
+                    mass
+            );
 
             // Read next line
             getline(input_file, tmp_string);
@@ -87,13 +97,4 @@ void CuboidReader::readFile(ParticleContainer &container, std::string &filename)
         std::cout << "Error: could not open file " << filename << std::endl;
         exit(-1);
     }
-}
-
-void CuboidReader::generateCuboid(int numberOfCuboids, double mass,
-                                  ParticleContainer &container,
-                                  std::array<double, 3> &coordinate,
-                                  std::array<double, 3> &numParticles,
-                                  std::array<double, 3> distance,
-                                  std::array<double, 3> initialVelocity) {
-    return;
 }
