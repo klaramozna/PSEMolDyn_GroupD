@@ -1,24 +1,29 @@
-cmake_minimum_required(VERSION 3.10)
-
-# Set the project name and version
-project(PSEMolDyn_GroupD_Tests VERSION 1.0)
-
-# Include Boost.Test
-find_package(Boost REQUIRED COMPONENTS unit_test_framework)
-
-# Gather the test source files
-file(GLOB TEST_SOURCE_FILES "*.cpp")
-
-set(SRC_FILES
-        ${CMAKE_SOURCE_DIR}/src/Simulation.cpp
+file(GLOB_RECURSE TEST_SRC
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
 )
 
-# Create a test target for each test suite or case
-foreach(TEST_SOURCE_FILE ${TEST_SOURCE_FILES})
-    get_filename_component(TEST_NAME ${TEST_SOURCE_FILE} NAME_WE)
-    add_executable(${TEST_NAME} ${TEST_SOURCE_FILE})
-    target_link_libraries(${TEST_NAME} Boost::unit_test_framework MolSimLib)
-    # Register each test target with CTest
-    add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
-endforeach()
+set(source_needed_for_test
+        ${PROJECT_SOURCE_DIR}/src/ParticleContainer.cpp
+        ${PROJECT_SOURCE_DIR}/src/ParticleContainer.h
+        ${PROJECT_SOURCE_DIR}/src/Particle.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particle.h
+        ${PROJECT_SOURCE_DIR}/src/utils/ArrayUtils.h
+        ${PROJECT_SOURCE_DIR}/src/VectorDouble3.cpp
+        ${PROJECT_SOURCE_DIR}/src/VectorDouble3.h
+)
 
+add_executable(
+        particleContainer_test
+        ${TEST_SRC}
+        ${source_needed_for_test}
+)
+
+target_link_libraries(
+        particleContainer_test
+        GTest::gtest
+        GTest::gtest_main
+)
+
+include(GoogleTest)
+gtest_discover_tests(particleContainer_test)

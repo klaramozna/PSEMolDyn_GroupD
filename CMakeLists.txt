@@ -1,10 +1,23 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.14)
 
 # define project name, version
 project(PSEMolDyn_GroupD VERSION 0.0.1)
 
+# Add CMake Modules
+list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
+
+# Includes
+include(doxygen)
+include(FetchContent)
+
+# Set C++ requirements for the project
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 # let ccmake and cmake-gui offer the default build type options
 set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug;Release;RelWithDebInfo;MinSizeRel")
+
+enable_testing()
 
 # set Release as the default build type if it is not yet set.
 if(NOT CMAKE_BUILD_TYPE)
@@ -20,21 +33,28 @@ if(NOT XercesC_FOUND)
 endif()
 
 # Look for Boost program options
-find_package(Boost QUIET COMPONENTS program_options unit_test_framework)
+find_package(Boost QUIET COMPONENTS program_options)
 if(NOT Boost_FOUND)
-    message(FATAL_ERROR "Boost program options and/or test-dev not found. You can install it with: sudo apt-get install libboost-program-options-dev or sudo apt-get install libboost-test-dev")
+    message(FATAL_ERROR "Boost program options not found. You can install it with: sudo apt-get install libboost-program-options-dev")
 endif()
 
+# Fetch GoogleTest
+FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+        DOWNLOAD_EXTRACT_TIMESTAMP true
+)
 
-list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
+FetchContent_MakeAvailable(googletest)
 
-include(doxygen)
-include(CTest)
+# Look for Boost program options
+find_package(GoogleTest QUIET)
 
+# Extend current CMake to /src
 add_subdirectory(src)
-#add_subdirectory(test)
 
-enable_testing()
+# Extend current CMake to /test
+add_subdirectory(test)
 
 
 

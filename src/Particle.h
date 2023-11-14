@@ -118,7 +118,7 @@ public:
      */
     void setOldF(const VectorDouble3 &oldForce);
 
-    bool operator==(Particle &other);
+    bool operator==(const Particle &other) const;
 
     std::string toString() const;
 };
