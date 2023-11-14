@@ -53,7 +53,7 @@ int main(int argc, char *argsv[]) {
 
     outputWriter::VTKWriter writer;
 
-    Simulation simulation(delta_t, container, &gravForce);
+    Simulation simulation(delta_t, container, gravForce);
 
     fileReader.readFile(simulation.getParticles(), input_path);
 

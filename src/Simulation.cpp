@@ -13,7 +13,7 @@
 
 Simulation::Simulation(double delta_t,
                        ParticleContainer container,
-                       ForceCalculation *calculation) :
+                       ForceCalculation &calculation) :
                         container(std::move(container)),
                         forceCalculation(calculation),
                         delta_t(delta_t) {}
@@ -30,7 +30,7 @@ void Simulation::calculateF() {
         VectorDouble3 f_i{};
         for (auto &p2: container) {
             if(!(p2 == p1)){
-                f_i += *(this->forceCalculation->CalculateForces(p1,p2));
+                f_i += *(this->forceCalculation.CalculateForces(p1,p2));
             }
         }
         p1.setF(f_i);
