@@ -3,9 +3,13 @@
 //
 
 #include "CuboidGenerator.h"
+#include <stdexcept>
 
 CuboidGenerator::CuboidGenerator(std::array<double, 3> corner, int n1, int n2, int n3, double particleDistance,
                                  double mass, std::array<double, 3> velocity): corner(), velocity() {
+    if(n1 <= 0 | n2 <= 0 | n3 <= 0){
+        throw std::invalid_argument("The number of particles in a dimension has to be strictly positive.");
+    }
     this->corner = corner;
     this->n1= n1;
     this->n2 = n2;
