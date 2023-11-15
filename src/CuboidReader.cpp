@@ -1,5 +1,5 @@
 #include "CuboidReader.h"
-#include "CuboidMock.h"
+#include "CuboidGenerator.h"
 
 #include <cstdlib>
 #include <fstream>
@@ -70,24 +70,18 @@ void CuboidReader::readFile(ParticleContainer &container, std::string &filename)
             // 4
             datastream >> mass;
 
-            // 5
-            for (auto &vj: initialVelocity) {
-                datastream >> vj;
-            }
-
             if (datastream.eof()) {
                 Logger::err_logger->error("Error reading file: eof reached unexpectedly reading from line {}", i);
                 exit(-1);
             }
 
+            // 5
+            for (auto &vj: initialVelocity) {
+                datastream >> vj;
+            }
+
             // Generate cuboid and place all new particles onto ParticleContainer
-            cuboids.emplace_back(
-                    coordinate,
-                    numParticles,
-                    distance,
-                    initialVelocity,
-                    mass
-            );
+            CuboidGenerator generator();
 
             // Read next line
             getline(input_file, tmp_string);

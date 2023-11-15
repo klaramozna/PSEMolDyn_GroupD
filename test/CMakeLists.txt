@@ -11,12 +11,20 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/utils/ArrayUtils.h
         ${PROJECT_SOURCE_DIR}/src/VectorDouble3.cpp
         ${PROJECT_SOURCE_DIR}/src/VectorDouble3.h
+        ${PROJECT_SOURCE_DIR}/src/CuboidReader.cpp
+        ${PROJECT_SOURCE_DIR}/src/CuboidReader.h
+        ${PROJECT_SOURCE_DIR}/src/Logger.h
+        ${PROJECT_SOURCE_DIR}/src/Logger.cpp
 )
 
 add_executable(
         particleContainer_test
         ${TEST_SRC}
         ${source_needed_for_test}
+)
+
+target_include_directories(particleContainer_test
+        PUBLIC ${CMAKE_SOURCE_DIR}/libs/
 )
 
 target_link_libraries(
