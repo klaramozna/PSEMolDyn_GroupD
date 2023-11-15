@@ -6,15 +6,15 @@
 #
 # A cuboid consists of
 # * xyz-coordinates (3 double values) of lower left point
-# * Number of particles per dimension (3 integer values)
+# * Number of particles per dimension (1 integer value)
 # * Distance between particles per dimension (3 double values)
 # * Mass of particles (1 double value)
 # * Initial velocity of Particles (3 double values)
 #
-# lower-left-coord     number of particles     distance          mass      initial velocity
+# lower-left-coord     number of particles     distance     mass      initial velocity
 3
-0.0 0.0 0.0            3 3 3                   0.1 0.1 0.1       10        1.0 0.0 0.0
-10.0 0.0 5.0           2 1 1                   1.0 1.0 1.0       0.1       0.0 -5.0 0.0
-1.1 0.2 15             10 1 1                  0.2 0.2 0.2       1000      1.0 5.0 0.0
+0.0 0.0 0.0            3 3 3                   0.1           10          1.0 0.0 0.0
+10.0 0.0 5.0           2 1 1                   1.0           0.1         0.0 -5.0 0.0
+1.1 0.2 15             10 1 1                  0.2           1000        1.0 5.0 0.0
 
 

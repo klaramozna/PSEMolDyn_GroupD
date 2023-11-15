@@ -5,44 +5,42 @@
 #pragma once
 
 #include "CuboidReaderTest.h"
+#include "../src/CuboidGenerator.h"
 #include <string>
 
 void CuboidReaderTest::SetUp() {
-    this->cuboids.clear();
-    this->expecteds.clear();
     filename = "../../test/resources/";
 };
 
+/**
+ * Try to read a valid Cuboid read from an input file
+ * @result Cuboid should match in size and composition with hardcoded simpleCube
+ **/
 TEST_F(CuboidReaderTest, TestSimple1Cuboid) {
     // Initialize expected CuboidMock
-    CuboidMock simpleCube(
+    CuboidGenerator simpleCube(
             {0.0, 0.0, 0.0},
-            {3,3,3},
-            {0.1, 0.1, 0.1},
+            3,3,3,
+            0.0,
             10.0,
             {1.0, 0.0, 0.0});
-
-    expecteds.push_back(simpleCube);
-
-    // Receive actual file
-    filename.append("simpleCuboid.txt");
-
     CuboidReader reader;
-    reader.readFile(dummy, filename);
 
-    // Make sure sizes match
-    if (expecteds.size() != cuboids.size()) {
-        FAIL() << "Didn't receive expected amount of cuboids";
-    }
+    filename.append("simpleCuboid.txt");
+    reader.readFile(receivedContainer, filename);
 
-    auto it1 = expecteds.begin();
-    auto it2 = cuboids.begin();
+    expectedContainer = simpleCube.generateParticles();
 
-    // Compare each cuboid making sure they match
-    for (; it1 != expecteds.end(); ++it1, ++it2) {
-        CuboidMock expected = *it1;
-        CuboidMock received = *it2;
-        EXPECT_EQ(expected, received);
+    ASSERT_EQ(expectedContainer.getSize(), receivedContainer.getSize()) << "Containers didn't match in size";
+
+    auto it1 = expectedContainer.begin();
+    auto it2 = receivedContainer.begin();
+
+    for (; it1 != expectedContainer.end() && it2!= receivedContainer.end(); ++it1, ++it2) {
+        Particle p1 = *it1;
+        Particle p2 = *it2;
+
+        ASSERT_TRUE(p1 == p2) << "Expected " << p1.toString() << "\nReceived " << p2.toString();
     }
 };
 

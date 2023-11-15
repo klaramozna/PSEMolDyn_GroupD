@@ -8,15 +8,13 @@
 #include <string>
 
 #include "../src/CuboidReader.h"
-#include "../src/CuboidMock.h"
 #include "../src/ParticleContainer.h"
 
 class CuboidReaderTest : public testing::Test {
 protected:
-    std::vector<CuboidMock> cuboids;
-    std::vector<CuboidMock> expecteds;
     std::string filename;
-    ParticleContainer dummy;
+    ParticleContainer expectedContainer;
+    ParticleContainer receivedContainer;
 
     void SetUp() override;
 };

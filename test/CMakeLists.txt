@@ -13,6 +13,8 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/VectorDouble3.h
         ${PROJECT_SOURCE_DIR}/src/CuboidReader.cpp
         ${PROJECT_SOURCE_DIR}/src/CuboidReader.h
+        ${PROJECT_SOURCE_DIR}/src/CuboidGenerator.h
+        ${PROJECT_SOURCE_DIR}/src/CuboidGenerator.cpp
         ${PROJECT_SOURCE_DIR}/src/Logger.h
         ${PROJECT_SOURCE_DIR}/src/Logger.cpp
 )

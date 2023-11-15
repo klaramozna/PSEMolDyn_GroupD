@@ -101,3 +101,7 @@ void ParticleContainer::applyToAll(const std::function<void(Particle &)>& functi
         function(particle);
     }
 }
+
+void ParticleContainer::addParticles(const ParticleContainer &container) {
+    particles.insert(particles.end(), container.particles.begin(), container.particles.end());
+}
