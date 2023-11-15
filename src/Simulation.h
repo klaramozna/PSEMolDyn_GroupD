@@ -15,7 +15,7 @@ private:
     static constexpr double start_time = 0;
 
     ParticleContainer container;
-    ForceCalculation* forceCalculation;
+    ForceCalculation &forceCalculation;
 
     double delta_t;
     /**
@@ -33,7 +33,7 @@ private:
     */
     void calculateF();
 public:
-    Simulation(double delta_t, ParticleContainer container, ForceCalculation *calculation);
+    Simulation(double delta_t, ParticleContainer container, ForceCalculation &calculation);
     virtual ~Simulation();
 
     /**
