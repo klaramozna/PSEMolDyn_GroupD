@@ -25,16 +25,21 @@ ParticleContainer& Simulation::getParticles() {
 }
 
 void Simulation::calculateF() {
-    for (auto &p1: container) {
-        p1.setOldF(p1.getFVector());
-        VectorDouble3 f_i{};
-        for (auto &p2: container) {
-            if(!(p2 == p1)){
-                f_i += *(this->forceCalculation.CalculateForces(p1,p2));
-            }
-        }
-        p1.setF(f_i);
+    // updating the old force and setting the new force to zero
+    for(auto & p : container){
+        p.setOldF((p.getFVector()));
+        p.setF(VectorDouble3());
     }
+
+    // calculating the new force
+    for(auto it = container.beginPair(); it != container.endPair(); ++it){
+        Particle& p1 = (*it).first;
+        Particle& p2 = (*it).second;
+        p1.setF(p1.getFVector() + *(this->forceCalculation.CalculateForces(p1,p2)));
+        p2.setF(p2.getFVector() + *(this->forceCalculation.CalculateForces(p2,p1)));
+    }
+
+
 }
 
 void Simulation::calculateV() {

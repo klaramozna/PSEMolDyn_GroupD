@@ -118,6 +118,38 @@ public:
      */
     void setOldF(const VectorDouble3 &oldForce);
 
+    /**
+     * @brief Sets the values of position according to the given parameters.
+     * @param x x coordinate
+     * @param y y coordinate
+     * @param z z coordinate
+     */
+    void setX(double x, double y, double z);
+
+    /**
+     * @brief Sets the values of velocity according to the given parameters.
+     * @param x velocity in the x-direction.
+     * @param y velocity in the y-direction.
+     * @param z velocity in the z-direction.
+     */
+    void setV(double x, double y, double z);
+
+    /**
+     * @brief Sets the values of force according to the given parameters.
+     * @param x force in the x-direction.
+     * @param y force in the y-direction.
+     * @param z force in the z-direction.
+     */
+    void setF(double x, double y, double z);
+
+    /**
+     * @brief Sets the values of force in the previous iteration according to the given parameters.
+     * @param x force in the x-direction.
+     * @param y force in the y-direction.
+     * @param z force in the z-direction.
+     */
+    void setOldF(double x, double y, double z);
+
     bool operator==(const Particle &other) const;
 
     std::string toString() const;

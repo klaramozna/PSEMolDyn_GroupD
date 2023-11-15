@@ -94,6 +94,30 @@ void Particle::setOldF(const VectorDouble3 &oldForce) {
     old_f = oldForce.convertToArray();
 }
 
+void Particle::setX(double x, double y, double z) {
+    (this->x)[0] = x;
+    (this->x)[1] = y;
+    (this->x)[2] = z;
+}
+
+void Particle::setV(double x, double y, double z) {
+    v[0] = x;
+    v[1] = y;
+    v[2] = z;
+}
+
+void Particle::setF(double x, double y, double z) {
+    f[0] = x;
+    f[1] = y;
+    f[2] = z;
+}
+
+void Particle::setOldF(double x, double y, double z) {
+    old_f[0] = x;
+    old_f[1] = y;
+    old_f[2] = z;
+}
+
 std::ostream &operator<<(std::ostream &stream, Particle &p) {
     stream << p.toString();
     return stream;
