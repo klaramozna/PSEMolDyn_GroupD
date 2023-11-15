@@ -45,6 +45,13 @@ public:
     VectorDouble3 operator-=(const VectorDouble3 &other);
 
     /**
+     * Checks equality between two VectorDouble3 objects.
+     * @param other Another VectorDouble3 object to compare with this vector
+     * @return true if the two vectors are equal, false otherwise
+     */
+    bool operator==(const VectorDouble3& other) const;
+
+    /**
      * @brief Returns the L2 norm (euclidean norm) of the vector.
      * @return L2 norm of the vector.
      */
@@ -60,6 +67,13 @@ public:
      * @return resulting array, containing the values of the vector.
      */
     std::array<double, 3> convertToArray() const;
+
+    /**
+     * @brief access elements
+     * @param index the index of the element to access
+     * @retrun double the element
+     */
+    double at(int index);
 
     /**
      * @brief Adds two vectors and returns result.
@@ -84,6 +98,9 @@ public:
      * @return resulting vector.
      */
     friend VectorDouble3 operator*(double scalar, const VectorDouble3 &vec);
+
+    
+
 };
 
 

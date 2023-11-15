@@ -69,3 +69,11 @@ VectorDouble3::VectorDouble3(const std::array<double, 3> &array): values{} {
 std::array<double, 3> VectorDouble3::convertToArray() const {
     return values;
 }
+
+double VectorDouble3::at(int index) {
+    return values.at(index);
+}
+
+bool VectorDouble3::operator==(const VectorDouble3& other) const {
+    return values == other.values; 
+}
