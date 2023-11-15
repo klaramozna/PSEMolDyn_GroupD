@@ -31,7 +31,7 @@ private:
     /**
      * @brief The mean-value of the velocity of the Brownian Motion.
      */
-    const double MEAN_VELOCITY_BROWNIAN = 0;
+    const double MEAN_VELOCITY_BROWNIAN = 0.1;
 
     /**
      * @brief Coordinates of the left-lower corner of the front side of the cuboid.
