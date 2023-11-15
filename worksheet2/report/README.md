@@ -17,7 +17,9 @@ Members:
 * 
 
 ## Task 2 ”Continuous Integration” ##
-* 
+* With the help of GitHub actions, we now build and test our code with every pull request or push to main. 
+* We make sure our code compiles and passes all address sanitizer checks. 
+* We also run our tests with ctest
 
 ## Task 3 ”Logging” ##
 * We made ourselves familiar with ```spdlog```. It is a high-performance, C++ logging library and offers a powerful API for logging messages at various levels. The library is header-only, making it easy to integrate into C++ projects, and supports logging to multiple sinks, such as console and files. Furthemore it is designed to be thread-safe.     
@@ -49,7 +51,8 @@ Run the program with``` --log_level <value in [0, 6]>``` or ``` -l <value in [0,
 where : ```log level (0: trace, 1: debug, 2: info, 3: warning, 4: error, 5: critical, 6: off)```
 
 ## Task 4 ”Collision of two bodies” ##
-* 
+* We changed our implementation of force calculation from using a nested for loop to using our PairIterator from the ParticleContainer class. We also applied Newton's third law to avoid unnecessary calculations. Both of these changed should, in theory, make our code faster, since we reduced the amount of iterations as well has halved the amount of force calculations. However, this improvement wasn't reflected in our measurements. We tested the executions time of the calculateF function with multiple different particle containers. One with 1000 particles, one with 100 particles and one with 10 particles. In all of those cases, our old implementation with a nested loop was consistently faster (~30% lower execution time). We suspect this is due to an additional loop that is needed in our new implementation to set the old force correctly.
+* We created a new class ```CuboidGenerator``` that inherits from the class ```ParticleGenerator```. We made the ```generateParticles``` function virtual as different types of particle generators will probably be implemented in the future and run-time polymorphism might be needed.
   
 # Misc #
 ## Using github Issues Feature to improve our code ##
