@@ -85,6 +85,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abea3e9b20e8675a811c13e484965126e"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVectorDouble3.html">VectorDouble3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorDouble3.html#abea3e9b20e8675a811c13e484965126e">operator-=</a> (const <a class="el" href="classVectorDouble3.html">VectorDouble3</a> &amp;other)</td></tr>
 <tr class="memdesc:abea3e9b20e8675a811c13e484965126e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Subtracts other from this and returns the result.  <a href="classVectorDouble3.html#abea3e9b20e8675a811c13e484965126e">More...</a><br /></td></tr>
 <tr class="separator:abea3e9b20e8675a811c13e484965126e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a2f4e60a65a5eb86205b5c51bcfb046"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorDouble3.html#a8a2f4e60a65a5eb86205b5c51bcfb046">operator==</a> (const <a class="el" href="classVectorDouble3.html">VectorDouble3</a> &amp;other) const</td></tr>
+<tr class="separator:a8a2f4e60a65a5eb86205b5c51bcfb046"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a55787a769abe9d677f6ac793cea1d665"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorDouble3.html#a55787a769abe9d677f6ac793cea1d665">getL2Norm</a> () const</td></tr>
 <tr class="memdesc:a55787a769abe9d677f6ac793cea1d665"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the L2 norm (euclidean norm) of the vector.  <a href="classVectorDouble3.html#a55787a769abe9d677f6ac793cea1d665">More...</a><br /></td></tr>
 <tr class="separator:a55787a769abe9d677f6ac793cea1d665"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -94,6 +96,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a5bef0b591f663ed50b9904fca0a65cf4"><td class="memItemLeft" align="right" valign="top">std::array&lt; double, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorDouble3.html#a5bef0b591f663ed50b9904fca0a65cf4">convertToArray</a> () const</td></tr>
 <tr class="memdesc:a5bef0b591f663ed50b9904fca0a65cf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts the vector to ann array (only available for vectors of size 3).  <a href="classVectorDouble3.html#a5bef0b591f663ed50b9904fca0a65cf4">More...</a><br /></td></tr>
 <tr class="separator:a5bef0b591f663ed50b9904fca0a65cf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adcfe6b0a1dc195cf85ab9f85f83352c1"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classVectorDouble3.html#adcfe6b0a1dc195cf85ab9f85f83352c1">at</a> (int index)</td></tr>
+<tr class="memdesc:adcfe6b0a1dc195cf85ab9f85f83352c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">access elements  <a href="classVectorDouble3.html#adcfe6b0a1dc195cf85ab9f85f83352c1">More...</a><br /></td></tr>
+<tr class="separator:adcfe6b0a1dc195cf85ab9f85f83352c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="friends"></a>
 Friends</h2></td></tr>
@@ -168,6 +173,32 @@ Friends</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="adcfe6b0a1dc195cf85ab9f85f83352c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adcfe6b0a1dc195cf85ab9f85f83352c1">&#9670;&nbsp;</a></span>at()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double VectorDouble3::at </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>access elements </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">index</td><td>the index of the element to access @retrun double the element </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a5bef0b591f663ed50b9904fca0a65cf4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5bef0b591f663ed50b9904fca0a65cf4">&#9670;&nbsp;</a></span>convertToArray()</h2>
 
@@ -259,6 +290,31 @@ Friends</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The resulting vector of the subtraction. </dd></dl>
+
+</div>
+</div>
+<a id="a8a2f4e60a65a5eb86205b5c51bcfb046"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a2f4e60a65a5eb86205b5c51bcfb046">&#9670;&nbsp;</a></span>operator==()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool VectorDouble3::operator== </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classVectorDouble3.html">VectorDouble3</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Checks equality between two <a class="el" href="classVectorDouble3.html">VectorDouble3</a> objects. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td>Another <a class="el" href="classVectorDouble3.html">VectorDouble3</a> object to compare with this vector </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true if the two vectors are equal, false otherwise </dd></dl>
 
 </div>
 </div>
