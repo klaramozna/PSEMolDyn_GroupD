@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xyzwriter_351',['XYZWriter',['../classoutputWriter_1_1XYZWriter.html',1,'outputWriter']]]
+  ['xyzwriter_358',['XYZWriter',['../classoutputWriter_1_1XYZWriter.html',1,'outputWriter']]]
 ];
