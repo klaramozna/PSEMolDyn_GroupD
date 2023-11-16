@@ -86,9 +86,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0bbba5d4bc48d15267d174e9220ebfe8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleGenerator.html#a0bbba5d4bc48d15267d174e9220ebfe8">ParticleGenerator</a> ()=default</td></tr>
 <tr class="memdesc:a0bbba5d4bc48d15267d174e9220ebfe8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor that default initializes the particle vector.  <a href="classParticleGenerator.html#a0bbba5d4bc48d15267d174e9220ebfe8">More...</a><br /></td></tr>
 <tr class="separator:a0bbba5d4bc48d15267d174e9220ebfe8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae25fc015a39aa7e7b7cb9eb5541ca84a"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classParticleContainer.html">ParticleContainer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleGenerator.html#ae25fc015a39aa7e7b7cb9eb5541ca84a">generateParticles</a> ()=0</td></tr>
-<tr class="memdesc:ae25fc015a39aa7e7b7cb9eb5541ca84a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates particles.  <a href="classParticleGenerator.html#ae25fc015a39aa7e7b7cb9eb5541ca84a">More...</a><br /></td></tr>
-<tr class="separator:ae25fc015a39aa7e7b7cb9eb5541ca84a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa58b464e56595d393a57f71c07ae7a6d"><td class="memItemLeft" align="right" valign="top">virtual <a class="el" href="classParticleContainer.html">ParticleContainer</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleGenerator.html#aa58b464e56595d393a57f71c07ae7a6d">generateParticles</a> (int <a class="el" href="classtype.html">type</a>=0)=0</td></tr>
+<tr class="memdesc:aa58b464e56595d393a57f71c07ae7a6d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates particles.  <a href="classParticleGenerator.html#aa58b464e56595d393a57f71c07ae7a6d">More...</a><br /></td></tr>
+<tr class="separator:aa58b464e56595d393a57f71c07ae7a6d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a1ed66d7ed7e011a4c88ef94fbd755e"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleGenerator.html#a3a1ed66d7ed7e011a4c88ef94fbd755e">~ParticleGenerator</a> ()=default</td></tr>
 <tr class="memdesc:a3a1ed66d7ed7e011a4c88ef94fbd755e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a <a class="el" href="classParticleGenerator.html">ParticleGenerator</a> object (allows deleting a pointer to <a class="el" href="classParticleGenerator.html">ParticleGenerator</a> without memory leaks).  <a href="classParticleGenerator.html#a3a1ed66d7ed7e011a4c88ef94fbd755e">More...</a><br /></td></tr>
 <tr class="separator:a3a1ed66d7ed7e011a4c88ef94fbd755e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -155,8 +155,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae25fc015a39aa7e7b7cb9eb5541ca84a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae25fc015a39aa7e7b7cb9eb5541ca84a">&#9670;&nbsp;</a></span>generateParticles()</h2>
+<a id="aa58b464e56595d393a57f71c07ae7a6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa58b464e56595d393a57f71c07ae7a6d">&#9670;&nbsp;</a></span>generateParticles()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -167,7 +167,8 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="memname">virtual <a class="el" href="classParticleContainer.html">ParticleContainer</a> ParticleGenerator::generateParticles </td>
           <td>(</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>type</em> = <code>0</code></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -179,9 +180,15 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Generates particles. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">type</td><td>type of particles (helpful to differentiate) </td></tr>
+  </table>
+  </dd>
+</dl>
 <dl class="section return"><dt>Returns</dt><dd>A particle container with the generated particles. </dd></dl>
 
-<p>Implemented in <a class="el" href="classCuboidGenerator.html#a9128a25938a70528c2e5fcf751d5690c">CuboidGenerator</a>.</p>
+<p>Implemented in <a class="el" href="classCuboidGenerator.html#a3fbe18a819967e50d8ab65677b5588ed">CuboidGenerator</a>.</p>
 
 </div>
 </div>
