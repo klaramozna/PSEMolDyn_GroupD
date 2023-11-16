@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['log_5flevel_536',['log_level',['../MolSim_8cpp.html#ab5a71c2541c377b3d5b34fdb35964c2e',1,'MolSim.cpp']]]
+  ['input_5fmode_539',['input_mode',['../MolSim_8cpp.html#afc980f0ef404720d6d9a3e8ca27bd4cd',1,'MolSim.cpp']]],
+  ['input_5fpath_540',['input_path',['../MolSim_8cpp.html#aa14dbbb4b5614a1e7a5b4281baa64b89',1,'MolSim.cpp']]]
 ];
