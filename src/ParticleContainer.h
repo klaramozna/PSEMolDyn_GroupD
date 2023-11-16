@@ -90,9 +90,15 @@ public:
 
     /**
      * @brief Applies the given function to all particles
-     * @param function is the function to be use on the particles
+     * @param function is the function to be used on the particles
      */
     void applyToAll(const std::function<void(Particle&)>& function);
+
+    /**
+     * @brief Applies the given function to all distinct pairs of particles
+     * @param function is the function to be applied to the particle pairs
+     */
+    void applyToPairs(const std::function<void(Particle&, Particle&)>& function);
 
     /**
      * @brief Implements an iterator that simulated a nested loop (two for loops), but skips the case where the particle in the outer loop is the same as the particle in the inner loop.
