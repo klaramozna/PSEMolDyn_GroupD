@@ -13,6 +13,7 @@
 #include "Simulation.h"
 #include "ParticleContainer.h"
 #include "GravitationalForce.h"
+#include "LennardJones.h"
 
 /* Logging */
 #include "Logger.h"
@@ -48,6 +49,7 @@ int main(int argc, char *argsv[]) {
     }
 
     if (force == "lennard") {
+        forceCalculation = std::make_unique<LennardJones>(5,1);
     }
 
     if (force == "grav") {

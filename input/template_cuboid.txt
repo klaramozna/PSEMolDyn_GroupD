@@ -12,9 +12,8 @@
 # * Initial velocity of Particles (3 double values)
 #
 # lower-left-coord     number of particles     distance     mass      initial velocity
-3
-0.0 0.0 0.0            3 3 3                   0.1           10          1.0 0.0 0.0
-10.0 0.0 5.0           2 1 1                   1.0           0.1         0.0 -5.0 0.0
-1.1 0.2 15             10 1 1                  0.2           1000        1.0 5.0 0.0
+2
+0.0 0.0 0.0            40 8 1                   1.1225           1          0.0 0.0 0.0
+15.0 15.0 0.0           8 8 1                   1.1225           1         0.0 -10.0 0.0
 
 
