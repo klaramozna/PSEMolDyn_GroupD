@@ -1,14 +1,13 @@
 /* File IO */
 #include "FileReader.h"
+#include "CuboidReader.h"
+#include "ParticleReader.h"
+
 #include "outputWriter/XYZWriter.h"
 #include "outputWriter/VTKWriter.h"
 
 /* Standard IO */
 #include <iostream>
-
-/* Boost */
-#include <boost/program_options.hpp>
-#include <filesystem>
 
 /* Simulation Logic */
 #include "Simulation.h"
@@ -17,10 +16,9 @@
 
 /* Logging */
 #include "Logger.h"
-
-
 #include <CL.h>
 
+/* Generators for Particles */
 #include "ParticleGenerator.h"
 #include "CuboidGenerator.h"
 
@@ -30,33 +28,49 @@ double delta_t;
 int log_level;
 std::string input_path;
 std::string input_mode;
+std::string force;
 
 
 int main(int argc, char *argsv[]) {
-    CuboidGenerator c(std::array<double, 3>{0, 0,  0}, 2, 1, 2, 1, 1, std::array<double, 3>{0, 0,  0});
-    ParticleContainer cont = c.generateParticles();
-    for(auto & p : cont){
-        p.getXVector().print();
-    }
-    
     CL cl;
-    int status = cl.parse_arguments(argc, argsv, end_time, delta_t, log_level, input_path, input_mode);
+    std::unique_ptr<ParticleReader> reader;
+    std::unique_ptr<ForceCalculation> forceCalculation;
+
+    ParticleContainer container;
+
+    outputWriter::VTKWriter writer;
+
+    int status = cl.parse_arguments(argc, argsv, end_time, delta_t, log_level, input_path, input_mode, force);
     
     //any error in parsing
     if (status) {
         return 1;
     }
 
-    FileReader fileReader;
+    if (force == "lennard") {
+    }
 
-    GravitationalForce gravForce;
-    ParticleContainer container;
+    if (force == "grav") {
+        forceCalculation = std::make_unique<GravitationalForce>();
+    }
 
-    outputWriter::VTKWriter writer;
+    Simulation simulation(delta_t, container, *forceCalculation);
 
-    Simulation simulation(delta_t, container, gravForce);
 
-    fileReader.readFile(simulation.getParticles(), input_path);
+    if (input_mode == "cuboid") {
+        reader = std::make_unique<CuboidReader>();
+    }
+
+    if (input_mode == "particle") {
+        reader = std::make_unique<FileReader>();
+    }
+
+    if (!reader) {
+        Logger::err_logger->error("Reader was not correctly initialized");
+        exit(-1);
+    }
+
+    reader->readFile(simulation.getParticles(), input_path);
 
     int iteration = 0;
     double current_time = start_time;
