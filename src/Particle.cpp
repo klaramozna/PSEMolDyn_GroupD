@@ -62,6 +62,10 @@ bool Particle::operator==(const Particle &other) const {
            (type == other.type) and (m == other.m) and (old_f == other.old_f);
 }
 
+bool Particle::operator!=(const Particle& other) const {
+    return (!(this == &other));
+}
+
 VectorDouble3 Particle::getXVector() const {
     return VectorDouble3(x);
 }
