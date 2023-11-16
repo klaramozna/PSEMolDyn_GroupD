@@ -10,6 +10,8 @@
 
 void CuboidReaderTest::SetUp() {
     filename = "../../test/resources/";
+    expectedContainer.getParticleVector().clear();
+    receivedContainer.getParticleVector().clear();
 };
 
 /**
@@ -21,7 +23,7 @@ TEST_F(CuboidReaderTest, TestSimple1Cuboid) {
     CuboidGenerator simpleCube(
             {0.0, 0.0, 0.0},
             3,3,3,
-            0.0,
+            0.1,
             10.0,
             {1.0, 0.0, 0.0});
     CuboidReader reader;
@@ -45,11 +47,28 @@ TEST_F(CuboidReaderTest, TestSimple1Cuboid) {
 };
 
 TEST_F(CuboidReaderTest, TestEmptyFile) {
+    CuboidReader reader;
+    filename.append("empty.txt");
 
+
+    ASSERT_EXIT(
+        {
+            reader.readFile(receivedContainer, filename);
+        },
+        ::testing::ExitedWithCode(-1),
+        "Expected exit code is -1");
 };
 
 TEST_F(CuboidReaderTest, TestOneWrongCuboid) {
+    CuboidReader reader;
+    filename.append("oneWrongCuboid.txt");
 
+    ASSERT_EXIT(
+            {
+                reader.readFile(receivedContainer, filename);
+            },
+            ::testing::ExitedWithCode(-1),
+            "Expected exit code is -1");
 };
 
 TEST_F(CuboidReaderTest, TestTooManyRows) {
