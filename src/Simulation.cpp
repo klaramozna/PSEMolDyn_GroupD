@@ -34,8 +34,9 @@ ParticleContainer& Simulation::getParticles() {
 
 
 void Simulation::calculateF(Particle& p1, Particle& p2) {
-    p1.setF(p1.getFVector() + this->forceCalculation.CalculateForces(p1,p2));
-    p2.setF(p2.getFVector() + this->forceCalculation.CalculateForces(p2,p1));
+    VectorDouble3 result = this->forceCalculation.CalculateForces(p1,p2);
+    p1.setF(p1.getFVector() + result);
+    p2.setF(p2.getFVector() - result);
 }
 
 void Simulation::calculateV(Particle& p) const {
