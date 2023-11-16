@@ -36,15 +36,15 @@ std::string CL::produce_help_message(const po::options_description &desc){
 int CL::parse_arguments(int argc, char *argsv[], double& end_time, double& delta_t, int& log_level, std::string& input_path, std::string& input_mode, std::string& force){
     desc.add_options()
         ("help,h", "produce help message")
-        ("input_mode,m", po::value<std::string>(), "Select between modes of input (cuboid or particle)")
+        ("input_mode,m", po::value<std::string>(&input_mode)->default_value("cuboid"), "Select between modes of input (cuboid or particle)")
         ("input_path,p", po::value<std::string>(), "the path to the input file")
-        ("t_end,e", po::value<double>(&end_time)->default_value(1000)->notifier([this](const double& value) {
+        ("t_end,e", po::value<double>(&end_time)->default_value(5)->notifier([this](const double& value) {
             this->validate_positive(value, "t_end");
         }), "end time of simulation")
-        ("delta_t,s", po::value<double>(&delta_t)->default_value(0.014)->notifier([this](const double& value) {
+        ("delta_t,s", po::value<double>(&delta_t)->default_value(0.0002)->notifier([this](const double& value) {
             this->validate_positive(value, "delta_t");
         }), "step size between iterations")
-        ("force,f", po::value<std::string>(), "Select between force calculation engines (lennard or grav)")
+        ("force,f", po::value<std::string>(&force)->default_value("lennard"), "Select between force calculation engines (lennard or grav)")
         ("log_level,l", po::value<int>(&log_level)->default_value(2)->notifier([this](const int& value) {
             this->validate_range(value, "log_level");
         }), "sets the log level (0: trace, 1: debug, 2: info, 3: warning, 4: error, 5: critical, 6: off)")
