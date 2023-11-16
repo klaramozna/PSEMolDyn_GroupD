@@ -19,19 +19,25 @@ private:
 
     double delta_t;
     /**
-    * @brief calculate the velocity for all particles
+    * @brief calculate the velocity of a particle
     */
-    void calculateV();
+    void calculateV(Particle& p) const;
 
     /**
-    * @brief calculate the position for all particles
+    * @brief calculate the position of a particle
     */
-    void calculateX();
+    void calculateX(Particle& p) const;
 
     /**
-     * @brief calculate the force for all particles
+     * @brief calculates the force between two particles, and updates the respective forces accordingly
     */
-    void calculateF();
+    void calculateF(Particle& p1, Particle& p2);
+
+    /**
+     * @brief updates the old force of a particle
+     */
+    static void setOldForce(Particle& p);
+
 public:
     Simulation(double delta_t, ParticleContainer container, ForceCalculation &calculation);
     virtual ~Simulation();

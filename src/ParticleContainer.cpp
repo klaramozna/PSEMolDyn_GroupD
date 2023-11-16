@@ -55,10 +55,9 @@ ParticleContainer::PairIterator &ParticleContainer::PairIterator::operator++() {
         if(innerIndex == outerIndex) ++(*this);
         return *this;
     }
-    if(innerIndex >= p.size() - 1 && outerIndex < p.size() - 1){    // inner loop has finished, but outer loop still has particles left
-        innerIndex = 0;
+    if(innerIndex >= p.size() - 1 && outerIndex < p.size() - 2){    // inner loop has finished, but outer loop still has particles left
         outerIndex++;
-        if(innerIndex == outerIndex) ++(*this);
+        innerIndex = outerIndex + 1;
         return *this;
     }
     else{                                                           // both inner and outer loops have gone through all elements
@@ -81,10 +80,16 @@ bool ParticleContainer::PairIterator::inRange() const {
 }
 
 ParticleContainer::PairIterator ParticleContainer::beginPair() {
+    if(particles.size() < 2){
+        throw std::runtime_error("Pair iterator cannot be used, since there are less than two particles in the container.");
+    }
     return PairIterator{0, 1, particles};
 }
 
 ParticleContainer::PairIterator ParticleContainer::endPair() {
+    if(particles.size() < 2){
+        throw std::runtime_error("Pair iterator cannot be used, since there are less than two particles in the container.");
+    }
     return PairIterator{particles.size(), particles.size(), particles};
 }
 
@@ -104,4 +109,11 @@ void ParticleContainer::applyToAll(const std::function<void(Particle &)>& functi
 
 void ParticleContainer::addParticles(const ParticleContainer &container) {
     particles.insert(particles.end(), container.particles.begin(), container.particles.end());
+
+void ParticleContainer::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
+    for(int i = 0; i < particles.size() - 1; i++){
+        for(int j = i + 1; j < particles.size(); j++){
+            function(particles[i], particles[j]);
+        }
+    }
 }

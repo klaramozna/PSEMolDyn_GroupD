@@ -24,38 +24,34 @@ ParticleContainer& Simulation::getParticles() {
     return container;
 }
 
-void Simulation::calculateF() {
-    for (auto &p1: container) {
-        p1.setOldF(p1.getFVector());
-        VectorDouble3 f_i{};
-        for (auto &p2: container) {
-            if(!(p2 == p1)){
-                f_i += this->forceCalculation.CalculateForces(p1,p2);
-            }
-        }
-        p1.setF(f_i);
-    }
+
+void Simulation::calculateF(Particle& p1, Particle& p2) {
+    p1.setF(p1.getFVector() + *(this->forceCalculation.CalculateForces(p1,p2)));
+    p2.setF(p2.getFVector() + *(this->forceCalculation.CalculateForces(p2,p1)));
 }
 
-void Simulation::calculateV() {
-    for (auto &p: container) {
-        VectorDouble3 v_i = p.getVVector() + (this->delta_t / (2. * p.getM()) * (p.getOldFVector() + p.getFVector()));
-        p.setV(v_i);
-    }
+void Simulation::calculateV(Particle& p) const {
+    VectorDouble3 v_i = p.getVVector() + (this->delta_t / (2. * p.getM()) * (p.getOldFVector() + p.getFVector()));
+    p.setV(v_i);
 }
 
-void Simulation::calculateX() {
-    for (auto &p: container) {
-        VectorDouble3 x_i = p.getXVector() + delta_t * p.getVVector()
-                           + ((delta_t * delta_t) / (2. * p.getM())) * p.getOldFVector();
-        p.setX(x_i);
-    }
+void Simulation::calculateX(Particle& p) const {
+    VectorDouble3 x_i = p.getXVector() + delta_t * p.getVVector()
+            + ((delta_t * delta_t) / (2. * p.getM())) * p.getOldFVector();
+    p.setX(x_i);
 }
 
 void Simulation::runIteration() {
-    calculateX();
+    // calculate new x
+    container.applyToAll([this](Particle& p) { calculateX(p); });
     // calculate new f
-    calculateF();
+    container.applyToAll([](Particle& p) { setOldForce(p); });
+    container.applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
     // calculate new v
-    calculateV();
+    container.applyToAll([this](Particle& p) { calculateV(p); });
+}
+
+void Simulation::setOldForce(Particle& p) {
+    p.setOldF((p.getFVector()));
+    p.setF(VectorDouble3());
 }
