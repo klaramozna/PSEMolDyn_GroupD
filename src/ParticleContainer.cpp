@@ -106,3 +106,11 @@ void ParticleContainer::applyToAll(const std::function<void(Particle &)>& functi
         function(particle);
     }
 }
+
+void ParticleContainer::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
+    for(int i = 0; i < particles.size() - 1; i++){
+        for(int j = i + 1; j < particles.size(); j++){
+            function(particles[i], particles[j]);
+        }
+    }
+}
