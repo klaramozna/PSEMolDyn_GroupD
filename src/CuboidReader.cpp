@@ -11,11 +11,15 @@ void CuboidReader::readFile(ParticleContainer &container, std::string &filename)
     std::ifstream inputFile(filename);
     std::string line;
 
-    if (inputFile.is_open()) {
+    try {
+        // Try to find file
+        if (!inputFile.is_open()) {
+            throw std::runtime_error("Could not open file " + filename);
+        }
+
         // Make sure file is not empty
         if (!getline(inputFile, line)) {
-            Logger::err_logger->error("No line found - empty file");
-            exit(-1);
+            throw std::runtime_error("No line found - empty file");
         }
 
         Logger::console->info("Read line: {} ", line);
@@ -27,24 +31,21 @@ void CuboidReader::readFile(ParticleContainer &container, std::string &filename)
 
         // Find number of cuboids
         if (!parseNumberOfCuboids(line)) {
-            Logger::err_logger->error("Number of cuboids not found");
-            exit(-1);
-        };
+            throw std::runtime_error("Number of cuboids not found");
+        }
 
         Logger::console->info("Reading {} cuboids", numberOfCuboids);
 
         for (int i = 0; i < numberOfCuboids; i++) {
             // Check for unexpected end of file after number of cuboids
             if (!getline(inputFile, line)) {
-                Logger::err_logger->error("Unexpected end of file before reading all cuboids!");
-                exit(-1);
+                throw std::runtime_error("Unexpected end of file before reading all cuboids!");
             }
 
             Logger::console->info("Read line: {} ", line);
 
             if (!validateLineFormat(line)) {
-                Logger::err_logger->error("Invalid line format - {} ", line);
-                exit(-1);
+                throw std::runtime_error("Invalid line format - " + line);
             }
 
             CuboidGenerator generator = parseLine(line);
@@ -52,9 +53,9 @@ void CuboidReader::readFile(ParticleContainer &container, std::string &filename)
 
             container.addParticles(readContainer);
         }
-    } else {
-        Logger::err_logger->error("Error: could not open file ", filename);
-        exit(-1);
+    } catch (const std::exception &ex) {
+        Logger::err_logger->error("Error: {}", ex.what());
+        throw;
     }
 }
 
