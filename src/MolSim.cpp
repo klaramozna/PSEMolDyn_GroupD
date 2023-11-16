@@ -33,6 +33,8 @@ double end_time;
 double delta_t;
 double averageVelo;
 
+bool testing;
+
 int log_level;
 std::string input_path;
 std::string input_mode;
@@ -48,7 +50,7 @@ int main(int argc, char *argsv[]) {
 
     outputWriter::VTKWriter writer;
 
-    int status = cl.parse_arguments(argc, argsv, end_time, delta_t, log_level, input_path, input_mode, force, averageVelo);
+    int status = cl.parse_arguments(argc, argsv, end_time, delta_t, log_level, input_path, input_mode, force, averageVelo, testing);
     
     //any error in parsing
     if (status) {
@@ -85,20 +87,36 @@ int main(int argc, char *argsv[]) {
     double current_time = start_time;
     std::string out_name("MD_vtk");
 
-    // for this loop, we assume: current x, current f and current v are known
-    while (current_time < end_time) {
-        simulation.runIteration();
+    // This is ugly and shouldn't be in main, but it is for a later refactor
+    if (testing) {
+        auto measure_start_time = std::chrono::high_resolution_clock::now();
 
-        iteration++;
-        if (iteration % 10 == 0) {
-            writer.plotParticles(simulation.getParticles(), out_name, iteration);
+        while (current_time < end_time) {
+            simulation.runIteration();
+            iteration++;
+            current_time += delta_t;
         }
 
-        Logger::console->info("Iteration {} finished.", iteration);
+        auto measure_end_time = std::chrono::high_resolution_clock::now();
+        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(measure_end_time - measure_start_time);
 
-        current_time += delta_t;
+        Logger::console->info("Time taken: {} milliseconds", duration.count());
+    } else {
+        // for this loop, we assume: current x, current f and current v are known
+        while (current_time < end_time) {
+            simulation.runIteration();
+
+            iteration++;
+            if (iteration % 10 == 0) {
+                writer.plotParticles(simulation.getParticles(), out_name, iteration);
+            }
+
+            Logger::console->info("Iteration {} finished.", iteration);
+
+            current_time += delta_t;
+        }
+
+        Logger::console->info("Output written. Terminating...");
+        return 0;
     }
-
-    Logger::console->info("Output written. Terminating...");
-    return 0;
 }

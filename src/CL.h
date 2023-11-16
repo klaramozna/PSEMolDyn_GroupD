@@ -59,6 +59,6 @@ std::string produce_help_message(const po::options_description &desc);
     * @throws std::invalid_argument If invalid or incomplete arguments are provided.
      
 */
-int parse_arguments(int argc, char *argsv[], double& end_time, double& delta_t, int& log_level, std::string& input_path, std::string& input_mode, std::string& force, double& averageVelo);
+int parse_arguments(int argc, char *argsv[], double& end_time, double& delta_t, int& log_level, std::string& input_path, std::string& input_mode, std::string& force, double& averageVelo, bool& testing);
 
 };
