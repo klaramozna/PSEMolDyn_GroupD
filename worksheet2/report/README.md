@@ -51,9 +51,13 @@ Run the program with``` --log_level <value in [0, 6]>``` or ``` -l <value in [0,
 where : ```log level (0: trace, 1: debug, 2: info, 3: warning, 4: error, 5: critical, 6: off)```
 
 ## Task 4 ”Collision of two bodies” ##
+* We created a new class ```CuboidGenerator``` that inherits from the class ```ParticleGenerator```. We made the ```generateParticles``` function virtual as different types of particle generators will probably be implemented in the future and run-time polymorphism might be needed.
+* We implemented a new method for force calculation, which computes the Lennard-Jones force between two molecules. The integration of this method to our project was convenient thanks to the parent class ```ForceCalculation``` which was required from worksheet 1 inorder to improve readability and easy integration of new force types. Another thing we did to improve the efficiency of this method is that we cached repeated computation when translating the mathematical formula in code.
 * We changed our implementation of force calculation from using a nested for loop to only iterating over distinct pairs of particles. We also applied Newton's third law to avoid unnecessary calculations. Both of these changed should, in theory, make our code faster, since we reduced the amount of iterations as well has halved the amount of force calculations. However, this improvement wasn't reflected in our measurements. We tested the executions time of the calculateF function with multiple different particle containers. One with 1000 particles, one with 100 particles and one with 10 particles. In all of those cases, our old implementation with a nested loop was consistently faster (~30% lower execution time). We suspect this is due to an additional loop that is needed in our new implementation to set the old force correctly.
 * To simplify the code in the ```Simulation``` class. We outsourced the iteration over both single particles and pairs of particles to the ```ParticleContainer``` class. We simply call our ```applyToAll``` and ```applyToPairs``` functions, passing the functions with calculations as lambda expressions.
-* We created a new class ```CuboidGenerator``` that inherits from the class ```ParticleGenerator```. We made the ```generateParticles``` function virtual as different types of particle generators will probably be implemented in the future and run-time polymorphism might be needed.
+* We performed the 2D Simulation of the collision of the two bodies with the given parameters in the worksheet. We also provided a video of our result simulation:
+
+* Benchmark?
   
 # Misc #
 ## Using github Issues Feature to improve our code ##
