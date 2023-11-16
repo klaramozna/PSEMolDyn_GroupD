@@ -4,11 +4,10 @@
 
 class LennardJones : public ForceCalculation {
 private:
-    VectorDouble3 result;
     double eps;
     double sigma;
 public:
-    VectorDouble3* CalculateForces(Particle& p1, Particle& p2) override;
+    VectorDouble3 CalculateForces(const Particle& p1, const Particle& p2);
    
     /**
     * @brief constructor to initialize eps and sigma
