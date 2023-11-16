@@ -121,6 +121,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a542a16b099b467ffc21135f6694dea03"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleContainer.html#a542a16b099b467ffc21135f6694dea03">applyToAll</a> (const std::function&lt; void(<a class="el" href="classParticle.html">Particle</a> &amp;)&gt; &amp;function)</td></tr>
 <tr class="memdesc:a542a16b099b467ffc21135f6694dea03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the given function to all particles.  <a href="classParticleContainer.html#a542a16b099b467ffc21135f6694dea03">More...</a><br /></td></tr>
 <tr class="separator:a542a16b099b467ffc21135f6694dea03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abfd51c30592fefc3fdb86dbe16a24fe9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleContainer.html#abfd51c30592fefc3fdb86dbe16a24fe9">applyToPairs</a> (const std::function&lt; void(<a class="el" href="classParticle.html">Particle</a> &amp;, <a class="el" href="classParticle.html">Particle</a> &amp;)&gt; &amp;function)</td></tr>
+<tr class="memdesc:abfd51c30592fefc3fdb86dbe16a24fe9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the given function to all distinct pairs of particles.  <a href="classParticleContainer.html#abfd51c30592fefc3fdb86dbe16a24fe9">More...</a><br /></td></tr>
+<tr class="separator:abfd51c30592fefc3fdb86dbe16a24fe9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a43f1e80564b53608a4dd62ff7a869188"></a>
@@ -269,7 +272,33 @@ Public Member Functions</h2></td></tr>
 <p>Applies the given function to all particles. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">function</td><td>is the function to be use on the particles </td></tr>
+    <tr><td class="paramname">function</td><td>is the function to be used on the particles </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abfd51c30592fefc3fdb86dbe16a24fe9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abfd51c30592fefc3fdb86dbe16a24fe9">&#9670;&nbsp;</a></span>applyToPairs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ParticleContainer::applyToPairs </td>
+          <td>(</td>
+          <td class="paramtype">const std::function&lt; void(<a class="el" href="classParticle.html">Particle</a> &amp;, <a class="el" href="classParticle.html">Particle</a> &amp;)&gt; &amp;&#160;</td>
+          <td class="paramname"><em>function</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applies the given function to all distinct pairs of particles. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">function</td><td>is the function to be applied to the particle pairs </td></tr>
   </table>
   </dd>
 </dl>
