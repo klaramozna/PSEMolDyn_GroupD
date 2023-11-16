@@ -33,7 +33,7 @@ std::string CL::produce_help_message(const po::options_description &desc){
     return oss.str();
 }
 
-int CL::parse_arguments(int argc, char *argsv[], double& end_time, double& delta_t, int& log_level, std::string& input_path, std::string& input_mode, std::string& force, double& averageVelo){
+int CL::parse_arguments(int argc, char *argsv[], double& end_time, double& delta_t, int& log_level, std::string& input_path, std::string& input_mode, std::string& force, double& averageVelo, bool& testing){
     desc.add_options()
         ("help,h", "produce help message")
         ("input_mode,m", po::value<std::string>(&input_mode)->default_value("cuboid"), "Select between modes of input (cuboid or particle)")
@@ -46,6 +46,7 @@ int CL::parse_arguments(int argc, char *argsv[], double& end_time, double& delta
         }), "step size between iterations")
         ("velocity, v", po::value<double>(&averageVelo)->default_value(0.1), "average Brownian motion velocity")
         ("force,f", po::value<std::string>(&force)->default_value("lennard"), "Select between force calculation engines (lennard or grav)")
+        ("testing,t", po::bool_switch(&testing)->default_value(false), "enable testing mode")
         ("log_level,l", po::value<int>(&log_level)->default_value(2)->notifier([this](const int& value) {
             this->validate_range(value, "log_level");
         }), "sets the log level (0: trace, 1: debug, 2: info, 3: warning, 4: error, 5: critical, 6: off)")
