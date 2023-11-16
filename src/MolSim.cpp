@@ -48,7 +48,7 @@ int main(int argc, char *argsv[]) {
 
     outputWriter::VTKWriter writer;
 
-    int status = cl.parse_arguments(argc, argsv, end_time, delta_t, log_level, input_path, input_mode, force);
+    int status = cl.parse_arguments(argc, argsv, end_time, delta_t, log_level, input_path, input_mode, force, averageVelo);
     
     //any error in parsing
     if (status) {
@@ -63,7 +63,6 @@ int main(int argc, char *argsv[]) {
         forceCalculation = std::make_unique<GravitationalForce>();
     }
 
-    averageVelo = 0.1;
     Simulation simulation(delta_t, container, *forceCalculation, averageVelo);
 
 
