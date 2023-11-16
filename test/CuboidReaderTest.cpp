@@ -2,8 +2,6 @@
 // Created by rodff on 14.11.23.
 //
 
-#pragma once
-
 #include "CuboidReaderTest.h"
 #include "../src/CuboidGenerator.h"
 

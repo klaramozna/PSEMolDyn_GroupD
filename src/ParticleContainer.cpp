@@ -7,6 +7,8 @@
 #include <utility>
 #include <stdexcept>
 
+using lui = long unsigned int;
+
 std::vector<Particle>::iterator ParticleContainer::begin() {
     return particles.begin();
 }
@@ -112,8 +114,8 @@ void ParticleContainer::addParticles(const ParticleContainer &container) {
 }
 
 void ParticleContainer::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
-    for(int i = 0; i < particles.size() - 1; i++){
-        for(int j = i + 1; j < particles.size(); j++){
+    for(lui i = 0; i < particles.size() - 1; i++){
+        for(lui j = i + 1; j < particles.size(); j++){
             function(particles[i], particles[j]);
         }
     }

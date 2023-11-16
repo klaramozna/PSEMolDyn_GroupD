@@ -77,12 +77,17 @@ TEST_F(ParticleContainerTest, Iterator) {
  * @brief Tests whether the pair iterators only gives pairs of pairwise differente molecules
  * */
 TEST_F(ParticleContainerTest, PairIterator) {
+    Particle particle1({0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, 1.0);
+    Particle particle2({1.0, 0.0, 0.0}, {1.0, 0.0, 0.0}, 1.0);
+    particles.push_back(particle1);
+    particles.push_back(particle2);
+    container = ParticleContainer(particles);
     int pairCount = 0;
     for (auto pairIt = container.beginPair(); pairIt != container.endPair(); ++pairIt) {
         auto pair = *pairIt;
 
         // Ensure that the pairs do not contain the same particle
-        EXPECT_EQ(pair.first, pair.second) << "Found a pair that contains the same particles";
+        EXPECT_NE(pair.first, pair.second) << "Found a pair that contains the same particles";
         ++pairCount;
     }
     // Pairs of distinct objects are given by (n * (m-1)) / 2
