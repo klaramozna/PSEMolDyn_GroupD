@@ -24,8 +24,15 @@
 #include "CuboidGenerator.h"
 
 constexpr double start_time = 0;
+
+const double sigma = 1;
+const double epsilon = 5;
+
+
 double end_time;
 double delta_t;
+double averageVelo;
+
 int log_level;
 std::string input_path;
 std::string input_mode;
@@ -41,7 +48,7 @@ int main(int argc, char *argsv[]) {
 
     outputWriter::VTKWriter writer;
 
-    int status = cl.parse_arguments(argc, argsv, end_time, delta_t, log_level, input_path, input_mode, force);
+    int status = cl.parse_arguments(argc, argsv, end_time, delta_t, log_level, input_path, input_mode, force, averageVelo);
     
     //any error in parsing
     if (status) {
@@ -49,14 +56,14 @@ int main(int argc, char *argsv[]) {
     }
 
     if (force == "lennard") {
-        forceCalculation = std::make_unique<LennardJones>(5,1);
+        forceCalculation = std::make_unique<LennardJones>(epsilon, sigma);
     }
 
     if (force == "grav") {
         forceCalculation = std::make_unique<GravitationalForce>();
     }
 
-    Simulation simulation(delta_t, container, *forceCalculation);
+    Simulation simulation(delta_t, container, *forceCalculation, averageVelo);
 
 
     if (input_mode == "cuboid") {

@@ -33,7 +33,7 @@ std::string CL::produce_help_message(const po::options_description &desc){
     return oss.str();
 }
 
-int CL::parse_arguments(int argc, char *argsv[], double& end_time, double& delta_t, int& log_level, std::string& input_path, std::string& input_mode, std::string& force){
+int CL::parse_arguments(int argc, char *argsv[], double& end_time, double& delta_t, int& log_level, std::string& input_path, std::string& input_mode, std::string& force, double& averageVelo){
     desc.add_options()
         ("help,h", "produce help message")
         ("input_mode,m", po::value<std::string>(&input_mode)->default_value("cuboid"), "Select between modes of input (cuboid or particle)")
@@ -44,6 +44,7 @@ int CL::parse_arguments(int argc, char *argsv[], double& end_time, double& delta
         ("delta_t,s", po::value<double>(&delta_t)->default_value(0.0002)->notifier([this](const double& value) {
             this->validate_positive(value, "delta_t");
         }), "step size between iterations")
+        ("velocity, v", po::value<double>(&averageVelo)->default_value(0.1), "average Brownian motion velocity")
         ("force,f", po::value<std::string>(&force)->default_value("lennard"), "Select between force calculation engines (lennard or grav)")
         ("log_level,l", po::value<int>(&log_level)->default_value(2)->notifier([this](const int& value) {
             this->validate_range(value, "log_level");
