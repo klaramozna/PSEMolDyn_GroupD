@@ -49,7 +49,7 @@ void CuboidReader::readFile(ParticleContainer &container, std::string &filename)
             }
 
             CuboidGenerator generator = parseLine(line);
-            ParticleContainer readContainer = generator.generateParticles();
+            ParticleContainer readContainer = generator.generateParticles(i);
 
             container.addParticles(readContainer);
         }

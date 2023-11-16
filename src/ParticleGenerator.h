@@ -13,9 +13,10 @@ public:
 
     /**
      * @brief Generates particles.
+     * @param type type of particles (helpful to differentiate)
      * @return A particle container with the generated particles.
      */
-    virtual ParticleContainer generateParticles() = 0;
+    virtual ParticleContainer generateParticles(int type=0) = 0;
 
     /**
      * @brief Destroys a ParticleGenerator object (allows deleting a pointer to ParticleGenerator without memory leaks).

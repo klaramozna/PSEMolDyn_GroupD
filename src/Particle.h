@@ -153,6 +153,16 @@ public:
     bool operator==(const Particle &other) const;
 
     std::string toString() const;
+
+     /**
+     *@brief Checks for inequality between two Particle objects.
+     *
+     * @param other The Particle object to compare with.
+     * @return true if the Particle objects are not equal, false otherwise.
+     */
+    bool operator!=(const Particle& other) const;
 };
 
 std::ostream &operator<<(std::ostream &stream, Particle &p);
+
+ 

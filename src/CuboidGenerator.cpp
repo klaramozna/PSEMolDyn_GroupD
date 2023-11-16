@@ -7,7 +7,7 @@
 
 CuboidGenerator::CuboidGenerator(std::array<double, 3> corner, int n1, int n2, int n3, double particleDistance,
                                  double mass, std::array<double, 3> velocity): corner(), velocity() {
-    if(n1 <= 0 | n2 <= 0 | n3 <= 0){
+    if((n1 <= 0) | (n2 <= 0) | (n3 <= 0)){
         throw std::invalid_argument("The number of particles in a dimension has to be strictly positive.");
     }
     this->corner = corner;
@@ -20,7 +20,7 @@ CuboidGenerator::CuboidGenerator(std::array<double, 3> corner, int n1, int n2, i
     particles.reserve(n1 * n2 * n3);
 }
 
-ParticleContainer CuboidGenerator::generateParticles() {
+ParticleContainer CuboidGenerator::generateParticles(int type) {
     double xCorner = corner[0];
     double yCorner = corner[1];
     double zCorner = corner[2];
@@ -28,7 +28,7 @@ ParticleContainer CuboidGenerator::generateParticles() {
         for(int y = 0; y < n2; y++){
             for(int z = 0; z < n3; z++){
                 std::array<double, 3> particlePosition{xCorner + particleDistance * x, yCorner + particleDistance * y, zCorner + particleDistance * z};
-                particles.emplace_back(particlePosition, velocity, mass);
+                particles.emplace_back(particlePosition, velocity, mass, type);
             }
         }
     }
