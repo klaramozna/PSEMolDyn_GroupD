@@ -8,15 +8,23 @@
 #include "Simulation.h"
 #include "VectorDouble3.h"
 #include "ForceCalculation.h"
+#include "utils/MaxwellBoltzmannDistribution.h"
 
 #include <utility>
 
 Simulation::Simulation(double delta_t,
                        ParticleContainer container,
-                       ForceCalculation &calculation) :
+                       ForceCalculation &calculation,
+                       double averageVelo) :
                         container(std::move(container)),
                         forceCalculation(calculation),
-                        delta_t(delta_t) {}
+                        delta_t(delta_t),
+                        averageVelo(averageVelo) {
+        this->container.applyToAll([this](Particle& particle){
+            VectorDouble3 randomVelo(maxwellBoltzmannDistributedVelocity(this->averageVelo, 3));
+            particle.setV(randomVelo);
+    });
+}
 
 Simulation::~Simulation() = default;
 

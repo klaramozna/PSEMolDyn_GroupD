@@ -18,6 +18,8 @@ private:
     ForceCalculation &forceCalculation;
 
     double delta_t;
+    double averageVelo;
+
     /**
     * @brief calculate the velocity of a particle
     */
@@ -39,7 +41,7 @@ private:
     static void setOldForce(Particle& p);
 
 public:
-    Simulation(double delta_t, ParticleContainer container, ForceCalculation &calculation);
+    Simulation(double delta_t, ParticleContainer container, ForceCalculation &calculation, double averageVelo);
     virtual ~Simulation();
 
     /**

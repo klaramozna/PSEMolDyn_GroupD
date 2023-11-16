@@ -13,6 +13,7 @@
 #include "Simulation.h"
 #include "ParticleContainer.h"
 #include "GravitationalForce.h"
+#include "LennardJones.h"
 
 /* Logging */
 #include "Logger.h"
@@ -23,8 +24,15 @@
 #include "CuboidGenerator.h"
 
 constexpr double start_time = 0;
+
+const double sigma = 1;
+const double epsilon = 5;
+
+
 double end_time;
 double delta_t;
+double averageVelo;
+
 int log_level;
 std::string input_path;
 std::string input_mode;
@@ -48,13 +56,15 @@ int main(int argc, char *argsv[]) {
     }
 
     if (force == "lennard") {
+        forceCalculation = std::make_unique<LennardJones>(epsilon, sigma);
     }
 
     if (force == "grav") {
         forceCalculation = std::make_unique<GravitationalForce>();
     }
 
-    Simulation simulation(delta_t, container, *forceCalculation);
+    averageVelo = 0.1;
+    Simulation simulation(delta_t, container, *forceCalculation, averageVelo);
 
 
     if (input_mode == "cuboid") {
