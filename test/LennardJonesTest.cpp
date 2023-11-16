@@ -16,7 +16,7 @@ TEST_F(LennardJonesTest, Initialization) {
 TEST_F(LennardJonesTest, Calculation) {
     Particle particle1({1.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, 1.0);  
     Particle particle2({0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, 1.0);
-    VectorDouble3 *result = lennardJones.CalculateForces(particle1, particle2);
+    VectorDouble3 result = lennardJones.CalculateForces(particle1, particle2);
     VectorDouble3 expected{std::array<double,3>{120,0,0}};
-    ASSERT_EQ(*result, expected);
+    ASSERT_EQ(result, expected);
 }
