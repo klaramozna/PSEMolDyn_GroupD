@@ -107,6 +107,9 @@ void ParticleContainer::applyToAll(const std::function<void(Particle &)>& functi
     }
 }
 
+void ParticleContainer::addParticles(const ParticleContainer &container) {
+    particles.insert(particles.end(), container.particles.begin(), container.particles.end());
+
 void ParticleContainer::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
     for(int i = 0; i < particles.size() - 1; i++){
         for(int j = i + 1; j < particles.size(); j++){

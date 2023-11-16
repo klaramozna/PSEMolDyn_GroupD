@@ -4,10 +4,8 @@
 #include "Particle.h"
 
 class ForceCalculation {
-private:
-    VectorDouble3 result;
 public:
-    virtual VectorDouble3* CalculateForces(Particle& p1, Particle& p2) = 0;
+    virtual VectorDouble3 CalculateForces(const Particle& p1, const Particle& p2) = 0;
     virtual ~ForceCalculation() = default; // Virtual destructor for polymorphism.
 };
 
