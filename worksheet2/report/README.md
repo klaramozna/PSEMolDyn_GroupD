@@ -14,7 +14,19 @@ Members:
 
 # Report #
 ## Task 1 ”Unit tests” ##
-* 
+In this section, we emphasize testing the `ParticleContainer` class, focusing on the `applyToAll` function and iterators over pairs. 
+The goal is to learn how to use GoogleTest with an already implemented library.
+
+### Setup
+
+1. Integrate the latest version of googletest into the CMake with ```FetchContent()```
+2. Use separate ```CMakeLists.txt``` for tests
+3. Create a test target
+
+### Writing Unit Tests
+The unit tests written for testing basic functionality of every method in ```Particle Container```.
+The focus was not on a thorough testing scheme, but rather one that covers our basic needs. The class 
+is also relatively simple, which doesn't demand too intensive of a testing on a first moment.
 
 ## Task 2 ”Continuous Integration” ##
 * With the help of GitHub actions, we now build and test our code with every pull request or push to main. 
@@ -59,9 +71,18 @@ where : ```log level (0: trace, 1: debug, 2: info, 3: warning, 4: error, 5: crit
 
 https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/7ae15dff-bda3-4fdf-904e-31e34f2324f5
 
-  
+### Benchmark
+We ran the simulation as detailed on the worksheet on the following setup
+* AMD Ryzen 7 5825U with 8 cores
+* Total Physical RAM: 16GB
+* Available RAM: 14.46 GiB
 
-* Benchmark?
+We then got the following result
+* 58885 milliseconds
+
+We hypothesize that our results have been slower due to
+1. Bad implementation of the iterator over Pairs in ```ParticleContainer```
+2. Badly optimized handling of Particles
   
 # Misc #
 ## Using github Issues Feature to improve our code ##
