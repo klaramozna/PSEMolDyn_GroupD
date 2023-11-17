@@ -23,6 +23,7 @@ Bachelor Practical course:
     - [Usage](#usage)
       - [Command Line Usage:](#command-line-usage)
         - [Optional arguments:](#optional-arguments)
+      - [Tests:](#tests)
     - [Documentation](#documentation)
         - [Build Doxygen Documentation](#build-doxygen-documentation)
 
@@ -69,8 +70,13 @@ run the program with: ```./src/MolSim -p <input_file_path>```
 - ```-e, --t_end```: specifies end time of simulation(default: 1000)
 - ```-s, --delta_t```: specifies the step size between iterations(default: 0.014)
 - ```-l, --log_level```: specifies the log level [0: trace, 1: debug, 2: info, 3: warning, 4: error, 5: critical, 6: off] (default: 2)
+- ```-f,--force```: Select between force calculation engines lennard or grav (default: lennard)
+- ```-t, --testing```: enable testing mode (to benchmark)
+- ```-m,--input_mode```:   Select between modes of input cuboid or particle (default: cuboid)
 
-
+#### Tests:
+This project is well-tested using Google Test.  
+To run the tests locally switch to the build directory and run ```ctest```
 <a name="documentation"></a>
 ### Documentation
 This project is well-documented using Doxygen.   
