@@ -90,6 +90,7 @@ Table of Contents</h2>
 <li><a href="#optional-arguments">Optional arguments:</a></li>
 </ul>
 </li>
+<li><a href="#tests">Tests:</a></li>
 </ul>
 </li>
 <li><a href="#documentation">Documentation</a><ul>
@@ -148,15 +149,21 @@ Optional arguments:</h4>
 <li><code>-e, --t_end</code>: specifies end time of simulation(default: 1000)</li>
 <li><code>-s, --delta_t</code>: specifies the step size between iterations(default: 0.014)</li>
 <li><code>-l, --log_level</code>: specifies the log level [0: trace, 1: debug, 2: info, 3: warning, 4: error, 5: critical, 6: off] (default: 2)</li>
+<li><code>-f,--force</code>: Select between force calculation engines lennard or grav (default: lennard)</li>
+<li><code>-t, --testing</code>: enable testing mode (to benchmark)</li>
+<li><code>-m,--input_mode</code>: Select between modes of input cuboid or particle (default: cuboid)</li>
 </ul>
-<p><a class="anchor" id="documentation"></a> </p>
-<h2><a class="anchor" id="autotoc_md10"></a>
+<h3><a class="anchor" id="autotoc_md10"></a>
+Tests:</h3>
+<p>This project is well-tested using Google Test. <br  />
+ To run the tests locally switch to the build directory and run <code>ctest</code> <a class="anchor" id="documentation"></a> </p>
+<h2><a class="anchor" id="autotoc_md11"></a>
 Documentation</h2>
 <p>This project is well-documented using Doxygen. <br  />
  The documentation is at the following Link: <a href="https://klaramozna.github.io/PSEMolDyn_GroupD/">Project Documentation</a> <br  />
  To generate it locally, follow these steps: <br  />
 </p>
-<h4><a class="anchor" id="autotoc_md11"></a>
+<h4><a class="anchor" id="autotoc_md12"></a>
 Build Doxygen Documentation</h4>
 <ul>
 <li>Create Build Directory and navigate to it: <code>mkdir build &amp;&amp; cd build</code> <br  />
