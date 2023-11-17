@@ -9,7 +9,7 @@
 
 #include <array>
 #include <string>
-#include "VectorDouble3.h"
+#include "../utils/VectorDouble3.h"
 
 class Particle {
 

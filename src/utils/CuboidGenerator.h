@@ -5,7 +5,7 @@
 #ifndef PSEMOLDYN_GROUPD_CUBOIDGENERATOR_H
 #define PSEMOLDYN_GROUPD_CUBOIDGENERATOR_H
 
-#include "ParticleGenerator.h"
+#include "../Particles/ParticleGenerator.h"
 
 class CuboidGenerator : public ParticleGenerator{
 public:

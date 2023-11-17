@@ -7,8 +7,8 @@
 #include <gtest/gtest.h>
 #include <string>
 
-#include "../src/CuboidReader.h"
-#include "../src/ParticleContainer.h"
+#include "../src/IO/input/CuboidReader.h"
+#include "../src/Particles/ParticleContainer.h"
 
 class CuboidReaderTest : public testing::Test {
 protected:

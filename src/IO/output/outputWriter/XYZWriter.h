@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "outputWriter/ParticleWriter.h"
+#include "ParticleWriter.h"
 
 #include <fstream>
 #include <list>

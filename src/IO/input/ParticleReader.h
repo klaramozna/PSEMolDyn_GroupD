@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "ParticleContainer.h"
+#include "../../Particles/ParticleContainer.h"
 
 class ParticleReader {
 public:

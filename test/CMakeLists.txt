@@ -4,21 +4,21 @@ file(GLOB_RECURSE TEST_SRC
 )
 
 set(source_needed_for_test
-        ${PROJECT_SOURCE_DIR}/src/ParticleContainer.cpp
-        ${PROJECT_SOURCE_DIR}/src/ParticleContainer.h
-        ${PROJECT_SOURCE_DIR}/src/Particle.cpp
-        ${PROJECT_SOURCE_DIR}/src/Particle.h
+        ${PROJECT_SOURCE_DIR}/src/Particles/ParticleContainer.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/ParticleContainer.h
+        ${PROJECT_SOURCE_DIR}/src/Particles/Particle.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/Particle.h
         ${PROJECT_SOURCE_DIR}/src/utils/ArrayUtils.h
-        ${PROJECT_SOURCE_DIR}/src/VectorDouble3.cpp
-        ${PROJECT_SOURCE_DIR}/src/VectorDouble3.h
-        ${PROJECT_SOURCE_DIR}/src/CuboidReader.cpp
-        ${PROJECT_SOURCE_DIR}/src/CuboidReader.h
-        ${PROJECT_SOURCE_DIR}/src/Logger.h
-        ${PROJECT_SOURCE_DIR}/src/Logger.cpp
-        ${PROJECT_SOURCE_DIR}/src/LennardJones.h
-        ${PROJECT_SOURCE_DIR}/src/LennardJones.cpp
-        ${PROJECT_SOURCE_DIR}/src/CuboidGenerator.cpp
-        ${PROJECT_SOURCE_DIR}/src/CuboidGenerator.h
+        ${PROJECT_SOURCE_DIR}/src/utils/VectorDouble3.cpp
+        ${PROJECT_SOURCE_DIR}/src/utils/VectorDouble3.h
+        ${PROJECT_SOURCE_DIR}/src/IO/input/CuboidReader.cpp
+        ${PROJECT_SOURCE_DIR}/src/IO/input/CuboidReader.h
+        ${PROJECT_SOURCE_DIR}/src/IO/Logger.h
+        ${PROJECT_SOURCE_DIR}/src/IO/Logger.cpp
+        ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/LennardJones.h
+        ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/LennardJones.cpp
+        ${PROJECT_SOURCE_DIR}/src/utils/CuboidGenerator.cpp
+        ${PROJECT_SOURCE_DIR}/src/utils/CuboidGenerator.h
         CuboidGeneratorTest.cpp
         CuboidGeneratorTest.h
 )

@@ -6,7 +6,7 @@
 #define PSEMOLDYN_GROUPD_CUBOIDGENERATORTEST_H
 
 #include <gtest/gtest.h>
-#include "../src/CuboidGenerator.h"
+#include "../src/utils/CuboidGenerator.h"
 
 class CuboidGeneratorTest : public testing::Test {
 protected:

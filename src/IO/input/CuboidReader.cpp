@@ -1,11 +1,11 @@
 #include "CuboidReader.h"
-#include "CuboidGenerator.h"
+#include "../../utils/CuboidGenerator.h"
 
 #include <cstdlib>
 #include <fstream>
 #include <sstream>
 #include <regex>
-#include "Logger.h"
+#include "../Logger.h"
 
 void CuboidReader::readFile(ParticleContainer &container, std::string &filename) {
     std::ifstream inputFile(filename);

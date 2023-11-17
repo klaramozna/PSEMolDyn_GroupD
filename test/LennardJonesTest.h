@@ -1,10 +1,9 @@
 #pragma once
 
 #include <gtest/gtest.h>
-#include "../src/LennardJones.h"
-#include "../src/LennardJones.h" 
-#include "../src/Particle.h" 
-#include "../src/VectorDouble3.h" 
+#include "../src/Simulation/Physics/LennardJones.h"
+#include "../src/Particles/Particle.h" 
+#include "../src/utils/VectorDouble3.h" 
 
 class LennardJonesTest : public testing::Test {
 protected:

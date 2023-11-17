@@ -6,9 +6,9 @@
 #define PSEMOLDYN_GROUPD_SIMULATION_H
 
 #include <list>
-#include "Particle.h"
-#include "ParticleContainer.h"
-#include "ForceCalculation.h"
+#include "../Particles/Particle.h"
+#include "../Particles/ParticleContainer.h"
+#include "./Physics/ForceCalculation.h"
 
 class Simulation {
 private:

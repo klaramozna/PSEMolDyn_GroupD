@@ -6,9 +6,9 @@
  */
 
 #include "Simulation.h"
-#include "VectorDouble3.h"
-#include "ForceCalculation.h"
-#include "utils/MaxwellBoltzmannDistribution.h"
+#include "../utils/VectorDouble3.h"
+#include "./Physics/ForceCalculation.h"
+#include "../utils/MaxwellBoltzmannDistribution.h"
 
 #include <utility>
 

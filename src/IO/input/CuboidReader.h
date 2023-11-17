@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ParticleReader.h"
-#include "CuboidGenerator.h"
+#include "../../utils/CuboidGenerator.h"
 
 class CuboidReader : public ParticleReader {
 public:

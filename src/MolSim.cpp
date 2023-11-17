@@ -1,27 +1,27 @@
 /* File IO */
-#include "FileReader.h"
-#include "CuboidReader.h"
-#include "ParticleReader.h"
+#include "IO/input/FileReader.h"
+#include "IO/input/CuboidReader.h"
+#include "IO/input/ParticleReader.h"
 
-#include "outputWriter/XYZWriter.h"
-#include "outputWriter/VTKWriter.h"
+#include "IO/output/outputWriter/XYZWriter.h"
+#include "IO/output/outputWriter/VTKWriter.h"
 
 /* Standard IO */
 #include <iostream>
 
 /* Simulation Logic */
-#include "Simulation.h"
-#include "ParticleContainer.h"
-#include "GravitationalForce.h"
-#include "LennardJones.h"
+#include "Simulation/Simulation.h"
+#include "Particles/ParticleContainer.h"
+#include "Simulation/Physics/GravitationalForce.h"
+#include "Simulation/Physics/LennardJones.h"
 
 /* Logging */
-#include "Logger.h"
-#include <CL.h>
+#include "IO/Logger.h"
+#include <IO/CLparser/CL.h>
 
 /* Generators for Particles */
-#include "ParticleGenerator.h"
-#include "CuboidGenerator.h"
+#include "Particles/ParticleGenerator.h"
+#include "utils/CuboidGenerator.h"
 
 constexpr double start_time = 0;
 

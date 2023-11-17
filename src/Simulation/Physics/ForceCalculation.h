@@ -1,7 +1,7 @@
 #ifndef PSEMOLDYN_GROUPD_FORCECALCULATION_H
 #define PSEMOLDYN_GROUPD_FORCECALCULATION_H
 
-#include "Particle.h"
+#include "../../Particles/Particle.h"
 
 class ForceCalculation {
 public:
