@@ -1,5 +1,5 @@
 #include "LennardJones.h"
-#include "VectorDouble3.h"
+#include "../../utils/VectorDouble3.h"
 
 #include <complex>
 

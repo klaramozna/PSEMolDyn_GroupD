@@ -3,7 +3,7 @@
 //
 
 #include "CuboidReaderTest.h"
-#include "../src/CuboidGenerator.h"
+#include "../src/utils/CuboidGenerator.h"
 
 #include <string>
 #include <regex>

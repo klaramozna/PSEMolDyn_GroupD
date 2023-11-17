@@ -2,7 +2,7 @@
 #define PARTICLE_CONTAINER_TEST_H
 
 #include <gtest/gtest.h>
-#include "../src/ParticleContainer.h"
+#include "../src/Particles/ParticleContainer.h"
 
 #include <vector>
 
