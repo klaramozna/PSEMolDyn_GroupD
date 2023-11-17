@@ -1,7 +1,7 @@
 var searchData=
 [
   ['gday_90',['gday',['../namespacexml__schema.html#ac811509fe713378372d75cdb01ff367f',1,'xml_schema']]],
-  ['generateparticles_91',['generateParticles',['../classCuboidGenerator.html#a3fbe18a819967e50d8ab65677b5588ed',1,'CuboidGenerator::generateParticles()'],['../classParticleGenerator.html#aa58b464e56595d393a57f71c07ae7a6d',1,'ParticleGenerator::generateParticles()']]],
+  ['generateparticles_91',['generateParticles',['../classParticleGenerator.html#aa58b464e56595d393a57f71c07ae7a6d',1,'ParticleGenerator::generateParticles()'],['../classCuboidGenerator.html#a3fbe18a819967e50d8ab65677b5588ed',1,'CuboidGenerator::generateParticles()']]],
   ['getepsilon_92',['getEpsilon',['../classLennardJones.html#aa3c7410493e08e910cc1bb3fc21e9eae',1,'LennardJones']]],
   ['getf_93',['getF',['../classParticle.html#a74b516167925a350dac3e96e7b3d98b3',1,'Particle']]],
   ['getfvector_94',['getFVector',['../classParticle.html#a88c9339bd5ac524a655bc55277479ada',1,'Particle']]],
