@@ -51,7 +51,7 @@ TEST_F(CuboidReaderTest, TestSimple1Cuboid) {
  * */
 TEST_F(CuboidReaderTest, TestEmptyFile) {
     CuboidReader reader;
-    ParticleContainer container;
+    DirectSumContainer container;
     filename.append("empty.txt");
 
     try {
@@ -71,7 +71,7 @@ TEST_F(CuboidReaderTest, TestEmptyFile) {
  * */
 TEST_F(CuboidReaderTest, TestOneWrongCuboid) {
     CuboidReader reader;
-    ParticleContainer container;
+    DirectSumContainer container;
     filename.append("tooLittleRows.txt");
 
     try {
@@ -92,7 +92,7 @@ TEST_F(CuboidReaderTest, TestOneWrongCuboid) {
  * */
 TEST_F(CuboidReaderTest, TestTooManyRows) {
     CuboidReader reader;
-    ParticleContainer container;
+    DirectSumContainer container;
     filename.append("tooManyRows.txt");
 
     try {

@@ -10,7 +10,9 @@ Simulation/Physics/GravitationalForce.cpp
         Particles/ParticleGenerator.cpp
         Particles/ParticleGenerator.h
         utils/CuboidGenerator.cpp
-        utils/CuboidGenerator.h)
+        utils/CuboidGenerator.h
+        Particles/ParticleContainer.cpp
+        Particles/ParticleContainer.h)
         
 # Include directories specific to the 'src' directory, if needed
 target_include_directories(MolSim

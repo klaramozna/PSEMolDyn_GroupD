@@ -20,7 +20,7 @@ namespace outputWriter {
         XYZWriter();
         ~XYZWriter();
 
-        void plotParticles(ParticleContainer &container, const std::string &filename,
+        void plotParticles(DirectSumContainer &container, const std::string &filename,
                            int iteration) override;
     };
 

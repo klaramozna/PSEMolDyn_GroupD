@@ -4,8 +4,8 @@ file(GLOB_RECURSE TEST_SRC
 )
 
 set(source_needed_for_test
-        ${PROJECT_SOURCE_DIR}/src/Particles/ParticleContainer.cpp
-        ${PROJECT_SOURCE_DIR}/src/Particles/ParticleContainer.h
+        ${PROJECT_SOURCE_DIR}/src/Particles/DirectSumContainer.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/DirectSumContainer.h
         ${PROJECT_SOURCE_DIR}/src/Particles/Particle.cpp
         ${PROJECT_SOURCE_DIR}/src/Particles/Particle.h
         ${PROJECT_SOURCE_DIR}/src/utils/ArrayUtils.h

@@ -7,14 +7,14 @@
 
 #include <list>
 #include "../Particles/Particle.h"
-#include "../Particles/ParticleContainer.h"
+#include "../Particles/DirectSumContainer.h"
 #include "./Physics/ForceCalculation.h"
 
 class Simulation {
 private:
     static constexpr double start_time = 0;
 
-    ParticleContainer container;
+    DirectSumContainer container;
     ForceCalculation &forceCalculation;
 
     double delta_t;
@@ -41,14 +41,14 @@ private:
     static void setOldForce(Particle& p);
 
 public:
-    Simulation(double delta_t, ParticleContainer container, ForceCalculation &calculation, double averageVelo);
+    Simulation(double delta_t, DirectSumContainer container, ForceCalculation &calculation, double averageVelo);
     virtual ~Simulation();
 
     /**
      * @brief Returns a vector of particles.
      * @return Vector Container.
      */
-    ParticleContainer& getParticles();
+    DirectSumContainer& getParticles();
 
     /**
      * @brief run one iteration of the simulation, meaning position, force and then velocity
