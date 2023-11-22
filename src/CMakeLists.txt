@@ -14,7 +14,9 @@ Simulation/Physics/GravitationalForce.cpp
         Particles/ParticleContainer.cpp
         Particles/ParticleContainer.h
         Particles/LinkedCellContainer.cpp
-        Particles/LinkedCellContainer.h)
+        Particles/LinkedCellContainer.h
+        Particles/Cell.cpp
+        Particles/Cell.h)
         
 # Include directories specific to the 'src' directory, if needed
 target_include_directories(MolSim
