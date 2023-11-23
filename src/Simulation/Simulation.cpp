@@ -15,11 +15,13 @@
 Simulation::Simulation(double delta_t,
                        ParticleContainer container,
                        ForceCalculation &calculation,
-                       double averageVelo) :
-                        container(std::move(container)),
-                        forceCalculation(calculation),
-                        delta_t(delta_t),
-                        averageVelo(averageVelo) {
+                       double averageVelo,
+                       Boundary &boundary) :
+                        container{std::move(container)},
+                        forceCalculation{calculation},
+                        boundary{boundary},
+                        delta_t{delta_t},
+                        averageVelo{averageVelo} {
         this->container.applyToAll([this](Particle& particle){
             VectorDouble3 randomVelo(maxwellBoltzmannDistributedVelocity(this->averageVelo, 3));
             particle.setV(randomVelo);
@@ -55,6 +57,10 @@ void Simulation::runIteration() {
     container.applyToAll([this](Particle& p) { calculateX(p); });
     // calculate new f
     container.applyToAll([](Particle& p) { setOldForce(p); });
+
+    // Don't forget to initialize this in Simulation
+    boundary.processBoundary(container, forceCalculation);
+
     container.applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
     // calculate new v
     container.applyToAll([this](Particle& p) { calculateV(p); });
