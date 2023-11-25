@@ -5,7 +5,6 @@
 
 VectorDouble3 LennardJones::CalculateForces(const Particle &p1, const Particle &p2) {
         VectorDouble3 result{};
-
         //Cache Repeated Computations
         VectorDouble3 distance = p1.getXVector() - p2.getXVector();
         double distanceL2Norm = distance.getL2Norm();

@@ -20,10 +20,7 @@ Simulation::Simulation(double delta_t,
                         forceCalculation(calculation),
                         delta_t(delta_t),
                         averageVelo(averageVelo) {
-        this->container.applyToAll([this](Particle& particle){
-            VectorDouble3 randomVelo(maxwellBoltzmannDistributedVelocity(this->averageVelo, 3));
-            particle.setV(randomVelo);
-    });
+
 }
 
 Simulation::~Simulation() = default;

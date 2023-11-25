@@ -16,6 +16,10 @@ FileReader::FileReader() = default;
 
 FileReader::~FileReader() = default;
 
+void FileReader::readFile(ParticleContainer &container, std::string &filename, SimParameters& SimParameters){
+   throw std::runtime_error("not needed");
+}
+
 void FileReader::readFile(ParticleContainer &container, std::string &filename) {
   std::array<double, 3> x;
   std::array<double, 3> v;
