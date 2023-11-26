@@ -7,6 +7,7 @@
 
 
 #include "ParticleContainer.h"
+#include "Cell.h"
 
 class LinkedCellContainer : public ParticleContainer{
 public:
@@ -19,7 +20,7 @@ public:
      * @param n3 Number of cells in the z direction.
      * @param particles The particles to be added to the container.
      */
-    LinkedCellContainer(std::array<double, 3> boundaryCorner, double meshSize, int n1, int n2, int n3, std::vector<Particle> particles = {});
+    LinkedCellContainer(std::array<double, 3> boundaryCorner, double meshSize, int n1, int n2, int n3, double cutoffRadius, std::vector<Particle> particles = {});
 
     /**
      * @brief Adds the given particle to the container.
@@ -58,16 +59,26 @@ public:
     void applyToBoundary(const std::function<void(Particle(&))>& function);
 
     /**
-     * @brief Deletes all particles, for which the given function returns true.
-     * @param function The function that decides if a particle should be deleted (deleted if true, otherwise not deleted).
-     */
-    void deleteParticlesIf(const std::function<bool(Particle)>& function);
-
-    /**
      * @brief Deletes particles outside of the boundary from the container.
      */
     void deleteHaloParticles();
 
+private:
+
+    /**
+     * @brief Vectors containing all cells, going from the lower left front corner (first increasing z, then y then x).
+     */
+    std::vector<Cell> cells;
+
+    /**
+     * @brief Specifies the radius, in which the particles affect each other.
+     */
+    double cutoffRadius;
+
+    /**
+     * @brief Puts all particles in their correct cells after a change in position.
+     */
+    void updateCells();
 
 };
 

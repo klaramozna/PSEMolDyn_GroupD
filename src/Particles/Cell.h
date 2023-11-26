@@ -5,6 +5,7 @@
 #ifndef PSEMOLDYN_GROUPD_CELL_H
 #define PSEMOLDYN_GROUPD_CELL_H
 
+#include <list>
 #include "Particle.h"
 
 class Cell {
@@ -47,11 +48,23 @@ public:
      */
     void setType(Type t);
 
+    /**
+     * @brief Adds the given particle to the cell.
+     * @param p The particle to be added.
+     */
+    void addParticle(Particle p);
+
+    /**
+     * @brief Deletes the given particle from the cell.
+     * @param p The particle to be deleted.
+     */
+    void deleteParticle(const Particle& p);
+
 private:
     /**
      * @brief Stores the particles of the cell.
      */
-    std::vector<Particle> particles;
+    std::list<Particle> particles;
 
     /**
      * @brief Type of the cell (Boundary, Halo or Inner).
