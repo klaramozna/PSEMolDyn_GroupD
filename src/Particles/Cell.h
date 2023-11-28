@@ -13,16 +13,15 @@ public:
     /**
      * @brief Possible types of cells, Inner means inside of boundary, Boundary means on the boundary, Halo means outside of the boundary.
      */
-    enum Type {Inner, Halo, Boundary};
 
-    using iterator_type = std::vector<Particle>::iterator;
+    using iterator_type = std::list<Particle>::iterator;
 
     /**
      * @brief Creates a Cell object, initializing it with the given particles and type
      * @param p The particles in the cell. Empty of no vector is given
      * @param t The type of the cell, Inner of no type is given.
      */
-    explicit Cell(const std::vector<Particle>& p = {}, Type t = Inner);
+    explicit Cell(const std::list<Particle>& p = {});
 
     /**
      * @brief Returns an iterator pointing to the first particle.
@@ -37,22 +36,10 @@ public:
     iterator_type end();
 
     /**
-     * @brief Returns the type of the boundary: Inner, Boundary or Halo.
-     * @return The type of the boundary.
-     */
-    Type getType();
-
-    /**
-     * @brief Sets the type of the cell according to the given parameter.
-     * @param type Type of the cell.
-     */
-    void setType(Type t);
-
-    /**
      * @brief Adds the given particle to the cell.
      * @param p The particle to be added.
      */
-    void addParticle(Particle p);
+    void addParticle(const Particle& p);
 
     /**
      * @brief Deletes the given particle from the cell.
@@ -65,11 +52,6 @@ private:
      * @brief Stores the particles of the cell.
      */
     std::list<Particle> particles;
-
-    /**
-     * @brief Type of the cell (Boundary, Halo or Inner).
-     */
-    Type type;
 
 };
 

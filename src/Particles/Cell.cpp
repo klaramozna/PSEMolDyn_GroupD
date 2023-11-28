@@ -4,8 +4,7 @@
 
 #include "Cell.h"
 
-Cell::Cell(const std::vector<Particle> &p, Cell::Type t) {
-    type = t;
+Cell::Cell(const std::list<Particle> &p, Cell::Type t) {
     particles = p;
 }
 
@@ -17,10 +16,10 @@ Cell::iterator_type Cell::end() {
     return particles.end();
 }
 
-Cell::Type Cell::getType() {
-    return type;
+void Cell::addParticle(const Particle& p) {
+    particles.insert(particles.end(), p);
 }
 
-void Cell::setType(Cell::Type t) {
-    type = t;
+void Cell::deleteParticle(const Particle &p) {
+    particles.remove(p);
 }

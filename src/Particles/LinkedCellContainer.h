@@ -8,19 +8,17 @@
 
 #include "ParticleContainer.h"
 #include "Cell.h"
+#include "CuboidBoundary.h"
 
 class LinkedCellContainer : public ParticleContainer{
 public:
     /**
      * @brief Creates a LinkedCellContainer object using the given parameters.
-     * @param boundaryCorner Contains the x, y and z coordinate (in this order) of the lower, left, front corner of the boundary.
-     * @param meshSize Width / length / height of each cell.
-     * @param n1 Number of cells in the x direction.
-     * @param n2 Number of cells in the y direction.
-     * @param n3 Number of cells in the z direction.
+     * @param boundary Cuboid boundary to be used for the container.
+     * @param cutoffRadius Radius in which the particles affect each other.
      * @param particles The particles to be added to the container.
      */
-    LinkedCellContainer(std::array<double, 3> boundaryCorner, double meshSize, int n1, int n2, int n3, double cutoffRadius, std::vector<Particle> particles = {});
+    LinkedCellContainer(CuboidBoundary boundary, double cutoffRadius, std::vector<Particle> particles = {});
 
     /**
      * @brief Adds the given particle to the container.
@@ -68,7 +66,7 @@ private:
     /**
      * @brief Vectors containing all cells, going from the lower left front corner (first increasing z, then y then x).
      */
-    std::vector<Cell> cells;
+    std::vector<Cell> grid;
 
     /**
      * @brief Specifies the radius, in which the particles affect each other.
@@ -76,10 +74,58 @@ private:
     double cutoffRadius;
 
     /**
+     * @brief Number of cells in the x-direction.
+     */
+    int numCellsX;
+
+    /**
+     * @brief Number of cells in the y-direction.
+     */
+    int numCellsY;
+
+    /**
+     * @brief Number of cells in the z-direction.
+     */
+    int numCellsZ;
+
+    /**
      * @brief Puts all particles in their correct cells after a change in position.
      */
     void updateCells();
 
+    /**
+     * @brief Number of particles in the container.
+     */
+    size_t size;
+
+    /**
+     * @brief Puts particles from the given vector to their correct cells.
+     * @param particles The particles to be put in their cells.
+     */
+    void putParticlesToCells(const std::vector<Particle>& particles);
+
+    /**
+     * @brief Returns the index of the cell that the given particle belongs to based on its position.
+     * @param p The particle that the index is being calculated based on.
+     * @return Index of the correct cell in the grid vector.
+     */
+    int getCellIndex(const Particle& p) const;
+
+    /**
+     * @brief Deletes the given particle from the cell with the index oldCell and adds it to the cell with the index newCell
+     * @param p1 Particle to be moved.
+     * @param oldCell Index of the cell the particle is being moved from.
+     * @param newCell Index of the cell the particle is being moved to.
+     */
+    void moveParticle(const Particle& p1, int oldCell, int newCell);
+
+    /**
+     * @brief Returns true if the given particle is it's correct cell.
+     * @param p The particle to be tested.
+     * @param currentIndex The index of the grid the particle is currently in.
+     * @return True if the particle is in the correct cell, false otherwise.
+     */
+    bool isInCorrectCell(const Particle& p, int currentIndex);
 };
 
 
