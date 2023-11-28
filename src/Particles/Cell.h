@@ -6,6 +6,7 @@
 #define PSEMOLDYN_GROUPD_CELL_H
 
 #include <list>
+#include <functional>
 #include "Particle.h"
 
 class Cell {
@@ -21,7 +22,7 @@ public:
      * @param p The particles in the cell. Empty of no vector is given
      * @param t The type of the cell, Inner of no type is given.
      */
-    explicit Cell(const std::list<Particle>& p = {});
+    explicit Cell(const std::list<Particle>& p = {}): particles{p}{};
 
     /**
      * @brief Returns an iterator pointing to the first particle.
@@ -47,6 +48,19 @@ public:
      */
     void deleteParticle(const Particle& p);
 
+    /**
+     * @brief Applies the given function to each pair of particles within the cell.
+     * @param function The function to be applied to the pairs.
+     */
+    void applyToPairs(const std::function<void(Particle&, Particle&)>& function);
+
+    /**
+     * @brief Applies the given function to all pairs between the cells (pairs (p1, p2) where p1 is from this cell and p2 from the parameter cell.). IMPORTANT: only the particles in this cell are modified.
+     * @param cell The cell that this cell is supposed to interact with.
+     * @param function Function to be applied to the pairs.
+     */
+    void interactWithCell(Cell cell, const std::function<void(Particle&, Particle&)>& function);
+
 private:
     /**
      * @brief Stores the particles of the cell.
@@ -54,6 +68,8 @@ private:
     std::list<Particle> particles;
 
 };
+
+
 
 
 #endif //PSEMOLDYN_GROUPD_CELL_H

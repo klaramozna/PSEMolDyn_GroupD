@@ -39,8 +39,8 @@ public:
     void applyToAll(const std::function<void(Particle&)>& function) override;
 
     /**
-     * @brief Applies the given function to pairs of particles in neighbouring cells according to the linked-cell algorithm.
-     * @param function The function to be applied to each pair.
+     * @brief Applies the given function to pairs of particles in neighbouring cells within the cutoff radius.
+     * @param function The function to be applied to each pair, that does not change the position of the particles.
      */
     void applyToPairs(const std::function<void(Particle&, Particle&)>& function) override;
 
@@ -126,6 +126,13 @@ private:
      * @return True if the particle is in the correct cell, false otherwise.
      */
     bool isInCorrectCell(const Particle& p, int currentIndex);
+
+    /**
+     * @brief Returns a vector of cells within the cutoff radius of
+     * @param index
+     * @return
+     */
+    std::vector<int> getNeighbours(int index);
 };
 
 

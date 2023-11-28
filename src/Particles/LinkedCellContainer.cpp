@@ -91,4 +91,17 @@ bool LinkedCellContainer::isInCorrectCell(const Particle &p, int currentIndex) {
     return getCellIndex(p) == currentIndex;
 }
 
+void LinkedCellContainer::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
+    for(int i = 0; i < grid.size(); i++){
+        // Apply the function on the pairs of particles within one cell
+        grid[i].applyToPairs(function);
+
+        // Iterate over neighbours within cutoff radius and apply function.
+        std::vector<int> neighbours = getNeighbours(i);
+        for(int j = 0; j < neighbours.size(); j++){
+            grid[i].interactWithCell(grid[j], function);
+        }
+    }
+}
+
 

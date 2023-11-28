@@ -4,15 +4,11 @@
 
 #include "Cell.h"
 
-Cell::Cell(const std::list<Particle> &p, Cell::Type t) {
-    particles = p;
-}
-
-Cell::iterator_type Cell::begin() {
+Cell::iterator_type Cell::begin(){
     return particles.begin();
 }
 
-Cell::iterator_type Cell::end() {
+Cell::iterator_type Cell::end(){
     return particles.end();
 }
 
@@ -23,3 +19,22 @@ void Cell::addParticle(const Particle& p) {
 void Cell::deleteParticle(const Particle &p) {
     particles.remove(p);
 }
+
+void Cell::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
+    for(auto & p1 : particles){
+        for(auto & p2 : particles){
+            if(p2 != p1){
+                function(p1, p2);
+            }
+        }
+    }
+}
+
+void Cell::interactWithCell(Cell cell, const std::function<void(Particle &, Particle &)> &function) {
+    for(auto & p1 : particles){
+        for(auto & p2 : cell){
+            function(p1, p2);
+        }
+    }
+}
+
