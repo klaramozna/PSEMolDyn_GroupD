@@ -77,3 +77,8 @@ double VectorDouble3::at(int index) {
 bool VectorDouble3::operator==(const VectorDouble3& other) const {
     return values == other.values; 
 }
+
+double getDistance(const VectorDouble3& v1, const VectorDouble3& v2){
+    VectorDouble3 result = v1 - v2;
+    return result.getL2Norm();
+}

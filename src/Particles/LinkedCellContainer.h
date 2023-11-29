@@ -18,7 +18,7 @@ public:
      * @param cutoffRadius Radius in which the particles affect each other.
      * @param particles The particles to be added to the container.
      */
-    LinkedCellContainer(CuboidBoundary boundary, double cutoffRadius, std::vector<Particle> particles = {});
+    LinkedCellContainer(const CuboidBoundary& boundary, double cutoffRadius, const std::vector<Particle>& particles = {});
 
     /**
      * @brief Adds the given particle to the container.
@@ -89,6 +89,13 @@ private:
     int numCellsZ;
 
     /**
+     * @brief Stores the shift of the grid from the (0, 0, 0) corner to the left lower direction.
+     */
+    std::array<double, 3> gridShift;
+
+    double cellSize;
+
+    /**
      * @brief Puts all particles in their correct cells after a change in position.
      */
     void updateCells();
@@ -103,13 +110,6 @@ private:
      * @param particles The particles to be put in their cells.
      */
     void putParticlesToCells(const std::vector<Particle>& particles);
-
-    /**
-     * @brief Returns the index of the cell that the given particle belongs to based on its position.
-     * @param p The particle that the index is being calculated based on.
-     * @return Index of the correct cell in the grid vector.
-     */
-    int getCellIndex(const Particle& p) const;
 
     /**
      * @brief Deletes the given particle from the cell with the index oldCell and adds it to the cell with the index newCell
@@ -128,11 +128,38 @@ private:
     bool isInCorrectCell(const Particle& p, int currentIndex);
 
     /**
-     * @brief Returns a vector of cells within the cutoff radius of
-     * @param index
-     * @return
+     * @brief Returns a the index in the grid of a cell with the given position,
+     * @param x X position of the cell.
+     * @param y Y position of the cell.
+     * @param z Z position of the cell.
+     * @return Grid index of the cell with the given coordinates.
      */
-    std::vector<int> getNeighbours(int index);
+    int getGridIndex(int x, int y, int z) const;
+
+    /**
+     * @brief Returns true, if the cell with the position (x, y, z) is within the cutoff radius of the given particle.
+     * @param p The particle for which the distance is calculated.
+     * @param x X position of the cell.
+     * @param y Y position of the cell.
+     * @param z Z position of the cell.
+     * @return True, if the cell is within the cutoff radius of particle p, false otherwise
+     */
+    bool cellWithinRadius(const Particle& p, int x, int y, int z);
+
+    /**
+     * @brief Returns true if the distance (euclidian) between the two particles is smaller or equal to the cutoff radius.
+     * @param p1 The first particle.
+     * @param p2 The second particle.
+     * @return True if the distance is smaller or equal to the cutoff radius, false otherwise.
+     */
+    bool particleWithinCutoff(const Particle& p1, const Particle& p2) const;
+
+    /**
+     * @brief Returns the index in the grid of the given particle.
+     * @param p The particle, for which the index is being calculated.
+     * @return The correct index in the grid vector.
+     */
+    int getParticleIndex(const Particle& p);
 };
 
 
