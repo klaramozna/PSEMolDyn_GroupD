@@ -5,11 +5,14 @@
 #include "CuboidBoundary.h"
 
 bool CuboidBoundary::isInside(const Particle &p) {
-    double x = p.getX()[0];
-    double y = p.getX()[1];
-    double z = p.getX()[2];
-    bool xInside = x >= corner[0] && x <= corner[0] + width;
-    bool yInside = y >= corner[1] && x <= corner[1] + height;
-    bool zInside = z >= corner[2] && x <= corner[2] + depth;
-    return xInside && yInside && zInside;
+    auto isCoordinateInside = [this](double coordinate, int index) {
+        return coordinate >= corner[index] && coordinate <= corner[index] + dim[index];
+    };
+
+    std::array<double, 3> pos = p.getX();
+    return isCoordinateInside(pos[0], 0) && isCoordinateInside(pos[1], 1) && isCoordinateInside(pos[2], 2);
+}
+
+std::array<int,3> CuboidBoundary::getDimensions() {
+    return dim;
 }

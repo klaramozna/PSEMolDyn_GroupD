@@ -15,7 +15,13 @@ public:
      * @param height Height of the cuboid boundary.
      * @param depth Depth of the cuboid boundary.
      */
-    CuboidBoundary(int width, int height, int depth): width(width), height(height), depth(depth){};
+    CuboidBoundary(int width, int height, int depth) {
+        dim[0] = width;
+        dim[1] = height;
+        dim[2] = depth;
+
+        corner = {0.0, 0.0, 0.0};
+    };
 
      /**
      * @brief Returns true, if the given particle is inside of or on the boundary, else false.
@@ -24,41 +30,22 @@ public:
      */
     bool isInside(const Particle& p) override;
 
-    /**
-     * @brief Returns width of boundary.
-     * @return Width of boundary.
-     */
-    int getWidth() const{return width;};
-
-    /**
-     * @brief Returns height of boundary.
-     * @return Height of boundary.
-     */
-    int getHeight() const{return height;};
-
-    /**
-     * @brief Returns depth of boundary.
-     * @return Depth of boundary.
-     */
-    int getDepth() const{return depth;};
+    std::array<int,3> getDimensions();
 
 private:
 
     /**
-     * @brief Width of the cuboid boundary.
+     * @brief Dimensions of the boundaries
+     * dim[0] = Width
+     * dim[1] = Height
+     * dim[2] = Length
      */
-    int width;
+    std::array<int,3> dim{};
 
     /**
-     * @brief Height of the cuboid boundary.
+     * @brief Lower Left Corner
      */
-    int height;
-
-    /**
-     * @brief Depth of the cuboid boundary.
-     */
-    int depth;
-
+    std::array<double,3> corner{};
 };
 
 

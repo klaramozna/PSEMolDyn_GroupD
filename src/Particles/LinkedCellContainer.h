@@ -18,7 +18,7 @@ public:
      * @param cutoffRadius Radius in which the particles affect each other.
      * @param particles The particles to be added to the container.
      */
-    LinkedCellContainer(const CuboidBoundary& boundary, double cutoffRadius, const std::vector<Particle>& particles = {});
+    LinkedCellContainer(CuboidBoundary& boundary, double cutoffRadius, const std::vector<Particle>& particles = {});
 
     /**
      * @brief Adds the given particle to the container.
@@ -69,24 +69,25 @@ private:
     std::vector<Cell> grid;
 
     /**
+     * @brief Vector containing boundary cells
+     */
+    std::vector<Cell> boundaryCells;
+
+    /**
+     * @brief Boundary class defining limits in each axis
+     */
+     CuboidBoundary boundary;
+
+
+    /**
      * @brief Specifies the radius, in which the particles affect each other.
      */
     double cutoffRadius;
 
     /**
-     * @brief Number of cells in the x-direction.
+     * @brief Stores number of cells for each dimension
      */
-    int numCellsX;
-
-    /**
-     * @brief Number of cells in the y-direction.
-     */
-    int numCellsY;
-
-    /**
-     * @brief Number of cells in the z-direction.
-     */
-    int numCellsZ;
+    std::array<int,3> nc;
 
     /**
      * @brief Stores the shift of the grid from the (0, 0, 0) corner to the left lower direction.
@@ -160,6 +161,16 @@ private:
      * @return The correct index in the grid vector.
      */
     int getParticleIndex(const Particle& p);
+
+
+    /**
+     * @brief Determines whether a (x,y,z) entry in a 3D array leads to a boundary cell
+     * according to the number of cells in the container in each axis
+     * @param x Integer defining the 1st entry of the multi-index
+     * @param y Integer defining the 2nd entry of the multi-index
+     * @param z Integer defining the 3rd entry of the multi-index
+     */
+     bool isBoundaryCell(int x, int y, int z);
 };
 
 

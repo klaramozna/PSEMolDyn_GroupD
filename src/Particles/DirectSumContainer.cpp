@@ -29,7 +29,7 @@ size_t DirectSumContainer::getSize() {
     return particles.size();
 }
 
-void DirectSumContainer::addParticles(std::vector<Particle> toAdd) {
+void DirectSumContainer::addParticles(std::vector<Particle> &toAdd) {
     particles.insert(particles.end(), toAdd.begin(), toAdd.end());
 }
 
