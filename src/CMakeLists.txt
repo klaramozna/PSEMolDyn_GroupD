@@ -11,7 +11,7 @@ Simulation/Physics/GravitationalForce.cpp
         Particles/ParticleGenerator.h
         utils/CuboidGenerator.cpp
         utils/CuboidGenerator.h
-        IO/input/simulationFormat.cxx
+        IO/input/simulationFormat.cpp
         IO/input/XMLReader.cpp
         IO/input/CuboidReader.cpp
         IO/input/FileReader.cpp)

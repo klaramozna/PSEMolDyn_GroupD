@@ -38,7 +38,7 @@
 
 #include <xsd/cxx/pre.hxx>
 
-#include "simulationFormat.hxx"
+#include "simulationFormat.h"
 
 // int_3d
 // 

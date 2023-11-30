@@ -6,7 +6,7 @@
  */
 
 #include "XMLReader.h"
-#include "simulationFormat.hxx"
+#include "simulationFormat.h"
 #include "./../Logger.h"
 #include "./../../Simulation/Simulation.h"
 #include "./../../Simulation/Physics/LennardJones.h"

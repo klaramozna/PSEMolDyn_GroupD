@@ -28,9 +28,9 @@ public:
      * @param input_path_val The input path.
      * @param input_mode_val The input mode.
      * @param force_val The force type.
-     * @param sigma_val
-     * @param epsilon_val
-     * @param base_name_val
+     * @param sigma_val sigma value
+     * @param epsilon_val epsilon value 
+     * @param base_name_val base name for the output files
      */
     SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                   bool testing_val, int log_level_val,
@@ -68,12 +68,19 @@ public:
     void setBaseName(const std::string val) {base_name = val;}
 
 private:
+    /**
+     * @brief start time of the simulation = 0
+     */
     static constexpr double start_time = 0.0;
+    /**
+     * @brief epsilon value
+     */
     double epsilon = 5.0;
+    /**
+     * @brief sigma value
+     */
     double sigma = 1.0;
     
-
-
     /**
      * @brief The end time.
      */
