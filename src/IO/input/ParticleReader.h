@@ -7,8 +7,8 @@
 
 class ParticleReader {
 public:
-    virtual void readFile(ParticleContainer &container, std::string &filename) = 0;
-    virtual void readFile(ParticleContainer &container, std::string &filename, SimParameters& SimParameters) = 0;
+    virtual void readFile(ParticleContainer &container, std::string &filename){};
+    virtual void readFile(ParticleContainer &container, std::string &filename, SimParameters& SimParameters){};
 
 };
 

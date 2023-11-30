@@ -13,8 +13,6 @@ public:
      * */
     void readFile(ParticleContainer &container, std::string &filename) override;
 
-    void readFile(ParticleContainer &container, std::string &filename, SimParameters& SimParameters) override;
-
 
 private:
     int numberOfCuboids{};

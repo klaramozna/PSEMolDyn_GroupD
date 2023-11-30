@@ -17,10 +17,6 @@ XMLReader::XMLReader() = default;
 
 XMLReader::~XMLReader() = default;
 
-void XMLReader::readFile(ParticleContainer &container, std::string &filename) {
-   throw std::runtime_error("not needed");
-}
-
 void XMLReader::readFile(ParticleContainer &container, std::string &filename, SimParameters& SimParameters) {
     try {
         std::unique_ptr<Simulation_t> sim(Simulation(filename));

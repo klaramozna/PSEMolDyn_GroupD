@@ -7,9 +7,6 @@
 #include <regex>
 #include "../Logger.h"
 
-void CuboidReader::readFile(ParticleContainer &container, std::string &filename, SimParameters& SimParameters) {
-    throw std::runtime_error("not needed");
-}
 
 void CuboidReader::readFile(ParticleContainer &container, std::string &filename) {
     std::ifstream inputFile(filename);
