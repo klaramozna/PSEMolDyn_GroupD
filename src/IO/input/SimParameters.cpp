@@ -12,7 +12,7 @@
 SimParameters::SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                   bool testing_val, int log_level_val,
                   const std::string& input_path_val, const std::string& input_mode_val,
-                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string base_name_val){
+                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val){
                     end_time =end_time_val;
                     delta_t = delta_t_val; 
                     averageVelo = averageVelo_val;
@@ -25,5 +25,20 @@ SimParameters::SimParameters(double end_time_val, double delta_t_val, double ave
                     epsilon = epsilon_val; 
                     base_name = base_name_val;
                   }
+
+bool SimParameters::operator==(const SimParameters &other) const {
+  return epsilon == other.getEpsilon() &&
+         sigma == other.getSigma() &&
+         end_time == other.getEndTime() &&
+         delta_t == other.getDeltaT() &&
+         averageVelo == other.getAverageVelo() &&
+         testing == other.isTesting() &&
+         log_level == other.getLogLevel() &&
+         input_mode == other.getInputMode() &&
+         input_path == other.getInputPath() &&
+         force == other.getForce() &&
+         base_name == other.getBaseName();
+}
+
 
 

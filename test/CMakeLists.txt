@@ -19,6 +19,9 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/LennardJones.cpp
         ${PROJECT_SOURCE_DIR}/src/utils/CuboidGenerator.cpp
         ${PROJECT_SOURCE_DIR}/src/utils/CuboidGenerator.h
+        ${PROJECT_SOURCE_DIR}/src/IO/input/XMLReader.cpp
+        ${PROJECT_SOURCE_DIR}/src/IO/input/SimParameters.cpp
+        ${PROJECT_SOURCE_DIR}/src/IO/input/simulationFormat.cpp
         CuboidGeneratorTest.cpp
         CuboidGeneratorTest.h
 )
@@ -37,7 +40,7 @@ target_link_libraries(
         particleContainer_test
         GTest::gtest
         GTest::gtest_main
+        xerces-c
 )
-
 include(GoogleTest)
 gtest_discover_tests(particleContainer_test)

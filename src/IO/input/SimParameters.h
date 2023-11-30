@@ -35,7 +35,7 @@ public:
     SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                   bool testing_val, int log_level_val,
                   const std::string& input_path_val, const std::string& input_mode_val,
-                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string base_name_val);
+                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val);
 
     SimParameters() = default;
 
@@ -66,6 +66,9 @@ public:
     void setSigma(const double val) {sigma = val;}
     void setEpsilon(const double val) {epsilon = val;}
     void setBaseName(const std::string val) {base_name = val;}
+
+    bool operator==(const SimParameters &other) const;
+
 
 private:
     /**

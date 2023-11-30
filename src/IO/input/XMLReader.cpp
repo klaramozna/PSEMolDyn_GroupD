@@ -46,7 +46,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
 
         if (sim->averageVelo().present()) {
             Logger::console->debug("Reading average Velo {} from XML", sim->averageVelo().get());
-            SimParameters.setAverageVelo(0.1);
+            SimParameters.setAverageVelo(sim->averageVelo().get());
         }
 
          if (sim->force()) {
