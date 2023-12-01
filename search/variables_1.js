@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['console_588',['console',['../namespaceLogger.html#a852d47c744a4084ede6cb3e325b4e0bb',1,'Logger']]]
+  ['err_5flogger_779',['err_logger',['../namespaceLogger.html#a807ca3078654157deb73c91eee70842d',1,'Logger']]]
 ];

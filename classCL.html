@@ -77,18 +77,18 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a89f225399a0001fdba1ae15a8289ea32"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if a double value is positive or not (used to handle incorrect user input)  <a href="classCL.html#a89f225399a0001fdba1ae15a8289ea32">More...</a><br /></td></tr>
 <tr class="separator:a89f225399a0001fdba1ae15a8289ea32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f4afac48cf3a1bdf055c6fd65baa6ef"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCL.html#a2f4afac48cf3a1bdf055c6fd65baa6ef">validate_range</a> (const int &amp;value, const std::string &amp;option_name)</td></tr>
-<tr class="memdesc:a2f4afac48cf3a1bdf055c6fd65baa6ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if an int value is in [0, 6] (otherwise incorrect log_level)  <a href="classCL.html#a2f4afac48cf3a1bdf055c6fd65baa6ef">More...</a><br /></td></tr>
+<tr class="memdesc:a2f4afac48cf3a1bdf055c6fd65baa6ef"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if an int value is in [0, 6] (otherwise incorrect <a class="el" href="classlog__level.html" title="Class corresponding to the log_level schema type.">log_level</a>)  <a href="classCL.html#a2f4afac48cf3a1bdf055c6fd65baa6ef">More...</a><br /></td></tr>
 <tr class="separator:a2f4afac48cf3a1bdf055c6fd65baa6ef"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a227177b9b861da54e429386425f5d021"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCL.html#a227177b9b861da54e429386425f5d021">produce_help_message</a> (const po::options_description &amp;desc)</td></tr>
 <tr class="memdesc:a227177b9b861da54e429386425f5d021"><td class="mdescLeft">&#160;</td><td class="mdescRight">produces the help message as a string  <a href="classCL.html#a227177b9b861da54e429386425f5d021">More...</a><br /></td></tr>
 <tr class="separator:a227177b9b861da54e429386425f5d021"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae74034c4597d96af34ea39802b953af8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCL.html#ae74034c4597d96af34ea39802b953af8">parse_arguments</a> (int argc, char *argsv[], double &amp;<a class="el" href="MolSim_8cpp.html#a8c7ea5e69ce954c1d81db1732f9f426a">end_time</a>, double &amp;<a class="el" href="MolSim_8cpp.html#a4cfc079302fe9a34fe24637c4e44303a">delta_t</a>, int &amp;<a class="el" href="MolSim_8cpp.html#ab5a71c2541c377b3d5b34fdb35964c2e">log_level</a>, std::string &amp;<a class="el" href="MolSim_8cpp.html#aa14dbbb4b5614a1e7a5b4281baa64b89">input_path</a>, std::string &amp;<a class="el" href="MolSim_8cpp.html#afc980f0ef404720d6d9a3e8ca27bd4cd">input_mode</a>, std::string &amp;<a class="el" href="MolSim_8cpp.html#a7446c0d623ffd4f453b4d2326e3a3900">force</a>, double &amp;<a class="el" href="MolSim_8cpp.html#a5e22e6943861c954d96f6c166ae57e34">averageVelo</a>, bool &amp;<a class="el" href="MolSim_8cpp.html#a6bbd6d0faf2a5a2ae6a988e7198f0b14">testing</a>)</td></tr>
-<tr class="memdesc:ae74034c4597d96af34ea39802b953af8"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the arguments provided by the user and configures simulation parameters  <a href="classCL.html#ae74034c4597d96af34ea39802b953af8">More...</a><br /></td></tr>
-<tr class="separator:ae74034c4597d96af34ea39802b953af8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad3b64af6bf2d668b56e409d7eb0195f6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCL.html#ad3b64af6bf2d668b56e409d7eb0195f6">parse_arguments</a> (int argc, char *argsv[], <a class="el" href="classSimParameters.html">SimParameters</a> &amp;simParameters)</td></tr>
+<tr class="memdesc:ad3b64af6bf2d668b56e409d7eb0195f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the arguments provided by the user and configures simulation parameters  <a href="classCL.html#ad3b64af6bf2d668b56e409d7eb0195f6">More...</a><br /></td></tr>
+<tr class="separator:ad3b64af6bf2d668b56e409d7eb0195f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="ae74034c4597d96af34ea39802b953af8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae74034c4597d96af34ea39802b953af8">&#9670;&nbsp;</a></span>parse_arguments()</h2>
+<a id="ad3b64af6bf2d668b56e409d7eb0195f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad3b64af6bf2d668b56e409d7eb0195f6">&#9670;&nbsp;</a></span>parse_arguments()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -108,50 +108,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>end_time</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>delta_t</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int &amp;&#160;</td>
-          <td class="paramname"><em>log_level</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string &amp;&#160;</td>
-          <td class="paramname"><em>input_path</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string &amp;&#160;</td>
-          <td class="paramname"><em>input_mode</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">std::string &amp;&#160;</td>
-          <td class="paramname"><em>force</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double &amp;&#160;</td>
-          <td class="paramname"><em>averageVelo</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">bool &amp;&#160;</td>
-          <td class="paramname"><em>testing</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="classSimParameters.html">SimParameters</a> &amp;&#160;</td>
+          <td class="paramname"><em>simParameters</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -166,14 +124,10 @@ Public Member Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">argc</td><td>The number of command line arguments. </td></tr>
     <tr><td class="paramname">argsv</td><td>An array containing the command line arguments. </td></tr>
-    <tr><td class="paramname">end_time</td><td>Reference to a double variable where the end time of the simulation will be stored. </td></tr>
-    <tr><td class="paramname">delta_t</td><td>Reference to a double variable where the time step between iterations will be stored. </td></tr>
-    <tr><td class="paramname">log_level</td><td>Reference to an integer variable where the log level will be stored (0: trace, 1: debug, 2: info, 3: warning, 4: error, 5: critical, 6: off). </td></tr>
-    <tr><td class="paramname">input_path</td><td>Reference to a string variable where the input file path will be stored. </td></tr>
+    <tr><td class="paramname">simParameters</td><td>instance holding the simulation parameters </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>int the status of the process (!= 0 if an error occured)</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname">std::invalid_argument</td><td>If invalid or incomplete arguments are provided. </td></tr>
@@ -273,7 +227,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>checks if an int value is in [0, 6] (otherwise incorrect log_level) </p>
+<p>checks if an int value is in [0, 6] (otherwise incorrect <a class="el" href="classlog__level.html" title="Class corresponding to the log_level schema type.">log_level</a>) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">value</td><td>the value to check </td></tr>

@@ -71,7 +71,7 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a7feb81e097444bda5ba59b9341a2b946"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceLogger.html#a7feb81e097444bda5ba59b9341a2b946">init</a> (int <a class="el" href="MolSim_8cpp.html#ab5a71c2541c377b3d5b34fdb35964c2e">log_level</a>)</td></tr>
+<tr class="memitem:a7feb81e097444bda5ba59b9341a2b946"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceLogger.html#a7feb81e097444bda5ba59b9341a2b946">init</a> (int <a class="el" href="classlog__level.html">log_level</a>)</td></tr>
 <tr class="memdesc:a7feb81e097444bda5ba59b9341a2b946"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the log level  <a href="namespaceLogger.html#a7feb81e097444bda5ba59b9341a2b946">More...</a><br /></td></tr>
 <tr class="separator:a7feb81e097444bda5ba59b9341a2b946"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -81,8 +81,6 @@ Variables</h2></td></tr>
 <tr class="separator:a852d47c744a4084ede6cb3e325b4e0bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a807ca3078654157deb73c91eee70842d"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; spdlog::logger &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceLogger.html#a807ca3078654157deb73c91eee70842d">err_logger</a> = spdlog::stderr_color_mt(&quot;stderr&quot;)</td></tr>
 <tr class="separator:a807ca3078654157deb73c91eee70842d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab35ee00bc0f507a51da7e9cf8b99374d"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; spdlog::logger &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespaceLogger.html#ab35ee00bc0f507a51da7e9cf8b99374d">file_logger</a> = spdlog::basic_logger_mt(&quot;file_logger&quot;, &quot;logs/logfile.txt&quot;)</td></tr>
-<tr class="separator:ab35ee00bc0f507a51da7e9cf8b99374d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a7feb81e097444bda5ba59b9341a2b946"></a>
@@ -104,7 +102,7 @@ Variables</h2></td></tr>
 <p>sets the log level </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">log_level</td><td>value in [0, 6], (0: trace, 1: debug, 2: info, 3: warning, 4: error, 5: critical, 6: off) </td></tr>
+    <tr><td class="paramname"><a class="el" href="classlog__level.html" title="Class corresponding to the log_level schema type.">log_level</a></td><td>value in [0, 6], (0: trace, 1: debug, 2: info, 3: warning, 4: error, 5: critical, 6: off) </td></tr>
   </table>
   </dd>
 </dl>
@@ -139,21 +137,6 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>logger for displaying errors </p>
-
-</div>
-</div>
-<a id="ab35ee00bc0f507a51da7e9cf8b99374d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab35ee00bc0f507a51da7e9cf8b99374d">&#9670;&nbsp;</a></span>file_logger</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::shared_ptr&lt; spdlog::logger &gt; Logger::file_logger = spdlog::basic_logger_mt(&quot;file_logger&quot;, &quot;logs/logfile.txt&quot;)</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-<p>file logger </p>
 
 </div>
 </div>

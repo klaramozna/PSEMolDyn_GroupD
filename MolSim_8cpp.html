@@ -66,8 +66,7 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a> &#124;
-<a href="#var-members">Variables</a>  </div>
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">MolSim.cpp File Reference</div>  </div>
 </div><!--header-->
@@ -77,6 +76,8 @@ $(function() {
 <code>#include &quot;<a class="el" href="ParticleReader_8h_source.html">IO/input/ParticleReader.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="XYZWriter_8h_source.html">IO/output/outputWriter/XYZWriter.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="VTKWriter_8h_source.html">IO/output/outputWriter/VTKWriter.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="SimParameters_8h_source.html">IO/input/SimParameters.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="XMLReader_8h_source.html">IO/input/XMLReader.h</a>&quot;</code><br />
 <code>#include &lt;iostream&gt;</code><br />
 <code>#include &quot;<a class="el" href="Simulation_8h_source.html">Simulation/Simulation.h</a>&quot;</code><br />
 <code>#include &quot;<a class="el" href="DirectSumContainer_8h_source.html">Particles/DirectSumContainer.h</a>&quot;</code><br />
@@ -91,31 +92,6 @@ $(function() {
 Functions</h2></td></tr>
 <tr class="memitem:a329c95e85f063f49b0daaed5c5b56335"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a329c95e85f063f49b0daaed5c5b56335">main</a> (int argc, char *argsv[])</td></tr>
 <tr class="separator:a329c95e85f063f49b0daaed5c5b56335"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
-Variables</h2></td></tr>
-<tr class="memitem:a638f9bb439eac914b175531577dfa7da"><td class="memItemLeft" align="right" valign="top">constexpr double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a638f9bb439eac914b175531577dfa7da">start_time</a> = 0</td></tr>
-<tr class="separator:a638f9bb439eac914b175531577dfa7da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a08d4c0acfdbc81d9f33f389cfe7839ea"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a08d4c0acfdbc81d9f33f389cfe7839ea">sigma</a> = 1</td></tr>
-<tr class="separator:a08d4c0acfdbc81d9f33f389cfe7839ea"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac29df3dcbefa1ce189e5990bde994025"><td class="memItemLeft" align="right" valign="top">const double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#ac29df3dcbefa1ce189e5990bde994025">epsilon</a> = 5</td></tr>
-<tr class="separator:ac29df3dcbefa1ce189e5990bde994025"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8c7ea5e69ce954c1d81db1732f9f426a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a8c7ea5e69ce954c1d81db1732f9f426a">end_time</a></td></tr>
-<tr class="separator:a8c7ea5e69ce954c1d81db1732f9f426a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4cfc079302fe9a34fe24637c4e44303a"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a4cfc079302fe9a34fe24637c4e44303a">delta_t</a></td></tr>
-<tr class="separator:a4cfc079302fe9a34fe24637c4e44303a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e22e6943861c954d96f6c166ae57e34"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a5e22e6943861c954d96f6c166ae57e34">averageVelo</a></td></tr>
-<tr class="separator:a5e22e6943861c954d96f6c166ae57e34"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6bbd6d0faf2a5a2ae6a988e7198f0b14"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a6bbd6d0faf2a5a2ae6a988e7198f0b14">testing</a></td></tr>
-<tr class="separator:a6bbd6d0faf2a5a2ae6a988e7198f0b14"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab5a71c2541c377b3d5b34fdb35964c2e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#ab5a71c2541c377b3d5b34fdb35964c2e">log_level</a></td></tr>
-<tr class="separator:ab5a71c2541c377b3d5b34fdb35964c2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa14dbbb4b5614a1e7a5b4281baa64b89"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#aa14dbbb4b5614a1e7a5b4281baa64b89">input_path</a></td></tr>
-<tr class="separator:aa14dbbb4b5614a1e7a5b4281baa64b89"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc980f0ef404720d6d9a3e8ca27bd4cd"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#afc980f0ef404720d6d9a3e8ca27bd4cd">input_mode</a></td></tr>
-<tr class="separator:afc980f0ef404720d6d9a3e8ca27bd4cd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7446c0d623ffd4f453b4d2326e3a3900"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="MolSim_8cpp.html#a7446c0d623ffd4f453b4d2326e3a3900">force</a></td></tr>
-<tr class="separator:a7446c0d623ffd4f453b4d2326e3a3900"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
 <a id="a329c95e85f063f49b0daaed5c5b56335"></a>
@@ -140,169 +116,6 @@ Variables</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<h2 class="groupheader">Variable Documentation</h2>
-<a id="a5e22e6943861c954d96f6c166ae57e34"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5e22e6943861c954d96f6c166ae57e34">&#9670;&nbsp;</a></span>averageVelo</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double averageVelo</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a4cfc079302fe9a34fe24637c4e44303a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4cfc079302fe9a34fe24637c4e44303a">&#9670;&nbsp;</a></span>delta_t</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double delta_t</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a8c7ea5e69ce954c1d81db1732f9f426a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c7ea5e69ce954c1d81db1732f9f426a">&#9670;&nbsp;</a></span>end_time</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">double end_time</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ac29df3dcbefa1ce189e5990bde994025"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac29df3dcbefa1ce189e5990bde994025">&#9670;&nbsp;</a></span>epsilon</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const double epsilon = 5</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a7446c0d623ffd4f453b4d2326e3a3900"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7446c0d623ffd4f453b4d2326e3a3900">&#9670;&nbsp;</a></span>force</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string force</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="afc980f0ef404720d6d9a3e8ca27bd4cd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc980f0ef404720d6d9a3e8ca27bd4cd">&#9670;&nbsp;</a></span>input_mode</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string input_mode</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="aa14dbbb4b5614a1e7a5b4281baa64b89"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aa14dbbb4b5614a1e7a5b4281baa64b89">&#9670;&nbsp;</a></span>input_path</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">std::string input_path</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="ab5a71c2541c377b3d5b34fdb35964c2e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab5a71c2541c377b3d5b34fdb35964c2e">&#9670;&nbsp;</a></span>log_level</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">int log_level</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a08d4c0acfdbc81d9f33f389cfe7839ea"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a08d4c0acfdbc81d9f33f389cfe7839ea">&#9670;&nbsp;</a></span>sigma</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">const double sigma = 1</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a638f9bb439eac914b175531577dfa7da"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a638f9bb439eac914b175531577dfa7da">&#9670;&nbsp;</a></span>start_time</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr double start_time = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-</div>
-</div>
-<a id="a6bbd6d0faf2a5a2ae6a988e7198f0b14"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a6bbd6d0faf2a5a2ae6a988e7198f0b14">&#9670;&nbsp;</a></span>testing</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">bool testing</td>
         </tr>
       </table>
 </div><div class="memdoc">

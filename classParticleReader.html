@@ -65,7 +65,7 @@ $(function() {
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="classParticleReader-members.html">List of all members</a>  </div>
   <div class="headertitle">
-<div class="title">ParticleReader Class Reference<span class="mlabels"><span class="mlabel">abstract</span></span></div>  </div>
+<div class="title">ParticleReader Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
@@ -78,17 +78,20 @@ Inheritance diagram for ParticleReader:</div>
   <map id="ParticleReader_map" name="ParticleReader_map">
 <area href="classCuboidReader.html" alt="CuboidReader" shape="rect" coords="0,56,96,80"/>
 <area href="classFileReader.html" alt="FileReader" shape="rect" coords="106,56,202,80"/>
+<area href="classXMLReader.html" alt="XMLReader" shape="rect" coords="212,56,308,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a403fb8eab75a0e9e93767cb32747a3bb"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleReader.html#a403fb8eab75a0e9e93767cb32747a3bb">readFile</a> (<a class="el" href="classDirectSumContainer.html">DirectSumContainer</a> &amp;container, std::string &amp;filename)=0</td></tr>
-<tr class="separator:a403fb8eab75a0e9e93767cb32747a3bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34fd4c14327faca4ec3c11a71fa15f28"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleReader.html#a34fd4c14327faca4ec3c11a71fa15f28">readFile</a> (<a class="el" href="classDirectSumContainer.html">DirectSumContainer</a> &amp;container, std::string &amp;filename)</td></tr>
+<tr class="separator:a34fd4c14327faca4ec3c11a71fa15f28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a020220314a0912efba2d3ed3574b7101"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleReader.html#a020220314a0912efba2d3ed3574b7101">readFile</a> (<a class="el" href="classDirectSumContainer.html">DirectSumContainer</a> &amp;container, std::string &amp;filename, <a class="el" href="classSimParameters.html">SimParameters</a> &amp;<a class="el" href="classSimParameters.html">SimParameters</a>)</td></tr>
+<tr class="separator:a020220314a0912efba2d3ed3574b7101"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a403fb8eab75a0e9e93767cb32747a3bb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a403fb8eab75a0e9e93767cb32747a3bb">&#9670;&nbsp;</a></span>readFile()</h2>
+<a id="a34fd4c14327faca4ec3c11a71fa15f28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34fd4c14327faca4ec3c11a71fa15f28">&#9670;&nbsp;</a></span>readFile() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -116,12 +119,56 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Implemented in <a class="el" href="classFileReader.html#a00f5239f521c6341cea53d033a463fa3">FileReader</a>, and <a class="el" href="classCuboidReader.html#af85d76a64721c67526e66bd9c166ff75">CuboidReader</a>.</p>
+<p>Reimplemented in <a class="el" href="classFileReader.html#a00f5239f521c6341cea53d033a463fa3">FileReader</a>, and <a class="el" href="classCuboidReader.html#af85d76a64721c67526e66bd9c166ff75">CuboidReader</a>.</p>
+
+</div>
+</div>
+<a id="a020220314a0912efba2d3ed3574b7101"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a020220314a0912efba2d3ed3574b7101">&#9670;&nbsp;</a></span>readFile() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ParticleReader::readFile </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classDirectSumContainer.html">DirectSumContainer</a> &amp;&#160;</td>
+          <td class="paramname"><em>container</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::string &amp;&#160;</td>
+          <td class="paramname"><em>filename</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classSimParameters.html">SimParameters</a> &amp;&#160;</td>
+          <td class="paramname"><em>SimParameters</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Reimplemented in <a class="el" href="classXMLReader.html#a350585018bd7ab0c98294006cbac21b4">XMLReader</a>.</p>
 
 </div>
 </div>
