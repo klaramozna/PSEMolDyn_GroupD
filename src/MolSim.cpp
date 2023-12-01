@@ -14,7 +14,7 @@
 
 /* Simulation Logic */
 #include "Simulation/Simulation.h"
-#include "Particles/ParticleContainer.h"
+#include "Particles/DirectSumContainer.h"
 #include "Simulation/Physics/GravitationalForce.h"
 #include "Simulation/Physics/LennardJones.h"
 
@@ -33,7 +33,7 @@ int main(int argc, char *argsv[]) {
     std::unique_ptr<ParticleReader> reader;
     std::unique_ptr<ForceCalculation> forceCalculation;
 
-    ParticleContainer container;
+    DirectSumContainer container;
 
     outputWriter::VTKWriter writer;
     SimParameters simParameters;

@@ -11,6 +11,16 @@ Simulation/Physics/GravitationalForce.cpp
         Particles/ParticleGenerator.h
         utils/CuboidGenerator.cpp
         utils/CuboidGenerator.h
+        Particles/ParticleContainer.h
+        Particles/LinkedCellContainer.cpp
+        Particles/LinkedCellContainer.h
+        Particles/Cell.cpp
+        Particles/Cell.h
+        Particles/Boundary.cpp
+        Particles/Boundary.h
+        Particles/CuboidBoundary.cpp
+        Particles/CuboidBoundary.h
+        utils/CuboidGenerator.h
         IO/input/simulationFormat.cpp
         IO/input/XMLReader.cpp
         IO/input/CuboidReader.cpp

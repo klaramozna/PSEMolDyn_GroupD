@@ -6,12 +6,12 @@
  */
 
 #pragma once
-#include "../../../Particles/ParticleContainer.h"
+#include "../../../Particles/DirectSumContainer.h"
 
 class ParticleWriter {
 public:
     virtual ~ParticleWriter() = default;
-    virtual void plotParticles(ParticleContainer& container, const std::string &filename,
-                       int iteration) = 0;
+    virtual void plotParticles(DirectSumContainer& container, const std::string &filename,
+                               int iteration) = 0;
 };
 

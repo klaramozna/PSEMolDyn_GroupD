@@ -4,6 +4,8 @@ file(GLOB_RECURSE TEST_SRC
 )
 
 set(source_needed_for_test
+        ${PROJECT_SOURCE_DIR}/src/Particles/DirectSumContainer.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/DirectSumContainer.h
         ${PROJECT_SOURCE_DIR}/src/Particles/ParticleContainer.cpp
         ${PROJECT_SOURCE_DIR}/src/Particles/ParticleContainer.h
         ${PROJECT_SOURCE_DIR}/src/Particles/Particle.cpp
@@ -22,8 +24,14 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/IO/input/XMLReader.cpp
         ${PROJECT_SOURCE_DIR}/src/IO/input/SimParameters.cpp
         ${PROJECT_SOURCE_DIR}/src/IO/input/simulationFormat.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/Cell.cpp 
+        ${PROJECT_SOURCE_DIR}/src/Particles/LinkedCellContainer.cpp 
+        ${PROJECT_SOURCE_DIR}/src/Particles/Boundary.cpp 
+        ${PROJECT_SOURCE_DIR}/src/Particles/CuboidBoundary.cpp 
         CuboidGeneratorTest.cpp
         CuboidGeneratorTest.h
+        LinkedCellContainerTest.cpp
+        LinkedCellContainerTest.h
 )
 
 add_executable(

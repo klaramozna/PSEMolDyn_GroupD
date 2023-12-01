@@ -13,7 +13,7 @@
 #include <utility>
 
 Simulation::Simulation(double delta_t,
-                       ParticleContainer container,
+                       DirectSumContainer container,
                        ForceCalculation &calculation,
                        double averageVelo) :
                         container(std::move(container)),
@@ -25,7 +25,7 @@ Simulation::Simulation(double delta_t,
 
 Simulation::~Simulation() = default;
 
-ParticleContainer& Simulation::getParticles() {
+DirectSumContainer& Simulation::getParticles() {
     return container;
 }
 

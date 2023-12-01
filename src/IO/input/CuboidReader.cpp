@@ -8,7 +8,7 @@
 #include "../Logger.h"
 
 
-void CuboidReader::readFile(ParticleContainer &container, std::string &filename) {
+void CuboidReader::readFile(DirectSumContainer &container, std::string &filename) {
     std::ifstream inputFile(filename);
     std::string line;
 
@@ -50,7 +50,7 @@ void CuboidReader::readFile(ParticleContainer &container, std::string &filename)
             }
 
             CuboidGenerator generator = parseLine(line);
-            ParticleContainer readContainer = generator.generateParticles(i);
+            DirectSumContainer readContainer = generator.generateParticles(i);
 
             container.addParticles(readContainer);
         }

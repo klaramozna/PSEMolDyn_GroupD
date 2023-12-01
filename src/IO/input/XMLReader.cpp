@@ -17,7 +17,7 @@ XMLReader::XMLReader() = default;
 
 XMLReader::~XMLReader() = default;
 
-void XMLReader::readFile(ParticleContainer &container, std::string &filename, SimParameters& SimParameters) {
+void XMLReader::readFile(DirectSumContainer &container, std::string &filename, SimParameters& SimParameters) {
     try {
         std::unique_ptr<Simulation_t> sim(Simulation(filename));
 
@@ -77,7 +77,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             double mass = cuboid.mass();
             std::array<double, 3> velocity = {cuboid.initial_velocity().x(), cuboid.initial_velocity().y(), cuboid.initial_velocity().z()};
             CuboidGenerator generator {lowerLeftCoord, n1, n2, n3, distance, mass, velocity};
-            ParticleContainer readContainer = generator.generateParticles(i);
+            DirectSumContainer readContainer = generator.generateParticles(i);
             container.addParticles(readContainer);
             i++;
     }

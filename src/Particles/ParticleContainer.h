@@ -1,174 +1,57 @@
 //
-// Created by klara on 30.10.23.
+// Created by klara on 21.11.23.
 //
 
-#ifndef PSEMOLDYN_PARTICLECONTAINER_H
-#define PSEMOLDYN_PARTICLECONTAINER_H
+#ifndef PSEMOLDYN_GROUPD_PARTICLECONTAINER_H
+#define PSEMOLDYN_GROUPD_PARTICLECONTAINER_H
 
-#include <vector>
-#include "Particle.h"
+
 #include <functional>
-
-/**
- * @file ParticleContainer.h
- *
- * @brief Hides structure / implementation of particles.
- */
-
+#include "Particle.h"
 
 class ParticleContainer {
-private:
-    /**
-     * @brief Stores the particles.
-     */
-    std::vector<Particle> particles;
 public:
-    class PairIterator;
-
-    using iterator_type = std::vector<Particle>::iterator;
-
     /**
-     * @brief Creates a container, using the given vector to initialize particles.
-     * @param particles stores the particles.
+     * @brief Adds the given particle to the container.
+     * @param p The particle to be added.
      */
-    explicit ParticleContainer(std::vector<Particle> particles);
-
-    ParticleContainer() = default;
+    virtual void addParticle(const Particle& p) = 0;
 
     /**
-     * @brief Creates an iterator at the starting position.
-     * @return the iterator.
+     * @brief Adds the given particles to the container.
+     * @param toAdd The vector containing the particles to be added.
      */
-    iterator_type begin();
+    virtual void addParticles(const std::vector<Particle>& toAdd) final;
 
     /**
-     * @brief Creates an iterator pointing behind the last particle.
-     * @return the iterator.
+     * @brief Returns the number of particles in the container.
+     * @return The number of particles in the container.
      */
-    iterator_type end();
+    virtual size_t getSize() = 0;
 
     /**
-     * @brief Wrapper for std::vector::reserve(size_type n)
-     * @param n Number of elements to have capacity for
-     * */
-    void reserveInVector(size_t n);
-
-    /**
-     * @brief Adds the given particle to the collection.
-     * @param particle is the particle to be added.
+     * @brief Applies the given function to all particles.
+     * @param function Function that is applied to each particle.
      */
-    void addParticle(const Particle& particle);
+    virtual void applyToAll(const std::function<void(Particle&)>& function) = 0;
 
     /**
-     * @brief Adds the given particles to the collection.
-     * @param toAdd contains the particles to be added.
+     * @brief Applies the given function to pairs of particles (different pairs depending on implementation).
+     * @param function The function to be applied to each pair.
      */
-    void addParticles(std::vector<Particle> toAdd);
+    virtual void applyToPairs(const std::function<void(Particle&, Particle&)>& function) = 0;
 
     /**
-     * @brief Fuses another ParticleContainer onto the colllection.
-     * @param container another particle container passed as reference
-     * */
-    void addParticles(const ParticleContainer &container);
-
-    /**
-     * @brief returns the size of the underlying particle vector
-     * */
-    size_t getSize();
-
-    /**
-     * @brief Creates an iterator for pairs of particles at the starting position
-     * @return the iterator.
+     * @brief Returns a vector of all particles in the container.
+     * @return The vector with the particles of the container.
      */
-    PairIterator beginPair();
+    virtual std::vector<Particle>& getParticleVector() = 0;
 
     /**
-     * @brief Creates an iterator for pairs pointing behind the last pair of particles.
-     * @return the iterator.
+     * @brief Destroys the ParticleContainer object.
      */
-    PairIterator endPair();
-
-    /**
-     * @brief Returns a vector of all stored particles.
-     * @return the vector.
-     */
-    std::vector<Particle> &getParticleVector();
-
-    /**
-     * @brief Applies the given function to all particles
-     * @param function is the function to be used on the particles
-     */
-    void applyToAll(const std::function<void(Particle&)>& function);
-
-    /**
-     * @brief Applies the given function to all distinct pairs of particles
-     * @param function is the function to be applied to the particle pairs
-     */
-    void applyToPairs(const std::function<void(Particle&, Particle&)>& function);
-
-    /**
-     * @brief Implements an iterator that simulated a nested loop (two for loops), but skips the case where the particle in the outer loop is the same as the particle in the inner loop.
-     */
-    class PairIterator {
-    private:
-        /**
-         * @brief Specifies the position in the outer loop.
-         */
-        std::vector<Particle>::size_type outerIndex;
-        /**
-         * @brief Specifies the position in the inner loop.
-         */
-        std::vector<Particle>::size_type innerIndex;
-        /**
-         * @brief Stores a reference to the particles.
-         */
-        std::vector<Particle> &p;
-
-        /**
-         * @brief Returns true if the iterator can be safely dereferenced.
-         * @return the resulting value.
-         */
-        bool inRange() const;
-
-    public:
-        /**
-         * @brief Creates an iterator at the given position.
-         * @param outer is the position in the outer loop.
-         * @param inner is the position in the inner loop.
-         * @param vec contains the particles that are iterated over.
-         */
-        PairIterator(std::vector<Particle>::size_type outer, std::vector<Particle>::size_type inner,
-                     std::vector<Particle> &vec);
-
-        /**
-         * @brief Returns a pair of particles at the position of the iterator.
-         * @return The first particle is the one in the outer loop, the second one in the inner loop.
-         */
-        std::pair<Particle &, Particle &> operator*() const;
-
-        /**
-         * @brief Increments the iterator.
-         * @return The incremented iterator.
-         */
-        PairIterator &operator++();
-
-        /**
-         * @brief Checks if the two iterators are equal.
-         * @param a Left iterator.
-         * @param b Right iterator.
-         * @return Returns true if they are equal and false otherwise.
-         */
-        friend bool operator==(const PairIterator &a, const PairIterator &b);
-
-        /**
-         * @brief Checks if the two iterators are not equal.
-         * @param a Left iterator.
-         * @param b Right iterator.
-         * @return Returns true if they are not equal and false otherwise
-         */
-        friend bool operator!=(const PairIterator &a, const PairIterator &b);
-    };
+    virtual ~ParticleContainer() = default;
 };
 
 
-#endif //PSEMOLDYN_PARTICLECONTAINER_H
+#endif //PSEMOLDYN_GROUPD_PARTICLECONTAINER_H
