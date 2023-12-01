@@ -95,6 +95,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afae7f626efe98ebfc1c18b12b929e9d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#afae7f626efe98ebfc1c18b12b929e9d1">deleteParticle</a> (const <a class="el" href="classParticle.html">Particle</a> &amp;p)</td></tr>
 <tr class="memdesc:afae7f626efe98ebfc1c18b12b929e9d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes the given particle from the cell.  <a href="classCell.html#afae7f626efe98ebfc1c18b12b929e9d1">More...</a><br /></td></tr>
 <tr class="separator:afae7f626efe98ebfc1c18b12b929e9d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8cf0c2dd13477cb67badc450e4732342"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a8cf0c2dd13477cb67badc450e4732342">contains</a> (const <a class="el" href="classParticle.html">Particle</a> &amp;p)</td></tr>
+<tr class="memdesc:a8cf0c2dd13477cb67badc450e4732342"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the given particle is contained in this cell.  <a href="classCell.html#a8cf0c2dd13477cb67badc450e4732342">More...</a><br /></td></tr>
+<tr class="separator:a8cf0c2dd13477cb67badc450e4732342"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a37525621bdbf000f6602d14b79171a60"></a>
@@ -193,6 +196,33 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns an iterator pointing to the first particle. </p>
 <dl class="section return"><dt>Returns</dt><dd>Iterator pointing to the first particle. </dd></dl>
+
+</div>
+</div>
+<a id="a8cf0c2dd13477cb67badc450e4732342"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8cf0c2dd13477cb67badc450e4732342">&#9670;&nbsp;</a></span>contains()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Cell::contains </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="classParticle.html">Particle</a> &amp;&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns true if the given particle is contained in this cell. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The particle to be tested. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>True if the particle is in this cell, false otherwise. </dd></dl>
 
 </div>
 </div>
