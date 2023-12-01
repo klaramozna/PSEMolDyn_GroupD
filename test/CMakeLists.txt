@@ -41,6 +41,7 @@ add_executable(
 )
 
 target_include_directories(particleContainer_test
+        PUBLIC ${CMAKE_SOURCE_DIR}/libs/libxsd
         PUBLIC ${CMAKE_SOURCE_DIR}/libs/
 )
 
