@@ -14,6 +14,7 @@ TEST_F(LinkedCellContainerTest, Initialization){
     ASSERT_TRUE(grid[26].contains(p4));
 }
 
+
 void LinkedCellContainerTest::SetUp() {
     std::vector<Particle> particles{p1, p2, p3, p4};
     container.addParticles(particles);
