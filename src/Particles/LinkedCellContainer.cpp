@@ -162,6 +162,7 @@ void LinkedCellContainer::applyToBoundary(const std::function<void(Particle (&))
     }
 }
 
+
 /* Not sure if this is a great idea, but alas */
 void LinkedCellContainer::deleteHaloParticles() {
     for (auto & cell : grid) {
