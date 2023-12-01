@@ -6,11 +6,11 @@ void ParticleContainerTest::SetUp() {
     Particle particle({0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, 1.0);
     particles.
     push_back(particle);
-    container = ParticleContainer(particles);
+    container = DirectSumContainer(particles);
 }
 
 /**
- * @brief Ensures consistency of the size() method of ParticleContainer
+ * @brief Ensures consistency of the size() method of DirectSumContainer
  * */
 TEST_F(ParticleContainerTest, Size) {
     ASSERT_EQ(container.getSize(), particles.size());
@@ -33,10 +33,10 @@ TEST_F(ParticleContainerTest, AddParticle) {
     if (yieldedParticle != container.begin()) {
         --yieldedParticle; // Decrement the iterator to get the last particle
         Particle yieldedParticleObject = *yieldedParticle; // Access the last particle
-        EXPECT_EQ(yieldedParticleObject,newParticle) << "Object inside ParticleContainer doesn't match the object inside the particle vector " ;
+        EXPECT_EQ(yieldedParticleObject,newParticle) << "Object inside DirectSumContainer doesn't match the object inside the particle vector " ;
 
     } else {
-        FAIL() << "No object found in ParticleContainer";
+        FAIL() << "No object found in DirectSumContainer";
     }
 }
 
@@ -81,7 +81,7 @@ TEST_F(ParticleContainerTest, PairIterator) {
     Particle particle2({1.0, 0.0, 0.0}, {1.0, 0.0, 0.0}, 1.0);
     particles.push_back(particle1);
     particles.push_back(particle2);
-    container = ParticleContainer(particles);
+    container = DirectSumContainer(particles);
     int pairCount = 0;
     for (auto pairIt = container.beginPair(); pairIt != container.endPair(); ++pairIt) {
         auto pair = *pairIt;

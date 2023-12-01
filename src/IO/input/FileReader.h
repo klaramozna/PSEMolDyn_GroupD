@@ -8,7 +8,7 @@
 #pragma once
 
 #include "ParticleReader.h"
-#include "../../Particles/ParticleContainer.h"
+#include "../../Particles/DirectSumContainer.h"
 
 #include <array>
 
@@ -17,5 +17,5 @@ class FileReader : public ParticleReader  {
 public:
     FileReader();
     virtual ~FileReader();
-    void readFile(ParticleContainer &container, std::string &filename) override;
+    void readFile(DirectSumContainer &container, std::string &filename) override;
 };

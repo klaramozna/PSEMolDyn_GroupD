@@ -103,5 +103,13 @@ public:
 
 };
 
+/**
+ * @brief Returns the euclidean distance between the given vectors.
+ * @param v1 First vector.
+ * @param v2 Second vector.
+ * @return The euclidean distance.
+ */
+double getDistance(const VectorDouble3& v1, const VectorDouble3& v2);
+
 
 #endif //PSEMOLDYN_GROUPD_VECTORDOUBLE3_H

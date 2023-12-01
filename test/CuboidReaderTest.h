@@ -8,13 +8,13 @@
 #include <string>
 
 #include "../src/IO/input/CuboidReader.h"
-#include "../src/Particles/ParticleContainer.h"
+#include "../src/Particles/DirectSumContainer.h"
 
 class CuboidReaderTest : public testing::Test {
 protected:
     std::string filename;
-    ParticleContainer expectedContainer;
-    ParticleContainer receivedContainer;
+    DirectSumContainer expectedContainer;
+    DirectSumContainer receivedContainer;
 
     void SetUp() override;
 };

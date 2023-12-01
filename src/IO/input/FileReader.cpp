@@ -16,7 +16,7 @@ FileReader::FileReader() = default;
 
 FileReader::~FileReader() = default;
 
-void FileReader::readFile(ParticleContainer &container, std::string &filename) {
+void FileReader::readFile(DirectSumContainer &container, std::string &filename) {
   std::array<double, 3> x;
   std::array<double, 3> v;
   double m;

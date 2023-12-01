@@ -5,7 +5,7 @@
 #include "CuboidGeneratorTest.h"
 
 TEST_F(CuboidGeneratorTest, Generating){
-    ParticleContainer container = generator.generateParticles();
+    DirectSumContainer container = generator.generateParticles();
     std::array<double, 3> velocity{};
     double mass = 1;
     std::vector<Particle> result = container.getParticleVector();
