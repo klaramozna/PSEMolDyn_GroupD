@@ -183,3 +183,6 @@ void LinkedCellContainer::addParticle(const Particle &p) {
     size++;
 }
 
+std::vector<Cell> LinkedCellContainer::getCells() {
+    return grid;
+}

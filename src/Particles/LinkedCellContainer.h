@@ -61,6 +61,12 @@ public:
      */
     void deleteHaloParticles();
 
+    /**
+     * @brief Only for testing purposes. Dont use.
+     * @return Returns the vector of Cells.
+     */
+    std::vector<Cell> getCells();
+
 private:
 
     /**
