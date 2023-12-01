@@ -21,7 +21,7 @@ public:
      * @brief Adds the given particles to the container.
      * @param toAdd The vector containing the particles to be added.
      */
-    void addParticles(const std::vector<Particle>& toAdd);
+    virtual void addParticles(const std::vector<Particle>& toAdd) final;
 
     /**
      * @brief Returns the number of particles in the container.

@@ -13,7 +13,7 @@
 // 2. Define the behaviour of getParticleVector() -> I would return a copy, but that requires changing ParticleContainer and adapting
 // existing code
 
-LinkedCellContainer::LinkedCellContainer(CuboidBoundary& boundary, double cutoffRadius,
+LinkedCellContainer::LinkedCellContainer(CuboidBoundary boundary, double cutoffRadius,
                                          const std::vector<Particle>& particles) : boundary{boundary}, cutoffRadius{cutoffRadius} {
     size = particles.size();
     cellSize = cutoffRadius;
@@ -45,10 +45,7 @@ LinkedCellContainer::LinkedCellContainer(CuboidBoundary& boundary, double cutoff
     putParticlesToCells(particles);
 }
 
-void LinkedCellContainer::addParticle(const Particle &p) {
-    grid[getParticleIndex(p)].addParticle(p);
-    size++;
-}
+
 
 size_t LinkedCellContainer::getSize() {
     return size;
@@ -178,5 +175,10 @@ void LinkedCellContainer::deleteHaloParticles() {
 
 bool LinkedCellContainer::isBoundaryCell(int x, int y, int z) {
     return x == 0 || x == nc[0] - 1 || y == 0 || y == nc[1] - 1 || z == 0 || z == nc[2] - 1;
+}
+
+void LinkedCellContainer::addParticle(const Particle &p) {
+    grid[getParticleIndex(p)].addParticle(p);
+    size++;
 }
 

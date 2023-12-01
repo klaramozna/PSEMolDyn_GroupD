@@ -29,10 +29,6 @@ size_t DirectSumContainer::getSize() {
     return particles.size();
 }
 
-void DirectSumContainer::addParticles(std::vector<Particle> &toAdd) {
-    particles.insert(particles.end(), toAdd.begin(), toAdd.end());
-}
-
 DirectSumContainer::PairIterator::PairIterator(std::vector<Particle>::size_type outer, std::vector<Particle>::size_type inner, std::vector<Particle> &vec): p(vec){
     outerIndex = outer;
     innerIndex = inner;

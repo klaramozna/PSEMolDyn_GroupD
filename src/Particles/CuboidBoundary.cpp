@@ -13,6 +13,6 @@ bool CuboidBoundary::isInside(const Particle &p) {
     return isCoordinateInside(pos[0], 0) && isCoordinateInside(pos[1], 1) && isCoordinateInside(pos[2], 2);
 }
 
-std::array<int,3> CuboidBoundary::getDimensions() {
+std::array<double,3> CuboidBoundary::getDimensions() {
     return dim;
 }

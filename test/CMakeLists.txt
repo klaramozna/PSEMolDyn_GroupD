@@ -21,6 +21,8 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/utils/CuboidGenerator.h
         CuboidGeneratorTest.cpp
         CuboidGeneratorTest.h
+        LinkedCellContainerTest.cpp
+        LinkedCellContainerTest.h
 )
 
 add_executable(

@@ -15,7 +15,7 @@ public:
      * @param height Height of the cuboid boundary.
      * @param depth Depth of the cuboid boundary.
      */
-    CuboidBoundary(int width, int height, int depth) {
+    CuboidBoundary(double width, double height, double depth) {
         dim[0] = width;
         dim[1] = height;
         dim[2] = depth;
@@ -30,7 +30,7 @@ public:
      */
     bool isInside(const Particle& p) override;
 
-    std::array<int,3> getDimensions();
+    std::array<double,3> getDimensions();
 
 private:
 
@@ -40,7 +40,7 @@ private:
      * dim[1] = Height
      * dim[2] = Length
      */
-    std::array<int,3> dim{};
+    std::array<double,3> dim{};
 
     /**
      * @brief Lower Left Corner
