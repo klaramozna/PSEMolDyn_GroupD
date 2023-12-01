@@ -3,7 +3,7 @@
 //
 
 #include "LinkedCellContainer.h"
-#include "utils/VectorDouble3.h"
+#include "./../utils/VectorDouble3.h"
 #include <stdexcept>
 #include <cmath>
 

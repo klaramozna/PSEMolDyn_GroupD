@@ -1,0 +1,65 @@
+<Simulation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="simulationFormat.xsd">
+
+    <!-- Simulation Arguments -->
+    <t_end>5</t_end>
+    <delta_t>0.0002</delta_t>
+    
+    <!-- Choose ForceType -->
+    <force>
+        <lennard>
+            <Epsilon>5</Epsilon>
+            <Sigma>1</Sigma>
+        </lennard>
+    </force>
+    <averageVelo>0.1</averageVelo>
+
+    <!-- Provide Particles (Cuboid) -->
+    <cuboid>
+        <lower-left-coord>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </lower-left-coord>
+        <number-of-particles>
+            <x>40</x>
+            <y>8</y>
+            <z>1</z>
+        </number-of-particles>
+        <distance>1.1225</distance>
+        <mass>1.0</mass>
+        <initial_velocity>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </initial_velocity>
+    </cuboid>
+
+    <cuboid>
+        <lower-left-coord>
+            <x>15</x>
+            <y>15</y>
+            <z>0.0</z>
+        </lower-left-coord>
+        <number-of-particles>
+            <x>8</x>
+            <y>8</y>
+            <z>1</z>
+        </number-of-particles>
+        <distance>1.1225</distance>
+        <mass>1.0</mass>
+        <initial_velocity>
+            <x>0.0</x>
+            <y>-10.0</y>
+            <z>0.0</z>
+        </initial_velocity>
+    </cuboid>
+
+    <!-- IO -->
+    <base_name>MD_vtk</base_name>
+    <writeFrequency>100</writeFrequency>
+
+    <!-- Misc -->
+    <log_level>2</log_level>
+    <testing_mode>false</testing_mode>
+
+</Simulation>

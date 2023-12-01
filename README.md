@@ -76,7 +76,8 @@ run the program with: ```./src/MolSim -p <input_file_path>```
 
 #### Tests:
 This project is well-tested using Google Test.  
-To run the tests locally switch to the build directory and run ```ctest```
+To run the tests locally switch to the build directory and run ```ctest```  
+Per default running ```cmake ..``` will fetch the google test libray and compile the tests (which results in longer building times), if you want to not compile the tests you can run ```cmake -DBUILD_GTESTS=OFF ..```
 <a name="documentation"></a>
 ### Documentation
 This project is well-documented using Doxygen.   

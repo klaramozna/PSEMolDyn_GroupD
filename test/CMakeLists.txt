@@ -6,6 +6,8 @@ file(GLOB_RECURSE TEST_SRC
 set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Particles/DirectSumContainer.cpp
         ${PROJECT_SOURCE_DIR}/src/Particles/DirectSumContainer.h
+        ${PROJECT_SOURCE_DIR}/src/Particles/ParticleContainer.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/ParticleContainer.h
         ${PROJECT_SOURCE_DIR}/src/Particles/Particle.cpp
         ${PROJECT_SOURCE_DIR}/src/Particles/Particle.h
         ${PROJECT_SOURCE_DIR}/src/utils/ArrayUtils.h
@@ -19,6 +21,13 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/LennardJones.cpp
         ${PROJECT_SOURCE_DIR}/src/utils/CuboidGenerator.cpp
         ${PROJECT_SOURCE_DIR}/src/utils/CuboidGenerator.h
+        ${PROJECT_SOURCE_DIR}/src/IO/input/XMLReader.cpp
+        ${PROJECT_SOURCE_DIR}/src/IO/input/SimParameters.cpp
+        ${PROJECT_SOURCE_DIR}/src/IO/input/simulationFormat.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/Cell.cpp 
+        ${PROJECT_SOURCE_DIR}/src/Particles/LinkedCellContainer.cpp 
+        ${PROJECT_SOURCE_DIR}/src/Particles/Boundary.cpp 
+        ${PROJECT_SOURCE_DIR}/src/Particles/CuboidBoundary.cpp 
         CuboidGeneratorTest.cpp
         CuboidGeneratorTest.h
         LinkedCellContainerTest.cpp
@@ -39,7 +48,7 @@ target_link_libraries(
         particleContainer_test
         GTest::gtest
         GTest::gtest_main
+        xerces-c
 )
-
 include(GoogleTest)
 gtest_discover_tests(particleContainer_test)
