@@ -4,6 +4,7 @@
 
 #include "LinkedCellContainerTest.h"
 
+/*
 TEST_F(LinkedCellContainerTest, Initialization){
 
-}
+}*/
