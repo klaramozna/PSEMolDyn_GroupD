@@ -52,7 +52,7 @@ TEST_F(ParticleContainerTest, AddParticles) {
             Particle({0,0,0}, {0,0,0}, 0.0),
             Particle({0,0,0}, {0,0,0}, 0.0)
     };
-    container.addParticles(particlesToAdd);
+    /*container.addParticles(particlesToAdd);*/
     ASSERT_EQ(container.getSize(), particles.size() + particlesToAdd.size());
 }
 

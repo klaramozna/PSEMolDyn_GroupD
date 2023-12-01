@@ -183,3 +183,14 @@ void LinkedCellContainer::addParticle(const Particle &p) {
     size++;
 }
 
+std::vector<Cell> LinkedCellContainer::getCells() {
+    return grid;
+}
+
+bool LinkedCellContainer::cellWithinRadius(const Particle &p, int x, int y, int z) {
+    double middleX = x * cellSize - gridShift[0] + cellSize / 2;
+    double middleY = y * cellSize - gridShift[1] + cellSize / 2;
+    double middleZ = z * cellSize - gridShift[2] + cellSize / 2;
+    return particleWithinCutoff(p, Particle{std::array<double, 3>{middleX, middleY, middleZ}, std::array<double, 3>{}, 0});
+}
+

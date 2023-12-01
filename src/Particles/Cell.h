@@ -48,6 +48,13 @@ public:
      */
     void deleteParticle(const Particle& p);
 
+    /**
+     * @brief Returns true if the given particle is contained in this cell.
+     * @param p The particle to be tested.
+     * @return True if the particle is in this cell, false otherwise.
+     */
+    bool contains(const Particle& p);
+
 private:
     /**
      * @brief Stores the particles of the cell.

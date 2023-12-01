@@ -20,4 +20,8 @@ void Cell::deleteParticle(const Particle &p) {
     particles.remove(p);
 }
 
+bool Cell::contains(const Particle &p) {
+    return std::find(particles.begin(), particles.end(), p) != particles.end();
+}
+
 
