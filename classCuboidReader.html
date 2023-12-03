@@ -84,12 +84,12 @@ Inheritance diagram for CuboidReader:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:af592478876c6d263f3082e7126b43313"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCuboidReader.html#af592478876c6d263f3082e7126b43313">~CuboidReader</a> ()=default</td></tr>
 <tr class="separator:af592478876c6d263f3082e7126b43313"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af85d76a64721c67526e66bd9c166ff75"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCuboidReader.html#af85d76a64721c67526e66bd9c166ff75">readFile</a> (<a class="el" href="classDirectSumContainer.html">DirectSumContainer</a> &amp;container, std::string &amp;filename) override</td></tr>
-<tr class="memdesc:af85d76a64721c67526e66bd9c166ff75"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a file containing data to generate multiple cuboids and dumps the cuboids onto the container.  <a href="classCuboidReader.html#af85d76a64721c67526e66bd9c166ff75">More...</a><br /></td></tr>
-<tr class="separator:af85d76a64721c67526e66bd9c166ff75"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea5bb36a7f22ae1ce01e07c3fef9012c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCuboidReader.html#aea5bb36a7f22ae1ce01e07c3fef9012c">readFile</a> (<a class="el" href="classParticleContainer.html">ParticleContainer</a> &amp;container, std::string &amp;filename) override</td></tr>
+<tr class="memdesc:aea5bb36a7f22ae1ce01e07c3fef9012c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reads a file containing data to generate multiple cuboids and dumps the cuboids onto the container.  <a href="classCuboidReader.html#aea5bb36a7f22ae1ce01e07c3fef9012c">More...</a><br /></td></tr>
+<tr class="separator:aea5bb36a7f22ae1ce01e07c3fef9012c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classParticleReader"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classParticleReader')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classParticleReader.html">ParticleReader</a></td></tr>
-<tr class="memitem:a020220314a0912efba2d3ed3574b7101 inherit pub_methods_classParticleReader"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleReader.html#a020220314a0912efba2d3ed3574b7101">readFile</a> (<a class="el" href="classDirectSumContainer.html">DirectSumContainer</a> &amp;container, std::string &amp;filename, <a class="el" href="classSimParameters.html">SimParameters</a> &amp;<a class="el" href="classSimParameters.html">SimParameters</a>)</td></tr>
-<tr class="separator:a020220314a0912efba2d3ed3574b7101 inherit pub_methods_classParticleReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a89a1424c8bbb9ed157adbebf2445b083 inherit pub_methods_classParticleReader"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleReader.html#a89a1424c8bbb9ed157adbebf2445b083">readFile</a> (<a class="el" href="classParticleContainer.html">ParticleContainer</a> &amp;container, std::string &amp;filename, <a class="el" href="classSimParameters.html">SimParameters</a> &amp;<a class="el" href="classSimParameters.html">SimParameters</a>)</td></tr>
+<tr class="separator:a89a1424c8bbb9ed157adbebf2445b083 inherit pub_methods_classParticleReader"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="af592478876c6d263f3082e7126b43313"></a>
@@ -118,8 +118,8 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="af85d76a64721c67526e66bd9c166ff75"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af85d76a64721c67526e66bd9c166ff75">&#9670;&nbsp;</a></span>readFile()</h2>
+<a id="aea5bb36a7f22ae1ce01e07c3fef9012c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea5bb36a7f22ae1ce01e07c3fef9012c">&#9670;&nbsp;</a></span>readFile()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -130,7 +130,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">void CuboidReader::readFile </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classDirectSumContainer.html">DirectSumContainer</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classParticleContainer.html">ParticleContainer</a> &amp;&#160;</td>
           <td class="paramname"><em>container</em>, </td>
         </tr>
         <tr>
@@ -155,13 +155,13 @@ Public Member Functions</h2></td></tr>
 <p>Reads a file containing data to generate multiple cuboids and dumps the cuboids onto the container. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">container</td><td><a class="el" href="classDirectSumContainer.html">DirectSumContainer</a> that will receive the read-in particles </td></tr>
+    <tr><td class="paramname">container</td><td><a class="el" href="classParticleContainer.html">ParticleContainer</a> that will receive the read-in particles </td></tr>
     <tr><td class="paramname">filename</td><td>Input file </td></tr>
   </table>
   </dd>
 </dl>
 
-<p>Reimplemented from <a class="el" href="classParticleReader.html#a34fd4c14327faca4ec3c11a71fa15f28">ParticleReader</a>.</p>
+<p>Reimplemented from <a class="el" href="classParticleReader.html#a1d71d1bbc7eee04967d36a5bca1e65dc">ParticleReader</a>.</p>
 
 </div>
 </div>
