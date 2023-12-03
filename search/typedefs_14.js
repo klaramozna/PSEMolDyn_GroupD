@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['x_5ftraits_947',['x_traits',['../classint__3d.html#a9906023016ab3c84717abda82b60af00',1,'int_3d::x_traits()'],['../classdouble__3d.html#a989ab45a777d17b6efa745dc71daa66c',1,'double_3d::x_traits()']]],
-  ['x_5ftype_948',['x_type',['../classint__3d.html#a2e75e4b7e8a79724ddf77097a17dd6bc',1,'int_3d::x_type()'],['../classdouble__3d.html#ae3ecb5a71325807b1fa6969f80c36260',1,'double_3d::x_type()']]]
+  ['writefrequency_5foptional_990',['writeFrequency_optional',['../classSimulation__t.html#a7642e77119361c1b829b606440b20e0c',1,'Simulation_t']]],
+  ['writefrequency_5ftraits_991',['writeFrequency_traits',['../classSimulation__t.html#ac92032f248cd68b7275256e75a21ebaa',1,'Simulation_t']]],
+  ['writefrequency_5ftype_992',['writeFrequency_type',['../classSimulation__t.html#a08d04dbd99727196d49d410725537076',1,'Simulation_t']]]
 ];

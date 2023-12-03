@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['writefrequency_5foptional_944',['writeFrequency_optional',['../classSimulation__t.html#a7642e77119361c1b829b606440b20e0c',1,'Simulation_t']]],
-  ['writefrequency_5ftraits_945',['writeFrequency_traits',['../classSimulation__t.html#ac92032f248cd68b7275256e75a21ebaa',1,'Simulation_t']]],
-  ['writefrequency_5ftype_946',['writeFrequency_type',['../classSimulation__t.html#a08d04dbd99727196d49d410725537076',1,'Simulation_t']]]
+  ['version_5ftraits_988',['version_traits',['../classVTKFile__t.html#adf056ee28cd9bf4c3895b2e9ac736653',1,'VTKFile_t']]],
+  ['version_5ftype_989',['version_type',['../classVTKFile__t.html#a7db6f6d11f363380d6361446f5dede7b',1,'VTKFile_t']]]
 ];
