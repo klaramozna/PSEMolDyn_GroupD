@@ -97,10 +97,9 @@ namespace outputWriter {
         pointsIterator->push_back(p.getX()[2]);
     }
 
-    void VTKWriter::plotParticles(DirectSumContainer &container, const std::string &filename, int iteration) {
-        initializeOutput(container.getSize());
-
-        for (auto &p: container) {
+    void VTKWriter::plotParticles(const std::vector<Particle>& particles, const std::string &filename, int iteration) {
+        initializeOutput(particles.size());
+        for (auto p: particles) {
             plotParticle(p);
         }
 

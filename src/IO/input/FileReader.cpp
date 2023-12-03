@@ -16,7 +16,7 @@ FileReader::FileReader() = default;
 
 FileReader::~FileReader() = default;
 
-void FileReader::readFile(DirectSumContainer &container, std::string &filename) {
+void FileReader::readFile(ParticleContainer &container, std::string &filename) {
   std::array<double, 3> x;
   std::array<double, 3> v;
   double m;
@@ -40,8 +40,6 @@ void FileReader::readFile(DirectSumContainer &container, std::string &filename) 
         std::cout << "Reading " << num_particles << "." << std::endl;
         getline(input_file, tmp_string);
         std::cout << "Read line: " << tmp_string << std::endl;
-
-        container.reserveInVector(num_particles);
 
         for (int i = 0; i < num_particles; i++) {
             std::istringstream datastream(tmp_string);

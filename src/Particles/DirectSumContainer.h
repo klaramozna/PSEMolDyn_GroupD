@@ -87,7 +87,7 @@ public:
      * @brief Returns a vector of all stored particles.
      * @return the vector.
      */
-    std::vector<Particle> &getParticleVector() override;
+    std::vector<Particle> getParticleVector() override;
 
     /**
      * @brief Applies the given function to all particles

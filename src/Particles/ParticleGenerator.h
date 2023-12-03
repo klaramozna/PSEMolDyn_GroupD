@@ -1,7 +1,7 @@
 #ifndef PSEMOLDYN_GROUPD_PARTICLEGENERATOR_H
 #define PSEMOLDYN_GROUPD_PARTICLEGENERATOR_H
 
-#include "DirectSumContainer.h"
+
 #include "Particle.h"
 
 class ParticleGenerator {
@@ -14,9 +14,9 @@ public:
     /**
      * @brief Generates particles.
      * @param type type of particles (helpful to differentiate)
-     * @return A particle container with the generated particles.
+     * @return A particle vector with the generated particles.
      */
-    virtual DirectSumContainer generateParticles(int type=0) = 0;
+    virtual std::vector<Particle> generateParticles(int type=0) = 0;
 
     /**
      * @brief Destroys a ParticleGenerator object (allows deleting a pointer to ParticleGenerator without memory leaks).
