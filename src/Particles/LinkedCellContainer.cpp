@@ -222,13 +222,22 @@ void LinkedCellContainer::applyToBoundary(const std::function<void(Particle (&))
 
 /* Not sure if this is a great idea, but alas */
 void LinkedCellContainer::deleteHaloParticles() {
-    for (auto & cell : grid) {
-        for (auto & particle : cell) {
-            if (!boundary.isInside(particle)) {
-                cell.deleteParticle(particle);
-                size--;
+    // Creating a vector for marking particles that need to be deleted
+    std::vector<std::pair<Particle, int>> particlesToBeDeleted{}; // stores each particle that needs to be deleted with the cell it's beeing deleted from
+
+    // Applying given function to each particle and marking particles for movement
+    for(int i = 0; i < grid.size(); i++){
+        for(auto & particle : grid[i]){
+            if(boundary.isOutside(particle)){
+                particlesToBeDeleted.emplace_back(particle, i);
             }
         }
+    }
+
+    // Deleting halo particles
+    for(auto & particle : particlesToBeDeleted){
+        grid[particle.second].deleteParticle(particle.first);
+        size--;
     }
 }
 

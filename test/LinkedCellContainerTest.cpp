@@ -17,11 +17,11 @@ TEST_F(LinkedCellContainerTest, Initialization){
 }
 
 TEST_F(LinkedCellContainerTest, deleteHaloParticles){
-    std::vector<Cell> grid = container.getCells();
     container.deleteHaloParticles();
+    std::vector<Cell> grid = container.getCells();
     ASSERT_TRUE(grid[44].contains(p1));
-    ASSERT_FALSE(grid[57].contains(p3));
-    ASSERT_TRUE(grid[40].contains(p2));
+    ASSERT_TRUE(grid[57].contains(p3));
+    ASSERT_FALSE(grid[40].contains(p2));
     ASSERT_TRUE(grid[61].contains(p4));
     ASSERT_EQ(container.getSize(), 3);
 }
