@@ -92,8 +92,8 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             double mass = sphere.mass();
             std::array<double, 3> velocity = {sphere.initial_velocity().x(), sphere.initial_velocity().y(), sphere.initial_velocity().z()};
             SphereGenerator generator {center, distance, radius, mass, velocity};
-            DirectSumContainer readContainer = generator.generateParticles(i);
-            container.addParticles(readContainer);
+            std::vector<Particle> particles = generator.generateParticles(i);
+            container.addParticles(particles);
             i++;
     }
 

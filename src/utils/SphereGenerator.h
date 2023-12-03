@@ -20,9 +20,9 @@ public:
 
     /**
      * @brief Generates a sphere of particles.
-     * @return A particle container with the generated particles.
+     * @return A vector with the generated particles.
      */
-    DirectSumContainer generateParticles(int type = 0) override;
+    std::vector<Particle> generateParticles(int type = 0) override;
 
 private:
 

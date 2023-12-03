@@ -14,7 +14,7 @@ SphereGenerator::SphereGenerator(std::array<double, 3> center, double particleDi
     this->velocity = velocity;
 }
 
-DirectSumContainer SphereGenerator::generateParticles(int type) {
+std::vector<Particle> SphereGenerator::generateParticles(int type) {
 
     //number of particles along the radius
     int numParticles = radius * 2 + 1;
@@ -42,5 +42,5 @@ DirectSumContainer SphereGenerator::generateParticles(int type) {
             }
         }
     }
-    return DirectSumContainer(particles);
+    return particles;
 }
