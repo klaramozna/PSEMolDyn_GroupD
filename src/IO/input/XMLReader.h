@@ -25,5 +25,5 @@ public:
      * @param filename Input file
      * @param simParamteres instance of SimParameters class to store the simulation arguments read from the file
      * */
-    void readFile (DirectSumContainer &container, std::string &filename, SimParameters& simParameters) override;
+    void readFile (ParticleContainer &container, std::string &filename, SimParameters& simParameters) override;
 };

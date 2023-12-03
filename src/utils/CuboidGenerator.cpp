@@ -20,7 +20,7 @@ CuboidGenerator::CuboidGenerator(std::array<double, 3> corner, int n1, int n2, i
     particles.reserve(n1 * n2 * n3);
 }
 
-DirectSumContainer CuboidGenerator::generateParticles(int type) {
+std::vector<Particle> CuboidGenerator::generateParticles(int type) {
     double xCorner = corner[0];
     double yCorner = corner[1];
     double zCorner = corner[2];
@@ -32,5 +32,5 @@ DirectSumContainer CuboidGenerator::generateParticles(int type) {
             }
         }
     }
-    return DirectSumContainer(particles);
+    return particles;
 }

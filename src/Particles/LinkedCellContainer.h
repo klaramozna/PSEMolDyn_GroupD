@@ -48,7 +48,7 @@ public:
      * @brief Returns a vector of all particles in the container.
      * @return The vector with the particles of the container.
      */
-    std::vector<Particle>& getParticleVector() override;
+    std::vector<Particle> getParticleVector() override;
 
     /**
      * @brief Applies the given function to each particle in the boundary

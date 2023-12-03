@@ -25,7 +25,7 @@ public:
      * @brief Generates a cuboid of particles.
      * @return A particle container with the generated particles.
      */
-    DirectSumContainer generateParticles(int type = 0) override;
+    std::vector<Particle> generateParticles(int type = 0) override;
 
 private:
 
