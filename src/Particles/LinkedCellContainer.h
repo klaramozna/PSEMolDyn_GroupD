@@ -79,7 +79,7 @@ private:
     /**
      * @brief Vector containing boundary cells
      */
-    std::vector<Cell> boundaryCells;
+    std::vector<Cell *> boundaryCells_ptr;
 
 
     /**

@@ -7,7 +7,7 @@
 #include <vector>
 #include "Particle.h"
 #include "ParticleContainer.h"
-#include "Simulation/Physics/ForceCalculation.h"
+#include "../Simulation/Physics/ForceCalculation.h"
 #include <functional>
 
 /**

@@ -23,12 +23,12 @@ LinkedCellContainer::LinkedCellContainer(Boundary &boundary, double cutoffRadius
     // Initialize grid
     grid.resize(nc[0] * nc[1] * nc[2]);
 
-    // Populate boundaryCells
+    // Populate boundaryCells_ptr
     for (int x = 0; x < nc[0]; ++x) {
         for (int y = 0; y < nc[1]; ++y) {
             for (int z = 0; z < nc[2]; ++z) {
                 if (isBoundaryCell(x, y, z)) {
-                    boundaryCells.push_back(grid[getGridIndex(x, y, z)]);
+                    boundaryCells_ptr.push_back(&grid[getGridIndex(x, y, z)]);
                 }
             }
         }
@@ -145,11 +145,12 @@ int LinkedCellContainer::getParticleIndex(const Particle &p) {
     return getGridIndex(x, y, z);
 }
 
-/* Shouldn't generate any big problems */
 void LinkedCellContainer::applyToBoundary(const std::function<void(Particle (&))> &function) {
-    for (auto & boundaryCell : boundaryCells) {
-        for (auto & particle : boundaryCell) {
-            function(particle);
+    for (auto boundaryCell : boundaryCells_ptr) {
+        if (boundaryCell != nullptr) {
+            for (auto &particle : *boundaryCell) {
+                function(particle);
+            }
         }
     }
 }
