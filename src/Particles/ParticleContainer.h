@@ -45,7 +45,7 @@ public:
      * @brief Returns a vector of all particles in the container.
      * @return The vector with the particles of the container.
      */
-    virtual std::vector<Particle>& getParticleVector() = 0;
+    virtual std::vector<Particle> getParticleVector() = 0;
 
     /**
      * @brief Destroys the ParticleContainer object.

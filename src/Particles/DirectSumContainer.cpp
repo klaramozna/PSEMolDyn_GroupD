@@ -91,7 +91,7 @@ DirectSumContainer::PairIterator DirectSumContainer::endPair() {
     return PairIterator{particles.size(), particles.size(), particles};
 }
 
-std::vector<Particle> &DirectSumContainer::getParticleVector() {
+std::vector<Particle> DirectSumContainer::getParticleVector() {
     return particles;
 }
 

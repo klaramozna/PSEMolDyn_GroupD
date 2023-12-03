@@ -46,7 +46,7 @@ namespace outputWriter {
          */
         void writeFile(const std::string &filename, int iteration);
 
-        void plotParticles(DirectSumContainer &container, const std::string &filename,
+        void plotParticles(const std::vector<Particle>& particles, const std::string &filename,
                            int iteration) override;
 
     private:

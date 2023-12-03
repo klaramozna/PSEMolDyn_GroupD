@@ -11,7 +11,7 @@
 class ParticleWriter {
 public:
     virtual ~ParticleWriter() = default;
-    virtual void plotParticles(DirectSumContainer& container, const std::string &filename,
+    virtual void plotParticles(const std::vector<Particle>& particles, const std::string &filename,
                                int iteration) = 0;
 };
 

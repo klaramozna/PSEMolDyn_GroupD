@@ -52,13 +52,12 @@ size_t LinkedCellContainer::getSize() {
     return size;
 }
 
-std::vector<Particle> &LinkedCellContainer::getParticleVector() {
-    /*std::vector<Particle> result{};
+std::vector<Particle> LinkedCellContainer::getParticleVector() {
+    std::vector<Particle> result{};
     for(auto & it : grid){
         result.insert(result.end(), it.begin(), it.end());
     }
-    return result;*/
-    //TODO: does it need to be a reference
+    return result;
 }
 
 void LinkedCellContainer::updateCells() {
@@ -152,47 +151,6 @@ void LinkedCellContainer::applyToPairs(const std::function<void(Particle &, Part
             }
         }
     }
-
-    /*// Iterate over positions
-    for(int x = 0; x < nc[0]; x++){
-        for(int y = 0; y < nc[1]; y++){
-            for(int z = 0; z < nc[2]; z++){
-
-
-                // Find out where is the current cell in the grid vector
-                int currentGridIndex = getGridIndex(x, y, z);
-
-
-                // Iterate over current cell
-                for(auto & pCurrent : grid[currentGridIndex]){
-
-
-                    // Find neighbours
-                    for(int i = x - 1; i < x + 1; i++){
-                        for(int j = y - 1; j < y + 1; j++){
-                            for(int k = z - 1; k < z + 1; k++){
-
-
-                                // Check if neighbour is within grid
-                                if(!(i < 0 || j < 0 || k < 0 || i >= nc[0] || j >= nc[1] || k >= nc[2])){
-                                    // Iterate over neighbour
-                                    if(cellWithinRadius(pCurrent, i, j, k)){
-                                        for(auto & pNeighbour : grid[getGridIndex(i, j, k)]){
-                                            // Apply function
-                                            if(pCurrent != pNeighbour && particleWithinCutoff(pCurrent, pNeighbour)){
-                                                function(pCurrent, pNeighbour);
-                                            }
-                                        }
-                                    }
-                                }
-
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }*/
 }
 
 int LinkedCellContainer::getGridIndex(int x, int y, int z) const {
