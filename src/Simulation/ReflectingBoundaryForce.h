@@ -8,5 +8,5 @@
 
 class ReflectingBoundaryForce : public ReflectingBoundary {
 public:
-    virtual void processBoundary(LinkedCellContainerStub &container, ForceCalculation &forceCalculation) override;
+    void processBoundary(LinkedCellContainer &container) override;
 };

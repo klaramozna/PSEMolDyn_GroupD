@@ -5,12 +5,7 @@ file(GLOB_RECURSE MY_SRC
 )
 
 # Create a library target for the project code
-add_executable(MolSim ${MY_SRC}
-Simulation/Physics/GravitationalForce.cpp
-        Particles/ParticleGenerator.cpp
-        Particles/ParticleGenerator.h
-        utils/CuboidGenerator.cpp
-        utils/CuboidGenerator.h)
+add_executable(MolSim ${MY_SRC})
         
 # Include directories specific to the 'src' directory, if needed
 target_include_directories(MolSim

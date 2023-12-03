@@ -4,8 +4,7 @@
 
 #include "ReflectingBoundaryGhostParticle.h"
 
-void ReflectingBoundaryGhostParticle::processBoundary(LinkedCellContainerStub &container,
-                                                      ForceCalculation &forceCalculation) {
+void ReflectingBoundaryGhostParticle::processBoundary(LinkedCellContainer &container) {
     double sigma = 0.0;
     container.applyToBoundary([this, &container, sigma](Particle &particle){
         std::vector<std::array<double,3>> ghostParticleCoords = this->findOppositeParticles(particle);

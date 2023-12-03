@@ -5,9 +5,10 @@
 #pragma once
 
 #include "Boundary.h"
-#include "./Physics/ForceCalculation.h"
 
 class OutflowBoundary : public Boundary {
-    virtual void processBoundary(LinkedCellContainerStub &container, ForceCalculation &forceCalculation) override;
+public:
+    OutflowBoundary(std::array<double, 3> llc, std::array<double, 3> dimensions, ForceCalculation &forceCalculation) : Boundary(llc, dimensions, forceCalculation) {};
+    void processBoundary(LinkedCellContainer &container) override;
 };
 

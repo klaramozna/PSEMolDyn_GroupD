@@ -4,6 +4,6 @@
 
 #include "OutflowBoundary.h"
 
-void OutflowBoundary::processBoundary(LinkedCellContainerStub &container, ForceCalculation &forceCalculation) {
-    container.deleteHaloParticles();
+void OutflowBoundary::processBoundary(LinkedCellContainer &container) {
+    container.deleteHaloParticles(*this);
 };

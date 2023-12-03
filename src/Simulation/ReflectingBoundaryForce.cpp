@@ -4,10 +4,9 @@
 
 #include "ReflectingBoundaryForce.h"
 
-void ReflectingBoundaryForce::processBoundary(LinkedCellContainerStub &container,
-                                                      ForceCalculation &forceCalculation) {
+void ReflectingBoundaryForce::processBoundary(LinkedCellContainer &container) {
     double sigma = 0.0;
-    container.applyToBoundary([this, &forceCalculation, sigma](Particle &particle){
+    container.applyToBoundary([this, sigma](Particle &particle){
         std::vector<std::array<double,3>> ghostParticleCoords = this->findOppositeParticles(particle);
         for (auto vector : ghostParticleCoords) {
             Particle ghostParticle{vector, {0.0, 0.0, 0.0} , particle.getM()};

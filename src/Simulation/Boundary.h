@@ -4,10 +4,11 @@
 
 #pragma once
 
-#include "../Particles/LinkedCellContainerStub.h"
 #include "Physics/ForceCalculation.h"
 #include <array>
 #include <cmath>
+
+class LinkedCellContainer;
 
 /**
  * @file Boundary.h
@@ -16,11 +17,9 @@
  * and executes the boundary control according to the boundary type of a given "wall"
  * */
 
-
-
 class Boundary {
 public:
-    const double sixthRootOf2 = std::pow(2.0, 1.0/6.0);
+    const double sixthRootOf2 = std::pow(2.0, 1.0 / 6.0);
 
     /**
      * @brief Goes through all boundary particles and enforces boundary conditions according to the given boundary type
@@ -29,16 +28,41 @@ public:
      * type of reflective boundary implementation
      *
      * */
-    virtual void processBoundary(LinkedCellContainerStub &container, ForceCalculation &calculation) = 0;
+    virtual void processBoundary(LinkedCellContainer &container) = 0;
 
     /**
      * @brief Constructor for a Boundary class
      * @param dimensions Vector containing the lengths of each "edge" along the axis
      * @param llc Left-Lower-Corner defining a point of reference for the boundaries
      * */
-    Boundary(std::array<double,3> llc, std::array<double,3> dimensions) : llc{llc}, dimensions{dimensions} {};
+    Boundary(std::array<double, 3> llc, std::array<double, 3> dimensions, ForceCalculation &forceCalculation) : dimensions{dimensions}, llc{llc}, forceCalculation{forceCalculation} {};
+
+    /**
+     * @brief Returns true, if the given particle is inside of or on the boundary, else false.
+     * @param p The particle tested.
+     * @return True, if the given particle is inside / on the boundary, else false.
+     */
+    bool isInside(const Particle &p) {
+        auto isCoordinateInside = [this](double coordinate, int index) -> bool {
+            return coordinate >= llc[index] && coordinate <= llc[index] + llc[index];
+        };
+
+        std::array<double, 3> pos = p.getX();
+        return isCoordinateInside(pos[0], 0) && isCoordinateInside(pos[1], 1) && isCoordinateInside(pos[2], 2);
+    }
+
+    /**
+     * @brief Destroys a boundary object
+     */
+    virtual ~Boundary() = default;
+
+    std::array<double,3> getDimensions() {
+        return dimensions;
+    };
+
 protected:
-    std::array<double,3> llc;
     std::array<double,3> dimensions;
+    std::array<double, 3> llc;
+    ForceCalculation &forceCalculation;
 };
 

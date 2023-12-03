@@ -2,10 +2,12 @@
 
 #include <string>
 
-#include "../../Particles/ParticleContainer.h"
+#include "SimParameters.h"
+#include "../../Particles/DirectSumContainer.h"
 
 class ParticleReader {
 public:
-    virtual void readFile(ParticleContainer &container, std::string &filename) = 0;
+    virtual DirectSumContainer readFile(std::string &filename){};
+    virtual DirectSumContainer readFile(std::string &filename, SimParameters& SimParameters){};
 };
 

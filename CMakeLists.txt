@@ -8,7 +8,8 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 
 # Includes
 include(doxygen)
-include(FetchContent)
+include(gtest)
+
 
 # Set C++ requirements for the project
 set(CMAKE_CXX_STANDARD 17)
@@ -38,24 +39,14 @@ if(NOT Boost_FOUND)
     message(FATAL_ERROR "Boost program options not found. You can install it with: sudo apt-get install libboost-program-options-dev")
 endif()
 
-# Fetch GoogleTest
-FetchContent_Declare(
-        googletest
-        URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
-        DOWNLOAD_EXTRACT_TIMESTAMP true
-)
-
-FetchContent_MakeAvailable(googletest)
-
-# Look for Boost program options
-find_package(GoogleTest QUIET)
-
 # Extend current CMake to /src
 add_subdirectory(src)
 
-# Extend current CMake to /test
-add_subdirectory(test)
 
+# Extend current CMake to /test if enabled
+if (BUILD_GTESTS)
+    add_subdirectory(test)
+endif()
 
 
 

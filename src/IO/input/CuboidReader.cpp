@@ -7,7 +7,8 @@
 #include <regex>
 #include "../Logger.h"
 
-void CuboidReader::readFile(ParticleContainer &container, std::string &filename) {
+
+DirectSumContainer CuboidReader::readFile(std::string &filename) {
     std::ifstream inputFile(filename);
     std::string line;
 
@@ -49,9 +50,9 @@ void CuboidReader::readFile(ParticleContainer &container, std::string &filename)
             }
 
             CuboidGenerator generator = parseLine(line);
-            ParticleContainer readContainer = generator.generateParticles(i);
+            DirectSumContainer readContainer = generator.generateParticles(i);
 
-            container.addParticles(readContainer);
+            return readContainer;
         }
     } catch (const std::exception &ex) {
         Logger::err_logger->error("Error: {}", ex.what());

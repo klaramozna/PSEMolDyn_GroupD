@@ -1,9 +1,6 @@
 # make doc_doxygen optional if someone does not have / like doxygen
-
-# TODO: create CMake build option for the target.
 option(BUILD_DOXYGEN "Build Doxygen documentation" OFF)
 
-# TODO: Add a custom target for building the documentation.
 if(BUILD_DOXYGEN)
 
     find_package(Doxygen QUIET)

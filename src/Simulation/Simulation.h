@@ -5,9 +5,12 @@
 #ifndef PSEMOLDYN_GROUPD_SIMULATION_H
 #define PSEMOLDYN_GROUPD_SIMULATION_H
 
+#pragma once
+
 #include <list>
+#include <memory>
 #include "../Particles/Particle.h"
-#include "../Particles/ParticleContainer.h"
+#include "../Particles/DirectSumContainer.h"
 #include "./Physics/ForceCalculation.h"
 #include "Boundary.h"
 
@@ -15,9 +18,9 @@ class Simulation {
 private:
     static constexpr double start_time = 0;
 
-    ParticleContainer container;
+    std::shared_ptr<ParticleContainer> container_;
     ForceCalculation &forceCalculation;
-    Boundary &boundary;
+    std::unique_ptr<Boundary> boundary;
 
     double delta_t;
     double averageVelo;
@@ -43,14 +46,14 @@ private:
     static void setOldForce(Particle& p);
 
 public:
-    Simulation(double delta_t, ParticleContainer container, ForceCalculation &calculation, double averageVelo, Boundary &boundary);
+    Simulation(double delta_t, std::unique_ptr<ParticleContainer> &&container, ForceCalculation &calculation, double averageVelo, std::unique_ptr<Boundary> &&boundary);
     virtual ~Simulation();
 
     /**
      * @brief Returns a vector of particles.
      * @return Vector Container.
      */
-    ParticleContainer& getParticles();
+    std::vector<Particle>& getParticles();
 
     /**
      * @brief run one iteration of the simulation, meaning position, force and then velocity

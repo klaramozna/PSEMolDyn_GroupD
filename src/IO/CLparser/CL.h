@@ -11,6 +11,8 @@
 #include <boost/program_options.hpp>
 #include <filesystem>
 
+#include "./../input/SimParameters.h"
+
 namespace po = boost::program_options;
 
 
@@ -49,16 +51,10 @@ std::string produce_help_message(const po::options_description &desc);
     * @brief parses the arguments provided by the user and configures simulation parameters
     * @param argc The number of command line arguments.
     * @param argsv An array containing the command line arguments.
-    * @param end_time Reference to a double variable where the end time of the simulation will be stored.
-    * @param delta_t Reference to a double variable where the time step between iterations will be stored.
-    * @param log_level Reference to an integer variable where the log level will be stored
-    *                  (0: trace, 1: debug, 2: info, 3: warning, 4: error, 5: critical, 6: off).
-    * @param input_path Reference to a string variable where the input file path will be stored.
-    * @return int the status of the process (!= 0 if an error occured)
-    * 
+    * @param simParameters instance holding the simulation parameters
     * @throws std::invalid_argument If invalid or incomplete arguments are provided.
      
 */
-int parse_arguments(int argc, char *argsv[], double& end_time, double& delta_t, int& log_level, std::string& input_path, std::string& input_mode, std::string& force, double& averageVelo, bool& testing);
+int parse_arguments(int argc, char *argsv[], SimParameters& simParameters);
 
 };

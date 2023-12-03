@@ -6,74 +6,58 @@
 #include "IO/output/outputWriter/XYZWriter.h"
 #include "IO/output/outputWriter/VTKWriter.h"
 
-/* Standard IO */
-#include <iostream>
+#include "IO/input/SimParameters.h"
+#include "IO/input/XMLReader.h"
+
 
 /* Simulation Logic */
 #include "Simulation/Simulation.h"
-#include "Particles/ParticleContainer.h"
+#include "Particles/DirectSumContainer.h"
 #include "Simulation/Physics/GravitationalForce.h"
 #include "Simulation/Physics/LennardJones.h"
+#include "Simulation/Boundary.h"
+#include "Simulation/OutflowBoundary.h"
 
 /* Logging */
 #include "IO/Logger.h"
 #include <IO/CLparser/CL.h>
 
-/* Generators for Particles */
-#include "Particles/ParticleGenerator.h"
-#include "utils/CuboidGenerator.h"
-
-constexpr double start_time = 0;
-
-const double sigma = 1;
-const double epsilon = 5;
-
-
-double end_time;
-double delta_t;
-double averageVelo;
-
-bool testing;
-
-int log_level;
-std::string input_path;
-std::string input_mode;
-std::string force;
-
+/* TODO:
+ * 1. Boundary is hard-coded in the simulation (Line 73) -> Implement boundary types by XML line
+ * 2.
+ * */
 
 int main(int argc, char *argsv[]) {
     CL cl;
     std::unique_ptr<ParticleReader> reader;
     std::unique_ptr<ForceCalculation> forceCalculation;
 
-    ParticleContainer container;
+    std::unique_ptr<ParticleContainer> directSumContainer = std::make_unique<DirectSumContainer>();
 
     outputWriter::VTKWriter writer;
+    SimParameters simParameters;
+    int status = cl.parse_arguments(argc, argsv, simParameters);
 
-    int status = cl.parse_arguments(argc, argsv, end_time, delta_t, log_level, input_path, input_mode, force, averageVelo, testing);
-    
     //any error in parsing
     if (status) {
         return 1;
     }
 
-    if (force == "lennard") {
-        forceCalculation = std::make_unique<LennardJones>(epsilon, sigma);
-    }
+    std::string input_path = simParameters.getInputPath();
 
-    if (force == "grav") {
-        forceCalculation = std::make_unique<GravitationalForce>();
-    }
-
-    Simulation simulation(delta_t, container, *forceCalculation, averageVelo);
-
-
-    if (input_mode == "cuboid") {
+    if (simParameters.getInputMode() == "cuboid") {
+        Logger::console->debug("Reading cuboid");
         reader = std::make_unique<CuboidReader>();
     }
 
-    if (input_mode == "particle") {
+    if (simParameters.getInputMode() == "particle") {
+         Logger::console->debug("Reading particle");
         reader = std::make_unique<FileReader>();
+    }
+
+    if (simParameters.getInputMode() == "xml") {
+        Logger::console->debug("Reading xml");
+        reader = std::make_unique<XMLReader>();
     }
 
     if (!reader) {
@@ -81,20 +65,59 @@ int main(int argc, char *argsv[]) {
         exit(-1);
     }
 
-    reader->readFile(simulation.getParticles(), input_path);
+    DirectSumContainer readContainer;
 
+    /* This is supposed to be passed as parameter in the XML file. */
+
+    if (simParameters.getInputMode() == "xml") {
+        readContainer = reader->readFile(input_path, simParameters);
+    }
+    else {
+        readContainer = reader->readFile(input_path);
+    }
+
+    directSumContainer->addParticles(readContainer.getParticleVector());
+    
+    Logger::console->info("Hello from MolSim for PSE!");
+
+    if (simParameters.getForce() == "lennard") {
+        forceCalculation = std::make_unique<LennardJones>(simParameters.getEpsilon(), simParameters.getSigma());
+        Logger::console->info("Force set to lennard");
+    }
+   
+    if (simParameters.getForce() == "grav") {
+        forceCalculation = std::make_unique<GravitationalForce>();
+        Logger::console->info("Force set to grav");
+    }
+
+
+    std::unique_ptr<Boundary> boundary = std::make_unique<OutflowBoundary>(
+            std::array<double, 3>{0.0, 0.0, 0.0},
+            std::array<double, 3>{10.0, 10.0, 10.0},
+            *forceCalculation
+    );
+
+    Logger::console->info("Calculating ...");
+   
     int iteration = 0;
-    double current_time = start_time;
-    std::string out_name("MD_vtk");
+    double current_time = simParameters.getStartTime();
+
+    Simulation simulation(
+            simParameters.getDeltaT(),
+            std::move(directSumContainer),
+            *forceCalculation,
+            simParameters.getAverageVelo(),
+            std::move(boundary)
+    );
 
     // This is ugly and shouldn't be in main, but it is for a later refactor
-    if (testing) {
+    if (simParameters.isTesting()) {
         auto measure_start_time = std::chrono::high_resolution_clock::now();
 
-        while (current_time < end_time) {
+        while (current_time < simParameters.getEndTime()) {
             simulation.runIteration();
             iteration++;
-            current_time += delta_t;
+            current_time += simParameters.getDeltaT();
         }
 
         auto measure_end_time = std::chrono::high_resolution_clock::now();
@@ -103,17 +126,17 @@ int main(int argc, char *argsv[]) {
         Logger::console->info("Time taken: {} milliseconds", duration.count());
     } else {
         // for this loop, we assume: current x, current f and current v are known
-        while (current_time < end_time) {
+        while (current_time < simParameters.getEndTime()) {
             simulation.runIteration();
 
             iteration++;
             if (iteration % 10 == 0) {
-                writer.plotParticles(simulation.getParticles(), out_name, iteration);
+                writer.plotParticles(simulation.getParticles(), simParameters.getBaseName(), iteration);
             }
 
             Logger::console->info("Iteration {} finished.", iteration);
 
-            current_time += delta_t;
+            current_time += simParameters.getDeltaT();
         }
 
         Logger::console->info("Output written. Terminating...");
