@@ -113,12 +113,6 @@ private:
     size_t size;
 
     /**
-     * @brief Puts particles from the given vector to their correct cells.
-     * @param particles The particles to be put in their cells.
-     */
-    void putParticlesToCells(const std::vector<Particle>& particles);
-
-    /**
      * @brief Deletes the given particle from the cell with the index oldCell and adds it to the cell with the index newCell
      * @param p1 Particle to be moved.
      * @param oldCell Index of the cell the particle is being moved from.
@@ -177,6 +171,13 @@ private:
      * @param z Integer defining the 3rd entry of the multi-index
      */
      bool isBoundaryCell(int x, int y, int z);
+
+     /**
+      * @brief Returns true if the given particle is positioned outside of the grid.
+      * @param p The particle to be evaluated.
+      * @return True rue if the given particle is positioned outside of the grid, otherwise false.
+      */
+     bool particleOutOfGrid(const Particle& p);
 };
 
 
