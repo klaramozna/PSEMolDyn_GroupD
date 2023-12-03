@@ -25,6 +25,17 @@
   </xs:restriction>
 </xs:simpleType>
 
+<xs:simpleType name="nonNegativeDouble">
+  <xs:restriction base="xs:double">
+    <xs:minInclusive value="0.0"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="nonNegativeInteger">
+  <xs:restriction base="xs:integer">
+    <xs:minInclusive value="0"/>
+  </xs:restriction>
+</xs:simpleType>
 
 
 <xs:complexType name="lennardJones_t">
@@ -48,8 +59,18 @@
     <xs:sequence>
       <xs:element name="lower-left-coord" type="double_3d"/>
       <xs:element name="number-of-particles" type="int_3d"/>
-      <xs:element name="distance" type="xs:double"/>
-      <xs:element name="mass" type="xs:double"/>
+      <xs:element name="distance" type="nonNegativeDouble"/>
+      <xs:element name="mass" type="nonNegativeDouble"/>
+      <xs:element name="initial_velocity" type="double_3d"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="Sphere">
+    <xs:sequence>
+      <xs:element name="center" type="double_3d"/>
+      <xs:element name="radius" type="nonNegativeInteger"/>
+      <xs:element name="distance" type="nonNegativeDouble"/>
+      <xs:element name="mass" type="nonNegativeDouble"/>
       <xs:element name="initial_velocity" type="double_3d"/>
     </xs:sequence>
   </xs:complexType>
@@ -70,6 +91,7 @@
         
         <!-- Provide Particles -->
         <xs:element name="cuboid" type="Cuboid" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="sphere" type="Sphere" minOccurs="0" maxOccurs="unbounded"/>
         
         <!-- IO -->
         <xs:element name="base_name" type="xs:string" minOccurs="0" maxOccurs="1" default="MD_vtk"/>

@@ -11,6 +11,7 @@
 #include "./../../Simulation/Simulation.h"
 #include "./../../Simulation/Physics/LennardJones.h"
 #include "./../../utils/CuboidGenerator.h"
+#include "./../../utils/SphereGenerator.h"
 #include <iostream>
 
 XMLReader::XMLReader() = default;
@@ -81,6 +82,22 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             container.addParticles(particles);
             i++;
     }
+
+         i = 0;
+        for (const auto& sphere: sim->sphere()) {
+            Logger::console->debug("Reading Sphere number {} from XML", i);
+            std::array<double,3> center = {sphere.center().x(), sphere.center().y(), sphere.center().z()};
+            int radius = sphere.radius();
+            double distance = sphere.distance();
+            double mass = sphere.mass();
+            std::array<double, 3> velocity = {sphere.initial_velocity().x(), sphere.initial_velocity().y(), sphere.initial_velocity().z()};
+            SphereGenerator generator {center, distance, radius, mass, velocity};
+            std::vector<Particle> particles = generator.generateParticles(i);
+            container.addParticles(particles);
+            i++;
+    }
+
+
 
     }
     catch (const xml_schema::exception& e) {

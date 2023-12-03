@@ -11,6 +11,8 @@ Simulation/Physics/GravitationalForce.cpp
         Particles/ParticleGenerator.h
         utils/CuboidGenerator.cpp
         utils/CuboidGenerator.h
+        utils/SphereGenerator.cpp
+        utils/SphereGenerator.h
         Particles/ParticleContainer.h
         Particles/LinkedCellContainer.cpp
         Particles/LinkedCellContainer.h
