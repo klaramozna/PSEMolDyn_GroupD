@@ -520,6 +520,223 @@ initial_velocity (::std::unique_ptr< initial_velocity_type > x)
 }
 
 
+// BoundaryBehavior
+// 
+
+BoundaryBehavior::
+BoundaryBehavior (value v)
+: ::xml_schema::string (_xsd_BoundaryBehavior_literals_[v])
+{
+}
+
+BoundaryBehavior::
+BoundaryBehavior (const char* v)
+: ::xml_schema::string (v)
+{
+}
+
+BoundaryBehavior::
+BoundaryBehavior (const ::std::string& v)
+: ::xml_schema::string (v)
+{
+}
+
+BoundaryBehavior::
+BoundaryBehavior (const ::xml_schema::string& v)
+: ::xml_schema::string (v)
+{
+}
+
+BoundaryBehavior::
+BoundaryBehavior (const BoundaryBehavior& v,
+                  ::xml_schema::flags f,
+                  ::xml_schema::container* c)
+: ::xml_schema::string (v, f, c)
+{
+}
+
+BoundaryBehavior& BoundaryBehavior::
+operator= (value v)
+{
+  static_cast< ::xml_schema::string& > (*this) = 
+  ::xml_schema::string (_xsd_BoundaryBehavior_literals_[v]);
+
+  return *this;
+}
+
+
+// Boundaries
+// 
+
+const Boundaries::BoxSize_type& Boundaries::
+BoxSize () const
+{
+  return this->BoxSize_.get ();
+}
+
+Boundaries::BoxSize_type& Boundaries::
+BoxSize ()
+{
+  return this->BoxSize_.get ();
+}
+
+void Boundaries::
+BoxSize (const BoxSize_type& x)
+{
+  this->BoxSize_.set (x);
+}
+
+void Boundaries::
+BoxSize (::std::unique_ptr< BoxSize_type > x)
+{
+  this->BoxSize_.set (std::move (x));
+}
+
+const Boundaries::Front_type& Boundaries::
+Front () const
+{
+  return this->Front_.get ();
+}
+
+Boundaries::Front_type& Boundaries::
+Front ()
+{
+  return this->Front_.get ();
+}
+
+void Boundaries::
+Front (const Front_type& x)
+{
+  this->Front_.set (x);
+}
+
+void Boundaries::
+Front (::std::unique_ptr< Front_type > x)
+{
+  this->Front_.set (std::move (x));
+}
+
+const Boundaries::Back_type& Boundaries::
+Back () const
+{
+  return this->Back_.get ();
+}
+
+Boundaries::Back_type& Boundaries::
+Back ()
+{
+  return this->Back_.get ();
+}
+
+void Boundaries::
+Back (const Back_type& x)
+{
+  this->Back_.set (x);
+}
+
+void Boundaries::
+Back (::std::unique_ptr< Back_type > x)
+{
+  this->Back_.set (std::move (x));
+}
+
+const Boundaries::Top_type& Boundaries::
+Top () const
+{
+  return this->Top_.get ();
+}
+
+Boundaries::Top_type& Boundaries::
+Top ()
+{
+  return this->Top_.get ();
+}
+
+void Boundaries::
+Top (const Top_type& x)
+{
+  this->Top_.set (x);
+}
+
+void Boundaries::
+Top (::std::unique_ptr< Top_type > x)
+{
+  this->Top_.set (std::move (x));
+}
+
+const Boundaries::Right_type& Boundaries::
+Right () const
+{
+  return this->Right_.get ();
+}
+
+Boundaries::Right_type& Boundaries::
+Right ()
+{
+  return this->Right_.get ();
+}
+
+void Boundaries::
+Right (const Right_type& x)
+{
+  this->Right_.set (x);
+}
+
+void Boundaries::
+Right (::std::unique_ptr< Right_type > x)
+{
+  this->Right_.set (std::move (x));
+}
+
+const Boundaries::Bottom_type& Boundaries::
+Bottom () const
+{
+  return this->Bottom_.get ();
+}
+
+Boundaries::Bottom_type& Boundaries::
+Bottom ()
+{
+  return this->Bottom_.get ();
+}
+
+void Boundaries::
+Bottom (const Bottom_type& x)
+{
+  this->Bottom_.set (x);
+}
+
+void Boundaries::
+Bottom (::std::unique_ptr< Bottom_type > x)
+{
+  this->Bottom_.set (std::move (x));
+}
+
+const Boundaries::Left_type& Boundaries::
+Left () const
+{
+  return this->Left_.get ();
+}
+
+Boundaries::Left_type& Boundaries::
+Left ()
+{
+  return this->Left_.get ();
+}
+
+void Boundaries::
+Left (const Left_type& x)
+{
+  this->Left_.set (x);
+}
+
+void Boundaries::
+Left (::std::unique_ptr< Left_type > x)
+{
+  this->Left_.set (std::move (x));
+}
+
+
 // Simulation_t
 // 
 
@@ -641,6 +858,72 @@ Simulation_t::averageVelo_type Simulation_t::
 averageVelo_default_value ()
 {
   return averageVelo_type (.1);
+}
+
+const Simulation_t::boundaries_optional& Simulation_t::
+boundaries () const
+{
+  return this->boundaries_;
+}
+
+Simulation_t::boundaries_optional& Simulation_t::
+boundaries ()
+{
+  return this->boundaries_;
+}
+
+void Simulation_t::
+boundaries (const boundaries_type& x)
+{
+  this->boundaries_.set (x);
+}
+
+void Simulation_t::
+boundaries (const boundaries_optional& x)
+{
+  this->boundaries_ = x;
+}
+
+void Simulation_t::
+boundaries (::std::unique_ptr< boundaries_type > x)
+{
+  this->boundaries_.set (std::move (x));
+}
+
+const Simulation_t::cutoffRadius_optional& Simulation_t::
+cutoffRadius () const
+{
+  return this->cutoffRadius_;
+}
+
+Simulation_t::cutoffRadius_optional& Simulation_t::
+cutoffRadius ()
+{
+  return this->cutoffRadius_;
+}
+
+void Simulation_t::
+cutoffRadius (const cutoffRadius_type& x)
+{
+  this->cutoffRadius_.set (x);
+}
+
+void Simulation_t::
+cutoffRadius (const cutoffRadius_optional& x)
+{
+  this->cutoffRadius_ = x;
+}
+
+void Simulation_t::
+cutoffRadius (::std::unique_ptr< cutoffRadius_type > x)
+{
+  this->cutoffRadius_.set (std::move (x));
+}
+
+Simulation_t::cutoffRadius_type Simulation_t::
+cutoffRadius_default_value ()
+{
+  return cutoffRadius_type (3.0);
 }
 
 const Simulation_t::cuboid_sequence& Simulation_t::
@@ -1877,6 +2160,343 @@ Sphere::
 {
 }
 
+// BoundaryBehavior
+//
+
+BoundaryBehavior::
+BoundaryBehavior (const ::xercesc::DOMElement& e,
+                  ::xml_schema::flags f,
+                  ::xml_schema::container* c)
+: ::xml_schema::string (e, f, c)
+{
+  _xsd_BoundaryBehavior_convert ();
+}
+
+BoundaryBehavior::
+BoundaryBehavior (const ::xercesc::DOMAttr& a,
+                  ::xml_schema::flags f,
+                  ::xml_schema::container* c)
+: ::xml_schema::string (a, f, c)
+{
+  _xsd_BoundaryBehavior_convert ();
+}
+
+BoundaryBehavior::
+BoundaryBehavior (const ::std::string& s,
+                  const ::xercesc::DOMElement* e,
+                  ::xml_schema::flags f,
+                  ::xml_schema::container* c)
+: ::xml_schema::string (s, e, f, c)
+{
+  _xsd_BoundaryBehavior_convert ();
+}
+
+BoundaryBehavior* BoundaryBehavior::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class BoundaryBehavior (*this, f, c);
+}
+
+BoundaryBehavior::value BoundaryBehavior::
+_xsd_BoundaryBehavior_convert () const
+{
+  ::xsd::cxx::tree::enum_comparator< char > c (_xsd_BoundaryBehavior_literals_);
+  const value* i (::std::lower_bound (
+                    _xsd_BoundaryBehavior_indexes_,
+                    _xsd_BoundaryBehavior_indexes_ + 2,
+                    *this,
+                    c));
+
+  if (i == _xsd_BoundaryBehavior_indexes_ + 2 || _xsd_BoundaryBehavior_literals_[*i] != *this)
+  {
+    throw ::xsd::cxx::tree::unexpected_enumerator < char > (*this);
+  }
+
+  return *i;
+}
+
+const char* const BoundaryBehavior::
+_xsd_BoundaryBehavior_literals_[2] =
+{
+  "Outflow",
+  "Reflecting"
+};
+
+const BoundaryBehavior::value BoundaryBehavior::
+_xsd_BoundaryBehavior_indexes_[2] =
+{
+  ::BoundaryBehavior::Outflow,
+  ::BoundaryBehavior::Reflecting
+};
+
+// Boundaries
+//
+
+Boundaries::
+Boundaries (const BoxSize_type& BoxSize,
+            const Front_type& Front,
+            const Back_type& Back,
+            const Top_type& Top,
+            const Right_type& Right,
+            const Bottom_type& Bottom,
+            const Left_type& Left)
+: ::xml_schema::type (),
+  BoxSize_ (BoxSize, this),
+  Front_ (Front, this),
+  Back_ (Back, this),
+  Top_ (Top, this),
+  Right_ (Right, this),
+  Bottom_ (Bottom, this),
+  Left_ (Left, this)
+{
+}
+
+Boundaries::
+Boundaries (::std::unique_ptr< BoxSize_type > BoxSize,
+            const Front_type& Front,
+            const Back_type& Back,
+            const Top_type& Top,
+            const Right_type& Right,
+            const Bottom_type& Bottom,
+            const Left_type& Left)
+: ::xml_schema::type (),
+  BoxSize_ (std::move (BoxSize), this),
+  Front_ (Front, this),
+  Back_ (Back, this),
+  Top_ (Top, this),
+  Right_ (Right, this),
+  Bottom_ (Bottom, this),
+  Left_ (Left, this)
+{
+}
+
+Boundaries::
+Boundaries (const Boundaries& x,
+            ::xml_schema::flags f,
+            ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  BoxSize_ (x.BoxSize_, f, this),
+  Front_ (x.Front_, f, this),
+  Back_ (x.Back_, f, this),
+  Top_ (x.Top_, f, this),
+  Right_ (x.Right_, f, this),
+  Bottom_ (x.Bottom_, f, this),
+  Left_ (x.Left_, f, this)
+{
+}
+
+Boundaries::
+Boundaries (const ::xercesc::DOMElement& e,
+            ::xml_schema::flags f,
+            ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  BoxSize_ (this),
+  Front_ (this),
+  Back_ (this),
+  Top_ (this),
+  Right_ (this),
+  Bottom_ (this),
+  Left_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void Boundaries::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // BoxSize
+    //
+    if (n.name () == "BoxSize" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< BoxSize_type > r (
+        BoxSize_traits::create (i, f, this));
+
+      if (!BoxSize_.present ())
+      {
+        this->BoxSize_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // Front
+    //
+    if (n.name () == "Front" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< Front_type > r (
+        Front_traits::create (i, f, this));
+
+      if (!Front_.present ())
+      {
+        this->Front_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // Back
+    //
+    if (n.name () == "Back" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< Back_type > r (
+        Back_traits::create (i, f, this));
+
+      if (!Back_.present ())
+      {
+        this->Back_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // Top
+    //
+    if (n.name () == "Top" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< Top_type > r (
+        Top_traits::create (i, f, this));
+
+      if (!Top_.present ())
+      {
+        this->Top_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // Right
+    //
+    if (n.name () == "Right" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< Right_type > r (
+        Right_traits::create (i, f, this));
+
+      if (!Right_.present ())
+      {
+        this->Right_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // Bottom
+    //
+    if (n.name () == "Bottom" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< Bottom_type > r (
+        Bottom_traits::create (i, f, this));
+
+      if (!Bottom_.present ())
+      {
+        this->Bottom_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // Left
+    //
+    if (n.name () == "Left" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< Left_type > r (
+        Left_traits::create (i, f, this));
+
+      if (!Left_.present ())
+      {
+        this->Left_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    break;
+  }
+
+  if (!BoxSize_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "BoxSize",
+      "");
+  }
+
+  if (!Front_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "Front",
+      "");
+  }
+
+  if (!Back_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "Back",
+      "");
+  }
+
+  if (!Top_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "Top",
+      "");
+  }
+
+  if (!Right_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "Right",
+      "");
+  }
+
+  if (!Bottom_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "Bottom",
+      "");
+  }
+
+  if (!Left_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "Left",
+      "");
+  }
+}
+
+Boundaries* Boundaries::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class Boundaries (*this, f, c);
+}
+
+Boundaries& Boundaries::
+operator= (const Boundaries& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->BoxSize_ = x.BoxSize_;
+    this->Front_ = x.Front_;
+    this->Back_ = x.Back_;
+    this->Top_ = x.Top_;
+    this->Right_ = x.Right_;
+    this->Bottom_ = x.Bottom_;
+    this->Left_ = x.Left_;
+  }
+
+  return *this;
+}
+
+Boundaries::
+~Boundaries ()
+{
+}
+
 // Simulation_t
 //
 
@@ -1890,6 +2510,8 @@ Simulation_t ()
   delta_t_ (this),
   force_ (this),
   averageVelo_ (this),
+  boundaries_ (this),
+  cutoffRadius_ (this),
   cuboid_ (this),
   sphere_ (this),
   base_name_ (this),
@@ -1908,6 +2530,8 @@ Simulation_t (const Simulation_t& x,
   delta_t_ (x.delta_t_, f, this),
   force_ (x.force_, f, this),
   averageVelo_ (x.averageVelo_, f, this),
+  boundaries_ (x.boundaries_, f, this),
+  cutoffRadius_ (x.cutoffRadius_, f, this),
   cuboid_ (x.cuboid_, f, this),
   sphere_ (x.sphere_, f, this),
   base_name_ (x.base_name_, f, this),
@@ -1926,6 +2550,8 @@ Simulation_t (const ::xercesc::DOMElement& e,
   delta_t_ (this),
   force_ (this),
   averageVelo_ (this),
+  boundaries_ (this),
+  cutoffRadius_ (this),
   cuboid_ (this),
   sphere_ (this),
   base_name_ (this),
@@ -1993,6 +2619,34 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       if (!this->averageVelo_)
       {
         this->averageVelo_.set (averageVelo_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // boundaries
+    //
+    if (n.name () == "boundaries" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< boundaries_type > r (
+        boundaries_traits::create (i, f, this));
+
+      if (!this->boundaries_)
+      {
+        this->boundaries_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // cutoffRadius
+    //
+    if (n.name () == "cutoffRadius" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< cutoffRadius_type > r (
+        cutoffRadius_traits::create (i, f, this));
+
+      if (!this->cutoffRadius_)
+      {
+        this->cutoffRadius_.set (::std::move (r));
         continue;
       }
     }
@@ -2090,6 +2744,8 @@ operator= (const Simulation_t& x)
     this->delta_t_ = x.delta_t_;
     this->force_ = x.force_;
     this->averageVelo_ = x.averageVelo_;
+    this->boundaries_ = x.boundaries_;
+    this->cutoffRadius_ = x.cutoffRadius_;
     this->cuboid_ = x.cuboid_;
     this->sphere_ = x.sphere_;
     this->base_name_ = x.base_name_;
