@@ -11,7 +11,7 @@
 #include <utility>
 
 Simulation::Simulation(double delta_t,
-                       std::unique_ptr<ParticleContainer> &&container_,
+                       std::shared_ptr<ParticleContainer> &&container_,
                        ForceCalculation &calculation,
                        double averageVelo,
                        std::unique_ptr<Boundary> &&boundary) :

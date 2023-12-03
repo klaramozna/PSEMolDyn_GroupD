@@ -16,12 +16,11 @@ FileReader::FileReader() = default;
 
 FileReader::~FileReader() = default;
 
-DirectSumContainer FileReader::readFile(std::string &filename) {
+void FileReader::readFile(const std::shared_ptr<ParticleContainer>& container, std::string &filename) {
   std::array<double, 3> x;
   std::array<double, 3> v;
   double m;
   int num_particles = 0;
-  DirectSumContainer container;
 
     std::ifstream input_file(filename);
     std::string tmp_string;
@@ -42,8 +41,6 @@ DirectSumContainer FileReader::readFile(std::string &filename) {
         getline(input_file, tmp_string);
         std::cout << "Read line: " << tmp_string << std::endl;
 
-        container.reserveInVector(num_particles);
-
         for (int i = 0; i < num_particles; i++) {
             std::istringstream datastream(tmp_string);
 
@@ -62,13 +59,11 @@ DirectSumContainer FileReader::readFile(std::string &filename) {
             datastream >> m;
 
             Particle newParticle = Particle(x,v,m);
-            container.addParticle(newParticle);
+            container->addParticle(newParticle);
 
             getline(input_file, tmp_string);
             std::cout << "Read line: " << tmp_string << std::endl;
         }
-
-        return container;
     } else {
         std::cout << "Error: could not open file " << filename << std::endl;
         exit(-1);

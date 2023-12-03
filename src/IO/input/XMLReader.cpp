@@ -17,7 +17,7 @@ XMLReader::XMLReader() = default;
 
 XMLReader::~XMLReader() = default;
 
-DirectSumContainer XMLReader::readFile(std::string &filename, SimParameters& SimParameters) {
+void XMLReader::readFile(const std::shared_ptr<ParticleContainer> &container, std::string &filename, SimParameters& SimParameters) {
     try {
         std::unique_ptr<Simulation_t> sim(Simulation(filename));
 
@@ -68,8 +68,6 @@ DirectSumContainer XMLReader::readFile(std::string &filename, SimParameters& Sim
 
         int i = 0;
 
-        DirectSumContainer container = DirectSumContainer();
-
         for (const auto& cuboid : sim->cuboid()) {
             Logger::console->debug("Reading Cuboid number {} from XML", i);
             std::array<double,3> lowerLeftCoord = {cuboid.lower_left_coord().x(), cuboid.lower_left_coord().y(), cuboid.lower_left_coord().z()};
@@ -81,11 +79,9 @@ DirectSumContainer XMLReader::readFile(std::string &filename, SimParameters& Sim
             std::array<double, 3> velocity = {cuboid.initial_velocity().x(), cuboid.initial_velocity().y(), cuboid.initial_velocity().z()};
             CuboidGenerator generator {lowerLeftCoord, n1, n2, n3, distance, mass, velocity};
             DirectSumContainer readContainer = generator.generateParticles(i);
-            container.addParticles(readContainer);
+            container->addParticles(readContainer.getParticleVector());
             i++;
     }
-
-    return container;
 
     }
     catch (const xml_schema::exception& e) {

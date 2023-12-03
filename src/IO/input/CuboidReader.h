@@ -11,7 +11,7 @@ public:
      * @param container DirectSumContainer that will receive the read-in particles
      * @param filename Input file
      * */
-    DirectSumContainer readFile(std::string &filename) override;
+    void readFile(const std::shared_ptr<ParticleContainer> &container, std::string &filename) override;
 
 
 private:

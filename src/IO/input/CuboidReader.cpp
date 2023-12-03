@@ -6,7 +6,7 @@
 #include "../Logger.h"
 
 
-DirectSumContainer CuboidReader::readFile(std::string &filename) {
+void CuboidReader::readFile(const std::shared_ptr<ParticleContainer> &container, std::string &filename) {
     std::ifstream inputFile(filename);
     std::string line;
 
@@ -49,8 +49,7 @@ DirectSumContainer CuboidReader::readFile(std::string &filename) {
 
             CuboidGenerator generator = parseLine(line);
             DirectSumContainer readContainer = generator.generateParticles(i);
-
-            return readContainer;
+            container->addParticles(readContainer.getParticleVector());
         }
     } catch (const std::exception &ex) {
         Logger::err_logger->error("Error: {}", ex.what());

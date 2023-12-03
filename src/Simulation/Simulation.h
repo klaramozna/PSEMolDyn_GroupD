@@ -46,7 +46,7 @@ private:
     static void setOldForce(Particle& p);
 
 public:
-    Simulation(double delta_t, std::unique_ptr<ParticleContainer> &&container, ForceCalculation &calculation, double averageVelo, std::unique_ptr<Boundary> &&boundary);
+    Simulation(double delta_t, std::shared_ptr<ParticleContainer> &&container, ForceCalculation &calculation, double averageVelo, std::unique_ptr<Boundary> &&boundary);
     virtual ~Simulation();
 
     /**

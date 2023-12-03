@@ -29,10 +29,10 @@
 
 int main(int argc, char *argsv[]) {
     CL cl;
+
     std::unique_ptr<ParticleReader> reader;
     std::unique_ptr<ForceCalculation> forceCalculation;
-
-    std::unique_ptr<ParticleContainer> directSumContainer = std::make_unique<DirectSumContainer>();
+    std::shared_ptr<ParticleContainer> container = std::make_shared<DirectSumContainer>();
 
     outputWriter::VTKWriter writer;
     SimParameters simParameters;
@@ -65,18 +65,14 @@ int main(int argc, char *argsv[]) {
         exit(-1);
     }
 
-    DirectSumContainer readContainer;
-
     /* This is supposed to be passed as parameter in the XML file. */
 
     if (simParameters.getInputMode() == "xml") {
-        readContainer = reader->readFile(input_path, simParameters);
+        reader->readFile(container, input_path, simParameters);
     }
     else {
-        readContainer = reader->readFile(input_path);
+        reader->readFile(container, input_path);
     }
-
-    directSumContainer->addParticles(readContainer.getParticleVector());
     
     Logger::console->info("Hello from MolSim for PSE!");
 
@@ -104,7 +100,7 @@ int main(int argc, char *argsv[]) {
 
     Simulation simulation(
             simParameters.getDeltaT(),
-            std::move(directSumContainer),
+            std::move(container),
             *forceCalculation,
             simParameters.getAverageVelo(),
             std::move(boundary)
