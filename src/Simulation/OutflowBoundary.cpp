@@ -3,6 +3,7 @@
 //
 
 #include "OutflowBoundary.h"
+#include "../Particles/LinkedCellContainer.h";
 
 void OutflowBoundary::processBoundary(LinkedCellContainer &container) {
     container.deleteHaloParticles(*this);

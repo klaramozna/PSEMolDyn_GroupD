@@ -187,6 +187,6 @@ bool LinkedCellContainer::cellWithinRadius(const Particle &p, int x, int y, int 
 }
 
 void LinkedCellContainer::applyBoundaryConditions(Boundary &boundary) {
-    boundary.processBoundary(this);
+    boundary.processBoundary(*this);
 }
 

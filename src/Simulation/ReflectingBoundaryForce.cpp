@@ -3,6 +3,7 @@
 //
 
 #include "ReflectingBoundaryForce.h"
+#include "../Particles/LinkedCellContainer.h"
 
 void ReflectingBoundaryForce::processBoundary(LinkedCellContainer &container) {
     double sigma = 0.0;

@@ -7,7 +7,6 @@
 #include "Physics/ForceCalculation.h"
 #include <array>
 #include <cmath>
-#include "../Particles/LinkedCellContainer.h"
 
 /**
  * @file Boundary.h
@@ -15,6 +14,8 @@
  * @brief Stores boundary information, such as type of boundary, starting point (3D vector) and dimensions in each axis,
  * and executes the boundary control according to the boundary type of a given "wall"
  * */
+
+class LinkedCellContainer;
 
 class Boundary {
 public:

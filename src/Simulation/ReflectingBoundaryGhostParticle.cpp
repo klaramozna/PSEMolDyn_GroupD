@@ -3,6 +3,7 @@
 //
 
 #include "ReflectingBoundaryGhostParticle.h"
+#include "../Particles/LinkedCellContainer.h"
 
 void ReflectingBoundaryGhostParticle::processBoundary(LinkedCellContainer &container) {
     double sigma = 0.0;
