@@ -160,6 +160,14 @@ z (const z_type& x)
 // 
 
 
+// nonNegativeDouble
+// 
+
+
+// nonNegativeInteger
+// 
+
+
 // lennardJones_t
 // 
 
@@ -333,6 +341,12 @@ distance (const distance_type& x)
   this->distance_.set (x);
 }
 
+void Cuboid::
+distance (::std::unique_ptr< distance_type > x)
+{
+  this->distance_.set (std::move (x));
+}
+
 const Cuboid::mass_type& Cuboid::
 mass () const
 {
@@ -349,6 +363,12 @@ void Cuboid::
 mass (const mass_type& x)
 {
   this->mass_.set (x);
+}
+
+void Cuboid::
+mass (::std::unique_ptr< mass_type > x)
+{
+  this->mass_.set (std::move (x));
 }
 
 const Cuboid::initial_velocity_type& Cuboid::
@@ -370,6 +390,130 @@ initial_velocity (const initial_velocity_type& x)
 }
 
 void Cuboid::
+initial_velocity (::std::unique_ptr< initial_velocity_type > x)
+{
+  this->initial_velocity_.set (std::move (x));
+}
+
+
+// Sphere
+// 
+
+const Sphere::center_type& Sphere::
+center () const
+{
+  return this->center_.get ();
+}
+
+Sphere::center_type& Sphere::
+center ()
+{
+  return this->center_.get ();
+}
+
+void Sphere::
+center (const center_type& x)
+{
+  this->center_.set (x);
+}
+
+void Sphere::
+center (::std::unique_ptr< center_type > x)
+{
+  this->center_.set (std::move (x));
+}
+
+const Sphere::radius_type& Sphere::
+radius () const
+{
+  return this->radius_.get ();
+}
+
+Sphere::radius_type& Sphere::
+radius ()
+{
+  return this->radius_.get ();
+}
+
+void Sphere::
+radius (const radius_type& x)
+{
+  this->radius_.set (x);
+}
+
+void Sphere::
+radius (::std::unique_ptr< radius_type > x)
+{
+  this->radius_.set (std::move (x));
+}
+
+const Sphere::distance_type& Sphere::
+distance () const
+{
+  return this->distance_.get ();
+}
+
+Sphere::distance_type& Sphere::
+distance ()
+{
+  return this->distance_.get ();
+}
+
+void Sphere::
+distance (const distance_type& x)
+{
+  this->distance_.set (x);
+}
+
+void Sphere::
+distance (::std::unique_ptr< distance_type > x)
+{
+  this->distance_.set (std::move (x));
+}
+
+const Sphere::mass_type& Sphere::
+mass () const
+{
+  return this->mass_.get ();
+}
+
+Sphere::mass_type& Sphere::
+mass ()
+{
+  return this->mass_.get ();
+}
+
+void Sphere::
+mass (const mass_type& x)
+{
+  this->mass_.set (x);
+}
+
+void Sphere::
+mass (::std::unique_ptr< mass_type > x)
+{
+  this->mass_.set (std::move (x));
+}
+
+const Sphere::initial_velocity_type& Sphere::
+initial_velocity () const
+{
+  return this->initial_velocity_.get ();
+}
+
+Sphere::initial_velocity_type& Sphere::
+initial_velocity ()
+{
+  return this->initial_velocity_.get ();
+}
+
+void Sphere::
+initial_velocity (const initial_velocity_type& x)
+{
+  this->initial_velocity_.set (x);
+}
+
+void Sphere::
 initial_velocity (::std::unique_ptr< initial_velocity_type > x)
 {
   this->initial_velocity_.set (std::move (x));
@@ -515,6 +659,24 @@ void Simulation_t::
 cuboid (const cuboid_sequence& s)
 {
   this->cuboid_ = s;
+}
+
+const Simulation_t::sphere_sequence& Simulation_t::
+sphere () const
+{
+  return this->sphere_;
+}
+
+Simulation_t::sphere_sequence& Simulation_t::
+sphere ()
+{
+  return this->sphere_;
+}
+
+void Simulation_t::
+sphere (const sphere_sequence& s)
+{
+  this->sphere_ = s;
 }
 
 const Simulation_t::base_name_optional& Simulation_t::
@@ -970,6 +1132,114 @@ log_level::
 {
 }
 
+// nonNegativeDouble
+//
+
+nonNegativeDouble::
+nonNegativeDouble (const ::xml_schema::double_& _xsd_double__base)
+: ::xsd::cxx::tree::fundamental_base< ::xml_schema::double_, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::double_ > (_xsd_double__base)
+{
+}
+
+nonNegativeDouble::
+nonNegativeDouble (const nonNegativeDouble& x,
+                   ::xml_schema::flags f,
+                   ::xml_schema::container* c)
+: ::xsd::cxx::tree::fundamental_base< ::xml_schema::double_, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::double_ > (x, f, c)
+{
+}
+
+nonNegativeDouble::
+nonNegativeDouble (const ::xercesc::DOMElement& e,
+                   ::xml_schema::flags f,
+                   ::xml_schema::container* c)
+: ::xsd::cxx::tree::fundamental_base< ::xml_schema::double_, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::double_ > (e, f, c)
+{
+}
+
+nonNegativeDouble::
+nonNegativeDouble (const ::xercesc::DOMAttr& a,
+                   ::xml_schema::flags f,
+                   ::xml_schema::container* c)
+: ::xsd::cxx::tree::fundamental_base< ::xml_schema::double_, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::double_ > (a, f, c)
+{
+}
+
+nonNegativeDouble::
+nonNegativeDouble (const ::std::string& s,
+                   const ::xercesc::DOMElement* e,
+                   ::xml_schema::flags f,
+                   ::xml_schema::container* c)
+: ::xsd::cxx::tree::fundamental_base< ::xml_schema::double_, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::double_ > (s, e, f, c)
+{
+}
+
+nonNegativeDouble* nonNegativeDouble::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class nonNegativeDouble (*this, f, c);
+}
+
+nonNegativeDouble::
+~nonNegativeDouble ()
+{
+}
+
+// nonNegativeInteger
+//
+
+nonNegativeInteger::
+nonNegativeInteger (const ::xml_schema::integer& _xsd_integer_base)
+: ::xsd::cxx::tree::fundamental_base< ::xml_schema::integer, char, ::xml_schema::simple_type > (_xsd_integer_base)
+{
+}
+
+nonNegativeInteger::
+nonNegativeInteger (const nonNegativeInteger& x,
+                    ::xml_schema::flags f,
+                    ::xml_schema::container* c)
+: ::xsd::cxx::tree::fundamental_base< ::xml_schema::integer, char, ::xml_schema::simple_type > (x, f, c)
+{
+}
+
+nonNegativeInteger::
+nonNegativeInteger (const ::xercesc::DOMElement& e,
+                    ::xml_schema::flags f,
+                    ::xml_schema::container* c)
+: ::xsd::cxx::tree::fundamental_base< ::xml_schema::integer, char, ::xml_schema::simple_type > (e, f, c)
+{
+}
+
+nonNegativeInteger::
+nonNegativeInteger (const ::xercesc::DOMAttr& a,
+                    ::xml_schema::flags f,
+                    ::xml_schema::container* c)
+: ::xsd::cxx::tree::fundamental_base< ::xml_schema::integer, char, ::xml_schema::simple_type > (a, f, c)
+{
+}
+
+nonNegativeInteger::
+nonNegativeInteger (const ::std::string& s,
+                    const ::xercesc::DOMElement* e,
+                    ::xml_schema::flags f,
+                    ::xml_schema::container* c)
+: ::xsd::cxx::tree::fundamental_base< ::xml_schema::integer, char, ::xml_schema::simple_type > (s, e, f, c)
+{
+}
+
+nonNegativeInteger* nonNegativeInteger::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class nonNegativeInteger (*this, f, c);
+}
+
+nonNegativeInteger::
+~nonNegativeInteger ()
+{
+}
+
 // lennardJones_t
 //
 
@@ -1291,9 +1561,12 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     //
     if (n.name () == "distance" && n.namespace_ ().empty ())
     {
+      ::std::unique_ptr< distance_type > r (
+        distance_traits::create (i, f, this));
+
       if (!distance_.present ())
       {
-        this->distance_.set (distance_traits::create (i, f, this));
+        this->distance_.set (::std::move (r));
         continue;
       }
     }
@@ -1302,9 +1575,12 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     //
     if (n.name () == "mass" && n.namespace_ ().empty ())
     {
+      ::std::unique_ptr< mass_type > r (
+        mass_traits::create (i, f, this));
+
       if (!mass_.present ())
       {
-        this->mass_.set (mass_traits::create (i, f, this));
+        this->mass_.set (::std::move (r));
         continue;
       }
     }
@@ -1390,6 +1666,217 @@ Cuboid::
 {
 }
 
+// Sphere
+//
+
+Sphere::
+Sphere (const center_type& center,
+        const radius_type& radius,
+        const distance_type& distance,
+        const mass_type& mass,
+        const initial_velocity_type& initial_velocity)
+: ::xml_schema::type (),
+  center_ (center, this),
+  radius_ (radius, this),
+  distance_ (distance, this),
+  mass_ (mass, this),
+  initial_velocity_ (initial_velocity, this)
+{
+}
+
+Sphere::
+Sphere (::std::unique_ptr< center_type > center,
+        const radius_type& radius,
+        const distance_type& distance,
+        const mass_type& mass,
+        ::std::unique_ptr< initial_velocity_type > initial_velocity)
+: ::xml_schema::type (),
+  center_ (std::move (center), this),
+  radius_ (radius, this),
+  distance_ (distance, this),
+  mass_ (mass, this),
+  initial_velocity_ (std::move (initial_velocity), this)
+{
+}
+
+Sphere::
+Sphere (const Sphere& x,
+        ::xml_schema::flags f,
+        ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  center_ (x.center_, f, this),
+  radius_ (x.radius_, f, this),
+  distance_ (x.distance_, f, this),
+  mass_ (x.mass_, f, this),
+  initial_velocity_ (x.initial_velocity_, f, this)
+{
+}
+
+Sphere::
+Sphere (const ::xercesc::DOMElement& e,
+        ::xml_schema::flags f,
+        ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  center_ (this),
+  radius_ (this),
+  distance_ (this),
+  mass_ (this),
+  initial_velocity_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void Sphere::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // center
+    //
+    if (n.name () == "center" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< center_type > r (
+        center_traits::create (i, f, this));
+
+      if (!center_.present ())
+      {
+        this->center_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // radius
+    //
+    if (n.name () == "radius" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< radius_type > r (
+        radius_traits::create (i, f, this));
+
+      if (!radius_.present ())
+      {
+        this->radius_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // distance
+    //
+    if (n.name () == "distance" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< distance_type > r (
+        distance_traits::create (i, f, this));
+
+      if (!distance_.present ())
+      {
+        this->distance_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // mass
+    //
+    if (n.name () == "mass" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< mass_type > r (
+        mass_traits::create (i, f, this));
+
+      if (!mass_.present ())
+      {
+        this->mass_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // initial_velocity
+    //
+    if (n.name () == "initial_velocity" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< initial_velocity_type > r (
+        initial_velocity_traits::create (i, f, this));
+
+      if (!initial_velocity_.present ())
+      {
+        this->initial_velocity_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    break;
+  }
+
+  if (!center_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "center",
+      "");
+  }
+
+  if (!radius_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "radius",
+      "");
+  }
+
+  if (!distance_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "distance",
+      "");
+  }
+
+  if (!mass_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "mass",
+      "");
+  }
+
+  if (!initial_velocity_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "initial_velocity",
+      "");
+  }
+}
+
+Sphere* Sphere::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class Sphere (*this, f, c);
+}
+
+Sphere& Sphere::
+operator= (const Sphere& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->center_ = x.center_;
+    this->radius_ = x.radius_;
+    this->distance_ = x.distance_;
+    this->mass_ = x.mass_;
+    this->initial_velocity_ = x.initial_velocity_;
+  }
+
+  return *this;
+}
+
+Sphere::
+~Sphere ()
+{
+}
+
 // Simulation_t
 //
 
@@ -1404,6 +1891,7 @@ Simulation_t ()
   force_ (this),
   averageVelo_ (this),
   cuboid_ (this),
+  sphere_ (this),
   base_name_ (this),
   writeFrequency_ (this),
   log_level_ (this),
@@ -1421,6 +1909,7 @@ Simulation_t (const Simulation_t& x,
   force_ (x.force_, f, this),
   averageVelo_ (x.averageVelo_, f, this),
   cuboid_ (x.cuboid_, f, this),
+  sphere_ (x.sphere_, f, this),
   base_name_ (x.base_name_, f, this),
   writeFrequency_ (x.writeFrequency_, f, this),
   log_level_ (x.log_level_, f, this),
@@ -1438,6 +1927,7 @@ Simulation_t (const ::xercesc::DOMElement& e,
   force_ (this),
   averageVelo_ (this),
   cuboid_ (this),
+  sphere_ (this),
   base_name_ (this),
   writeFrequency_ (this),
   log_level_ (this),
@@ -1518,6 +2008,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       continue;
     }
 
+    // sphere
+    //
+    if (n.name () == "sphere" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< sphere_type > r (
+        sphere_traits::create (i, f, this));
+
+      this->sphere_.push_back (::std::move (r));
+      continue;
+    }
+
     // base_name
     //
     if (n.name () == "base_name" && n.namespace_ ().empty ())
@@ -1590,6 +2091,7 @@ operator= (const Simulation_t& x)
     this->force_ = x.force_;
     this->averageVelo_ = x.averageVelo_;
     this->cuboid_ = x.cuboid_;
+    this->sphere_ = x.sphere_;
     this->base_name_ = x.base_name_;
     this->writeFrequency_ = x.writeFrequency_;
     this->log_level_ = x.log_level_;

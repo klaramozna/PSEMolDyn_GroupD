@@ -25,6 +25,7 @@
 /* Generators for Particles */
 #include "Particles/ParticleGenerator.h"
 #include "utils/CuboidGenerator.h"
+#include "utils/SphereGenerator.h"
 
 
 

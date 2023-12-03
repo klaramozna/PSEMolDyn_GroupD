@@ -1,0 +1,45 @@
+<Simulation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="simulationFormat.xsd">
+
+    <!-- Simulation Arguments -->
+    <t_end>5</t_end>
+    <delta_t>1</delta_t>
+    
+    <!-- Choose ForceType -->
+    <force>
+        <lennard>
+            <Epsilon>5</Epsilon>
+            <Sigma>1</Sigma>
+        </lennard>
+    </force>
+    <averageVelo>0.1</averageVelo>
+
+    <!-- Provide Particles (Sphere) -->
+    <sphere>
+        <center>
+            <x>60.0</x>
+            <y>25.0</y>
+            <z>0.0</z>
+        </center>
+        <radius>
+            15
+        </radius>
+        <distance>1.1225</distance>
+        <mass>1.0</mass>
+        <initial_velocity>
+            <x>0.0</x>
+            <y>-10.0</y>
+            <z>0.0</z>
+        </initial_velocity>
+    </sphere>
+
+
+
+    <!-- IO -->
+    <base_name>MD_vtk</base_name>
+    <writeFrequency>100</writeFrequency>
+
+    <!-- Misc -->
+    <log_level>1</log_level>
+    <testing_mode>false</testing_mode>
+
+</Simulation>
