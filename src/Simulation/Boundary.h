@@ -7,8 +7,7 @@
 #include "Physics/ForceCalculation.h"
 #include <array>
 #include <cmath>
-
-class LinkedCellContainer;
+#include "../Particles/LinkedCellContainer.h"
 
 /**
  * @file Boundary.h
