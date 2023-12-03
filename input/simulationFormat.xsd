@@ -1,0 +1,89 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+<!-- Define custom types -->
+
+<xs:complexType name="int_3d">
+    <xs:sequence>
+      <xs:element name="x" type="xs:integer"/>
+      <xs:element name="y" type="xs:integer"/>
+      <xs:element name="z" type="xs:integer"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="double_3d">
+    <xs:sequence>
+      <xs:element name="x" type="xs:double"/>
+      <xs:element name="y" type="xs:double"/>
+      <xs:element name="z" type="xs:double"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:simpleType name="log_level">
+    <xs:restriction base="xs:integer">
+        <xs:minInclusive value="0"/>
+        <xs:maxInclusive value="6"/>
+  </xs:restriction>
+</xs:simpleType>
+
+
+
+<xs:complexType name="lennardJones_t">
+    <xs:sequence>
+        <xs:element name="Epsilon" type="xs:double"/>
+        <xs:element name="Sigma" type="xs:double"/>
+    </xs:sequence>
+</xs:complexType>
+
+    <!-- choose one force type -->
+<xs:complexType name="ForceType">
+  <xs:choice>
+        <!-- first element is default -->
+    <xs:element name="lennard" type="lennardJones_t"/>
+    <xs:element name="grav" type="xs:string"/>
+  </xs:choice>
+</xs:complexType>
+
+
+<xs:complexType name="Cuboid">
+    <xs:sequence>
+      <xs:element name="lower-left-coord" type="double_3d"/>
+      <xs:element name="number-of-particles" type="int_3d"/>
+      <xs:element name="distance" type="xs:double"/>
+      <xs:element name="mass" type="xs:double"/>
+      <xs:element name="initial_velocity" type="double_3d"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+<!-- Specify Program Arguments -->
+
+    <xs:complexType name="Simulation_t">
+      <xs:sequence>
+
+        <!-- Simulation Arguments -->
+
+        <xs:element name="t_end" type="xs:double" minOccurs="0" maxOccurs="1" default="5"/>
+        <xs:element name="delta_t" type="xs:double" minOccurs="0" maxOccurs="1" default="0.0002"/>
+        <xs:element name="force" type="ForceType" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="averageVelo" type="xs:double" minOccurs="0" maxOccurs="1" default="0.1"/> <!-- Brownian Motion average velocity -->
+
+        
+        <!-- Provide Particles -->
+        <xs:element name="cuboid" type="Cuboid" minOccurs="0" maxOccurs="unbounded"/>
+        
+        <!-- IO -->
+        <xs:element name="base_name" type="xs:string" minOccurs="0" maxOccurs="1" default="MD_vtk"/>
+        <xs:element name="writeFrequency" type="xs:int" minOccurs="0" maxOccurs="1"/>
+
+        <!-- Misc -->
+
+        <xs:element name="log_level" type="log_level" minOccurs="0" maxOccurs="1" default="2"/>
+        <xs:element name="testing_mode" type="xs:boolean" minOccurs="0" maxOccurs="1" default="false"/>
+
+        
+      </xs:sequence>
+    </xs:complexType>
+
+<xs:element name="Simulation" type="Simulation_t"/>
+
+</xs:schema>

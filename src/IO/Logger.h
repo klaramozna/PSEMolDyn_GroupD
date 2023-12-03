@@ -24,10 +24,6 @@ extern std::shared_ptr<spdlog::logger> console;
   */
 extern std::shared_ptr<spdlog::logger> err_logger;  
 
-/**
-  * file logger
-*/
-extern std::shared_ptr<spdlog::logger> file_logger;
 
 
 /**

@@ -13,6 +13,7 @@ public:
      * */
     void readFile(DirectSumContainer &container, std::string &filename) override;
 
+
 private:
     int numberOfCuboids{};
 

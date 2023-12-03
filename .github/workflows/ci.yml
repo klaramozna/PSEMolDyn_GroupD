@@ -23,13 +23,10 @@ jobs:
         run: sudo apt-get install make
 
       - name: Install Xerces-C library
-        run: sudo apt-get install libxerces-c-dev
+        run: sudo apt-get install libxerces-c-dev -y
 
       - name: Install boost library for program options
         run: sudo apt-get install libboost-program-options-dev
-
-      - name: Install boost library for tests
-        run: sudo apt-get install libboost-test-dev
 
       - name: Install doxygen
         run: sudo apt-get install doxygen
