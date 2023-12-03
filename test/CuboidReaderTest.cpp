@@ -9,7 +9,7 @@
 #include <regex>
 
 void CuboidReaderTest::SetUp() {
-    filename = "../../test/resources/";
+    filename = std::string(TEST_RESOURCES_DIR);
     expectedContainer.getParticleVector().clear();
     receivedContainer.getParticleVector().clear();
 };

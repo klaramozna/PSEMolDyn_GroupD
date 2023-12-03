@@ -2,7 +2,8 @@ file(GLOB_RECURSE TEST_SRC
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
 )
-
+# Define the path to test resources relative to the project directory
+set(TEST_RESOURCES_DIR ${CMAKE_SOURCE_DIR}/test/resources/)
 set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Particles/DirectSumContainer.cpp
         ${PROJECT_SOURCE_DIR}/src/Particles/DirectSumContainer.h
@@ -59,3 +60,5 @@ target_link_libraries(
 )
 include(GoogleTest)
 gtest_discover_tests(particleContainer_test)
+
+target_compile_definitions(particleContainer_test PRIVATE TEST_RESOURCES_DIR="${TEST_RESOURCES_DIR}")
