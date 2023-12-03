@@ -26,6 +26,12 @@ Members:
 
 
 ## Task 2 ”Linked-cell algorithm” ##
+* Since we now have a second implementation of the ```ParticleContainer``` from previous week. We decided rename ```ParticleContainer``` to ```DirectSumContainer``` and create a superclass ```ParticleContaier``` that both ```DirectSumContainer``` and the new ```LinkedCellContainer``` inherit from. 
+* ```ParticleContainer``` contains virtual methods that allow us to choose the container used at runtime.
+* We store particles in a vector of ```Cells```. The ```Cell``` class is implemented as a list of particles. We decided to use a list and not a vector, because we need to move particles between cells as they move. In order to do this, we need to delete the particle in the original cell and add it to the new cell. Adding a particle to a vector should not be too inefficient given that we reserve enough space in the beginning, but deleting a particle would be very inefficient in a vector, especially if the particle is located in the middle of the vector, as all of the elements after that would need to be moved. For that reason with decided to implement ```Cell``` as a list.
+* The most interesting part of the ```LinkedCellContainer``` class is the ```applyToPairs``` method we use for force calculation. To iterate over the cells, we use the position of a cell, which is the place of the cell along each axis. For example position (0, 1, 2) would mean that the cell is the first cell along the x-axis, second cell along the y-axis and third cell along the z-axis.
+* We then map this position onto an index in the vector of cells using a simple formula taken from the book "Numerical Simulation in Molecular Dynamics".
+* Using the position of a cell, we find all of its neighbours and let its particles interact with the particles of the neighbours. In order to still be able to use Newton's third law, we only consider neighbours that a larger cell index than the current cell. Within a cell, we use an implementation very similar to the one from last week, just adapted to a list.
 
 ## Task 3 "Boundary conditions" ##
 
