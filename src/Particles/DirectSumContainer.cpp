@@ -105,10 +105,6 @@ void DirectSumContainer::applyToAll(const std::function<void(Particle &)>& funct
     }
 }
 
-void DirectSumContainer::addParticles(const DirectSumContainer &container) {
-    particles.insert(particles.end(), container.particles.begin(), container.particles.end());
-}
-
 void DirectSumContainer::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
     for(lui i = 0; i < particles.size() - 1; i++){
         for(lui j = i + 1; j < particles.size(); j++){
