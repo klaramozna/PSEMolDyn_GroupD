@@ -4,7 +4,7 @@
 #include <string>
 
 void XMLReaderTest::SetUp() {
-    filename = "../../test/resources/";
+    filename = std::string(TEST_RESOURCES_DIR);
     expectedContainer.getParticleVector().clear();
     receivedContainer.getParticleVector().clear();
 };
