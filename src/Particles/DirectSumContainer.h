@@ -61,12 +61,6 @@ public:
     void addParticle(const Particle& particle) override;
 
     /**
-     * @brief Fuses another DirectSumContainer onto the colllection.
-     * @param container another particle container passed as reference
-     * */
-    void addParticles(const DirectSumContainer &container);
-
-    /**
      * @brief returns the size of the underlying particle vector
      * */
     size_t getSize() override;
