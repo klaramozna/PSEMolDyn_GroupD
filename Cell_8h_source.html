@@ -94,25 +94,28 @@ $(function() {
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCell.html#afae7f626efe98ebfc1c18b12b929e9d1">deleteParticle</a>(<span class="keyword">const</span> <a class="code" href="classParticle.html">Particle</a>&amp; p);</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classCell.html#a8cf0c2dd13477cb67badc450e4732342">contains</a>(<span class="keyword">const</span> <a class="code" href="classParticle.html">Particle</a>&amp; p);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classCell.html#ada9d1bc2cdf27a24841b06bee3106721">contains</a>(<a class="code" href="classParticle.html">Particle</a> p);</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    std::list&lt;Particle&gt; particles;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCell.html#a92fda96a9376311cfb25cec4d1485b4b">applyToPairs</a>(<span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>(<a class="code" href="classParticle.html">Particle</a> &amp;, <a class="code" href="classParticle.html">Particle</a> &amp;)&gt; &amp;<span class="keyword">function</span>);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;};</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160; </div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160; </div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//PSEMOLDYN_GROUPD_CELL_H</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    std::list&lt;Particle&gt; particles;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;};</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160; </div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//PSEMOLDYN_GROUPD_CELL_H</span></div>
 <div class="ttc" id="aParticle_8h_html"><div class="ttname"><a href="Particle_8h.html">Particle.h</a></div><div class="ttdoc">Provides vector operations using simple operators.</div></div>
 <div class="ttc" id="aclassCell_html"><div class="ttname"><a href="classCell.html">Cell</a></div><div class="ttdef"><b>Definition:</b> Cell.h:12</div></div>
 <div class="ttc" id="aclassCell_html_a265a3fee40e6d91e6c6b2cc26ddad622"><div class="ttname"><a href="classCell.html#a265a3fee40e6d91e6c6b2cc26ddad622">Cell::end</a></div><div class="ttdeci">iterator_type end()</div><div class="ttdoc">Returns an iterator pointing after the last particle.</div><div class="ttdef"><b>Definition:</b> Cell.cpp:11</div></div>
 <div class="ttc" id="aclassCell_html_a37525621bdbf000f6602d14b79171a60"><div class="ttname"><a href="classCell.html#a37525621bdbf000f6602d14b79171a60">Cell::iterator_type</a></div><div class="ttdeci">std::list&lt; Particle &gt;::iterator iterator_type</div><div class="ttdoc">Possible types of cells, Inner means inside of boundary, Boundary means on the boundary,...</div><div class="ttdef"><b>Definition:</b> Cell.h:18</div></div>
 <div class="ttc" id="aclassCell_html_a3b4315b8ae69482711c53ee6f41a22ec"><div class="ttname"><a href="classCell.html#a3b4315b8ae69482711c53ee6f41a22ec">Cell::begin</a></div><div class="ttdeci">iterator_type begin()</div><div class="ttdoc">Returns an iterator pointing to the first particle.</div><div class="ttdef"><b>Definition:</b> Cell.cpp:7</div></div>
-<div class="ttc" id="aclassCell_html_a8cf0c2dd13477cb67badc450e4732342"><div class="ttname"><a href="classCell.html#a8cf0c2dd13477cb67badc450e4732342">Cell::contains</a></div><div class="ttdeci">bool contains(const Particle &amp;p)</div><div class="ttdoc">Returns true if the given particle is contained in this cell.</div><div class="ttdef"><b>Definition:</b> Cell.cpp:23</div></div>
+<div class="ttc" id="aclassCell_html_a92fda96a9376311cfb25cec4d1485b4b"><div class="ttname"><a href="classCell.html#a92fda96a9376311cfb25cec4d1485b4b">Cell::applyToPairs</a></div><div class="ttdeci">void applyToPairs(const std::function&lt; void(Particle &amp;, Particle &amp;)&gt; &amp;function)</div><div class="ttdoc">Applies the given function to each distinct pair of particles in the cell.</div><div class="ttdef"><b>Definition:</b> Cell.cpp:27</div></div>
 <div class="ttc" id="aclassCell_html_a98fb40ed98bd5450d1f90150a34552cc"><div class="ttname"><a href="classCell.html#a98fb40ed98bd5450d1f90150a34552cc">Cell::addParticle</a></div><div class="ttdeci">void addParticle(const Particle &amp;p)</div><div class="ttdoc">Adds the given particle to the cell.</div><div class="ttdef"><b>Definition:</b> Cell.cpp:15</div></div>
 <div class="ttc" id="aclassCell_html_aaebed195e45de52ca5a000f9372bab6e"><div class="ttname"><a href="classCell.html#aaebed195e45de52ca5a000f9372bab6e">Cell::Cell</a></div><div class="ttdeci">Cell(const std::list&lt; Particle &gt; &amp;p={})</div><div class="ttdoc">Creates a Cell object, initializing it with the given particles and type.</div><div class="ttdef"><b>Definition:</b> Cell.h:25</div></div>
+<div class="ttc" id="aclassCell_html_ada9d1bc2cdf27a24841b06bee3106721"><div class="ttname"><a href="classCell.html#ada9d1bc2cdf27a24841b06bee3106721">Cell::contains</a></div><div class="ttdeci">bool contains(Particle p)</div><div class="ttdoc">Returns true if the given particle is contained in this cell.</div><div class="ttdef"><b>Definition:</b> Cell.cpp:23</div></div>
 <div class="ttc" id="aclassCell_html_afae7f626efe98ebfc1c18b12b929e9d1"><div class="ttname"><a href="classCell.html#afae7f626efe98ebfc1c18b12b929e9d1">Cell::deleteParticle</a></div><div class="ttdeci">void deleteParticle(const Particle &amp;p)</div><div class="ttdoc">Deletes the given particle from the cell.</div><div class="ttdef"><b>Definition:</b> Cell.cpp:19</div></div>
 <div class="ttc" id="aclassParticle_html"><div class="ttname"><a href="classParticle.html">Particle</a></div><div class="ttdef"><b>Definition:</b> Particle.h:14</div></div>
 </div><!-- fragment --></div><!-- contents -->

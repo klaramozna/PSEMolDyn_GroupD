@@ -95,9 +95,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afae7f626efe98ebfc1c18b12b929e9d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#afae7f626efe98ebfc1c18b12b929e9d1">deleteParticle</a> (const <a class="el" href="classParticle.html">Particle</a> &amp;p)</td></tr>
 <tr class="memdesc:afae7f626efe98ebfc1c18b12b929e9d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Deletes the given particle from the cell.  <a href="classCell.html#afae7f626efe98ebfc1c18b12b929e9d1">More...</a><br /></td></tr>
 <tr class="separator:afae7f626efe98ebfc1c18b12b929e9d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8cf0c2dd13477cb67badc450e4732342"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a8cf0c2dd13477cb67badc450e4732342">contains</a> (const <a class="el" href="classParticle.html">Particle</a> &amp;p)</td></tr>
-<tr class="memdesc:a8cf0c2dd13477cb67badc450e4732342"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the given particle is contained in this cell.  <a href="classCell.html#a8cf0c2dd13477cb67badc450e4732342">More...</a><br /></td></tr>
-<tr class="separator:a8cf0c2dd13477cb67badc450e4732342"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada9d1bc2cdf27a24841b06bee3106721"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#ada9d1bc2cdf27a24841b06bee3106721">contains</a> (<a class="el" href="classParticle.html">Particle</a> p)</td></tr>
+<tr class="memdesc:ada9d1bc2cdf27a24841b06bee3106721"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true if the given particle is contained in this cell.  <a href="classCell.html#ada9d1bc2cdf27a24841b06bee3106721">More...</a><br /></td></tr>
+<tr class="separator:ada9d1bc2cdf27a24841b06bee3106721"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a92fda96a9376311cfb25cec4d1485b4b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCell.html#a92fda96a9376311cfb25cec4d1485b4b">applyToPairs</a> (const std::function&lt; void(<a class="el" href="classParticle.html">Particle</a> &amp;, <a class="el" href="classParticle.html">Particle</a> &amp;)&gt; &amp;function)</td></tr>
+<tr class="memdesc:a92fda96a9376311cfb25cec4d1485b4b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the given function to each distinct pair of particles in the cell.  <a href="classCell.html#a92fda96a9376311cfb25cec4d1485b4b">More...</a><br /></td></tr>
+<tr class="separator:a92fda96a9376311cfb25cec4d1485b4b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Typedef Documentation</h2>
 <a id="a37525621bdbf000f6602d14b79171a60"></a>
@@ -179,6 +182,32 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a92fda96a9376311cfb25cec4d1485b4b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92fda96a9376311cfb25cec4d1485b4b">&#9670;&nbsp;</a></span>applyToPairs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Cell::applyToPairs </td>
+          <td>(</td>
+          <td class="paramtype">const std::function&lt; void(<a class="el" href="classParticle.html">Particle</a> &amp;, <a class="el" href="classParticle.html">Particle</a> &amp;)&gt; &amp;&#160;</td>
+          <td class="paramname"><em>function</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Applies the given function to each distinct pair of particles in the cell. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">function</td><td>The function to be applied. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a3b4315b8ae69482711c53ee6f41a22ec"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3b4315b8ae69482711c53ee6f41a22ec">&#9670;&nbsp;</a></span>begin()</h2>
 
@@ -199,8 +228,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a8cf0c2dd13477cb67badc450e4732342"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8cf0c2dd13477cb67badc450e4732342">&#9670;&nbsp;</a></span>contains()</h2>
+<a id="ada9d1bc2cdf27a24841b06bee3106721"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada9d1bc2cdf27a24841b06bee3106721">&#9670;&nbsp;</a></span>contains()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -208,7 +237,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">bool Cell::contains </td>
           <td>(</td>
-          <td class="paramtype">const <a class="el" href="classParticle.html">Particle</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="classParticle.html">Particle</a>&#160;</td>
           <td class="paramname"><em>p</em></td><td>)</td>
           <td></td>
         </tr>
