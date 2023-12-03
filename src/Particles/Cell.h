@@ -53,7 +53,13 @@ public:
      * @param p The particle to be tested.
      * @return True if the particle is in this cell, false otherwise.
      */
-    bool contains(const Particle& p);
+    bool contains(Particle p);
+
+    /**
+     * @brief Applies the given function to each distinct pair of particles in the cell.
+     * @param function The function to be applied.
+     */
+    void applyToPairs(const std::function<void(Particle &, Particle &)> &function);
 
 private:
     /**

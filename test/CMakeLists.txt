@@ -21,13 +21,19 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/LennardJones.cpp
         ${PROJECT_SOURCE_DIR}/src/utils/CuboidGenerator.cpp
         ${PROJECT_SOURCE_DIR}/src/utils/CuboidGenerator.h
+        ${PROJECT_SOURCE_DIR}/src/Particles/LinkedCellContainer.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/LinkedCellContainer.h
+        ${PROJECT_SOURCE_DIR}/src/Particles/Boundary.h
+        ${PROJECT_SOURCE_DIR}/src/Particles/Boundary.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/CuboidBoundary.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/CuboidBoundary.h
+        ${PROJECT_SOURCE_DIR}/src/Particles/ParticleContainer.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/ParticleContainer.h
+        ${PROJECT_SOURCE_DIR}/src/Particles/Cell.h
+        ${PROJECT_SOURCE_DIR}/src/Particles/Cell.cpp
         ${PROJECT_SOURCE_DIR}/src/IO/input/XMLReader.cpp
         ${PROJECT_SOURCE_DIR}/src/IO/input/SimParameters.cpp
-        ${PROJECT_SOURCE_DIR}/src/IO/input/simulationFormat.cpp
-        ${PROJECT_SOURCE_DIR}/src/Particles/Cell.cpp 
-        ${PROJECT_SOURCE_DIR}/src/Particles/LinkedCellContainer.cpp 
-        ${PROJECT_SOURCE_DIR}/src/Particles/Boundary.cpp 
-        ${PROJECT_SOURCE_DIR}/src/Particles/CuboidBoundary.cpp 
+        ${PROJECT_SOURCE_DIR}/src/IO/input/simulationFormat.cpp 
         CuboidGeneratorTest.cpp
         CuboidGeneratorTest.h
         LinkedCellContainerTest.cpp

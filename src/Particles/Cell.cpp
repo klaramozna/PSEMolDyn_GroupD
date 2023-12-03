@@ -20,8 +20,18 @@ void Cell::deleteParticle(const Particle &p) {
     particles.remove(p);
 }
 
-bool Cell::contains(const Particle &p) {
+bool Cell::contains(Particle p) {
     return std::find(particles.begin(), particles.end(), p) != particles.end();
+}
+
+void Cell::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
+    for(auto outer = particles.begin(); outer != --particles.end(); outer++){
+        auto inner = outer;
+        inner++;
+        for(auto in2 = inner; in2 != particles.end(); in2++){
+            function(*outer, *in2);
+        }
+    }
 }
 
 
