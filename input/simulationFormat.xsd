@@ -75,6 +75,27 @@
     </xs:sequence>
   </xs:complexType>
 
+<!-- Boundary -->
+
+<xs:simpleType name="BoundaryBehavior">
+  <xs:restriction base="xs:string">
+      <xs:enumeration value="Outflow"/>
+      <xs:enumeration value="Reflecting"/>
+  </xs:restriction>
+</xs:simpleType>
+
+
+<xs:complexType name="Boundaries">
+  <xs:sequence>
+      <xs:element name="BoxSize" type="double_3d"/>
+      <xs:element name="Front" type="BoundaryBehavior"/>
+      <xs:element name="Back" type="BoundaryBehavior"/>
+      <xs:element name="Top" type="BoundaryBehavior"/>
+      <xs:element name="Right" type="BoundaryBehavior"/>
+      <xs:element name="Bottom" type="BoundaryBehavior"/>
+      <xs:element name="Left" type="BoundaryBehavior"/>
+  </xs:sequence>
+</xs:complexType>
 
 <!-- Specify Program Arguments -->
 
@@ -87,6 +108,8 @@
         <xs:element name="delta_t" type="xs:double" minOccurs="0" maxOccurs="1" default="0.0002"/>
         <xs:element name="force" type="ForceType" minOccurs="0" maxOccurs="1"/>
         <xs:element name="averageVelo" type="xs:double" minOccurs="0" maxOccurs="1" default="0.1"/> <!-- Brownian Motion average velocity -->
+        <xs:element name = "boundaries" type="Boundaries" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="cutoffRadius" type="nonNegativeDouble" minOccurs="0" maxOccurs="1" default="3.0"/>
 
         
         <!-- Provide Particles -->
