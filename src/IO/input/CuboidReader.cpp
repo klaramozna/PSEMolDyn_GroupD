@@ -7,6 +7,7 @@
 #include <regex>
 #include "../Logger.h"
 
+
 void CuboidReader::readFile(DirectSumContainer &container, std::string &filename) {
     std::ifstream inputFile(filename);
     std::string line;

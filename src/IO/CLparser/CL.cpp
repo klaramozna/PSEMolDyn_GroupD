@@ -33,7 +33,23 @@ std::string CL::produce_help_message(const po::options_description &desc){
     return oss.str();
 }
 
-int CL::parse_arguments(int argc, char *argsv[], double& end_time, double& delta_t, int& log_level, std::string& input_path, std::string& input_mode, std::string& force, double& averageVelo, bool& testing){
+bool hasXMLExtension(const std::string& input_path) {
+    std::string lowercasePath = input_path;
+    std::transform(lowercasePath.begin(), lowercasePath.end(), lowercasePath.begin(), ::tolower);
+    return (lowercasePath.length() >= 4 && lowercasePath.substr(lowercasePath.length() - 4) == ".xml");
+}
+
+int CL::parse_arguments(int argc, char *argsv[], SimParameters& simParameters){
+    double end_time;
+    double delta_t;
+    double averageVelo;
+
+    bool testing;
+
+    int log_level;
+    std::string input_path;
+    std::string input_mode;
+    std::string force;
     desc.add_options()
         ("help,h", "produce help message")
         ("input_mode,m", po::value<std::string>(&input_mode)->default_value("cuboid"), "Select between modes of input (cuboid or particle)")
@@ -52,7 +68,7 @@ int CL::parse_arguments(int argc, char *argsv[], double& end_time, double& delta
         }), "sets the log level (0: trace, 1: debug, 2: info, 3: warning, 4: error, 5: critical, 6: off)")
         ;
 
-    Logger::console->info("Hello from MolSim for PSE!");
+    
 
     po::variables_map vm;
     try {
@@ -75,7 +91,12 @@ int CL::parse_arguments(int argc, char *argsv[], double& end_time, double& delta
     }
     if (vm.count("input_path") && std::filesystem::exists(vm["input_path"].as<std::string>())) {
         input_path = vm["input_path"].as<std::string>();
-        Logger::console->info("Input path: {}", input_path);
+        if (hasXMLExtension(input_path)){
+            simParameters.setInputMode("xml");
+            simParameters.setInputPath(input_path);
+            Logger::console->debug("Reading from XML: {}", input_path);
+            return 0;
+        }
     } else {
         Logger::err_logger->error("Input file not specified or invalid.");
         Logger::console->info("{}", produce_help_message(desc));
@@ -111,6 +132,15 @@ int CL::parse_arguments(int argc, char *argsv[], double& end_time, double& delta
         Logger::console->info("{}", produce_help_message(desc));
         return 1;
     }
+
+    simParameters.setAverageVelo(averageVelo);
+    simParameters.setDeltaT(delta_t);
+    simParameters.setEndTime(end_time);
+    simParameters.setForce(force);
+    simParameters.setInputMode(input_mode);
+    simParameters.setInputPath(input_path);
+    simParameters.setLogLevel(log_level);
+    simParameters.setTesting(testing);
 
     return 0;
 }

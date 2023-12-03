@@ -6,6 +6,8 @@ file(GLOB_RECURSE TEST_SRC
 set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Particles/DirectSumContainer.cpp
         ${PROJECT_SOURCE_DIR}/src/Particles/DirectSumContainer.h
+        ${PROJECT_SOURCE_DIR}/src/Particles/ParticleContainer.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/ParticleContainer.h
         ${PROJECT_SOURCE_DIR}/src/Particles/Particle.cpp
         ${PROJECT_SOURCE_DIR}/src/Particles/Particle.h
         ${PROJECT_SOURCE_DIR}/src/utils/ArrayUtils.h
@@ -29,6 +31,13 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Particles/ParticleContainer.h
         ${PROJECT_SOURCE_DIR}/src/Particles/Cell.h
         ${PROJECT_SOURCE_DIR}/src/Particles/Cell.cpp
+        ${PROJECT_SOURCE_DIR}/src/IO/input/XMLReader.cpp
+        ${PROJECT_SOURCE_DIR}/src/IO/input/SimParameters.cpp
+        ${PROJECT_SOURCE_DIR}/src/IO/input/simulationFormat.cpp 
+        CuboidGeneratorTest.cpp
+        CuboidGeneratorTest.h
+        LinkedCellContainerTest.cpp
+        LinkedCellContainerTest.h
 )
 
 add_executable(
@@ -38,6 +47,7 @@ add_executable(
 )
 
 target_include_directories(particleContainer_test
+        PUBLIC ${CMAKE_SOURCE_DIR}/libs/libxsd
         PUBLIC ${CMAKE_SOURCE_DIR}/libs/
 )
 
@@ -45,7 +55,7 @@ target_link_libraries(
         particleContainer_test
         GTest::gtest
         GTest::gtest_main
+        xerces-c
 )
-
 include(GoogleTest)
 gtest_discover_tests(particleContainer_test)
