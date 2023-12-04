@@ -100,6 +100,20 @@ void XMLReader::readFile(const std::shared_ptr<ParticleContainer> &container, st
     }
 
 
+         if (sim->boundaries()) {
+            std::array <double,3> boxSize {sim->boundaries()->BoxSize().x(), sim->boundaries()->BoxSize().y(), sim->boundaries()->BoxSize().z()};
+            SimParameters.setBoxSize(boxSize);
+            std::array<std::string, 6> bound_beh {sim->boundaries()->Front(),
+                                                     sim->boundaries()->Back(), 
+                                                     sim->boundaries()->Top(), 
+                                                     sim->boundaries()->Right(),
+                                                     sim->boundaries()->Bottom(),
+                                                     sim->boundaries()->Left() };
+            SimParameters.setBoundaryBehavior(bound_beh);
+        }
+        if (sim->cutoffRadius().present()){
+            SimParameters.setCutoffRadius(sim->cutoffRadius().get());
+        }
 
     }
     catch (const xml_schema::exception& e) {
