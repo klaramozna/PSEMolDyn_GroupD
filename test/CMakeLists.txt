@@ -22,6 +22,8 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/LennardJones.cpp
         ${PROJECT_SOURCE_DIR}/src/utils/CuboidGenerator.cpp
         ${PROJECT_SOURCE_DIR}/src/utils/CuboidGenerator.h
+        ${PROJECT_SOURCE_DIR}/src/utils/SphereGenerator.cpp
+        ${PROJECT_SOURCE_DIR}/src/utils/SphereGenerator.h
         ${PROJECT_SOURCE_DIR}/src/Particles/LinkedCellContainer.cpp
         ${PROJECT_SOURCE_DIR}/src/Particles/LinkedCellContainer.h
         ${PROJECT_SOURCE_DIR}/src/Particles/CuboidBoundary.cpp

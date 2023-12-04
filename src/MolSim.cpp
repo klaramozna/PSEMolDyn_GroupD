@@ -21,6 +21,11 @@
 #include "IO/Logger.h"
 #include <IO/CLparser/CL.h>
 
+/* Generators for Particles */
+#include "Particles/ParticleGenerator.h"
+#include "utils/CuboidGenerator.h"
+#include "utils/SphereGenerator.h"
+
 
 int main(int argc, char *argsv[]) {
     CL cl;
