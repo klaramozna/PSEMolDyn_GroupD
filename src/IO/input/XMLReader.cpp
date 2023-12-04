@@ -78,8 +78,9 @@ void XMLReader::readFile(const std::shared_ptr<ParticleContainer> &container, st
             double mass = cuboid.mass();
             std::array<double, 3> velocity = {cuboid.initial_velocity().x(), cuboid.initial_velocity().y(), cuboid.initial_velocity().z()};
             CuboidGenerator generator {lowerLeftCoord, n1, n2, n3, distance, mass, velocity};
-            DirectSumContainer readContainer = generator.generateParticles(i);
-            container->addParticles(readContainer.getParticleVector());
+
+            std::vector<Particle> readContainer = generator.generateParticles(i);
+            container->addParticles(readContainer);
             i++;
     }
 

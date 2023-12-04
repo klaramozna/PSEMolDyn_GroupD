@@ -91,7 +91,7 @@ DirectSumContainer::PairIterator DirectSumContainer::endPair() {
     return PairIterator{particles.size(), particles.size(), particles};
 }
 
-std::vector<Particle> &DirectSumContainer::getParticleVector() {
+std::vector<Particle> DirectSumContainer::getParticleVector() {
     return particles;
 }
 
@@ -105,10 +105,6 @@ void DirectSumContainer::applyToAll(const std::function<void(Particle &)>& funct
     }
 }
 
-void DirectSumContainer::addParticles(const DirectSumContainer &container) {
-    particles.insert(particles.end(), container.particles.begin(), container.particles.end());
-}
-
 void DirectSumContainer::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
     for(lui i = 0; i < particles.size() - 1; i++){
         for(lui j = i + 1; j < particles.size(); j++){
@@ -116,5 +112,3 @@ void DirectSumContainer::applyToPairs(const std::function<void(Particle &, Parti
         }
     }
 }
-
-void DirectSumContainer::applyBoundaryConditions(Boundary &boundary) {}

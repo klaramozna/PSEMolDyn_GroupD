@@ -11,7 +11,6 @@
 class ParticleWriter {
 public:
     virtual ~ParticleWriter() = default;
-    virtual void plotParticles(std::vector<Particle> &particleVector, const std::string &filename,
-                               int iteration) = 0;
+    virtual void plotParticles(std::vector<Particle> &particleVector, const std::string &filename, int iteration) = 0;
 };
 

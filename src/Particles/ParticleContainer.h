@@ -7,7 +7,7 @@
 #include <functional>
 #include "Particle.h"
 
-class Boundary;
+class BoundaryActions;
 
 class ParticleContainer {
 public:
@@ -45,13 +45,7 @@ public:
      * @brief Returns a vector of all particles in the container.
      * @return The vector with the particles of the container.
      */
-    virtual std::vector<Particle>& getParticleVector() = 0;
-
-    /**
-     * @brief Apply boundary constraints according to the passed object
-     * @param boundary Boundary which specifies how the particles get processed
-     */
-    virtual void applyBoundaryConditions(Boundary &boundary) = 0;
+    virtual std::vector<Particle> getParticleVector() = 0;
 
 
     /**

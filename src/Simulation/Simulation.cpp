@@ -11,25 +11,24 @@
 #include <utility>
 
 Simulation::Simulation(double delta_t,
-                       std::shared_ptr<ParticleContainer> &&container_,
+                       std::shared_ptr<ParticleContainer> container,
                        ForceCalculation &calculation,
                        double averageVelo,
-                       std::unique_ptr<Boundary> &&boundary) :
-                        container_{std::move(container_)},
+                       CuboidBoundary &boundary) :
+                        container{std::move(container)},
                         forceCalculation{calculation},
-                        boundary{std::move(boundary)},
+                        boundary{boundary},
                         delta_t{delta_t},
                         averageVelo{averageVelo} {
-        this->container_->applyToAll([this](Particle& particle){
+        this->container->applyToAll([this](Particle& particle){
             VectorDouble3 randomVelo(maxwellBoltzmannDistributedVelocity(this->averageVelo, 3));
             particle.setV(randomVelo);
-    });
-}
+            }
+        );
+};
 
-Simulation::~Simulation() = default;
-
-std::vector<Particle>& Simulation::getParticles() {
-    return container_->getParticleVector();
+std::vector<Particle> Simulation::getParticles() {
+    return container->getParticleVector();
 }
 
 
@@ -50,19 +49,18 @@ void Simulation::calculateX(Particle& p) const {
     p.setX(x_i);
 }
 
+
 void Simulation::runIteration() {
     // calculate new x
-    container_->applyToAll([this](Particle& p) { calculateX(p); });
+    container->applyToAll([this](Particle& p) { calculateX(p); });
     // calculate new f
-    container_->applyToAll([](Particle& p) { setOldForce(p); });
+    container->applyToAll([](Particle& p) { setOldForce(p); });
 
-    container_->applyBoundaryConditions(*boundary);
-
-    container_->applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
+    container->applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
     // calculate new v
-    container_->applyToAll([this](Particle& p) { calculateV(p); });
-
+    container->applyToAll([this](Particle& p) { calculateV(p); });
 }
+
 
 void Simulation::setOldForce(Particle& p) {
     p.setOldF((p.getFVector()));

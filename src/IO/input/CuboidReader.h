@@ -8,11 +8,10 @@ public:
     ~CuboidReader() = default;
     /**
      * @brief Reads a file containing data to generate multiple cuboids and dumps the cuboids onto the container
-     * @param container DirectSumContainer that will receive the read-in particles
+     * @param container ParticleContainer that will receive the read-in particles
      * @param filename Input file
      * */
     void readFile(const std::shared_ptr<ParticleContainer> &container, std::string &filename) override;
-
 
 private:
     int numberOfCuboids{};

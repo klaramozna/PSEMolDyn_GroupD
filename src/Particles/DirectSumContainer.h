@@ -61,12 +61,6 @@ public:
     void addParticle(const Particle& particle) override;
 
     /**
-     * @brief Fuses another DirectSumContainer onto the colllection.
-     * @param container another particle container passed as reference
-     * */
-    void addParticles(const DirectSumContainer &container);
-
-    /**
      * @brief returns the size of the underlying particle vector
      * */
     size_t getSize() override;
@@ -87,7 +81,7 @@ public:
      * @brief Returns a vector of all stored particles.
      * @return the vector.
      */
-    std::vector<Particle> &getParticleVector() override;
+    std::vector<Particle> getParticleVector() override;
 
     /**
      * @brief Applies the given function to all particles
@@ -100,12 +94,6 @@ public:
      * @param function is the function to be applied to the particle pairs
      */
     void applyToPairs(const std::function<void(Particle&, Particle&)>& function) override;
-
-    /**
-     * @brief Processes the boundary (in this direct sum implementation, it does nothimg
-     * @param forceCalculation determines what type of force should be applied to enforce the boundary
-     * */
-     void applyBoundaryConditions(Boundary& Boundary) override;
 
     /**
      * @brief Implements an iterator that simulated a nested loop (two for loops), but skips the case where the particle in the outer loop is the same as the particle in the inner loop.

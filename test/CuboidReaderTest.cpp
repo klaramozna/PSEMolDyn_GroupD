@@ -9,7 +9,7 @@
 #include <regex>
 
 void CuboidReaderTest::SetUp() {
-    filename = "../../test/resources/";
+    filename = std::string(TEST_RESOURCES_DIR);
     expectedContainer.getParticleVector().clear();
     receivedContainer_ptr->getParticleVector().clear();
 };
@@ -31,7 +31,7 @@ TEST_F(CuboidReaderTest, TestSimple1Cuboid) {
     filename.append("simpleCuboid.txt");
     reader.readFile(receivedContainer_ptr, filename);
 
-    expectedContainer = simpleCube.generateParticles();
+    expectedContainer = DirectSumContainer(simpleCube.generateParticles());
 
     ASSERT_EQ(expectedContainer.getSize(), receivedContainer_ptr->getSize()) << "Containers didn't match in size";
 
@@ -132,7 +132,7 @@ TEST_F(CuboidReaderTest, TestTwoCorrectCuboids) {
     filename.append("twoCuboids.txt");
     reader.readFile(receivedContainer_ptr, filename);
 
-    expectedContainer = firstCube.generateParticles();
+    expectedContainer = DirectSumContainer(firstCube.generateParticles());
     expectedContainer.addParticles(secondCube.generateParticles());
 
     ASSERT_TRUE(expectedContainer.getSize() == receivedContainer_ptr->getSize()) << "Containers didn't match in size";

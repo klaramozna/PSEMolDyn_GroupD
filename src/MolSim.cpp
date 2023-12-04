@@ -13,30 +13,26 @@
 /* Simulation Logic */
 #include "Simulation/Simulation.h"
 #include "Particles/DirectSumContainer.h"
+#include "Particles/LinkedCellContainer.h"
 #include "Simulation/Physics/GravitationalForce.h"
 #include "Simulation/Physics/LennardJones.h"
-#include "Simulation/Boundary.h"
-#include "Simulation/OutflowBoundary.h"
 
 /* Logging */
 #include "IO/Logger.h"
 #include <IO/CLparser/CL.h>
 
-/* TODO:
- * 1. Boundary is hard-coded in the simulation (Line 73) -> Implement boundary types by XML line
- * 2.
- * */
 
 int main(int argc, char *argsv[]) {
     CL cl;
 
     std::unique_ptr<ParticleReader> reader;
     std::unique_ptr<ForceCalculation> forceCalculation;
-    std::shared_ptr<ParticleContainer> container = std::make_shared<DirectSumContainer>();
 
     outputWriter::VTKWriter writer;
     SimParameters simParameters;
     int status = cl.parse_arguments(argc, argsv, simParameters);
+
+    double cutoffRadius = 3.0;
 
     //any error in parsing
     if (status) {
@@ -64,15 +60,6 @@ int main(int argc, char *argsv[]) {
         Logger::err_logger->error("Reader was not correctly initialized");
         exit(-1);
     }
-
-    /* This is supposed to be passed as parameter in the XML file. */
-
-    if (simParameters.getInputMode() == "xml") {
-        reader->readFile(container, input_path, simParameters);
-    }
-    else {
-        reader->readFile(container, input_path);
-    }
     
     Logger::console->info("Hello from MolSim for PSE!");
 
@@ -86,12 +73,17 @@ int main(int argc, char *argsv[]) {
         Logger::console->info("Force set to grav");
     }
 
+    CuboidBoundary boundary(180, 90, 1);
+    std::shared_ptr<ParticleContainer> container = std::make_shared<LinkedCellContainer>(boundary, cutoffRadius);
 
-    std::unique_ptr<Boundary> boundary = std::make_unique<OutflowBoundary>(
-            std::array<double, 3>{0.0, 0.0, 0.0},
-            std::array<double, 3>{10.0, 10.0, 10.0},
-            *forceCalculation
-    );
+    /* This is supposed to be passed as parameter in the XML file. */
+
+    if (simParameters.getInputMode() == "xml") {
+        reader->readFile(container, input_path, simParameters);
+    }
+    else {
+        reader->readFile(container, input_path);
+    }
 
     Logger::console->info("Calculating ...");
    
@@ -100,10 +92,10 @@ int main(int argc, char *argsv[]) {
 
     Simulation simulation(
             simParameters.getDeltaT(),
-            std::move(container),
+            container,
             *forceCalculation,
             simParameters.getAverageVelo(),
-            std::move(boundary)
+            boundary
     );
 
     // This is ugly and shouldn't be in main, but it is for a later refactor
@@ -122,12 +114,14 @@ int main(int argc, char *argsv[]) {
         Logger::console->info("Time taken: {} milliseconds", duration.count());
     } else {
         // for this loop, we assume: current x, current f and current v are known
+        std::vector<Particle> particleVector;
         while (current_time < simParameters.getEndTime()) {
             simulation.runIteration();
 
             iteration++;
             if (iteration % 10 == 0) {
-                writer.plotParticles(simulation.getParticles(), simParameters.getBaseName(), iteration);
+                particleVector = simulation.getParticles();
+                writer.plotParticles(particleVector, simParameters.getBaseName(), iteration);
             }
 
             Logger::console->info("Iteration {} finished.", iteration);

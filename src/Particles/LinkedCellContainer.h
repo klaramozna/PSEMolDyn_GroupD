@@ -5,10 +5,10 @@
 #pragma once
 
 #include "ParticleContainer.h"
-#include "../Simulation/Boundary.h"
+#include "CuboidBoundary.h"
 #include "Cell.h"
 
-class Boundary;
+#include "BoundaryCellsIterator.h"
 
 class LinkedCellContainer : public ParticleContainer {
 public:
@@ -18,7 +18,7 @@ public:
      * @param cutoffRadius Radius in which the particles affect each other.
      * @param particles The particles to be added to the container.
      */
-    LinkedCellContainer(Boundary &boundary, double cutoffRadius, const std::vector<Particle>& particles = {});
+    LinkedCellContainer(CuboidBoundary &boundary, double cutoffRadius, const std::vector<Particle>& particles = {});
 
     /**
      * @brief Adds the given particle to the container.
@@ -48,7 +48,7 @@ public:
      * @brief Returns a vector of all particles in the container.
      * @return The vector with the particles of the container.
      */
-    std::vector<Particle>& getParticleVector() override;
+    std::vector<Particle> getParticleVector() override;
 
     /**
      * @brief Applies the given function to each particle in the boundary
@@ -59,15 +59,29 @@ public:
     /**
      * @brief Deletes particles outside of the boundary from the container.
      */
-    void deleteHaloParticles(Boundary &boundary);
-
-    void applyBoundaryConditions(Boundary &boundary) override;
+    void deleteHaloParticles();
 
     /**
      * @brief Only for testing purposes. Dont use.
      * @return Returns the vector of Cells.
      */
     std::vector<Cell> getCells();
+
+    /**
+    * @brief Returns an iterator pointing to the beginning of the boundary cells.
+    * @return BoundaryCellIterator pointing to the beginning of the boundary cells.
+    */
+    auto beginBoundaryCells() {
+        return BoundaryCellIterator(boundaryCells_ptr, 0);
+    }
+
+    /**
+     * @brief Returns an iterator pointing to the end of the boundary cells.
+     * @return BoundaryCellIterator pointing to the end of the boundary cells.
+     */
+    auto endBoundaryCells() {
+        return BoundaryCellIterator(boundaryCells_ptr, boundaryCells_ptr.size());
+    }
 
 private:
 
@@ -80,6 +94,11 @@ private:
      * @brief Vector containing boundary cells
      */
     std::vector<Cell *> boundaryCells_ptr;
+
+    /**
+     * @brief Reference to BoundaryControl
+     * */
+     CuboidBoundary& boundary;
 
 
     /**
@@ -108,12 +127,6 @@ private:
      * @brief Number of particles in the container.
      */
     size_t size;
-
-    /**
-     * @brief Puts particles from the given vector to their correct cells.
-     * @param particles The particles to be put in their cells.
-     */
-    void putParticlesToCells(const std::vector<Particle>& particles);
 
     /**
      * @brief Deletes the given particle from the cell with the index oldCell and adds it to the cell with the index newCell
@@ -174,4 +187,11 @@ private:
      * @param z Integer defining the 3rd entry of the multi-index
      */
      bool isBoundaryCell(int x, int y, int z);
+
+     /**
+      * @brief Returns true if the given particle is positioned outside of the grid.
+      * @param p The particle to be evaluated.
+      * @return True rue if the given particle is positioned outside of the grid, otherwise false.
+      */
+     bool particleOutOfGrid(const Particle& p);
 };

@@ -5,7 +5,6 @@
 #include <regex>
 #include "../Logger.h"
 
-
 void CuboidReader::readFile(const std::shared_ptr<ParticleContainer> &container, std::string &filename) {
     std::ifstream inputFile(filename);
     std::string line;
@@ -48,8 +47,10 @@ void CuboidReader::readFile(const std::shared_ptr<ParticleContainer> &container,
             }
 
             CuboidGenerator generator = parseLine(line);
-            DirectSumContainer readContainer = generator.generateParticles(i);
-            container->addParticles(readContainer.getParticleVector());
+
+            std::vector<Particle> readContainer = generator.generateParticles(i);
+            container->addParticles(readContainer);
+
         }
     } catch (const std::exception &ex) {
         Logger::err_logger->error("Error: {}", ex.what());

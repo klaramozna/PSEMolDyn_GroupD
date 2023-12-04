@@ -4,7 +4,7 @@
 #include <string>
 
 void XMLReaderTest::SetUp() {
-    filename = "../../test/resources/";
+    filename = std::string(TEST_RESOURCES_DIR);
     expectedContainer.getParticleVector().clear();
     receivedContainer.getParticleVector().clear();
 };
@@ -26,7 +26,7 @@ TEST_F(XMLReaderTest, TestSimple1XMLReader) {
     filename.append("simpleCuboid.xml");
     xmlreader.readFile(receivedContainer, filename, receivedSimParameters);
 
-    expectedContainer = simpleCube.generateParticles();
+    expectedContainer = DirectSumContainer(simpleCube.generateParticles());
 
     ASSERT_EQ(expectedContainer.getSize(), receivedContainer.getSize()) << "Containers didn't match in size";
 

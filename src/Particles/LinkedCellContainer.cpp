@@ -3,21 +3,25 @@
 //
 
 #include "LinkedCellContainer.h"
+#include "../utils/VectorDouble3.h"
+#include <stdexcept>
 #include <cmath>
+#include <iostream>
 
-LinkedCellContainer::LinkedCellContainer(Boundary &boundary, double cutoffRadius,
-                                         const std::vector<Particle>& particles) : cutoffRadius{cutoffRadius} {
+
+LinkedCellContainer::LinkedCellContainer(CuboidBoundary &boundary, double cutoffRadius,
+                                         const std::vector<Particle>& particles) : boundary{boundary}, cutoffRadius{cutoffRadius}, grid{} {
     size = particles.size();
     cellSize = cutoffRadius;
 
     // Calculate number of cells in each axis
     for (int i = 0; i < 3; i++) {
-        nc[i] = std::floor(boundary.getDimensions()[i] / cellSize) == boundary.getDimensions()[i] / cellSize ? boundary.getDimensions()[i] + 2 : boundary.getDimensions()[i] + 3;
+        nc[i] = std::ceil(boundary.getDimensions()[i]/cellSize) + 2;
     }
 
     // Defines by how much each dimension in the grid needs to be shifted so that the grid is symmetrical to the boundary
     for (int i = 0; i < 3; i++) {
-        gridShift[i] = 1 + (nc[i] * cellSize - boundary.getDimensions()[i]) / 2;
+        gridShift[i] = (nc[i] * cellSize - boundary.getDimensions()[i]) / 2;
     }
 
     // Initialize grid
@@ -34,7 +38,7 @@ LinkedCellContainer::LinkedCellContainer(Boundary &boundary, double cutoffRadius
         }
     }
 
-    putParticlesToCells(particles);
+    addParticles(particles);
 }
 
 
@@ -43,13 +47,12 @@ size_t LinkedCellContainer::getSize() {
     return size;
 }
 
-std::vector<Particle> &LinkedCellContainer::getParticleVector() {
-    /*std::vector<Particle> result{};
+std::vector<Particle> LinkedCellContainer::getParticleVector() {
+    std::vector<Particle> result{};
     for(auto & it : grid){
         result.insert(result.end(), it.begin(), it.end());
     }
-    return result;*/
-    //TODO: does it need to be a reference
+    return result;
 }
 
 void LinkedCellContainer::updateCells() {
@@ -64,19 +67,18 @@ void LinkedCellContainer::updateCells() {
 
 void LinkedCellContainer::moveParticle(const Particle &p1, int oldCell, int newCell) {
     grid[oldCell].deleteParticle(p1);
-    grid[newCell].addParticle(p1);
-}
-
-void LinkedCellContainer::putParticlesToCells(const std::vector<Particle> &particles) {
-    for(auto & p : particles){
-        int index = getParticleIndex(p);
-        grid[index].addParticle(p);
+    if(particleOutOfGrid(p1)){
+        size--;
     }
+    else{
+        grid[newCell].addParticle(p1);
+    }
+
 }
 
 void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &function) {
     // Creating a vector for marking particles that need to be moved
-    std::vector<std::pair<Particle, int>> particlesToBeMoved{}; // stores each particle that needs to be moved with the cell it's beeing moved from
+    std::vector<std::pair<Particle, int>> particlesToBeMoved{}; // stores each particle that needs to be moved with the cell it's being moved from
     particlesToBeMoved.reserve(size);
 
     // Applying given function to each particle and marking particles for movement
@@ -100,23 +102,36 @@ bool LinkedCellContainer::isInCorrectCell(const Particle &p, int currentIndex) {
 }
 
 void LinkedCellContainer::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
-    // Iterate over positions
-    for(int x = 0; x < nc[0]; x++){
-        for(int y = 0; y < nc[1]; y++){
-            for(int z = 0; z < nc[2]; z++){
+    // Iterate over all cells
+    for(int z = 0; z < nc[2]; z++) {
+        for (int y = 0; y < nc[1]; y++) {
+            for (int x = 0; x < nc[0]; x++) {
+
+
                 // Find out where is the current cell in the grid vector
                 int currentGridIndex = getGridIndex(x, y, z);
+
+                // Apply function within current cell
+                grid[currentGridIndex].applyToPairs(function);
+
                 // Iterate over current cell
-                for(auto & pCurrent : grid[currentGridIndex]){
+                for (auto &pCurrent: grid[currentGridIndex]) {
+
                     // Find neighbours
-                    for(int i = x - 1; i < x + 1; i++){
-                        for(int j = y - 1; j < y + 1; j++){
-                            for(int k = z - 1; k < z + 1; k++){
-                                // Iterate over neighbour
-                                if(cellWithinRadius(pCurrent, i, j, k)){
-                                    for(auto & pNeighbour : grid[getGridIndex(i, j, k)]){
+                    for (int i = z - 1; i <= z + 1; i++) {
+                        for (int j = y - 1; j <= y + 1; j++) {
+                            for (int k = x - 1; k <= x + 1; k++) {
+
+                                int neighbourGridIndex = getGridIndex(k, j, i);
+
+                                // Check if the neighbour has not yet been iterated over and if it is still inside the grid
+                                if (neighbourGridIndex > currentGridIndex &&
+                                    (k >= 0 && j >= 0 && i >= 0 && k < nc[0] && j < nc[1] && i < nc[2])) {
+
+                                    // Iterate over neighbour
+                                    for (auto &pNeighbour: grid[getGridIndex(k, j, i)]) {
                                         // Apply function
-                                        if(pCurrent != pNeighbour && particleWithinCutoff(pCurrent, pNeighbour)){
+                                        if (pCurrent != pNeighbour && particleWithinCutoff(pCurrent, pNeighbour)) {
                                             function(pCurrent, pNeighbour);
                                         }
                                     }
@@ -156,14 +171,23 @@ void LinkedCellContainer::applyToBoundary(const std::function<void(Particle (&))
 }
 
 
-/* Not sure if this is a great idea, but alas */
-void LinkedCellContainer::deleteHaloParticles(Boundary &boundary) {
-    for (auto & cell : grid) {
-        for (auto & particle : cell) {
-            if (!boundary.isInside(particle)) {
-                cell.deleteParticle(particle);
+void LinkedCellContainer::deleteHaloParticles() {
+    // Creating a vector for marking particles that need to be deleted
+    std::vector<std::pair<Particle, int>> particlesToBeDeleted{}; // stores each particle that needs to be deleted with the cell it's being deleted from
+
+    // Applying given function to each particle and marking particles for movement
+    for(int i = 0; i < grid.size(); i++){
+        for(auto & particle : grid[i]){
+            if(!boundary.isInside(particle)){
+                particlesToBeDeleted.emplace_back(particle, i);
             }
         }
+    }
+
+    // Deleting halo particles
+    for(auto & particle : particlesToBeDeleted){
+        grid[particle.second].deleteParticle(particle.first);
+        size--;
     }
 }
 
@@ -172,6 +196,9 @@ bool LinkedCellContainer::isBoundaryCell(int x, int y, int z) {
 }
 
 void LinkedCellContainer::addParticle(const Particle &p) {
+    if(getParticleIndex(p) < 0 || getParticleIndex(p) >= grid.size()){
+        throw std::runtime_error("Particle out of domain.");
+    }
     grid[getParticleIndex(p)].addParticle(p);
     size++;
 }
@@ -187,6 +214,9 @@ bool LinkedCellContainer::cellWithinRadius(const Particle &p, int x, int y, int 
     return particleWithinCutoff(p, Particle{std::array<double, 3>{middleX, middleY, middleZ}, std::array<double, 3>{}, 0});
 }
 
-void LinkedCellContainer::applyBoundaryConditions(Boundary &boundary) {
-    boundary.processBoundary(*this);
+bool LinkedCellContainer::particleOutOfGrid(const Particle &p) {
+    int x = floor((p.getX()[0] + gridShift[0]) / cellSize);
+    int y = floor((p.getX()[1] + gridShift[1]) / cellSize);
+    int z = floor((p.getX()[2] + gridShift[2]) / cellSize);
+    return x < 0 || y < 0 || z < 0 || x >= nc[0] || y >= nc[1] || z >= nc[2];
 }

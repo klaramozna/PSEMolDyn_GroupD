@@ -2,25 +2,26 @@
 // Created by rodff on 01.11.23.
 //
 
-#ifndef PSEMOLDYN_GROUPD_SIMULATION_H
-#define PSEMOLDYN_GROUPD_SIMULATION_H
-
 #pragma once
 
 #include <list>
 #include <memory>
+
+// Particle imports
+#include "../Particles/ParticleContainer.h"
 #include "../Particles/Particle.h"
-#include "../Particles/DirectSumContainer.h"
-#include "./Physics/ForceCalculation.h"
-#include "Boundary.h"
+#include "../Particles/CuboidBoundary.h"
+
+// Physics imports
+#include "Physics/ForceCalculation.h"
 
 class Simulation {
 private:
     static constexpr double start_time = 0;
 
-    std::shared_ptr<ParticleContainer> container_;
+    std::shared_ptr<ParticleContainer> container;
     ForceCalculation &forceCalculation;
-    std::unique_ptr<Boundary> boundary;
+    CuboidBoundary &boundary;
 
     double delta_t;
     double averageVelo;
@@ -46,19 +47,17 @@ private:
     static void setOldForce(Particle& p);
 
 public:
-    Simulation(double delta_t, std::shared_ptr<ParticleContainer> &&container, ForceCalculation &calculation, double averageVelo, std::unique_ptr<Boundary> &&boundary);
-    virtual ~Simulation();
+    Simulation(double delta_t, std::shared_ptr<ParticleContainer> container, ForceCalculation &calculation, double averageVelo, CuboidBoundary &boundary);
+    ~Simulation() = default;
 
     /**
      * @brief Returns a vector of particles.
      * @return Vector Container.
      */
-    std::vector<Particle>& getParticles();
+    std::vector<Particle> getParticles();
 
     /**
      * @brief run one iteration of the simulation, meaning position, force and then velocity
      */
     void runIteration();
 };
-
-#endif //PSEMOLDYN_GROUPD_SIMULATION_H

@@ -2,7 +2,8 @@ file(GLOB_RECURSE TEST_SRC
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.h"
 )
-
+# Define the path to test resources relative to the project directory
+set(TEST_RESOURCES_DIR ${CMAKE_SOURCE_DIR}/test/resources/)
 set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Particles/DirectSumContainer.cpp
         ${PROJECT_SOURCE_DIR}/src/Particles/DirectSumContainer.h
@@ -21,15 +22,19 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/LennardJones.cpp
         ${PROJECT_SOURCE_DIR}/src/utils/CuboidGenerator.cpp
         ${PROJECT_SOURCE_DIR}/src/utils/CuboidGenerator.h
+        ${PROJECT_SOURCE_DIR}/src/Particles/LinkedCellContainer.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/LinkedCellContainer.h
+        ${PROJECT_SOURCE_DIR}/src/Particles/CuboidBoundary.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/CuboidBoundary.h
+        ${PROJECT_SOURCE_DIR}/src/Particles/ParticleContainer.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/ParticleContainer.h
+        ${PROJECT_SOURCE_DIR}/src/Particles/Cell.h
+        ${PROJECT_SOURCE_DIR}/src/Particles/Cell.cpp
         ${PROJECT_SOURCE_DIR}/src/IO/input/XMLReader.cpp
         ${PROJECT_SOURCE_DIR}/src/IO/input/SimParameters.cpp
         ${PROJECT_SOURCE_DIR}/src/IO/input/simulationFormat.cpp
         ${PROJECT_SOURCE_DIR}/src/Particles/Cell.cpp 
         ${PROJECT_SOURCE_DIR}/src/Particles/LinkedCellContainer.cpp
-        CuboidGeneratorTest.cpp
-        CuboidGeneratorTest.h
-        LinkedCellContainerTest.cpp
-        LinkedCellContainerTest.h
 )
 
 add_executable(
@@ -51,3 +56,5 @@ target_link_libraries(
 )
 include(GoogleTest)
 gtest_discover_tests(particleContainer_test)
+
+target_compile_definitions(particleContainer_test PRIVATE TEST_RESOURCES_DIR="${TEST_RESOURCES_DIR}")
