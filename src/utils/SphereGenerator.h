@@ -24,6 +24,12 @@ public:
      */
     std::vector<Particle> generateParticles(int type = 0) override;
 
+    /**
+     * @brief Generates a disk (2D) of particles.
+     * @return A vector with the generated particles.
+     */
+    std::vector<Particle> generateDisk(int type = 0);
+
 private:
 
     /**
