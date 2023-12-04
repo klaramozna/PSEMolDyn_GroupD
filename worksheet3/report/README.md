@@ -32,6 +32,8 @@ Members:
 * The most interesting part of the ```LinkedCellContainer``` class is the ```applyToPairs``` method we use for force calculation. To iterate over the cells, we use the position of a cell, which is the place of the cell along each axis. For example position (0, 1, 2) would mean that the cell is the first cell along the x-axis, second cell along the y-axis and third cell along the z-axis.
 * We then map this position onto an index in the vector of cells using a simple formula taken from the book "Numerical Simulation in Molecular Dynamics".
 * Using the position of a cell, we find all of its neighbours and let its particles interact with the particles of the neighbours. In order to still be able to use Newton's third law, we only consider neighbours that a larger cell index than the current cell. Within a cell, we use an implementation very similar to the one from last week, just adapted to a list.
+* We compared the runtimes of DirectSumContainer and LinkedCellContainer. The important parameters were: end time - 10, step size - 0.5, cutoff radius - 5. As can be seen on the figure below, LinkedCellContainer is significantly faster compared to DirectSumContainer. While the runtime of DirectSumContainer grows almost exponentially, due to an increasing number of force calculations, LinkedCellContainers runtime remains relatively constant and only increases slightly.
+  <img src=containercomparison.png>
 
 ## Task 3 "Boundary conditions" ##
 
