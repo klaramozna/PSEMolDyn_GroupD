@@ -73,12 +73,12 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by klara on 30.10.23.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef PSEMOLDYN_PARTICLECONTAINER_H</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define PSEMOLDYN_PARTICLECONTAINER_H</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Particle_8h.html">Particle.h</a>&quot;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ParticleContainer_8h.html">ParticleContainer.h</a>&quot;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Particle_8h.html">Particle.h</a>&quot;</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ParticleContainer_8h.html">ParticleContainer.h</a>&quot;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;../Simulation/Physics/ForceCalculation.h&quot;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classDirectSumContainer.html">   20</a></span>&#160;<span class="keyword">class </span><a class="code" href="classDirectSumContainer.html">DirectSumContainer</a> : <span class="keyword">public</span> <a class="code" href="classParticleContainer.html">ParticleContainer</a>{</div>
@@ -134,9 +134,6 @@ $(function() {
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;        <span class="keyword">friend</span> <span class="keywordtype">bool</span> <a class="code" href="classDirectSumContainer_1_1PairIterator.html#a037eb872fef821e1a055d0699bbb90ed">operator!=</a>(<span class="keyword">const</span> <a class="code" href="classDirectSumContainer_1_1PairIterator.html">PairIterator</a> &amp;a, <span class="keyword">const</span> <a class="code" href="classDirectSumContainer_1_1PairIterator.html">PairIterator</a> &amp;b);</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    };</div>
 <div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;};</div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160; </div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//PSEMOLDYN_PARTICLECONTAINER_H</span></div>
 <div class="ttc" id="aParticleContainer_8h_html"><div class="ttname"><a href="ParticleContainer_8h.html">ParticleContainer.h</a></div></div>
 <div class="ttc" id="aParticle_8h_html"><div class="ttname"><a href="Particle_8h.html">Particle.h</a></div><div class="ttdoc">Provides vector operations using simple operators.</div></div>
 <div class="ttc" id="aclassDirectSumContainer_1_1PairIterator_html"><div class="ttname"><a href="classDirectSumContainer_1_1PairIterator.html">DirectSumContainer::PairIterator</a></div><div class="ttdoc">Implements an iterator that simulated a nested loop (two for loops), but skips the case where the par...</div><div class="ttdef"><b>Definition:</b> DirectSumContainer.h:101</div></div>

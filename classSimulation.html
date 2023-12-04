@@ -73,10 +73,10 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a34e96d4e4b7d4bd0ba83a9d7e48e16c1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#a34e96d4e4b7d4bd0ba83a9d7e48e16c1">Simulation</a> (double delta_t, <a class="el" href="classParticleContainer.html">ParticleContainer</a> &amp;container, <a class="el" href="classForceCalculation.html">ForceCalculation</a> &amp;calculation, double averageVelo)</td></tr>
-<tr class="separator:a34e96d4e4b7d4bd0ba83a9d7e48e16c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a80fad3f57dfaf195a36f7bc49bc88279"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#a80fad3f57dfaf195a36f7bc49bc88279">~Simulation</a> ()</td></tr>
-<tr class="separator:a80fad3f57dfaf195a36f7bc49bc88279"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adf0fb765d6ff1acae02d3881e5d10e8c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#adf0fb765d6ff1acae02d3881e5d10e8c">Simulation</a> (double delta_t, std::shared_ptr&lt; <a class="el" href="classParticleContainer.html">ParticleContainer</a> &gt; container, <a class="el" href="classForceCalculation.html">ForceCalculation</a> &amp;calculation, double averageVelo, <a class="el" href="classCuboidBoundary.html">CuboidBoundary</a> &amp;boundary)</td></tr>
+<tr class="separator:adf0fb765d6ff1acae02d3881e5d10e8c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aabcfa929f9e6622346ece569f0229a91"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#aabcfa929f9e6622346ece569f0229a91">~Simulation</a> ()=default</td></tr>
+<tr class="separator:aabcfa929f9e6622346ece569f0229a91"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5cdd6d9d3a2e156d3f18759db18f4c22"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#a5cdd6d9d3a2e156d3f18759db18f4c22">getParticles</a> ()</td></tr>
 <tr class="memdesc:a5cdd6d9d3a2e156d3f18759db18f4c22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a vector of particles.  <a href="classSimulation.html#a5cdd6d9d3a2e156d3f18759db18f4c22">More...</a><br /></td></tr>
 <tr class="separator:a5cdd6d9d3a2e156d3f18759db18f4c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -85,8 +85,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a7809f13e6c8aed57a31fa2c01c020c07"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a34e96d4e4b7d4bd0ba83a9d7e48e16c1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a34e96d4e4b7d4bd0ba83a9d7e48e16c1">&#9670;&nbsp;</a></span>Simulation()</h2>
+<a id="adf0fb765d6ff1acae02d3881e5d10e8c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adf0fb765d6ff1acae02d3881e5d10e8c">&#9670;&nbsp;</a></span>Simulation()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -100,7 +100,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classParticleContainer.html">ParticleContainer</a> &amp;&#160;</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classParticleContainer.html">ParticleContainer</a> &gt;&#160;</td>
           <td class="paramname"><em>container</em>, </td>
         </tr>
         <tr>
@@ -113,7 +113,13 @@ Public Member Functions</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>averageVelo</em>&#160;</td>
+          <td class="paramname"><em>averageVelo</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classCuboidBoundary.html">CuboidBoundary</a> &amp;&#160;</td>
+          <td class="paramname"><em>boundary</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -125,8 +131,8 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a80fad3f57dfaf195a36f7bc49bc88279"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a80fad3f57dfaf195a36f7bc49bc88279">&#9670;&nbsp;</a></span>~Simulation()</h2>
+<a id="aabcfa929f9e6622346ece569f0229a91"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aabcfa929f9e6622346ece569f0229a91">&#9670;&nbsp;</a></span>~Simulation()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -143,7 +149,7 @@ Public Member Functions</h2></td></tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">default</span></span>  </td>
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">

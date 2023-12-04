@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['boundaries_531',['Boundaries',['../classBoundaries.html',1,'']]],
-  ['boundary_532',['Boundary',['../classBoundary.html',1,'']]],
-  ['boundarybehavior_533',['BoundaryBehavior',['../classBoundaryBehavior.html',1,'']]]
+  ['boundaries_543',['Boundaries',['../classBoundaries.html',1,'']]],
+  ['boundaryactions_544',['BoundaryActions',['../classBoundaryActions.html',1,'']]],
+  ['boundarybehavior_545',['BoundaryBehavior',['../classBoundaryBehavior.html',1,'']]],
+  ['boundarycelliterator_546',['BoundaryCellIterator',['../classBoundaryCellIterator.html',1,'']]]
 ];
