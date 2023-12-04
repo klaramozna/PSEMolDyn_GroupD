@@ -2,15 +2,15 @@
 // Created by klara on 22.11.23.
 //
 
-#ifndef PSEMOLDYN_GROUPD_LINKEDCELLCONTAINER_H
-#define PSEMOLDYN_GROUPD_LINKEDCELLCONTAINER_H
-
+#pragma once
 
 #include "ParticleContainer.h"
-#include "Cell.h"
 #include "CuboidBoundary.h"
+#include "Cell.h"
 
-class LinkedCellContainer : public ParticleContainer{
+#include "BoundaryCellsIterator.h"
+
+class LinkedCellContainer : public ParticleContainer {
 public:
     /**
      * @brief Creates a LinkedCellContainer object using the given parameters.
@@ -67,6 +67,22 @@ public:
      */
     std::vector<Cell> getCells();
 
+    /**
+    * @brief Returns an iterator pointing to the beginning of the boundary cells.
+    * @return BoundaryCellIterator pointing to the beginning of the boundary cells.
+    */
+    auto beginBoundaryCells() {
+        return BoundaryCellIterator(boundaryCells_ptr, 0);
+    }
+
+    /**
+     * @brief Returns an iterator pointing to the end of the boundary cells.
+     * @return BoundaryCellIterator pointing to the end of the boundary cells.
+     */
+    auto endBoundaryCells() {
+        return BoundaryCellIterator(boundaryCells_ptr, boundaryCells_ptr.size());
+    }
+
 private:
 
     /**
@@ -80,9 +96,9 @@ private:
     std::vector<Cell *> boundaryCells_ptr;
 
     /**
-     * @brief Boundary class defining limits in each axis
-     */
-     CuboidBoundary boundary;
+     * @brief Reference to BoundaryControl
+     * */
+     CuboidBoundary& boundary;
 
 
     /**
@@ -179,6 +195,3 @@ private:
       */
      bool particleOutOfGrid(const Particle& p);
 };
-
-
-#endif //PSEMOLDYN_GROUPD_LINKEDCELLCONTAINER_H

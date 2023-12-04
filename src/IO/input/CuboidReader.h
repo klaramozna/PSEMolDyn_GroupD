@@ -11,8 +11,7 @@ public:
      * @param container ParticleContainer that will receive the read-in particles
      * @param filename Input file
      * */
-    void readFile(ParticleContainer &container, std::string &filename) override;
-
+    void readFile(const std::shared_ptr<ParticleContainer> &container, std::string &filename) override;
 
 private:
     int numberOfCuboids{};

@@ -2,20 +2,26 @@
 // Created by rodff on 01.11.23.
 //
 
-#ifndef PSEMOLDYN_GROUPD_SIMULATION_H
-#define PSEMOLDYN_GROUPD_SIMULATION_H
+#pragma once
 
 #include <list>
+#include <memory>
+
+// Particle imports
+#include "../Particles/ParticleContainer.h"
 #include "../Particles/Particle.h"
-#include "../Particles/DirectSumContainer.h"
-#include "./Physics/ForceCalculation.h"
+#include "../Particles/CuboidBoundary.h"
+
+// Physics imports
+#include "Physics/ForceCalculation.h"
 
 class Simulation {
 private:
     static constexpr double start_time = 0;
 
-    ParticleContainer& container;
+    std::shared_ptr<ParticleContainer> container;
     ForceCalculation &forceCalculation;
+    CuboidBoundary &boundary;
 
     double delta_t;
     double averageVelo;
@@ -41,8 +47,8 @@ private:
     static void setOldForce(Particle& p);
 
 public:
-    Simulation(double delta_t, ParticleContainer& container, ForceCalculation &calculation, double averageVelo);
-    virtual ~Simulation();
+    Simulation(double delta_t, std::shared_ptr<ParticleContainer> container, ForceCalculation &calculation, double averageVelo, CuboidBoundary &boundary);
+    ~Simulation() = default;
 
     /**
      * @brief Returns a vector of particles.
@@ -55,5 +61,3 @@ public:
      */
     void runIteration();
 };
-
-#endif //PSEMOLDYN_GROUPD_SIMULATION_H

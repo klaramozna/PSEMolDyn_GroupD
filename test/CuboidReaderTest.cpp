@@ -11,7 +11,7 @@
 void CuboidReaderTest::SetUp() {
     filename = std::string(TEST_RESOURCES_DIR);
     expectedContainer.getParticleVector().clear();
-    receivedContainer.getParticleVector().clear();
+    receivedContainer_ptr->getParticleVector().clear();
 };
 
 /**
@@ -29,16 +29,16 @@ TEST_F(CuboidReaderTest, TestSimple1Cuboid) {
     CuboidReader reader;
 
     filename.append("simpleCuboid.txt");
-    reader.readFile(receivedContainer, filename);
+    reader.readFile(receivedContainer_ptr, filename);
 
     expectedContainer = DirectSumContainer(simpleCube.generateParticles());
 
-    ASSERT_EQ(expectedContainer.getSize(), receivedContainer.getSize()) << "Containers didn't match in size";
+    ASSERT_EQ(expectedContainer.getSize(), receivedContainer_ptr->getSize()) << "Containers didn't match in size";
 
     auto it1 = expectedContainer.begin();
-    auto it2 = receivedContainer.begin();
+    auto it2 = receivedContainer_ptr->begin();
 
-    for (; it1 != expectedContainer.end() && it2!= receivedContainer.end(); ++it1, ++it2) {
+    for (; it1 != expectedContainer.end() && it2!= receivedContainer_ptr->end(); ++it1, ++it2) {
         Particle p1 = *it1;
         Particle p2 = *it2;
 
@@ -51,7 +51,7 @@ TEST_F(CuboidReaderTest, TestSimple1Cuboid) {
  * */
 TEST_F(CuboidReaderTest, TestEmptyFile) {
     CuboidReader reader;
-    DirectSumContainer container;
+    std::shared_ptr<DirectSumContainer> container;
     filename.append("empty.txt");
 
     try {
@@ -71,7 +71,7 @@ TEST_F(CuboidReaderTest, TestEmptyFile) {
  * */
 TEST_F(CuboidReaderTest, TestOneWrongCuboid) {
     CuboidReader reader;
-    DirectSumContainer container;
+    std::shared_ptr<DirectSumContainer> container;
     filename.append("tooLittleRows.txt");
 
     try {
@@ -92,7 +92,7 @@ TEST_F(CuboidReaderTest, TestOneWrongCuboid) {
  * */
 TEST_F(CuboidReaderTest, TestTooManyRows) {
     CuboidReader reader;
-    DirectSumContainer container;
+    std::shared_ptr<DirectSumContainer> container;
     filename.append("tooManyRows.txt");
 
     try {
@@ -130,17 +130,17 @@ TEST_F(CuboidReaderTest, TestTwoCorrectCuboids) {
     CuboidReader reader;
 
     filename.append("twoCuboids.txt");
-    reader.readFile(receivedContainer, filename);
+    reader.readFile(receivedContainer_ptr, filename);
 
     expectedContainer = DirectSumContainer(firstCube.generateParticles());
     expectedContainer.addParticles(secondCube.generateParticles());
 
-    ASSERT_TRUE(expectedContainer.getSize() == receivedContainer.getSize()) << "Containers didn't match in size";
+    ASSERT_TRUE(expectedContainer.getSize() == receivedContainer_ptr->getSize()) << "Containers didn't match in size";
 
     auto it1 = expectedContainer.begin();
-    auto it2 = receivedContainer.begin();
+    auto it2 = receivedContainer_ptr->begin();
 
-    for (; it1 != expectedContainer.end() && it2!= receivedContainer.end(); ++it1, ++it2) {
+    for (; it1 != expectedContainer.end() && it2!= receivedContainer_ptr->end(); ++it1, ++it2) {
         Particle p1 = *it1;
         Particle p2 = *it2;
 

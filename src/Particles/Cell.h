@@ -2,8 +2,7 @@
 // Created by klara on 22.11.23.
 //
 
-#ifndef PSEMOLDYN_GROUPD_CELL_H
-#define PSEMOLDYN_GROUPD_CELL_H
+#pragma once
 
 #include <list>
 #include <functional>
@@ -68,8 +67,3 @@ private:
     std::list<Particle> particles;
 
 };
-
-
-
-
-#endif //PSEMOLDYN_GROUPD_CELL_H

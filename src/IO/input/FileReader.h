@@ -17,5 +17,5 @@ class FileReader : public ParticleReader  {
 public:
     FileReader();
     virtual ~FileReader();
-    void readFile(ParticleContainer &container, std::string &filename) override;
+    void readFile(const std::shared_ptr<ParticleContainer> &container, std::string &filename) override;
 };

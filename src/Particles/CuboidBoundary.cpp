@@ -17,3 +17,21 @@ bool CuboidBoundary::isInside(const Particle &p) {
 std::array<double,3> CuboidBoundary::getDimensions() {
     return dim;
 }
+
+/**
+ * @brief Gets the boundary type for a specific face of the cuboid.
+ * @param face The face index (0 for x-min, 1 for x-max, 2 for y-min, 3 for y-max, 4 for z-min, 5 for z-max).
+ * @return The boundary type for the specified face.
+ */
+BoundaryType CuboidBoundary::getBoundaryType(int face) const {
+    if (face >= 0 && face < 6) {
+        return boundaryTypes[face];
+    }
+    return BoundaryType::None;  // Default if face index is out of bounds
+}
+
+void CuboidBoundary::setBoundaryType(int face, BoundaryType boundaryType) {
+    if (face >= 0 && face < 6) {
+        boundaryTypes[face] = boundaryType;
+    }
+}

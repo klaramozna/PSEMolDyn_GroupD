@@ -18,7 +18,7 @@ XMLReader::XMLReader() = default;
 
 XMLReader::~XMLReader() = default;
 
-void XMLReader::readFile(ParticleContainer &container, std::string &filename, SimParameters& SimParameters) {
+void XMLReader::readFile(const std::shared_ptr<ParticleContainer> &container, std::string &filename, SimParameters& SimParameters) {
     try {
         std::unique_ptr<Simulation_t> sim(Simulation(filename));
 
@@ -68,6 +68,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
         }
 
         int i = 0;
+
         for (const auto& cuboid : sim->cuboid()) {
             Logger::console->debug("Reading Cuboid number {} from XML", i);
             std::array<double,3> lowerLeftCoord = {cuboid.lower_left_coord().x(), cuboid.lower_left_coord().y(), cuboid.lower_left_coord().z()};
@@ -78,8 +79,9 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             double mass = cuboid.mass();
             std::array<double, 3> velocity = {cuboid.initial_velocity().x(), cuboid.initial_velocity().y(), cuboid.initial_velocity().z()};
             CuboidGenerator generator {lowerLeftCoord, n1, n2, n3, distance, mass, velocity};
-            std::vector<Particle> particles = generator.generateParticles(i);
-            container.addParticles(particles);
+
+            std::vector<Particle> readContainer = generator.generateParticles(i);
+            container->addParticles(readContainer);
             i++;
     }
 
@@ -93,7 +95,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             std::array<double, 3> velocity = {sphere.initial_velocity().x(), sphere.initial_velocity().y(), sphere.initial_velocity().z()};
             SphereGenerator generator {center, distance, radius, mass, velocity};
             std::vector<Particle> particles = generator.generateParticles(i);
-            container.addParticles(particles);
+            container->addParticles(particles);
             i++;
     }
 

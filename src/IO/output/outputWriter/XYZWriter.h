@@ -19,9 +19,7 @@ namespace outputWriter {
     public:
         XYZWriter();
         ~XYZWriter();
-
-        void plotParticles(const std::vector<Particle>& particles, const std::string &filename,
-                           int iteration) override;
+        void plotParticles(std::vector<Particle> &particleVector, const std::string &filename, int iteration) override;
     };
 
 } // namespace outputWriter

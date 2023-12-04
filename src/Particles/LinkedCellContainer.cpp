@@ -9,11 +9,6 @@
 #include <iostream>
 
 
-//TODO:
-// 1. Initialize grid -> right now, there would be an outOfBounds problem because grid hasn't been initialized
-// 2. Define the behaviour of getParticleVector() -> I would return a copy, but that requires changing ParticleContainer and adapting
-// existing code
-
 LinkedCellContainer::LinkedCellContainer(CuboidBoundary boundary, double cutoffRadius,
                                          const std::vector<Particle>& particles) : boundary{boundary}, cutoffRadius{cutoffRadius}, grid{} {
     size = particles.size();
@@ -32,7 +27,7 @@ LinkedCellContainer::LinkedCellContainer(CuboidBoundary boundary, double cutoffR
     // Initialize grid
     grid.resize(nc[0] * nc[1] * nc[2]);
 
-    // Populate boundaryCells
+    // Populate boundaryCells_ptr
     for (int x = 0; x < nc[0]; ++x) {
         for (int y = 0; y < nc[1]; ++y) {
             for (int z = 0; z < nc[2]; ++z) {
@@ -83,7 +78,7 @@ void LinkedCellContainer::moveParticle(const Particle &p1, int oldCell, int newC
 
 void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &function) {
     // Creating a vector for marking particles that need to be moved
-    std::vector<std::pair<Particle, int>> particlesToBeMoved{}; // stores each particle that needs to be moved with the cell it's beeing moved from
+    std::vector<std::pair<Particle, int>> particlesToBeMoved{}; // stores each particle that needs to be moved with the cell it's being moved from
     particlesToBeMoved.reserve(size);
 
     // Applying given function to each particle and marking particles for movement
@@ -129,7 +124,7 @@ void LinkedCellContainer::applyToPairs(const std::function<void(Particle &, Part
 
                                 int neighbourGridIndex = getGridIndex(k, j, i);
 
-                                // Check if the neighbour has not yet been iterated over and if it is still inside of the grid
+                                // Check if the neighbour has not yet been iterated over and if it is still inside the grid
                                 if (neighbourGridIndex > currentGridIndex &&
                                     (k >= 0 && j >= 0 && i >= 0 && k < nc[0] && j < nc[1] && i < nc[2])) {
 
@@ -141,13 +136,10 @@ void LinkedCellContainer::applyToPairs(const std::function<void(Particle &, Part
                                         }
                                     }
                                 }
-
-
                             }
                         }
                     }
                 }
-
             }
         }
     }
@@ -168,7 +160,6 @@ int LinkedCellContainer::getParticleIndex(const Particle &p) {
     return getGridIndex(x, y, z);
 }
 
-/* Shouldn't generate any big problems */
 void LinkedCellContainer::applyToBoundary(const std::function<void(Particle (&))> &function) {
     for (auto boundaryCell : boundaryCells_ptr) {
         if (boundaryCell != nullptr) {
@@ -180,15 +171,14 @@ void LinkedCellContainer::applyToBoundary(const std::function<void(Particle (&))
 }
 
 
-/* Not sure if this is a great idea, but alas */
 void LinkedCellContainer::deleteHaloParticles() {
     // Creating a vector for marking particles that need to be deleted
-    std::vector<std::pair<Particle, int>> particlesToBeDeleted{}; // stores each particle that needs to be deleted with the cell it's beeing deleted from
+    std::vector<std::pair<Particle, int>> particlesToBeDeleted{}; // stores each particle that needs to be deleted with the cell it's being deleted from
 
     // Applying given function to each particle and marking particles for movement
     for(int i = 0; i < grid.size(); i++){
         for(auto & particle : grid[i]){
-            if(boundary.isOutside(particle)){
+            if(!boundary.isInside(particle)){
                 particlesToBeDeleted.emplace_back(particle, i);
             }
         }
@@ -230,4 +220,3 @@ bool LinkedCellContainer::particleOutOfGrid(const Particle &p) {
     int z = floor((p.getX()[2] + gridShift[2]) / cellSize);
     return x < 0 || y < 0 || z < 0 || x >= nc[0] || y >= nc[1] || z >= nc[2];
 }
-

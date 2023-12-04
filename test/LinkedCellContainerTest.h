@@ -6,9 +6,8 @@
 #define PSEMOLDYN_GROUPD_LINKEDCELLCONTAINERTEST_H
 
 #include "../src/Particles/LinkedCellContainer.h"
-#include "../src/Particles/CuboidBoundary.h"
+#include "../src/Simulation/Physics/LennardJones.h"
 #include <gtest/gtest.h>
-
 
 class LinkedCellContainerTest : public testing::Test{
 protected:
@@ -24,6 +23,9 @@ protected:
     Particle p4Shifted{std::array<double, 3>{0.5, 6.1-2, 0.5}, std::array<double, 3>{}, 0};
     void SetUp() override;
 };
+
+
+
 
 
 #endif //PSEMOLDYN_GROUPD_LINKEDCELLCONTAINERTEST_H

@@ -7,7 +7,11 @@
 
 
 TEST_F(LinkedCellContainerTest, Initialization){
-    // Make sure particles are put into correct cells.
+    LennardJones force{1, 1};
+    CuboidBoundary boundary{4, 4, 3};
+    LinkedCellContainer container{boundary, 2};
+    std::vector<Particle> particles{p1, p2, p3, p4};
+    container.addParticles(particles);
     std::vector<Cell> grid = container.getCells();
     ASSERT_TRUE(grid[44].contains(p1));
     ASSERT_TRUE(grid[57].contains(p3));
@@ -96,6 +100,11 @@ TEST_F(LinkedCellContainerTest, applyToPairs){
     }
 }
 
+void LinkedCellContainerTest::SetUp() {
+    std::vector<Particle> particles{p1, p2, p3, p4};
+    container.addParticles(particles);
+}
+
 /* To Do: fix this test
 
 TEST_F(LinkedCellContainerTest, applyToBoundary){
@@ -108,7 +117,4 @@ TEST_F(LinkedCellContainerTest, applyToBoundary){
 
 */
 
-void LinkedCellContainerTest::SetUp() {
-    std::vector<Particle> particles{p1, p2, p3, p4};
-    container.addParticles(particles);
-}
+

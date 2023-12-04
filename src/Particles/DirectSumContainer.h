@@ -2,12 +2,12 @@
 // Created by klara on 30.10.23.
 //
 
-#ifndef PSEMOLDYN_PARTICLECONTAINER_H
-#define PSEMOLDYN_PARTICLECONTAINER_H
+#pragma once
 
 #include <vector>
 #include "Particle.h"
 #include "ParticleContainer.h"
+#include "../Simulation/Physics/ForceCalculation.h"
 #include <functional>
 
 /**
@@ -158,6 +158,3 @@ public:
         friend bool operator!=(const PairIterator &a, const PairIterator &b);
     };
 };
-
-
-#endif //PSEMOLDYN_PARTICLECONTAINER_H

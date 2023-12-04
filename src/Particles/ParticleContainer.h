@@ -2,12 +2,12 @@
 // Created by klara on 21.11.23.
 //
 
-#ifndef PSEMOLDYN_GROUPD_PARTICLECONTAINER_H
-#define PSEMOLDYN_GROUPD_PARTICLECONTAINER_H
-
+#pragma once
 
 #include <functional>
 #include "Particle.h"
+
+class BoundaryActions;
 
 class ParticleContainer {
 public:
@@ -47,11 +47,9 @@ public:
      */
     virtual std::vector<Particle> getParticleVector() = 0;
 
+
     /**
      * @brief Destroys the ParticleContainer object.
-     */
+    */
     virtual ~ParticleContainer() = default;
 };
-
-
-#endif //PSEMOLDYN_GROUPD_PARTICLECONTAINER_H

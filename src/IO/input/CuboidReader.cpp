@@ -1,14 +1,11 @@
 #include "CuboidReader.h"
-#include "../../utils/CuboidGenerator.h"
 
-#include <cstdlib>
 #include <fstream>
 #include <sstream>
 #include <regex>
 #include "../Logger.h"
 
-
-void CuboidReader::readFile(ParticleContainer &container, std::string &filename) {
+void CuboidReader::readFile(const std::shared_ptr<ParticleContainer> &container, std::string &filename) {
     std::ifstream inputFile(filename);
     std::string line;
 
@@ -50,7 +47,10 @@ void CuboidReader::readFile(ParticleContainer &container, std::string &filename)
             }
 
             CuboidGenerator generator = parseLine(line);
-            container.addParticles(generator.generateParticles());
+
+            std::vector<Particle> readContainer = generator.generateParticles(i);
+            container->addParticles(readContainer);
+
         }
     } catch (const std::exception &ex) {
         Logger::err_logger->error("Error: {}", ex.what());
