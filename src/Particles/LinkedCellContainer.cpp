@@ -37,7 +37,7 @@ LinkedCellContainer::LinkedCellContainer(CuboidBoundary boundary, double cutoffR
         for (int y = 0; y < nc[1]; ++y) {
             for (int z = 0; z < nc[2]; ++z) {
                 if (isBoundaryCell(x, y, z)) {
-                    boundaryCells.push_back(grid[getGridIndex(x, y, z)]);
+                    boundaryCells_ptr.push_back(&grid[getGridIndex(x, y, z)]);
                 }
             }
         }
@@ -170,9 +170,11 @@ int LinkedCellContainer::getParticleIndex(const Particle &p) {
 
 /* Shouldn't generate any big problems */
 void LinkedCellContainer::applyToBoundary(const std::function<void(Particle (&))> &function) {
-    for (auto & boundaryCell : boundaryCells) {
-        for (auto & particle : boundaryCell) {
-            function(particle);
+    for (auto boundaryCell : boundaryCells_ptr) {
+        if (boundaryCell != nullptr) {
+            for (auto &particle : *boundaryCell) {
+                function(particle);
+            }
         }
     }
 }
