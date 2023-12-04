@@ -37,6 +37,13 @@ Members:
 
 
 ## Task 4 ”Simulation of a falling drop - Wall” ##
+* We extended the particle generator with another subclass to generate spheres. The math behind generating particles within a sphere involves the equation for a sphere and the calculation of distances to determine if a point lies within the sphere.
+* Equation of a Sphere with a center (a, b, c) and radius r is given by: $`(x−a)^2+(y−b)^2+(z−c)^2=r^2 `$ , so we loop over the coordinates and check only generate a particle on those coordinares when they lie within the sphere.
+* Here is an example of a generated shpere:   
+<img src=Sphere.png>  
+
+* We also adapted the XML input format accordingly to allow the user to also specify the parameters needed to describe a sphere by defining a complexType ```Sphere```. An example of a sphere generating XML file is ```input/sphere.xml```
+
 
   
 # Misc #
