@@ -35,6 +35,16 @@ Members:
 
 ## Task 3 "Boundary conditions" ##
 
+* Boundaries are enforced by ```Simulation```, such that during ```runIteration()``` between the force calculation and velocity calculation, the boundary conditions are enforced.
+* Help functions are available as static methods in ```BoundaryActions```, such as creating a virtual particle for the reflective boundary
+* ```CuboidBoundary``` implements the Boundary with dimensions for each axis and the the lower left corner
+* In total we have 3 implementations of the boundary, which can be applied to each "wall" as defined in ```CuboidBoundary```
+  1. Reflective - Ghost Particle: A ghost particle gets added to ```ParticleContainer``` before calculating the forces, which in turn, provides the affected particle with a new force vector
+  2. Reflective - Force: We directly inject the force onto the particle, since our Particles assume old and current force vectors
+  3. Outflow: Particles outside of the domain simply get deleted using ```deleteHaloParticles()``` from ```LinkedCellContainer```
+
+
+
 
 ## Task 4 ”Simulation of a falling drop - Wall” ##
 * We extended the particle generator with another subclass to generate spheres. The math behind generating particles within a sphere involves the equation for a sphere and the calculation of distances to determine if a point lies within the sphere.
