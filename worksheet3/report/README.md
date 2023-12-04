@@ -45,6 +45,7 @@ Members:
   2. Reflective - Force: We directly inject the force onto the particle, since our Particles assume old and current force vectors
   3. Outflow: Particles outside of the domain simply get deleted using ```deleteHaloParticles()``` from ```LinkedCellContainer```
 
+> Warning: This part was not implemented correctly and will get ended alongside the next ask
 
 
 
