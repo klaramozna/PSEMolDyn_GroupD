@@ -5,6 +5,7 @@
 #include "SphereGenerator.h"
 #include <cmath>
 #include <iostream>
+#include "VectorDouble3.h"
 
 SphereGenerator::SphereGenerator(std::array<double, 3> center, double particleDistance, int radius, double mass, std::array<double, 3> velocity): center(), velocity() {
     this->center = center;
@@ -31,10 +32,8 @@ std::vector<Particle> SphereGenerator::generateParticles(int type) {
                 double z = center[2] + k * particleDistance;
 
                 // Check if the point is inside the sphere
-                // to Do: improve with vectorDouble and L2Norm
-                double distance = sqrt((x - center[0]) * (x -  center[0]) +
-                                       (y - center[1]) * (y -  center[1]) +
-                                       (z - center[2] )* (z -  center[2]));
+                VectorDouble3 cord (std::array<double,3>{x - center[0], y - center[1], z - center[2]});
+                double distance = cord.getL2Norm();
                 if (distance <= radius * particleDistance) {
                     std::array<double, 3> particlePosition{x , y, z};
                     particles.emplace_back(particlePosition, velocity, mass, 0);
