@@ -35,6 +35,10 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/IO/input/simulationFormat.cpp
         ${PROJECT_SOURCE_DIR}/src/Particles/Cell.cpp 
         ${PROJECT_SOURCE_DIR}/src/Particles/LinkedCellContainer.cpp
+        CuboidGeneratorTest.cpp
+        CuboidGeneratorTest.h
+        LinkedCellContainerTest.cpp
+        LinkedCellContainerTest.h
 )
 
 add_executable(

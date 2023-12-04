@@ -6,7 +6,7 @@
 void XMLReaderTest::SetUp() {
     filename = std::string(TEST_RESOURCES_DIR);
     expectedContainer.getParticleVector().clear();
-    receivedContainer.getParticleVector().clear();
+    receivedContainer->getParticleVector().clear();
 };
 
 /**
@@ -28,16 +28,15 @@ TEST_F(XMLReaderTest, TestSimple1XMLReader) {
 
     expectedContainer = DirectSumContainer(simpleCube.generateParticles());
 
-    ASSERT_EQ(expectedContainer.getSize(), receivedContainer.getSize()) << "Containers didn't match in size";
+    ASSERT_EQ(expectedContainer.getSize(), receivedContainer->getSize()) << "Containers didn't match in size";
 
-    auto it1 = expectedContainer.begin();
-    auto it2 = receivedContainer.begin();
+    auto expectedVector = expectedContainer.getParticleVector();
+    auto receivedVector = receivedContainer->getParticleVector();
 
-    for (; it1 != expectedContainer.end() && it2!= receivedContainer.end(); ++it1, ++it2) {
-        Particle p1 = *it1;
-        Particle p2 = *it2;
+    ASSERT_EQ(expectedVector.size(), receivedVector.size()) << "Vectors differ in size";
 
-        ASSERT_TRUE(p1 == p2) << "Expected " << p1.toString() << "\nReceived " << p2.toString();
+    for (int i = 0; i < expectedVector.size(); i++) {
+        ASSERT_TRUE(expectedVector[i] == receivedVector[i]) << "Expected " << expectedVector[i].toString() << "\nReceived " << receivedVector[i].toString();
     }
     //input_path and mode are empty strings here as they are passed explicitly in the test and not via command line
     SimParameters expectedSimParameters (5, 0.0002, 0.1, false, 2, "", "", "lennard", 1, 5, "MD_vtk");

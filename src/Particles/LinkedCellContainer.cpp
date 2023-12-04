@@ -9,7 +9,7 @@
 #include <iostream>
 
 
-LinkedCellContainer::LinkedCellContainer(CuboidBoundary &boundary, double cutoffRadius,
+LinkedCellContainer::LinkedCellContainer(CuboidBoundary boundary, double cutoffRadius,
                                          const std::vector<Particle>& particles) : boundary{boundary}, cutoffRadius{cutoffRadius}, grid{} {
     size = particles.size();
     cellSize = cutoffRadius;

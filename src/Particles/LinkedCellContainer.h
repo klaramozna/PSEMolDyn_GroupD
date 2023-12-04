@@ -18,7 +18,7 @@ public:
      * @param cutoffRadius Radius in which the particles affect each other.
      * @param particles The particles to be added to the container.
      */
-    LinkedCellContainer(CuboidBoundary &boundary, double cutoffRadius, const std::vector<Particle>& particles = {});
+    LinkedCellContainer(CuboidBoundary boundary, double cutoffRadius, const std::vector<Particle>& particles = {});
 
     /**
      * @brief Adds the given particle to the container.

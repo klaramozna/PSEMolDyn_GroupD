@@ -15,7 +15,7 @@ class CuboidReaderTest : public testing::Test {
 protected:
     std::string filename;
     DirectSumContainer expectedContainer;
-    std::shared_ptr<DirectSumContainer> receivedContainer_ptr;
+    std::shared_ptr<DirectSumContainer> receivedContainer_ptr = std::make_shared<DirectSumContainer>();
 
     void SetUp() override;
 };

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <gtest/gtest.h>
+#include <memory>
 #include <string>
 
 #include "../src/IO/input/XMLReader.h"
@@ -11,7 +12,7 @@ class XMLReaderTest : public testing::Test {
 protected:
     std::string filename;
     DirectSumContainer expectedContainer;
-    DirectSumContainer receivedContainer;
+    std::shared_ptr<DirectSumContainer> receivedContainer = std::make_shared<DirectSumContainer>();
     SimParameters receivedSimParameters;
 
     void SetUp() override;
