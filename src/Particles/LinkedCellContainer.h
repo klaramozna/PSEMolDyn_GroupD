@@ -93,7 +93,7 @@ private:
     /**
      * @brief Vector containing boundary cells
      */
-    std::vector<Cell *> boundaryCells_ptr;
+    std::vector<Cell> boundaryCells;
 
     /**
      * @brief Reference to BoundaryControl
