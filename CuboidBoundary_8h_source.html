@@ -76,56 +76,36 @@ $(function() {
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef PSEMOLDYN_GROUPD_CUBOIDBOUNDARY_H</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define PSEMOLDYN_GROUPD_CUBOIDBOUNDARY_H</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;../Particles/Particle.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Boundary_8h.html">Boundary.h</a>&quot;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8">   10</a></span>&#160;<span class="keyword">enum class</span> <a class="code" href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a> {</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <a class="code" href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8a6adf97f83acf6453d4a6a4b1070f3754">None</a> = 0,</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <a class="code" href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8aed8d17bb6b19088af6d891a82e5b1eb2">Outflow</a> = 1,</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    <a class="code" href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8ac8ee26665030eb67a3a2464687bd84ea">ReflectiveGhostParticle</a> = 2,</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <a class="code" href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8a5a82368d079e8321804df978f9c00deb">ReflectiveForce</a> = 3,</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;};</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
-<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="classCuboidBoundary.html">   17</a></span>&#160;<span class="keyword">class </span><a class="code" href="classCuboidBoundary.html">CuboidBoundary</a> {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="classCuboidBoundary.html#a1f9d02b084c2e64cf188604fd7bf935c">   25</a></span>&#160;    <a class="code" href="classCuboidBoundary.html#a1f9d02b084c2e64cf188604fd7bf935c">CuboidBoundary</a>(<span class="keywordtype">double</span> width, <span class="keywordtype">double</span> height, <span class="keywordtype">double</span> depth) {</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        dim[0] = width;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;        dim[1] = height;</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        dim[2] = depth;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        corner = {0.0, 0.0, 0.0};</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    };</div>
+<div class="line"><a name="l00010"></a><span class="lineno"><a class="line" href="classCuboidBoundary.html">   10</a></span>&#160;<span class="keyword">class </span><a class="code" href="classCuboidBoundary.html">CuboidBoundary</a> : <span class="keyword">public</span> <a class="code" href="classBoundary.html">Boundary</a> {</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="classCuboidBoundary.html#a1f9d02b084c2e64cf188604fd7bf935c">   18</a></span>&#160;    <a class="code" href="classCuboidBoundary.html#a1f9d02b084c2e64cf188604fd7bf935c">CuboidBoundary</a>(<span class="keywordtype">double</span> width, <span class="keywordtype">double</span> height, <span class="keywordtype">double</span> depth) {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        dim[0] = width;</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        dim[1] = height;</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        dim[2] = depth;</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        corner = {0.0, 0.0, 0.0};</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    };</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classCuboidBoundary.html#a2ef5c59fac7562251630ef32f4ef4f2b">isInside</a>(<span class="keyword">const</span> <a class="code" href="classParticle.html">Particle</a>&amp; p) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="classCuboidBoundary.html#a087ebf224c861f5ec7c4d3d6889a627d">isInside</a>(<span class="keyword">const</span> <a class="code" href="classParticle.html">Particle</a>&amp; p);</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCuboidBoundary.html#a2edbde7ec3dbba8beaf88e8e03511617">setBoundaryType</a>(<span class="keywordtype">int</span> face, <a class="code" href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a> boundaryType);</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160; </div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <a class="code" href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a> <a class="code" href="classCuboidBoundary.html#a83058190583eaf8df983bd23c40ed714">getBoundaryType</a>(<span class="keywordtype">int</span> face) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    std::array&lt;double,3&gt; <a class="code" href="classCuboidBoundary.html#a8e3e6376076af85eae3ef6ac552013ae">getDimensions</a>();</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    std::array&lt;double,3&gt; dim{};</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    std::array&lt;double,3&gt; corner{};</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    std::array&lt;BoundaryType, 6&gt; boundaryTypes{<a class="code" href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8a6adf97f83acf6453d4a6a4b1070f3754">BoundaryType::None</a>, <a class="code" href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8a6adf97f83acf6453d4a6a4b1070f3754">BoundaryType::None</a>, <a class="code" href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8a6adf97f83acf6453d4a6a4b1070f3754">BoundaryType::None</a>,</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;                                             <a class="code" href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8a6adf97f83acf6453d4a6a4b1070f3754">BoundaryType::None</a>, <a class="code" href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8a6adf97f83acf6453d4a6a4b1070f3754">BoundaryType::None</a>, <a class="code" href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8a6adf97f83acf6453d4a6a4b1070f3754">BoundaryType::None</a>};</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;};</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//PSEMOLDYN_GROUPD_CUBOIDBOUNDARY_H</span></div>
-<div class="ttc" id="aCuboidBoundary_8h_html_af75d5dd7322fa39ed0af4e7839e600f8"><div class="ttname"><a href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a></div><div class="ttdeci">BoundaryType</div><div class="ttdef"><b>Definition:</b> CuboidBoundary.h:10</div></div>
-<div class="ttc" id="aCuboidBoundary_8h_html_af75d5dd7322fa39ed0af4e7839e600f8a5a82368d079e8321804df978f9c00deb"><div class="ttname"><a href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8a5a82368d079e8321804df978f9c00deb">BoundaryType::ReflectiveForce</a></div><div class="ttdeci">@ ReflectiveForce</div></div>
-<div class="ttc" id="aCuboidBoundary_8h_html_af75d5dd7322fa39ed0af4e7839e600f8a6adf97f83acf6453d4a6a4b1070f3754"><div class="ttname"><a href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8a6adf97f83acf6453d4a6a4b1070f3754">BoundaryType::None</a></div><div class="ttdeci">@ None</div></div>
-<div class="ttc" id="aCuboidBoundary_8h_html_af75d5dd7322fa39ed0af4e7839e600f8ac8ee26665030eb67a3a2464687bd84ea"><div class="ttname"><a href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8ac8ee26665030eb67a3a2464687bd84ea">BoundaryType::ReflectiveGhostParticle</a></div><div class="ttdeci">@ ReflectiveGhostParticle</div></div>
-<div class="ttc" id="aCuboidBoundary_8h_html_af75d5dd7322fa39ed0af4e7839e600f8aed8d17bb6b19088af6d891a82e5b1eb2"><div class="ttname"><a href="CuboidBoundary_8h.html#af75d5dd7322fa39ed0af4e7839e600f8aed8d17bb6b19088af6d891a82e5b1eb2">BoundaryType::Outflow</a></div><div class="ttdeci">@ Outflow</div></div>
-<div class="ttc" id="aclassCuboidBoundary_html"><div class="ttname"><a href="classCuboidBoundary.html">CuboidBoundary</a></div><div class="ttdef"><b>Definition:</b> CuboidBoundary.h:17</div></div>
-<div class="ttc" id="aclassCuboidBoundary_html_a087ebf224c861f5ec7c4d3d6889a627d"><div class="ttname"><a href="classCuboidBoundary.html#a087ebf224c861f5ec7c4d3d6889a627d">CuboidBoundary::isInside</a></div><div class="ttdeci">bool isInside(const Particle &amp;p)</div><div class="ttdoc">Returns true, if the given particle is inside of or on the boundary, else false.</div><div class="ttdef"><b>Definition:</b> CuboidBoundary.cpp:7</div></div>
-<div class="ttc" id="aclassCuboidBoundary_html_a1f9d02b084c2e64cf188604fd7bf935c"><div class="ttname"><a href="classCuboidBoundary.html#a1f9d02b084c2e64cf188604fd7bf935c">CuboidBoundary::CuboidBoundary</a></div><div class="ttdeci">CuboidBoundary(double width, double height, double depth)</div><div class="ttdoc">Creates a CuboidBoundary object with the given parameters.</div><div class="ttdef"><b>Definition:</b> CuboidBoundary.h:25</div></div>
-<div class="ttc" id="aclassCuboidBoundary_html_a2edbde7ec3dbba8beaf88e8e03511617"><div class="ttname"><a href="classCuboidBoundary.html#a2edbde7ec3dbba8beaf88e8e03511617">CuboidBoundary::setBoundaryType</a></div><div class="ttdeci">void setBoundaryType(int face, BoundaryType boundaryType)</div><div class="ttdoc">Sets the boundary type for a specific face of the cuboid.</div><div class="ttdef"><b>Definition:</b> CuboidBoundary.cpp:33</div></div>
-<div class="ttc" id="aclassCuboidBoundary_html_a83058190583eaf8df983bd23c40ed714"><div class="ttname"><a href="classCuboidBoundary.html#a83058190583eaf8df983bd23c40ed714">CuboidBoundary::getBoundaryType</a></div><div class="ttdeci">BoundaryType getBoundaryType(int face) const</div><div class="ttdoc">Gets the boundary type for a specific face of the cuboid.</div><div class="ttdef"><b>Definition:</b> CuboidBoundary.cpp:26</div></div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    std::array&lt;double,3&gt; <a class="code" href="classCuboidBoundary.html#a8e3e6376076af85eae3ef6ac552013ae">getDimensions</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    std::array&lt;double,3&gt; dim{};</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    std::array&lt;double,3&gt; corner{};</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;};</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//PSEMOLDYN_GROUPD_CUBOIDBOUNDARY_H</span></div>
+<div class="ttc" id="aBoundary_8h_html"><div class="ttname"><a href="Boundary_8h.html">Boundary.h</a></div></div>
+<div class="ttc" id="aclassBoundary_html"><div class="ttname"><a href="classBoundary.html">Boundary</a></div><div class="ttdef"><b>Definition:</b> Boundary.h:12</div></div>
+<div class="ttc" id="aclassCuboidBoundary_html"><div class="ttname"><a href="classCuboidBoundary.html">CuboidBoundary</a></div><div class="ttdef"><b>Definition:</b> CuboidBoundary.h:10</div></div>
+<div class="ttc" id="aclassCuboidBoundary_html_a1f9d02b084c2e64cf188604fd7bf935c"><div class="ttname"><a href="classCuboidBoundary.html#a1f9d02b084c2e64cf188604fd7bf935c">CuboidBoundary::CuboidBoundary</a></div><div class="ttdeci">CuboidBoundary(double width, double height, double depth)</div><div class="ttdoc">Creates a CuboidBoundary object with the given parameters.</div><div class="ttdef"><b>Definition:</b> CuboidBoundary.h:18</div></div>
+<div class="ttc" id="aclassCuboidBoundary_html_a2ef5c59fac7562251630ef32f4ef4f2b"><div class="ttname"><a href="classCuboidBoundary.html#a2ef5c59fac7562251630ef32f4ef4f2b">CuboidBoundary::isInside</a></div><div class="ttdeci">bool isInside(const Particle &amp;p) override</div><div class="ttdoc">Returns true, if the given particle is inside of or on the boundary, else false.</div><div class="ttdef"><b>Definition:</b> CuboidBoundary.cpp:7</div></div>
 <div class="ttc" id="aclassCuboidBoundary_html_a8e3e6376076af85eae3ef6ac552013ae"><div class="ttname"><a href="classCuboidBoundary.html#a8e3e6376076af85eae3ef6ac552013ae">CuboidBoundary::getDimensions</a></div><div class="ttdeci">std::array&lt; double, 3 &gt; getDimensions()</div><div class="ttdef"><b>Definition:</b> CuboidBoundary.cpp:17</div></div>
 <div class="ttc" id="aclassParticle_html"><div class="ttname"><a href="classParticle.html">Particle</a></div><div class="ttdef"><b>Definition:</b> Particle.h:14</div></div>
 </div><!-- fragment --></div><!-- contents -->

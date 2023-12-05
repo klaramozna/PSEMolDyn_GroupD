@@ -83,25 +83,22 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    std::vector&lt;Particle&gt; <a class="code" href="classSphereGenerator.html#a6b8d351a9218f7e203a89dcf3b3c16fe">generateParticles</a>(<span class="keywordtype">int</span> <a class="code" href="classtype.html">type</a> = 0) <span class="keyword">override</span>;</div>
 <div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    std::vector&lt;Particle&gt; <a class="code" href="classSphereGenerator.html#ad751c2b7750f43f56f7dedc4de69e608">generateDisk</a>(<span class="keywordtype">int</span> <a class="code" href="classtype.html">type</a> = 0);</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    std::array&lt;double, 3&gt; center;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordtype">double</span> particleDistance;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">int</span> radius;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">double</span> mass;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    std::array&lt;double, 3&gt; velocity;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;};</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    std::array&lt;double, 3&gt; center;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordtype">double</span> particleDistance;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    <span class="keywordtype">int</span> radius;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordtype">double</span> mass;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    std::array&lt;double, 3&gt; velocity;</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;};</div>
 <div class="ttc" id="aclassParticleGenerator_html"><div class="ttname"><a href="classParticleGenerator.html">ParticleGenerator</a></div><div class="ttdef"><b>Definition:</b> ParticleGenerator.h:7</div></div>
 <div class="ttc" id="aclassSphereGenerator_html"><div class="ttname"><a href="classSphereGenerator.html">SphereGenerator</a></div><div class="ttdef"><b>Definition:</b> SphereGenerator.h:9</div></div>
-<div class="ttc" id="aclassSphereGenerator_html_a69396171dcbc2cba7b06d7752bd90815"><div class="ttname"><a href="classSphereGenerator.html#a69396171dcbc2cba7b06d7752bd90815">SphereGenerator::SphereGenerator</a></div><div class="ttdeci">SphereGenerator(std::array&lt; double, 3 &gt; center, double particleDistance, int radius, double mass, std::array&lt; double, 3 &gt; velocity)</div><div class="ttdoc">Creates a SphereGenerator object initializing it with the given parameters.</div><div class="ttdef"><b>Definition:</b> SphereGenerator.cpp:9</div></div>
-<div class="ttc" id="aclassSphereGenerator_html_a6b8d351a9218f7e203a89dcf3b3c16fe"><div class="ttname"><a href="classSphereGenerator.html#a6b8d351a9218f7e203a89dcf3b3c16fe">SphereGenerator::generateParticles</a></div><div class="ttdeci">std::vector&lt; Particle &gt; generateParticles(int type=0) override</div><div class="ttdoc">Generates a sphere of particles.</div><div class="ttdef"><b>Definition:</b> SphereGenerator.cpp:17</div></div>
-<div class="ttc" id="aclassSphereGenerator_html_ad751c2b7750f43f56f7dedc4de69e608"><div class="ttname"><a href="classSphereGenerator.html#ad751c2b7750f43f56f7dedc4de69e608">SphereGenerator::generateDisk</a></div><div class="ttdeci">std::vector&lt; Particle &gt; generateDisk(int type=0)</div><div class="ttdoc">Generates a disk (2D) of particles.</div><div class="ttdef"><b>Definition:</b> SphereGenerator.cpp:43</div></div>
+<div class="ttc" id="aclassSphereGenerator_html_a69396171dcbc2cba7b06d7752bd90815"><div class="ttname"><a href="classSphereGenerator.html#a69396171dcbc2cba7b06d7752bd90815">SphereGenerator::SphereGenerator</a></div><div class="ttdeci">SphereGenerator(std::array&lt; double, 3 &gt; center, double particleDistance, int radius, double mass, std::array&lt; double, 3 &gt; velocity)</div><div class="ttdoc">Creates a SphereGenerator object initializing it with the given parameters.</div><div class="ttdef"><b>Definition:</b> SphereGenerator.cpp:10</div></div>
+<div class="ttc" id="aclassSphereGenerator_html_a6b8d351a9218f7e203a89dcf3b3c16fe"><div class="ttname"><a href="classSphereGenerator.html#a6b8d351a9218f7e203a89dcf3b3c16fe">SphereGenerator::generateParticles</a></div><div class="ttdeci">std::vector&lt; Particle &gt; generateParticles(int type=0) override</div><div class="ttdoc">Generates a sphere of particles.</div><div class="ttdef"><b>Definition:</b> SphereGenerator.cpp:18</div></div>
 <div class="ttc" id="aclasstype_html"><div class="ttname"><a href="classtype.html">type</a></div><div class="ttdoc">Enumeration class corresponding to the type schema type.</div><div class="ttdef"><b>Definition:</b> vtk-unstructured.h:2287</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->

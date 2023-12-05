@@ -73,12 +73,12 @@ $(function() {
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">// Created by klara on 21.11.23.</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">//</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#pragma once</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160; </div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Particle_8h.html">Particle.h</a>&quot;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">class </span><a class="code" href="classBoundaryActions.html">BoundaryActions</a>;</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#ifndef PSEMOLDYN_GROUPD_PARTICLECONTAINER_H</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#define PSEMOLDYN_GROUPD_PARTICLECONTAINER_H</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="Particle_8h.html">Particle.h</a>&quot;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160; </div>
 <div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="classParticleContainer.html">   12</a></span>&#160;<span class="keyword">class </span><a class="code" href="classParticleContainer.html">ParticleContainer</a> {</div>
 <div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="keyword">public</span>:</div>
@@ -94,11 +94,12 @@ $(function() {
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="classParticleContainer.html#ade9a7895091d5b0718df9ae2deab4086">   48</a></span>&#160;    <span class="keyword">virtual</span> std::vector&lt;Particle&gt; <a class="code" href="classParticleContainer.html#ade9a7895091d5b0718df9ae2deab4086">getParticleVector</a>() = 0;</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="classParticleContainer.html#abb684a4e41103ffa70bbb1a1f9b0c596">   54</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classParticleContainer.html#abb684a4e41103ffa70bbb1a1f9b0c596">~ParticleContainer</a>() = <span class="keywordflow">default</span>;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;};</div>
+<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="classParticleContainer.html#abb684a4e41103ffa70bbb1a1f9b0c596">   53</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classParticleContainer.html#abb684a4e41103ffa70bbb1a1f9b0c596">~ParticleContainer</a>() = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;};</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//PSEMOLDYN_GROUPD_PARTICLECONTAINER_H</span></div>
 <div class="ttc" id="aParticle_8h_html"><div class="ttname"><a href="Particle_8h.html">Particle.h</a></div><div class="ttdoc">Provides vector operations using simple operators.</div></div>
-<div class="ttc" id="aclassBoundaryActions_html"><div class="ttname"><a href="classBoundaryActions.html">BoundaryActions</a></div><div class="ttdef"><b>Definition:</b> BoundaryActions.h:20</div></div>
 <div class="ttc" id="aclassParticleContainer_html"><div class="ttname"><a href="classParticleContainer.html">ParticleContainer</a></div><div class="ttdef"><b>Definition:</b> ParticleContainer.h:12</div></div>
 <div class="ttc" id="aclassParticleContainer_html_a30f82070ff41a284ad06750d1a2842f4"><div class="ttname"><a href="classParticleContainer.html#a30f82070ff41a284ad06750d1a2842f4">ParticleContainer::getSize</a></div><div class="ttdeci">virtual size_t getSize()=0</div><div class="ttdoc">Returns the number of particles in the container.</div></div>
 <div class="ttc" id="aclassParticleContainer_html_a5251276358e526c4b10bdecb457edeea"><div class="ttname"><a href="classParticleContainer.html#a5251276358e526c4b10bdecb457edeea">ParticleContainer::applyToPairs</a></div><div class="ttdeci">virtual void applyToPairs(const std::function&lt; void(Particle &amp;, Particle &amp;)&gt; &amp;function)=0</div><div class="ttdoc">Applies the given function to pairs of particles (different pairs depending on implementation).</div></div>
