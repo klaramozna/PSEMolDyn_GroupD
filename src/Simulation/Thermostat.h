@@ -7,6 +7,7 @@
 
 
 #include "Particles/Particle.h"
+#include "utils/MaxwellBoltzmannDistribution.h"
 
 class Thermostat {
 public:
@@ -17,8 +18,7 @@ public:
      * @param cycleLength Number of iterations after which the thermostat is applied.
      * @param dim Dimension used. Has to be between 1 and 3.
      */
-    Thermostat(const std::array<double, 3> &initTemperature, const std::array<double, 3> &targetTemperature,
-               int cycleLength, int dim): initTemperature{initTemperature}, currentTemperature{0}, targetTemperature{targetTemperature}, dim{dim}, cycleLength{cycleLength}, currentIteration{0}{};
+    Thermostat(double initTemperature, double targetTemperature, int cycleLength, int dim): initTemperature{initTemperature}, currentTemperature{0}, targetTemperature{targetTemperature}, dim{dim}, cycleLength{cycleLength}, currentIteration{0}{};
 
     /**
      * @brief Changes the temperature of the given particle according to the type of the thermostat.
@@ -39,12 +39,6 @@ public:
     void initializeBrownianMotion(Particle& particle) const;
 
     /**
-     * @brief Sets the velocity of the particle based on initTemperature given in the constructor.
-     * @param particle The particle to be changed.
-     */
-    void initializeInitTemperature(Particle& particle) const;
-
-    /**
      * @brief Destroys the thermostat object.
      */
     virtual ~Thermostat() = default;
@@ -54,17 +48,17 @@ private:
     /**
      * @brief The temperature that particles should be initialized with.
      */
-    std::array<double, 3> initTemperature;
+    double initTemperature;
 
     /**
      * @brief Current temperature of the system.
      */
-    std::array<double, 3> currentTemperature;
+    double currentTemperature;
 
     /**
      * @brief Target temperature of the system.
      */
-    std::array<double, 3> targetTemperature;
+    double targetTemperature;
 
     /**
      * @brief Dimension used. Has to be between 1 and 3

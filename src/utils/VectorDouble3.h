@@ -15,6 +15,11 @@
  * @brief Provides vector operations using simple operators.
  */
 
+
+class VectorDouble3;
+double getDotProduct(const VectorDouble3& v1, const VectorDouble3& v2);
+
+
 class VectorDouble3 {
 private:
     /**
@@ -99,7 +104,13 @@ public:
      */
     friend VectorDouble3 operator*(double scalar, const VectorDouble3 &vec);
 
-    
+    /**
+    * @brief Returns the dot product of the two given vectors.
+    * @param v1 First vector.
+    * @param v2 Second vector.
+    * @return Dot product of the two vectors.
+    */
+    friend double getDotProduct(const VectorDouble3& v1, const VectorDouble3& v2);
 
 };
 
