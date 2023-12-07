@@ -28,7 +28,9 @@ Simulation/Physics/GravitationalForce.cpp
         IO/input/CuboidReader.cpp
         IO/input/FileReader.cpp
         Simulation/Thermostat.cpp
-        Simulation/Thermostat.h)
+        Simulation/Thermostat.h
+        Simulation/SimpleThermostat.cpp
+        Simulation/SimpleThermostat.h)
         
 # Include directories specific to the 'src' directory, if needed
 target_include_directories(MolSim

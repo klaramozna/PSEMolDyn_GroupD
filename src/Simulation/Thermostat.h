@@ -51,29 +51,9 @@ private:
     double initTemperature;
 
     /**
-     * @brief Current temperature of the system.
-     */
-    double currentTemperature;
-
-    /**
-     * @brief Target temperature of the system.
-     */
-    double targetTemperature;
-
-    /**
      * @brief Dimension used. Has to be between 1 and 3
      */
     int dim;
-
-    /**
-     * @brief Number of iterations after which the thermostat is applied.
-     */
-    int cycleLength;
-
-    /**
-     * @brief The number of the current iteration.
-     */
-    int currentIteration;
 
     /**
      * @brief Calculates the kinetic energy of the given particles.
@@ -89,6 +69,30 @@ private:
      * @return The calculated temperature.
      */
     double getTemperature(double kineticEnergy, int numParticles) const;
+
+protected:
+
+    /**
+     * @brief The number of the current iteration.
+     */
+    int currentIteration;
+
+    /**
+     * @brief Number of iterations after which the thermostat is applied.
+     */
+    int cycleLength;
+
+    /**
+     * @brief Current temperature of the system.
+     */
+    double currentTemperature;
+
+    /**
+     * @brief Target temperature of the system.
+     */
+    double targetTemperature;
+
+
 };
 
 
