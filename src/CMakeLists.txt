@@ -30,7 +30,9 @@ Simulation/Physics/GravitationalForce.cpp
         Simulation/Thermostat.cpp
         Simulation/Thermostat.h
         Simulation/SimpleThermostat.cpp
-        Simulation/SimpleThermostat.h)
+        Simulation/SimpleThermostat.h
+        Simulation/GradualThermostat.cpp
+        Simulation/GradualThermostat.h)
         
 # Include directories specific to the 'src' directory, if needed
 target_include_directories(MolSim
