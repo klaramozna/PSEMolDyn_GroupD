@@ -37,6 +37,13 @@
   </xs:restriction>
 </xs:simpleType>
 
+<xs:simpleType name="Dimension">
+  <xs:restriction base="xs:string">
+      <xs:enumeration value="2D"/>
+      <xs:enumeration value="3D"/>
+  </xs:restriction>
+</xs:simpleType>
+
 
 <xs:complexType name="lennardJones_t">
     <xs:sequence>
@@ -67,6 +74,7 @@
 
   <xs:complexType name="Sphere">
     <xs:sequence>
+      <xs:element name="dimension" type="Dimension"/>
       <xs:element name="center" type="double_3d"/>
       <xs:element name="radius" type="nonNegativeInteger"/>
       <xs:element name="distance" type="nonNegativeDouble"/>

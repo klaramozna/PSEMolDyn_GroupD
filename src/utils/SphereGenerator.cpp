@@ -17,11 +17,6 @@ SphereGenerator::SphereGenerator(std::array<double, 3> center, double particleDi
 
 std::vector<Particle> SphereGenerator::generateParticles(int type) {
 
-    //number of particles along the radius
-    int numParticles = radius * 2 + 1;
-    int toReserve = 0;
-
-
     // Generate particles on the surface of the sphere
    for (int i = -radius; i <= radius; ++i) {
         for (int j = -radius; j <= radius; ++j) {
@@ -41,5 +36,25 @@ std::vector<Particle> SphereGenerator::generateParticles(int type) {
             }
         }
     }
+    return particles;
+}
+
+std::vector<Particle> SphereGenerator::generateDisk(int type) {
+
+ // Generate particles within the circular area
+    for (int i = -radius; i <= radius; ++i) {
+        for (int j = -radius; j <= radius; ++j) {
+            // Calculate positions of particles within the circular area
+            double x = center[0] + i * particleDistance;
+            double y = center[1] + j * particleDistance;
+
+            // Check if the point is inside the disk (circle)
+            double distance = sqrt((x - center[0]) * (x - center[0]) + (y - center[1]) * (y - center[1]));
+                if (distance <= radius * particleDistance) {
+                    std::array<double, 3> particlePosition{x , y, 0};
+                    particles.emplace_back(particlePosition, velocity, mass, 0);
+                }
+            }
+        }
     return particles;
 }

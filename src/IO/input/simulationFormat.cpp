@@ -168,6 +168,51 @@ z (const z_type& x)
 // 
 
 
+// Dimension
+// 
+
+Dimension::
+Dimension (value v)
+: ::xml_schema::string (_xsd_Dimension_literals_[v])
+{
+}
+
+Dimension::
+Dimension (const char* v)
+: ::xml_schema::string (v)
+{
+}
+
+Dimension::
+Dimension (const ::std::string& v)
+: ::xml_schema::string (v)
+{
+}
+
+Dimension::
+Dimension (const ::xml_schema::string& v)
+: ::xml_schema::string (v)
+{
+}
+
+Dimension::
+Dimension (const Dimension& v,
+           ::xml_schema::flags f,
+           ::xml_schema::container* c)
+: ::xml_schema::string (v, f, c)
+{
+}
+
+Dimension& Dimension::
+operator= (value v)
+{
+  static_cast< ::xml_schema::string& > (*this) = 
+  ::xml_schema::string (_xsd_Dimension_literals_[v]);
+
+  return *this;
+}
+
+
 // lennardJones_t
 // 
 
@@ -398,6 +443,30 @@ initial_velocity (::std::unique_ptr< initial_velocity_type > x)
 
 // Sphere
 // 
+
+const Sphere::dimension_type& Sphere::
+dimension () const
+{
+  return this->dimension_.get ();
+}
+
+Sphere::dimension_type& Sphere::
+dimension ()
+{
+  return this->dimension_.get ();
+}
+
+void Sphere::
+dimension (const dimension_type& x)
+{
+  this->dimension_.set (x);
+}
+
+void Sphere::
+dimension (::std::unique_ptr< dimension_type > x)
+{
+  this->dimension_.set (std::move (x));
+}
 
 const Sphere::center_type& Sphere::
 center () const
@@ -1523,6 +1592,76 @@ nonNegativeInteger::
 {
 }
 
+// Dimension
+//
+
+Dimension::
+Dimension (const ::xercesc::DOMElement& e,
+           ::xml_schema::flags f,
+           ::xml_schema::container* c)
+: ::xml_schema::string (e, f, c)
+{
+  _xsd_Dimension_convert ();
+}
+
+Dimension::
+Dimension (const ::xercesc::DOMAttr& a,
+           ::xml_schema::flags f,
+           ::xml_schema::container* c)
+: ::xml_schema::string (a, f, c)
+{
+  _xsd_Dimension_convert ();
+}
+
+Dimension::
+Dimension (const ::std::string& s,
+           const ::xercesc::DOMElement* e,
+           ::xml_schema::flags f,
+           ::xml_schema::container* c)
+: ::xml_schema::string (s, e, f, c)
+{
+  _xsd_Dimension_convert ();
+}
+
+Dimension* Dimension::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class Dimension (*this, f, c);
+}
+
+Dimension::value Dimension::
+_xsd_Dimension_convert () const
+{
+  ::xsd::cxx::tree::enum_comparator< char > c (_xsd_Dimension_literals_);
+  const value* i (::std::lower_bound (
+                    _xsd_Dimension_indexes_,
+                    _xsd_Dimension_indexes_ + 2,
+                    *this,
+                    c));
+
+  if (i == _xsd_Dimension_indexes_ + 2 || _xsd_Dimension_literals_[*i] != *this)
+  {
+    throw ::xsd::cxx::tree::unexpected_enumerator < char > (*this);
+  }
+
+  return *i;
+}
+
+const char* const Dimension::
+_xsd_Dimension_literals_[2] =
+{
+  "2D",
+  "3D"
+};
+
+const Dimension::value Dimension::
+_xsd_Dimension_indexes_[2] =
+{
+  ::Dimension::cxx_2D,
+  ::Dimension::cxx_3D
+};
+
 // lennardJones_t
 //
 
@@ -1953,12 +2092,14 @@ Cuboid::
 //
 
 Sphere::
-Sphere (const center_type& center,
+Sphere (const dimension_type& dimension,
+        const center_type& center,
         const radius_type& radius,
         const distance_type& distance,
         const mass_type& mass,
         const initial_velocity_type& initial_velocity)
 : ::xml_schema::type (),
+  dimension_ (dimension, this),
   center_ (center, this),
   radius_ (radius, this),
   distance_ (distance, this),
@@ -1968,12 +2109,14 @@ Sphere (const center_type& center,
 }
 
 Sphere::
-Sphere (::std::unique_ptr< center_type > center,
+Sphere (const dimension_type& dimension,
+        ::std::unique_ptr< center_type > center,
         const radius_type& radius,
         const distance_type& distance,
         const mass_type& mass,
         ::std::unique_ptr< initial_velocity_type > initial_velocity)
 : ::xml_schema::type (),
+  dimension_ (dimension, this),
   center_ (std::move (center), this),
   radius_ (radius, this),
   distance_ (distance, this),
@@ -1987,6 +2130,7 @@ Sphere (const Sphere& x,
         ::xml_schema::flags f,
         ::xml_schema::container* c)
 : ::xml_schema::type (x, f, c),
+  dimension_ (x.dimension_, f, this),
   center_ (x.center_, f, this),
   radius_ (x.radius_, f, this),
   distance_ (x.distance_, f, this),
@@ -2000,6 +2144,7 @@ Sphere (const ::xercesc::DOMElement& e,
         ::xml_schema::flags f,
         ::xml_schema::container* c)
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  dimension_ (this),
   center_ (this),
   radius_ (this),
   distance_ (this),
@@ -2022,6 +2167,20 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     const ::xercesc::DOMElement& i (p.cur_element ());
     const ::xsd::cxx::xml::qualified_name< char > n (
       ::xsd::cxx::xml::dom::name< char > (i));
+
+    // dimension
+    //
+    if (n.name () == "dimension" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< dimension_type > r (
+        dimension_traits::create (i, f, this));
+
+      if (!dimension_.present ())
+      {
+        this->dimension_.set (::std::move (r));
+        continue;
+      }
+    }
 
     // center
     //
@@ -2096,6 +2255,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     break;
   }
 
+  if (!dimension_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "dimension",
+      "");
+  }
+
   if (!center_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
@@ -2145,6 +2311,7 @@ operator= (const Sphere& x)
   if (this != &x)
   {
     static_cast< ::xml_schema::type& > (*this) = x;
+    this->dimension_ = x.dimension_;
     this->center_ = x.center_;
     this->radius_ = x.radius_;
     this->distance_ = x.distance_;
