@@ -14,8 +14,8 @@
 // 2. Define the behaviour of getParticleVector() -> I would return a copy, but that requires changing ParticleContainer and adapting
 // existing code
 
-LinkedCellContainer::LinkedCellContainer(CuboidBoundary boundary, double cutoffRadius,
-                                         const std::vector<Particle>& particles) : boundary{boundary}, cutoffRadius{cutoffRadius}, grid{} {
+LinkedCellContainer::LinkedCellContainer(Boundary boundary, double cutoffRadius,
+                                         const std::vector<Particle>& particles) : boundary{boundary}, grid{}, cutoffRadius{cutoffRadius} {
     size = particles.size();
     cellSize = cutoffRadius;
 
