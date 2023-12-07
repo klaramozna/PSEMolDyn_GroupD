@@ -15,6 +15,7 @@
 
     <!-- Provide Particles (Sphere) -->
     <sphere>
+        <dimension>3D</dimension>
         <center>
             <x>60.0</x>
             <y>25.0</y>
