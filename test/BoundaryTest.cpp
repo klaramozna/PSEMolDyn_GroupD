@@ -15,7 +15,7 @@ TEST_F(BoundaryTest, IsInside) {
     EXPECT_TRUE(boundary.isInside(insideParticle));
 
     // Test particle on the boundary
-    Particle onBoundaryParticle({1.0, 1.0, 1.0}, {0.0, 0.0, 0.0}, 1.0);
+    Particle onBoundaryParticle({0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, 1.0);
     EXPECT_TRUE(boundary.isInside(onBoundaryParticle));
 
     // Test particle outside the boundary
@@ -34,7 +34,7 @@ TEST_F(BoundaryTest, IsOutside) {
     EXPECT_FALSE(boundary.isOutside(insideParticle));
 
     // Test particle on the boundary
-    Particle onBoundaryParticle({1.0, 1.0, 1.0}, {0.0, 0.0, 0.0}, 1.0);
+    Particle onBoundaryParticle({0.0, 0.0, 0.0}, {0.0, 0.0, 0.0}, 1.0);
     EXPECT_FALSE(boundary.isOutside(onBoundaryParticle));
 
     // Test particle outside the boundary
