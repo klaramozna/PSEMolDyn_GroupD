@@ -39,6 +39,8 @@ set(source_needed_for_test
         CuboidGeneratorTest.h
         LinkedCellContainerTest.cpp
         LinkedCellContainerTest.h
+        BoundaryTest.cpp
+        BoundaryTest.h
 )
 
 add_executable(
