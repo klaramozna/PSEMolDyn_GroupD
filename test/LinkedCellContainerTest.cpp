@@ -111,7 +111,7 @@ TEST_F(LinkedCellContainerTest, applyToBoundary){
 
     // Making sure other particles remained unchanged
     ASSERT_TRUE(grid[62].contains(boundary1));
-    ASSERT_EQ(container.getSize(), 4);
+    ASSERT_EQ(boundaryContainer.getSize(), 2);
 }
 
 
