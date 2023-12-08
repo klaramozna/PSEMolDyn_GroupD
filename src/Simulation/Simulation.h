@@ -9,6 +9,7 @@
 #include "../Particles/Particle.h"
 #include "../Particles/DirectSumContainer.h"
 #include "./Physics/ForceCalculation.h"
+#include "Thermostat.h"
 
 class Simulation {
 private:
@@ -16,6 +17,7 @@ private:
 
     ParticleContainer& container;
     ForceCalculation &forceCalculation;
+    Thermostat& thermostat;
 
     double delta_t;
     double averageVelo;
@@ -41,7 +43,7 @@ private:
     static void setOldForce(Particle& p);
 
 public:
-    Simulation(double delta_t, ParticleContainer& container, ForceCalculation &calculation, double averageVelo);
+    Simulation(double delta_t, ParticleContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo);
     virtual ~Simulation();
 
     /**

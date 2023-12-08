@@ -12,11 +12,12 @@
 
 #include <utility>
 
-Simulation::Simulation(double delta_t, ParticleContainer& container, ForceCalculation &calculation, double averageVelo) :
+Simulation::Simulation(double delta_t, ParticleContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo) :
                         container(container),
                         forceCalculation(calculation),
+                        thermostat(thermostat),
                         delta_t(delta_t),
-                        averageVelo(averageVelo) {
+                        averageVelo(averageVelo){
 
 }
 
@@ -45,6 +46,10 @@ void Simulation::calculateX(Particle& p) const {
 }
 
 void Simulation::runIteration() {
+    // adjust temperature
+    thermostat.updateState(container.getParticleVector());
+    container.applyToAll([this](Particle& p){thermostat.updateTemperature(p);});
+
     // calculate new x
     container.applyToAll([this](Particle& p) { calculateX(p); });
     // calculate new f

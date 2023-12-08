@@ -17,6 +17,7 @@
 #include "Particles/DirectSumContainer.h"
 #include "Simulation/Physics/GravitationalForce.h"
 #include "Simulation/Physics/LennardJones.h"
+#include "Simulation/SimpleThermostat.h"
 
 /* Logging */
 #include "IO/Logger.h"
@@ -90,8 +91,13 @@ int main(int argc, char *argsv[]) {
    
     int iteration = 0;
     double current_time = simParameters.getStartTime();
- 
-    Simulation simulation(simParameters.getDeltaT(), container, *forceCalculation, simParameters.getAverageVelo());
+
+
+    //TODO: change once xml parameters adjusted
+    SimpleThermostat thermostat{20, 20, 50, 3};
+
+
+    Simulation simulation(simParameters.getDeltaT(), container, *forceCalculation, thermostat, simParameters.getAverageVelo());
     // This is ugly and shouldn't be in main, but it is for a later refactor
     if (simParameters.isTesting()) {
         auto measure_start_time = std::chrono::high_resolution_clock::now();
