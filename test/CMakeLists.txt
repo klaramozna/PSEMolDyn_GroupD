@@ -36,7 +36,9 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Particles/Cell.cpp
         ${PROJECT_SOURCE_DIR}/src/IO/input/XMLReader.cpp
         ${PROJECT_SOURCE_DIR}/src/IO/input/SimParameters.cpp
-        ${PROJECT_SOURCE_DIR}/src/IO/input/simulationFormat.cpp 
+        ${PROJECT_SOURCE_DIR}/src/IO/xsdCode/simulationFormat.cpp
+        ${PROJECT_SOURCE_DIR}/src/IO/xsdCode/checkpointFormat.cpp
+        ${PROJECT_SOURCE_DIR}/src/IO/xsdCode/commonSchema.cpp   
         CuboidGeneratorTest.cpp
         CuboidGeneratorTest.h
         LinkedCellContainerTest.cpp

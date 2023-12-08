@@ -23,10 +23,13 @@ Simulation/Physics/GravitationalForce.cpp
         Particles/CuboidBoundary.cpp
         Particles/CuboidBoundary.h
         utils/CuboidGenerator.h
-        IO/input/simulationFormat.cpp
+        IO/xsdCode/commonSchema.cpp
+        IO/xsdCode/checkpointFormat.cpp
+        IO/xsdCode/simulationFormat.cpp
         IO/input/XMLReader.cpp
         IO/input/CuboidReader.cpp
-        IO/input/FileReader.cpp)
+        IO/input/FileReader.cpp
+        )
         
 # Include directories specific to the 'src' directory, if needed
 target_include_directories(MolSim

@@ -1,0 +1,36 @@
+<!-- commonSchema.xsd -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="commonSchema"
+           xmlns="commonSchema">
+
+<!-- shared definitions -->
+<!-- Define custom types -->
+
+<xs:complexType name="int_3d">
+    <xs:sequence>
+      <xs:element name="x" type="xs:integer"/>
+      <xs:element name="y" type="xs:integer"/>
+      <xs:element name="z" type="xs:integer"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="double_3d">
+    <xs:sequence>
+      <xs:element name="x" type="xs:double"/>
+      <xs:element name="y" type="xs:double"/>
+      <xs:element name="z" type="xs:double"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:simpleType name="nonNegativeDouble">
+  <xs:restriction base="xs:double">
+    <xs:minInclusive value="0.0"/>
+  </xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="nonNegativeInteger">
+  <xs:restriction base="xs:integer">
+    <xs:minInclusive value="0"/>
+  </xs:restriction>
+</xs:simpleType>
+</xs:schema>
