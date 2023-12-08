@@ -101,15 +101,22 @@ TEST_F(LinkedCellContainerTest, applyToBoundary){
         p.setV(VectorDouble3(std::array<double, 3>{50, 50, 50}));
     });
 
-    std::cout << "p4 velocity: " << ArrayUtils::to_string(p4.getV()) << std::endl;
-    std::cout << "p1 velocity: " << ArrayUtils::to_string(p1.getV()) << std::endl;
-    std::cout << "p2 velocity: " << ArrayUtils::to_string(p2.getV()) << std::endl;
-    std::cout << "p3 velocity: " << ArrayUtils::to_string(p3.getV()) << std::endl;
+    std::vector<Cell> grid = container.getCells();
+    Particle boundaryP1{std::array<double, 3>{2, 0, 0.5}, std::array<double, 3>{50, 50, 50}, 0};
+    Particle boundaryP4{std::array<double, 3>{0.5, 6.1, 0.5}, std::array<double, 3>{50, 50, 50}, 0};
 
-    ASSERT_EQ(p4.getV(), (std::array<double, 3>{0, 0, 0}));
-    ASSERT_EQ(p1.getV(), (std::array<double, 3>{0, 0, 0}));
-    ASSERT_EQ(p2.getV(), (std::array<double, 3>{50, 50, 50}));
-    ASSERT_EQ(p3.getV(), (std::array<double, 3>{0, 0, 0}));
+    // Making sure boundary particles were changed and no longer have their old values
+    ASSERT_FALSE(grid[44].contains(p1));
+    ASSERT_FALSE(grid[61].contains(p4));
+
+    // Making sure boundary cells contain the changed boundary particles
+    ASSERT_TRUE(grid[44].contains(boundaryP1));
+    ASSERT_TRUE(grid[61].contains(boundaryP4));
+
+    // Making sure other particles remained unchanged
+    ASSERT_TRUE(grid[57].contains(p3));
+    ASSERT_TRUE(grid[40].contains(p2));
+    ASSERT_EQ(container.getSize(), 4);
 }
 
 
