@@ -3,7 +3,7 @@
 //
 
 #include "LinkedCellContainerTest.h"
-#include <gtest/gtest.h>
+#include "../src/utils/ArrayUtils.h"
 
 
 TEST_F(LinkedCellContainerTest, Initialization){
@@ -96,17 +96,22 @@ TEST_F(LinkedCellContainerTest, applyToPairs){
     }
 }
 
-/* To Do: fix this test
-
 TEST_F(LinkedCellContainerTest, applyToBoundary){
-    container.applyToBoundary([this](Particle& p){p.setV(VectorDouble3(std::array<double, 3>{50, 50, 50}));});
-    ASSERT_EQ(p4.getV(), (std::array<double, 3>{50, 50, 50}));
-    ASSERT_EQ(p1.getV(), (std::array<double, 3>{50, 50, 50}));
-    ASSERT_EQ(p2.getV(), (std::array<double, 3>{0, 0, 0}));
+    container.applyToBoundary([](Particle &p) {
+        p.setV(VectorDouble3(std::array<double, 3>{50, 50, 50}));
+    });
+
+    std::cout << "p4 velocity: " << ArrayUtils::to_string(p4.getV()) << std::endl;
+    std::cout << "p1 velocity: " << ArrayUtils::to_string(p1.getV()) << std::endl;
+    std::cout << "p2 velocity: " << ArrayUtils::to_string(p2.getV()) << std::endl;
+    std::cout << "p3 velocity: " << ArrayUtils::to_string(p3.getV()) << std::endl;
+
+    ASSERT_EQ(p4.getV(), (std::array<double, 3>{0, 0, 0}));
+    ASSERT_EQ(p1.getV(), (std::array<double, 3>{0, 0, 0}));
+    ASSERT_EQ(p2.getV(), (std::array<double, 3>{50, 50, 50}));
     ASSERT_EQ(p3.getV(), (std::array<double, 3>{0, 0, 0}));
 }
 
-*/
 
 void LinkedCellContainerTest::SetUp() {
     std::vector<Particle> particles{p1, p2, p3, p4};
