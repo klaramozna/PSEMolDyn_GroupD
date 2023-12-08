@@ -97,25 +97,20 @@ TEST_F(LinkedCellContainerTest, applyToPairs){
 }
 
 TEST_F(LinkedCellContainerTest, applyToBoundary){
-    container.applyToBoundary([](Particle &p) {
+    boundaryContainer.applyToBoundary([](Particle &p) {
         p.setV(VectorDouble3(std::array<double, 3>{50, 50, 50}));
     });
 
-    std::vector<Cell> grid = container.getCells();
-    Particle boundaryP1{std::array<double, 3>{2, 0, 0.5}, std::array<double, 3>{50, 50, 50}, 0};
-    Particle boundaryP4{std::array<double, 3>{0.5, 6.1, 0.5}, std::array<double, 3>{50, 50, 50}, 0};
+    std::vector<Cell> grid = boundaryContainer.getCells();
 
     // Making sure boundary particles were changed and no longer have their old values
-    ASSERT_FALSE(grid[44].contains(p1));
-    ASSERT_FALSE(grid[61].contains(p4));
+    ASSERT_FALSE(grid[61].contains(boundary2));
 
     // Making sure boundary cells contain the changed boundary particles
-    ASSERT_TRUE(grid[44].contains(boundaryP1));
-    ASSERT_TRUE(grid[61].contains(boundaryP4));
+    ASSERT_TRUE(grid[61].contains(boundaryChanged2));
 
     // Making sure other particles remained unchanged
-    ASSERT_TRUE(grid[57].contains(p3));
-    ASSERT_TRUE(grid[40].contains(p2));
+    ASSERT_TRUE(grid[62].contains(boundary1));
     ASSERT_EQ(container.getSize(), 4);
 }
 
@@ -123,4 +118,6 @@ TEST_F(LinkedCellContainerTest, applyToBoundary){
 void LinkedCellContainerTest::SetUp() {
     std::vector<Particle> particles{p1, p2, p3, p4};
     container.addParticles(particles);
+    std::vector<Particle> boundary{boundary1, boundary2};
+    boundaryContainer.addParticles(boundary);
 }

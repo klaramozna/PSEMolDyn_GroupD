@@ -23,6 +23,10 @@ protected:
     Particle p3Shifted{std::array<double, 3>{5.25, 4.1-2, 0.5}, std::array<double, 3>{}, 0};
     Particle p4Shifted{std::array<double, 3>{0.5, 6.1-2, 0.5}, std::array<double, 3>{}, 0};
     void SetUp() override;
+    LinkedCellContainer boundaryContainer{Boundary(3, 3, 3), 1};
+    Particle boundary1{std::array<double, 3>{1.5, 1.5, 1.5}, std::array<double, 3>{}, 0};
+    Particle boundary2{std::array<double, 3>{0.5, 1.5, 1.5}, std::array<double, 3>{}, 0};
+    Particle boundaryChanged2{std::array<double, 3>{0.5, 1.5, 1.5}, std::array<double, 3>{50, 50, 50}, 0};
 };
 
 
