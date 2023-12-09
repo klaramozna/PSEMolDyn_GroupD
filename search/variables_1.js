@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['err_5flogger_894',['err_logger',['../namespaceLogger.html#a807ca3078654157deb73c91eee70842d',1,'Logger']]]
+  ['dim_909',['dim',['../classBoundary.html#a7cbe51d33235c8402cf04de26bb794a9',1,'Boundary']]]
 ];
