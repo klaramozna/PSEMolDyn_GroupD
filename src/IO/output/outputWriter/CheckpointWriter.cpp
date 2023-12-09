@@ -43,7 +43,7 @@
         }
 
         xml_schema::namespace_infomap map;
-        map[""].schema = "../../../../input/checkpointFormat.xsd";    
+        map[""].schema = "../checkpointFormat.xsd";    
         std::ofstream ofs (filename);
         Checkpoint(ofs, checkpoint, map);
     }
