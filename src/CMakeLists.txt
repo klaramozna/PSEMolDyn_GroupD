@@ -24,7 +24,10 @@ Simulation/Physics/GravitationalForce.cpp
         IO/input/simulationFormat.cpp
         IO/input/XMLReader.cpp
         IO/input/CuboidReader.cpp
-        IO/input/FileReader.cpp)
+        IO/input/FileReader.cpp
+        Particles/OutflowBoundary.h
+        Particles/ReflectiveBoundary.cpp
+        Particles/ReflectiveBoundary.h)
         
 # Include directories specific to the 'src' directory, if needed
 target_include_directories(MolSim

@@ -30,6 +30,4 @@ Boundary::Boundary(double width, double height, double depth) {
     corner = {0.0, 0.0, 0.0};
 }
 
-void Boundary::applyBoundaryToParticle(const Particle &p) {
-    return;
-};
+void Boundary::applyBoundaryToParticle(Particle &p, ForceCalculation &fc, double cellSize) {};

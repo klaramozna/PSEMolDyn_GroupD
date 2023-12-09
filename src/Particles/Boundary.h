@@ -8,6 +8,7 @@
 
 #include <array>
 #include "Particle.h"
+#include "../Simulation/Physics/ForceCalculation.h"
 
 class Boundary {
 public:
@@ -49,7 +50,7 @@ public:
      * @brief Applies the given function to the particle
      * @param p Particle that gets modified
      */
-    virtual void applyBoundaryToParticle(const Particle& p);
+    virtual void applyBoundaryToParticle(Particle& p, ForceCalculation &fc, double cellSize);
 
 private:
     /**

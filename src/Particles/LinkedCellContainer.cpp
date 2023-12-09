@@ -168,7 +168,6 @@ int LinkedCellContainer::getParticleIndex(const Particle &p) {
     return getGridIndex(x, y, z);
 }
 
-/* Shouldn't generate any big problems */
 void LinkedCellContainer::applyToBoundary(const std::function<void(Particle (&))> &function) {
     for (auto boundaryCell : boundaryCells_ptr) {
         if (boundaryCell != nullptr) {
