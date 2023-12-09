@@ -7,6 +7,8 @@
 
 #include <gtest/gtest.h>
 #include "../src/Particles/Boundary.h"
+#include "../src/Simulation/Physics/ForceCalculation.h"
+#include "../src/Simulation/Physics/GravitationalForce.h"
 
 
 class BoundaryTest : public ::testing::Test {};

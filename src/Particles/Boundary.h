@@ -18,7 +18,7 @@ public:
      * @param height Height of the cuboid boundary.
      * @param depth Depth of the cuboid boundary.
     */
-    Boundary(double width, double height, double depth);
+    Boundary(double width, double height, double depth, ForceCalculation& fc, double cellsize);
 
     /**
      * @brief Returns true, if the given particle is inside of or on the boundary, else false.
@@ -50,9 +50,9 @@ public:
      * @brief Applies the given function to the particle
      * @param p Particle that gets modified
      */
-    virtual void applyBoundaryToParticle(Particle& p, ForceCalculation &fc, double cellSize);
+    virtual void applyBoundaryToParticle(Particle& p);
 
-private:
+protected:
     /**
      * @brief Dimensions of the boundaries
      * dim[0] = Width
@@ -65,6 +65,10 @@ private:
      * @brief Lower Left Corner
      */
     std::array<double,3> corner{};
+
+    double cellSize;
+
+    ForceCalculation &fc;
 };
 
 

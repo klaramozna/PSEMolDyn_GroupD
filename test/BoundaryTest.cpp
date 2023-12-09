@@ -8,7 +8,8 @@
  * @brief Tests isInside function for particles inside, on, and outside a 2x2x2 Boundary.
  */
 TEST_F(BoundaryTest, IsInside) {
-    Boundary boundary(2.0, 2.0, 2.0);
+    GravitationalForce fc = GravitationalForce();
+    Boundary boundary(2.0, 2.0, 2.0, fc, 0);
 
     // Test particle inside the boundary
     Particle insideParticle({1.0, 1.0, 1.0}, {0.0, 0.0, 0.0}, 1.0);
@@ -27,7 +28,8 @@ TEST_F(BoundaryTest, IsInside) {
  * @brief Tests isOutside function for particles inside, on, and outside a 2x2x2 Boundary.
  */
 TEST_F(BoundaryTest, IsOutside) {
-    Boundary boundary(2.0, 2.0, 2.0);
+    GravitationalForce fc = GravitationalForce();
+    Boundary boundary(2.0, 2.0, 2.0, fc, 0);
 
     // Test particle inside the boundary
     Particle insideParticle({1.0, 1.0, 1.0}, {0.0, 0.0, 0.0}, 1.0);
@@ -47,7 +49,8 @@ TEST_F(BoundaryTest, IsOutside) {
  */
 TEST_F(BoundaryTest, GetDimensions) {
     // Create a Boundary with dimensions (width=2, height=2, depth=2)
-    Boundary boundary(2.0, 2.0, 2.0);
+    GravitationalForce fc = GravitationalForce();
+    Boundary boundary(2.0, 2.0, 2.0, fc, 0);
 
     // Check if the dimensions match
     auto dimensions = boundary.getDimensions();

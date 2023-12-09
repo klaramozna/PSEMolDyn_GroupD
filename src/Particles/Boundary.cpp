@@ -22,7 +22,7 @@ std::array<double,3> Boundary::getDimensions() {
     return dim;
 }
 
-Boundary::Boundary(double width, double height, double depth) {
+Boundary::Boundary(double width, double height, double depth, ForceCalculation &fc, double cellSize) : cellSize{cellSize}, fc{fc} {
     dim[0] = width;
     dim[1] = height;
     dim[2] = depth;
@@ -30,4 +30,4 @@ Boundary::Boundary(double width, double height, double depth) {
     corner = {0.0, 0.0, 0.0};
 }
 
-void Boundary::applyBoundaryToParticle(Particle &p, ForceCalculation &fc, double cellSize) {};
+void Boundary::applyBoundaryToParticle(Particle &p) {};

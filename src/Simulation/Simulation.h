@@ -7,15 +7,17 @@
 
 #include <list>
 #include "../Particles/Particle.h"
-#include "../Particles/DirectSumContainer.h"
+#include "../Particles/LinkedCellContainer.h"
 #include "./Physics/ForceCalculation.h"
+#include "../Particles/Boundary.h"
 
 class Simulation {
 private:
     static constexpr double start_time = 0;
 
-    ParticleContainer& container;
+    LinkedCellContainer& container;
     ForceCalculation &forceCalculation;
+    Boundary boundary;
 
     double delta_t;
     double averageVelo;
@@ -41,7 +43,7 @@ private:
     static void setOldForce(Particle& p);
 
 public:
-    Simulation(double delta_t, ParticleContainer& container, ForceCalculation &calculation, double averageVelo);
+    Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, double averageVelo, Boundary &boundary);
     virtual ~Simulation();
 
     /**
@@ -54,6 +56,10 @@ public:
      * @brief run one iteration of the simulation, meaning position, force and then velocity
      */
     void runIteration();
+
+    void runIterationReflective();
+
+    void runIterationOutflow();
 };
 
 #endif //PSEMOLDYN_GROUPD_SIMULATION_H

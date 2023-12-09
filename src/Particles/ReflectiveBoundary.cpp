@@ -6,7 +6,7 @@
 #include <cmath>
 #include <iostream>
 
-void ReflectiveBoundary::applyBoundaryToParticle(Particle &p, ForceCalculation &fc, double cellSize) {
+void ReflectiveBoundary::applyBoundaryToParticle(Particle &p) {
     std::array<double, 3> particlePosition = p.getX();
     std::array<double, 3> boundaryDimensions = this->getDimensions();
 
@@ -42,4 +42,4 @@ void ReflectiveBoundary::applyBoundaryToParticle(Particle &p, ForceCalculation &
     }
 }
 
-ReflectiveBoundary::ReflectiveBoundary(double width, double height, double depth) : Boundary{width, height, depth} {}
+ReflectiveBoundary::ReflectiveBoundary(double width, double height, double depth, ForceCalculation &fc, double cellSize) : Boundary{width, height, depth, fc, cellSize} {}
