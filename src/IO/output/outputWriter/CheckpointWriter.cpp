@@ -4,6 +4,7 @@
 
 #include "CheckpointWriter.h"
 #include "../../Logger.h"
+#include <fstream>
 
 
     CheckpointWriter::CheckpointWriter(){
@@ -19,7 +20,7 @@
     }
 
 
-    void CheckpointWriter::writeCheckpoint (ParticleContainer &container){
+    void CheckpointWriter::writeCheckpoint (ParticleContainer &container, std::string filename){
         
         Checkpoint_t checkpoint;
         Checkpoint_t::particle_sequence &particle_sequence = checkpoint.particle();
@@ -41,8 +42,10 @@
 
         }
 
-        //To do: write output to xml file and adapt xml reader to read it 
-
+        xml_schema::namespace_infomap map;
+        map[""].schema = "../../../../input/checkpointFormat.xsd";    
+        std::ofstream ofs (filename);
+        Checkpoint(ofs, checkpoint, map);
     }
 
    

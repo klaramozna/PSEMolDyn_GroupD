@@ -9,12 +9,19 @@
 class CheckpointWriter {
 public:
     /**
-     * @brief Creates a CuboidGenerator object initializing it with the given parameters
-     * @param 
+     * @brief Constructor: Creates a CheckpointWriter
      */
     CheckpointWriter();
 
-    void writeCheckpoint (ParticleContainer &container);
+    /**
+     * @brief writes the whole particles state to a given file in XML format
+     * @param container the container with the particles of the simulation to store
+     * @param filename the path of the output file
+     */
+    void writeCheckpoint (ParticleContainer &container, std::string filename);
 
+     /**
+     * @brief Destructor
+     */
     ~CheckpointWriter();
 };
