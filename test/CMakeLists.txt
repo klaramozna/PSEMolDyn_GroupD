@@ -28,8 +28,6 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Particles/LinkedCellContainer.h
         ${PROJECT_SOURCE_DIR}/src/Particles/Boundary.h
         ${PROJECT_SOURCE_DIR}/src/Particles/Boundary.cpp
-        ${PROJECT_SOURCE_DIR}/src/Particles/CuboidBoundary.cpp
-        ${PROJECT_SOURCE_DIR}/src/Particles/CuboidBoundary.h
         ${PROJECT_SOURCE_DIR}/src/Particles/ParticleContainer.cpp
         ${PROJECT_SOURCE_DIR}/src/Particles/ParticleContainer.h
         ${PROJECT_SOURCE_DIR}/src/Particles/Cell.h
@@ -43,6 +41,10 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Simulation/SimpleThermostat.cpp
         ${PROJECT_SOURCE_DIR}/src/Simulation/GradualThermostat.h
         ${PROJECT_SOURCE_DIR}/src/Simulation/GradualThermostat.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/ReflectiveBoundary.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/ReflectiveBoundary.h
+        ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/GravitationalForce.h
+        ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/GravitationalForce.cpp
         CuboidGeneratorTest.cpp
         CuboidGeneratorTest.h
         LinkedCellContainerTest.cpp
@@ -51,6 +53,8 @@ set(source_needed_for_test
         SimpleThermostatTest.h
         GradualThermostatTest.cpp
         GradualThermostatTest.h
+        BoundaryTest.cpp
+        BoundaryTest.h
 )
 
 add_executable(

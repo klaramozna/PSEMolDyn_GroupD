@@ -8,7 +8,7 @@
 
 #include "ParticleContainer.h"
 #include "Cell.h"
-#include "CuboidBoundary.h"
+#include "Boundary.h"
 
 class LinkedCellContainer : public ParticleContainer{
 public:
@@ -18,7 +18,7 @@ public:
      * @param cutoffRadius Radius in which the particles affect each other.
      * @param particles The particles to be added to the container.
      */
-    LinkedCellContainer(CuboidBoundary boundary, double cutoffRadius, const std::vector<Particle>& particles = {});
+    LinkedCellContainer(Boundary boundary, double cutoffRadius, const std::vector<Particle>& particles = {});
 
     /**
      * @brief Adds the given particle to the container.
@@ -82,7 +82,7 @@ private:
     /**
      * @brief Boundary class defining limits in each axis
      */
-     CuboidBoundary boundary;
+     Boundary boundary;
 
 
     /**

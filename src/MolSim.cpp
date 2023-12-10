@@ -14,7 +14,7 @@
 
 /* Simulation Logic */
 #include "Simulation/Simulation.h"
-#include "Particles/DirectSumContainer.h"
+#include "Particles/LinkedCellContainer.h"
 #include "Simulation/Physics/GravitationalForce.h"
 #include "Simulation/Physics/LennardJones.h"
 #include "Simulation/SimpleThermostat.h"
@@ -34,8 +34,6 @@ int main(int argc, char *argsv[]) {
     CL cl;
     std::unique_ptr<ParticleReader> reader;
     std::unique_ptr<ForceCalculation> forceCalculation;
-
-    DirectSumContainer container;
 
     outputWriter::VTKWriter writer;
     SimParameters simParameters;
@@ -68,6 +66,10 @@ int main(int argc, char *argsv[]) {
         exit(-1);
     }
 
+    Boundary boundary{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius()};
+    LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
+
+
     if (simParameters.getInputMode() == "xml") {
         reader->readFile(container, input_path, simParameters);
     }
@@ -97,7 +99,8 @@ int main(int argc, char *argsv[]) {
     SimpleThermostat thermostat{20, 20, 50, 3};
 
 
-    Simulation simulation(simParameters.getDeltaT(), container, *forceCalculation, thermostat, simParameters.getAverageVelo());
+    Simulation simulation(simParameters.getDeltaT(), container, *forceCalculation, thermostat, simParameters.getAverageVelo(), boundary);
+  
     // This is ugly and shouldn't be in main, but it is for a later refactor
     if (simParameters.isTesting()) {
         auto measure_start_time = std::chrono::high_resolution_clock::now();

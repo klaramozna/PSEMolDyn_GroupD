@@ -92,12 +92,42 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             double mass = sphere.mass();
             std::array<double, 3> velocity = {sphere.initial_velocity().x(), sphere.initial_velocity().y(), sphere.initial_velocity().z()};
             SphereGenerator generator {center, distance, radius, mass, velocity};
-            std::vector<Particle> particles = generator.generateParticles(i);
+            std::vector<Particle> particles;
+            if (sphere.dimension() == "3D"){
+                particles = generator.generateParticles(i);
+            }
+            else {
+                particles = generator.generateDisk(i);
+            }
             container.addParticles(particles);
             i++;
+    }   
+    if (sim->boundaries()) {
+            std::array <double,3> boxSize {sim->boundaries()->BoxSize().x(), sim->boundaries()->BoxSize().y(), sim->boundaries()->BoxSize().z()};
+            SimParameters.setBoxSize(boxSize);
+            std::array<std::string, 6> bound_beh {sim->boundaries()->Front(),
+                                                     sim->boundaries()->Back(), 
+                                                     sim->boundaries()->Top(), 
+                                                     sim->boundaries()->Right(),
+                                                     sim->boundaries()->Bottom(),
+                                                     sim->boundaries()->Left() };
+            SimParameters.setBoundaryBehavior(bound_beh);
+
+            Logger::console->debug("Box Size Content:");
+            for (const auto& size : boxSize) {
+                Logger::console->debug("Size: {}", size);
+            }
+
+            Logger::console->debug("Boundary Behavior Content:");
+            for (const auto& behavior : bound_beh) {
+                Logger::console->debug("Behavior: {}", behavior);
+            }
     }
 
-
+        if (sim->cutoffRadius().present()){
+            Logger::console->debug("Reading cut off Radius {} from XML", sim->cutoffRadius().get());
+            SimParameters.setCutoffRadius(sim->cutoffRadius().get());
+        }
 
     }
     catch (const xml_schema::exception& e) {
