@@ -49,6 +49,8 @@ set(source_needed_for_test
         LinkedCellContainerTest.h
         SimpleThermostatTest.cpp
         SimpleThermostatTest.h
+        GradualThermostatTest.cpp
+        GradualThermostatTest.h
 )
 
 add_executable(

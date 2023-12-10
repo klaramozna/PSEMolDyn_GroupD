@@ -15,18 +15,6 @@ TEST_F(SimpleThermostatTest, TemperatureCalculation){
     EXPECT_DOUBLE_EQ(thermostat.getCurrentTemperature(), 1);
 }
 
-TEST_F(SimpleThermostatTest, warming){
-    std::vector<double> correctTemperatures{4, 1, 1, 4, 1, 1, 4, 1, 1};
-    for(auto correctTemp : correctTemperatures){
-        container.applyToAll([](Particle& p){p.setV(1, 1, 1);});
-        thermostat.updateState(container.getParticleVector());
-        container.applyToAll([this](Particle& p){thermostat.updateTemperature(p);});
-        thermostat.updateState(container.getParticleVector());
-        EXPECT_DOUBLE_EQ(correctTemp, thermostat.getCurrentTemperature());
-        thermostat.updateIteration();
-    }
-}
-
 TEST_F(SimpleThermostatTest, updateTemperature){
     std::vector<double> correctTemperatures{4, 1, 1, 4, 1, 1, 4, 1, 1};
     for(auto correctTemp : correctTemperatures){
