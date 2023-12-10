@@ -50,6 +50,8 @@ int CL::parse_arguments(int argc, char *argsv[], SimParameters& simParameters){
     std::string input_path;
     std::string input_mode;
     std::string force;
+    std::string store_checkpoint_path;
+    std::string load_checkpoint_path;
     desc.add_options()
         ("help,h", "produce help message")
         ("input_mode,m", po::value<std::string>(&input_mode)->default_value("cuboid"), "Select between modes of input (cuboid or particle)")
@@ -66,6 +68,8 @@ int CL::parse_arguments(int argc, char *argsv[], SimParameters& simParameters){
         ("log_level,l", po::value<int>(&log_level)->default_value(2)->notifier([this](const int& value) {
             this->validate_range(value, "log_level");
         }), "sets the log level (0: trace, 1: debug, 2: info, 3: warning, 4: error, 5: critical, 6: off)")
+        ("store_checkpoint,c", po::value<std::string>(&store_checkpoint_path), "Enter checkpoint filename to store")
+        ("load_checkpoint,x", po::value<std::string>(&load_checkpoint_path), "Enter checkpoint filename to load")
         ;
 
     
@@ -89,6 +93,17 @@ int CL::parse_arguments(int argc, char *argsv[], SimParameters& simParameters){
         Logger::console->info("{}", produce_help_message(desc));
         return 1;
     }
+
+    if (vm.count("store_checkpoint")){
+        Logger::console->debug("Storing Checkpoint to {}", store_checkpoint_path);
+        simParameters.setStoreCheckpoint(store_checkpoint_path);
+    }
+
+    if (vm.count("load_checkpoint")){
+        Logger::console->debug("Loading Checkpoint from {}", load_checkpoint_path);
+        simParameters.setLoadCheckpoint(load_checkpoint_path);
+    }
+
     if (vm.count("input_path") && std::filesystem::exists(vm["input_path"].as<std::string>())) {
         input_path = vm["input_path"].as<std::string>();
         if (hasXMLExtension(input_path)){

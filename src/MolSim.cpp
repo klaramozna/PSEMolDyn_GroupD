@@ -27,6 +27,9 @@
 #include "utils/CuboidGenerator.h"
 #include "utils/SphereGenerator.h"
 
+/* Checkpoint */
+#include "IO/output/outputWriter/CheckpointWriter.h"
+
 
 
 int main(int argc, char *argsv[]) {
@@ -43,6 +46,13 @@ int main(int argc, char *argsv[]) {
     //any error in parsing
     if (status) {
         return 1;
+    }
+
+    /* read checkpoint if available and update container */
+    if (!simParameters.getloadCheckpoint().empty()) {
+        XMLReader cReader;
+        std::string p = simParameters.getloadCheckpoint();
+        cReader.readFile(container, p, simParameters);
     }
 
     std::string input_path = simParameters.getInputPath();
@@ -121,6 +131,13 @@ int main(int argc, char *argsv[]) {
             current_time += simParameters.getDeltaT();
         }
 
+        /* store checkpoint if specified */
+        if (!simParameters.getStoreCheckpoint().empty()) {
+            CheckpointWriter c;
+            Logger::console->info("Storing checkpoint ...");
+            c.writeCheckpoint(container, simParameters.getStoreCheckpoint());
+        }
+        
         Logger::console->info("Output written. Terminating...");
         return 0;
     }

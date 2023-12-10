@@ -63,7 +63,9 @@ public:
     std::string getBaseName() const { return base_name; }
     double getCutoffRadius() const { return cutoffRadius; }
     std::array<double,3> getBoxSize() const {return boxSize;}
-    std::array<std::string,6> getBoundaryBehavior() const {return boundaryBehavior;}   
+    std::array<std::string,6> getBoundaryBehavior() const {return boundaryBehavior;}
+    std::string getStoreCheckpoint() const { return store_checkpoint_path ;}
+    std::string getloadCheckpoint() const { return load_checkpoint_path ;}
 
     // Setters for modifying parameter values
     void setEndTime(double val) { end_time = val; }
@@ -79,8 +81,9 @@ public:
     void setBaseName(const std::string val) {base_name = val;}
     void setCutoffRadius(const double val) { cutoffRadius = val; }
     void setBoxSize(const std::array<double,3>& val)  {boxSize = val;}
-    void setBoundaryBehavior(const std::array<std::string, 6>& val) { boundaryBehavior = val;} 
-
+    void setBoundaryBehavior(const std::array<std::string, 6>& val) { boundaryBehavior = val;}
+    void setStoreCheckpoint(const std::string& val) { store_checkpoint_path = val; }
+    void setLoadCheckpoint(const std::string& val) { load_checkpoint_path = val; }
     bool operator==(const SimParameters &other) const;
 
 
@@ -153,6 +156,17 @@ private:
      * @brief behaviour of the 6 boundaries in this order (Front, Back, Top, Right, Bottom, Left) 
      */
     std::array<std::string, 6> boundaryBehavior;
+
+     /**
+     * @brief checkpoint path to store
+     */
+    std::string store_checkpoint_path;
+
+     /**
+     * @brief checkpoint path to load from
+     */
+    std::string load_checkpoint_path;
+
 
 
 
