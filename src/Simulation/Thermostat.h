@@ -6,8 +6,7 @@
 #define PSEMOLDYN_GROUPD_THERMOSTAT_H
 
 
-#include "Particles/Particle.h"
-#include "utils/MaxwellBoltzmannDistribution.h"
+#include "../Particles/Particle.h"
 
 class Thermostat {
 public:
@@ -27,10 +26,15 @@ public:
     virtual void updateTemperature(Particle& particle) = 0;
 
     /**
-     * @brief Needs to be called in every iteration before updating temperature. Updates the current temperature based on how the particles changed.
+     * @brief Updates the current temperature based on how the particles changed. Needs to be called whenever the particles change.
      * @param particles The current state of the particles.
      */
     void updateState(const std::vector<Particle>& particles);
+
+    /**
+     * @brief Needs to be called exactly once per iteration, to help the thermostat keep track of the iterations. Needs to be called after calling updateTemperature.
+     */
+    void updateIteration();
 
     /**
      * @brief Sets the velocity of the particle to a value according to the brownian motion.
@@ -42,6 +46,12 @@ public:
      * @brief Destroys the thermostat object.
      */
     virtual ~Thermostat() = default;
+
+    /**
+     * @brief Returns the current temperature of the system.
+     * @return Current temperature.
+     */
+    double getCurrentTemperature();
 
 private:
 

@@ -16,5 +16,4 @@ void GradualThermostat::updateTemperature(Particle &particle) {
         double beta = sqrt(iterationTempTarget / currentTemperature);
         particle.setV(beta * particle.getVVector());
     }
-    currentIteration++;
 }

@@ -86,7 +86,7 @@ double getDistance(const VectorDouble3& v1, const VectorDouble3& v2){
 double getDotProduct(const VectorDouble3& v1, const VectorDouble3& v2){
     double sum = 0;
     for(int i = 0; i < 3; i++){
-        sum += v1.values[i] * v2.values[2];
+        sum += v1.values[i] * v2.values[i];
     }
     return sum;
 }

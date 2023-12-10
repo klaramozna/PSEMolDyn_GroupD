@@ -8,7 +8,6 @@
 #include "Simulation.h"
 #include "../utils/VectorDouble3.h"
 #include "./Physics/ForceCalculation.h"
-#include "../utils/MaxwellBoltzmannDistribution.h"
 
 #include <utility>
 
@@ -49,6 +48,7 @@ void Simulation::runIteration() {
     // adjust temperature
     thermostat.updateState(container.getParticleVector());
     container.applyToAll([this](Particle& p){thermostat.updateTemperature(p);});
+    thermostat.updateIteration();
 
     // calculate new x
     container.applyToAll([this](Particle& p) { calculateX(p); });

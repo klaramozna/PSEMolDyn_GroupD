@@ -10,5 +10,4 @@ void SimpleThermostat::updateTemperature(Particle &particle) {
         double beta = sqrt(targetTemperature / currentTemperature);
         particle.setV(beta * particle.getVVector());
     }
-    currentIteration++;
 }
