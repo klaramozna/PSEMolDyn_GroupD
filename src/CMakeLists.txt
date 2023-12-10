@@ -25,6 +25,12 @@ Simulation/Physics/GravitationalForce.cpp
         IO/input/XMLReader.cpp
         IO/input/CuboidReader.cpp
         IO/input/FileReader.cpp
+        Simulation/Thermostat.cpp
+        Simulation/Thermostat.h
+        Simulation/SimpleThermostat.cpp
+        Simulation/SimpleThermostat.h
+        Simulation/GradualThermostat.cpp
+        Simulation/GradualThermostat.h
         Particles/OutflowBoundary.h
         Particles/ReflectiveBoundary.cpp
         Particles/ReflectiveBoundary.h)

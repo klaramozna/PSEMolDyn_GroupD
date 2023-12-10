@@ -9,6 +9,7 @@
 #include "../Particles/Particle.h"
 #include "../Particles/LinkedCellContainer.h"
 #include "./Physics/ForceCalculation.h"
+#include "Thermostat.h"
 #include "../Particles/Boundary.h"
 
 class Simulation {
@@ -17,6 +18,7 @@ private:
 
     LinkedCellContainer& container;
     ForceCalculation &forceCalculation;
+    Thermostat& thermostat;
     Boundary boundary;
 
     double delta_t;
@@ -43,7 +45,9 @@ private:
     static void setOldForce(Particle& p);
 
 public:
-    Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, double averageVelo, Boundary &boundary);
+
+    Simulation(double delta_t, ParticleContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary);
+  
     virtual ~Simulation();
 
     /**
