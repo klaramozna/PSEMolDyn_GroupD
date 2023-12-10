@@ -46,7 +46,7 @@ private:
 
 public:
 
-    Simulation(double delta_t, ParticleContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary);
+    Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary);
   
     virtual ~Simulation();
 
