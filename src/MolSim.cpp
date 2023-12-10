@@ -17,6 +17,9 @@
 #include "Particles/LinkedCellContainer.h"
 #include "Simulation/Physics/GravitationalForce.h"
 #include "Simulation/Physics/LennardJones.h"
+#include "Particles/Boundary.h"
+#include "Particles/ReflectiveBoundary.h"
+
 
 /* Logging */
 #include "IO/Logger.h"
@@ -64,20 +67,18 @@ int main(int argc, char *argsv[]) {
         Logger::err_logger->error("Reader was not correctly initialized");
         exit(-1);
     }
-
-    Boundary boundary{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius()};
-    LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
-
+    
+    DirectSumContainer container_h;
+    
 
     if (simParameters.getInputMode() == "xml") {
-        reader->readFile(container, input_path, simParameters);
+        reader->readFile(container_h, input_path, simParameters);
+        
     }
     else {
-        reader->readFile(container, input_path);
+        reader->readFile(container_h, input_path);
     }
     
-    Logger::console->info("Hello from MolSim for PSE!");
-
     if (simParameters.getForce() == "lennard") {
         forceCalculation = std::make_unique<LennardJones>(simParameters.getEpsilon(), simParameters.getSigma());
         Logger::console->info("Force set to lennard");
@@ -87,7 +88,11 @@ int main(int argc, char *argsv[]) {
         forceCalculation = std::make_unique<GravitationalForce>();
         Logger::console->info("Force set to grav");
     }
-     
+
+    ReflectiveBoundary boundary{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius()};
+    LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
+    container.addParticles(container_h.getParticleVector());
+    Logger::console->info("Hello from MolSim for PSE!");
     Logger::console->info("Calculating ...");
    
     int iteration = 0;
@@ -111,7 +116,7 @@ int main(int argc, char *argsv[]) {
     } else {
         // for this loop, we assume: current x, current f and current v are known
         while (current_time < simParameters.getEndTime()) {
-            simulation.runIteration();
+            simulation.runIterationReflective();
 
             iteration++;
             if (iteration % 10 == 0) {

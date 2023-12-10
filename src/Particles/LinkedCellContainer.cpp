@@ -84,7 +84,7 @@ void LinkedCellContainer::moveParticle(const Particle &p1, int oldCell, int newC
 void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &function) {
     // Creating a vector for marking particles that need to be moved
     std::vector<std::pair<Particle, int>> particlesToBeMoved{}; // stores each particle that needs to be moved with the cell it's beeing moved from
-    particlesToBeMoved.reserve(size);
+    //particlesToBeMoved.reserve(size);
 
     // Applying given function to each particle and marking particles for movement
     for(int i = 0; i < grid.size(); i++){

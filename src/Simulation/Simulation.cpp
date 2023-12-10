@@ -9,7 +9,7 @@
 #include "Particles/LinkedCellContainer.h"
 
 
-Simulation::Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, double averageVelo, Boundary &boundary) :
+Simulation::Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, double averageVelo, ReflectiveBoundary &boundary) :
                         container(container),
                         forceCalculation(calculation),
                         boundary{boundary},
