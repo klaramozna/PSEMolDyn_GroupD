@@ -15,7 +15,7 @@
 
 
 
-Simulation::Simulation(double delta_t, ParticleContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary) :
+Simulation::Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary) :
                         container(container),
                         forceCalculation(calculation),
                         thermostat(thermostat), boundary{boundary},
@@ -70,6 +70,11 @@ void Simulation::setOldForce(Particle& p) {
 }
 
 void Simulation::runIterationReflective() {
+    // adjust temperature
+    thermostat.updateState(container.getParticleVector());
+    container.applyToAll([this](Particle& p){thermostat.updateTemperature(p);});
+    thermostat.updateIteration();
+
     // calculate new x
     container.applyToAll([this](Particle& p) { calculateX(p); });
 
@@ -85,6 +90,11 @@ void Simulation::runIterationReflective() {
 }
 
 void Simulation::runIterationOutflow() {
+    // adjust temperature
+    thermostat.updateState(container.getParticleVector());
+    container.applyToAll([this](Particle& p){thermostat.updateTemperature(p);});
+    thermostat.updateIteration();
+
     container.deleteHaloParticles();
     // calculate new x
     container.applyToAll([this](Particle& p) { calculateX(p); });
