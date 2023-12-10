@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['nonnegativedouble_578',['nonNegativeDouble',['../classnonNegativeDouble.html',1,'']]],
-  ['nonnegativeinteger_579',['nonNegativeInteger',['../classnonNegativeInteger.html',1,'']]]
+  ['nonnegativedouble_602',['nonNegativeDouble',['../classnonNegativeDouble.html',1,'']]],
+  ['nonnegativeinteger_603',['nonNegativeInteger',['../classnonNegativeInteger.html',1,'']]]
 ];
