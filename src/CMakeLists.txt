@@ -29,6 +29,7 @@ Simulation/Physics/GravitationalForce.cpp
         IO/input/XMLReader.cpp
         IO/input/CuboidReader.cpp
         IO/input/FileReader.cpp
+        Benchmark.cpp
         )
         
 # Include directories specific to the 'src' directory, if needed

@@ -30,6 +30,8 @@
 /* Checkpoint */
 #include "IO/output/outputWriter/CheckpointWriter.h"
 
+#include "Benchmark.h"
+
 
 
 int main(int argc, char *argsv[]) {
@@ -104,7 +106,9 @@ int main(int argc, char *argsv[]) {
     Simulation simulation(simParameters.getDeltaT(), container, *forceCalculation, simParameters.getAverageVelo());
     // This is ugly and shouldn't be in main, but it is for a later refactor
     if (simParameters.isTesting()) {
-        auto measure_start_time = std::chrono::high_resolution_clock::now();
+
+        Benchmark benchmark;
+        benchmark.startBenchmark();
 
         while (current_time < simParameters.getEndTime()) {
             simulation.runIteration();
@@ -112,10 +116,10 @@ int main(int argc, char *argsv[]) {
             current_time += simParameters.getDeltaT();
         }
 
-        auto measure_end_time = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(measure_end_time - measure_start_time);
+        benchmark.stopBenchmark();
+        int number_of_iterations = simParameters.getEndTime() / simParameters.getDeltaT();
+        benchmark.printBenchmarkResults(benchmark.getElapsedTimeInSeconds(), number_of_iterations ,container.getSize());
 
-        Logger::console->info("Time taken: {} milliseconds", duration.count());
     } else {
         // for this loop, we assume: current x, current f and current v are known
         while (current_time < simParameters.getEndTime()) {
