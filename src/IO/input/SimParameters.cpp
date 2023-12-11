@@ -67,7 +67,6 @@ bool SimParameters::operator==(const SimParameters &other) const {
            maxTemperatureChange == other.getMaxTemperatureChange() &&
            thermostatCycleLength == other.getThermostatCycleLength();
 
-
 }
 
 
