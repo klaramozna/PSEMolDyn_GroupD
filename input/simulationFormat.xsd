@@ -1,39 +1,16 @@
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:common="commonSchema">
+
+    <!-- Import commonSchema.xsd -->
+    <xs:import namespace="commonSchema"
+                schemaLocation="commonSchema.xsd"/>
 
 <!-- Define custom types -->
-
-<xs:complexType name="int_3d">
-    <xs:sequence>
-      <xs:element name="x" type="xs:integer"/>
-      <xs:element name="y" type="xs:integer"/>
-      <xs:element name="z" type="xs:integer"/>
-    </xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="double_3d">
-    <xs:sequence>
-      <xs:element name="x" type="xs:double"/>
-      <xs:element name="y" type="xs:double"/>
-      <xs:element name="z" type="xs:double"/>
-    </xs:sequence>
-</xs:complexType>
 
 <xs:simpleType name="log_level">
     <xs:restriction base="xs:integer">
         <xs:minInclusive value="0"/>
         <xs:maxInclusive value="6"/>
-  </xs:restriction>
-</xs:simpleType>
-
-<xs:simpleType name="nonNegativeDouble">
-  <xs:restriction base="xs:double">
-    <xs:minInclusive value="0.0"/>
-  </xs:restriction>
-</xs:simpleType>
-
-<xs:simpleType name="nonNegativeInteger">
-  <xs:restriction base="xs:integer">
-    <xs:minInclusive value="0"/>
   </xs:restriction>
 </xs:simpleType>
 
@@ -64,22 +41,22 @@
 
 <xs:complexType name="Cuboid">
     <xs:sequence>
-      <xs:element name="lower-left-coord" type="double_3d"/>
-      <xs:element name="number-of-particles" type="int_3d"/>
-      <xs:element name="distance" type="nonNegativeDouble"/>
-      <xs:element name="mass" type="nonNegativeDouble"/>
-      <xs:element name="initial_velocity" type="double_3d"/>
+      <xs:element name="lower-left-coord" type="common:double_3d"/>
+      <xs:element name="number-of-particles" type="common:int_3d"/>
+      <xs:element name="distance" type="common:nonNegativeDouble"/>
+      <xs:element name="mass" type="common:nonNegativeDouble"/>
+      <xs:element name="initial_velocity" type="common:double_3d"/>
     </xs:sequence>
   </xs:complexType>
 
   <xs:complexType name="Sphere">
     <xs:sequence>
       <xs:element name="dimension" type="Dimension"/>
-      <xs:element name="center" type="double_3d"/>
-      <xs:element name="radius" type="nonNegativeInteger"/>
-      <xs:element name="distance" type="nonNegativeDouble"/>
-      <xs:element name="mass" type="nonNegativeDouble"/>
-      <xs:element name="initial_velocity" type="double_3d"/>
+      <xs:element name="center" type="common:double_3d"/>
+      <xs:element name="radius" type="common:nonNegativeInteger"/>
+      <xs:element name="distance" type="common:nonNegativeDouble"/>
+      <xs:element name="mass" type="common:nonNegativeDouble"/>
+      <xs:element name="initial_velocity" type="common:double_3d"/>
     </xs:sequence>
   </xs:complexType>
 
@@ -95,7 +72,7 @@
 
 <xs:complexType name="Boundaries">
   <xs:sequence>
-      <xs:element name="BoxSize" type="double_3d"/>
+      <xs:element name="BoxSize" type="common:double_3d"/>
       <xs:element name="Front" type="BoundaryBehavior"/>
       <xs:element name="Back" type="BoundaryBehavior"/>
       <xs:element name="Top" type="BoundaryBehavior"/>
@@ -117,7 +94,7 @@
         <xs:element name="force" type="ForceType" minOccurs="0" maxOccurs="1"/>
         <xs:element name="averageVelo" type="xs:double" minOccurs="0" maxOccurs="1" default="0.1"/> <!-- Brownian Motion average velocity -->
         <xs:element name = "boundaries" type="Boundaries" minOccurs="0" maxOccurs="1"/>
-        <xs:element name="cutoffRadius" type="nonNegativeDouble" minOccurs="0" maxOccurs="1" default="3.0"/>
+        <xs:element name="cutoffRadius" type="common:nonNegativeDouble" minOccurs="0" maxOccurs="1" default="3.0"/>
 
         
         <!-- Provide Particles -->

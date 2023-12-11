@@ -6,7 +6,7 @@
  */
 
 #include "XMLReader.h"
-#include "simulationFormat.h"
+#include "../xsdCode/simulationFormat.h"
 #include "./../Logger.h"
 #include "./../../Simulation/Simulation.h"
 #include "./../../Simulation/Physics/LennardJones.h"
@@ -132,7 +132,5 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
     }
     catch (const xml_schema::exception& e) {
         Logger::err_logger->error("{}",e.what());
-
     }
-
 }

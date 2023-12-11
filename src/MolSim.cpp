@@ -28,6 +28,13 @@
 #include "utils/CuboidGenerator.h"
 #include "utils/SphereGenerator.h"
 
+/* Checkpoint */
+#include "IO/output/outputWriter/CheckpointWriter.h"
+#include "IO/input/CheckpointReader.h"
+
+/* Benchmark */
+#include "Benchmark.h"
+
 
 
 int main(int argc, char *argsv[]) {
@@ -66,15 +73,14 @@ int main(int argc, char *argsv[]) {
         exit(-1);
     }
 
-    Boundary boundary{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius()};
-    LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
-
+    /* To do: solve this dependency between readFile and container*/
+    DirectSumContainer container_h;
 
     if (simParameters.getInputMode() == "xml") {
-        reader->readFile(container, input_path, simParameters);
+        reader->readFile(container_h, input_path, simParameters);
     }
     else {
-        reader->readFile(container, input_path);
+        reader->readFile(container_h, input_path);
     }
     
     Logger::console->info("Hello from MolSim for PSE!");
@@ -87,6 +93,20 @@ int main(int argc, char *argsv[]) {
     if (simParameters.getForce() == "grav") {
         forceCalculation = std::make_unique<GravitationalForce>();
         Logger::console->info("Force set to grav");
+    }
+
+    Boundary boundary{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius()};
+    LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
+
+    /* To do: solve this dependency between readFile and container*/
+    container.addParticles(container_h.getParticleVector());
+
+
+    /* read checkpoint if available and update container */
+    if (!simParameters.getloadCheckpoint().empty()) {
+        CheckpointReader cReader;
+        std::string p = simParameters.getloadCheckpoint();
+        cReader.readFile(container, p, simParameters);
     }
      
     Logger::console->info("Calculating ...");
@@ -103,7 +123,9 @@ int main(int argc, char *argsv[]) {
   
     // This is ugly and shouldn't be in main, but it is for a later refactor
     if (simParameters.isTesting()) {
-        auto measure_start_time = std::chrono::high_resolution_clock::now();
+
+        Benchmark benchmark;
+        benchmark.startBenchmark();
 
         while (current_time < simParameters.getEndTime()) {
             simulation.runIteration();
@@ -111,10 +133,10 @@ int main(int argc, char *argsv[]) {
             current_time += simParameters.getDeltaT();
         }
 
-        auto measure_end_time = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(measure_end_time - measure_start_time);
+        benchmark.stopBenchmark();
+        int number_of_iterations = simParameters.getEndTime() / simParameters.getDeltaT();
+        benchmark.printBenchmarkResults(benchmark.getElapsedTimeInSeconds(), number_of_iterations ,container.getSize());
 
-        Logger::console->info("Time taken: {} milliseconds", duration.count());
     } else {
         // for this loop, we assume: current x, current f and current v are known
         while (current_time < simParameters.getEndTime()) {
@@ -130,6 +152,13 @@ int main(int argc, char *argsv[]) {
             current_time += simParameters.getDeltaT();
         }
 
+        /* store checkpoint if specified */
+        if (!simParameters.getStoreCheckpoint().empty()) {
+            CheckpointWriter c;
+            Logger::console->info("Storing checkpoint ...");
+            c.writeCheckpoint(container, simParameters.getStoreCheckpoint());
+        }
+        
         Logger::console->info("Output written. Terminating...");
         return 0;
     }

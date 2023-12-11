@@ -1,0 +1,33 @@
+<!-- checkpointFormat.xsd -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:common="commonSchema">
+
+    <!-- Import commonSchema.xsd -->
+    <xs:import namespace="commonSchema"
+                schemaLocation="commonSchema.xsd"/>
+
+<!-- Main point of the checkpoint: save the complete state of the molecules to the file, including old force, type, and so on -->
+
+<xs:complexType name="particle_t">
+    <xs:sequence>
+        <xs:element name="x" type="common:double_3d"/>
+        <xs:element name="v" type="common:double_3d"/>
+        <xs:element name="f" type="common:double_3d"/>
+        <xs:element name="old_f" type="common:double_3d"/>
+        <xs:element name="m" type="common:nonNegativeDouble"/>
+        <xs:element name="type" type="common:nonNegativeInteger"/>
+    </xs:sequence>
+
+</xs:complexType>
+
+<xs:complexType name="Checkpoint_t">
+    <xs:sequence>
+      
+      <xs:element name="particle" type="particle_t" minOccurs="0" maxOccurs="unbounded"/>
+     
+    </xs:sequence>
+  </xs:complexType>
+
+
+<xs:element name="Checkpoint" type="Checkpoint_t"/>
+</xs:schema>
