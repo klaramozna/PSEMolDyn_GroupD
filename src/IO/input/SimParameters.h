@@ -30,7 +30,7 @@ public:
      * @param input_mode_val The input mode.
      * @param force_val The force type.
      * @param sigma_val sigma value
-     * @param epsilon_val epsilon value 
+     * @param epsilon_val epsilon value
      * @param base_name_val base name for the output files
      * @param cutoffRadius_val base name for the output files
      * @param  boxSize_val the domain size
@@ -39,7 +39,7 @@ public:
     SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                   bool testing_val, int log_level_val,
                   const std::string& input_path_val, const std::string& input_mode_val,
-                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val);
+                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength);
 
     SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                   bool testing_val, int log_level_val,
@@ -66,6 +66,10 @@ public:
     std::array<std::string,6> getBoundaryBehavior() const {return boundaryBehavior;}
     std::string getStoreCheckpoint() const { return store_checkpoint_path ;}
     std::string getloadCheckpoint() const { return load_checkpoint_path ;}
+    double getInitTemperature()const {return  initTemperature;}
+    double getThermostatCycleLength()const{return  thermostatCycleLength;}
+    double getTargetTemperature()const{return targetTemperature;}
+    double getMaxTemperatureChange()const{return maxTemperatureChange;}
 
     // Setters for modifying parameter values
     void setEndTime(double val) { end_time = val; }
@@ -84,6 +88,10 @@ public:
     void setBoundaryBehavior(const std::array<std::string, 6>& val) { boundaryBehavior = val;}
     void setStoreCheckpoint(const std::string& val) { store_checkpoint_path = val; }
     void setLoadCheckpoint(const std::string& val) { load_checkpoint_path = val; }
+    void setInitTemperature(double val){initTemperature = val;}
+    void setThermostatCycleLength(int val){thermostatCycleLength = val;}
+    void setTargetTemperature(double val){targetTemperature = val;}
+    void setMaxTemperatureChange(double val){maxTemperatureChange = val;}
     bool operator==(const SimParameters &other) const;
 
 
@@ -100,7 +108,7 @@ private:
      * @brief sigma value
      */
     double sigma = 1.0;
-    
+
     /**
      * @brief The end time.
      */
@@ -140,35 +148,54 @@ private:
      * @brief The force type.
      */
     std::string force;
-     /**
-     * @brief output file base name
-     */
+    /**
+    * @brief output file base name
+    */
     std::string base_name = "MD_vtk";
     /**
      * @brief cutoff radius
      */
     double cutoffRadius;
     /**
-     * @brief domain size 
+     * @brief domain size
      */
     std::array<double,3> boxSize;
     /**
-     * @brief behaviour of the 6 boundaries in this order (Front, Back, Top, Right, Bottom, Left) 
+     * @brief behaviour of the 6 boundaries in this order (Front, Back, Top, Right, Bottom, Left)
      */
     std::array<std::string, 6> boundaryBehavior;
 
-     /**
-     * @brief checkpoint path to store
-     */
+    /**
+    * @brief checkpoint path to store
+    */
     std::string store_checkpoint_path;
 
-     /**
-     * @brief checkpoint path to load from
-     */
+    /**
+    * @brief checkpoint path to load from
+    */
     std::string load_checkpoint_path;
+
+    /**
+     * @brief Temperature that the thermostat can be initialized with.
+     */
+    double initTemperature;
+
+    /**
+     * @brief The number of iterations, per which the thermostat is applied.
+     */
+    int thermostatCycleLength;
+
+    /**
+     * @brief Target temperature of the system.
+     */
+    double targetTemperature;
+
+    /**
+     * @brief Maximum change of temperature per iteration.
+     */
+    double maxTemperatureChange;
 
 
 
 
 };
-
