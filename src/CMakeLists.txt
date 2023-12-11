@@ -29,6 +29,7 @@ Simulation/Physics/GravitationalForce.cpp
         IO/input/XMLReader.cpp
         IO/input/CuboidReader.cpp
         IO/input/FileReader.cpp
+        IO/input/CheckpointReader.cpp
         Benchmark.cpp
         )
         

@@ -29,7 +29,7 @@
 
 /* Checkpoint */
 #include "IO/output/outputWriter/CheckpointWriter.h"
-
+#include "IO/input/CheckpointReader.h"
 #include "Benchmark.h"
 
 
@@ -52,7 +52,7 @@ int main(int argc, char *argsv[]) {
 
     /* read checkpoint if available and update container */
     if (!simParameters.getloadCheckpoint().empty()) {
-        XMLReader cReader;
+        CheckpointReader cReader;
         std::string p = simParameters.getloadCheckpoint();
         cReader.readFile(container, p, simParameters);
     }
