@@ -28,7 +28,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
         }
 
         SimParameters.setDeltaT(sim->delta_t().get());
-        SimParameters.setEndTime(sim->t_end().get()); 
+        SimParameters.setEndTime(sim->t_end().get());
 
         if (sim->base_name().present()){
             Logger::console->debug("Reading Base name {} from XML", sim->base_name().get());
@@ -39,7 +39,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             Logger::console->debug("Reading Writing Frequency {} from XML", sim->writeFrequency().get());
         }
 
-     
+
         if (sim->testing_mode().present()) {
             Logger::console->debug("Reading testing mode {} from XML", sim->testing_mode().get());
             SimParameters.setTesting(sim->testing_mode().get());
@@ -50,7 +50,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             SimParameters.setAverageVelo(sim->averageVelo().get());
         }
 
-         if (sim->force()) {
+        if (sim->force()) {
             if (sim->force()->lennard()) {
                 Logger::console->debug("Reading force type 1 from XML");
                 lennardJones_t& lennard = *(sim->force()->lennard());
@@ -62,7 +62,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
                 SimParameters.setSigma(sigma);
             } else if (sim->force()->grav()) {
                 Logger::console->debug("Reading force type 2 from XML");
-                 SimParameters.setForce("grav");
+                SimParameters.setForce("grav");
 
             }
         }
@@ -81,9 +81,9 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             std::vector<Particle> particles = generator.generateParticles(i);
             container.addParticles(particles);
             i++;
-    }
+        }
 
-         i = 0;
+        i = 0;
         for (const auto& sphere: sim->sphere()) {
             Logger::console->debug("Reading Sphere number {} from XML", i);
             std::array<double,3> center = {sphere.center().x(), sphere.center().y(), sphere.center().z()};
@@ -101,16 +101,16 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             }
             container.addParticles(particles);
             i++;
-    }   
-    if (sim->boundaries()) {
+        }
+        if (sim->boundaries()) {
             std::array <double,3> boxSize {sim->boundaries()->BoxSize().x(), sim->boundaries()->BoxSize().y(), sim->boundaries()->BoxSize().z()};
             SimParameters.setBoxSize(boxSize);
             std::array<std::string, 6> bound_beh {sim->boundaries()->Front(),
-                                                     sim->boundaries()->Back(), 
-                                                     sim->boundaries()->Top(), 
-                                                     sim->boundaries()->Right(),
-                                                     sim->boundaries()->Bottom(),
-                                                     sim->boundaries()->Left() };
+                                                  sim->boundaries()->Back(),
+                                                  sim->boundaries()->Top(),
+                                                  sim->boundaries()->Right(),
+                                                  sim->boundaries()->Bottom(),
+                                                  sim->boundaries()->Left() };
             SimParameters.setBoundaryBehavior(bound_beh);
 
             Logger::console->debug("Box Size Content:");
@@ -122,12 +122,34 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             for (const auto& behavior : bound_beh) {
                 Logger::console->debug("Behavior: {}", behavior);
             }
-    }
+        }
 
         if (sim->cutoffRadius().present()){
             Logger::console->debug("Reading cut off Radius {} from XML", sim->cutoffRadius().get());
             SimParameters.setCutoffRadius(sim->cutoffRadius().get());
         }
+
+        if (sim->initTemperature().present()){
+            Logger::console->debug("Reading initTemperature {} from XML", sim->initTemperature().get());
+            SimParameters.setInitTemperature(sim->initTemperature().get());
+        }
+
+        if (sim->targetTemperature().present()){
+            Logger::console->debug("Reading targetTemperature {} from XML", sim->targetTemperature().get());
+            SimParameters.setTargetTemperature(sim->targetTemperature().get());
+        }
+
+        if (sim->maxTemperatureChange().present()){
+            Logger::console->debug("Reading maxTemperatureChange {} from XML", sim->maxTemperatureChange().get());
+            SimParameters.setMaxTemperatureChange(sim->maxTemperatureChange().get());
+        }
+
+        if (sim->thermostatCycleLength().present()){
+            Logger::console->debug("Reading thermostatCycleLength {} from XML", sim->thermostatCycleLength().get());
+            SimParameters.setThermostatCycleLength(sim->thermostatCycleLength().get());
+        }
+
+
 
     }
     catch (const xml_schema::exception& e) {

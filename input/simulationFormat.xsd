@@ -98,7 +98,7 @@
           <xs:element name="initTemperature" type="common:nonNegativeDouble" minOccurs="0" maxOccurs="1" default="10.0"/>
           <xs:element name="targetTemperature" type="common:nonNegativeDouble" minOccurs="0" maxOccurs="1" default="10.0"/>
           <xs:element name="maxTemperatureChange" type="common:nonNegativeDouble" minOccurs="0" maxOccurs="1" default="1.0"/>
-          <xs:element name="thermostatCycleLength" type="common:nonNegativeInteger" minOccurs="0" maxOccurs="1" default="3.0"/>
+          <xs:element name="thermostatCycleLength" type="common:nonNegativeInteger" minOccurs="0" maxOccurs="1" default="3"/>
 
         
         <!-- Provide Particles -->

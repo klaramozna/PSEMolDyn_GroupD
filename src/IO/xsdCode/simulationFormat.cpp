@@ -871,6 +871,150 @@ cutoffRadius_default_value ()
   return cutoffRadius_type (3.0);
 }
 
+const Simulation_t::initTemperature_optional& Simulation_t::
+initTemperature () const
+{
+  return this->initTemperature_;
+}
+
+Simulation_t::initTemperature_optional& Simulation_t::
+initTemperature ()
+{
+  return this->initTemperature_;
+}
+
+void Simulation_t::
+initTemperature (const initTemperature_type& x)
+{
+  this->initTemperature_.set (x);
+}
+
+void Simulation_t::
+initTemperature (const initTemperature_optional& x)
+{
+  this->initTemperature_ = x;
+}
+
+void Simulation_t::
+initTemperature (::std::unique_ptr< initTemperature_type > x)
+{
+  this->initTemperature_.set (std::move (x));
+}
+
+Simulation_t::initTemperature_type Simulation_t::
+initTemperature_default_value ()
+{
+  return initTemperature_type (10.0);
+}
+
+const Simulation_t::targetTemperature_optional& Simulation_t::
+targetTemperature () const
+{
+  return this->targetTemperature_;
+}
+
+Simulation_t::targetTemperature_optional& Simulation_t::
+targetTemperature ()
+{
+  return this->targetTemperature_;
+}
+
+void Simulation_t::
+targetTemperature (const targetTemperature_type& x)
+{
+  this->targetTemperature_.set (x);
+}
+
+void Simulation_t::
+targetTemperature (const targetTemperature_optional& x)
+{
+  this->targetTemperature_ = x;
+}
+
+void Simulation_t::
+targetTemperature (::std::unique_ptr< targetTemperature_type > x)
+{
+  this->targetTemperature_.set (std::move (x));
+}
+
+Simulation_t::targetTemperature_type Simulation_t::
+targetTemperature_default_value ()
+{
+  return targetTemperature_type (10.0);
+}
+
+const Simulation_t::maxTemperatureChange_optional& Simulation_t::
+maxTemperatureChange () const
+{
+  return this->maxTemperatureChange_;
+}
+
+Simulation_t::maxTemperatureChange_optional& Simulation_t::
+maxTemperatureChange ()
+{
+  return this->maxTemperatureChange_;
+}
+
+void Simulation_t::
+maxTemperatureChange (const maxTemperatureChange_type& x)
+{
+  this->maxTemperatureChange_.set (x);
+}
+
+void Simulation_t::
+maxTemperatureChange (const maxTemperatureChange_optional& x)
+{
+  this->maxTemperatureChange_ = x;
+}
+
+void Simulation_t::
+maxTemperatureChange (::std::unique_ptr< maxTemperatureChange_type > x)
+{
+  this->maxTemperatureChange_.set (std::move (x));
+}
+
+Simulation_t::maxTemperatureChange_type Simulation_t::
+maxTemperatureChange_default_value ()
+{
+  return maxTemperatureChange_type (1.0);
+}
+
+const Simulation_t::thermostatCycleLength_optional& Simulation_t::
+thermostatCycleLength () const
+{
+  return this->thermostatCycleLength_;
+}
+
+Simulation_t::thermostatCycleLength_optional& Simulation_t::
+thermostatCycleLength ()
+{
+  return this->thermostatCycleLength_;
+}
+
+void Simulation_t::
+thermostatCycleLength (const thermostatCycleLength_type& x)
+{
+  this->thermostatCycleLength_.set (x);
+}
+
+void Simulation_t::
+thermostatCycleLength (const thermostatCycleLength_optional& x)
+{
+  this->thermostatCycleLength_ = x;
+}
+
+void Simulation_t::
+thermostatCycleLength (::std::unique_ptr< thermostatCycleLength_type > x)
+{
+  this->thermostatCycleLength_.set (std::move (x));
+}
+
+Simulation_t::thermostatCycleLength_type Simulation_t::
+thermostatCycleLength_default_value ()
+{
+  return thermostatCycleLength_type (3LL);
+}
+
 const Simulation_t::cuboid_sequence& Simulation_t::
 cuboid () const
 {
@@ -2177,6 +2321,10 @@ Simulation_t ()
   averageVelo_ (this),
   boundaries_ (this),
   cutoffRadius_ (this),
+  initTemperature_ (this),
+  targetTemperature_ (this),
+  maxTemperatureChange_ (this),
+  thermostatCycleLength_ (this),
   cuboid_ (this),
   sphere_ (this),
   base_name_ (this),
@@ -2197,6 +2345,10 @@ Simulation_t (const Simulation_t& x,
   averageVelo_ (x.averageVelo_, f, this),
   boundaries_ (x.boundaries_, f, this),
   cutoffRadius_ (x.cutoffRadius_, f, this),
+  initTemperature_ (x.initTemperature_, f, this),
+  targetTemperature_ (x.targetTemperature_, f, this),
+  maxTemperatureChange_ (x.maxTemperatureChange_, f, this),
+  thermostatCycleLength_ (x.thermostatCycleLength_, f, this),
   cuboid_ (x.cuboid_, f, this),
   sphere_ (x.sphere_, f, this),
   base_name_ (x.base_name_, f, this),
@@ -2217,6 +2369,10 @@ Simulation_t (const ::xercesc::DOMElement& e,
   averageVelo_ (this),
   boundaries_ (this),
   cutoffRadius_ (this),
+  initTemperature_ (this),
+  targetTemperature_ (this),
+  maxTemperatureChange_ (this),
+  thermostatCycleLength_ (this),
   cuboid_ (this),
   sphere_ (this),
   base_name_ (this),
@@ -2316,6 +2472,62 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // initTemperature
+    //
+    if (n.name () == "initTemperature" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< initTemperature_type > r (
+        initTemperature_traits::create (i, f, this));
+
+      if (!this->initTemperature_)
+      {
+        this->initTemperature_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // targetTemperature
+    //
+    if (n.name () == "targetTemperature" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< targetTemperature_type > r (
+        targetTemperature_traits::create (i, f, this));
+
+      if (!this->targetTemperature_)
+      {
+        this->targetTemperature_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // maxTemperatureChange
+    //
+    if (n.name () == "maxTemperatureChange" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< maxTemperatureChange_type > r (
+        maxTemperatureChange_traits::create (i, f, this));
+
+      if (!this->maxTemperatureChange_)
+      {
+        this->maxTemperatureChange_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // thermostatCycleLength
+    //
+    if (n.name () == "thermostatCycleLength" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< thermostatCycleLength_type > r (
+        thermostatCycleLength_traits::create (i, f, this));
+
+      if (!this->thermostatCycleLength_)
+      {
+        this->thermostatCycleLength_.set (::std::move (r));
+        continue;
+      }
+    }
+
     // cuboid
     //
     if (n.name () == "cuboid" && n.namespace_ ().empty ())
@@ -2411,6 +2623,10 @@ operator= (const Simulation_t& x)
     this->averageVelo_ = x.averageVelo_;
     this->boundaries_ = x.boundaries_;
     this->cutoffRadius_ = x.cutoffRadius_;
+    this->initTemperature_ = x.initTemperature_;
+    this->targetTemperature_ = x.targetTemperature_;
+    this->maxTemperatureChange_ = x.maxTemperatureChange_;
+    this->thermostatCycleLength_ = x.thermostatCycleLength_;
     this->cuboid_ = x.cuboid_;
     this->sphere_ = x.sphere_;
     this->base_name_ = x.base_name_;
