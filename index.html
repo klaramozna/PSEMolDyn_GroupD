@@ -90,10 +90,13 @@ Table of Contents</h2>
 <li><a href="#optional-arguments">Optional arguments:</a></li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#checkpoints">Checkpoints:</a><ul>
 <li><a href="#tests">Tests:</a></li>
 </ul>
 </li>
-<li><a href="#documentation">Documentation</a><ul>
+<li><a href="#documentation">Documentation:</a><ul>
 <li><a href="#build-doxygen-documentation">Build Doxygen Documentation</a></li>
 </ul>
 </li>
@@ -153,18 +156,24 @@ Optional arguments:</h4>
 <li><code>-t, --testing</code>: enable testing mode (to benchmark)</li>
 <li><code>-m,--input_mode</code>: Select between modes of input cuboid or particle (default: cuboid)</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md10"></a>
+<h2><a class="anchor" id="autotoc_md10"></a>
+Checkpoints:</h2>
+<p>Checkpoints are crucial in molecular dynamics, like simulating a falling drop in liquid. They save system states, aiding equilibration and data integrity.</p><ul>
+<li><code>-c , --store_checkpoint</code>: Enter checkpoint filename to store</li>
+<li><code>-x , --load_checkpoint</code>: Enter checkpoint filename to load</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md11"></a>
 Tests:</h3>
 <p>This project is well-tested using Google Test. <br  />
  To run the tests locally switch to the build directory and run <code>ctest</code> <br  />
- Per default running <code>cmake ..</code> will fetch the google test libray and compile the tests (which results in longer building times), if you want to not compile the tests you can run <code>cmake -DBUILD_GTESTS=OFF ..</code> <a class="anchor" id="documentation"></a> </p>
-<h2><a class="anchor" id="autotoc_md11"></a>
-Documentation</h2>
+ Per default running <code>cmake ..</code> will fetch the google test libray and compile the tests (which results in longer building times), if you want to not compile the tests you can run <code>cmake -DBUILD_GTESTS=OFF ..</code> <a class="anchor" id="documentation"></a></p>
+<h2><a class="anchor" id="autotoc_md12"></a>
+Documentation:</h2>
 <p>This project is well-documented using Doxygen. <br  />
  The documentation is at the following Link: <a href="https://klaramozna.github.io/PSEMolDyn_GroupD/">Project Documentation</a> <br  />
  To generate it locally, follow these steps: <br  />
 </p>
-<h4><a class="anchor" id="autotoc_md12"></a>
+<h4><a class="anchor" id="autotoc_md13"></a>
 Build Doxygen Documentation</h4>
 <ul>
 <li>Create Build Directory and navigate to it: <code>mkdir build &amp;&amp; cd build</code> <br  />
