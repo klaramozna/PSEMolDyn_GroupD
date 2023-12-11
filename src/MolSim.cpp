@@ -77,10 +77,10 @@ int main(int argc, char *argsv[]) {
     DirectSumContainer container_h;
 
     if (simParameters.getInputMode() == "xml") {
-        reader->readFile(container, input_path, simParameters);
+        reader->readFile(container_h, input_path, simParameters);
     }
     else {
-        reader->readFile(container, input_path);
+        reader->readFile(container_h, input_path);
     }
     
     Logger::console->info("Hello from MolSim for PSE!");
