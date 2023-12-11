@@ -3,7 +3,7 @@
 //
 
 #include "LinkedCellContainerTest.h"
-#include <gtest/gtest.h>
+#include "../src/utils/ArrayUtils.h"
 
 
 TEST_F(LinkedCellContainerTest, Initialization){
@@ -96,19 +96,28 @@ TEST_F(LinkedCellContainerTest, applyToPairs){
     }
 }
 
-/* To Do: fix this test
-
 TEST_F(LinkedCellContainerTest, applyToBoundary){
-    container.applyToBoundary([this](Particle& p){p.setV(VectorDouble3(std::array<double, 3>{50, 50, 50}));});
-    ASSERT_EQ(p4.getV(), (std::array<double, 3>{50, 50, 50}));
-    ASSERT_EQ(p1.getV(), (std::array<double, 3>{50, 50, 50}));
-    ASSERT_EQ(p2.getV(), (std::array<double, 3>{0, 0, 0}));
-    ASSERT_EQ(p3.getV(), (std::array<double, 3>{0, 0, 0}));
+    boundaryContainer.applyToBoundary([](Particle &p) {
+        p.setV(VectorDouble3(std::array<double, 3>{50, 50, 50}));
+    });
+
+    std::vector<Cell> grid = boundaryContainer.getCells();
+
+    // Making sure boundary particles were changed and no longer have their old values
+    ASSERT_FALSE(grid[61].contains(boundary2));
+
+    // Making sure boundary cells contain the changed boundary particles
+    ASSERT_TRUE(grid[61].contains(boundaryChanged2));
+
+    // Making sure other particles remained unchanged
+    ASSERT_TRUE(grid[62].contains(boundary1));
+    ASSERT_EQ(boundaryContainer.getSize(), 2);
 }
 
-*/
 
 void LinkedCellContainerTest::SetUp() {
     std::vector<Particle> particles{p1, p2, p3, p4};
     container.addParticles(particles);
+    std::vector<Particle> boundary{boundary1, boundary2};
+    boundaryContainer.addParticles(boundary);
 }

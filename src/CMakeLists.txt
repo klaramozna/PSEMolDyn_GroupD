@@ -20,8 +20,6 @@ Simulation/Physics/GravitationalForce.cpp
         Particles/Cell.h
         Particles/Boundary.cpp
         Particles/Boundary.h
-        Particles/CuboidBoundary.cpp
-        Particles/CuboidBoundary.h
         utils/CuboidGenerator.h
         IO/xsdCode/commonSchema.cpp
         IO/xsdCode/checkpointFormat.cpp
@@ -31,7 +29,15 @@ Simulation/Physics/GravitationalForce.cpp
         IO/input/FileReader.cpp
         IO/input/CheckpointReader.cpp
         Benchmark.cpp
-        )
+        Simulation/Thermostat.cpp
+        Simulation/Thermostat.h
+        Simulation/SimpleThermostat.cpp
+        Simulation/SimpleThermostat.h
+        Simulation/GradualThermostat.cpp
+        Simulation/GradualThermostat.h
+        Particles/OutflowBoundary.h
+        Particles/ReflectiveBoundary.cpp
+        Particles/ReflectiveBoundary.h)
         
 # Include directories specific to the 'src' directory, if needed
 target_include_directories(MolSim

@@ -14,9 +14,10 @@
 
 /* Simulation Logic */
 #include "Simulation/Simulation.h"
-#include "Particles/DirectSumContainer.h"
+#include "Particles/LinkedCellContainer.h"
 #include "Simulation/Physics/GravitationalForce.h"
 #include "Simulation/Physics/LennardJones.h"
+#include "Simulation/SimpleThermostat.h"
 
 /* Logging */
 #include "IO/Logger.h"
@@ -30,6 +31,8 @@
 /* Checkpoint */
 #include "IO/output/outputWriter/CheckpointWriter.h"
 #include "IO/input/CheckpointReader.h"
+
+/* Benchmark */
 #include "Benchmark.h"
 
 
@@ -39,8 +42,6 @@ int main(int argc, char *argsv[]) {
     std::unique_ptr<ParticleReader> reader;
     std::unique_ptr<ForceCalculation> forceCalculation;
 
-    DirectSumContainer container;
-
     outputWriter::VTKWriter writer;
     SimParameters simParameters;
     int status = cl.parse_arguments(argc, argsv, simParameters);
@@ -48,13 +49,6 @@ int main(int argc, char *argsv[]) {
     //any error in parsing
     if (status) {
         return 1;
-    }
-
-    /* read checkpoint if available and update container */
-    if (!simParameters.getloadCheckpoint().empty()) {
-        CheckpointReader cReader;
-        std::string p = simParameters.getloadCheckpoint();
-        cReader.readFile(container, p, simParameters);
     }
 
     std::string input_path = simParameters.getInputPath();
@@ -79,6 +73,9 @@ int main(int argc, char *argsv[]) {
         exit(-1);
     }
 
+    /* To do: solve this dependency between readFile and container*/
+    DirectSumContainer container_h;
+
     if (simParameters.getInputMode() == "xml") {
         reader->readFile(container, input_path, simParameters);
     }
@@ -97,13 +94,33 @@ int main(int argc, char *argsv[]) {
         forceCalculation = std::make_unique<GravitationalForce>();
         Logger::console->info("Force set to grav");
     }
+
+    Boundary boundary{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius()};
+    LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
+
+    /* To do: solve this dependency between readFile and container*/
+    container.addParticles(container_h.getParticleVector());
+
+
+    /* read checkpoint if available and update container */
+    if (!simParameters.getloadCheckpoint().empty()) {
+        CheckpointReader cReader;
+        std::string p = simParameters.getloadCheckpoint();
+        cReader.readFile(container, p, simParameters);
+    }
      
     Logger::console->info("Calculating ...");
    
     int iteration = 0;
     double current_time = simParameters.getStartTime();
- 
-    Simulation simulation(simParameters.getDeltaT(), container, *forceCalculation, simParameters.getAverageVelo());
+
+
+    //TODO: change once xml parameters adjusted
+    SimpleThermostat thermostat{20, 20, 50, 3};
+
+
+    Simulation simulation(simParameters.getDeltaT(), container, *forceCalculation, thermostat, simParameters.getAverageVelo(), boundary);
+  
     // This is ugly and shouldn't be in main, but it is for a later refactor
     if (simParameters.isTesting()) {
 
