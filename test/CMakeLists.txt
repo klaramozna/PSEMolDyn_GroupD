@@ -33,7 +33,9 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Particles/Cell.h
         ${PROJECT_SOURCE_DIR}/src/Particles/Cell.cpp
         ${PROJECT_SOURCE_DIR}/src/IO/input/XMLReader.cpp
+        ${PROJECT_SOURCE_DIR}/src/IO/input/CheckpointReader.cpp
         ${PROJECT_SOURCE_DIR}/src/IO/input/SimParameters.cpp
+        ${PROJECT_SOURCE_DIR}/src/IO/output/outputWriter/CheckpointWriter.cpp
         ${PROJECT_SOURCE_DIR}/src/IO/xsdCode/simulationFormat.cpp
         ${PROJECT_SOURCE_DIR}/src/IO/xsdCode/checkpointFormat.cpp
         ${PROJECT_SOURCE_DIR}/src/IO/xsdCode/commonSchema.cpp   
@@ -58,6 +60,7 @@ set(source_needed_for_test
         GradualThermostatTest.h
         BoundaryTest.cpp
         BoundaryTest.h
+        CheckpointTest.cpp
 )
 
 add_executable(
