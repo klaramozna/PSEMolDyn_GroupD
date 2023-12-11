@@ -35,6 +35,10 @@ public:
      * @param cutoffRadius_val base name for the output files
      * @param  boxSize_val the domain size
      * @param  boundaryBehavior_val behavior of boundaries
+     * @param initTemp Initial temperature of molecules.
+     * @param targetTemp Target temperature of molecules.
+     * @param maxChange Maximum temperature change per iteration.
+     * @param cycleLength The number of cycles in which thermostat is periodically applied.
      */
     SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                   bool testing_val, int log_level_val,
