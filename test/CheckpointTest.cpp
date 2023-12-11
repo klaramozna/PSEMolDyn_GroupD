@@ -12,7 +12,7 @@ void CheckpointTest::SetUp() {
  **/
 TEST_F(CheckpointTest, TestSimpleCheckpoint) {
 
-    filename.append("Checkpoints/checkpoint1.xml");
+    filename.append("/Checkpoints/checkpoint1.xml");
     //cWriter.writeCheckpoint(container, filename);
 
     
