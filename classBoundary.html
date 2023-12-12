@@ -84,9 +84,9 @@ Inheritance diagram for Boundary:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a60fb29e438ce36f4513a0d2769edca80"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#a60fb29e438ce36f4513a0d2769edca80">Boundary</a> (double width, double height, double depth, <a class="el" href="classForceCalculation.html">ForceCalculation</a> &amp;<a class="el" href="classBoundary.html#a0c349ced58d7e09ab840eb8fe9fe2e7a">fc</a>, double cellsize)</td></tr>
-<tr class="memdesc:a60fb29e438ce36f4513a0d2769edca80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a CuboidBoundary object with the given parameters.  <a href="classBoundary.html#a60fb29e438ce36f4513a0d2769edca80">More...</a><br /></td></tr>
-<tr class="separator:a60fb29e438ce36f4513a0d2769edca80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed6ee512460da8ce829c6d8ecbbcacf8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#aed6ee512460da8ce829c6d8ecbbcacf8">Boundary</a> (double width, double height, double depth, <a class="el" href="classForceCalculation.html">ForceCalculation</a> &amp;<a class="el" href="classBoundary.html#a0c349ced58d7e09ab840eb8fe9fe2e7a">fc</a>, double cellsize, double <a class="el" href="classBoundary.html#a793afa4e587dc1e2a19a6b4b07f0d6e0">sigma</a>)</td></tr>
+<tr class="memdesc:aed6ee512460da8ce829c6d8ecbbcacf8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a CuboidBoundary object with the given parameters.  <a href="classBoundary.html#aed6ee512460da8ce829c6d8ecbbcacf8">More...</a><br /></td></tr>
+<tr class="separator:aed6ee512460da8ce829c6d8ecbbcacf8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fc4a9f0c963d11b0ad1a848d5d461be"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#a1fc4a9f0c963d11b0ad1a848d5d461be">isInside</a> (const <a class="el" href="classParticle.html">Particle</a> &amp;p)</td></tr>
 <tr class="memdesc:a1fc4a9f0c963d11b0ad1a848d5d461be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true, if the given particle is inside of or on the boundary, else false.  <a href="classBoundary.html#a1fc4a9f0c963d11b0ad1a848d5d461be">More...</a><br /></td></tr>
 <tr class="separator:a1fc4a9f0c963d11b0ad1a848d5d461be"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -111,14 +111,16 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:acc8328c3f16b15a5ccbc0143fde2ae57"><td class="memItemLeft" align="right" valign="top">std::array&lt; double, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#acc8328c3f16b15a5ccbc0143fde2ae57">corner</a> {}</td></tr>
 <tr class="memdesc:acc8328c3f16b15a5ccbc0143fde2ae57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lower Left Corner.  <a href="classBoundary.html#acc8328c3f16b15a5ccbc0143fde2ae57">More...</a><br /></td></tr>
 <tr class="separator:acc8328c3f16b15a5ccbc0143fde2ae57"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a793afa4e587dc1e2a19a6b4b07f0d6e0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#a793afa4e587dc1e2a19a6b4b07f0d6e0">sigma</a></td></tr>
+<tr class="separator:a793afa4e587dc1e2a19a6b4b07f0d6e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae330c23744c4ced92b6e2a028e876307"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#ae330c23744c4ced92b6e2a028e876307">cellSize</a></td></tr>
 <tr class="separator:ae330c23744c4ced92b6e2a028e876307"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c349ced58d7e09ab840eb8fe9fe2e7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classForceCalculation.html">ForceCalculation</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#a0c349ced58d7e09ab840eb8fe9fe2e7a">fc</a></td></tr>
 <tr class="separator:a0c349ced58d7e09ab840eb8fe9fe2e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a60fb29e438ce36f4513a0d2769edca80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a60fb29e438ce36f4513a0d2769edca80">&#9670;&nbsp;</a></span>Boundary()</h2>
+<a id="aed6ee512460da8ce829c6d8ecbbcacf8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed6ee512460da8ce829c6d8ecbbcacf8">&#9670;&nbsp;</a></span>Boundary()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -151,7 +153,13 @@ Protected Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>cellsize</em>&#160;</td>
+          <td class="paramname"><em>cellsize</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>sigma</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -417,6 +425,28 @@ Protected Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname"><a class="el" href="classForceCalculation.html">ForceCalculation</a>&amp; Boundary::fc</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a793afa4e587dc1e2a19a6b4b07f0d6e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a793afa4e587dc1e2a19a6b4b07f0d6e0">&#9670;&nbsp;</a></span>sigma</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Boundary::sigma</td>
         </tr>
       </table>
   </td>
