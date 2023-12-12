@@ -23,7 +23,6 @@ Particle::Particle(const Particle &other) {
     old_f = other.old_f;
     m = other.m;
     type = other.type;
-    particleType = other.particleType;
 }
 
 Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
@@ -32,7 +31,6 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
     v = v_arg;
     m = m_arg;
     type = type_arg;
-    particleType = ParticleType(m_arg, 1, 1);
 }
 
 Particle::~Particle() {}
