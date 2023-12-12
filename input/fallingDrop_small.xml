@@ -1,9 +1,9 @@
 <Simulation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="simulationFormat.xsd">
 
     <!-- Simulation Arguments -->
-    <t_end>10</t_end>
-    <delta_t>0.00005</delta_t>
-    
+    <t_end>5</t_end>
+    <delta_t>0.0001</delta_t>
+
     <!-- Choose ForceType -->
     <force>
         <lennard>
@@ -15,27 +15,27 @@
 
     <boundaries>
 
-    <BoxSize> <x>120</x> <y>50</y> <z>3</z></BoxSize>
-     <Front>Reflecting</Front>
-     <Back>Reflecting</Back>
-     <Top>Reflecting</Top>
-     <Right>Reflecting</Right>
-     <Bottom>Reflecting</Bottom>
-     <Left>Reflecting</Left>
-    
+        <BoxSize> <x>60</x> <y>50</y> <z>3</z></BoxSize>
+        <Front>Reflecting</Front>
+        <Back>Reflecting</Back>
+        <Top>Reflecting</Top>
+        <Right>Reflecting</Right>
+        <Bottom>Reflecting</Bottom>
+        <Left>Reflecting</Left>
+
     </boundaries>
-    <cutoffRadius>1.0</cutoffRadius>
+    <cutoffRadius>3.0</cutoffRadius>
 
     <!-- Provide Particles (Sphere) -->
     <sphere>
         <dimension>2D</dimension>
         <center>
-            <x>60.0</x>
-            <y>25.0</y>
+            <x>10.0</x>
+            <y>10.0</y>
             <z>0.0</z>
         </center>
         <radius>
-            15
+            5
         </radius>
         <distance>1.1225</distance>
         <mass>1.0</mass>

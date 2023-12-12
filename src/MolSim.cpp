@@ -89,7 +89,7 @@ int main(int argc, char *argsv[]) {
         Logger::console->info("Force set to grav");
     }
 
-    ReflectiveBoundary boundary{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius()};
+    ReflectiveBoundary boundary{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius(), simParameters.getSigma()};
     LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
     container.addParticles(container_h.getParticleVector());
     Logger::console->info("Hello from MolSim for PSE!");
@@ -119,7 +119,7 @@ int main(int argc, char *argsv[]) {
 
         // for this loop, we assume: current x, current f and current v are known
         while (current_time < simParameters.getEndTime()) {
-            simulation.runIteration();
+            simulation.runIterationReflective();
 
             iteration++;
             if (iteration % 10 == 0) {

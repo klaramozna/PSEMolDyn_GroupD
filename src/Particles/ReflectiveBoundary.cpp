@@ -27,19 +27,17 @@ void ReflectiveBoundary::applyBoundaryToParticle(Particle &p) {
     }
 
     // Check z-axis (if it's not a 2D <-> z = 1.0)
-    if (boundaryDimensions[2] != 1.0) {
-        if (boundaryDimensions[2] - particlePosition[2] <= cellSize && boundaryDimensions[2] - particlePosition[2] > 0) {
-            opposingParticlePosition[2] += 2 * std::abs(particlePosition[2] - boundaryDimensions[2]);
-        } else if (particlePosition[2] <= cellSize) {
-            opposingParticlePosition[2] -= 2 *particlePosition[2];
-        }
+    if (boundaryDimensions[2] - particlePosition[2] <= cellSize && boundaryDimensions[2] - particlePosition[2] > 0) {
+        opposingParticlePosition[2] += 2 * std::abs(particlePosition[2] - boundaryDimensions[2]);
+    } else if (particlePosition[2] <= cellSize) {
+        opposingParticlePosition[2] -= 2 *particlePosition[2];
     }
 
-    if (getDistance(VectorDouble3(particlePosition), VectorDouble3(opposingParticlePosition)) <= sixthRootOfTwo && particlePosition != opposingParticlePosition) {
+    if (getDistance(VectorDouble3(particlePosition), VectorDouble3(opposingParticlePosition)) <= sixthRootOfTwo * sigma) {
         auto opposingParticle = Particle(opposingParticlePosition, {0.0, 0.0, 0.0}, p.getM());
         auto result = fc.CalculateForces(p, opposingParticle);
         p.setF(p.getFVector() + result);
     }
 }
 
-ReflectiveBoundary::ReflectiveBoundary(double width, double height, double depth, ForceCalculation &fc, double cellSize) : Boundary{width, height, depth, fc, cellSize} {}
+ReflectiveBoundary::ReflectiveBoundary(double width, double height, double depth, ForceCalculation &fc, double cellSize, double sigma) : Boundary{width, height, depth, fc, cellSize, sigma} {}
