@@ -15,7 +15,7 @@
 
     <boundaries>
 
-    <BoxSize> <x>120</x> <y>50</y> <z>1</z></BoxSize>
+    <BoxSize> <x>120</x> <y>50</y> <z>3</z></BoxSize>
      <Front>Reflecting</Front>
      <Back>Reflecting</Back>
      <Top>Reflecting</Top>
@@ -53,7 +53,7 @@
     <writeFrequency>100</writeFrequency>
 
     <!-- Misc -->
-    <log_level>2</log_level>
+    <log_level>6</log_level>
     <testing_mode>false</testing_mode>
 
 </Simulation>

@@ -114,9 +114,12 @@ int main(int argc, char *argsv[]) {
 
         Logger::console->info("Time taken: {} milliseconds", duration.count());
     } else {
+        // create directory
+        writer.createMarkedDirectory();
+
         // for this loop, we assume: current x, current f and current v are known
         while (current_time < simParameters.getEndTime()) {
-            simulation.runIterationReflective();
+            simulation.runIteration();
 
             iteration++;
             if (iteration % 10 == 0) {

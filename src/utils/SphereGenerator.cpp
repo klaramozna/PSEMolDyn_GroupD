@@ -51,7 +51,7 @@ std::vector<Particle> SphereGenerator::generateDisk(int type) {
             // Check if the point is inside the disk (circle)
             double distance = sqrt((x - center[0]) * (x - center[0]) + (y - center[1]) * (y - center[1]));
                 if (distance <= radius * particleDistance) {
-                    std::array<double, 3> particlePosition{x , y, 0};
+                    std::array<double, 3> particlePosition{x , y, 1};
                     particles.emplace_back(particlePosition, velocity, mass, 0);
                 }
             }

@@ -35,7 +35,7 @@ void ReflectiveBoundary::applyBoundaryToParticle(Particle &p) {
         }
     }
 
-    if (getDistance(VectorDouble3(particlePosition), VectorDouble3(opposingParticlePosition)) <= sixthRootOfTwo) {
+    if (getDistance(VectorDouble3(particlePosition), VectorDouble3(opposingParticlePosition)) <= sixthRootOfTwo && particlePosition != opposingParticlePosition) {
         auto opposingParticle = Particle(opposingParticlePosition, {0.0, 0.0, 0.0}, p.getM());
         auto result = fc.CalculateForces(p, opposingParticle);
         p.setF(p.getFVector() + result);
