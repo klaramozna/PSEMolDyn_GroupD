@@ -18,6 +18,11 @@ public:
     ParticleType(double mass, double epsilon, double sigma): mass{mass}, epsilon{epsilon}, sigma{sigma}{};
 
     /**
+     * @brief Creates a ParticleType object with mass, sigma and epsilon set to zero.
+     */
+    ParticleType() = default;
+
+    /**
      * @brief Returns the mass of the type.
      * @return The mass of the type.
      */
