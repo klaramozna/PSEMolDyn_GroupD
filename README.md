@@ -23,8 +23,9 @@ Bachelor Practical course:
     - [Usage](#usage)
       - [Command Line Usage:](#command-line-usage)
         - [Optional arguments:](#optional-arguments)
+    - [Checkpoints:](#checkpoints)
       - [Tests:](#tests)
-    - [Documentation](#documentation)
+    - [Documentation:](#documentation)
         - [Build Doxygen Documentation](#build-doxygen-documentation)
 
 <a name="introduction"></a>
@@ -74,12 +75,18 @@ run the program with: ```./src/MolSim -p <input_file_path>```
 - ```-t, --testing```: enable testing mode (to benchmark)
 - ```-m,--input_mode```:   Select between modes of input cuboid or particle (default: cuboid)
 
+### Checkpoints:
+Checkpoints are crucial in molecular dynamics, like simulating a falling drop in liquid. They save system states, aiding equilibration and data integrity.
+- ```-c , --store_checkpoint```: Enter checkpoint filename to store
+- ```-x , --load_checkpoint```: Enter checkpoint filename to load
+
 #### Tests:
 This project is well-tested using Google Test.  
 To run the tests locally switch to the build directory and run ```ctest```  
 Per default running ```cmake ..``` will fetch the google test libray and compile the tests (which results in longer building times), if you want to not compile the tests you can run ```cmake -DBUILD_GTESTS=OFF ..```
 <a name="documentation"></a>
-### Documentation
+
+### Documentation:
 This project is well-documented using Doxygen.   
 The documentation is at the following Link: [Project Documentation](https://klaramozna.github.io/PSEMolDyn_GroupD/)  
 To generate it locally, follow these steps:  

@@ -40,131 +40,7 @@
 
 #include "simulationFormat.h"
 
-// int_3d
-// 
-
-const int_3d::x_type& int_3d::
-x () const
-{
-  return this->x_.get ();
-}
-
-int_3d::x_type& int_3d::
-x ()
-{
-  return this->x_.get ();
-}
-
-void int_3d::
-x (const x_type& x)
-{
-  this->x_.set (x);
-}
-
-const int_3d::y_type& int_3d::
-y () const
-{
-  return this->y_.get ();
-}
-
-int_3d::y_type& int_3d::
-y ()
-{
-  return this->y_.get ();
-}
-
-void int_3d::
-y (const y_type& x)
-{
-  this->y_.set (x);
-}
-
-const int_3d::z_type& int_3d::
-z () const
-{
-  return this->z_.get ();
-}
-
-int_3d::z_type& int_3d::
-z ()
-{
-  return this->z_.get ();
-}
-
-void int_3d::
-z (const z_type& x)
-{
-  this->z_.set (x);
-}
-
-
-// double_3d
-// 
-
-const double_3d::x_type& double_3d::
-x () const
-{
-  return this->x_.get ();
-}
-
-double_3d::x_type& double_3d::
-x ()
-{
-  return this->x_.get ();
-}
-
-void double_3d::
-x (const x_type& x)
-{
-  this->x_.set (x);
-}
-
-const double_3d::y_type& double_3d::
-y () const
-{
-  return this->y_.get ();
-}
-
-double_3d::y_type& double_3d::
-y ()
-{
-  return this->y_.get ();
-}
-
-void double_3d::
-y (const y_type& x)
-{
-  this->y_.set (x);
-}
-
-const double_3d::z_type& double_3d::
-z () const
-{
-  return this->z_.get ();
-}
-
-double_3d::z_type& double_3d::
-z ()
-{
-  return this->z_.get ();
-}
-
-void double_3d::
-z (const z_type& x)
-{
-  this->z_.set (x);
-}
-
-
 // log_level
-// 
-
-
-// nonNegativeDouble
-// 
-
-
-// nonNegativeInteger
 // 
 
 
@@ -995,6 +871,150 @@ cutoffRadius_default_value ()
   return cutoffRadius_type (3.0);
 }
 
+const Simulation_t::initTemperature_optional& Simulation_t::
+initTemperature () const
+{
+  return this->initTemperature_;
+}
+
+Simulation_t::initTemperature_optional& Simulation_t::
+initTemperature ()
+{
+  return this->initTemperature_;
+}
+
+void Simulation_t::
+initTemperature (const initTemperature_type& x)
+{
+  this->initTemperature_.set (x);
+}
+
+void Simulation_t::
+initTemperature (const initTemperature_optional& x)
+{
+  this->initTemperature_ = x;
+}
+
+void Simulation_t::
+initTemperature (::std::unique_ptr< initTemperature_type > x)
+{
+  this->initTemperature_.set (std::move (x));
+}
+
+Simulation_t::initTemperature_type Simulation_t::
+initTemperature_default_value ()
+{
+  return initTemperature_type (10.0);
+}
+
+const Simulation_t::targetTemperature_optional& Simulation_t::
+targetTemperature () const
+{
+  return this->targetTemperature_;
+}
+
+Simulation_t::targetTemperature_optional& Simulation_t::
+targetTemperature ()
+{
+  return this->targetTemperature_;
+}
+
+void Simulation_t::
+targetTemperature (const targetTemperature_type& x)
+{
+  this->targetTemperature_.set (x);
+}
+
+void Simulation_t::
+targetTemperature (const targetTemperature_optional& x)
+{
+  this->targetTemperature_ = x;
+}
+
+void Simulation_t::
+targetTemperature (::std::unique_ptr< targetTemperature_type > x)
+{
+  this->targetTemperature_.set (std::move (x));
+}
+
+Simulation_t::targetTemperature_type Simulation_t::
+targetTemperature_default_value ()
+{
+  return targetTemperature_type (10.0);
+}
+
+const Simulation_t::maxTemperatureChange_optional& Simulation_t::
+maxTemperatureChange () const
+{
+  return this->maxTemperatureChange_;
+}
+
+Simulation_t::maxTemperatureChange_optional& Simulation_t::
+maxTemperatureChange ()
+{
+  return this->maxTemperatureChange_;
+}
+
+void Simulation_t::
+maxTemperatureChange (const maxTemperatureChange_type& x)
+{
+  this->maxTemperatureChange_.set (x);
+}
+
+void Simulation_t::
+maxTemperatureChange (const maxTemperatureChange_optional& x)
+{
+  this->maxTemperatureChange_ = x;
+}
+
+void Simulation_t::
+maxTemperatureChange (::std::unique_ptr< maxTemperatureChange_type > x)
+{
+  this->maxTemperatureChange_.set (std::move (x));
+}
+
+Simulation_t::maxTemperatureChange_type Simulation_t::
+maxTemperatureChange_default_value ()
+{
+  return maxTemperatureChange_type (1.0);
+}
+
+const Simulation_t::thermostatCycleLength_optional& Simulation_t::
+thermostatCycleLength () const
+{
+  return this->thermostatCycleLength_;
+}
+
+Simulation_t::thermostatCycleLength_optional& Simulation_t::
+thermostatCycleLength ()
+{
+  return this->thermostatCycleLength_;
+}
+
+void Simulation_t::
+thermostatCycleLength (const thermostatCycleLength_type& x)
+{
+  this->thermostatCycleLength_.set (x);
+}
+
+void Simulation_t::
+thermostatCycleLength (const thermostatCycleLength_optional& x)
+{
+  this->thermostatCycleLength_ = x;
+}
+
+void Simulation_t::
+thermostatCycleLength (::std::unique_ptr< thermostatCycleLength_type > x)
+{
+  this->thermostatCycleLength_.set (std::move (x));
+}
+
+Simulation_t::thermostatCycleLength_type Simulation_t::
+thermostatCycleLength_default_value ()
+{
+  return thermostatCycleLength_type (3LL);
+}
+
 const Simulation_t::cuboid_sequence& Simulation_t::
 cuboid () const
 {
@@ -1160,276 +1180,6 @@ testing_mode_default_value ()
 
 #include <xsd/cxx/xml/dom/parsing-source.hxx>
 
-// int_3d
-//
-
-int_3d::
-int_3d (const x_type& x,
-        const y_type& y,
-        const z_type& z)
-: ::xml_schema::type (),
-  x_ (x, this),
-  y_ (y, this),
-  z_ (z, this)
-{
-}
-
-int_3d::
-int_3d (const int_3d& x,
-        ::xml_schema::flags f,
-        ::xml_schema::container* c)
-: ::xml_schema::type (x, f, c),
-  x_ (x.x_, f, this),
-  y_ (x.y_, f, this),
-  z_ (x.z_, f, this)
-{
-}
-
-int_3d::
-int_3d (const ::xercesc::DOMElement& e,
-        ::xml_schema::flags f,
-        ::xml_schema::container* c)
-: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-  x_ (this),
-  y_ (this),
-  z_ (this)
-{
-  if ((f & ::xml_schema::flags::base) == 0)
-  {
-    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
-    this->parse (p, f);
-  }
-}
-
-void int_3d::
-parse (::xsd::cxx::xml::dom::parser< char >& p,
-       ::xml_schema::flags f)
-{
-  for (; p.more_content (); p.next_content (false))
-  {
-    const ::xercesc::DOMElement& i (p.cur_element ());
-    const ::xsd::cxx::xml::qualified_name< char > n (
-      ::xsd::cxx::xml::dom::name< char > (i));
-
-    // x
-    //
-    if (n.name () == "x" && n.namespace_ ().empty ())
-    {
-      if (!x_.present ())
-      {
-        this->x_.set (x_traits::create (i, f, this));
-        continue;
-      }
-    }
-
-    // y
-    //
-    if (n.name () == "y" && n.namespace_ ().empty ())
-    {
-      if (!y_.present ())
-      {
-        this->y_.set (y_traits::create (i, f, this));
-        continue;
-      }
-    }
-
-    // z
-    //
-    if (n.name () == "z" && n.namespace_ ().empty ())
-    {
-      if (!z_.present ())
-      {
-        this->z_.set (z_traits::create (i, f, this));
-        continue;
-      }
-    }
-
-    break;
-  }
-
-  if (!x_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "x",
-      "");
-  }
-
-  if (!y_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "y",
-      "");
-  }
-
-  if (!z_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "z",
-      "");
-  }
-}
-
-int_3d* int_3d::
-_clone (::xml_schema::flags f,
-        ::xml_schema::container* c) const
-{
-  return new class int_3d (*this, f, c);
-}
-
-int_3d& int_3d::
-operator= (const int_3d& x)
-{
-  if (this != &x)
-  {
-    static_cast< ::xml_schema::type& > (*this) = x;
-    this->x_ = x.x_;
-    this->y_ = x.y_;
-    this->z_ = x.z_;
-  }
-
-  return *this;
-}
-
-int_3d::
-~int_3d ()
-{
-}
-
-// double_3d
-//
-
-double_3d::
-double_3d (const x_type& x,
-           const y_type& y,
-           const z_type& z)
-: ::xml_schema::type (),
-  x_ (x, this),
-  y_ (y, this),
-  z_ (z, this)
-{
-}
-
-double_3d::
-double_3d (const double_3d& x,
-           ::xml_schema::flags f,
-           ::xml_schema::container* c)
-: ::xml_schema::type (x, f, c),
-  x_ (x.x_, f, this),
-  y_ (x.y_, f, this),
-  z_ (x.z_, f, this)
-{
-}
-
-double_3d::
-double_3d (const ::xercesc::DOMElement& e,
-           ::xml_schema::flags f,
-           ::xml_schema::container* c)
-: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
-  x_ (this),
-  y_ (this),
-  z_ (this)
-{
-  if ((f & ::xml_schema::flags::base) == 0)
-  {
-    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
-    this->parse (p, f);
-  }
-}
-
-void double_3d::
-parse (::xsd::cxx::xml::dom::parser< char >& p,
-       ::xml_schema::flags f)
-{
-  for (; p.more_content (); p.next_content (false))
-  {
-    const ::xercesc::DOMElement& i (p.cur_element ());
-    const ::xsd::cxx::xml::qualified_name< char > n (
-      ::xsd::cxx::xml::dom::name< char > (i));
-
-    // x
-    //
-    if (n.name () == "x" && n.namespace_ ().empty ())
-    {
-      if (!x_.present ())
-      {
-        this->x_.set (x_traits::create (i, f, this));
-        continue;
-      }
-    }
-
-    // y
-    //
-    if (n.name () == "y" && n.namespace_ ().empty ())
-    {
-      if (!y_.present ())
-      {
-        this->y_.set (y_traits::create (i, f, this));
-        continue;
-      }
-    }
-
-    // z
-    //
-    if (n.name () == "z" && n.namespace_ ().empty ())
-    {
-      if (!z_.present ())
-      {
-        this->z_.set (z_traits::create (i, f, this));
-        continue;
-      }
-    }
-
-    break;
-  }
-
-  if (!x_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "x",
-      "");
-  }
-
-  if (!y_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "y",
-      "");
-  }
-
-  if (!z_.present ())
-  {
-    throw ::xsd::cxx::tree::expected_element< char > (
-      "z",
-      "");
-  }
-}
-
-double_3d* double_3d::
-_clone (::xml_schema::flags f,
-        ::xml_schema::container* c) const
-{
-  return new class double_3d (*this, f, c);
-}
-
-double_3d& double_3d::
-operator= (const double_3d& x)
-{
-  if (this != &x)
-  {
-    static_cast< ::xml_schema::type& > (*this) = x;
-    this->x_ = x.x_;
-    this->y_ = x.y_;
-    this->z_ = x.z_;
-  }
-
-  return *this;
-}
-
-double_3d::
-~double_3d ()
-{
-}
-
 // log_level
 //
 
@@ -1481,114 +1231,6 @@ _clone (::xml_schema::flags f,
 
 log_level::
 ~log_level ()
-{
-}
-
-// nonNegativeDouble
-//
-
-nonNegativeDouble::
-nonNegativeDouble (const ::xml_schema::double_& _xsd_double__base)
-: ::xsd::cxx::tree::fundamental_base< ::xml_schema::double_, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::double_ > (_xsd_double__base)
-{
-}
-
-nonNegativeDouble::
-nonNegativeDouble (const nonNegativeDouble& x,
-                   ::xml_schema::flags f,
-                   ::xml_schema::container* c)
-: ::xsd::cxx::tree::fundamental_base< ::xml_schema::double_, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::double_ > (x, f, c)
-{
-}
-
-nonNegativeDouble::
-nonNegativeDouble (const ::xercesc::DOMElement& e,
-                   ::xml_schema::flags f,
-                   ::xml_schema::container* c)
-: ::xsd::cxx::tree::fundamental_base< ::xml_schema::double_, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::double_ > (e, f, c)
-{
-}
-
-nonNegativeDouble::
-nonNegativeDouble (const ::xercesc::DOMAttr& a,
-                   ::xml_schema::flags f,
-                   ::xml_schema::container* c)
-: ::xsd::cxx::tree::fundamental_base< ::xml_schema::double_, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::double_ > (a, f, c)
-{
-}
-
-nonNegativeDouble::
-nonNegativeDouble (const ::std::string& s,
-                   const ::xercesc::DOMElement* e,
-                   ::xml_schema::flags f,
-                   ::xml_schema::container* c)
-: ::xsd::cxx::tree::fundamental_base< ::xml_schema::double_, char, ::xml_schema::simple_type, ::xsd::cxx::tree::schema_type::double_ > (s, e, f, c)
-{
-}
-
-nonNegativeDouble* nonNegativeDouble::
-_clone (::xml_schema::flags f,
-        ::xml_schema::container* c) const
-{
-  return new class nonNegativeDouble (*this, f, c);
-}
-
-nonNegativeDouble::
-~nonNegativeDouble ()
-{
-}
-
-// nonNegativeInteger
-//
-
-nonNegativeInteger::
-nonNegativeInteger (const ::xml_schema::integer& _xsd_integer_base)
-: ::xsd::cxx::tree::fundamental_base< ::xml_schema::integer, char, ::xml_schema::simple_type > (_xsd_integer_base)
-{
-}
-
-nonNegativeInteger::
-nonNegativeInteger (const nonNegativeInteger& x,
-                    ::xml_schema::flags f,
-                    ::xml_schema::container* c)
-: ::xsd::cxx::tree::fundamental_base< ::xml_schema::integer, char, ::xml_schema::simple_type > (x, f, c)
-{
-}
-
-nonNegativeInteger::
-nonNegativeInteger (const ::xercesc::DOMElement& e,
-                    ::xml_schema::flags f,
-                    ::xml_schema::container* c)
-: ::xsd::cxx::tree::fundamental_base< ::xml_schema::integer, char, ::xml_schema::simple_type > (e, f, c)
-{
-}
-
-nonNegativeInteger::
-nonNegativeInteger (const ::xercesc::DOMAttr& a,
-                    ::xml_schema::flags f,
-                    ::xml_schema::container* c)
-: ::xsd::cxx::tree::fundamental_base< ::xml_schema::integer, char, ::xml_schema::simple_type > (a, f, c)
-{
-}
-
-nonNegativeInteger::
-nonNegativeInteger (const ::std::string& s,
-                    const ::xercesc::DOMElement* e,
-                    ::xml_schema::flags f,
-                    ::xml_schema::container* c)
-: ::xsd::cxx::tree::fundamental_base< ::xml_schema::integer, char, ::xml_schema::simple_type > (s, e, f, c)
-{
-}
-
-nonNegativeInteger* nonNegativeInteger::
-_clone (::xml_schema::flags f,
-        ::xml_schema::container* c) const
-{
-  return new class nonNegativeInteger (*this, f, c);
-}
-
-nonNegativeInteger::
-~nonNegativeInteger ()
 {
 }
 
@@ -2679,6 +2321,10 @@ Simulation_t ()
   averageVelo_ (this),
   boundaries_ (this),
   cutoffRadius_ (this),
+  initTemperature_ (this),
+  targetTemperature_ (this),
+  maxTemperatureChange_ (this),
+  thermostatCycleLength_ (this),
   cuboid_ (this),
   sphere_ (this),
   base_name_ (this),
@@ -2699,6 +2345,10 @@ Simulation_t (const Simulation_t& x,
   averageVelo_ (x.averageVelo_, f, this),
   boundaries_ (x.boundaries_, f, this),
   cutoffRadius_ (x.cutoffRadius_, f, this),
+  initTemperature_ (x.initTemperature_, f, this),
+  targetTemperature_ (x.targetTemperature_, f, this),
+  maxTemperatureChange_ (x.maxTemperatureChange_, f, this),
+  thermostatCycleLength_ (x.thermostatCycleLength_, f, this),
   cuboid_ (x.cuboid_, f, this),
   sphere_ (x.sphere_, f, this),
   base_name_ (x.base_name_, f, this),
@@ -2719,6 +2369,10 @@ Simulation_t (const ::xercesc::DOMElement& e,
   averageVelo_ (this),
   boundaries_ (this),
   cutoffRadius_ (this),
+  initTemperature_ (this),
+  targetTemperature_ (this),
+  maxTemperatureChange_ (this),
+  thermostatCycleLength_ (this),
   cuboid_ (this),
   sphere_ (this),
   base_name_ (this),
@@ -2818,6 +2472,62 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // initTemperature
+    //
+    if (n.name () == "initTemperature" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< initTemperature_type > r (
+        initTemperature_traits::create (i, f, this));
+
+      if (!this->initTemperature_)
+      {
+        this->initTemperature_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // targetTemperature
+    //
+    if (n.name () == "targetTemperature" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< targetTemperature_type > r (
+        targetTemperature_traits::create (i, f, this));
+
+      if (!this->targetTemperature_)
+      {
+        this->targetTemperature_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // maxTemperatureChange
+    //
+    if (n.name () == "maxTemperatureChange" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< maxTemperatureChange_type > r (
+        maxTemperatureChange_traits::create (i, f, this));
+
+      if (!this->maxTemperatureChange_)
+      {
+        this->maxTemperatureChange_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // thermostatCycleLength
+    //
+    if (n.name () == "thermostatCycleLength" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< thermostatCycleLength_type > r (
+        thermostatCycleLength_traits::create (i, f, this));
+
+      if (!this->thermostatCycleLength_)
+      {
+        this->thermostatCycleLength_.set (::std::move (r));
+        continue;
+      }
+    }
+
     // cuboid
     //
     if (n.name () == "cuboid" && n.namespace_ ().empty ())
@@ -2913,6 +2623,10 @@ operator= (const Simulation_t& x)
     this->averageVelo_ = x.averageVelo_;
     this->boundaries_ = x.boundaries_;
     this->cutoffRadius_ = x.cutoffRadius_;
+    this->initTemperature_ = x.initTemperature_;
+    this->targetTemperature_ = x.targetTemperature_;
+    this->maxTemperatureChange_ = x.maxTemperatureChange_;
+    this->thermostatCycleLength_ = x.thermostatCycleLength_;
     this->cuboid_ = x.cuboid_;
     this->sphere_ = x.sphere_;
     this->base_name_ = x.base_name_;

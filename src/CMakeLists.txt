@@ -21,10 +21,20 @@ Simulation/Physics/GravitationalForce.cpp
         Particles/Boundary.cpp
         Particles/Boundary.h
         utils/CuboidGenerator.h
-        IO/input/simulationFormat.cpp
+        IO/xsdCode/commonSchema.cpp
+        IO/xsdCode/checkpointFormat.cpp
+        IO/xsdCode/simulationFormat.cpp
         IO/input/XMLReader.cpp
         IO/input/CuboidReader.cpp
         IO/input/FileReader.cpp
+        IO/input/CheckpointReader.cpp
+        Benchmark.cpp
+        Simulation/Thermostat.cpp
+        Simulation/Thermostat.h
+        Simulation/SimpleThermostat.cpp
+        Simulation/SimpleThermostat.h
+        Simulation/GradualThermostat.cpp
+        Simulation/GradualThermostat.h
         Particles/OutflowBoundary.h
         Particles/ReflectiveBoundary.cpp
         Particles/ReflectiveBoundary.h)

@@ -6,13 +6,16 @@
  */
 
 #include "Simulation.h"
+
+#include "../utils/VectorDouble3.h"
+#include "./Physics/ForceCalculation.h"
+
 #include "Particles/LinkedCellContainer.h"
 
-
-Simulation::Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, double averageVelo, ReflectiveBoundary &boundary) :
+Simulation::Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary) :
                         container(container),
                         forceCalculation(calculation),
-                        boundary{boundary},
+                        thermostat(thermostat), boundary{boundary},
                         delta_t(delta_t),
                         averageVelo(averageVelo){
 
@@ -43,6 +46,11 @@ void Simulation::calculateX(Particle& p) const {
 }
 
 void Simulation::runIteration() {
+    // adjust temperature
+    thermostat.updateState(container.getParticleVector());
+    container.applyToAll([this](Particle& p){thermostat.updateTemperature(p);});
+    thermostat.updateIteration();
+
     // calculate new x
     container.applyToAll([this](Particle& p) { calculateX(p); });
 
@@ -59,6 +67,11 @@ void Simulation::setOldForce(Particle& p) {
 }
 
 void Simulation::runIterationReflective() {
+    // adjust temperature
+    thermostat.updateState(container.getParticleVector());
+    container.applyToAll([this](Particle& p){thermostat.updateTemperature(p);});
+    thermostat.updateIteration();
+
     // calculate new x
     container.applyToAll([this](Particle& p) { calculateX(p); });
 
@@ -75,6 +88,11 @@ void Simulation::runIterationReflective() {
 }
 
 void Simulation::runIterationOutflow() {
+    // adjust temperature
+    thermostat.updateState(container.getParticleVector());
+    container.applyToAll([this](Particle& p){thermostat.updateTemperature(p);});
+    thermostat.updateIteration();
+
     container.deleteHaloParticles();
     // calculate new x
     container.applyToAll([this](Particle& p) { calculateX(p); });

@@ -19,6 +19,7 @@
 #include "Simulation/Physics/LennardJones.h"
 #include "Particles/Boundary.h"
 #include "Particles/ReflectiveBoundary.h"
+#include "Simulation/SimpleThermostat.h"
 
 
 /* Logging */
@@ -29,6 +30,13 @@
 #include "Particles/ParticleGenerator.h"
 #include "utils/CuboidGenerator.h"
 #include "utils/SphereGenerator.h"
+
+/* Checkpoint */
+#include "IO/output/outputWriter/CheckpointWriter.h"
+#include "IO/input/CheckpointReader.h"
+
+/* Benchmark */
+#include "Benchmark.h"
 
 
 
@@ -67,13 +75,12 @@ int main(int argc, char *argsv[]) {
         Logger::err_logger->error("Reader was not correctly initialized");
         exit(-1);
     }
-    
+
+    /* To do: solve this dependency between readFile and container*/
     DirectSumContainer container_h;
-    
 
     if (simParameters.getInputMode() == "xml") {
         reader->readFile(container_h, input_path, simParameters);
-        
     }
     else {
         reader->readFile(container_h, input_path);
@@ -89,19 +96,37 @@ int main(int argc, char *argsv[]) {
         Logger::console->info("Force set to grav");
     }
 
-    ReflectiveBoundary boundary{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius(), simParameters.getSigma()};
+    Boundary boundary{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius(), simParameters.getSigma()};
     LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
+
+    /* To do: solve this dependency between readFile and container*/
     container.addParticles(container_h.getParticleVector());
-    Logger::console->info("Hello from MolSim for PSE!");
+
+
+    /* read checkpoint if available and update container */
+    if (!simParameters.getloadCheckpoint().empty()) {
+        CheckpointReader cReader;
+        std::string p = simParameters.getloadCheckpoint();
+        cReader.readFile(container, p, simParameters);
+    }
+  
     Logger::console->info("Calculating ...");
    
     int iteration = 0;
     double current_time = simParameters.getStartTime();
- 
-    Simulation simulation(simParameters.getDeltaT(), container, *forceCalculation, simParameters.getAverageVelo(), boundary);
+
+
+    //TODO: change once xml parameters adjusted
+    SimpleThermostat thermostat{20, 20, 50, 3};
+
+
+    Simulation simulation(simParameters.getDeltaT(), container, *forceCalculation, thermostat, simParameters.getAverageVelo(), boundary);
+  
     // This is ugly and shouldn't be in main, but it is for a later refactor
     if (simParameters.isTesting()) {
-        auto measure_start_time = std::chrono::high_resolution_clock::now();
+
+        Benchmark benchmark;
+        benchmark.startBenchmark();
 
         while (current_time < simParameters.getEndTime()) {
             simulation.runIteration();
@@ -109,10 +134,10 @@ int main(int argc, char *argsv[]) {
             current_time += simParameters.getDeltaT();
         }
 
-        auto measure_end_time = std::chrono::high_resolution_clock::now();
-        auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(measure_end_time - measure_start_time);
+        benchmark.stopBenchmark();
+        int number_of_iterations = simParameters.getEndTime() / simParameters.getDeltaT();
+        benchmark.printBenchmarkResults(benchmark.getElapsedTimeInSeconds(), number_of_iterations ,container.getSize());
 
-        Logger::console->info("Time taken: {} milliseconds", duration.count());
     } else {
         // create directory
         writer.createMarkedDirectory();
@@ -131,6 +156,13 @@ int main(int argc, char *argsv[]) {
             current_time += simParameters.getDeltaT();
         }
 
+        /* store checkpoint if specified */
+        if (!simParameters.getStoreCheckpoint().empty()) {
+            CheckpointWriter c;
+            Logger::console->info("Storing checkpoint ...");
+            c.writeCheckpoint(container, simParameters.getStoreCheckpoint());
+        }
+        
         Logger::console->info("Output written. Terminating...");
         return 0;
     }

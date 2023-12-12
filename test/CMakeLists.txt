@@ -33,8 +33,19 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Particles/Cell.h
         ${PROJECT_SOURCE_DIR}/src/Particles/Cell.cpp
         ${PROJECT_SOURCE_DIR}/src/IO/input/XMLReader.cpp
+        ${PROJECT_SOURCE_DIR}/src/IO/input/CheckpointReader.cpp
         ${PROJECT_SOURCE_DIR}/src/IO/input/SimParameters.cpp
-        ${PROJECT_SOURCE_DIR}/src/IO/input/simulationFormat.cpp
+        ${PROJECT_SOURCE_DIR}/src/IO/output/outputWriter/CheckpointWriter.cpp
+        ${PROJECT_SOURCE_DIR}/src/IO/xsdCode/simulationFormat.cpp
+        ${PROJECT_SOURCE_DIR}/src/IO/xsdCode/checkpointFormat.cpp
+        ${PROJECT_SOURCE_DIR}/src/IO/xsdCode/commonSchema.cpp   
+        ${PROJECT_SOURCE_DIR}/src/IO/xsdCode/simulationFormat.cpp
+        ${PROJECT_SOURCE_DIR}/src/Simulation/Thermostat.h
+        ${PROJECT_SOURCE_DIR}/src/Simulation/Thermostat.cpp
+        ${PROJECT_SOURCE_DIR}/src/Simulation/SimpleThermostat.h
+        ${PROJECT_SOURCE_DIR}/src/Simulation/SimpleThermostat.cpp
+        ${PROJECT_SOURCE_DIR}/src/Simulation/GradualThermostat.h
+        ${PROJECT_SOURCE_DIR}/src/Simulation/GradualThermostat.cpp
         ${PROJECT_SOURCE_DIR}/src/Particles/ReflectiveBoundary.cpp
         ${PROJECT_SOURCE_DIR}/src/Particles/ReflectiveBoundary.h
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/GravitationalForce.h
@@ -43,8 +54,13 @@ set(source_needed_for_test
         CuboidGeneratorTest.h
         LinkedCellContainerTest.cpp
         LinkedCellContainerTest.h
+        SimpleThermostatTest.cpp
+        SimpleThermostatTest.h
+        GradualThermostatTest.cpp
+        GradualThermostatTest.h
         BoundaryTest.cpp
         BoundaryTest.h
+        CheckpointTest.cpp
 )
 
 add_executable(
