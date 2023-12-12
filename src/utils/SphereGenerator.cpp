@@ -7,12 +7,14 @@
 #include <iostream>
 #include "VectorDouble3.h"
 
-SphereGenerator::SphereGenerator(std::array<double, 3> center, double particleDistance, int radius, double mass, std::array<double, 3> velocity): center(), velocity() {
+SphereGenerator::SphereGenerator(std::array<double, 3> center, double particleDistance, int radius, double mass, std::array<double, 3> velocity, double epsilon, double sigma): center(), velocity() {
     this->center = center;
     this->particleDistance = particleDistance;
     this->radius = radius;
     this->mass = mass;
     this->velocity = velocity;
+    this->epsilon = epsilon;
+    this->sigma = sigma;
 }
 
 std::vector<Particle> SphereGenerator::generateParticles(int type) {
@@ -31,7 +33,7 @@ std::vector<Particle> SphereGenerator::generateParticles(int type) {
                 double distance = cord.getL2Norm();
                 if (distance <= radius * particleDistance) {
                     std::array<double, 3> particlePosition{x , y, z};
-                    particles.emplace_back(particlePosition, velocity, mass, 0);
+                    particles.emplace_back(particlePosition, velocity, mass, epsilon, sigma, 0);
                 }
             }
         }
@@ -52,7 +54,7 @@ std::vector<Particle> SphereGenerator::generateDisk(int type) {
             double distance = sqrt((x - center[0]) * (x - center[0]) + (y - center[1]) * (y - center[1]));
                 if (distance <= radius * particleDistance) {
                     std::array<double, 3> particlePosition{x , y, 1};
-                    particles.emplace_back(particlePosition, velocity, mass, 0);
+                    particles.emplace_back(particlePosition, velocity, mass, epsilon, sigma, 0);
                 }
             }
         }
