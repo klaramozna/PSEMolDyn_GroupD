@@ -17,7 +17,10 @@
 #include "Particles/LinkedCellContainer.h"
 #include "Simulation/Physics/GravitationalForce.h"
 #include "Simulation/Physics/LennardJones.h"
+#include "Particles/Boundary.h"
+#include "Particles/ReflectiveBoundary.h"
 #include "Simulation/SimpleThermostat.h"
+
 
 /* Logging */
 #include "IO/Logger.h"
@@ -83,8 +86,6 @@ int main(int argc, char *argsv[]) {
         reader->readFile(container_h, input_path);
     }
     
-    Logger::console->info("Hello from MolSim for PSE!");
-
     if (simParameters.getForce() == "lennard") {
         forceCalculation = std::make_unique<LennardJones>(simParameters.getEpsilon(), simParameters.getSigma());
         Logger::console->info("Force set to lennard");
@@ -95,7 +96,7 @@ int main(int argc, char *argsv[]) {
         Logger::console->info("Force set to grav");
     }
 
-    Boundary boundary{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius()};
+    Boundary boundary{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius(), simParameters.getSigma()};
     LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
 
     /* To do: solve this dependency between readFile and container*/
@@ -108,7 +109,7 @@ int main(int argc, char *argsv[]) {
         std::string p = simParameters.getloadCheckpoint();
         cReader.readFile(container, p, simParameters);
     }
-     
+  
     Logger::console->info("Calculating ...");
    
     int iteration = 0;
@@ -138,9 +139,12 @@ int main(int argc, char *argsv[]) {
         benchmark.printBenchmarkResults(benchmark.getElapsedTimeInSeconds(), number_of_iterations ,container.getSize());
 
     } else {
+        // create directory
+        writer.createMarkedDirectory();
+
         // for this loop, we assume: current x, current f and current v are known
         while (current_time < simParameters.getEndTime()) {
-            simulation.runIteration();
+            simulation.runIterationReflective();
 
             iteration++;
             if (iteration % 10 == 0) {

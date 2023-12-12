@@ -12,9 +12,6 @@
 
 #include "Particles/LinkedCellContainer.h"
 
-
-
-
 Simulation::Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary) :
                         container(container),
                         forceCalculation(calculation),
@@ -78,13 +75,14 @@ void Simulation::runIterationReflective() {
     // calculate new x
     container.applyToAll([this](Particle& p) { calculateX(p); });
 
+    // calculate new f
+    container.applyToAll([](Particle& p) { setOldForce(p); });
+    container.applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
+
     container.applyToBoundary([this](Particle& particle) {
         boundary.applyBoundaryToParticle(particle);
     });
 
-    // calculate new f
-    container.applyToAll([](Particle& p) { setOldForce(p); });
-    container.applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
     // calculate new v
     container.applyToAll([this](Particle& p) { calculateV(p); });
 }
