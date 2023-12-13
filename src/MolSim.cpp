@@ -19,6 +19,7 @@
 #include "Simulation/Physics/LennardJones.h"
 #include "Particles/Boundary.h"
 #include "Particles/ReflectiveBoundary.h"
+#include "Particles/OutflowBoundary.h"
 #include "Simulation/SimpleThermostat.h"
 
 
@@ -44,6 +45,7 @@ int main(int argc, char *argsv[]) {
     CL cl;
     std::unique_ptr<ParticleReader> reader;
     std::unique_ptr<ForceCalculation> forceCalculation;
+    std::shared_ptr<Boundary> boundary;
 
     outputWriter::VTKWriter writer;
     SimParameters simParameters;
@@ -53,6 +55,8 @@ int main(int argc, char *argsv[]) {
     if (status) {
         return 1;
     }
+
+    // Determining input mode
 
     std::string input_path = simParameters.getInputPath();
 
@@ -77,6 +81,8 @@ int main(int argc, char *argsv[]) {
     }
 
     /* To do: solve this dependency between readFile and container*/
+
+    // Reading particles from file
     DirectSumContainer container_h;
 
     if (simParameters.getInputMode() == "xml") {
@@ -85,6 +91,8 @@ int main(int argc, char *argsv[]) {
     else {
         reader->readFile(container_h, input_path);
     }
+
+    // Initializing force calculation
     
     if (simParameters.getForce() == "lennard") {
         forceCalculation = std::make_unique<LennardJones>(simParameters.getEpsilon(), simParameters.getSigma());
@@ -96,12 +104,27 @@ int main(int argc, char *argsv[]) {
         Logger::console->info("Force set to grav");
     }
 
-    Boundary boundary{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius(), simParameters.getSigma()};
-    LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
+    // Initializing boundary
+
+    if (simParameters.getBoundaryBehavior()[0] == "Reflecting") {
+        boundary = std::make_shared<ReflectiveBoundary>(simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius(), simParameters.getSigma());
+        Logger::console->info("Boundary set to reflective");
+    }
+
+    else if (simParameters.getBoundaryBehavior()[0] == "Outflow") {
+        boundary = std::make_shared<OutflowBoundary>(simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius(), simParameters.getSigma());
+        Logger::console->info("Boundary set to reflective");
+    }
+
+    else {
+        Logger::err_logger->error("Boundary was not correctly initialized");
+        exit(-1);
+    }
+
+    LinkedCellContainer container(*boundary, simParameters.getCutoffRadius());
 
     /* To do: solve this dependency between readFile and container*/
     container.addParticles(container_h.getParticleVector());
-
 
     /* read checkpoint if available and update container */
     if (!simParameters.getloadCheckpoint().empty()) {
@@ -144,7 +167,7 @@ int main(int argc, char *argsv[]) {
 
         // for this loop, we assume: current x, current f and current v are known
         while (current_time < simParameters.getEndTime()) {
-            simulation.runIterationReflective();
+            simulation.runIteration();
 
             iteration++;
             if (iteration % 10 == 0) {
