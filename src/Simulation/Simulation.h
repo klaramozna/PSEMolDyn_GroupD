@@ -18,7 +18,6 @@ private:
 
     LinkedCellContainer& container;
     ForceCalculation &forceCalculation;
-    ReflectiveBoundary boundary;
     Thermostat& thermostat;
     Boundary boundary;
   

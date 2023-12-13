@@ -13,23 +13,23 @@ void ReflectiveBoundary::applyBoundaryToParticle(Particle &p) {
     std::array<double, 3> opposingParticlePosition = particlePosition;
 
     // Check x-axis
-    if (boundaryDimensions[0] - particlePosition[0] <= cellSize && boundaryDimensions[0] - particlePosition[0] > 0) {
+    if (boundaryDimensions[0] - particlePosition[0] < cellSize && boundaryDimensions[0] - particlePosition[0] > 0) {
         opposingParticlePosition[0] += 2*std::abs(particlePosition[0] - boundaryDimensions[0]);
-    } else if (particlePosition[0] <= cellSize) {
+    } else if (particlePosition[0] < cellSize && particlePosition[0] > 0) {
         opposingParticlePosition[0] -= 2*particlePosition[0];
     }
 
     // Check y-axis
-    if (boundaryDimensions[1] - particlePosition[1] <= cellSize && boundaryDimensions[1] - particlePosition[1] > 0) {
+    if (boundaryDimensions[1] - particlePosition[1] < cellSize && boundaryDimensions[1] - particlePosition[1] > 0) {
         opposingParticlePosition[1] += 2 * std::abs(particlePosition[1] - boundaryDimensions[0]);
-    } else if (particlePosition[1] <= cellSize) {
+    } else if (particlePosition[1] < cellSize && particlePosition[1] > 0) {
         opposingParticlePosition[1] -= 2 *particlePosition[1];
     }
 
     // Check z-axis (if it's not a 2D <-> z = 1.0)
-    if (boundaryDimensions[2] - particlePosition[2] <= cellSize && boundaryDimensions[2] - particlePosition[2] > 0) {
+    if (boundaryDimensions[2] - particlePosition[2] < cellSize && boundaryDimensions[2] - particlePosition[2] > 0) {
         opposingParticlePosition[2] += 2 * std::abs(particlePosition[2] - boundaryDimensions[2]);
-    } else if (particlePosition[2] <= cellSize) {
+    } else if (particlePosition[2] < cellSize && particlePosition[2] > 0) {
         opposingParticlePosition[2] -= 2 *particlePosition[2];
     }
 
