@@ -203,7 +203,7 @@ void LinkedCellContainer::deleteHaloParticles() {
 }
 
 bool LinkedCellContainer::isBoundaryCell(int x, int y, int z) {
-    return x == 1 || x == nc[0] - 2 || y == 1 || y == nc[1] - 2 || z == 1 || z == nc[2] - 2;
+    return (x == 1 || x == nc[0] - 2 || y == 1 || y == nc[1] - 2 || z == 1 || z == nc[2] - 2) && !(x == 0 || y == 0 || z == 0);
 }
 
 void LinkedCellContainer::addParticle(const Particle &p) {

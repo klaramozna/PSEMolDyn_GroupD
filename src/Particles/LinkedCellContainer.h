@@ -67,6 +67,12 @@ public:
      */
     std::vector<Cell> getCells();
 
+    /**
+     * @brief Returns the cell size in each dimension.
+     * @return Cell size in each dimension
+     */
+    std::array<double, 3> getCellSize() const {return cellSize;};
+
 private:
 
     /**
