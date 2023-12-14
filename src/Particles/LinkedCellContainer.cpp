@@ -30,7 +30,7 @@ LinkedCellContainer::LinkedCellContainer(Boundary boundary, double cutoffRadius,
     }
 
     // Initialize grid
-    grid.resize(nc[0] * nc[1] * nc[2]);
+    grid.resize(nc[0] * nc[1] * nc[2], Cell{cutoffRadius});
 
     // Populate boundaryCells
     for (int x = 0; x < nc[0]; ++x) {
