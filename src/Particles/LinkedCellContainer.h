@@ -100,7 +100,7 @@ private:
      */
     std::array<double, 3> gridShift;
 
-    double cellSize;
+    std::array<double, 3> cellSize;
 
     /**
      * @brief Puts all particles in their correct cells after a change in position.
