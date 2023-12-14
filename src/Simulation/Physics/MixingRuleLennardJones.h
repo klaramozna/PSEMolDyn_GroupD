@@ -6,6 +6,7 @@
 #include "ForceCalculation.h"
 
 class MixingRuleLennardJones : public ForceCalculation{
+public:
 
     /**
      * @brief Calculates the Lennard Jones forces between the two particles. The parameters sigma and epsilon are determined based on the type of the particles using mixing rules.
