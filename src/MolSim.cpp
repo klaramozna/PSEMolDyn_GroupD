@@ -139,8 +139,7 @@ int main(int argc, char *argsv[]) {
     double current_time = simParameters.getStartTime();
 
 
-    //TODO: change once xml parameters adjusted
-    SimpleThermostat thermostat{20, 20, 50, 3};
+    SimpleThermostat thermostat{simParameters.getInitTemperature(), simParameters.getTargetTemperature(), simParameters.getThermostatCycleLength(), 3};
 
 
     Simulation simulation(simParameters.getDeltaT(), container, *forceCalculation, thermostat, simParameters.getAverageVelo(), boundary);

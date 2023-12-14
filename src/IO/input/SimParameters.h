@@ -71,7 +71,7 @@ public:
     std::string getStoreCheckpoint() const { return store_checkpoint_path ;}
     std::string getloadCheckpoint() const { return load_checkpoint_path ;}
     double getInitTemperature()const {return  initTemperature;}
-    double getThermostatCycleLength()const{return  thermostatCycleLength;}
+    int getThermostatCycleLength()const{return  thermostatCycleLength;}
     double getTargetTemperature()const{return targetTemperature;}
     double getMaxTemperatureChange()const{return maxTemperatureChange;}
 
