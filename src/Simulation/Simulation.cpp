@@ -21,6 +21,8 @@ Simulation::Simulation(double delta_t, LinkedCellContainer& container, ForceCalc
                         thermostat(thermostat), boundary{std::move(boundary)},
                         delta_t(delta_t),
                         averageVelo(averageVelo){
+    // Apply brownian motion
+    container.applyToAll([&thermostat](Particle& p){thermostat.initializeBrownianMotion(p);});
 
 }
 
