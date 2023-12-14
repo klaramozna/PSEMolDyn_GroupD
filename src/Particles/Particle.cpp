@@ -23,6 +23,8 @@ Particle::Particle(const Particle &other) {
     old_f = other.old_f;
     m = other.m;
     type = other.type;
+    epsilon = other.epsilon;
+    sigma = other.sigma;
 }
 
 Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,

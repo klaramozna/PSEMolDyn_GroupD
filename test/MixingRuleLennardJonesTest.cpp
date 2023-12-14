@@ -9,3 +9,10 @@ TEST_F(MixingRuleLennardJonesTest, calculation){
     VectorDouble3 expected{std::array<double, 3>{120,0,0}};
     ASSERT_EQ(result, expected);
 }
+TEST_F(MixingRuleLennardJonesTest, parametersCuboidGenerator){
+    std::vector<Particle> particles = cuboidGenerator.generateParticles(0);
+    for(const auto& p : particles){
+        ASSERT_EQ(p.getEpsilon(), 3);
+        ASSERT_EQ(p.getSigma(), 4);
+    }
+}
