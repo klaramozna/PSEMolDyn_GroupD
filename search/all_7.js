@@ -39,7 +39,7 @@ var searchData=
   ['getstarttime_228',['getStartTime',['../classSimParameters.html#a7d19c6adf6f5b9d82284a21f80e7c94d',1,'SimParameters']]],
   ['getstorecheckpoint_229',['getStoreCheckpoint',['../classSimParameters.html#a5451cd57e8e92cc0af7217034df9e13d',1,'SimParameters']]],
   ['gettargettemperature_230',['getTargetTemperature',['../classSimParameters.html#a53563998900815bf8f4c2db1293f9a3f',1,'SimParameters']]],
-  ['getthermostatcyclelength_231',['getThermostatCycleLength',['../classSimParameters.html#a9084e28499126707c1fd7203e4dc3f36',1,'SimParameters']]],
+  ['getthermostatcyclelength_231',['getThermostatCycleLength',['../classSimParameters.html#aa9fff76a258ba913bad5f09c5750d526',1,'SimParameters']]],
   ['gettype_232',['getType',['../classParticle.html#a806c077af237adf8b34dd0661cf92e5f',1,'Particle']]],
   ['getv_233',['getV',['../classParticle.html#afcca7d6019f3e2fdc8df36bd0428f492',1,'Particle']]],
   ['getvvector_234',['getVVector',['../classParticle.html#aa29bb73621a7bc7094568220818069c9',1,'Particle']]],
