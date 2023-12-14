@@ -1564,6 +1564,138 @@ class Cuboid: public ::xml_schema::type
   //@}
 
   /**
+   * @name epsilon_cuboid
+   *
+   * @brief Accessor and modifier functions for the %epsilon_cuboid
+   * required element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::commonSchema::nonNegativeDouble epsilon_cuboid_type;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< epsilon_cuboid_type, char > epsilon_cuboid_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element.
+   *
+   * @return A constant reference to the element.
+   */
+  const epsilon_cuboid_type&
+  epsilon_cuboid () const;
+
+  /**
+   * @brief Return a read-write reference to the element.
+   *
+   * @return A reference to the element.
+   */
+  epsilon_cuboid_type&
+  epsilon_cuboid ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  epsilon_cuboid (const epsilon_cuboid_type& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly
+   * instead of making a copy.
+   */
+  void
+  epsilon_cuboid (::std::unique_ptr< epsilon_cuboid_type > p);
+
+  /**
+   * @brief Return the default value for the element.
+   *
+   * @return The element's default value.
+   */
+  static epsilon_cuboid_type
+  epsilon_cuboid_default_value ();
+
+  //@}
+
+  /**
+   * @name sigma_cuboid
+   *
+   * @brief Accessor and modifier functions for the %sigma_cuboid
+   * required element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::commonSchema::nonNegativeDouble sigma_cuboid_type;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< sigma_cuboid_type, char > sigma_cuboid_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element.
+   *
+   * @return A constant reference to the element.
+   */
+  const sigma_cuboid_type&
+  sigma_cuboid () const;
+
+  /**
+   * @brief Return a read-write reference to the element.
+   *
+   * @return A reference to the element.
+   */
+  sigma_cuboid_type&
+  sigma_cuboid ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  sigma_cuboid (const sigma_cuboid_type& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly
+   * instead of making a copy.
+   */
+  void
+  sigma_cuboid (::std::unique_ptr< sigma_cuboid_type > p);
+
+  /**
+   * @brief Return the default value for the element.
+   *
+   * @return The element's default value.
+   */
+  static sigma_cuboid_type
+  sigma_cuboid_default_value ();
+
+  //@}
+
+  /**
    * @name Constructors
    */
   //@{
@@ -1576,7 +1708,9 @@ class Cuboid: public ::xml_schema::type
           const number_of_particles_type&,
           const distance_type&,
           const mass_type&,
-          const initial_velocity_type&);
+          const initial_velocity_type&,
+          const epsilon_cuboid_type&,
+          const sigma_cuboid_type&);
 
   /**
    * @brief Create an instance from the ultimate base and
@@ -1590,7 +1724,9 @@ class Cuboid: public ::xml_schema::type
           ::std::unique_ptr< number_of_particles_type >,
           const distance_type&,
           const mass_type&,
-          ::std::unique_ptr< initial_velocity_type >);
+          ::std::unique_ptr< initial_velocity_type >,
+          const epsilon_cuboid_type&,
+          const sigma_cuboid_type&);
 
   /**
    * @brief Create an instance from a DOM element.
@@ -1667,6 +1803,8 @@ class Cuboid: public ::xml_schema::type
   ::xsd::cxx::tree::one< distance_type > distance_;
   ::xsd::cxx::tree::one< mass_type > mass_;
   ::xsd::cxx::tree::one< initial_velocity_type > initial_velocity_;
+  ::xsd::cxx::tree::one< epsilon_cuboid_type > epsilon_cuboid_;
+  ::xsd::cxx::tree::one< sigma_cuboid_type > sigma_cuboid_;
 
   //@endcond
 };
@@ -2028,6 +2166,138 @@ class Sphere: public ::xml_schema::type
   //@}
 
   /**
+   * @name epsilon_sphere
+   *
+   * @brief Accessor and modifier functions for the %epsilon_sphere
+   * required element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::commonSchema::nonNegativeDouble epsilon_sphere_type;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< epsilon_sphere_type, char > epsilon_sphere_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element.
+   *
+   * @return A constant reference to the element.
+   */
+  const epsilon_sphere_type&
+  epsilon_sphere () const;
+
+  /**
+   * @brief Return a read-write reference to the element.
+   *
+   * @return A reference to the element.
+   */
+  epsilon_sphere_type&
+  epsilon_sphere ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  epsilon_sphere (const epsilon_sphere_type& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly
+   * instead of making a copy.
+   */
+  void
+  epsilon_sphere (::std::unique_ptr< epsilon_sphere_type > p);
+
+  /**
+   * @brief Return the default value for the element.
+   *
+   * @return The element's default value.
+   */
+  static epsilon_sphere_type
+  epsilon_sphere_default_value ();
+
+  //@}
+
+  /**
+   * @name sigma_sphere
+   *
+   * @brief Accessor and modifier functions for the %sigma_sphere
+   * required element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::commonSchema::nonNegativeDouble sigma_sphere_type;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< sigma_sphere_type, char > sigma_sphere_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element.
+   *
+   * @return A constant reference to the element.
+   */
+  const sigma_sphere_type&
+  sigma_sphere () const;
+
+  /**
+   * @brief Return a read-write reference to the element.
+   *
+   * @return A reference to the element.
+   */
+  sigma_sphere_type&
+  sigma_sphere ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  sigma_sphere (const sigma_sphere_type& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly
+   * instead of making a copy.
+   */
+  void
+  sigma_sphere (::std::unique_ptr< sigma_sphere_type > p);
+
+  /**
+   * @brief Return the default value for the element.
+   *
+   * @return The element's default value.
+   */
+  static sigma_sphere_type
+  sigma_sphere_default_value ();
+
+  //@}
+
+  /**
    * @name Constructors
    */
   //@{
@@ -2041,7 +2311,9 @@ class Sphere: public ::xml_schema::type
           const radius_type&,
           const distance_type&,
           const mass_type&,
-          const initial_velocity_type&);
+          const initial_velocity_type&,
+          const epsilon_sphere_type&,
+          const sigma_sphere_type&);
 
   /**
    * @brief Create an instance from the ultimate base and
@@ -2056,7 +2328,9 @@ class Sphere: public ::xml_schema::type
           const radius_type&,
           const distance_type&,
           const mass_type&,
-          ::std::unique_ptr< initial_velocity_type >);
+          ::std::unique_ptr< initial_velocity_type >,
+          const epsilon_sphere_type&,
+          const sigma_sphere_type&);
 
   /**
    * @brief Create an instance from a DOM element.
@@ -2134,6 +2408,8 @@ class Sphere: public ::xml_schema::type
   ::xsd::cxx::tree::one< distance_type > distance_;
   ::xsd::cxx::tree::one< mass_type > mass_;
   ::xsd::cxx::tree::one< initial_velocity_type > initial_velocity_;
+  ::xsd::cxx::tree::one< epsilon_sphere_type > epsilon_sphere_;
+  ::xsd::cxx::tree::one< sigma_sphere_type > sigma_sphere_;
 
   //@endcond
 };

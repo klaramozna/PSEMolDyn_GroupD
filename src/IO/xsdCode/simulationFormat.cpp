@@ -316,6 +316,66 @@ initial_velocity (::std::unique_ptr< initial_velocity_type > x)
   this->initial_velocity_.set (std::move (x));
 }
 
+const Cuboid::epsilon_cuboid_type& Cuboid::
+epsilon_cuboid () const
+{
+  return this->epsilon_cuboid_.get ();
+}
+
+Cuboid::epsilon_cuboid_type& Cuboid::
+epsilon_cuboid ()
+{
+  return this->epsilon_cuboid_.get ();
+}
+
+void Cuboid::
+epsilon_cuboid (const epsilon_cuboid_type& x)
+{
+  this->epsilon_cuboid_.set (x);
+}
+
+void Cuboid::
+epsilon_cuboid (::std::unique_ptr< epsilon_cuboid_type > x)
+{
+  this->epsilon_cuboid_.set (std::move (x));
+}
+
+Cuboid::epsilon_cuboid_type Cuboid::
+epsilon_cuboid_default_value ()
+{
+  return epsilon_cuboid_type (1.0);
+}
+
+const Cuboid::sigma_cuboid_type& Cuboid::
+sigma_cuboid () const
+{
+  return this->sigma_cuboid_.get ();
+}
+
+Cuboid::sigma_cuboid_type& Cuboid::
+sigma_cuboid ()
+{
+  return this->sigma_cuboid_.get ();
+}
+
+void Cuboid::
+sigma_cuboid (const sigma_cuboid_type& x)
+{
+  this->sigma_cuboid_.set (x);
+}
+
+void Cuboid::
+sigma_cuboid (::std::unique_ptr< sigma_cuboid_type > x)
+{
+  this->sigma_cuboid_.set (std::move (x));
+}
+
+Cuboid::sigma_cuboid_type Cuboid::
+sigma_cuboid_default_value ()
+{
+  return sigma_cuboid_type (1.0);
+}
+
 
 // Sphere
 // 
@@ -462,6 +522,66 @@ void Sphere::
 initial_velocity (::std::unique_ptr< initial_velocity_type > x)
 {
   this->initial_velocity_.set (std::move (x));
+}
+
+const Sphere::epsilon_sphere_type& Sphere::
+epsilon_sphere () const
+{
+  return this->epsilon_sphere_.get ();
+}
+
+Sphere::epsilon_sphere_type& Sphere::
+epsilon_sphere ()
+{
+  return this->epsilon_sphere_.get ();
+}
+
+void Sphere::
+epsilon_sphere (const epsilon_sphere_type& x)
+{
+  this->epsilon_sphere_.set (x);
+}
+
+void Sphere::
+epsilon_sphere (::std::unique_ptr< epsilon_sphere_type > x)
+{
+  this->epsilon_sphere_.set (std::move (x));
+}
+
+Sphere::epsilon_sphere_type Sphere::
+epsilon_sphere_default_value ()
+{
+  return epsilon_sphere_type (1.0);
+}
+
+const Sphere::sigma_sphere_type& Sphere::
+sigma_sphere () const
+{
+  return this->sigma_sphere_.get ();
+}
+
+Sphere::sigma_sphere_type& Sphere::
+sigma_sphere ()
+{
+  return this->sigma_sphere_.get ();
+}
+
+void Sphere::
+sigma_sphere (const sigma_sphere_type& x)
+{
+  this->sigma_sphere_.set (x);
+}
+
+void Sphere::
+sigma_sphere (::std::unique_ptr< sigma_sphere_type > x)
+{
+  this->sigma_sphere_.set (std::move (x));
+}
+
+Sphere::sigma_sphere_type Sphere::
+sigma_sphere_default_value ()
+{
+  return sigma_sphere_type (1.0);
 }
 
 
@@ -1527,13 +1647,17 @@ Cuboid (const lower_left_coord_type& lower_left_coord,
         const number_of_particles_type& number_of_particles,
         const distance_type& distance,
         const mass_type& mass,
-        const initial_velocity_type& initial_velocity)
+        const initial_velocity_type& initial_velocity,
+        const epsilon_cuboid_type& epsilon_cuboid,
+        const sigma_cuboid_type& sigma_cuboid)
 : ::xml_schema::type (),
   lower_left_coord_ (lower_left_coord, this),
   number_of_particles_ (number_of_particles, this),
   distance_ (distance, this),
   mass_ (mass, this),
-  initial_velocity_ (initial_velocity, this)
+  initial_velocity_ (initial_velocity, this),
+  epsilon_cuboid_ (epsilon_cuboid, this),
+  sigma_cuboid_ (sigma_cuboid, this)
 {
 }
 
@@ -1542,13 +1666,17 @@ Cuboid (::std::unique_ptr< lower_left_coord_type > lower_left_coord,
         ::std::unique_ptr< number_of_particles_type > number_of_particles,
         const distance_type& distance,
         const mass_type& mass,
-        ::std::unique_ptr< initial_velocity_type > initial_velocity)
+        ::std::unique_ptr< initial_velocity_type > initial_velocity,
+        const epsilon_cuboid_type& epsilon_cuboid,
+        const sigma_cuboid_type& sigma_cuboid)
 : ::xml_schema::type (),
   lower_left_coord_ (std::move (lower_left_coord), this),
   number_of_particles_ (std::move (number_of_particles), this),
   distance_ (distance, this),
   mass_ (mass, this),
-  initial_velocity_ (std::move (initial_velocity), this)
+  initial_velocity_ (std::move (initial_velocity), this),
+  epsilon_cuboid_ (epsilon_cuboid, this),
+  sigma_cuboid_ (sigma_cuboid, this)
 {
 }
 
@@ -1561,7 +1689,9 @@ Cuboid (const Cuboid& x,
   number_of_particles_ (x.number_of_particles_, f, this),
   distance_ (x.distance_, f, this),
   mass_ (x.mass_, f, this),
-  initial_velocity_ (x.initial_velocity_, f, this)
+  initial_velocity_ (x.initial_velocity_, f, this),
+  epsilon_cuboid_ (x.epsilon_cuboid_, f, this),
+  sigma_cuboid_ (x.sigma_cuboid_, f, this)
 {
 }
 
@@ -1574,7 +1704,9 @@ Cuboid (const ::xercesc::DOMElement& e,
   number_of_particles_ (this),
   distance_ (this),
   mass_ (this),
-  initial_velocity_ (this)
+  initial_velocity_ (this),
+  epsilon_cuboid_ (this),
+  sigma_cuboid_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -1663,6 +1795,34 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // epsilon_cuboid
+    //
+    if (n.name () == "epsilon_cuboid" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< epsilon_cuboid_type > r (
+        epsilon_cuboid_traits::create (i, f, this));
+
+      if (!epsilon_cuboid_.present ())
+      {
+        this->epsilon_cuboid_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // sigma_cuboid
+    //
+    if (n.name () == "sigma_cuboid" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< sigma_cuboid_type > r (
+        sigma_cuboid_traits::create (i, f, this));
+
+      if (!sigma_cuboid_.present ())
+      {
+        this->sigma_cuboid_.set (::std::move (r));
+        continue;
+      }
+    }
+
     break;
   }
 
@@ -1700,6 +1860,20 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "initial_velocity",
       "");
   }
+
+  if (!epsilon_cuboid_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "epsilon_cuboid",
+      "");
+  }
+
+  if (!sigma_cuboid_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "sigma_cuboid",
+      "");
+  }
 }
 
 Cuboid* Cuboid::
@@ -1720,6 +1894,8 @@ operator= (const Cuboid& x)
     this->distance_ = x.distance_;
     this->mass_ = x.mass_;
     this->initial_velocity_ = x.initial_velocity_;
+    this->epsilon_cuboid_ = x.epsilon_cuboid_;
+    this->sigma_cuboid_ = x.sigma_cuboid_;
   }
 
   return *this;
@@ -1739,14 +1915,18 @@ Sphere (const dimension_type& dimension,
         const radius_type& radius,
         const distance_type& distance,
         const mass_type& mass,
-        const initial_velocity_type& initial_velocity)
+        const initial_velocity_type& initial_velocity,
+        const epsilon_sphere_type& epsilon_sphere,
+        const sigma_sphere_type& sigma_sphere)
 : ::xml_schema::type (),
   dimension_ (dimension, this),
   center_ (center, this),
   radius_ (radius, this),
   distance_ (distance, this),
   mass_ (mass, this),
-  initial_velocity_ (initial_velocity, this)
+  initial_velocity_ (initial_velocity, this),
+  epsilon_sphere_ (epsilon_sphere, this),
+  sigma_sphere_ (sigma_sphere, this)
 {
 }
 
@@ -1756,14 +1936,18 @@ Sphere (const dimension_type& dimension,
         const radius_type& radius,
         const distance_type& distance,
         const mass_type& mass,
-        ::std::unique_ptr< initial_velocity_type > initial_velocity)
+        ::std::unique_ptr< initial_velocity_type > initial_velocity,
+        const epsilon_sphere_type& epsilon_sphere,
+        const sigma_sphere_type& sigma_sphere)
 : ::xml_schema::type (),
   dimension_ (dimension, this),
   center_ (std::move (center), this),
   radius_ (radius, this),
   distance_ (distance, this),
   mass_ (mass, this),
-  initial_velocity_ (std::move (initial_velocity), this)
+  initial_velocity_ (std::move (initial_velocity), this),
+  epsilon_sphere_ (epsilon_sphere, this),
+  sigma_sphere_ (sigma_sphere, this)
 {
 }
 
@@ -1777,7 +1961,9 @@ Sphere (const Sphere& x,
   radius_ (x.radius_, f, this),
   distance_ (x.distance_, f, this),
   mass_ (x.mass_, f, this),
-  initial_velocity_ (x.initial_velocity_, f, this)
+  initial_velocity_ (x.initial_velocity_, f, this),
+  epsilon_sphere_ (x.epsilon_sphere_, f, this),
+  sigma_sphere_ (x.sigma_sphere_, f, this)
 {
 }
 
@@ -1791,7 +1977,9 @@ Sphere (const ::xercesc::DOMElement& e,
   radius_ (this),
   distance_ (this),
   mass_ (this),
-  initial_velocity_ (this)
+  initial_velocity_ (this),
+  epsilon_sphere_ (this),
+  sigma_sphere_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -1894,6 +2082,34 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // epsilon_sphere
+    //
+    if (n.name () == "epsilon_sphere" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< epsilon_sphere_type > r (
+        epsilon_sphere_traits::create (i, f, this));
+
+      if (!epsilon_sphere_.present ())
+      {
+        this->epsilon_sphere_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // sigma_sphere
+    //
+    if (n.name () == "sigma_sphere" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< sigma_sphere_type > r (
+        sigma_sphere_traits::create (i, f, this));
+
+      if (!sigma_sphere_.present ())
+      {
+        this->sigma_sphere_.set (::std::move (r));
+        continue;
+      }
+    }
+
     break;
   }
 
@@ -1938,6 +2154,20 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "initial_velocity",
       "");
   }
+
+  if (!epsilon_sphere_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "epsilon_sphere",
+      "");
+  }
+
+  if (!sigma_sphere_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "sigma_sphere",
+      "");
+  }
 }
 
 Sphere* Sphere::
@@ -1959,6 +2189,8 @@ operator= (const Sphere& x)
     this->distance_ = x.distance_;
     this->mass_ = x.mass_;
     this->initial_velocity_ = x.initial_velocity_;
+    this->epsilon_sphere_ = x.epsilon_sphere_;
+    this->sigma_sphere_ = x.sigma_sphere_;
   }
 
   return *this;

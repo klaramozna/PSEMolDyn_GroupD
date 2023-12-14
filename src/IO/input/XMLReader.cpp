@@ -77,7 +77,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             double distance = cuboid.distance();
             double mass = cuboid.mass();
             std::array<double, 3> velocity = {cuboid.initial_velocity().x(), cuboid.initial_velocity().y(), cuboid.initial_velocity().z()};
-            CuboidGenerator generator {lowerLeftCoord, n1, n2, n3, distance, mass, velocity};
+            CuboidGenerator generator {lowerLeftCoord, n1, n2, n3, distance, mass, velocity, cuboid.epsilon_cuboid(), cuboid.sigma_cuboid()};
             std::vector<Particle> particles = generator.generateParticles(i);
             container.addParticles(particles);
             i++;
@@ -91,7 +91,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             double distance = sphere.distance();
             double mass = sphere.mass();
             std::array<double, 3> velocity = {sphere.initial_velocity().x(), sphere.initial_velocity().y(), sphere.initial_velocity().z()};
-            SphereGenerator generator {center, distance, radius, mass, velocity};
+            SphereGenerator generator {center, distance, radius, mass, velocity, sphere.epsilon_sphere(), sphere.sigma_sphere()};
             std::vector<Particle> particles;
             if (sphere.dimension() == "3D"){
                 particles = generator.generateParticles(i);
