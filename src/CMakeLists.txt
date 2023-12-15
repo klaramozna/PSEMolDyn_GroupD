@@ -37,7 +37,10 @@ Simulation/Physics/GravitationalForce.cpp
         Simulation/GradualThermostat.h
         Particles/OutflowBoundary.h
         Particles/ReflectiveBoundary.cpp
-        Particles/ReflectiveBoundary.h)
+        Particles/ReflectiveBoundary.h
+        Simulation/Physics/MixingRuleLennardJones.cpp
+        Simulation/Physics/MixingRuleLennardJones.h
+)
         
 # Include directories specific to the 'src' directory, if needed
 target_include_directories(MolSim

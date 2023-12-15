@@ -34,6 +34,8 @@
             commonSchema::double_3d(p.getFVector().at(0), p.getFVector().at(1), p.getFVector().at(2)),
             commonSchema::double_3d(p.getOldFVector().at(0), p.getOldFVector().at(1), p.getOldFVector().at(2)),
             p.getM(),
+            p.getEpsilon(),
+            p.getSigma(),
             p.getType()
         );
 

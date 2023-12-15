@@ -76,8 +76,16 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             int n3 = cuboid.number_of_particles().z();
             double distance = cuboid.distance();
             double mass = cuboid.mass();
+            double epsilon = cuboid.epsilon_cuboid_default_value();
+            double sigma = cuboid.sigma_cuboid_default_value();
+            if (cuboid.epsilon_cuboid().present()){
+                epsilon = cuboid.epsilon_cuboid().get();
+            }
+            if (cuboid.sigma_cuboid().present()) {
+                sigma = cuboid.sigma_cuboid().get();
+            }
             std::array<double, 3> velocity = {cuboid.initial_velocity().x(), cuboid.initial_velocity().y(), cuboid.initial_velocity().z()};
-            CuboidGenerator generator {lowerLeftCoord, n1, n2, n3, distance, mass, velocity};
+            CuboidGenerator generator {lowerLeftCoord, n1, n2, n3, distance, mass, velocity, epsilon, sigma};
             std::vector<Particle> particles = generator.generateParticles(i);
             container.addParticles(particles);
             i++;
@@ -90,8 +98,16 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             int radius = sphere.radius();
             double distance = sphere.distance();
             double mass = sphere.mass();
+            double epsilon = sphere.epsilon_sphere_default_value();
+            double sigma = sphere.sigma_sphere_default_value();
+            if (sphere.epsilon_sphere().present()){
+                epsilon = sphere.epsilon_sphere().get();
+            }
+            if (sphere.sigma_sphere().present()) {
+                sigma = sphere.sigma_sphere().get();
+            }
             std::array<double, 3> velocity = {sphere.initial_velocity().x(), sphere.initial_velocity().y(), sphere.initial_velocity().z()};
-            SphereGenerator generator {center, distance, radius, mass, velocity};
+            SphereGenerator generator {center, distance, radius, mass, velocity, epsilon, sigma};
             std::vector<Particle> particles;
             if (sphere.dimension() == "3D"){
                 particles = generator.generateParticles(i);

@@ -10,7 +10,7 @@
 class ReflectiveBoundary : public Boundary {
 public:
     void applyBoundaryToParticle(Particle& p) override;
-    ReflectiveBoundary(double width, double height, double depth, ForceCalculation &fc, double cellSize, double sigma);
+    ReflectiveBoundary(double width, double height, double depth, ForceCalculation &fc, double cellSize);
 private:
     static constexpr double sixthRootOfTwo = 1.12246204831;
 };

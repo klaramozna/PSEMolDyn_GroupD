@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no" ?>
-<Checkpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../checkpointFormat.xsd">
+<Checkpoint xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../input/checkpointFormat.xsd">
   <particle>
     <x>
       <x>0</x>
@@ -22,7 +22,9 @@
       <z>0</z>
     </old_f>
     <m>1</m>
-    <type>0</type>
+    <epsilon>2</epsilon>
+    <sigma>1</sigma>
+    <type>1</type>
   </particle>
   <particle>
     <x>
@@ -46,6 +48,8 @@
       <z>0</z>
     </old_f>
     <m>1</m>
+    <epsilon>1</epsilon>
+    <sigma>1</sigma>
     <type>0</type>
   </particle>
   <particle>
@@ -70,6 +74,8 @@
       <z>0</z>
     </old_f>
     <m>1</m>
+    <epsilon>1</epsilon>
+    <sigma>1</sigma>
     <type>0</type>
   </particle>
   <particle>
@@ -94,6 +100,8 @@
       <z>0</z>
     </old_f>
     <m>1</m>
+    <epsilon>1</epsilon>
+    <sigma>1</sigma>
     <type>0</type>
   </particle>
 </Checkpoint>

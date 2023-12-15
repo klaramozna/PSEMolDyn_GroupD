@@ -22,7 +22,7 @@ public:
      * @param p The particles in the cell. Empty of no vector is given
      * @param t The type of the cell, Inner of no type is given.
      */
-    explicit Cell(double cutoffRadius, const std::list<Particle>& p = {}): particles{p}, cutoffRadius{cutoffRadius}{};
+    explicit Cell(const std::list<Particle>& p = {}): particles{p}{};
 
     /**
      * @brief Returns an iterator pointing to the first particle.
@@ -66,11 +66,6 @@ private:
      * @brief Stores the particles of the cell.
      */
     std::list<Particle> particles;
-
-    /**
-     * @brief Maximum distance between particles that affect each other.
-     */
-    double cutoffRadius;
 
 };
 

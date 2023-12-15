@@ -45,6 +45,16 @@ private:
      */
     int type;
 
+    /**
+     * @brief Epsilon for lennard jones forces.
+     */
+    double epsilon;
+
+    /**
+     * @brief Sigma for lennard jones forces.
+     */
+    double sigma;
+
 public:
     explicit Particle(int type = 0);
 
@@ -56,6 +66,18 @@ public:
             std::array<double, 3> x_arg, std::array<double, 3> v_arg, double m_arg,
             int type = 0);
 
+    /**
+     * @brief Creates a Particle object using the given parameters.
+     * @param x_arg The position of the particle.
+     * @param v_arg The velocity of the particle.
+     * @param m_arg The mass of the particle.
+     * @param epsilon The epsilon (for Lennard-Jones calculation) of the particle.
+     * @param sigma The sigma (for Lennard-Jones calculation) of the particle.
+     * @param type The type of the particle.
+     */
+    Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg, double m_arg, double epsilon, double sigma,
+             int type = 0): x{x_arg}, v{v_arg}, f{0}, old_f{0}, m{m_arg}, type{type}, epsilon{epsilon}, sigma{sigma}{};
+
     virtual ~Particle();
 
     const std::array<double, 3> &getX() const;
@@ -65,6 +87,10 @@ public:
     const std::array<double, 3> &getF() const;
 
     const std::array<double, 3> &getOldF() const;
+
+    double getEpsilon() const{return epsilon;}
+
+    double getSigma() const{return sigma;}
 
     /**
      * @brief Returns the position as a DoubleVector.

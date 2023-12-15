@@ -22,7 +22,7 @@ std::array<double,3> Boundary::getDimensions() {
     return dim;
 }
 
-Boundary::Boundary(double width, double height, double depth, ForceCalculation &fc, double cellSize, double sigma) : sigma{sigma}, cellSize{cellSize}, fc{fc} {
+Boundary::Boundary(double width, double height, double depth, ForceCalculation &fc, double cellSize) : cellSize{cellSize}, fc{fc} {
     dim[0] = width;
     dim[1] = height;
     dim[2] = depth;

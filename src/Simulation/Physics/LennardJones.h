@@ -7,7 +7,7 @@ private:
     double eps;
     double sigma;
 public:
-    VectorDouble3 CalculateForces(const Particle& p1, const Particle& p2);
+    VectorDouble3 CalculateForces(const Particle& p1, const Particle& p2) override;
    
     /**
     * @brief constructor to initialize eps and sigma

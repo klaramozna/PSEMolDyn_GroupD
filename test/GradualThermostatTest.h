@@ -22,8 +22,8 @@ public:
 class GradualThermostatTest : public testing::Test{
 protected:
     MockForceCalculation fc{};
-    LinkedCellContainer containerWarming{Boundary(4, 4, 4, fc, 1, 1), 1};
-    LinkedCellContainer containerCooling{Boundary(4, 4, 4, fc, 1, 1), 1};
+    LinkedCellContainer containerWarming{Boundary(4, 4, 4, fc, 1), 1};
+    LinkedCellContainer containerCooling{Boundary(4, 4, 4, fc, 1), 1};
     GradualThermostat thermostatWarming{10, 4, 3, 3, 1};
     GradualThermostat thermostatCooling{10, 1, 3, 3, 1};
     Particle p1{std::array<double, 3>{0, 0, 0}, std::array<double, 3>{1, 1, 1}, 1};
