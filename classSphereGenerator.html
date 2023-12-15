@@ -82,9 +82,9 @@ Inheritance diagram for SphereGenerator:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a69396171dcbc2cba7b06d7752bd90815"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSphereGenerator.html#a69396171dcbc2cba7b06d7752bd90815">SphereGenerator</a> (std::array&lt; double, 3 &gt; center, double particleDistance, int radius, double mass, std::array&lt; double, 3 &gt; velocity)</td></tr>
-<tr class="memdesc:a69396171dcbc2cba7b06d7752bd90815"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="classSphereGenerator.html">SphereGenerator</a> object initializing it with the given parameters.  <a href="classSphereGenerator.html#a69396171dcbc2cba7b06d7752bd90815">More...</a><br /></td></tr>
-<tr class="separator:a69396171dcbc2cba7b06d7752bd90815"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1247340bd1755c12a4c0f437e511bc13"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSphereGenerator.html#a1247340bd1755c12a4c0f437e511bc13">SphereGenerator</a> (std::array&lt; double, 3 &gt; center, double particleDistance, int radius, double mass, std::array&lt; double, 3 &gt; velocity, double epsilon=1, double sigma=1)</td></tr>
+<tr class="memdesc:a1247340bd1755c12a4c0f437e511bc13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="classSphereGenerator.html">SphereGenerator</a> object initializing it with the given parameters.  <a href="classSphereGenerator.html#a1247340bd1755c12a4c0f437e511bc13">More...</a><br /></td></tr>
+<tr class="separator:a1247340bd1755c12a4c0f437e511bc13"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6b8d351a9218f7e203a89dcf3b3c16fe"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSphereGenerator.html#a6b8d351a9218f7e203a89dcf3b3c16fe">generateParticles</a> (int <a class="el" href="classtype.html">type</a>=0) override</td></tr>
 <tr class="memdesc:a6b8d351a9218f7e203a89dcf3b3c16fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a sphere of particles.  <a href="classSphereGenerator.html#a6b8d351a9218f7e203a89dcf3b3c16fe">More...</a><br /></td></tr>
 <tr class="separator:a6b8d351a9218f7e203a89dcf3b3c16fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -107,8 +107,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a4c065631d36a8d5035ea4399d079b053 inherit pro_attribs_classParticleGenerator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a69396171dcbc2cba7b06d7752bd90815"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a69396171dcbc2cba7b06d7752bd90815">&#9670;&nbsp;</a></span>SphereGenerator()</h2>
+<a id="a1247340bd1755c12a4c0f437e511bc13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1247340bd1755c12a4c0f437e511bc13">&#9670;&nbsp;</a></span>SphereGenerator()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -141,7 +141,19 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::array&lt; double, 3 &gt;&#160;</td>
-          <td class="paramname"><em>velocity</em>&#160;</td>
+          <td class="paramname"><em>velocity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>epsilon</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>sigma</em> = <code>1</code>&#160;</td>
         </tr>
         <tr>
           <td></td>

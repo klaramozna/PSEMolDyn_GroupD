@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['radius_5ftraits_1259',['radius_traits',['../classSphere.html#ad3c198547b24abf2411a9a913afe7bd6',1,'Sphere']]],
-  ['radius_5ftype_1260',['radius_type',['../classSphere.html#a2221275f5dd37cf00597ac5720ec93d4',1,'Sphere']]],
-  ['right_5ftraits_1261',['Right_traits',['../classBoundaries.html#ae5668bb0c33fb0b3fc708791dd4a51ba',1,'Boundaries']]],
-  ['right_5ftype_1262',['Right_type',['../classBoundaries.html#a5e68855e18613ac916af794b35b1aeb5',1,'Boundaries']]]
+  ['radius_5ftraits_1314',['radius_traits',['../classSphere.html#ad3c198547b24abf2411a9a913afe7bd6',1,'Sphere']]],
+  ['radius_5ftype_1315',['radius_type',['../classSphere.html#a2221275f5dd37cf00597ac5720ec93d4',1,'Sphere']]],
+  ['right_5ftraits_1316',['Right_traits',['../classBoundaries.html#ae5668bb0c33fb0b3fc708791dd4a51ba',1,'Boundaries']]],
+  ['right_5ftype_1317',['Right_type',['../classBoundaries.html#a5e68855e18613ac916af794b35b1aeb5',1,'Boundaries']]]
 ];

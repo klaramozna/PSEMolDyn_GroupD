@@ -101,64 +101,61 @@ $(function() {
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    std::vector&lt;Cell&gt; <a class="code" href="classLinkedCellContainer.html#a0b711026991543166d6a3040cf4dec75">getCells</a>();</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="line" href="classLinkedCellContainer.html#a06d65edd6d7d8fbfba9f9007732d14d7">   74</a></span>&#160;    std::array&lt;double, 3&gt; <a class="code" href="classLinkedCellContainer.html#a06d65edd6d7d8fbfba9f9007732d14d7">getCellSize</a>()<span class="keyword"> const </span>{<span class="keywordflow">return</span> cellSize;};</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    std::vector&lt;Cell&gt; grid;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    std::vector&lt;Cell *&gt; boundaryCells_ptr;</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;    std::vector&lt;Cell&gt; grid;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    std::vector&lt;Cell *&gt; boundaryCells_ptr;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;     <a class="code" href="classBoundary.html">Boundary</a> boundary;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;     <a class="code" href="classBoundary.html">Boundary</a> boundary;</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <span class="keywordtype">double</span> cutoffRadius;</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    <span class="keywordtype">double</span> cutoffRadius;</div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    std::array&lt;int,3&gt; nc;</div>
-<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160; </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    std::array&lt;double, 3&gt; gridShift;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    std::array&lt;double, 3&gt; cellSize;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160; </div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;    <span class="keywordtype">void</span> updateCells();</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160; </div>
-<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;    <span class="keywordtype">size_t</span> size;</div>
-<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160; </div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordtype">void</span> moveParticle(<span class="keyword">const</span> <a class="code" href="classParticle.html">Particle</a>&amp; p1, <span class="keywordtype">int</span> oldCell, <span class="keywordtype">int</span> newCell);</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160; </div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordtype">bool</span> isInCorrectCell(<span class="keyword">const</span> <a class="code" href="classParticle.html">Particle</a>&amp; p, <span class="keywordtype">int</span> currentIndex);</div>
-<div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160; </div>
-<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;    <span class="keywordtype">int</span> getGridIndex(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> z) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160; </div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;    <span class="keywordtype">bool</span> cellWithinRadius(<span class="keyword">const</span> <a class="code" href="classParticle.html">Particle</a>&amp; p, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> z);</div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160; </div>
-<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;    <span class="keywordtype">bool</span> particleWithinCutoff(<span class="keyword">const</span> <a class="code" href="classParticle.html">Particle</a>&amp; p1, <span class="keyword">const</span> <a class="code" href="classParticle.html">Particle</a>&amp; p2) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160; </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordtype">int</span> getParticleIndex(<span class="keyword">const</span> <a class="code" href="classParticle.html">Particle</a>&amp; p);</div>
-<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160; </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160; </div>
-<div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160;     <span class="keywordtype">bool</span> isBoundaryCell(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> z);</div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160; </div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;     <span class="keywordtype">bool</span> particleOutOfGrid(<span class="keyword">const</span> <a class="code" href="classParticle.html">Particle</a>&amp; p);</div>
-<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;};</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//PSEMOLDYN_GROUPD_LINKEDCELLCONTAINER_H</span></div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    std::array&lt;int,3&gt; nc;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160; </div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    std::array&lt;double, 3&gt; gridShift;</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160; </div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;    <span class="keywordtype">double</span> cellSize;</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    <span class="keywordtype">void</span> updateCells();</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;    <span class="keywordtype">size_t</span> size;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160; </div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    <span class="keywordtype">void</span> moveParticle(<span class="keyword">const</span> <a class="code" href="classParticle.html">Particle</a>&amp; p1, <span class="keywordtype">int</span> oldCell, <span class="keywordtype">int</span> newCell);</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160; </div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;    <span class="keywordtype">bool</span> isInCorrectCell(<span class="keyword">const</span> <a class="code" href="classParticle.html">Particle</a>&amp; p, <span class="keywordtype">int</span> currentIndex);</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160; </div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordtype">int</span> getGridIndex(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> z) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;    <span class="keywordtype">bool</span> cellWithinRadius(<span class="keyword">const</span> <a class="code" href="classParticle.html">Particle</a>&amp; p, <span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> z);</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160; </div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;    <span class="keywordtype">bool</span> particleWithinCutoff(<span class="keyword">const</span> <a class="code" href="classParticle.html">Particle</a>&amp; p1, <span class="keyword">const</span> <a class="code" href="classParticle.html">Particle</a>&amp; p2) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <span class="keywordtype">int</span> getParticleIndex(<span class="keyword">const</span> <a class="code" href="classParticle.html">Particle</a>&amp; p);</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160; </div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;     <span class="keywordtype">bool</span> isBoundaryCell(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> z);</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;     <span class="keywordtype">bool</span> particleOutOfGrid(<span class="keyword">const</span> <a class="code" href="classParticle.html">Particle</a>&amp; p);</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;};</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160; </div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//PSEMOLDYN_GROUPD_LINKEDCELLCONTAINER_H</span></div>
 <div class="ttc" id="aBoundary_8h_html"><div class="ttname"><a href="Boundary_8h.html">Boundary.h</a></div></div>
 <div class="ttc" id="aCell_8h_html"><div class="ttname"><a href="Cell_8h.html">Cell.h</a></div></div>
 <div class="ttc" id="aParticleContainer_8h_html"><div class="ttname"><a href="ParticleContainer_8h.html">ParticleContainer.h</a></div></div>
 <div class="ttc" id="aclassBoundary_html"><div class="ttname"><a href="classBoundary.html">Boundary</a></div><div class="ttdef"><b>Definition:</b> Boundary.h:13</div></div>
 <div class="ttc" id="aclassLinkedCellContainer_html"><div class="ttname"><a href="classLinkedCellContainer.html">LinkedCellContainer</a></div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.h:13</div></div>
-<div class="ttc" id="aclassLinkedCellContainer_html_a06d65edd6d7d8fbfba9f9007732d14d7"><div class="ttname"><a href="classLinkedCellContainer.html#a06d65edd6d7d8fbfba9f9007732d14d7">LinkedCellContainer::getCellSize</a></div><div class="ttdeci">std::array&lt; double, 3 &gt; getCellSize() const</div><div class="ttdoc">Returns the cell size in each dimension.</div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.h:74</div></div>
-<div class="ttc" id="aclassLinkedCellContainer_html_a0b711026991543166d6a3040cf4dec75"><div class="ttname"><a href="classLinkedCellContainer.html#a0b711026991543166d6a3040cf4dec75">LinkedCellContainer::getCells</a></div><div class="ttdeci">std::vector&lt; Cell &gt; getCells()</div><div class="ttdoc">Only for testing purposes. Dont use.</div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.cpp:217</div></div>
-<div class="ttc" id="aclassLinkedCellContainer_html_a0d196a1d1a91e0ee1851113e745ab6f9"><div class="ttname"><a href="classLinkedCellContainer.html#a0d196a1d1a91e0ee1851113e745ab6f9">LinkedCellContainer::addParticle</a></div><div class="ttdeci">void addParticle(const Particle &amp;p) override</div><div class="ttdoc">Adds the given particle to the container.</div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.cpp:209</div></div>
-<div class="ttc" id="aclassLinkedCellContainer_html_a1aab68c81977805a5deb197a7ea1a68d"><div class="ttname"><a href="classLinkedCellContainer.html#a1aab68c81977805a5deb197a7ea1a68d">LinkedCellContainer::applyToBoundary</a></div><div class="ttdeci">void applyToBoundary(const std::function&lt; void(Particle(&amp;))&gt; &amp;function)</div><div class="ttdoc">Applies the given function to each particle in the boundary.</div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.cpp:173</div></div>
-<div class="ttc" id="aclassLinkedCellContainer_html_a55e3d2cc457889656c1ce086d3444d4f"><div class="ttname"><a href="classLinkedCellContainer.html#a55e3d2cc457889656c1ce086d3444d4f">LinkedCellContainer::deleteHaloParticles</a></div><div class="ttdeci">void deleteHaloParticles()</div><div class="ttdoc">Deletes particles outside of the boundary from the container.</div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.cpp:185</div></div>
+<div class="ttc" id="aclassLinkedCellContainer_html_a0b711026991543166d6a3040cf4dec75"><div class="ttname"><a href="classLinkedCellContainer.html#a0b711026991543166d6a3040cf4dec75">LinkedCellContainer::getCells</a></div><div class="ttdeci">std::vector&lt; Cell &gt; getCells()</div><div class="ttdoc">Only for testing purposes. Dont use.</div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.cpp:215</div></div>
+<div class="ttc" id="aclassLinkedCellContainer_html_a0d196a1d1a91e0ee1851113e745ab6f9"><div class="ttname"><a href="classLinkedCellContainer.html#a0d196a1d1a91e0ee1851113e745ab6f9">LinkedCellContainer::addParticle</a></div><div class="ttdeci">void addParticle(const Particle &amp;p) override</div><div class="ttdoc">Adds the given particle to the container.</div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.cpp:207</div></div>
+<div class="ttc" id="aclassLinkedCellContainer_html_a1aab68c81977805a5deb197a7ea1a68d"><div class="ttname"><a href="classLinkedCellContainer.html#a1aab68c81977805a5deb197a7ea1a68d">LinkedCellContainer::applyToBoundary</a></div><div class="ttdeci">void applyToBoundary(const std::function&lt; void(Particle(&amp;))&gt; &amp;function)</div><div class="ttdoc">Applies the given function to each particle in the boundary.</div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.cpp:171</div></div>
+<div class="ttc" id="aclassLinkedCellContainer_html_a55e3d2cc457889656c1ce086d3444d4f"><div class="ttname"><a href="classLinkedCellContainer.html#a55e3d2cc457889656c1ce086d3444d4f">LinkedCellContainer::deleteHaloParticles</a></div><div class="ttdeci">void deleteHaloParticles()</div><div class="ttdoc">Deletes particles outside of the boundary from the container.</div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.cpp:183</div></div>
 <div class="ttc" id="aclassLinkedCellContainer_html_a65d50e8c922f9fdf2588e4dc706e4673"><div class="ttname"><a href="classLinkedCellContainer.html#a65d50e8c922f9fdf2588e4dc706e4673">LinkedCellContainer::LinkedCellContainer</a></div><div class="ttdeci">LinkedCellContainer(Boundary boundary, double cutoffRadius, const std::vector&lt; Particle &gt; &amp;particles={})</div><div class="ttdoc">Creates a LinkedCellContainer object using the given parameters.</div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.cpp:17</div></div>
-<div class="ttc" id="aclassLinkedCellContainer_html_a93cc82079e0c05aa035460d6495c10bb"><div class="ttname"><a href="classLinkedCellContainer.html#a93cc82079e0c05aa035460d6495c10bb">LinkedCellContainer::applyToAll</a></div><div class="ttdeci">void applyToAll(const std::function&lt; void(Particle &amp;)&gt; &amp;function) override</div><div class="ttdoc">Applies the given function to all particles.</div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.cpp:86</div></div>
-<div class="ttc" id="aclassLinkedCellContainer_html_a96b2b7107b89cd475d67dc9fc52c34f2"><div class="ttname"><a href="classLinkedCellContainer.html#a96b2b7107b89cd475d67dc9fc52c34f2">LinkedCellContainer::getSize</a></div><div class="ttdeci">size_t getSize() override</div><div class="ttdoc">Returns the number of particles in the container.</div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.cpp:53</div></div>
-<div class="ttc" id="aclassLinkedCellContainer_html_aa87cd6cf17202b142e769bae1b17a03d"><div class="ttname"><a href="classLinkedCellContainer.html#aa87cd6cf17202b142e769bae1b17a03d">LinkedCellContainer::applyToPairs</a></div><div class="ttdeci">void applyToPairs(const std::function&lt; void(Particle &amp;, Particle &amp;)&gt; &amp;function) override</div><div class="ttdoc">Applies the given function to pairs of particles in neighbouring cells within the cutoff radius.</div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.cpp:111</div></div>
-<div class="ttc" id="aclassLinkedCellContainer_html_ab6faa7c002062a175d458b717e8ca58e"><div class="ttname"><a href="classLinkedCellContainer.html#ab6faa7c002062a175d458b717e8ca58e">LinkedCellContainer::getParticleVector</a></div><div class="ttdeci">std::vector&lt; Particle &gt; getParticleVector() override</div><div class="ttdoc">Returns a vector of all particles in the container.</div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.cpp:57</div></div>
+<div class="ttc" id="aclassLinkedCellContainer_html_a93cc82079e0c05aa035460d6495c10bb"><div class="ttname"><a href="classLinkedCellContainer.html#a93cc82079e0c05aa035460d6495c10bb">LinkedCellContainer::applyToAll</a></div><div class="ttdeci">void applyToAll(const std::function&lt; void(Particle &amp;)&gt; &amp;function) override</div><div class="ttdoc">Applies the given function to all particles.</div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.cpp:84</div></div>
+<div class="ttc" id="aclassLinkedCellContainer_html_a96b2b7107b89cd475d67dc9fc52c34f2"><div class="ttname"><a href="classLinkedCellContainer.html#a96b2b7107b89cd475d67dc9fc52c34f2">LinkedCellContainer::getSize</a></div><div class="ttdeci">size_t getSize() override</div><div class="ttdoc">Returns the number of particles in the container.</div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.cpp:51</div></div>
+<div class="ttc" id="aclassLinkedCellContainer_html_aa87cd6cf17202b142e769bae1b17a03d"><div class="ttname"><a href="classLinkedCellContainer.html#aa87cd6cf17202b142e769bae1b17a03d">LinkedCellContainer::applyToPairs</a></div><div class="ttdeci">void applyToPairs(const std::function&lt; void(Particle &amp;, Particle &amp;)&gt; &amp;function) override</div><div class="ttdoc">Applies the given function to pairs of particles in neighbouring cells within the cutoff radius.</div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.cpp:109</div></div>
+<div class="ttc" id="aclassLinkedCellContainer_html_ab6faa7c002062a175d458b717e8ca58e"><div class="ttname"><a href="classLinkedCellContainer.html#ab6faa7c002062a175d458b717e8ca58e">LinkedCellContainer::getParticleVector</a></div><div class="ttdeci">std::vector&lt; Particle &gt; getParticleVector() override</div><div class="ttdoc">Returns a vector of all particles in the container.</div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.cpp:55</div></div>
 <div class="ttc" id="aclassParticleContainer_html"><div class="ttname"><a href="classParticleContainer.html">ParticleContainer</a></div><div class="ttdef"><b>Definition:</b> ParticleContainer.h:12</div></div>
 <div class="ttc" id="aclassParticle_html"><div class="ttname"><a href="classParticle.html">Particle</a></div><div class="ttdef"><b>Definition:</b> Particle.h:14</div></div>
 </div><!-- fragment --></div><!-- contents -->

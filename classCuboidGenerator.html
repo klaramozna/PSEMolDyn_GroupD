@@ -82,9 +82,9 @@ Inheritance diagram for CuboidGenerator:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ac1c09c31f8ef38edda4500b6ab4c586b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCuboidGenerator.html#ac1c09c31f8ef38edda4500b6ab4c586b">CuboidGenerator</a> (std::array&lt; double, 3 &gt; corner, int n1, int n2, int n3, double particleDistance, double mass, std::array&lt; double, 3 &gt; velocity)</td></tr>
-<tr class="memdesc:ac1c09c31f8ef38edda4500b6ab4c586b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="classCuboidGenerator.html">CuboidGenerator</a> object initializing it with the given parameters.  <a href="classCuboidGenerator.html#ac1c09c31f8ef38edda4500b6ab4c586b">More...</a><br /></td></tr>
-<tr class="separator:ac1c09c31f8ef38edda4500b6ab4c586b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7c3dda26ef4d28b06f2631c752f76c2f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCuboidGenerator.html#a7c3dda26ef4d28b06f2631c752f76c2f">CuboidGenerator</a> (std::array&lt; double, 3 &gt; corner, int n1, int n2, int n3, double particleDistance, double mass, std::array&lt; double, 3 &gt; velocity, double epsilon=1, double sigma=1)</td></tr>
+<tr class="memdesc:a7c3dda26ef4d28b06f2631c752f76c2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="classCuboidGenerator.html">CuboidGenerator</a> object initializing it with the given parameters.  <a href="classCuboidGenerator.html#a7c3dda26ef4d28b06f2631c752f76c2f">More...</a><br /></td></tr>
+<tr class="separator:a7c3dda26ef4d28b06f2631c752f76c2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab7ea403306a3dd439c18533a1ea63b99"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCuboidGenerator.html#ab7ea403306a3dd439c18533a1ea63b99">generateParticles</a> (int <a class="el" href="classtype.html">type</a>=0) override</td></tr>
 <tr class="memdesc:ab7ea403306a3dd439c18533a1ea63b99"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a cuboid of particles.  <a href="classCuboidGenerator.html#ab7ea403306a3dd439c18533a1ea63b99">More...</a><br /></td></tr>
 <tr class="separator:ab7ea403306a3dd439c18533a1ea63b99"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -104,8 +104,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:a4c065631d36a8d5035ea4399d079b053 inherit pro_attribs_classParticleGenerator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ac1c09c31f8ef38edda4500b6ab4c586b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac1c09c31f8ef38edda4500b6ab4c586b">&#9670;&nbsp;</a></span>CuboidGenerator()</h2>
+<a id="a7c3dda26ef4d28b06f2631c752f76c2f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c3dda26ef4d28b06f2631c752f76c2f">&#9670;&nbsp;</a></span>CuboidGenerator()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -150,7 +150,19 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">std::array&lt; double, 3 &gt;&#160;</td>
-          <td class="paramname"><em>velocity</em>&#160;</td>
+          <td class="paramname"><em>velocity</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>epsilon</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>sigma</em> = <code>1</code>&#160;</td>
         </tr>
         <tr>
           <td></td>

@@ -79,6 +79,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a24b04cb7c6f7ea4242d25c410f44ae56"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abd17e9e13b8ed36738424c79aa14e127"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#abd17e9e13b8ed36738424c79aa14e127">Particle</a> (std::array&lt; double, 3 &gt; x_arg, std::array&lt; double, 3 &gt; v_arg, double m_arg, int <a class="el" href="classtype.html">type</a>=0)</td></tr>
 <tr class="separator:abd17e9e13b8ed36738424c79aa14e127"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afc18f55ea7e516a7ba015fb8920d6551"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#afc18f55ea7e516a7ba015fb8920d6551">Particle</a> (std::array&lt; double, 3 &gt; x_arg, std::array&lt; double, 3 &gt; v_arg, double m_arg, double epsilon, double sigma, int <a class="el" href="classtype.html">type</a>=0)</td></tr>
+<tr class="memdesc:afc18f55ea7e516a7ba015fb8920d6551"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="classParticle.html">Particle</a> object using the given parameters.  <a href="classParticle.html#afc18f55ea7e516a7ba015fb8920d6551">More...</a><br /></td></tr>
+<tr class="separator:afc18f55ea7e516a7ba015fb8920d6551"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad030d0fe7b88cf81744b127c99244ff4"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#ad030d0fe7b88cf81744b127c99244ff4">~Particle</a> ()</td></tr>
 <tr class="separator:ad030d0fe7b88cf81744b127c99244ff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5f097eb9cef2c4f1bae890014282867"><td class="memItemLeft" align="right" valign="top">const std::array&lt; double, 3 &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#ad5f097eb9cef2c4f1bae890014282867">getX</a> () const</td></tr>
@@ -89,6 +92,10 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a74b516167925a350dac3e96e7b3d98b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2523afe674a4a1f8a135fd62742ad614"><td class="memItemLeft" align="right" valign="top">const std::array&lt; double, 3 &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a2523afe674a4a1f8a135fd62742ad614">getOldF</a> () const</td></tr>
 <tr class="separator:a2523afe674a4a1f8a135fd62742ad614"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:accf978be56ac81112bc7e20562eedc97"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#accf978be56ac81112bc7e20562eedc97">getEpsilon</a> () const</td></tr>
+<tr class="separator:accf978be56ac81112bc7e20562eedc97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1804384e5792dd766a5b7fad67903677"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a1804384e5792dd766a5b7fad67903677">getSigma</a> () const</td></tr>
+<tr class="separator:a1804384e5792dd766a5b7fad67903677"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15fd35b4de0cdc64fbfbe8fe7ae36267"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVectorDouble3.html">VectorDouble3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a15fd35b4de0cdc64fbfbe8fe7ae36267">getXVector</a> () const</td></tr>
 <tr class="memdesc:a15fd35b4de0cdc64fbfbe8fe7ae36267"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the position as a DoubleVector.  <a href="classParticle.html#a15fd35b4de0cdc64fbfbe8fe7ae36267">More...</a><br /></td></tr>
 <tr class="separator:a15fd35b4de0cdc64fbfbe8fe7ae36267"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,7 +146,7 @@ Public Member Functions</h2></td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a866812d3dfb9c539e5e24593e596a8c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a866812d3dfb9c539e5e24593e596a8c9">&#9670;&nbsp;</a></span>Particle() <span class="overload">[1/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a866812d3dfb9c539e5e24593e596a8c9">&#9670;&nbsp;</a></span>Particle() <span class="overload">[1/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -165,7 +172,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="a24b04cb7c6f7ea4242d25c410f44ae56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24b04cb7c6f7ea4242d25c410f44ae56">&#9670;&nbsp;</a></span>Particle() <span class="overload">[2/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a24b04cb7c6f7ea4242d25c410f44ae56">&#9670;&nbsp;</a></span>Particle() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -183,7 +190,7 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <a id="abd17e9e13b8ed36738424c79aa14e127"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd17e9e13b8ed36738424c79aa14e127">&#9670;&nbsp;</a></span>Particle() <span class="overload">[3/3]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abd17e9e13b8ed36738424c79aa14e127">&#9670;&nbsp;</a></span>Particle() <span class="overload">[3/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -222,6 +229,79 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="afc18f55ea7e516a7ba015fb8920d6551"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afc18f55ea7e516a7ba015fb8920d6551">&#9670;&nbsp;</a></span>Particle() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Particle::Particle </td>
+          <td>(</td>
+          <td class="paramtype">std::array&lt; double, 3 &gt;&#160;</td>
+          <td class="paramname"><em>x_arg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::array&lt; double, 3 &gt;&#160;</td>
+          <td class="paramname"><em>v_arg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>m_arg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>epsilon</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>sigma</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>type</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a <a class="el" href="classParticle.html">Particle</a> object using the given parameters. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x_arg</td><td>The position of the particle. </td></tr>
+    <tr><td class="paramname">v_arg</td><td>The velocity of the particle. </td></tr>
+    <tr><td class="paramname">m_arg</td><td>The mass of the particle. </td></tr>
+    <tr><td class="paramname">epsilon</td><td>The epsilon (for Lennard-Jones calculation) of the particle. </td></tr>
+    <tr><td class="paramname">sigma</td><td>The sigma (for Lennard-Jones calculation) of the particle. </td></tr>
+    <tr><td class="paramname">type</td><td>The type of the particle. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ad030d0fe7b88cf81744b127c99244ff4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad030d0fe7b88cf81744b127c99244ff4">&#9670;&nbsp;</a></span>~Particle()</h2>
 
@@ -248,6 +328,31 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="accf978be56ac81112bc7e20562eedc97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#accf978be56ac81112bc7e20562eedc97">&#9670;&nbsp;</a></span>getEpsilon()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Particle::getEpsilon </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a74b516167925a350dac3e96e7b3d98b3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a74b516167925a350dac3e96e7b3d98b3">&#9670;&nbsp;</a></span>getF()</h2>
 
@@ -336,6 +441,31 @@ Public Member Functions</h2></td></tr>
 
 <p>Returns the position in the previous iteration as a DoubleVector. </p>
 <dl class="section return"><dt>Returns</dt><dd>Vector with the values of the force. </dd></dl>
+
+</div>
+</div>
+<a id="a1804384e5792dd766a5b7fad67903677"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1804384e5792dd766a5b7fad67903677">&#9670;&nbsp;</a></span>getSigma()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Particle::getSigma </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
