@@ -26,7 +26,7 @@ public:
 
 class ReflectiveBoundaryTest : public ::testing::Test {
 public:
-    ReflectiveBoundary boundary{3.0, 3.0, 3.0, fc, 1, 1};
+    ReflectiveBoundary boundary{3.0, 3.0, 1.0, fc, 1};
     MockForceCalculation fc{};
 };
 

@@ -20,7 +20,7 @@ public:
 class SimpleThermostatTest : public testing::Test{
 protected:
     MockForceCalculation fc{};
-    LinkedCellContainer container{Boundary(4, 4, 4, fc, 1, 1), 1};
+    LinkedCellContainer container{Boundary(4, 4, 4, fc, 1), 1};
     SimpleThermostat thermostat{10, 4, 3, 3};
     Particle p1{std::array<double, 3>{0, 0, 0}, std::array<double, 3>{1, 1, 1}, 1};
     Particle p2{std::array<double, 3>{1, 0.5, 2}, std::array<double, 3>{1, 1, 1}, 1};

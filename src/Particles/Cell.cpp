@@ -3,7 +3,6 @@
 //
 
 #include "Cell.h"
-#include "../utils/VectorDouble3.h"
 
 Cell::iterator_type Cell::begin(){
     return particles.begin();
@@ -30,10 +29,7 @@ void Cell::applyToPairs(const std::function<void(Particle &, Particle &)> &funct
         auto inner = outer;
         inner++;
         for(auto in2 = inner; in2 != particles.end(); in2++){
-            if(getDistance(outer->getXVector(), in2->getXVector()) <= cutoffRadius){
-                function(*outer, *in2);
-            }
-
+            function(*outer, *in2);
         }
     }
 }

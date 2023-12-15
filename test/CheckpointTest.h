@@ -26,10 +26,8 @@ protected:
     CheckpointReader cReader;
     std::string filename;
     MockForceCalculation fc{};
-  
     LinkedCellContainer container{Boundary(4, 4, 4, fc, 1), 1};
     Particle p1{std::array<double, 3>{0, 0, 0}, std::array<double, 3>{1, 1, 1}, 1, 2.0, 1.0, 1};
-
     Particle p2{std::array<double, 3>{1, 0.5, 2}, std::array<double, 3>{1, 1, 1}, 1};
     Particle p3{std::array<double, 3>{3, 2, 0}, std::array<double, 3>{1, 1, 1}, 1};
     Particle p4{std::array<double, 3>{1, 0.3, 2}, std::array<double, 3>{1, 1, 1}, 1};

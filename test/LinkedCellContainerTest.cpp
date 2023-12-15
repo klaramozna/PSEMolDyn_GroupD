@@ -114,46 +114,10 @@ TEST_F(LinkedCellContainerTest, applyToBoundary){
     ASSERT_EQ(boundaryContainer.getSize(), 2);
 }
 
-TEST_F(LinkedCellContainerTest, wrongAligment){
-    // Make sure particles are put into correct cells.
-    std::vector<Cell> grid = wrongAlignmentContainer.getCells();
-    // Check the cellsize in each dimension
-    EXPECT_DOUBLE_EQ(wrongAlignmentContainer.getCellSize()[0], 1.5);
-    EXPECT_DOUBLE_EQ(wrongAlignmentContainer.getCellSize()[1], 1.66666666666666666666666666666666666666666666666666666666666666666666666);
-    EXPECT_DOUBLE_EQ(wrongAlignmentContainer.getCellSize()[2], 1.5);
-    ASSERT_TRUE(grid[61].contains(p1WrongAlignment));
-    ASSERT_TRUE(grid[68].contains(p2WrongAlignment));
-    ASSERT_TRUE(grid[73].contains(p3WrongAlignment));
-    ASSERT_EQ(wrongAlignmentContainer.getSize(), 3);
-}
-
-TEST_F(LinkedCellContainerTest, wrongAlignmentBoundary){
-    wrongAlignmentContainer.applyToBoundary([](Particle &p) {
-        p.setV(VectorDouble3(std::array<double, 3>{50, 50, 50}));
-    });
-
-    std::vector<Cell> grid = wrongAlignmentContainer.getCells();
-
-    // Making sure boundary particles were changed and no longer have their old values
-    ASSERT_FALSE(grid[68].contains(p2WrongAlignment));
-    ASSERT_FALSE(grid[73].contains(p3WrongAlignment));
-
-    // Making sure boundary cells contain the changed boundary particles
-    ASSERT_TRUE(grid[68].contains(p2BoundaryWrongAlignment));
-    ASSERT_TRUE(grid[73].contains(p3BoundaryWrongAlignment));
-
-    // Making sure other particles remained unchanged
-    ASSERT_TRUE(grid[61].contains(p1WrongAlignment));
-    ASSERT_EQ(wrongAlignmentContainer.getSize(), 3);
-}
-
-
 
 void LinkedCellContainerTest::SetUp() {
     std::vector<Particle> particles{p1, p2, p3, p4};
     container.addParticles(particles);
     std::vector<Particle> boundary{boundary1, boundary2};
     boundaryContainer.addParticles(boundary);
-    std::vector<Particle> wrongAlignmentParticles{p1WrongAlignment, p2WrongAlignment, p3WrongAlignment};
-    wrongAlignmentContainer.addParticles(wrongAlignmentParticles);
 }

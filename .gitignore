@@ -3,4 +3,3 @@ cmake-build-*
 build/
 .vscode/
 documentation
-Simulation_*:*/
