@@ -33,6 +33,8 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
     v = v_arg;
     m = m_arg;
     type = type_arg;
+    epsilon = 1.0;
+    sigma = 1.0;
 }
 
 Particle::~Particle() {}

@@ -48,8 +48,8 @@
       <z>0</z>
     </old_f>
     <m>1</m>
-    <epsilon>0</epsilon>
-    <sigma>0</sigma>
+    <epsilon>1</epsilon>
+    <sigma>1</sigma>
     <type>0</type>
   </particle>
   <particle>
@@ -74,8 +74,8 @@
       <z>0</z>
     </old_f>
     <m>1</m>
-    <epsilon>0</epsilon>
-    <sigma>0</sigma>
+    <epsilon>1</epsilon>
+    <sigma>1</sigma>
     <type>0</type>
   </particle>
   <particle>
@@ -100,8 +100,8 @@
       <z>0</z>
     </old_f>
     <m>1</m>
-    <epsilon>0</epsilon>
-    <sigma>0</sigma>
+    <epsilon>1</epsilon>
+    <sigma>1</sigma>
     <type>0</type>
   </particle>
 </Checkpoint>
