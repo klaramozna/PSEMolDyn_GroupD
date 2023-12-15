@@ -17,20 +17,22 @@
 LinkedCellContainer::LinkedCellContainer(Boundary boundary, double cutoffRadius,
                                          const std::vector<Particle>& particles) : boundary{boundary}, grid{}, cutoffRadius{cutoffRadius} {
     size = particles.size();
-    cellSize = cutoffRadius;
+
+    // Potencially slightly increase cell size (compared to cutoff radius)
+    for(int i = 0; i < 3; i++){
+        cellSize[i] = boundary.getDimensions()[i] / std::floor(boundary.getDimensions()[i] / cutoffRadius);
+    }
 
     // Calculate number of cells in each axis
     for (int i = 0; i < 3; i++) {
-        nc[i] = std::ceil(boundary.getDimensions()[i]/cellSize) + 2;
+        nc[i] = std::floor(boundary.getDimensions()[i] / cutoffRadius) + 2;
     }
 
     // Defines by how much each dimension in the grid needs to be shifted so that the grid is symmetrical to the boundary
-    for (int i = 0; i < 3; i++) {
-        gridShift[i] = (nc[i] * cellSize - boundary.getDimensions()[i]) / 2;
-    }
+    gridShift = cellSize;
 
     // Initialize grid
-    grid.resize(nc[0] * nc[1] * nc[2]);
+    grid.resize(nc[0] * nc[1] * nc[2], Cell{cutoffRadius});
 
     // Populate boundaryCells
     for (int x = 0; x < nc[0]; ++x) {
@@ -84,7 +86,7 @@ void LinkedCellContainer::moveParticle(const Particle &p1, int oldCell, int newC
 void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &function) {
     // Creating a vector for marking particles that need to be moved
     std::vector<std::pair<Particle, int>> particlesToBeMoved{}; // stores each particle that needs to be moved with the cell it's beeing moved from
-    particlesToBeMoved.reserve(size);
+    //particlesToBeMoved.reserve(size);
 
     // Applying given function to each particle and marking particles for movement
     for(int i = 0; i < grid.size(); i++){
@@ -162,9 +164,9 @@ bool LinkedCellContainer::particleWithinCutoff(const Particle &p1, const Particl
 }
 
 int LinkedCellContainer::getParticleIndex(const Particle &p) {
-    int x = floor((p.getX()[0] + gridShift[0]) / cellSize);
-    int y = floor((p.getX()[1] + gridShift[1]) / cellSize);
-    int z = floor((p.getX()[2] + gridShift[2]) / cellSize);
+    int x = floor((p.getX()[0] + gridShift[0]) / cellSize[0]);
+    int y = floor((p.getX()[1] + gridShift[1]) / cellSize[1]);
+    int z = floor((p.getX()[2] + gridShift[2]) / cellSize[2]);
     return getGridIndex(x, y, z);
 }
 
@@ -201,7 +203,7 @@ void LinkedCellContainer::deleteHaloParticles() {
 }
 
 bool LinkedCellContainer::isBoundaryCell(int x, int y, int z) {
-    return x == 1 || x == nc[0] - 2 || y == 1 || y == nc[1] - 2 || z == 1 || z == nc[2] - 2;
+    return (x == 1 || x == nc[0] - 2 || y == 1 || y == nc[1] - 2 || z == 1 || z == nc[2] - 2) && !(x == 0 || y == 0 || z == 0);
 }
 
 void LinkedCellContainer::addParticle(const Particle &p) {
@@ -217,16 +219,16 @@ std::vector<Cell> LinkedCellContainer::getCells() {
 }
 
 bool LinkedCellContainer::cellWithinRadius(const Particle &p, int x, int y, int z) {
-    double middleX = x * cellSize - gridShift[0] + cellSize / 2;
-    double middleY = y * cellSize - gridShift[1] + cellSize / 2;
-    double middleZ = z * cellSize - gridShift[2] + cellSize / 2;
+    double middleX = x * cellSize[0] - gridShift[0] + cellSize[0] / 2;
+    double middleY = y * cellSize[1] - gridShift[1] + cellSize[1] / 2;
+    double middleZ = z * cellSize[2] - gridShift[2] + cellSize[2] / 2;
     return particleWithinCutoff(p, Particle{std::array<double, 3>{middleX, middleY, middleZ}, std::array<double, 3>{}, 0});
 }
 
 bool LinkedCellContainer::particleOutOfGrid(const Particle &p) {
-    int x = floor((p.getX()[0] + gridShift[0]) / cellSize);
-    int y = floor((p.getX()[1] + gridShift[1]) / cellSize);
-    int z = floor((p.getX()[2] + gridShift[2]) / cellSize);
+    int x = floor((p.getX()[0] + gridShift[0]) / cellSize[0]);
+    int y = floor((p.getX()[1] + gridShift[1]) / cellSize[1]);
+    int z = floor((p.getX()[2] + gridShift[2]) / cellSize[2]);
     return x < 0 || y < 0 || z < 0 || x >= nc[0] || y >= nc[1] || z >= nc[2];
 }
 

@@ -9,7 +9,7 @@
  */
 TEST_F(BoundaryTest, IsInside) {
     GravitationalForce fc = GravitationalForce();
-    Boundary boundary(2.0, 2.0, 2.0, fc, 0);
+    Boundary boundary(2.0, 2.0, 2.0, fc, 0, 0);
 
     // Test particle inside the boundary
     Particle insideParticle({1.0, 1.0, 1.0}, {0.0, 0.0, 0.0}, 1.0);
@@ -29,7 +29,7 @@ TEST_F(BoundaryTest, IsInside) {
  */
 TEST_F(BoundaryTest, IsOutside) {
     GravitationalForce fc = GravitationalForce();
-    Boundary boundary(2.0, 2.0, 2.0, fc, 0);
+    Boundary boundary(2.0, 2.0, 2.0, fc, 0, 0);
 
     // Test particle inside the boundary
     Particle insideParticle({1.0, 1.0, 1.0}, {0.0, 0.0, 0.0}, 1.0);
@@ -50,7 +50,7 @@ TEST_F(BoundaryTest, IsOutside) {
 TEST_F(BoundaryTest, GetDimensions) {
     // Create a Boundary with dimensions (width=2, height=2, depth=2)
     GravitationalForce fc = GravitationalForce();
-    Boundary boundary(2.0, 2.0, 2.0, fc, 0);
+    Boundary boundary(2.0, 2.0, 2.0, fc, 0, 0);
 
     // Check if the dimensions match
     auto dimensions = boundary.getDimensions();

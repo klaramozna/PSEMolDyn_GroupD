@@ -9,8 +9,10 @@
 #include "../Particles/Particle.h"
 #include "../Particles/LinkedCellContainer.h"
 #include "./Physics/ForceCalculation.h"
+#include "../Particles/ReflectiveBoundary.h"
 #include "Thermostat.h"
-#include "../Particles/Boundary.h"
+
+#include <memory>
 
 class Simulation {
 private:
@@ -19,8 +21,8 @@ private:
     LinkedCellContainer& container;
     ForceCalculation &forceCalculation;
     Thermostat& thermostat;
-    Boundary boundary;
-
+    std::shared_ptr<Boundary> boundary;
+  
     double delta_t;
     double averageVelo;
 
@@ -45,9 +47,7 @@ private:
     static void setOldForce(Particle& p);
 
 public:
-
-    Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary);
-  
+    Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, std::shared_ptr<Boundary> boundary);
     virtual ~Simulation();
 
     /**
@@ -60,10 +60,6 @@ public:
      * @brief run one iteration of the simulation, meaning position, force and then velocity
      */
     void runIteration();
-
-    void runIterationReflective();
-
-    void runIterationOutflow();
 };
 
 #endif //PSEMOLDYN_GROUPD_SIMULATION_H

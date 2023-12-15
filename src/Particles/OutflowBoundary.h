@@ -7,6 +7,9 @@
 
 #include "Boundary.h"
 
-class OutflowBoundary : public Boundary {};
+class OutflowBoundary : public Boundary {
+public:
+    OutflowBoundary(double width, double height, double depth, ForceCalculation &fc, double cellSize, double sigma) : Boundary(width, height, depth, fc, cellSize, sigma) {};
 
+};
 #endif //PSEMOLDYN_GROUPD_OUTFLOWBOUNDARY_H
