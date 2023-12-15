@@ -52,7 +52,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
 
         if (sim->force()) {
             if (sim->force()->lennard()) {
-                Logger::console->debug("Reading force type 1 from XML");
+                Logger::console->debug("Reading force type 1 (lennard jones) from XML");
                 lennardJones_t& lennard = *(sim->force()->lennard());
                 double epsilon = lennard.Epsilon();
                 double sigma = lennard.Sigma();
@@ -61,9 +61,16 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
                 SimParameters.setEpsilon(epsilon);
                 SimParameters.setSigma(sigma);
             } else if (sim->force()->grav()) {
-                Logger::console->debug("Reading force type 2 from XML");
+                Logger::console->debug("Reading force type 2 (gravitational) from XML");
                 SimParameters.setForce("grav");
-
+            }
+            else if (sim->force()->gravity()) {
+                Logger::console->debug("Reading force type 3 (gravity) from XML");
+                SimParameters.setForce("gravity");
+                gravity_t& gravity = *(sim->force()->gravity());
+                double gravity_factor = gravity.gravity_factor();
+                Logger::console->debug("Reading gravity factor {} from XML", gravity_factor);
+                SimParameters.setGravityFactor(gravity_factor);
             }
         }
 

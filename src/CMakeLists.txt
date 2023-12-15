@@ -40,6 +40,8 @@ Simulation/Physics/GravitationalForce.cpp
         Particles/ReflectiveBoundary.h
         Simulation/Physics/MixingRuleLennardJones.cpp
         Simulation/Physics/MixingRuleLennardJones.h
+        Simulation/Physics/GravityForce.cpp
+
 )
         
 # Include directories specific to the 'src' directory, if needed

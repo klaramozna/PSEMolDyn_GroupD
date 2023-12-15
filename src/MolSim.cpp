@@ -95,6 +95,11 @@ int main(int argc, char *argsv[]) {
         Logger::console->info("Force set to grav");
     }
 
+    if (simParameters.getForce() == "gravity") {
+        // to do
+        Logger::console->info("Force set to gravity");
+    }
+
     Boundary boundary{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius()};
     LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
 

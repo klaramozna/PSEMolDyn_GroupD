@@ -129,6 +129,28 @@ Sigma (const Sigma_type& x)
 }
 
 
+// gravity_t
+// 
+
+const gravity_t::gravity_factor_type& gravity_t::
+gravity_factor () const
+{
+  return this->gravity_factor_.get ();
+}
+
+gravity_t::gravity_factor_type& gravity_t::
+gravity_factor ()
+{
+  return this->gravity_factor_.get ();
+}
+
+void gravity_t::
+gravity_factor (const gravity_factor_type& x)
+{
+  this->gravity_factor_.set (x);
+}
+
+
 // ForceType
 // 
 
@@ -190,6 +212,36 @@ void ForceType::
 grav (::std::unique_ptr< grav_type > x)
 {
   this->grav_.set (std::move (x));
+}
+
+const ForceType::gravity_optional& ForceType::
+gravity () const
+{
+  return this->gravity_;
+}
+
+ForceType::gravity_optional& ForceType::
+gravity ()
+{
+  return this->gravity_;
+}
+
+void ForceType::
+gravity (const gravity_type& x)
+{
+  this->gravity_.set (x);
+}
+
+void ForceType::
+gravity (const gravity_optional& x)
+{
+  this->gravity_ = x;
+}
+
+void ForceType::
+gravity (::std::unique_ptr< gravity_type > x)
+{
+  this->gravity_.set (std::move (x));
 }
 
 
@@ -1560,6 +1612,95 @@ lennardJones_t::
 {
 }
 
+// gravity_t
+//
+
+gravity_t::
+gravity_t (const gravity_factor_type& gravity_factor)
+: ::xml_schema::type (),
+  gravity_factor_ (gravity_factor, this)
+{
+}
+
+gravity_t::
+gravity_t (const gravity_t& x,
+           ::xml_schema::flags f,
+           ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  gravity_factor_ (x.gravity_factor_, f, this)
+{
+}
+
+gravity_t::
+gravity_t (const ::xercesc::DOMElement& e,
+           ::xml_schema::flags f,
+           ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  gravity_factor_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void gravity_t::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // gravity_factor
+    //
+    if (n.name () == "gravity_factor" && n.namespace_ ().empty ())
+    {
+      if (!gravity_factor_.present ())
+      {
+        this->gravity_factor_.set (gravity_factor_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    break;
+  }
+
+  if (!gravity_factor_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "gravity_factor",
+      "");
+  }
+}
+
+gravity_t* gravity_t::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class gravity_t (*this, f, c);
+}
+
+gravity_t& gravity_t::
+operator= (const gravity_t& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->gravity_factor_ = x.gravity_factor_;
+  }
+
+  return *this;
+}
+
+gravity_t::
+~gravity_t ()
+{
+}
+
 // ForceType
 //
 
@@ -1567,7 +1708,8 @@ ForceType::
 ForceType ()
 : ::xml_schema::type (),
   lennard_ (this),
-  grav_ (this)
+  grav_ (this),
+  gravity_ (this)
 {
 }
 
@@ -1577,7 +1719,8 @@ ForceType (const ForceType& x,
            ::xml_schema::container* c)
 : ::xml_schema::type (x, f, c),
   lennard_ (x.lennard_, f, this),
-  grav_ (x.grav_, f, this)
+  grav_ (x.grav_, f, this),
+  gravity_ (x.gravity_, f, this)
 {
 }
 
@@ -1587,7 +1730,8 @@ ForceType (const ::xercesc::DOMElement& e,
            ::xml_schema::container* c)
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
   lennard_ (this),
-  grav_ (this)
+  grav_ (this),
+  gravity_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -1634,6 +1778,20 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // gravity
+    //
+    if (n.name () == "gravity" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< gravity_type > r (
+        gravity_traits::create (i, f, this));
+
+      if (!this->gravity_)
+      {
+        this->gravity_.set (::std::move (r));
+        continue;
+      }
+    }
+
     break;
   }
 }
@@ -1653,6 +1811,7 @@ operator= (const ForceType& x)
     static_cast< ::xml_schema::type& > (*this) = x;
     this->lennard_ = x.lennard_;
     this->grav_ = x.grav_;
+    this->gravity_ = x.gravity_;
   }
 
   return *this;

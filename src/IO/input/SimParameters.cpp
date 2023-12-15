@@ -12,7 +12,7 @@
 SimParameters::SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                              bool testing_val, int log_level_val,
                              const std::string& input_path_val, const std::string& input_mode_val,
-                             const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength){
+                             const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, double gravity_factor_val){
     end_time =end_time_val;
     delta_t = delta_t_val;
     averageVelo = averageVelo_val;
@@ -31,6 +31,7 @@ SimParameters::SimParameters(double end_time_val, double delta_t_val, double ave
     targetTemperature = targetTemp;
     maxTemperatureChange = maxChange;
     thermostatCycleLength = cycleLength;
+    gravity_factor = gravity_factor_val;
 }
 
 SimParameters::SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,

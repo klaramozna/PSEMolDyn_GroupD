@@ -29,12 +29,20 @@
     </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="gravity_t">
+    <xs:sequence>
+        <xs:element name="gravity_factor" type="xs:double"/>
+    </xs:sequence>
+</xs:complexType>
+
     <!-- choose one force type -->
 <xs:complexType name="ForceType">
   <xs:choice>
         <!-- first element is default -->
     <xs:element name="lennard" type="lennardJones_t"/>
     <xs:element name="grav" type="xs:string"/>
+    <xs:element name="gravity" type="gravity_t"/>
+    
   </xs:choice>
 </xs:complexType>
 
