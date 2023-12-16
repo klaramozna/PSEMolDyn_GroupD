@@ -23,6 +23,7 @@ Particle::Particle(const Particle &other) {
     old_f = other.old_f;
     m = other.m;
     type = other.type;
+    markedForDeletion = other.markedForDeletion;
 }
 
 Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
@@ -116,6 +117,18 @@ void Particle::setOldF(double x, double y, double z) {
     old_f[0] = x;
     old_f[1] = y;
     old_f[2] = z;
+}
+
+bool Particle::isMarkedForDeletion() const {
+    return markedForDeletion;
+}
+
+void Particle::markForDeletion() {
+    markedForDeletion = true;
+}
+
+void Particle::unmarkForDeletion() {
+    markedForDeletion = false;
 }
 
 std::ostream &operator<<(std::ostream &stream, Particle &p) {

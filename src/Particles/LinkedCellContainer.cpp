@@ -3,16 +3,8 @@
 //
 
 #include "LinkedCellContainer.h"
-#include "../utils/VectorDouble3.h"
 #include <stdexcept>
 #include <cmath>
-#include <iostream>
-
-
-//TODO:
-// 1. Initialize grid -> right now, there would be an outOfBounds problem because grid hasn't been initialized
-// 2. Define the behaviour of getParticleVector() -> I would return a copy, but that requires changing ParticleContainer and adapting
-// existing code
 
 LinkedCellContainer::LinkedCellContainer(Boundary boundary, double cutoffRadius,
                                          const std::vector<Particle>& particles) : boundary{boundary}, grid{}, cutoffRadius{cutoffRadius} {
@@ -72,13 +64,21 @@ void LinkedCellContainer::updateCells() {
 
 void LinkedCellContainer::moveParticle(const Particle &p1, int oldCell, int newCell) {
     grid[oldCell].deleteParticle(p1);
-    if(particleOutOfGrid(p1)){
-        size--;
+    if (p1.isMarkedForDeletion()) {
+        // If we are outside and marked for deletion, we delete the particle
+        if (particleOutOfGrid(p1)) {
+            size--;
+        // If we are not outside and not within a boundary cell, unmark for deletion
+        } else if (!isBoundaryCell(newCell % nc[0], (newCell / nc[0]) % nc[1], newCell / (nc[0] * nc[1]))) {
+            Particle p2 = p1;
+            p2.unmarkForDeletion();
+            grid[newCell].addParticle(p2);
+        }
+    } else {
+        Particle p2 = p1;
+        p2.unmarkForDeletion();
+        grid[newCell].addParticle(p2);
     }
-    else{
-        grid[newCell].addParticle(p1);
-    }
-
 }
 
 void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &function) {

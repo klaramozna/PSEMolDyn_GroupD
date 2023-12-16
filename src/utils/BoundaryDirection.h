@@ -1,0 +1,17 @@
+//
+// Created by rodff on 14.12.23.
+//
+
+#ifndef PSEMOLDYN_GROUPD_BOUNDARYDIRECTION_H
+#define PSEMOLDYN_GROUPD_BOUNDARYDIRECTION_H
+
+enum BoundaryDirection {
+    TOP,
+    BOTTOM,
+    LEFT,
+    RIGHT,
+    FRONT,
+    BACK
+};
+
+#endif //PSEMOLDYN_GROUPD_BOUNDARYDIRECTION_H

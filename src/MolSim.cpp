@@ -18,8 +18,7 @@
 #include "Simulation/Physics/GravitationalForce.h"
 #include "Simulation/Physics/LennardJones.h"
 #include "Particles/Boundary.h"
-#include "Particles/ReflectiveBoundary.h"
-#include "Particles/OutflowBoundary.h"
+
 #include "Simulation/SimpleThermostat.h"
 
 
@@ -45,7 +44,6 @@ int main(int argc, char *argsv[]) {
     CL cl;
     std::unique_ptr<ParticleReader> reader;
     std::unique_ptr<ForceCalculation> forceCalculation;
-    std::shared_ptr<Boundary> boundary;
 
     outputWriter::VTKWriter writer;
     SimParameters simParameters;
@@ -104,24 +102,20 @@ int main(int argc, char *argsv[]) {
         Logger::console->info("Force set to grav");
     }
 
-    // Initializing boundary
-
-    if (simParameters.getBoundaryBehavior()[0] == "Reflecting") {
-        boundary = std::make_shared<ReflectiveBoundary>(simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius(), simParameters.getSigma());
-        Logger::console->info("Boundary set to reflective");
-    }
-
-    else if (simParameters.getBoundaryBehavior()[0] == "Outflow") {
-        boundary = std::make_shared<OutflowBoundary>(simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius(), simParameters.getSigma());
-        Logger::console->info("Boundary set to reflective");
-    }
-
     else {
         Logger::err_logger->error("Boundary was not correctly initialized");
         exit(-1);
     }
 
-    LinkedCellContainer container(*boundary, simParameters.getCutoffRadius());
+    // Initializing boundary
+    Boundary boundary = Boundary(simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], simParameters.getSigma(), simParameters.getBoundaryBehavior());
+
+    if (boundary.getBoundaryTypes().empty()) {
+        Logger::err_logger->error("Boundary was not correctly initialized");
+        exit(-1);
+    }
+
+    LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
 
     /* To do: solve this dependency between readFile and container*/
     container.addParticles(container_h.getParticleVector());
@@ -143,7 +137,7 @@ int main(int argc, char *argsv[]) {
     SimpleThermostat thermostat{20, 20, 50, 3};
 
 
-    Simulation simulation(simParameters.getDeltaT(), container, *forceCalculation, thermostat, simParameters.getAverageVelo(), boundary);
+    Simulation simulation(simParameters.getDeltaT(), simParameters.getSigma(), container, *forceCalculation, thermostat, simParameters.getAverageVelo(), boundary);
   
     // This is ugly and shouldn't be in main, but it is for a later refactor
     if (simParameters.isTesting()) {

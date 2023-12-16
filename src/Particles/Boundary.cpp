@@ -22,12 +22,24 @@ std::array<double,3> Boundary::getDimensions() {
     return dim;
 }
 
-Boundary::Boundary(double width, double height, double depth, ForceCalculation &fc, double cellSize, double sigma) : sigma{sigma}, cellSize{cellSize}, fc{fc} {
+Boundary::Boundary(double width, double height, double depth, double sigma, const std::array<std::string, 6>& boundaryType_str) : sigma{sigma} {
     dim[0] = width;
     dim[1] = height;
     dim[2] = depth;
 
     corner = {0.0, 0.0, 0.0};
+
+    for (int i = 0; i < 6; i++) {
+        if (boundaryType_str[i] == "Reflective") {
+            boundaryTypes[i] = REFLECTIVE;
+        } else if (boundaryType_str[i] == "Outflow") {
+            boundaryTypes[i] = OUTFLOW;
+        } else if (boundaryType_str[i] == "Periodic") {
+            boundaryTypes[i] = PERIODIC;
+        }
+    }
 }
 
-void Boundary::applyBoundaryToParticle(Particle &p) {};
+std::array<BoundaryType, 6> Boundary::getBoundaryTypes() {
+    return boundaryTypes;
+}

@@ -9,8 +9,9 @@
 #include "../Particles/Particle.h"
 #include "../Particles/LinkedCellContainer.h"
 #include "./Physics/ForceCalculation.h"
-#include "../Particles/ReflectiveBoundary.h"
 #include "Thermostat.h"
+
+#include "../Particles/BoundaryEnforcer.h"
 
 #include <memory>
 
@@ -21,8 +22,9 @@ private:
     LinkedCellContainer& container;
     ForceCalculation &forceCalculation;
     Thermostat& thermostat;
-    std::shared_ptr<Boundary> boundary;
-  
+
+    BoundaryEnforcer boundaryEnforcer;
+
     double delta_t;
     double averageVelo;
 
@@ -47,7 +49,7 @@ private:
     static void setOldForce(Particle& p);
 
 public:
-    Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, std::shared_ptr<Boundary> boundary);
+    Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary);
     virtual ~Simulation();
 
     /**

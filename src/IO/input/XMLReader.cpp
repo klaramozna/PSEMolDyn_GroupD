@@ -9,10 +9,8 @@
 #include "../xsdCode/simulationFormat.h"
 #include "./../Logger.h"
 #include "./../../Simulation/Simulation.h"
-#include "./../../Simulation/Physics/LennardJones.h"
 #include "./../../utils/CuboidGenerator.h"
 #include "./../../utils/SphereGenerator.h"
-#include <iostream>
 
 XMLReader::XMLReader() = default;
 

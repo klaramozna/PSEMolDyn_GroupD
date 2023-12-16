@@ -35,9 +35,11 @@ Simulation/Physics/GravitationalForce.cpp
         Simulation/SimpleThermostat.h
         Simulation/GradualThermostat.cpp
         Simulation/GradualThermostat.h
-        Particles/OutflowBoundary.h
-        Particles/ReflectiveBoundary.cpp
-        Particles/ReflectiveBoundary.h)
+        Particles/BoundaryEnforcer.cpp
+        Particles/BoundaryEnforcer.h
+        utils/BoundaryTypes.h
+        utils/Constants.h
+        utils/BoundaryDirection.h)
         
 # Include directories specific to the 'src' directory, if needed
 target_include_directories(MolSim
@@ -62,7 +64,7 @@ find_package(Boost REQUIRED COMPONENTS program_options)
 # depending on the compiler different flags are used
 target_compile_options(MolSim
         PRIVATE
-        $<$<CXX_COMPILER_ID:GNU>:-Wall>
+        $<$<CXX_COMPILER_ID:GNU>:-Wall -O3>
         # disable some spam warnings for icpc...
         $<$<CXX_COMPILER_ID:Intel>:-w3 -wd383,981,1418,1572,2259>
 )

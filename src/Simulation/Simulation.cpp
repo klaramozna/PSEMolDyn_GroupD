@@ -7,22 +7,16 @@
 
 #include "Simulation.h"
 
-#include <utility>
-
-#include "../utils/VectorDouble3.h"
-#include "./Physics/ForceCalculation.h"
-
 #include "Particles/LinkedCellContainer.h"
-#include "Particles/OutflowBoundary.h"
+#include "Particles/BoundaryEnforcer.h"
 
-Simulation::Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, std::shared_ptr<Boundary> boundary) :
+Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary) :
                         container(container),
                         forceCalculation(calculation),
-                        thermostat(thermostat), boundary{std::move(boundary)},
+                        thermostat(thermostat),
+                        boundaryEnforcer(sigma, container, boundary.getDimensions(), boundary.getBoundaryTypes(), forceCalculation),
                         delta_t(delta_t),
-                        averageVelo(averageVelo){
-
-}
+                        averageVelo(averageVelo) {}
 
 Simulation::~Simulation() = default;
 
@@ -66,11 +60,9 @@ void Simulation::runIteration() {
     container.applyToAll([](Particle& p) { setOldForce(p); });
     container.applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
 
-    if (std::dynamic_pointer_cast<ReflectiveBoundary>(boundary) != nullptr) {
-        container.applyToBoundary([this](Particle& p) { boundary->applyBoundaryToParticle(p); });
-    } else if (std::dynamic_pointer_cast<OutflowBoundary>(boundary) != nullptr) {
-        container.deleteHaloParticles();
-    }
+    // TODO: Change this to function in boundaryEnforcer so that it can also create particles instead of
+    // only altering existing ones
+    container.applyToBoundary([this](Particle& p) { boundaryEnforcer.applyBoundaryConditionsForParticle(p); });
 
     // calculate new v
     container.applyToAll([this](Particle& p) { calculateV(p); });

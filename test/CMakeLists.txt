@@ -46,10 +46,10 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Simulation/SimpleThermostat.cpp
         ${PROJECT_SOURCE_DIR}/src/Simulation/GradualThermostat.h
         ${PROJECT_SOURCE_DIR}/src/Simulation/GradualThermostat.cpp
-        ${PROJECT_SOURCE_DIR}/src/Particles/ReflectiveBoundary.cpp
-        ${PROJECT_SOURCE_DIR}/src/Particles/ReflectiveBoundary.h
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/GravitationalForce.h
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/GravitationalForce.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/BoundaryEnforcer.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/BoundaryEnforcer.h
         CuboidGeneratorTest.cpp
         CuboidGeneratorTest.h
         LinkedCellContainerTest.cpp
