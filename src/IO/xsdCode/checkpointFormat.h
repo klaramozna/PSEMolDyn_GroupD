@@ -934,6 +934,100 @@ class particle_t: public ::xml_schema::type
   //@}
 
   /**
+   * @name epsilon
+   *
+   * @brief Accessor and modifier functions for the %epsilon
+   * required element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::xml_schema::double_ epsilon_type;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< epsilon_type, char, ::xsd::cxx::tree::schema_type::double_ > epsilon_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element.
+   *
+   * @return A constant reference to the element.
+   */
+  const epsilon_type&
+  epsilon () const;
+
+  /**
+   * @brief Return a read-write reference to the element.
+   *
+   * @return A reference to the element.
+   */
+  epsilon_type&
+  epsilon ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  epsilon (const epsilon_type& x);
+
+  //@}
+
+  /**
+   * @name sigma
+   *
+   * @brief Accessor and modifier functions for the %sigma
+   * required element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::xml_schema::double_ sigma_type;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< sigma_type, char, ::xsd::cxx::tree::schema_type::double_ > sigma_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element.
+   *
+   * @return A constant reference to the element.
+   */
+  const sigma_type&
+  sigma () const;
+
+  /**
+   * @brief Return a read-write reference to the element.
+   *
+   * @return A reference to the element.
+   */
+  sigma_type&
+  sigma ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  sigma (const sigma_type& x);
+
+  //@}
+
+  /**
    * @name type
    *
    * @brief Accessor and modifier functions for the %type
@@ -1005,6 +1099,8 @@ class particle_t: public ::xml_schema::type
               const f_type&,
               const old_f_type&,
               const m_type&,
+              const epsilon_type&,
+              const sigma_type&,
               const type_type&);
 
   /**
@@ -1020,6 +1116,8 @@ class particle_t: public ::xml_schema::type
               ::std::unique_ptr< f_type >,
               ::std::unique_ptr< old_f_type >,
               const m_type&,
+              const epsilon_type&,
+              const sigma_type&,
               const type_type&);
 
   /**
@@ -1097,6 +1195,8 @@ class particle_t: public ::xml_schema::type
   ::xsd::cxx::tree::one< f_type > f_;
   ::xsd::cxx::tree::one< old_f_type > old_f_;
   ::xsd::cxx::tree::one< m_type > m_;
+  ::xsd::cxx::tree::one< epsilon_type > epsilon_;
+  ::xsd::cxx::tree::one< sigma_type > sigma_;
   ::xsd::cxx::tree::one< type_type > type_;
 
   //@endcond

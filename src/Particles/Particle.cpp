@@ -14,6 +14,7 @@ Particle::Particle(int type_arg) {
     type = type_arg;
     f = {0., 0., 0.};
     old_f = {0., 0., 0.};
+    markedForDeletion = false;
 }
 
 Particle::Particle(const Particle &other) {
@@ -24,6 +25,8 @@ Particle::Particle(const Particle &other) {
     m = other.m;
     type = other.type;
     markedForDeletion = other.markedForDeletion;
+    epsilon = other.epsilon;
+    sigma = other.sigma;
 }
 
 Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
@@ -32,6 +35,9 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
     v = v_arg;
     m = m_arg;
     type = type_arg;
+    epsilon = 1.0;
+    sigma = 1.0;
+    markedForDeletion = false;
 }
 
 Particle::~Particle() {}

@@ -30,7 +30,7 @@ Boundary::Boundary(double width, double height, double depth, double sigma, cons
     corner = {0.0, 0.0, 0.0};
 
     for (int i = 0; i < 6; i++) {
-        if (boundaryType_str[i] == "Reflective") {
+        if (boundaryType_str[i] == "Reflecting") {
             boundaryTypes[i] = REFLECTIVE;
         } else if (boundaryType_str[i] == "Outflow") {
             boundaryTypes[i] = OUTFLOW;

@@ -10,13 +10,15 @@
 #include "Particles/LinkedCellContainer.h"
 #include "Particles/BoundaryEnforcer.h"
 
-Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary) :
+Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity) :
                         container(container),
                         forceCalculation(calculation),
                         thermostat(thermostat),
                         boundaryEnforcer(sigma, container, boundary.getDimensions(), boundary.getBoundaryTypes(), forceCalculation),
+                        gravity(gravity),
                         delta_t(delta_t),
                         averageVelo(averageVelo) {}
+
 
 Simulation::~Simulation() = default;
 
@@ -42,9 +44,9 @@ void Simulation::calculateX(Particle& p) const {
     p.setX(x_i);
 }
 
-void Simulation::setOldForce(Particle& p) {
-    p.setOldF((p.getFVector()));
-    p.setF(VectorDouble3());
+void Simulation::applyGravity(Particle& p) {
+    VectorDouble3 result = gravity.CalculateForce(p);
+    p.setF(p.getFVector() + result);
 }
 
 void Simulation::runIteration() {
@@ -60,10 +62,14 @@ void Simulation::runIteration() {
     container.applyToAll([](Particle& p) { setOldForce(p); });
     container.applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
 
-    // TODO: Change this to function in boundaryEnforcer so that it can also create particles instead of
-    // only altering existing ones
     container.applyToBoundary([this](Particle& p) { boundaryEnforcer.applyBoundaryConditionsForParticle(p); });
 
+    container.applyToAll([this](Particle& p) { applyGravity(p); });
     // calculate new v
     container.applyToAll([this](Particle& p) { calculateV(p); });
+}
+
+void Simulation::setOldForce(Particle& p) {
+    p.setOldF((p.getFVector()));
+    p.setF(VectorDouble3());
 }

@@ -5,6 +5,7 @@
 #include "LinkedCellContainer.h"
 #include <stdexcept>
 #include <cmath>
+#include <iostream>
 
 LinkedCellContainer::LinkedCellContainer(Boundary boundary, double cutoffRadius,
                                          const std::vector<Particle>& particles) : boundary{boundary}, grid{}, cutoffRadius{cutoffRadius} {
@@ -64,27 +65,30 @@ void LinkedCellContainer::updateCells() {
 
 void LinkedCellContainer::moveParticle(const Particle &p1, int oldCell, int newCell) {
     grid[oldCell].deleteParticle(p1);
+
+    if (newCell >= grid.size() || (p1.isMarkedForDeletion() && particleOutOfGrid(p1))) {
+        --size;
+        return;
+    }
+
     if (p1.isMarkedForDeletion()) {
-        // If we are outside and marked for deletion, we delete the particle
-        if (particleOutOfGrid(p1)) {
-            size--;
-        // If we are not outside and not within a boundary cell, unmark for deletion
-        } else if (!isBoundaryCell(newCell % nc[0], (newCell / nc[0]) % nc[1], newCell / (nc[0] * nc[1]))) {
+
+        if (!isBoundaryCell(newCell % nc[0], (newCell / nc[0]) % nc[1], newCell / (nc[0] * nc[1]))){
             Particle p2 = p1;
             p2.unmarkForDeletion();
             grid[newCell].addParticle(p2);
+        } else {
+            grid[newCell].addParticle(p1);
         }
     } else {
-        Particle p2 = p1;
-        p2.unmarkForDeletion();
-        grid[newCell].addParticle(p2);
+        grid[newCell].addParticle(p1);
     }
 }
 
 void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &function) {
     // Creating a vector for marking particles that need to be moved
     std::vector<std::pair<Particle, int>> particlesToBeMoved{}; // stores each particle that needs to be moved with the cell it's beeing moved from
-    //particlesToBeMoved.reserve(size);
+    particlesToBeMoved.reserve(size);
 
     // Applying given function to each particle and marking particles for movement
     for(int i = 0; i < grid.size(); i++){
@@ -100,6 +104,10 @@ void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &func
     for(auto & particle : particlesToBeMoved){
         moveParticle(particle.first, particle.second, getParticleIndex(particle.first));
     }
+}
+
+std::array<double, 3> LinkedCellContainer::getCellSize() {
+    return {cellSize, cellSize,cellSize};
 }
 
 bool LinkedCellContainer::isInCorrectCell(const Particle &p, int currentIndex) {

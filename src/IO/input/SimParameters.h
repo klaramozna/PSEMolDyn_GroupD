@@ -39,11 +39,12 @@ public:
      * @param targetTemp Target temperature of molecules.
      * @param maxChange Maximum temperature change per iteration.
      * @param cycleLength The number of cycles in which thermostat is periodically applied.
+     * @param gravity_factor the gravity factor g_grav which adds a gravitational force G (along the y-axis)
      */
     SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                   bool testing_val, int log_level_val,
                   const std::string& input_path_val, const std::string& input_mode_val,
-                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength);
+                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, double gravity_factor_val  = 0);
 
     SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                   bool testing_val, int log_level_val,
@@ -74,6 +75,7 @@ public:
     double getThermostatCycleLength()const{return  thermostatCycleLength;}
     double getTargetTemperature()const{return targetTemperature;}
     double getMaxTemperatureChange()const{return maxTemperatureChange;}
+    double getGravityFactor() const {return gravity_factor;}
 
     // Setters for modifying parameter values
     void setEndTime(double val) { end_time = val; }
@@ -96,6 +98,7 @@ public:
     void setThermostatCycleLength(int val){thermostatCycleLength = val;}
     void setTargetTemperature(double val){targetTemperature = val;}
     void setMaxTemperatureChange(double val){maxTemperatureChange = val;}
+    void setGravityFactor (double val) {gravity_factor = val;}
     bool operator==(const SimParameters &other) const;
 
 
@@ -199,7 +202,10 @@ private:
      */
     double maxTemperatureChange;
 
-
+    /**
+     * @brief g_grav which adds a gravitational force G (along the y-axis)
+     */
+    double gravity_factor = 0;
 
 
 };

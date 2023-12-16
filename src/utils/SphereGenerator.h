@@ -16,7 +16,7 @@ public:
      * @param mass is the mass of each particle.
      * @param velocity is the initial velocity of the whole sphere.
      */
-    SphereGenerator(std::array<double, 3> center, double particleDistance, int radius, double mass, std::array<double, 3> velocity);
+    SphereGenerator(std::array<double, 3> center, double particleDistance, int radius, double mass, std::array<double, 3> velocity, double epsilon = 1, double sigma = 1);
 
     /**
      * @brief Generates a sphere of particles.
@@ -56,4 +56,14 @@ private:
      * @brief Initial velocity of the whole sphere
      */
     std::array<double, 3> velocity;
+
+    /**
+     * @brief Epsilon of each particle.
+     */
+    double epsilon;
+
+    /**
+     * @brief Sigma of each particle.
+     */
+    double sigma;
 };

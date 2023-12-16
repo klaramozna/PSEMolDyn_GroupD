@@ -163,6 +163,42 @@ m (::std::unique_ptr< m_type > x)
   this->m_.set (std::move (x));
 }
 
+const particle_t::epsilon_type& particle_t::
+epsilon () const
+{
+  return this->epsilon_.get ();
+}
+
+particle_t::epsilon_type& particle_t::
+epsilon ()
+{
+  return this->epsilon_.get ();
+}
+
+void particle_t::
+epsilon (const epsilon_type& x)
+{
+  this->epsilon_.set (x);
+}
+
+const particle_t::sigma_type& particle_t::
+sigma () const
+{
+  return this->sigma_.get ();
+}
+
+particle_t::sigma_type& particle_t::
+sigma ()
+{
+  return this->sigma_.get ();
+}
+
+void particle_t::
+sigma (const sigma_type& x)
+{
+  this->sigma_.set (x);
+}
+
 const particle_t::type_type& particle_t::
 type () const
 {
@@ -221,6 +257,8 @@ particle_t (const x_type& x,
             const f_type& f,
             const old_f_type& old_f,
             const m_type& m,
+            const epsilon_type& epsilon,
+            const sigma_type& sigma,
             const type_type& type)
 : ::xml_schema::type (),
   x_ (x, this),
@@ -228,6 +266,8 @@ particle_t (const x_type& x,
   f_ (f, this),
   old_f_ (old_f, this),
   m_ (m, this),
+  epsilon_ (epsilon, this),
+  sigma_ (sigma, this),
   type_ (type, this)
 {
 }
@@ -238,6 +278,8 @@ particle_t (::std::unique_ptr< x_type > x,
             ::std::unique_ptr< f_type > f,
             ::std::unique_ptr< old_f_type > old_f,
             const m_type& m,
+            const epsilon_type& epsilon,
+            const sigma_type& sigma,
             const type_type& type)
 : ::xml_schema::type (),
   x_ (std::move (x), this),
@@ -245,6 +287,8 @@ particle_t (::std::unique_ptr< x_type > x,
   f_ (std::move (f), this),
   old_f_ (std::move (old_f), this),
   m_ (m, this),
+  epsilon_ (epsilon, this),
+  sigma_ (sigma, this),
   type_ (type, this)
 {
 }
@@ -259,6 +303,8 @@ particle_t (const particle_t& x,
   f_ (x.f_, f, this),
   old_f_ (x.old_f_, f, this),
   m_ (x.m_, f, this),
+  epsilon_ (x.epsilon_, f, this),
+  sigma_ (x.sigma_, f, this),
   type_ (x.type_, f, this)
 {
 }
@@ -273,6 +319,8 @@ particle_t (const ::xercesc::DOMElement& e,
   f_ (this),
   old_f_ (this),
   m_ (this),
+  epsilon_ (this),
+  sigma_ (this),
   type_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
@@ -362,6 +410,28 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // epsilon
+    //
+    if (n.name () == "epsilon" && n.namespace_ ().empty ())
+    {
+      if (!epsilon_.present ())
+      {
+        this->epsilon_.set (epsilon_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // sigma
+    //
+    if (n.name () == "sigma" && n.namespace_ ().empty ())
+    {
+      if (!sigma_.present ())
+      {
+        this->sigma_.set (sigma_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     // type
     //
     if (n.name () == "type" && n.namespace_ ().empty ())
@@ -414,6 +484,20 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       "");
   }
 
+  if (!epsilon_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "epsilon",
+      "");
+  }
+
+  if (!sigma_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "sigma",
+      "");
+  }
+
   if (!type_.present ())
   {
     throw ::xsd::cxx::tree::expected_element< char > (
@@ -440,6 +524,8 @@ operator= (const particle_t& x)
     this->f_ = x.f_;
     this->old_f_ = x.old_f_;
     this->m_ = x.m_;
+    this->epsilon_ = x.epsilon_;
+    this->sigma_ = x.sigma_;
     this->type_ = x.type_;
   }
 
@@ -865,6 +951,28 @@ operator<< (::xercesc::DOMElement& e, const particle_t& i)
         e));
 
     s << i.m ();
+  }
+
+  // epsilon
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "epsilon",
+        e));
+
+    s << ::xml_schema::as_double(i.epsilon ());
+  }
+
+  // sigma
+  //
+  {
+    ::xercesc::DOMElement& s (
+      ::xsd::cxx::xml::dom::create_element (
+        "sigma",
+        e));
+
+    s << ::xml_schema::as_double(i.sigma ());
   }
 
   // type

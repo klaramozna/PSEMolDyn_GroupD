@@ -70,6 +70,7 @@ protected:
     */
     std::array<BoundaryType, 6> boundaryTypes{};
 
+
     /**
      * @brief Sigma as defined by the parameters
      */

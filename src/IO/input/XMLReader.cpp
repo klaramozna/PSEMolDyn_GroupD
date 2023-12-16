@@ -50,7 +50,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
 
         if (sim->force()) {
             if (sim->force()->lennard()) {
-                Logger::console->debug("Reading force type 1 from XML");
+                Logger::console->debug("Reading force type 1 (lennard jones) from XML");
                 lennardJones_t& lennard = *(sim->force()->lennard());
                 double epsilon = lennard.Epsilon();
                 double sigma = lennard.Sigma();
@@ -59,11 +59,17 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
                 SimParameters.setEpsilon(epsilon);
                 SimParameters.setSigma(sigma);
             } else if (sim->force()->grav()) {
-                Logger::console->debug("Reading force type 2 from XML");
+                Logger::console->debug("Reading force type 2 (gravitational) from XML");
                 SimParameters.setForce("grav");
-
             }
         }
+
+        if (sim->gravity().present()) {
+                Logger::console->debug("Reading Gravity froce from XML");
+                double gravity_factor = (sim->gravity()->gravity_factor());
+                Logger::console->debug("Reading gravity factor {} from XML", gravity_factor);
+                SimParameters.setGravityFactor(gravity_factor);
+            }
 
         int i = 0;
         for (const auto& cuboid : sim->cuboid()) {
@@ -74,8 +80,16 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             int n3 = cuboid.number_of_particles().z();
             double distance = cuboid.distance();
             double mass = cuboid.mass();
+            double epsilon = cuboid.epsilon_cuboid_default_value();
+            double sigma = cuboid.sigma_cuboid_default_value();
+            if (cuboid.epsilon_cuboid().present()){
+                epsilon = cuboid.epsilon_cuboid().get();
+            }
+            if (cuboid.sigma_cuboid().present()) {
+                sigma = cuboid.sigma_cuboid().get();
+            }
             std::array<double, 3> velocity = {cuboid.initial_velocity().x(), cuboid.initial_velocity().y(), cuboid.initial_velocity().z()};
-            CuboidGenerator generator {lowerLeftCoord, n1, n2, n3, distance, mass, velocity};
+            CuboidGenerator generator {lowerLeftCoord, n1, n2, n3, distance, mass, velocity, epsilon, sigma};
             std::vector<Particle> particles = generator.generateParticles(i);
             container.addParticles(particles);
             i++;
@@ -88,8 +102,16 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             int radius = sphere.radius();
             double distance = sphere.distance();
             double mass = sphere.mass();
+            double epsilon = sphere.epsilon_sphere_default_value();
+            double sigma = sphere.sigma_sphere_default_value();
+            if (sphere.epsilon_sphere().present()){
+                epsilon = sphere.epsilon_sphere().get();
+            }
+            if (sphere.sigma_sphere().present()) {
+                sigma = sphere.sigma_sphere().get();
+            }
             std::array<double, 3> velocity = {sphere.initial_velocity().x(), sphere.initial_velocity().y(), sphere.initial_velocity().z()};
-            SphereGenerator generator {center, distance, radius, mass, velocity};
+            SphereGenerator generator {center, distance, radius, mass, velocity, epsilon, sigma};
             std::vector<Particle> particles;
             if (sphere.dimension() == "3D"){
                 particles = generator.generateParticles(i);
@@ -146,7 +168,6 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             Logger::console->debug("Reading thermostatCycleLength {} from XML", sim->thermostatCycleLength().get());
             SimParameters.setThermostatCycleLength(sim->thermostatCycleLength().get());
         }
-
 
 
     }

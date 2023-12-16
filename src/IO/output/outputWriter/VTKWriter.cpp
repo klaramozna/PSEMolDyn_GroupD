@@ -67,7 +67,7 @@ namespace outputWriter {
 
     void VTKWriter::plotParticle(Particle &p) {
         if (vtkFile->UnstructuredGrid().present()) {
-           Logger::console->info("UnstructuredGrid is present");
+           Logger::console->trace("UnstructuredGrid is present");
         } else {
             Logger::err_logger->error("ERROR: No UnstructuredGrid present");
         }
@@ -114,6 +114,7 @@ namespace outputWriter {
 
         writeFile(filename, iteration);
     }
+
 
     void VTKWriter::createMarkedDirectory() {
         // Get the current time

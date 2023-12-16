@@ -16,7 +16,9 @@ void BoundaryEnforcer::applyBoundaryConditionsForParticle(Particle &particle) {
     auto boundariesOfParticle = getBoundariesOfParticle(particle);
 
     for (auto boundaryOfParticle : boundariesOfParticle) {
-        switch (boundaryTypes[static_cast<int>(boundaryOfParticle)]) {
+        int boundaryIndex = static_cast<int>(boundaryOfParticle);
+
+        switch (boundaryTypes[boundaryIndex]) {
             case BoundaryType::REFLECTIVE:
                 applyReflectiveForce(particle, boundaryOfParticle);
                 break;
@@ -67,21 +69,21 @@ std::vector<BoundaryDirection> BoundaryEnforcer::getBoundariesOfParticle(Particl
 
     std::array<double, 3> particlePosition = particle.getX();
 
-    if (particlePosition[0] < container.getCellSizeX() && particlePosition[0] > 0) {
+    if (particlePosition[0] < container.getCellSize()[0] && particlePosition[0] > 0) {
         result.push_back(BoundaryDirection::LEFT);
-    } else if (dimensions[0] - particlePosition[0] < container.getCellSizeX() && dimensions[0] - particlePosition[0] > 0) {
+    } else if (dimensions[0] - particlePosition[0] < container.getCellSize()[0] && dimensions[0] - particlePosition[0] > 0) {
         result.push_back(BoundaryDirection::RIGHT);
     }
 
-    if (particlePosition[1] < container.getCellSizeY() && particlePosition[1] > 0) {
+    if (particlePosition[1] < container.getCellSize()[1] && particlePosition[1] > 0) {
         result.push_back(BoundaryDirection::BOTTOM);
-    } else if (dimensions[1] - particlePosition[1] < container.getCellSizeY() && dimensions[1] - particlePosition[1] > 0) {
+    } else if (dimensions[1] - particlePosition[1] < container.getCellSize()[1] && dimensions[1] - particlePosition[1] > 0) {
         result.push_back(BoundaryDirection::TOP);
     }
 
-    if (particlePosition[2] < container.getCellSizeZ() && particlePosition[2] > 0) {
+    if (particlePosition[2] < container.getCellSize()[2] && particlePosition[2] > 0) {
         result.push_back(BoundaryDirection::FRONT);
-    } else if (dimensions[2] - particlePosition[2] < container.getCellSizeZ() && dimensions[2] - particlePosition[2] > 0) {
+    } else if (dimensions[2] - particlePosition[2] < container.getCellSize()[2] && dimensions[2] - particlePosition[2] > 0) {
         result.push_back(BoundaryDirection::BACK);
     }
 

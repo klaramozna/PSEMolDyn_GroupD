@@ -18,13 +18,13 @@
     <BoxSize> <x>120</x> <y>50</y> <z>3</z></BoxSize>
      <Front>Reflecting</Front>
      <Back>Reflecting</Back>
-     <Top>Reflecting</Top>
-     <Right>Reflecting</Right>
-     <Bottom>Reflecting</Bottom>
-     <Left>Reflecting</Left>
+     <Top>Outflow</Top>
+     <Right>Outflow</Right>
+     <Bottom>Outflow</Bottom>
+     <Left>Outflow</Left>
     
     </boundaries>
-    <cutoffRadius>1.0</cutoffRadius>
+    <cutoffRadius>3.0</cutoffRadius>
 
     <!-- Provide Particles (Sphere) -->
     <sphere>
@@ -53,7 +53,7 @@
     <writeFrequency>100</writeFrequency>
 
     <!-- Misc -->
-    <log_level>6</log_level>
+    <log_level>2</log_level>
     <testing_mode>false</testing_mode>
 
 </Simulation>

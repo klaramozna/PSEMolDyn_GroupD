@@ -50,6 +50,8 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/GravitationalForce.cpp
         ${PROJECT_SOURCE_DIR}/src/Particles/BoundaryEnforcer.cpp
         ${PROJECT_SOURCE_DIR}/src/Particles/BoundaryEnforcer.h
+        ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/MixingRuleLennardJones.h
+        ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/MixingRuleLennardJones.cpp
         CuboidGeneratorTest.cpp
         CuboidGeneratorTest.h
         LinkedCellContainerTest.cpp
@@ -61,6 +63,8 @@ set(source_needed_for_test
         BoundaryTest.cpp
         BoundaryTest.h
         CheckpointTest.cpp
+        MixingRuleLennardJonesTest.cpp
+        MixingRuleLennardJonesTest.h
 )
 
 add_executable(

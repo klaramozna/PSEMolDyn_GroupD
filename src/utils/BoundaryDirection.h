@@ -6,12 +6,12 @@
 #define PSEMOLDYN_GROUPD_BOUNDARYDIRECTION_H
 
 enum BoundaryDirection {
-    TOP,
-    BOTTOM,
-    LEFT,
-    RIGHT,
-    FRONT,
-    BACK
+    FRONT = 0,
+    BACK = 1,
+    TOP = 2,
+    RIGHT = 3,
+    BOTTOM = 4,
+    LEFT = 5
 };
 
 #endif //PSEMOLDYN_GROUPD_BOUNDARYDIRECTION_H

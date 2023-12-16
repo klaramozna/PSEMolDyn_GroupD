@@ -566,6 +566,7 @@ namespace xml_schema
 class log_level;
 class Dimension;
 class lennardJones_t;
+class gravity_t;
 class ForceType;
 class Cuboid;
 class Sphere;
@@ -1014,6 +1015,147 @@ class lennardJones_t: public ::xml_schema::type
   protected:
   ::xsd::cxx::tree::one< Epsilon_type > Epsilon_;
   ::xsd::cxx::tree::one< Sigma_type > Sigma_;
+
+  //@endcond
+};
+
+/**
+ * @brief Class corresponding to the %gravity_t schema type.
+ *
+ * @nosubgrouping
+ */
+class gravity_t: public ::xml_schema::type
+{
+  public:
+  /**
+   * @name gravity_factor
+   *
+   * @brief Accessor and modifier functions for the %gravity_factor
+   * required element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::xml_schema::double_ gravity_factor_type;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< gravity_factor_type, char, ::xsd::cxx::tree::schema_type::double_ > gravity_factor_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element.
+   *
+   * @return A constant reference to the element.
+   */
+  const gravity_factor_type&
+  gravity_factor () const;
+
+  /**
+   * @brief Return a read-write reference to the element.
+   *
+   * @return A reference to the element.
+   */
+  gravity_factor_type&
+  gravity_factor ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  gravity_factor (const gravity_factor_type& x);
+
+  //@}
+
+  /**
+   * @name Constructors
+   */
+  //@{
+
+  /**
+   * @brief Create an instance from the ultimate base and
+   * initializers for required elements and attributes.
+   */
+  gravity_t (const gravity_factor_type&);
+
+  /**
+   * @brief Create an instance from a DOM element.
+   *
+   * @param e A DOM element to extract the data from.
+   * @param f Flags to create the new instance with.
+   * @param c A pointer to the object that will contain the new
+   * instance.
+   */
+  gravity_t (const ::xercesc::DOMElement& e,
+             ::xml_schema::flags f = 0,
+             ::xml_schema::container* c = 0);
+
+  /**
+   * @brief Copy constructor.
+   *
+   * @param x An instance to make a copy of.
+   * @param f Flags to create the copy with.
+   * @param c A pointer to the object that will contain the copy.
+   *
+   * For polymorphic object models use the @c _clone function instead.
+   */
+  gravity_t (const gravity_t& x,
+             ::xml_schema::flags f = 0,
+             ::xml_schema::container* c = 0);
+
+  /**
+   * @brief Copy the instance polymorphically.
+   *
+   * @param f Flags to create the copy with.
+   * @param c A pointer to the object that will contain the copy.
+   * @return A pointer to the dynamically allocated copy.
+   *
+   * This function ensures that the dynamic type of the instance is
+   * used for copying and should be used for polymorphic object
+   * models instead of the copy constructor.
+   */
+  virtual gravity_t*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  /**
+   * @brief Copy assignment operator.
+   *
+   * @param x An instance to make a copy of.
+   * @return A reference to itself.
+   *
+   * For polymorphic object models use the @c _clone function instead.
+   */
+  gravity_t&
+  operator= (const gravity_t& x);
+
+  //@}
+
+  /**
+   * @brief Destructor.
+   */
+  virtual 
+  ~gravity_t ();
+
+  // Implementation.
+  //
+
+  //@cond
+
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  ::xsd::cxx::tree::one< gravity_factor_type > gravity_factor_;
 
   //@endcond
 };
@@ -1564,6 +1706,174 @@ class Cuboid: public ::xml_schema::type
   //@}
 
   /**
+   * @name epsilon_cuboid
+   *
+   * @brief Accessor and modifier functions for the %epsilon_cuboid
+   * optional element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::commonSchema::nonNegativeDouble epsilon_cuboid_type;
+
+  /**
+   * @brief Element optional container type.
+   */
+  typedef ::xsd::cxx::tree::optional< epsilon_cuboid_type > epsilon_cuboid_optional;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< epsilon_cuboid_type, char > epsilon_cuboid_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element
+   * container.
+   *
+   * @return A constant reference to the optional container.
+   */
+  const epsilon_cuboid_optional&
+  epsilon_cuboid () const;
+
+  /**
+   * @brief Return a read-write reference to the element container.
+   *
+   * @return A reference to the optional container.
+   */
+  epsilon_cuboid_optional&
+  epsilon_cuboid ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  epsilon_cuboid (const epsilon_cuboid_type& x);
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x An optional container with the new value to set.
+   *
+   * If the value is present in @a x then this function makes a copy 
+   * of this value and sets it as the new value of the element.
+   * Otherwise the element container is set the 'not present' state.
+   */
+  void
+  epsilon_cuboid (const epsilon_cuboid_optional& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly instead
+   * of making a copy.
+   */
+  void
+  epsilon_cuboid (::std::unique_ptr< epsilon_cuboid_type > p);
+
+  /**
+   * @brief Return the default value for the element.
+   *
+   * @return The element's default value.
+   */
+  static epsilon_cuboid_type
+  epsilon_cuboid_default_value ();
+
+  //@}
+
+  /**
+   * @name sigma_cuboid
+   *
+   * @brief Accessor and modifier functions for the %sigma_cuboid
+   * optional element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::commonSchema::nonNegativeDouble sigma_cuboid_type;
+
+  /**
+   * @brief Element optional container type.
+   */
+  typedef ::xsd::cxx::tree::optional< sigma_cuboid_type > sigma_cuboid_optional;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< sigma_cuboid_type, char > sigma_cuboid_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element
+   * container.
+   *
+   * @return A constant reference to the optional container.
+   */
+  const sigma_cuboid_optional&
+  sigma_cuboid () const;
+
+  /**
+   * @brief Return a read-write reference to the element container.
+   *
+   * @return A reference to the optional container.
+   */
+  sigma_cuboid_optional&
+  sigma_cuboid ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  sigma_cuboid (const sigma_cuboid_type& x);
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x An optional container with the new value to set.
+   *
+   * If the value is present in @a x then this function makes a copy 
+   * of this value and sets it as the new value of the element.
+   * Otherwise the element container is set the 'not present' state.
+   */
+  void
+  sigma_cuboid (const sigma_cuboid_optional& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly instead
+   * of making a copy.
+   */
+  void
+  sigma_cuboid (::std::unique_ptr< sigma_cuboid_type > p);
+
+  /**
+   * @brief Return the default value for the element.
+   *
+   * @return The element's default value.
+   */
+  static sigma_cuboid_type
+  sigma_cuboid_default_value ();
+
+  //@}
+
+  /**
    * @name Constructors
    */
   //@{
@@ -1667,6 +1977,8 @@ class Cuboid: public ::xml_schema::type
   ::xsd::cxx::tree::one< distance_type > distance_;
   ::xsd::cxx::tree::one< mass_type > mass_;
   ::xsd::cxx::tree::one< initial_velocity_type > initial_velocity_;
+  epsilon_cuboid_optional epsilon_cuboid_;
+  sigma_cuboid_optional sigma_cuboid_;
 
   //@endcond
 };
@@ -2028,6 +2340,174 @@ class Sphere: public ::xml_schema::type
   //@}
 
   /**
+   * @name epsilon_sphere
+   *
+   * @brief Accessor and modifier functions for the %epsilon_sphere
+   * optional element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::commonSchema::nonNegativeDouble epsilon_sphere_type;
+
+  /**
+   * @brief Element optional container type.
+   */
+  typedef ::xsd::cxx::tree::optional< epsilon_sphere_type > epsilon_sphere_optional;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< epsilon_sphere_type, char > epsilon_sphere_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element
+   * container.
+   *
+   * @return A constant reference to the optional container.
+   */
+  const epsilon_sphere_optional&
+  epsilon_sphere () const;
+
+  /**
+   * @brief Return a read-write reference to the element container.
+   *
+   * @return A reference to the optional container.
+   */
+  epsilon_sphere_optional&
+  epsilon_sphere ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  epsilon_sphere (const epsilon_sphere_type& x);
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x An optional container with the new value to set.
+   *
+   * If the value is present in @a x then this function makes a copy 
+   * of this value and sets it as the new value of the element.
+   * Otherwise the element container is set the 'not present' state.
+   */
+  void
+  epsilon_sphere (const epsilon_sphere_optional& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly instead
+   * of making a copy.
+   */
+  void
+  epsilon_sphere (::std::unique_ptr< epsilon_sphere_type > p);
+
+  /**
+   * @brief Return the default value for the element.
+   *
+   * @return The element's default value.
+   */
+  static epsilon_sphere_type
+  epsilon_sphere_default_value ();
+
+  //@}
+
+  /**
+   * @name sigma_sphere
+   *
+   * @brief Accessor and modifier functions for the %sigma_sphere
+   * optional element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::commonSchema::nonNegativeDouble sigma_sphere_type;
+
+  /**
+   * @brief Element optional container type.
+   */
+  typedef ::xsd::cxx::tree::optional< sigma_sphere_type > sigma_sphere_optional;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< sigma_sphere_type, char > sigma_sphere_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element
+   * container.
+   *
+   * @return A constant reference to the optional container.
+   */
+  const sigma_sphere_optional&
+  sigma_sphere () const;
+
+  /**
+   * @brief Return a read-write reference to the element container.
+   *
+   * @return A reference to the optional container.
+   */
+  sigma_sphere_optional&
+  sigma_sphere ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  sigma_sphere (const sigma_sphere_type& x);
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x An optional container with the new value to set.
+   *
+   * If the value is present in @a x then this function makes a copy 
+   * of this value and sets it as the new value of the element.
+   * Otherwise the element container is set the 'not present' state.
+   */
+  void
+  sigma_sphere (const sigma_sphere_optional& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly instead
+   * of making a copy.
+   */
+  void
+  sigma_sphere (::std::unique_ptr< sigma_sphere_type > p);
+
+  /**
+   * @brief Return the default value for the element.
+   *
+   * @return The element's default value.
+   */
+  static sigma_sphere_type
+  sigma_sphere_default_value ();
+
+  //@}
+
+  /**
    * @name Constructors
    */
   //@{
@@ -2134,6 +2614,8 @@ class Sphere: public ::xml_schema::type
   ::xsd::cxx::tree::one< distance_type > distance_;
   ::xsd::cxx::tree::one< mass_type > mass_;
   ::xsd::cxx::tree::one< initial_velocity_type > initial_velocity_;
+  epsilon_sphere_optional epsilon_sphere_;
+  sigma_sphere_optional sigma_sphere_;
 
   //@endcond
 };
@@ -3038,6 +3520,82 @@ class Simulation_t: public ::xml_schema::type
    */
   void
   force (::std::unique_ptr< force_type > p);
+
+  //@}
+
+  /**
+   * @name gravity
+   *
+   * @brief Accessor and modifier functions for the %gravity
+   * optional element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::gravity_t gravity_type;
+
+  /**
+   * @brief Element optional container type.
+   */
+  typedef ::xsd::cxx::tree::optional< gravity_type > gravity_optional;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< gravity_type, char > gravity_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element
+   * container.
+   *
+   * @return A constant reference to the optional container.
+   */
+  const gravity_optional&
+  gravity () const;
+
+  /**
+   * @brief Return a read-write reference to the element container.
+   *
+   * @return A reference to the optional container.
+   */
+  gravity_optional&
+  gravity ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  gravity (const gravity_type& x);
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x An optional container with the new value to set.
+   *
+   * If the value is present in @a x then this function makes a copy 
+   * of this value and sets it as the new value of the element.
+   * Otherwise the element container is set the 'not present' state.
+   */
+  void
+  gravity (const gravity_optional& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly instead
+   * of making a copy.
+   */
+  void
+  gravity (::std::unique_ptr< gravity_type > p);
 
   //@}
 
@@ -4129,6 +4687,7 @@ class Simulation_t: public ::xml_schema::type
   t_end_optional t_end_;
   delta_t_optional delta_t_;
   force_optional force_;
+  gravity_optional gravity_;
   averageVelo_optional averageVelo_;
   boundaries_optional boundaries_;
   cutoffRadius_optional cutoffRadius_;

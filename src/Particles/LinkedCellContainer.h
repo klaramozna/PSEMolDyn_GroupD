@@ -67,6 +67,12 @@ public:
      */
     std::vector<Cell> getCells();
 
+    /**
+     * @brief Returns the cell size of the container.
+     * @return The cell size of the container.
+     */
+    std::array<double,3> getCellSize();
+
 private:
 
     /**

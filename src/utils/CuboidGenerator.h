@@ -19,7 +19,7 @@ public:
      * @param mass is the mass of each particle.
      * @param velocity is the initial velocity of each particle.
      */
-    CuboidGenerator(std::array<double, 3> corner, int n1, int n2, int n3, double particleDistance, double mass, std::array<double, 3> velocity);
+    CuboidGenerator(std::array<double, 3> corner, int n1, int n2, int n3, double particleDistance, double mass, std::array<double, 3> velocity, double epsilon = 1, double sigma = 1);
 
     /**
      * @brief Generates a cuboid of particles.
@@ -63,6 +63,16 @@ private:
      * @brief Initial velocity of each particle.
      */
     std::array<double, 3> velocity;
+
+    /**
+     * @brief Epsilon of each particle.
+     */
+    double epsilon;
+
+    /**
+     * @brief Sigma of each particle.
+     */
+    double sigma;
 };
 
 
