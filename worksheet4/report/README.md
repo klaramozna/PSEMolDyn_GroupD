@@ -17,7 +17,11 @@ Members:
 * 
 
 ## Task 2 “Simulation of the Rayleigh-Taylor instability” ##
-* 
+### Periodic Boundaries: ###
+  
+### Gravity Force: ### 
+* The gravity Force is a single particle force so it was not possible to implement it as a subclass of ForceCalculation.h like Lennard Jones. So we added a new parent class ```OneParticleForceCalculation``` and implemented ```GravityForce``` as a subclass of it, the method offered by this class will then be used in the Simulation class wrapped with the applyToAll functionality in every iteration.
+* We support also this new routine through the XML input. The gravity factor is intialized with 0 so that this force has no effect if the user does not specify it. The user can overwrite this value with the XML input. The syntax is the following ``` <gravity> gravity factor value </gravity> ```
 
 ## Task 3 “Simulation of a falling drop - Liquid” ##
 ### Checkpointing ###
