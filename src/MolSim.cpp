@@ -18,6 +18,7 @@
 #include "Simulation/Physics/GravitationalForce.h"
 #include "Simulation/Physics/LennardJones.h"
 #include "Simulation/SimpleThermostat.h"
+#include "Simulation/Physics/GravityForce.h"
 
 /* Logging */
 #include "IO/Logger.h"
@@ -41,6 +42,7 @@ int main(int argc, char *argsv[]) {
     CL cl;
     std::unique_ptr<ParticleReader> reader;
     std::unique_ptr<ForceCalculation> forceCalculation;
+    GravityForce gravity{0};
 
     outputWriter::VTKWriter writer;
     SimParameters simParameters;
@@ -95,9 +97,9 @@ int main(int argc, char *argsv[]) {
         Logger::console->info("Force set to grav");
     }
 
-    if (simParameters.getForce() == "gravity") {
-        // to do
-        Logger::console->info("Force set to gravity");
+    if (simParameters.getGravityFactor() != 0.0) {
+        gravity.setGravityFactor(simParameters.getGravityFactor());
+        Logger::console->info("Gravity Force activated with factor {}", simParameters.getGravityFactor());
     }
 
     Boundary boundary{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius()};
@@ -124,7 +126,7 @@ int main(int argc, char *argsv[]) {
     SimpleThermostat thermostat{20, 20, 50, 3};
 
 
-    Simulation simulation(simParameters.getDeltaT(), container, *forceCalculation, thermostat, simParameters.getAverageVelo(), boundary);
+    Simulation simulation(simParameters.getDeltaT(), container, *forceCalculation, thermostat, simParameters.getAverageVelo(), boundary, gravity);
   
     // This is ugly and shouldn't be in main, but it is for a later refactor
     if (simParameters.isTesting()) {

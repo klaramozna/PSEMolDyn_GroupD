@@ -64,15 +64,14 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
                 Logger::console->debug("Reading force type 2 (gravitational) from XML");
                 SimParameters.setForce("grav");
             }
-            else if (sim->force()->gravity()) {
-                Logger::console->debug("Reading force type 3 (gravity) from XML");
-                SimParameters.setForce("gravity");
-                gravity_t& gravity = *(sim->force()->gravity());
-                double gravity_factor = gravity.gravity_factor();
+        }
+
+        if (sim->gravity().present()) {
+                Logger::console->debug("Reading Gravity froce from XML");
+                double gravity_factor = (sim->gravity()->gravity_factor());
                 Logger::console->debug("Reading gravity factor {} from XML", gravity_factor);
                 SimParameters.setGravityFactor(gravity_factor);
             }
-        }
 
         int i = 0;
         for (const auto& cuboid : sim->cuboid()) {
@@ -171,7 +170,6 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             Logger::console->debug("Reading thermostatCycleLength {} from XML", sim->thermostatCycleLength().get());
             SimParameters.setThermostatCycleLength(sim->thermostatCycleLength().get());
         }
-
 
 
     }

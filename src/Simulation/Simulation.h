@@ -9,6 +9,7 @@
 #include "../Particles/Particle.h"
 #include "../Particles/LinkedCellContainer.h"
 #include "./Physics/ForceCalculation.h"
+#include "./Physics/GravityForce.h"
 #include "Thermostat.h"
 #include "../Particles/Boundary.h"
 
@@ -20,6 +21,7 @@ private:
     ForceCalculation &forceCalculation;
     Thermostat& thermostat;
     Boundary boundary;
+    GravityForce gravity;
 
     double delta_t;
     double averageVelo;
@@ -43,10 +45,15 @@ private:
      * @brief updates the old force of a particle
      */
     static void setOldForce(Particle& p);
+     /**
+     * @brief applies the gravity
+     */
+    void applyGravity(Particle& p);
+
 
 public:
 
-    Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary);
+    Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity);
   
     virtual ~Simulation();
 

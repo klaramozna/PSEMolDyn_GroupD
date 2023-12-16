@@ -15,12 +15,13 @@
 
 
 
-Simulation::Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary) :
+Simulation::Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity) :
                         container(container),
                         forceCalculation(calculation),
                         thermostat(thermostat), boundary{boundary},
                         delta_t(delta_t),
-                        averageVelo(averageVelo){
+                        averageVelo(averageVelo),
+                        gravity(gravity){
 
 }
 
@@ -48,6 +49,11 @@ void Simulation::calculateX(Particle& p) const {
     p.setX(x_i);
 }
 
+void Simulation::applyGravity(Particle& p) {
+    VectorDouble3 result = gravity.CalculateForce(p);
+    p.setF(p.getFVector() + result);
+}
+
 void Simulation::runIteration() {
     // adjust temperature
     thermostat.updateState(container.getParticleVector());
@@ -60,6 +66,7 @@ void Simulation::runIteration() {
     // calculate new f
     container.applyToAll([](Particle& p) { setOldForce(p); });
     container.applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
+    container.applyToAll([this](Particle& p) { applyGravity(p); });
     // calculate new v
     container.applyToAll([this](Particle& p) { calculateV(p); });
 }

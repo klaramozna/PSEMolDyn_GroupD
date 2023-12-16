@@ -4,7 +4,7 @@
 
 class OneParticleForceCalculation {
 public:
-    virtual VectorDouble3 CalculateForces(const Particle& p) = 0;
+    virtual VectorDouble3 CalculateForce(const Particle& p) = 0;
     virtual ~OneParticleForceCalculation() = default; // Virtual destructor for polymorphism.
 };
 

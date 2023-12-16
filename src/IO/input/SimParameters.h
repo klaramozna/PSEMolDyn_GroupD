@@ -205,7 +205,7 @@ private:
     /**
      * @brief g_grav which adds a gravitational force G (along the y-axis)
      */
-    double gravity_factor;
+    double gravity_factor = 0;
 
 
 };

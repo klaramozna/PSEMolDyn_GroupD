@@ -214,36 +214,6 @@ grav (::std::unique_ptr< grav_type > x)
   this->grav_.set (std::move (x));
 }
 
-const ForceType::gravity_optional& ForceType::
-gravity () const
-{
-  return this->gravity_;
-}
-
-ForceType::gravity_optional& ForceType::
-gravity ()
-{
-  return this->gravity_;
-}
-
-void ForceType::
-gravity (const gravity_type& x)
-{
-  this->gravity_.set (x);
-}
-
-void ForceType::
-gravity (const gravity_optional& x)
-{
-  this->gravity_ = x;
-}
-
-void ForceType::
-gravity (::std::unique_ptr< gravity_type > x)
-{
-  this->gravity_.set (std::move (x));
-}
-
 
 // Cuboid
 // 
@@ -969,6 +939,36 @@ void Simulation_t::
 force (::std::unique_ptr< force_type > x)
 {
   this->force_.set (std::move (x));
+}
+
+const Simulation_t::gravity_optional& Simulation_t::
+gravity () const
+{
+  return this->gravity_;
+}
+
+Simulation_t::gravity_optional& Simulation_t::
+gravity ()
+{
+  return this->gravity_;
+}
+
+void Simulation_t::
+gravity (const gravity_type& x)
+{
+  this->gravity_.set (x);
+}
+
+void Simulation_t::
+gravity (const gravity_optional& x)
+{
+  this->gravity_ = x;
+}
+
+void Simulation_t::
+gravity (::std::unique_ptr< gravity_type > x)
+{
+  this->gravity_.set (std::move (x));
 }
 
 const Simulation_t::averageVelo_optional& Simulation_t::
@@ -1708,8 +1708,7 @@ ForceType::
 ForceType ()
 : ::xml_schema::type (),
   lennard_ (this),
-  grav_ (this),
-  gravity_ (this)
+  grav_ (this)
 {
 }
 
@@ -1719,8 +1718,7 @@ ForceType (const ForceType& x,
            ::xml_schema::container* c)
 : ::xml_schema::type (x, f, c),
   lennard_ (x.lennard_, f, this),
-  grav_ (x.grav_, f, this),
-  gravity_ (x.gravity_, f, this)
+  grav_ (x.grav_, f, this)
 {
 }
 
@@ -1730,8 +1728,7 @@ ForceType (const ::xercesc::DOMElement& e,
            ::xml_schema::container* c)
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
   lennard_ (this),
-  grav_ (this),
-  gravity_ (this)
+  grav_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -1778,20 +1775,6 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
-    // gravity
-    //
-    if (n.name () == "gravity" && n.namespace_ ().empty ())
-    {
-      ::std::unique_ptr< gravity_type > r (
-        gravity_traits::create (i, f, this));
-
-      if (!this->gravity_)
-      {
-        this->gravity_.set (::std::move (r));
-        continue;
-      }
-    }
-
     break;
   }
 }
@@ -1811,7 +1794,6 @@ operator= (const ForceType& x)
     static_cast< ::xml_schema::type& > (*this) = x;
     this->lennard_ = x.lennard_;
     this->grav_ = x.grav_;
-    this->gravity_ = x.gravity_;
   }
 
   return *this;
@@ -2697,6 +2679,7 @@ Simulation_t ()
   t_end_ (this),
   delta_t_ (this),
   force_ (this),
+  gravity_ (this),
   averageVelo_ (this),
   boundaries_ (this),
   cutoffRadius_ (this),
@@ -2721,6 +2704,7 @@ Simulation_t (const Simulation_t& x,
   t_end_ (x.t_end_, f, this),
   delta_t_ (x.delta_t_, f, this),
   force_ (x.force_, f, this),
+  gravity_ (x.gravity_, f, this),
   averageVelo_ (x.averageVelo_, f, this),
   boundaries_ (x.boundaries_, f, this),
   cutoffRadius_ (x.cutoffRadius_, f, this),
@@ -2745,6 +2729,7 @@ Simulation_t (const ::xercesc::DOMElement& e,
   t_end_ (this),
   delta_t_ (this),
   force_ (this),
+  gravity_ (this),
   averageVelo_ (this),
   boundaries_ (this),
   cutoffRadius_ (this),
@@ -2808,6 +2793,20 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       if (!this->force_)
       {
         this->force_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // gravity
+    //
+    if (n.name () == "gravity" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< gravity_type > r (
+        gravity_traits::create (i, f, this));
+
+      if (!this->gravity_)
+      {
+        this->gravity_.set (::std::move (r));
         continue;
       }
     }
@@ -2999,6 +2998,7 @@ operator= (const Simulation_t& x)
     this->t_end_ = x.t_end_;
     this->delta_t_ = x.delta_t_;
     this->force_ = x.force_;
+    this->gravity_ = x.gravity_;
     this->averageVelo_ = x.averageVelo_;
     this->boundaries_ = x.boundaries_;
     this->cutoffRadius_ = x.cutoffRadius_;
