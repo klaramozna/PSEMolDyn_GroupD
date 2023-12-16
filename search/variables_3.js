@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['fc_1167',['fc',['../classBoundary.html#a0c349ced58d7e09ab840eb8fe9fe2e7a',1,'Boundary']]]
+  ['err_5flogger_1188',['err_logger',['../namespaceLogger.html#a807ca3078654157deb73c91eee70842d',1,'Logger']]]
 ];

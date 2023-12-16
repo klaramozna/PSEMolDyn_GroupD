@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['operator_21_3d_1436',['operator!=',['../classDirectSumContainer_1_1PairIterator.html#a037eb872fef821e1a055d0699bbb90ed',1,'DirectSumContainer::PairIterator']]],
-  ['operator_2a_1437',['operator*',['../classVectorDouble3.html#a80e5a5468d14fddf31f29670009cea86',1,'VectorDouble3']]],
-  ['operator_2b_1438',['operator+',['../classVectorDouble3.html#a0c599049d1ed5fab08e690f83aa04a0e',1,'VectorDouble3']]],
-  ['operator_2d_1439',['operator-',['../classVectorDouble3.html#ae0ba5cbc202b166409207f512f5ec27a',1,'VectorDouble3']]],
-  ['operator_3d_3d_1440',['operator==',['../classDirectSumContainer_1_1PairIterator.html#a89887af0c2fdd33690f66688f28d2f3c',1,'DirectSumContainer::PairIterator']]]
+  ['operator_21_3d_1469',['operator!=',['../classDirectSumContainer_1_1PairIterator.html#a037eb872fef821e1a055d0699bbb90ed',1,'DirectSumContainer::PairIterator']]],
+  ['operator_2a_1470',['operator*',['../classVectorDouble3.html#a80e5a5468d14fddf31f29670009cea86',1,'VectorDouble3']]],
+  ['operator_2b_1471',['operator+',['../classVectorDouble3.html#a0c599049d1ed5fab08e690f83aa04a0e',1,'VectorDouble3']]],
+  ['operator_2d_1472',['operator-',['../classVectorDouble3.html#ae0ba5cbc202b166409207f512f5ec27a',1,'VectorDouble3']]],
+  ['operator_3d_3d_1473',['operator==',['../classDirectSumContainer_1_1PairIterator.html#a89887af0c2fdd33690f66688f28d2f3c',1,'DirectSumContainer::PairIterator']]]
 ];

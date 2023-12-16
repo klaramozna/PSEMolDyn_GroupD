@@ -71,22 +71,12 @@ $(function() {
 <div class="contents">
 
 <p><code>#include &lt;<a class="el" href="Boundary_8h_source.html">Boundary.h</a>&gt;</code></p>
-<div class="dynheader">
-Inheritance diagram for Boundary:</div>
-<div class="dyncontent">
- <div class="center">
-  <img src="classBoundary.png" usemap="#Boundary_map" alt=""/>
-  <map id="Boundary_map" name="Boundary_map">
-<area href="classOutflowBoundary.html" alt="OutflowBoundary" shape="rect" coords="0,56,123,80"/>
-<area href="classReflectiveBoundary.html" alt="ReflectiveBoundary" shape="rect" coords="133,56,256,80"/>
-  </map>
-</div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a60fb29e438ce36f4513a0d2769edca80"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#a60fb29e438ce36f4513a0d2769edca80">Boundary</a> (double width, double height, double depth, <a class="el" href="classForceCalculation.html">ForceCalculation</a> &amp;<a class="el" href="classBoundary.html#a0c349ced58d7e09ab840eb8fe9fe2e7a">fc</a>, double cellsize)</td></tr>
-<tr class="memdesc:a60fb29e438ce36f4513a0d2769edca80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a CuboidBoundary object with the given parameters.  <a href="classBoundary.html#a60fb29e438ce36f4513a0d2769edca80">More...</a><br /></td></tr>
-<tr class="separator:a60fb29e438ce36f4513a0d2769edca80"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa105e97e396886090477f053b84685a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#afa105e97e396886090477f053b84685a">Boundary</a> (double width, double height, double depth, double <a class="el" href="classBoundary.html#a793afa4e587dc1e2a19a6b4b07f0d6e0">sigma</a>, const std::array&lt; std::string, 6 &gt; &amp;boundaryType_str)</td></tr>
+<tr class="memdesc:afa105e97e396886090477f053b84685a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a CuboidBoundary object with the given parameters.  <a href="classBoundary.html#afa105e97e396886090477f053b84685a">More...</a><br /></td></tr>
+<tr class="separator:afa105e97e396886090477f053b84685a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1fc4a9f0c963d11b0ad1a848d5d461be"><td class="memItemLeft" align="right" valign="top">virtual bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#a1fc4a9f0c963d11b0ad1a848d5d461be">isInside</a> (const <a class="el" href="classParticle.html">Particle</a> &amp;p)</td></tr>
 <tr class="memdesc:a1fc4a9f0c963d11b0ad1a848d5d461be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns true, if the given particle is inside of or on the boundary, else false.  <a href="classBoundary.html#a1fc4a9f0c963d11b0ad1a848d5d461be">More...</a><br /></td></tr>
 <tr class="separator:a1fc4a9f0c963d11b0ad1a848d5d461be"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -96,12 +86,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0b1b9fefa954ef53534160bee0624a56"><td class="memItemLeft" align="right" valign="top">virtual std::array&lt; double, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#a0b1b9fefa954ef53534160bee0624a56">getDimensions</a> ()</td></tr>
 <tr class="memdesc:a0b1b9fefa954ef53534160bee0624a56"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the dimensions of the boundary.  <a href="classBoundary.html#a0b1b9fefa954ef53534160bee0624a56">More...</a><br /></td></tr>
 <tr class="separator:a0b1b9fefa954ef53534160bee0624a56"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae7415a42ab34b55688894d53c91634a5"><td class="memItemLeft" align="right" valign="top">virtual std::array&lt; <a class="el" href="BoundaryTypes_8h.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a>, 6 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#ae7415a42ab34b55688894d53c91634a5">getBoundaryTypes</a> ()</td></tr>
+<tr class="memdesc:ae7415a42ab34b55688894d53c91634a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns array containing boundary types for each wall.  <a href="classBoundary.html#ae7415a42ab34b55688894d53c91634a5">More...</a><br /></td></tr>
+<tr class="separator:ae7415a42ab34b55688894d53c91634a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abb92b7d764d386e145b4ff70a987cbfc"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#abb92b7d764d386e145b4ff70a987cbfc">~Boundary</a> ()=default</td></tr>
 <tr class="memdesc:abb92b7d764d386e145b4ff70a987cbfc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys a boundary object.  <a href="classBoundary.html#abb92b7d764d386e145b4ff70a987cbfc">More...</a><br /></td></tr>
 <tr class="separator:abb92b7d764d386e145b4ff70a987cbfc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a533c80de0d2c790b493081f1ea2a71cc"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#a533c80de0d2c790b493081f1ea2a71cc">applyBoundaryToParticle</a> (<a class="el" href="classParticle.html">Particle</a> &amp;p)</td></tr>
-<tr class="memdesc:a533c80de0d2c790b493081f1ea2a71cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the given function to the particle.  <a href="classBoundary.html#a533c80de0d2c790b493081f1ea2a71cc">More...</a><br /></td></tr>
-<tr class="separator:a533c80de0d2c790b493081f1ea2a71cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -111,14 +101,16 @@ Protected Attributes</h2></td></tr>
 <tr class="memitem:acc8328c3f16b15a5ccbc0143fde2ae57"><td class="memItemLeft" align="right" valign="top">std::array&lt; double, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#acc8328c3f16b15a5ccbc0143fde2ae57">corner</a> {}</td></tr>
 <tr class="memdesc:acc8328c3f16b15a5ccbc0143fde2ae57"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lower Left Corner.  <a href="classBoundary.html#acc8328c3f16b15a5ccbc0143fde2ae57">More...</a><br /></td></tr>
 <tr class="separator:acc8328c3f16b15a5ccbc0143fde2ae57"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae330c23744c4ced92b6e2a028e876307"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#ae330c23744c4ced92b6e2a028e876307">cellSize</a></td></tr>
-<tr class="separator:ae330c23744c4ced92b6e2a028e876307"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0c349ced58d7e09ab840eb8fe9fe2e7a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classForceCalculation.html">ForceCalculation</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#a0c349ced58d7e09ab840eb8fe9fe2e7a">fc</a></td></tr>
-<tr class="separator:a0c349ced58d7e09ab840eb8fe9fe2e7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0a36f039f9ffc78fb84da79a15403e30"><td class="memItemLeft" align="right" valign="top">std::array&lt; <a class="el" href="BoundaryTypes_8h.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a>, 6 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#a0a36f039f9ffc78fb84da79a15403e30">boundaryTypes</a> {}</td></tr>
+<tr class="memdesc:a0a36f039f9ffc78fb84da79a15403e30"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type of the boundary for each wall.  <a href="classBoundary.html#a0a36f039f9ffc78fb84da79a15403e30">More...</a><br /></td></tr>
+<tr class="separator:a0a36f039f9ffc78fb84da79a15403e30"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a793afa4e587dc1e2a19a6b4b07f0d6e0"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classBoundary.html#a793afa4e587dc1e2a19a6b4b07f0d6e0">sigma</a></td></tr>
+<tr class="memdesc:a793afa4e587dc1e2a19a6b4b07f0d6e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sigma as defined by the parameters.  <a href="classBoundary.html#a793afa4e587dc1e2a19a6b4b07f0d6e0">More...</a><br /></td></tr>
+<tr class="separator:a793afa4e587dc1e2a19a6b4b07f0d6e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a60fb29e438ce36f4513a0d2769edca80"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a60fb29e438ce36f4513a0d2769edca80">&#9670;&nbsp;</a></span>Boundary()</h2>
+<a id="afa105e97e396886090477f053b84685a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa105e97e396886090477f053b84685a">&#9670;&nbsp;</a></span>Boundary()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -144,14 +136,14 @@ Protected Attributes</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classForceCalculation.html">ForceCalculation</a> &amp;&#160;</td>
-          <td class="paramname"><em>fc</em>, </td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>sigma</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>cellsize</em>&#160;</td>
+          <td class="paramtype">const std::array&lt; std::string, 6 &gt; &amp;&#160;</td>
+          <td class="paramname"><em>boundaryType_str</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -201,8 +193,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a533c80de0d2c790b493081f1ea2a71cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a533c80de0d2c790b493081f1ea2a71cc">&#9670;&nbsp;</a></span>applyBoundaryToParticle()</h2>
+<a id="ae7415a42ab34b55688894d53c91634a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae7415a42ab34b55688894d53c91634a5">&#9670;&nbsp;</a></span>getBoundaryTypes()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -211,10 +203,9 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">void Boundary::applyBoundaryToParticle </td>
+          <td class="memname">std::array&lt; <a class="el" href="BoundaryTypes_8h.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a>, 6 &gt; Boundary::getBoundaryTypes </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classParticle.html">Particle</a> &amp;&#160;</td>
-          <td class="paramname"><em>p</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -225,15 +216,7 @@ Protected Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Applies the given function to the particle. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">p</td><td><a class="el" href="classParticle.html">Particle</a> that gets modified </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Reimplemented in <a class="el" href="classReflectiveBoundary.html#a8683752873001f1d512a4f8bac78ade7">ReflectiveBoundary</a>.</p>
+<p>Returns array containing boundary types for each wall. </p>
 
 </div>
 </div>
@@ -336,8 +319,8 @@ Protected Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
-<a id="ae330c23744c4ced92b6e2a028e876307"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae330c23744c4ced92b6e2a028e876307">&#9670;&nbsp;</a></span>cellSize</h2>
+<a id="a0a36f039f9ffc78fb84da79a15403e30"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0a36f039f9ffc78fb84da79a15403e30">&#9670;&nbsp;</a></span>boundaryTypes</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -346,7 +329,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">double Boundary::cellSize</td>
+          <td class="memname">std::array&lt;<a class="el" href="BoundaryTypes_8h.html#af75d5dd7322fa39ed0af4e7839e600f8">BoundaryType</a>, 6&gt; Boundary::boundaryTypes {}</td>
         </tr>
       </table>
   </td>
@@ -355,6 +338,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Type of the boundary for each wall. </p>
 
 </div>
 </div>
@@ -406,8 +391,8 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a0c349ced58d7e09ab840eb8fe9fe2e7a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0c349ced58d7e09ab840eb8fe9fe2e7a">&#9670;&nbsp;</a></span>fc</h2>
+<a id="a793afa4e587dc1e2a19a6b4b07f0d6e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a793afa4e587dc1e2a19a6b4b07f0d6e0">&#9670;&nbsp;</a></span>sigma</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -416,7 +401,7 @@ Protected Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="classForceCalculation.html">ForceCalculation</a>&amp; Boundary::fc</td>
+          <td class="memname">double Boundary::sigma</td>
         </tr>
       </table>
   </td>
@@ -425,6 +410,8 @@ Protected Attributes</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
+
+<p>Sigma as defined by the parameters. </p>
 
 </div>
 </div>

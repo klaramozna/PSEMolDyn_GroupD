@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['value_1420',['value',['../classtype.html#a83781d700ce124b4224c316326a5a975',1,'type::value()'],['../classDimension.html#a3222110b2bc71848ef09b4fad14ab042',1,'Dimension::value()'],['../classBoundaryBehavior.html#a0738df9b21952379aba8783722610b9c',1,'BoundaryBehavior::value()']]]
+  ['boundarydirection_1442',['BoundaryDirection',['../BoundaryDirection_8h.html#ad7fd84facffe94a4ab2c8d2909748a2c',1,'BoundaryDirection.h']]],
+  ['boundarytype_1443',['BoundaryType',['../BoundaryTypes_8h.html#af75d5dd7322fa39ed0af4e7839e600f8',1,'BoundaryTypes.h']]]
 ];
