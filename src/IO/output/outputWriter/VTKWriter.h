@@ -11,6 +11,7 @@
 #include "vtk-unstructured.h"
 
 #include <list>
+#include <filesystem>
 
 namespace outputWriter {
 
@@ -18,6 +19,8 @@ namespace outputWriter {
  * This class implements the functionality to generate vtk output from
  * particles.
  */
+
+    namespace fs = std::filesystem;
     class VTKWriter : public ParticleWriter {
 
     public:
@@ -49,8 +52,14 @@ namespace outputWriter {
         void plotParticles(const std::vector<Particle>& particles, const std::string &filename,
                            int iteration) override;
 
+        /**
+         * @brief creates directory with 'Simulation' + Time.now()
+         */
+        void createMarkedDirectory();
+
     private:
         VTKFile_t *vtkFile;
+        fs::path directory;
     };
 
 } // namespace outputWriter

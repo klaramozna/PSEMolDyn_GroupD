@@ -46,6 +46,11 @@ private:
     int type;
 
     /**
+     *  Bool values that determines whether particle should be deleted
+     */
+    bool markedForDeletion;
+
+    /**
      * @brief Epsilon for lennard jones forces.
      */
     double epsilon;
@@ -87,6 +92,8 @@ public:
     const std::array<double, 3> &getF() const;
 
     const std::array<double, 3> &getOldF() const;
+
+    bool isMarkedForDeletion() const;
 
     double getEpsilon() const{return epsilon;}
 
@@ -175,6 +182,16 @@ public:
      * @param z force in the z-direction.
      */
     void setOldF(double x, double y, double z);
+
+    /**
+     * @brief Sets the value of markedForDeletion to true
+     */
+    void markForDeletion();
+
+    /**
+     * @brief Sets the value of markedForDeletion to false
+     */
+    void unmarkForDeletion();
 
     bool operator==(const Particle &other) const;
 

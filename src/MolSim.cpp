@@ -9,25 +9,21 @@
 #include "IO/input/SimParameters.h"
 #include "IO/input/XMLReader.h"
 
-/* Standard IO */
-#include <iostream>
 
 /* Simulation Logic */
 #include "Simulation/Simulation.h"
 #include "Particles/LinkedCellContainer.h"
 #include "Simulation/Physics/GravitationalForce.h"
 #include "Simulation/Physics/LennardJones.h"
+
+#include "Particles/Boundary.h"
+
 #include "Simulation/SimpleThermostat.h"
 #include "Simulation/Physics/GravityForce.h"
 
 /* Logging */
 #include "IO/Logger.h"
 #include <IO/CLparser/CL.h>
-
-/* Generators for Particles */
-#include "Particles/ParticleGenerator.h"
-#include "utils/CuboidGenerator.h"
-#include "utils/SphereGenerator.h"
 
 /* Checkpoint */
 #include "IO/output/outputWriter/CheckpointWriter.h"
@@ -43,6 +39,7 @@ int main(int argc, char *argsv[]) {
     std::unique_ptr<ParticleReader> reader;
     std::unique_ptr<ForceCalculation> forceCalculation;
     GravityForce gravity{0};
+
 
     outputWriter::VTKWriter writer;
     SimParameters simParameters;
@@ -84,8 +81,6 @@ int main(int argc, char *argsv[]) {
     else {
         reader->readFile(container_h, input_path);
     }
-    
-    Logger::console->info("Hello from MolSim for PSE!");
 
     if (simParameters.getForce() == "lennard") {
         forceCalculation = std::make_unique<LennardJones>(simParameters.getEpsilon(), simParameters.getSigma());
@@ -97,12 +92,20 @@ int main(int argc, char *argsv[]) {
         Logger::console->info("Force set to grav");
     }
 
+    // Initializing boundary
+    Boundary boundary(simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2],
+             simParameters.getSigma(), simParameters.getBoundaryBehavior());
+
+    if (boundary.getBoundaryTypes().empty()) {
+        Logger::err_logger->error("Boundary was not correctly initialized");
+        exit(-1);
+    }
+
     if (simParameters.getGravityFactor() != 0.0) {
         gravity.setGravityFactor(simParameters.getGravityFactor());
         Logger::console->info("Gravity Force activated with factor {}", simParameters.getGravityFactor());
     }
 
-    Boundary boundary{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2], *forceCalculation, simParameters.getCutoffRadius()};
     LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
 
     /* To do: solve this dependency between readFile and container*/
@@ -125,9 +128,8 @@ int main(int argc, char *argsv[]) {
     //TODO: change once xml parameters adjusted
     SimpleThermostat thermostat{20, 20, 50, 3};
 
+    Simulation simulation(simParameters.getDeltaT(), simParameters.getSigma(),  container, *forceCalculation, thermostat, simParameters.getAverageVelo(), boundary, gravity);
 
-    Simulation simulation(simParameters.getDeltaT(), container, *forceCalculation, thermostat, simParameters.getAverageVelo(), boundary, gravity);
-  
     // This is ugly and shouldn't be in main, but it is for a later refactor
     if (simParameters.isTesting()) {
 
@@ -145,6 +147,7 @@ int main(int argc, char *argsv[]) {
         benchmark.printBenchmarkResults(benchmark.getElapsedTimeInSeconds(), number_of_iterations ,container.getSize());
 
     } else {
+        writer.createMarkedDirectory();
         // for this loop, we assume: current x, current f and current v are known
         while (current_time < simParameters.getEndTime()) {
             simulation.runIteration();

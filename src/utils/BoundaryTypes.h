@@ -1,0 +1,14 @@
+//
+// Created by rodff on 14.12.23.
+//
+
+#ifndef PSEMOLDYN_GROUPD_BOUNDARYTYPES_H
+#define PSEMOLDYN_GROUPD_BOUNDARYTYPES_H
+
+enum BoundaryType {
+    OUTFLOW,
+    REFLECTIVE,
+    PERIODIC
+};
+
+#endif //PSEMOLDYN_GROUPD_BOUNDARYTYPES_H

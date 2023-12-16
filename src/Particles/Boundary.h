@@ -9,6 +9,7 @@
 #include <array>
 #include "Particle.h"
 #include "../Simulation/Physics/ForceCalculation.h"
+#include "../utils/BoundaryTypes.h"
 
 class Boundary {
 public:
@@ -18,7 +19,7 @@ public:
      * @param height Height of the cuboid boundary.
      * @param depth Depth of the cuboid boundary.
     */
-    Boundary(double width, double height, double depth, ForceCalculation& fc, double cellsize);
+    Boundary(double width, double height, double depth, double sigma, const std::array<std::string, 6>& boundaryType_str);
 
     /**
      * @brief Returns true, if the given particle is inside of or on the boundary, else false.
@@ -41,16 +42,14 @@ public:
     virtual std::array<double,3> getDimensions();
 
     /**
+     * @brief Returns array containing boundary types for each wall
+     */
+    virtual std::array<BoundaryType, 6> getBoundaryTypes();
+
+    /**
      * @brief Destroys a boundary object
      */
     virtual ~Boundary() = default;
-
-
-    /**
-     * @brief Applies the given function to the particle
-     * @param p Particle that gets modified
-     */
-    virtual void applyBoundaryToParticle(Particle& p);
 
 protected:
     /**
@@ -66,9 +65,16 @@ protected:
      */
     std::array<double,3> corner{};
 
-    double cellSize;
+    /**
+     * @brief Type of the boundary for each wall
+    */
+    std::array<BoundaryType, 6> boundaryTypes{};
 
-    ForceCalculation &fc;
+
+    /**
+     * @brief Sigma as defined by the parameters
+     */
+    double sigma;
 };
 
 

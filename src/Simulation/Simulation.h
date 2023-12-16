@@ -12,6 +12,9 @@
 #include "./Physics/GravityForce.h"
 #include "Thermostat.h"
 #include "../Particles/Boundary.h"
+#include "../Particles/BoundaryEnforcer.h"
+
+#include <memory>
 
 class Simulation {
 private:
@@ -20,7 +23,8 @@ private:
     LinkedCellContainer& container;
     ForceCalculation &forceCalculation;
     Thermostat& thermostat;
-    Boundary boundary;
+
+    BoundaryEnforcer boundaryEnforcer;
     GravityForce gravity;
 
     double delta_t;
@@ -53,8 +57,8 @@ private:
 
 public:
 
-    Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity);
-  
+    Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity);
+
     virtual ~Simulation();
 
     /**
@@ -67,10 +71,6 @@ public:
      * @brief run one iteration of the simulation, meaning position, force and then velocity
      */
     void runIteration();
-
-    void runIterationReflective();
-
-    void runIterationOutflow();
 };
 
 #endif //PSEMOLDYN_GROUPD_SIMULATION_H

@@ -7,23 +7,18 @@
 
 #include "Simulation.h"
 
-#include "../utils/VectorDouble3.h"
-#include "./Physics/ForceCalculation.h"
-
 #include "Particles/LinkedCellContainer.h"
+#include "Particles/BoundaryEnforcer.h"
 
-
-
-
-Simulation::Simulation(double delta_t, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity) :
+Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity) :
                         container(container),
                         forceCalculation(calculation),
-                        thermostat(thermostat), boundary{boundary},
+                        thermostat(thermostat),
+                        boundaryEnforcer(sigma, container, boundary.getDimensions(), boundary.getBoundaryTypes(), forceCalculation),
+                        gravity(gravity),
                         delta_t(delta_t),
-                        averageVelo(averageVelo),
-                        gravity(gravity){
+                        averageVelo(averageVelo) {}
 
-}
 
 Simulation::~Simulation() = default;
 
@@ -66,6 +61,9 @@ void Simulation::runIteration() {
     // calculate new f
     container.applyToAll([](Particle& p) { setOldForce(p); });
     container.applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
+
+    container.applyToBoundary([this](Particle& p) { boundaryEnforcer.applyBoundaryConditionsForParticle(p); });
+
     container.applyToAll([this](Particle& p) { applyGravity(p); });
     // calculate new v
     container.applyToAll([this](Particle& p) { calculateV(p); });
@@ -74,41 +72,4 @@ void Simulation::runIteration() {
 void Simulation::setOldForce(Particle& p) {
     p.setOldF((p.getFVector()));
     p.setF(VectorDouble3());
-}
-
-void Simulation::runIterationReflective() {
-    // adjust temperature
-    thermostat.updateState(container.getParticleVector());
-    container.applyToAll([this](Particle& p){thermostat.updateTemperature(p);});
-    thermostat.updateIteration();
-
-    // calculate new x
-    container.applyToAll([this](Particle& p) { calculateX(p); });
-
-    container.applyToBoundary([this](Particle& particle) {
-        boundary.applyBoundaryToParticle(particle);
-    });
-
-    // calculate new f
-    container.applyToAll([](Particle& p) { setOldForce(p); });
-    container.applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
-    // calculate new v
-    container.applyToAll([this](Particle& p) { calculateV(p); });
-}
-
-void Simulation::runIterationOutflow() {
-    // adjust temperature
-    thermostat.updateState(container.getParticleVector());
-    container.applyToAll([this](Particle& p){thermostat.updateTemperature(p);});
-    thermostat.updateIteration();
-
-    container.deleteHaloParticles();
-    // calculate new x
-    container.applyToAll([this](Particle& p) { calculateX(p); });
-
-    // calculate new f
-    container.applyToAll([](Particle& p) { setOldForce(p); });
-    container.applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
-    // calculate new v
-    container.applyToAll([this](Particle& p) { calculateV(p); });
 }

@@ -18,6 +18,8 @@ namespace outputWriter {
     VTKWriter::VTKWriter() = default;
     VTKWriter::~VTKWriter() = default;
 
+    namespace fs = std::filesystem;
+
     void VTKWriter::initializeOutput(int numParticles) {
 
         vtkFile = new VTKFile_t("UnstructuredGrid");
@@ -55,7 +57,10 @@ namespace outputWriter {
         std::stringstream strstr;
         strstr << filename << "_" << std::setfill('0') << std::setw(4) << iteration << ".vtu";
 
-        std::ofstream file(strstr.str().c_str());
+        std::string filename_str = strstr.str();
+        fs::path fullPath = directory / filename_str;
+
+        std::ofstream file(fullPath);
         VTKFile(file, *vtkFile);
         delete vtkFile;
     }
@@ -98,12 +103,42 @@ namespace outputWriter {
     }
 
     void VTKWriter::plotParticles(const std::vector<Particle>& particles, const std::string &filename, int iteration) {
+        if (!fs::exists(directory) || !fs::is_directory(directory)) {
+            Logger::err_logger->error("Directory \"" + directory.string() + "\" wasn't created");
+            exit(-1);
+        }
         initializeOutput(particles.size());
         for (auto p: particles) {
             plotParticle(p);
         }
 
         writeFile(filename, iteration);
+    }
+
+
+    void VTKWriter::createMarkedDirectory() {
+        // Get the current time
+        std::time_t currentTime = std::time(nullptr);
+
+        // Convert the current time to a struct tm
+        std::tm* localTime = std::localtime(&currentTime);
+
+        // Format the date and time
+        std::ostringstream oss;
+        oss << std::put_time(localTime, "%d.%m.%Y:%H:%M");
+
+        std::string resultString = "Simulation_" + oss.str();
+
+        directory = fs::path(resultString);
+
+        try {
+            // Use create_directory() to create the directory
+            fs::create_directory(directory);
+            Logger::console->info( "Directory created successfully: " + directory.string());
+        } catch (const std::filesystem::filesystem_error& e) {
+            Logger::err_logger->error("Error creating directory: " + std::string(e.what()));
+            exit(-1);
+        }
     }
 
 

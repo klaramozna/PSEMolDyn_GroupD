@@ -9,7 +9,7 @@
 #include "../src/utils/VectorDouble3.h"
 #include "../src/Simulation/Physics/ForceCalculation.h"
 
-#include "../src/Particles/ReflectiveBoundary.h"
+#include "../src/Particles/BoundaryEnforcer.h"
 
 #include <gtest/gtest.h>
 
@@ -26,7 +26,8 @@ public:
 
 class ReflectiveBoundaryTest : public ::testing::Test {
 public:
-    ReflectiveBoundary boundary{3.0, 3.0, 1.0, fc, 1};
+    LinkedCellContainer container{Boundary(3, 3, 3, 1, {}), 1};
+    BoundaryEnforcer boundaryEnforcer{1.0,container, {3.0, 3.0, 3.0}, {BoundaryType::REFLECTIVE, BoundaryType::REFLECTIVE,BoundaryType::REFLECTIVE,BoundaryType::REFLECTIVE, BoundaryType::REFLECTIVE,BoundaryType::REFLECTIVE},fc};
     MockForceCalculation fc{};
 };
 
