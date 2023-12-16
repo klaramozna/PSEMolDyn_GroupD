@@ -44,23 +44,26 @@ Simulation/Physics/GravitationalForce.cpp
 
 )
         
-# Include directories specific to the 'src' directory, if needed
+## Include directories specific to the 'src' directory, if needed
 target_include_directories(MolSim
-        PUBLIC ${CMAKE_SOURCE_DIR}/libs/libxsd
-        PUBLIC ${CMAKE_SOURCE_DIR}/libs/
-        PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
+PUBLIC ${CMAKE_SOURCE_DIR}/libs/libxsd
+PUBLIC ${CMAKE_SOURCE_DIR}/libs/
+PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
+#uncomment this on the cluster
+#PUBLIC /dss/dsshome1/lxc04/di29wav/
 )
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(XERCESC REQUIRED IMPORTED_TARGET xerces-c)
 
-# Link Libraries for running the project
 target_link_libraries(MolSim
-        # stuff that is used in headers and source files
+# stuff that is used in headers and source files
         PUBLIC
-        xerces-c
-        Boost::program_options
+                PkgConfig::XERCESC
+                Boost::program_options
 )
 
-# Configure dependencies - Boost, Xerces
-find_package(XercesC REQUIRED)
+
+# Configure dependencies
 find_package(Boost REQUIRED COMPONENTS program_options)
 
 # activate all compiler warnings. Clean up your code :P

@@ -27,6 +27,7 @@ if(NOT CMAKE_BUILD_TYPE)
 endif(NOT CMAKE_BUILD_TYPE)
 
 # Look for Xerces XML Parser, and raise an error if not found with instruction to install it
+#comment this on the linux cluster
 find_package(XercesC QUIET)
 
 if(NOT XercesC_FOUND)
