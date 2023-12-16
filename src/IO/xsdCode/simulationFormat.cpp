@@ -129,6 +129,28 @@ Sigma (const Sigma_type& x)
 }
 
 
+// gravity_t
+// 
+
+const gravity_t::gravity_factor_type& gravity_t::
+gravity_factor () const
+{
+  return this->gravity_factor_.get ();
+}
+
+gravity_t::gravity_factor_type& gravity_t::
+gravity_factor ()
+{
+  return this->gravity_factor_.get ();
+}
+
+void gravity_t::
+gravity_factor (const gravity_factor_type& x)
+{
+  this->gravity_factor_.set (x);
+}
+
+
 // ForceType
 // 
 
@@ -919,6 +941,36 @@ force (::std::unique_ptr< force_type > x)
   this->force_.set (std::move (x));
 }
 
+const Simulation_t::gravity_optional& Simulation_t::
+gravity () const
+{
+  return this->gravity_;
+}
+
+Simulation_t::gravity_optional& Simulation_t::
+gravity ()
+{
+  return this->gravity_;
+}
+
+void Simulation_t::
+gravity (const gravity_type& x)
+{
+  this->gravity_.set (x);
+}
+
+void Simulation_t::
+gravity (const gravity_optional& x)
+{
+  this->gravity_ = x;
+}
+
+void Simulation_t::
+gravity (::std::unique_ptr< gravity_type > x)
+{
+  this->gravity_.set (std::move (x));
+}
+
 const Simulation_t::averageVelo_optional& Simulation_t::
 averageVelo () const
 {
@@ -1557,6 +1609,95 @@ operator= (const lennardJones_t& x)
 
 lennardJones_t::
 ~lennardJones_t ()
+{
+}
+
+// gravity_t
+//
+
+gravity_t::
+gravity_t (const gravity_factor_type& gravity_factor)
+: ::xml_schema::type (),
+  gravity_factor_ (gravity_factor, this)
+{
+}
+
+gravity_t::
+gravity_t (const gravity_t& x,
+           ::xml_schema::flags f,
+           ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  gravity_factor_ (x.gravity_factor_, f, this)
+{
+}
+
+gravity_t::
+gravity_t (const ::xercesc::DOMElement& e,
+           ::xml_schema::flags f,
+           ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  gravity_factor_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void gravity_t::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // gravity_factor
+    //
+    if (n.name () == "gravity_factor" && n.namespace_ ().empty ())
+    {
+      if (!gravity_factor_.present ())
+      {
+        this->gravity_factor_.set (gravity_factor_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    break;
+  }
+
+  if (!gravity_factor_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "gravity_factor",
+      "");
+  }
+}
+
+gravity_t* gravity_t::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class gravity_t (*this, f, c);
+}
+
+gravity_t& gravity_t::
+operator= (const gravity_t& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->gravity_factor_ = x.gravity_factor_;
+  }
+
+  return *this;
+}
+
+gravity_t::
+~gravity_t ()
 {
 }
 
@@ -2538,6 +2679,7 @@ Simulation_t ()
   t_end_ (this),
   delta_t_ (this),
   force_ (this),
+  gravity_ (this),
   averageVelo_ (this),
   boundaries_ (this),
   cutoffRadius_ (this),
@@ -2562,6 +2704,7 @@ Simulation_t (const Simulation_t& x,
   t_end_ (x.t_end_, f, this),
   delta_t_ (x.delta_t_, f, this),
   force_ (x.force_, f, this),
+  gravity_ (x.gravity_, f, this),
   averageVelo_ (x.averageVelo_, f, this),
   boundaries_ (x.boundaries_, f, this),
   cutoffRadius_ (x.cutoffRadius_, f, this),
@@ -2586,6 +2729,7 @@ Simulation_t (const ::xercesc::DOMElement& e,
   t_end_ (this),
   delta_t_ (this),
   force_ (this),
+  gravity_ (this),
   averageVelo_ (this),
   boundaries_ (this),
   cutoffRadius_ (this),
@@ -2649,6 +2793,20 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       if (!this->force_)
       {
         this->force_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // gravity
+    //
+    if (n.name () == "gravity" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< gravity_type > r (
+        gravity_traits::create (i, f, this));
+
+      if (!this->gravity_)
+      {
+        this->gravity_.set (::std::move (r));
         continue;
       }
     }
@@ -2840,6 +2998,7 @@ operator= (const Simulation_t& x)
     this->t_end_ = x.t_end_;
     this->delta_t_ = x.delta_t_;
     this->force_ = x.force_;
+    this->gravity_ = x.gravity_;
     this->averageVelo_ = x.averageVelo_;
     this->boundaries_ = x.boundaries_;
     this->cutoffRadius_ = x.cutoffRadius_;

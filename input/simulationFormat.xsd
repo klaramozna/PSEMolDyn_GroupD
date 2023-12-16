@@ -29,6 +29,12 @@
     </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="gravity_t">
+    <xs:sequence>
+        <xs:element name="gravity_factor" type="xs:double"/>
+    </xs:sequence>
+</xs:complexType>
+
     <!-- choose one force type -->
 <xs:complexType name="ForceType">
   <xs:choice>
@@ -96,6 +102,7 @@
         <xs:element name="t_end" type="xs:double" minOccurs="0" maxOccurs="1" default="5"/>
         <xs:element name="delta_t" type="xs:double" minOccurs="0" maxOccurs="1" default="0.0002"/>
         <xs:element name="force" type="ForceType" minOccurs="0" maxOccurs="1"/>
+        <xs:element name="gravity" type="gravity_t" minOccurs="0" maxOccurs="1"/>
         <xs:element name="averageVelo" type="xs:double" minOccurs="0" maxOccurs="1" default="0.1"/> <!-- Brownian Motion average velocity -->
         <xs:element name = "boundaries" type="Boundaries" minOccurs="0" maxOccurs="1"/>
         <xs:element name="cutoffRadius" type="common:nonNegativeDouble" minOccurs="0" maxOccurs="1" default="3.0"/>
