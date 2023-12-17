@@ -214,6 +214,36 @@ grav (::std::unique_ptr< grav_type > x)
   this->grav_.set (std::move (x));
 }
 
+const ForceType::MixingRuleLennardJones_optional& ForceType::
+MixingRuleLennardJones () const
+{
+  return this->MixingRuleLennardJones_;
+}
+
+ForceType::MixingRuleLennardJones_optional& ForceType::
+MixingRuleLennardJones ()
+{
+  return this->MixingRuleLennardJones_;
+}
+
+void ForceType::
+MixingRuleLennardJones (const MixingRuleLennardJones_type& x)
+{
+  this->MixingRuleLennardJones_.set (x);
+}
+
+void ForceType::
+MixingRuleLennardJones (const MixingRuleLennardJones_optional& x)
+{
+  this->MixingRuleLennardJones_ = x;
+}
+
+void ForceType::
+MixingRuleLennardJones (::std::unique_ptr< MixingRuleLennardJones_type > x)
+{
+  this->MixingRuleLennardJones_.set (std::move (x));
+}
+
 
 // Cuboid
 // 
@@ -1708,7 +1738,8 @@ ForceType::
 ForceType ()
 : ::xml_schema::type (),
   lennard_ (this),
-  grav_ (this)
+  grav_ (this),
+  MixingRuleLennardJones_ (this)
 {
 }
 
@@ -1718,7 +1749,8 @@ ForceType (const ForceType& x,
            ::xml_schema::container* c)
 : ::xml_schema::type (x, f, c),
   lennard_ (x.lennard_, f, this),
-  grav_ (x.grav_, f, this)
+  grav_ (x.grav_, f, this),
+  MixingRuleLennardJones_ (x.MixingRuleLennardJones_, f, this)
 {
 }
 
@@ -1728,7 +1760,8 @@ ForceType (const ::xercesc::DOMElement& e,
            ::xml_schema::container* c)
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
   lennard_ (this),
-  grav_ (this)
+  grav_ (this),
+  MixingRuleLennardJones_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -1775,6 +1808,20 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // MixingRuleLennardJones
+    //
+    if (n.name () == "MixingRuleLennardJones" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< MixingRuleLennardJones_type > r (
+        MixingRuleLennardJones_traits::create (i, f, this));
+
+      if (!this->MixingRuleLennardJones_)
+      {
+        this->MixingRuleLennardJones_.set (::std::move (r));
+        continue;
+      }
+    }
+
     break;
   }
 }
@@ -1794,6 +1841,7 @@ operator= (const ForceType& x)
     static_cast< ::xml_schema::type& > (*this) = x;
     this->lennard_ = x.lennard_;
     this->grav_ = x.grav_;
+    this->MixingRuleLennardJones_ = x.MixingRuleLennardJones_;
   }
 
   return *this;
@@ -2374,11 +2422,11 @@ _xsd_BoundaryBehavior_convert () const
   ::xsd::cxx::tree::enum_comparator< char > c (_xsd_BoundaryBehavior_literals_);
   const value* i (::std::lower_bound (
                     _xsd_BoundaryBehavior_indexes_,
-                    _xsd_BoundaryBehavior_indexes_ + 2,
+                    _xsd_BoundaryBehavior_indexes_ + 3,
                     *this,
                     c));
 
-  if (i == _xsd_BoundaryBehavior_indexes_ + 2 || _xsd_BoundaryBehavior_literals_[*i] != *this)
+  if (i == _xsd_BoundaryBehavior_indexes_ + 3 || _xsd_BoundaryBehavior_literals_[*i] != *this)
   {
     throw ::xsd::cxx::tree::unexpected_enumerator < char > (*this);
   }
@@ -2387,16 +2435,18 @@ _xsd_BoundaryBehavior_convert () const
 }
 
 const char* const BoundaryBehavior::
-_xsd_BoundaryBehavior_literals_[2] =
+_xsd_BoundaryBehavior_literals_[3] =
 {
   "Outflow",
-  "Reflecting"
+  "Reflecting",
+  "Periodic"
 };
 
 const BoundaryBehavior::value BoundaryBehavior::
-_xsd_BoundaryBehavior_indexes_[2] =
+_xsd_BoundaryBehavior_indexes_[3] =
 {
   ::BoundaryBehavior::Outflow,
+  ::BoundaryBehavior::Periodic,
   ::BoundaryBehavior::Reflecting
 };
 
