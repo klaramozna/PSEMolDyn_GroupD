@@ -15,6 +15,7 @@
 #include "Particles/LinkedCellContainer.h"
 #include "Simulation/Physics/GravitationalForce.h"
 #include "Simulation/Physics/LennardJones.h"
+#include "Simulation/Physics/MixingRuleLennardJones.h"
 
 #include "Particles/Boundary.h"
 
@@ -90,6 +91,11 @@ int main(int argc, char *argsv[]) {
     if (simParameters.getForce() == "grav") {
         forceCalculation = std::make_unique<GravitationalForce>();
         Logger::console->info("Force set to grav");
+    }
+
+    if (simParameters.getForce() == "MixingRuleLennardJones") {
+        forceCalculation = std::make_unique<MixingRuleLennardJones>();
+        Logger::console->info("Force set to Mixing Rule LennardJones");
     }
 
     // Initializing boundary

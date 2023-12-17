@@ -18,10 +18,10 @@
     <BoxSize> <x>120</x> <y>50</y> <z>3</z></BoxSize>
      <Front>Reflecting</Front>
      <Back>Reflecting</Back>
-     <Top>Outflow</Top>
-     <Right>Outflow</Right>
+     <Top>Reflecting</Top>
+     <Right>Reflecting</Right>
      <Bottom>Reflecting</Bottom>
-     <Left>Outflow</Left>
+     <Left>Reflecting</Left>
     
     </boundaries>
     <cutoffRadius>3.0</cutoffRadius>

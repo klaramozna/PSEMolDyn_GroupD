@@ -62,6 +62,10 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
                 Logger::console->debug("Reading force type 2 (gravitational) from XML");
                 SimParameters.setForce("grav");
             }
+            else if (sim->force()->MixingRuleLennardJones()) {
+                Logger::console->debug("Reading force type 3 (Mixing Rule Lennard Jones) from XML");
+                SimParameters.setForce("MixingRuleLennardJones");
+            } 
         }
 
         if (sim->gravity().present()) {
