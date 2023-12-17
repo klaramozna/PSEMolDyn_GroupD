@@ -44,7 +44,7 @@ int main(int argc, char *argsv[]) {
 
     outputWriter::VTKWriter writer;
     SimParameters simParameters;
-    int status = cl.parse_arguments(argc, argsv, simParameters);
+    int status = cl.parse_input_path_and_mode_and_log(argc, argsv, simParameters);
 
     //any error in parsing
     if (status) {
@@ -81,6 +81,11 @@ int main(int argc, char *argsv[]) {
     }
     else {
         reader->readFile(container_h, input_path);
+    }
+
+    status = cl.parse_arguments(argc, argsv, simParameters);
+    if (status) {
+        return 1;
     }
 
     if (simParameters.getForce() == "lennard") {
@@ -159,7 +164,7 @@ int main(int argc, char *argsv[]) {
             simulation.runIteration();
 
             iteration++;
-            if (iteration % 10 == 0) {
+            if (iteration % simParameters.getWriteFrequency() == 0) {
                 writer.plotParticles(simulation.getParticles(), simParameters.getBaseName(), iteration);
             }
 
@@ -175,7 +180,7 @@ int main(int argc, char *argsv[]) {
             c.writeCheckpoint(container, simParameters.getStoreCheckpoint());
         }
         
-        Logger::console->info("Output written. Terminating...");
+        Logger::console->info("Output written with frequency {}. Terminating...", simParameters.getWriteFrequency());
         return 0;
     }
 }

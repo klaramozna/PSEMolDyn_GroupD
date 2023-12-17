@@ -22,10 +22,25 @@ private:
      /**
      * Allowed Options
      */
-   po::options_description desc{"Allowed options"};
+    po::options_description desc{"Allowed options"};
+    /*
+    * sim arguments
+    **/
+    std::string input_path;
+    std::string input_mode;
+    double end_time;
+    double delta_t;
+    double averageVelo;
+    bool testing;
+    int log_level;
+    int write_frequency;
+    double gravity_factor;
+    std::string force;
+    std::string store_checkpoint_path;
+    std::string load_checkpoint_path;
 
 public:
-
+     CL ();
 /**
      * @brief checks if a double value is positive or not (used to handle incorrect user input)
      * @param value the value to check
@@ -56,5 +71,15 @@ std::string produce_help_message(const po::options_description &desc);
      
 */
 int parse_arguments(int argc, char *argsv[], SimParameters& simParameters);
+
+ /**
+    * @brief parses the input path and mode
+    * @param argc The number of command line arguments.
+    * @param argsv An array containing the command line arguments.
+    * @param simParameters instance holding the simulation parameters
+    * @throws std::invalid_argument If invalid or incomplete arguments are provided.
+     
+*/
+int parse_input_path_and_mode_and_log(int argc, char *argsv[], SimParameters& simParameters);
 
 };

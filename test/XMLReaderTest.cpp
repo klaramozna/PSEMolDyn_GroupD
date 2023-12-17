@@ -40,12 +40,13 @@ TEST_F(XMLReaderTest, TestSimple1XMLReader) {
         ASSERT_TRUE(p1 == p2) << "Expected " << p1.toString() << "\nReceived " << p2.toString();
     }
     //input_path and mode are empty strings here as they are passed explicitly in the test and not via command line
-    SimParameters expectedSimParameters (5, 0.0002, 0.1, false, 2, "", "", "lennard", 1, 5, "MD_vtk");
+    SimParameters expectedSimParameters (5, 0.0002, 0.1, false, 2, "", "", "lennard", 1, 5, "MD_vtk", 100);
     
     ASSERT_EQ(expectedSimParameters.getEndTime(), receivedSimParameters.getEndTime()) << "Simulation Parameter End Time didn't match";
     ASSERT_EQ(expectedSimParameters.getDeltaT(), receivedSimParameters.getDeltaT()) << "Simulation Parameter Step size didn't match"; 
     ASSERT_EQ(expectedSimParameters.getAverageVelo(), receivedSimParameters.getAverageVelo()) << "Simulation Parameter Average Velocity didn't match";
     ASSERT_EQ(expectedSimParameters.getBaseName(), receivedSimParameters.getBaseName()) << "Simulation Parameter Base Name didn't match";
+    ASSERT_EQ(expectedSimParameters.getWriteFrequency(), receivedSimParameters.getWriteFrequency()) << "Simulation Parameter Write Frequency didn't match";
     ASSERT_EQ(expectedSimParameters.getLogLevel(), receivedSimParameters.getLogLevel()) << "Simulation Parameter Log level didn't match";
     ASSERT_EQ(expectedSimParameters.isTesting(), receivedSimParameters.isTesting()) << "Simulation Parameter Testing mode didn't match";
 
