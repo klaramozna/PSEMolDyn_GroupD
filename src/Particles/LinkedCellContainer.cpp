@@ -66,23 +66,22 @@ void LinkedCellContainer::updateCells() {
 void LinkedCellContainer::moveParticle(const Particle &p1, int oldCell, int newCell) {
     grid[oldCell].deleteParticle(p1);
 
-    if (newCell >= grid.size() || (p1.isMarkedForDeletion() && particleOutOfGrid(p1))) {
-        --size;
-        return;
+    // Check if particle needs to be dismarked
+    auto [x,y,z] = getCoordinateFromIndex(newCell);
+    if(!isBoundaryCell(x,y,z)){
+        Particle p2(p1);
+        p2.unmarkForDeletion();
+        grid[newCell].addParticle(p2);
     }
 
-    if (p1.isMarkedForDeletion()) {
-
-        if (!isBoundaryCell(newCell % nc[0], (newCell / nc[0]) % nc[1], newCell / (nc[0] * nc[1]))){
-            Particle p2 = p1;
-            p2.unmarkForDeletion();
-            grid[newCell].addParticle(p2);
-        } else {
-            grid[newCell].addParticle(p1);
-        }
-    } else {
+    // Check if particle is outside
+    if(particleOutOfGrid(p1)){
+        size--;
+    }
+    else{
         grid[newCell].addParticle(p1);
     }
+
 }
 
 void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &function) {
@@ -195,7 +194,7 @@ void LinkedCellContainer::deleteHaloParticles() {
     // Applying given function to each particle and marking particles for movement
     for(int i = 0; i < grid.size(); i++){
         for(auto & particle : grid[i]){
-            if(boundary.isOutside(particle)){
+            if(boundary.isOutside(particle) && particle.isMarkedForDeletion()){
                 particlesToBeDeleted.emplace_back(particle, i);
             }
         }
@@ -237,4 +236,10 @@ bool LinkedCellContainer::particleOutOfGrid(const Particle &p) {
     int z = floor((p.getX()[2] + gridShift[2]) / cellSize);
     return x < 0 || y < 0 || z < 0 || x >= nc[0] || y >= nc[1] || z >= nc[2];
 }
+
+std::array<int, 3> LinkedCellContainer::getCoordinateFromIndex(int index) {
+    return {index % nc[0], (index / nc[0]) % nc[1], index / (nc[0] * nc[1])};
+}
+
+
 
