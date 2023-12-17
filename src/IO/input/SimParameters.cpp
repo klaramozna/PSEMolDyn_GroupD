@@ -7,6 +7,7 @@
 
 #include <string>
 #include"SimParameters.h"
+#include"../Logger.h"
 
 // Constructor to initialize the parameters
 SimParameters::SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
@@ -74,4 +75,16 @@ bool SimParameters::operator==(const SimParameters &other) const {
 
 }
 
+void SimParameters::print(){
+    Logger::console->debug("End Time: {}", end_time);
+    Logger::console->debug("Delta_t: {}", delta_t);
+    Logger::console->debug("average Velo: {}", averageVelo);
+    Logger::console->debug("Testing: {}", testing);
+    Logger::console->debug("Log Level: {}", log_level);
+    Logger::console->debug("input_mode: {}", input_mode);
+    Logger::console->debug("input path: {}", input_path);
+    Logger::console->debug("base name: {}", base_name);
+    Logger::console->debug("force: {}", force);
+    Logger::console->debug("write frequency: {}", write_frequency);
+}
 

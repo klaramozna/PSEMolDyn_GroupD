@@ -23,6 +23,8 @@ private:
      * Allowed Options
      */
     po::options_description desc{"Allowed options"};
+
+    po::variables_map vm;
     /*
     * sim arguments
     **/

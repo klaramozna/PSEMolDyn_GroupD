@@ -53,6 +53,7 @@ public:
                   const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency);
     SimParameters() = default;
 
+    void print();
 
     // Getters for retrieving parameter values
     constexpr double getStartTime() const { return start_time; }
@@ -105,6 +106,9 @@ public:
     void setGravityFactor (double val) {gravity_factor = val;}
     void setThermostatType (const std::string& thermostatType_val){thermostatType = thermostatType_val;}
     bool operator==(const SimParameters &other) const;
+
+
+
 
 
 private:
