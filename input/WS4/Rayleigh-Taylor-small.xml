@@ -14,7 +14,7 @@
 
     <boundaries>
 
-    <BoxSize> <x>63</x> <y>36</y> <z>3</z></BoxSize>
+    <BoxSize> <x>63</x> <y>36</y> <z>1</z></BoxSize>
      <Front>Periodic</Front>
      <Back>Periodic</Back>
      <Top>Reflecting</Top>

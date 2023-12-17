@@ -12,7 +12,7 @@
    
      <boundaries>
 
-        <BoxSize> <x>303</x> <y>180</y> <z>3</z></BoxSize>
+        <BoxSize> <x>303</x> <y>180</y> <z>1</z></BoxSize>
          <Front>Reflecting</Front>
          <Back>Reflecting</Back>
          <Top>Reflecting</Top>
