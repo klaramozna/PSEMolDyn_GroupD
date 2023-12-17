@@ -51,3 +51,8 @@ https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/270aacd1-1df2-4e
 
 
 
+https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/8e781b10-7655-4623-b6b6-fd95094c5686
+
+
+
+
