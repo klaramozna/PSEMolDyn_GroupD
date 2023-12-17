@@ -32,6 +32,7 @@ public:
      * @param sigma_val sigma value
      * @param epsilon_val epsilon value
      * @param base_name_val base name for the output files
+     * @param write_frequency frequency of creating ouptput files
      * @param cutoffRadius_val base name for the output files
      * @param  boxSize_val the domain size
      * @param  boundaryBehavior_val behavior of boundaries
@@ -44,12 +45,12 @@ public:
     SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                   bool testing_val, int log_level_val,
                   const std::string& input_path_val, const std::string& input_mode_val,
-                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, double gravity_factor_val  = 0);
+                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, double gravity_factor_val  = 0);
 
     SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                   bool testing_val, int log_level_val,
                   const std::string& input_path_val, const std::string& input_mode_val,
-                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val);
+                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency);
     SimParameters() = default;
 
 
@@ -66,6 +67,7 @@ public:
     double getSigma() const {return sigma;}
     double getEpsilon() const {return epsilon;}
     std::string getBaseName() const { return base_name; }
+    int getWriteFrequency () const {return write_frequency;}
     double getCutoffRadius() const { return cutoffRadius; }
     std::array<double,3> getBoxSize() const {return boxSize;}
     std::array<std::string,6> getBoundaryBehavior() const {return boundaryBehavior;}
@@ -89,6 +91,7 @@ public:
     void setSigma(const double val) {sigma = val;}
     void setEpsilon(const double val) {epsilon = val;}
     void setBaseName(const std::string val) {base_name = val;}
+    void setWriteFrequency (const int val) {write_frequency = val;}
     void setCutoffRadius(const double val) { cutoffRadius = val; }
     void setBoxSize(const std::array<double,3>& val)  {boxSize = val;}
     void setBoundaryBehavior(const std::array<std::string, 6>& val) { boundaryBehavior = val;}
@@ -159,6 +162,10 @@ private:
     * @brief output file base name
     */
     std::string base_name = "MD_vtk";
+     /**
+    * @brief write frequency
+    */
+    int write_frequency = 10;
     /**
      * @brief cutoff radius
      */

@@ -20,7 +20,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
     try {
         std::unique_ptr<Simulation_t> sim(Simulation(filename));
 
-        if (sim->log_level().present()) {
+        if (sim->log_level().present() && !Logger::is_log_level_set()) {
             SimParameters.setLogLevel(sim->log_level().get());
             Logger::init(sim->log_level().get());
         }
@@ -35,6 +35,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
 
         if (sim->writeFrequency().present()){
             Logger::console->debug("Reading Writing Frequency {} from XML", sim->writeFrequency().get());
+            SimParameters.setWriteFrequency(sim->writeFrequency().get());
         }
 
 

@@ -16,14 +16,17 @@
 namespace Logger {
 
  /**
-  * logger for general infos
+  *@brief logger for general infos
   */
 extern std::shared_ptr<spdlog::logger> console;    
 /**
-  * logger for displaying errors
+  *@brief logger for displaying errors
   */
 extern std::shared_ptr<spdlog::logger> err_logger;  
-
+/**
+  *@brief see if logger already set or not
+*/
+extern bool log_level_set;
 
 
 /**
@@ -32,6 +35,15 @@ extern std::shared_ptr<spdlog::logger> err_logger;
 */
 void init(int log_level);
 
+/**
+  * @brief Sets log_level_set to true
+*/
+void set_log_level_set();
 
+/**
+  * @brief Checks if log_level_set is true
+  * @return true if log_level_set is true, false otherwise
+*/
+bool is_log_level_set();
 
 }
