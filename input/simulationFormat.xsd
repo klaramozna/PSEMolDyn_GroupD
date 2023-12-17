@@ -41,6 +41,7 @@
         <!-- first element is default -->
     <xs:element name="lennard" type="lennardJones_t"/>
     <xs:element name="grav" type="xs:string"/>
+    <xs:element name="MixingRuleLennardJones" type="xs:string"/>
   </xs:choice>
 </xs:complexType>
 

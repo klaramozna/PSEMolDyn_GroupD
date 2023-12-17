@@ -1321,6 +1321,82 @@ class ForceType: public ::xml_schema::type
   //@}
 
   /**
+   * @name MixingRuleLennardJones
+   *
+   * @brief Accessor and modifier functions for the %MixingRuleLennardJones
+   * optional element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::xml_schema::string MixingRuleLennardJones_type;
+
+  /**
+   * @brief Element optional container type.
+   */
+  typedef ::xsd::cxx::tree::optional< MixingRuleLennardJones_type > MixingRuleLennardJones_optional;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< MixingRuleLennardJones_type, char > MixingRuleLennardJones_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element
+   * container.
+   *
+   * @return A constant reference to the optional container.
+   */
+  const MixingRuleLennardJones_optional&
+  MixingRuleLennardJones () const;
+
+  /**
+   * @brief Return a read-write reference to the element container.
+   *
+   * @return A reference to the optional container.
+   */
+  MixingRuleLennardJones_optional&
+  MixingRuleLennardJones ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  MixingRuleLennardJones (const MixingRuleLennardJones_type& x);
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x An optional container with the new value to set.
+   *
+   * If the value is present in @a x then this function makes a copy 
+   * of this value and sets it as the new value of the element.
+   * Otherwise the element container is set the 'not present' state.
+   */
+  void
+  MixingRuleLennardJones (const MixingRuleLennardJones_optional& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly instead
+   * of making a copy.
+   */
+  void
+  MixingRuleLennardJones (::std::unique_ptr< MixingRuleLennardJones_type > p);
+
+  //@}
+
+  /**
    * @name Constructors
    */
   //@{
@@ -1403,6 +1479,7 @@ class ForceType: public ::xml_schema::type
   protected:
   lennard_optional lennard_;
   grav_optional grav_;
+  MixingRuleLennardJones_optional MixingRuleLennardJones_;
 
   //@endcond
 };
@@ -2634,7 +2711,8 @@ class BoundaryBehavior: public ::xml_schema::string
   enum value
   {
     Outflow,
-    Reflecting
+    Reflecting,
+    Periodic
   };
 
   /**
@@ -2759,8 +2837,8 @@ class BoundaryBehavior: public ::xml_schema::string
   _xsd_BoundaryBehavior_convert () const;
 
   public:
-  static const char* const _xsd_BoundaryBehavior_literals_[2];
-  static const value _xsd_BoundaryBehavior_indexes_[2];
+  static const char* const _xsd_BoundaryBehavior_literals_[3];
+  static const value _xsd_BoundaryBehavior_indexes_[3];
 
   //@endcond
 };
