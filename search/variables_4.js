@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['particles_1196',['particles',['../classParticleGenerator.html#a4c065631d36a8d5035ea4399d079b053',1,'ParticleGenerator']]]
+  ['log_5flevel_5fset_1203',['log_level_set',['../namespaceLogger.html#a450392648f0b5e99fc71b3b657c07b0a',1,'Logger']]]
 ];

@@ -73,6 +73,8 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
+<tr class="memitem:ad07308214d77d08517bda2c08305d39f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCL.html#ad07308214d77d08517bda2c08305d39f">CL</a> ()</td></tr>
+<tr class="separator:ad07308214d77d08517bda2c08305d39f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a89f225399a0001fdba1ae15a8289ea32"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCL.html#a89f225399a0001fdba1ae15a8289ea32">validate_positive</a> (const double &amp;value, const std::string &amp;option_name)</td></tr>
 <tr class="memdesc:a89f225399a0001fdba1ae15a8289ea32"><td class="mdescLeft">&#160;</td><td class="mdescRight">checks if a double value is positive or not (used to handle incorrect user input)  <a href="classCL.html#a89f225399a0001fdba1ae15a8289ea32">More...</a><br /></td></tr>
 <tr class="separator:a89f225399a0001fdba1ae15a8289ea32"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -85,7 +87,28 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad3b64af6bf2d668b56e409d7eb0195f6"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCL.html#ad3b64af6bf2d668b56e409d7eb0195f6">parse_arguments</a> (int argc, char *argsv[], <a class="el" href="classSimParameters.html">SimParameters</a> &amp;simParameters)</td></tr>
 <tr class="memdesc:ad3b64af6bf2d668b56e409d7eb0195f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the arguments provided by the user and configures simulation parameters  <a href="classCL.html#ad3b64af6bf2d668b56e409d7eb0195f6">More...</a><br /></td></tr>
 <tr class="separator:ad3b64af6bf2d668b56e409d7eb0195f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4575d19fb8f9a4d591e5d3d32841ee9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCL.html#aa4575d19fb8f9a4d591e5d3d32841ee9">parse_input_path_and_mode_and_log</a> (int argc, char *argsv[], <a class="el" href="classSimParameters.html">SimParameters</a> &amp;simParameters)</td></tr>
+<tr class="memdesc:aa4575d19fb8f9a4d591e5d3d32841ee9"><td class="mdescLeft">&#160;</td><td class="mdescRight">parses the input path and mode  <a href="classCL.html#aa4575d19fb8f9a4d591e5d3d32841ee9">More...</a><br /></td></tr>
+<tr class="separator:aa4575d19fb8f9a4d591e5d3d32841ee9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="ad07308214d77d08517bda2c08305d39f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad07308214d77d08517bda2c08305d39f">&#9670;&nbsp;</a></span>CL()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">CL::CL </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="ad3b64af6bf2d668b56e409d7eb0195f6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad3b64af6bf2d668b56e409d7eb0195f6">&#9670;&nbsp;</a></span>parse_arguments()</h2>
@@ -120,6 +143,56 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>parses the arguments provided by the user and configures simulation parameters </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">argc</td><td>The number of command line arguments. </td></tr>
+    <tr><td class="paramname">argsv</td><td>An array containing the command line arguments. </td></tr>
+    <tr><td class="paramname">simParameters</td><td>instance holding the simulation parameters </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::invalid_argument</td><td>If invalid or incomplete arguments are provided. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa4575d19fb8f9a4d591e5d3d32841ee9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4575d19fb8f9a4d591e5d3d32841ee9">&#9670;&nbsp;</a></span>parse_input_path_and_mode_and_log()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int CL::parse_input_path_and_mode_and_log </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>argc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">char *&#160;</td>
+          <td class="paramname"><em>argsv</em>[], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classSimParameters.html">SimParameters</a> &amp;&#160;</td>
+          <td class="paramname"><em>simParameters</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>parses the input path and mode </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">argc</td><td>The number of command line arguments. </td></tr>

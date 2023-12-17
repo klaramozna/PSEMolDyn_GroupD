@@ -88,19 +88,24 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="keyword">extern</span> std::shared_ptr&lt;spdlog::logger&gt; <a class="code" href="namespaceLogger.html#a852d47c744a4084ede6cb3e325b4e0bb">console</a>;    </div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="keyword">extern</span> std::shared_ptr&lt;spdlog::logger&gt; <a class="code" href="namespaceLogger.html#a807ca3078654157deb73c91eee70842d">err_logger</a>;  </div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespaceLogger.html#a7feb81e097444bda5ba59b9341a2b946">init</a>(<span class="keywordtype">int</span> <a class="code" href="classlog__level.html">log_level</a>);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;}</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">extern</span> <span class="keywordtype">bool</span> <a class="code" href="namespaceLogger.html#a450392648f0b5e99fc71b3b657c07b0a">log_level_set</a>;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespaceLogger.html#a7feb81e097444bda5ba59b9341a2b946">init</a>(<span class="keywordtype">int</span> <a class="code" href="classlog__level.html">log_level</a>);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="keywordtype">void</span> <a class="code" href="namespaceLogger.html#a6057a7ab1a22f6b900643e2286146d0d">set_log_level_set</a>();</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="keywordtype">bool</span> <a class="code" href="namespaceLogger.html#ab9e3c0a372597fb7c863b6b596d9fe98">is_log_level_set</a>();</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160; </div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
 <div class="ttc" id="aclasslog__level_html"><div class="ttname"><a href="classlog__level.html">log_level</a></div><div class="ttdoc">Class corresponding to the log_level schema type.</div><div class="ttdef"><b>Definition:</b> simulationFormat.h:599</div></div>
 <div class="ttc" id="anamespaceLogger_html"><div class="ttname"><a href="namespaceLogger.html">Logger</a></div><div class="ttdef"><b>Definition:</b> Logger.cpp:11</div></div>
-<div class="ttc" id="anamespaceLogger_html_a7feb81e097444bda5ba59b9341a2b946"><div class="ttname"><a href="namespaceLogger.html#a7feb81e097444bda5ba59b9341a2b946">Logger::init</a></div><div class="ttdeci">void init(int log_level)</div><div class="ttdoc">sets the log level</div><div class="ttdef"><b>Definition:</b> Logger.cpp:17</div></div>
-<div class="ttc" id="anamespaceLogger_html_a807ca3078654157deb73c91eee70842d"><div class="ttname"><a href="namespaceLogger.html#a807ca3078654157deb73c91eee70842d">Logger::err_logger</a></div><div class="ttdeci">std::shared_ptr&lt; spdlog::logger &gt; err_logger</div><div class="ttdef"><b>Definition:</b> Logger.cpp:15</div></div>
-<div class="ttc" id="anamespaceLogger_html_a852d47c744a4084ede6cb3e325b4e0bb"><div class="ttname"><a href="namespaceLogger.html#a852d47c744a4084ede6cb3e325b4e0bb">Logger::console</a></div><div class="ttdeci">std::shared_ptr&lt; spdlog::logger &gt; console</div><div class="ttdef"><b>Definition:</b> Logger.cpp:14</div></div>
+<div class="ttc" id="anamespaceLogger_html_a450392648f0b5e99fc71b3b657c07b0a"><div class="ttname"><a href="namespaceLogger.html#a450392648f0b5e99fc71b3b657c07b0a">Logger::log_level_set</a></div><div class="ttdeci">bool log_level_set</div><div class="ttdoc">see if logger already set or not</div><div class="ttdef"><b>Definition:</b> Logger.cpp:16</div></div>
+<div class="ttc" id="anamespaceLogger_html_a6057a7ab1a22f6b900643e2286146d0d"><div class="ttname"><a href="namespaceLogger.html#a6057a7ab1a22f6b900643e2286146d0d">Logger::set_log_level_set</a></div><div class="ttdeci">void set_log_level_set()</div><div class="ttdoc">Sets log_level_set to true.</div><div class="ttdef"><b>Definition:</b> Logger.cpp:22</div></div>
+<div class="ttc" id="anamespaceLogger_html_a7feb81e097444bda5ba59b9341a2b946"><div class="ttname"><a href="namespaceLogger.html#a7feb81e097444bda5ba59b9341a2b946">Logger::init</a></div><div class="ttdeci">void init(int log_level)</div><div class="ttdoc">sets the log level</div><div class="ttdef"><b>Definition:</b> Logger.cpp:18</div></div>
+<div class="ttc" id="anamespaceLogger_html_a807ca3078654157deb73c91eee70842d"><div class="ttname"><a href="namespaceLogger.html#a807ca3078654157deb73c91eee70842d">Logger::err_logger</a></div><div class="ttdeci">std::shared_ptr&lt; spdlog::logger &gt; err_logger</div><div class="ttdoc">logger for displaying errors</div><div class="ttdef"><b>Definition:</b> Logger.cpp:15</div></div>
+<div class="ttc" id="anamespaceLogger_html_a852d47c744a4084ede6cb3e325b4e0bb"><div class="ttname"><a href="namespaceLogger.html#a852d47c744a4084ede6cb3e325b4e0bb">Logger::console</a></div><div class="ttdeci">std::shared_ptr&lt; spdlog::logger &gt; console</div><div class="ttdoc">logger for general infos</div><div class="ttdef"><b>Definition:</b> Logger.cpp:14</div></div>
+<div class="ttc" id="anamespaceLogger_html_ab9e3c0a372597fb7c863b6b596d9fe98"><div class="ttname"><a href="namespaceLogger.html#ab9e3c0a372597fb7c863b6b596d9fe98">Logger::is_log_level_set</a></div><div class="ttdeci">bool is_log_level_set()</div><div class="ttdoc">Checks if log_level_set is true.</div><div class="ttdef"><b>Definition:</b> Logger.cpp:26</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
