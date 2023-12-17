@@ -1,7 +1,7 @@
 <Simulation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../simulationFormat.xsd">
 
     <!-- Simulation Arguments -->
-    <t_end>25</t_end>
+    <t_end>50</t_end>
     <delta_t>0.0005</delta_t>
     
     <!-- Choose ForceType -->
@@ -14,7 +14,7 @@
 
     <boundaries>
 
-    <BoxSize> <x>63</x> <y>36</y> <z>3</z></BoxSize>
+    <BoxSize> <x>300</x> <y>54</y> <z>3</z></BoxSize>
      <Front>Periodic</Front>
      <Back>Periodic</Back>
      <Top>Reflecting</Top>
@@ -23,7 +23,7 @@
      <Left>Periodic</Left>
     
     </boundaries>
-    <cutoffRadius>2.5</cutoffRadius>
+    <cutoffRadius>3.0</cutoffRadius>
     <thermostat>
         <simple> 
             <initTemperature> 40 </initTemperature>
@@ -40,8 +40,8 @@
         <z>0.0</z>
     </lower-left-coord>
     <number-of-particles>
-        <x>50</x>
-        <y>14</y>
+        <x>250</x>
+        <y>20</y>
         <z>1</z>
     </number-of-particles>
     <distance>1.2</distance>
@@ -52,18 +52,18 @@
         <z>0.0</z>
     </initial_velocity>
     <epsilon_cuboid>1.0</epsilon_cuboid>
-    <sigma_cuboid>1.0</sigma_cuboid>
+    <sigma_cuboid>1.2</sigma_cuboid>
 </cuboid>
 
 <cuboid>
     <lower-left-coord>
         <x>0.6</x>
-        <y>19</y>
+        <y>27</y>
         <z>0.0</z>
     </lower-left-coord>
     <number-of-particles>
-        <x>50</x>
-        <y>14</y>
+        <x>250</x>
+        <y>20</y>
         <z>1</z>
     </number-of-particles>
     <distance>1.2</distance>
@@ -74,7 +74,7 @@
         <z>0.0</z>
     </initial_velocity>
     <epsilon_cuboid>1.0</epsilon_cuboid>
-    <sigma_cuboid>0.9412</sigma_cuboid>
+    <sigma_cuboid>1.1</sigma_cuboid>
 </cuboid>
 
     <!-- IO -->
