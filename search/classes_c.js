@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['thermostat_780',['Thermostat',['../classThermostat.html',1,'']]],
-  ['type_781',['type',['../classtype.html',1,'']]]
+  ['thermostat_803',['Thermostat',['../classThermostat.html',1,'']]],
+  ['thermostattype_804',['ThermostatType',['../classThermostatType.html',1,'']]],
+  ['type_805',['type',['../classtype.html',1,'']]]
 ];

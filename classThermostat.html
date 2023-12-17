@@ -77,8 +77,9 @@ Inheritance diagram for Thermostat:</div>
  <div class="center">
   <img src="classThermostat.png" usemap="#Thermostat_map" alt=""/>
   <map id="Thermostat_map" name="Thermostat_map">
-<area href="classGradualThermostat.html" alt="GradualThermostat" shape="rect" coords="0,56,118,80"/>
-<area href="classSimpleThermostat.html" alt="SimpleThermostat" shape="rect" coords="128,56,246,80"/>
+<area href="classFakeThermostat.html" alt="FakeThermostat" shape="rect" coords="0,56,118,80"/>
+<area href="classGradualThermostat.html" alt="GradualThermostat" shape="rect" coords="128,56,246,80"/>
+<area href="classSimpleThermostat.html" alt="SimpleThermostat" shape="rect" coords="256,56,374,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -87,6 +88,8 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a396f75481544345e6176524178dc5b93"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a396f75481544345e6176524178dc5b93">Thermostat</a> (double initTemperature, double <a class="el" href="classThermostat.html#a1f922c971579730eb8347692bde4ecb9">targetTemperature</a>, int <a class="el" href="classThermostat.html#a00e7765ee0e868eaf72990ea5b121323">cycleLength</a>, int dim)</td></tr>
 <tr class="memdesc:a396f75481544345e6176524178dc5b93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a thermostat object based on the given parameters.  <a href="classThermostat.html#a396f75481544345e6176524178dc5b93">More...</a><br /></td></tr>
 <tr class="separator:a396f75481544345e6176524178dc5b93"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a277a57c01ed56b68ff32c2d00e3bb164"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a277a57c01ed56b68ff32c2d00e3bb164">Thermostat</a> ()=default</td></tr>
+<tr class="separator:a277a57c01ed56b68ff32c2d00e3bb164"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9b15f86ac302c5423724b8839a41c1c2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a9b15f86ac302c5423724b8839a41c1c2">updateTemperature</a> (<a class="el" href="classParticle.html">Particle</a> &amp;particle)=0</td></tr>
 <tr class="memdesc:a9b15f86ac302c5423724b8839a41c1c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the temperature of the given particle according to the type of the thermostat.  <a href="classThermostat.html#a9b15f86ac302c5423724b8839a41c1c2">More...</a><br /></td></tr>
 <tr class="separator:a9b15f86ac302c5423724b8839a41c1c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -123,7 +126,7 @@ Protected Attributes</h2></td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a396f75481544345e6176524178dc5b93"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a396f75481544345e6176524178dc5b93">&#9670;&nbsp;</a></span>Thermostat()</h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a396f75481544345e6176524178dc5b93">&#9670;&nbsp;</a></span>Thermostat() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -178,6 +181,31 @@ Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a277a57c01ed56b68ff32c2d00e3bb164"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a277a57c01ed56b68ff32c2d00e3bb164">&#9670;&nbsp;</a></span>Thermostat() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Thermostat::Thermostat </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 </div>
 </div>
