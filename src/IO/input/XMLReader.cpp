@@ -69,6 +69,29 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             } 
         }
 
+        if (sim->thermostat()) {
+            if (sim->thermostat()->none()) {
+                Logger::console->debug("Reading thermostat type 1 (none) from XML");
+                SimParameters.setThermostatType("none");
+            } else if (sim->thermostat()->simple()) {
+                simpleThermostatType& thermostat = *(sim->thermostat()->simple());
+                Logger::console->debug("Reading thermostat type 2 (simple) from XML");
+                SimParameters.setThermostatType("simple");
+                SimParameters.setInitTemperature(thermostat.initTemperature());
+                SimParameters.setThermostatCycleLength(thermostat.thermostatCycleLength());
+                SimParameters.setTargetTemperature(thermostat.targetTemperature());
+            }
+            else if (sim->thermostat()->gradual()) {
+                gradualThermostatType& thermostat = *(sim->thermostat()->gradual());
+                Logger::console->debug("Reading thermostat type 3 (gradual) from XML");
+                SimParameters.setThermostatType("gradual");
+                SimParameters.setInitTemperature(thermostat.initTemperature());
+                SimParameters.setThermostatCycleLength(thermostat.thermostatCycleLength());
+                SimParameters.setTargetTemperature(thermostat.targetTemperature());
+                SimParameters.setMaxTemperatureChange(thermostat.maxTemperatureChange());
+            }
+        }
+
         if (sim->gravity().present()) {
                 Logger::console->debug("Reading Gravity froce from XML");
                 double gravity_factor = (sim->gravity()->gravity_factor());
@@ -152,26 +175,6 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
         if (sim->cutoffRadius().present()){
             Logger::console->debug("Reading cut off Radius {} from XML", sim->cutoffRadius().get());
             SimParameters.setCutoffRadius(sim->cutoffRadius().get());
-        }
-
-        if (sim->initTemperature().present()){
-            Logger::console->debug("Reading initTemperature {} from XML", sim->initTemperature().get());
-            SimParameters.setInitTemperature(sim->initTemperature().get());
-        }
-
-        if (sim->targetTemperature().present()){
-            Logger::console->debug("Reading targetTemperature {} from XML", sim->targetTemperature().get());
-            SimParameters.setTargetTemperature(sim->targetTemperature().get());
-        }
-
-        if (sim->maxTemperatureChange().present()){
-            Logger::console->debug("Reading maxTemperatureChange {} from XML", sim->maxTemperatureChange().get());
-            SimParameters.setMaxTemperatureChange(sim->maxTemperatureChange().get());
-        }
-
-        if (sim->thermostatCycleLength().present()){
-            Logger::console->debug("Reading thermostatCycleLength {} from XML", sim->thermostatCycleLength().get());
-            SimParameters.setThermostatCycleLength(sim->thermostatCycleLength().get());
         }
 
 

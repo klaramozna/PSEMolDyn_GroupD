@@ -245,6 +245,276 @@ MixingRuleLennardJones (::std::unique_ptr< MixingRuleLennardJones_type > x)
 }
 
 
+// simpleThermostatType
+// 
+
+const simpleThermostatType::initTemperature_type& simpleThermostatType::
+initTemperature () const
+{
+  return this->initTemperature_.get ();
+}
+
+simpleThermostatType::initTemperature_type& simpleThermostatType::
+initTemperature ()
+{
+  return this->initTemperature_.get ();
+}
+
+void simpleThermostatType::
+initTemperature (const initTemperature_type& x)
+{
+  this->initTemperature_.set (x);
+}
+
+void simpleThermostatType::
+initTemperature (::std::unique_ptr< initTemperature_type > x)
+{
+  this->initTemperature_.set (std::move (x));
+}
+
+const simpleThermostatType::targetTemperature_type& simpleThermostatType::
+targetTemperature () const
+{
+  return this->targetTemperature_.get ();
+}
+
+simpleThermostatType::targetTemperature_type& simpleThermostatType::
+targetTemperature ()
+{
+  return this->targetTemperature_.get ();
+}
+
+void simpleThermostatType::
+targetTemperature (const targetTemperature_type& x)
+{
+  this->targetTemperature_.set (x);
+}
+
+void simpleThermostatType::
+targetTemperature (::std::unique_ptr< targetTemperature_type > x)
+{
+  this->targetTemperature_.set (std::move (x));
+}
+
+const simpleThermostatType::thermostatCycleLength_type& simpleThermostatType::
+thermostatCycleLength () const
+{
+  return this->thermostatCycleLength_.get ();
+}
+
+simpleThermostatType::thermostatCycleLength_type& simpleThermostatType::
+thermostatCycleLength ()
+{
+  return this->thermostatCycleLength_.get ();
+}
+
+void simpleThermostatType::
+thermostatCycleLength (const thermostatCycleLength_type& x)
+{
+  this->thermostatCycleLength_.set (x);
+}
+
+void simpleThermostatType::
+thermostatCycleLength (::std::unique_ptr< thermostatCycleLength_type > x)
+{
+  this->thermostatCycleLength_.set (std::move (x));
+}
+
+
+// gradualThermostatType
+// 
+
+const gradualThermostatType::initTemperature_type& gradualThermostatType::
+initTemperature () const
+{
+  return this->initTemperature_.get ();
+}
+
+gradualThermostatType::initTemperature_type& gradualThermostatType::
+initTemperature ()
+{
+  return this->initTemperature_.get ();
+}
+
+void gradualThermostatType::
+initTemperature (const initTemperature_type& x)
+{
+  this->initTemperature_.set (x);
+}
+
+void gradualThermostatType::
+initTemperature (::std::unique_ptr< initTemperature_type > x)
+{
+  this->initTemperature_.set (std::move (x));
+}
+
+const gradualThermostatType::targetTemperature_type& gradualThermostatType::
+targetTemperature () const
+{
+  return this->targetTemperature_.get ();
+}
+
+gradualThermostatType::targetTemperature_type& gradualThermostatType::
+targetTemperature ()
+{
+  return this->targetTemperature_.get ();
+}
+
+void gradualThermostatType::
+targetTemperature (const targetTemperature_type& x)
+{
+  this->targetTemperature_.set (x);
+}
+
+void gradualThermostatType::
+targetTemperature (::std::unique_ptr< targetTemperature_type > x)
+{
+  this->targetTemperature_.set (std::move (x));
+}
+
+const gradualThermostatType::maxTemperatureChange_type& gradualThermostatType::
+maxTemperatureChange () const
+{
+  return this->maxTemperatureChange_.get ();
+}
+
+gradualThermostatType::maxTemperatureChange_type& gradualThermostatType::
+maxTemperatureChange ()
+{
+  return this->maxTemperatureChange_.get ();
+}
+
+void gradualThermostatType::
+maxTemperatureChange (const maxTemperatureChange_type& x)
+{
+  this->maxTemperatureChange_.set (x);
+}
+
+void gradualThermostatType::
+maxTemperatureChange (::std::unique_ptr< maxTemperatureChange_type > x)
+{
+  this->maxTemperatureChange_.set (std::move (x));
+}
+
+const gradualThermostatType::thermostatCycleLength_type& gradualThermostatType::
+thermostatCycleLength () const
+{
+  return this->thermostatCycleLength_.get ();
+}
+
+gradualThermostatType::thermostatCycleLength_type& gradualThermostatType::
+thermostatCycleLength ()
+{
+  return this->thermostatCycleLength_.get ();
+}
+
+void gradualThermostatType::
+thermostatCycleLength (const thermostatCycleLength_type& x)
+{
+  this->thermostatCycleLength_.set (x);
+}
+
+void gradualThermostatType::
+thermostatCycleLength (::std::unique_ptr< thermostatCycleLength_type > x)
+{
+  this->thermostatCycleLength_.set (std::move (x));
+}
+
+
+// ThermostatType
+// 
+
+const ThermostatType::none_optional& ThermostatType::
+none () const
+{
+  return this->none_;
+}
+
+ThermostatType::none_optional& ThermostatType::
+none ()
+{
+  return this->none_;
+}
+
+void ThermostatType::
+none (const none_type& x)
+{
+  this->none_.set (x);
+}
+
+void ThermostatType::
+none (const none_optional& x)
+{
+  this->none_ = x;
+}
+
+void ThermostatType::
+none (::std::unique_ptr< none_type > x)
+{
+  this->none_.set (std::move (x));
+}
+
+const ThermostatType::simple_optional& ThermostatType::
+simple () const
+{
+  return this->simple_;
+}
+
+ThermostatType::simple_optional& ThermostatType::
+simple ()
+{
+  return this->simple_;
+}
+
+void ThermostatType::
+simple (const simple_type& x)
+{
+  this->simple_.set (x);
+}
+
+void ThermostatType::
+simple (const simple_optional& x)
+{
+  this->simple_ = x;
+}
+
+void ThermostatType::
+simple (::std::unique_ptr< simple_type > x)
+{
+  this->simple_.set (std::move (x));
+}
+
+const ThermostatType::gradual_optional& ThermostatType::
+gradual () const
+{
+  return this->gradual_;
+}
+
+ThermostatType::gradual_optional& ThermostatType::
+gradual ()
+{
+  return this->gradual_;
+}
+
+void ThermostatType::
+gradual (const gradual_type& x)
+{
+  this->gradual_.set (x);
+}
+
+void ThermostatType::
+gradual (const gradual_optional& x)
+{
+  this->gradual_ = x;
+}
+
+void ThermostatType::
+gradual (::std::unique_ptr< gradual_type > x)
+{
+  this->gradual_.set (std::move (x));
+}
+
+
 // Cuboid
 // 
 
@@ -1097,148 +1367,34 @@ cutoffRadius_default_value ()
   return cutoffRadius_type (3.0);
 }
 
-const Simulation_t::initTemperature_optional& Simulation_t::
-initTemperature () const
+const Simulation_t::thermostat_optional& Simulation_t::
+thermostat () const
 {
-  return this->initTemperature_;
+  return this->thermostat_;
 }
 
-Simulation_t::initTemperature_optional& Simulation_t::
-initTemperature ()
+Simulation_t::thermostat_optional& Simulation_t::
+thermostat ()
 {
-  return this->initTemperature_;
-}
-
-void Simulation_t::
-initTemperature (const initTemperature_type& x)
-{
-  this->initTemperature_.set (x);
+  return this->thermostat_;
 }
 
 void Simulation_t::
-initTemperature (const initTemperature_optional& x)
+thermostat (const thermostat_type& x)
 {
-  this->initTemperature_ = x;
+  this->thermostat_.set (x);
 }
 
 void Simulation_t::
-initTemperature (::std::unique_ptr< initTemperature_type > x)
+thermostat (const thermostat_optional& x)
 {
-  this->initTemperature_.set (std::move (x));
-}
-
-Simulation_t::initTemperature_type Simulation_t::
-initTemperature_default_value ()
-{
-  return initTemperature_type (10.0);
-}
-
-const Simulation_t::targetTemperature_optional& Simulation_t::
-targetTemperature () const
-{
-  return this->targetTemperature_;
-}
-
-Simulation_t::targetTemperature_optional& Simulation_t::
-targetTemperature ()
-{
-  return this->targetTemperature_;
+  this->thermostat_ = x;
 }
 
 void Simulation_t::
-targetTemperature (const targetTemperature_type& x)
+thermostat (::std::unique_ptr< thermostat_type > x)
 {
-  this->targetTemperature_.set (x);
-}
-
-void Simulation_t::
-targetTemperature (const targetTemperature_optional& x)
-{
-  this->targetTemperature_ = x;
-}
-
-void Simulation_t::
-targetTemperature (::std::unique_ptr< targetTemperature_type > x)
-{
-  this->targetTemperature_.set (std::move (x));
-}
-
-Simulation_t::targetTemperature_type Simulation_t::
-targetTemperature_default_value ()
-{
-  return targetTemperature_type (10.0);
-}
-
-const Simulation_t::maxTemperatureChange_optional& Simulation_t::
-maxTemperatureChange () const
-{
-  return this->maxTemperatureChange_;
-}
-
-Simulation_t::maxTemperatureChange_optional& Simulation_t::
-maxTemperatureChange ()
-{
-  return this->maxTemperatureChange_;
-}
-
-void Simulation_t::
-maxTemperatureChange (const maxTemperatureChange_type& x)
-{
-  this->maxTemperatureChange_.set (x);
-}
-
-void Simulation_t::
-maxTemperatureChange (const maxTemperatureChange_optional& x)
-{
-  this->maxTemperatureChange_ = x;
-}
-
-void Simulation_t::
-maxTemperatureChange (::std::unique_ptr< maxTemperatureChange_type > x)
-{
-  this->maxTemperatureChange_.set (std::move (x));
-}
-
-Simulation_t::maxTemperatureChange_type Simulation_t::
-maxTemperatureChange_default_value ()
-{
-  return maxTemperatureChange_type (1.0);
-}
-
-const Simulation_t::thermostatCycleLength_optional& Simulation_t::
-thermostatCycleLength () const
-{
-  return this->thermostatCycleLength_;
-}
-
-Simulation_t::thermostatCycleLength_optional& Simulation_t::
-thermostatCycleLength ()
-{
-  return this->thermostatCycleLength_;
-}
-
-void Simulation_t::
-thermostatCycleLength (const thermostatCycleLength_type& x)
-{
-  this->thermostatCycleLength_.set (x);
-}
-
-void Simulation_t::
-thermostatCycleLength (const thermostatCycleLength_optional& x)
-{
-  this->thermostatCycleLength_ = x;
-}
-
-void Simulation_t::
-thermostatCycleLength (::std::unique_ptr< thermostatCycleLength_type > x)
-{
-  this->thermostatCycleLength_.set (std::move (x));
-}
-
-Simulation_t::thermostatCycleLength_type Simulation_t::
-thermostatCycleLength_default_value ()
-{
-  return thermostatCycleLength_type (3LL);
+  this->thermostat_.set (std::move (x));
 }
 
 const Simulation_t::cuboid_sequence& Simulation_t::
@@ -1849,6 +2005,441 @@ operator= (const ForceType& x)
 
 ForceType::
 ~ForceType ()
+{
+}
+
+// simpleThermostatType
+//
+
+simpleThermostatType::
+simpleThermostatType (const initTemperature_type& initTemperature,
+                      const targetTemperature_type& targetTemperature,
+                      const thermostatCycleLength_type& thermostatCycleLength)
+: ::xml_schema::type (),
+  initTemperature_ (initTemperature, this),
+  targetTemperature_ (targetTemperature, this),
+  thermostatCycleLength_ (thermostatCycleLength, this)
+{
+}
+
+simpleThermostatType::
+simpleThermostatType (const simpleThermostatType& x,
+                      ::xml_schema::flags f,
+                      ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  initTemperature_ (x.initTemperature_, f, this),
+  targetTemperature_ (x.targetTemperature_, f, this),
+  thermostatCycleLength_ (x.thermostatCycleLength_, f, this)
+{
+}
+
+simpleThermostatType::
+simpleThermostatType (const ::xercesc::DOMElement& e,
+                      ::xml_schema::flags f,
+                      ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  initTemperature_ (this),
+  targetTemperature_ (this),
+  thermostatCycleLength_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void simpleThermostatType::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // initTemperature
+    //
+    if (n.name () == "initTemperature" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< initTemperature_type > r (
+        initTemperature_traits::create (i, f, this));
+
+      if (!initTemperature_.present ())
+      {
+        this->initTemperature_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // targetTemperature
+    //
+    if (n.name () == "targetTemperature" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< targetTemperature_type > r (
+        targetTemperature_traits::create (i, f, this));
+
+      if (!targetTemperature_.present ())
+      {
+        this->targetTemperature_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // thermostatCycleLength
+    //
+    if (n.name () == "thermostatCycleLength" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< thermostatCycleLength_type > r (
+        thermostatCycleLength_traits::create (i, f, this));
+
+      if (!thermostatCycleLength_.present ())
+      {
+        this->thermostatCycleLength_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    break;
+  }
+
+  if (!initTemperature_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "initTemperature",
+      "");
+  }
+
+  if (!targetTemperature_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "targetTemperature",
+      "");
+  }
+
+  if (!thermostatCycleLength_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "thermostatCycleLength",
+      "");
+  }
+}
+
+simpleThermostatType* simpleThermostatType::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class simpleThermostatType (*this, f, c);
+}
+
+simpleThermostatType& simpleThermostatType::
+operator= (const simpleThermostatType& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->initTemperature_ = x.initTemperature_;
+    this->targetTemperature_ = x.targetTemperature_;
+    this->thermostatCycleLength_ = x.thermostatCycleLength_;
+  }
+
+  return *this;
+}
+
+simpleThermostatType::
+~simpleThermostatType ()
+{
+}
+
+// gradualThermostatType
+//
+
+gradualThermostatType::
+gradualThermostatType (const initTemperature_type& initTemperature,
+                       const targetTemperature_type& targetTemperature,
+                       const maxTemperatureChange_type& maxTemperatureChange,
+                       const thermostatCycleLength_type& thermostatCycleLength)
+: ::xml_schema::type (),
+  initTemperature_ (initTemperature, this),
+  targetTemperature_ (targetTemperature, this),
+  maxTemperatureChange_ (maxTemperatureChange, this),
+  thermostatCycleLength_ (thermostatCycleLength, this)
+{
+}
+
+gradualThermostatType::
+gradualThermostatType (const gradualThermostatType& x,
+                       ::xml_schema::flags f,
+                       ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  initTemperature_ (x.initTemperature_, f, this),
+  targetTemperature_ (x.targetTemperature_, f, this),
+  maxTemperatureChange_ (x.maxTemperatureChange_, f, this),
+  thermostatCycleLength_ (x.thermostatCycleLength_, f, this)
+{
+}
+
+gradualThermostatType::
+gradualThermostatType (const ::xercesc::DOMElement& e,
+                       ::xml_schema::flags f,
+                       ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  initTemperature_ (this),
+  targetTemperature_ (this),
+  maxTemperatureChange_ (this),
+  thermostatCycleLength_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void gradualThermostatType::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // initTemperature
+    //
+    if (n.name () == "initTemperature" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< initTemperature_type > r (
+        initTemperature_traits::create (i, f, this));
+
+      if (!initTemperature_.present ())
+      {
+        this->initTemperature_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // targetTemperature
+    //
+    if (n.name () == "targetTemperature" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< targetTemperature_type > r (
+        targetTemperature_traits::create (i, f, this));
+
+      if (!targetTemperature_.present ())
+      {
+        this->targetTemperature_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // maxTemperatureChange
+    //
+    if (n.name () == "maxTemperatureChange" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< maxTemperatureChange_type > r (
+        maxTemperatureChange_traits::create (i, f, this));
+
+      if (!maxTemperatureChange_.present ())
+      {
+        this->maxTemperatureChange_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // thermostatCycleLength
+    //
+    if (n.name () == "thermostatCycleLength" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< thermostatCycleLength_type > r (
+        thermostatCycleLength_traits::create (i, f, this));
+
+      if (!thermostatCycleLength_.present ())
+      {
+        this->thermostatCycleLength_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    break;
+  }
+
+  if (!initTemperature_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "initTemperature",
+      "");
+  }
+
+  if (!targetTemperature_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "targetTemperature",
+      "");
+  }
+
+  if (!maxTemperatureChange_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "maxTemperatureChange",
+      "");
+  }
+
+  if (!thermostatCycleLength_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "thermostatCycleLength",
+      "");
+  }
+}
+
+gradualThermostatType* gradualThermostatType::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class gradualThermostatType (*this, f, c);
+}
+
+gradualThermostatType& gradualThermostatType::
+operator= (const gradualThermostatType& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->initTemperature_ = x.initTemperature_;
+    this->targetTemperature_ = x.targetTemperature_;
+    this->maxTemperatureChange_ = x.maxTemperatureChange_;
+    this->thermostatCycleLength_ = x.thermostatCycleLength_;
+  }
+
+  return *this;
+}
+
+gradualThermostatType::
+~gradualThermostatType ()
+{
+}
+
+// ThermostatType
+//
+
+ThermostatType::
+ThermostatType ()
+: ::xml_schema::type (),
+  none_ (this),
+  simple_ (this),
+  gradual_ (this)
+{
+}
+
+ThermostatType::
+ThermostatType (const ThermostatType& x,
+                ::xml_schema::flags f,
+                ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  none_ (x.none_, f, this),
+  simple_ (x.simple_, f, this),
+  gradual_ (x.gradual_, f, this)
+{
+}
+
+ThermostatType::
+ThermostatType (const ::xercesc::DOMElement& e,
+                ::xml_schema::flags f,
+                ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  none_ (this),
+  simple_ (this),
+  gradual_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void ThermostatType::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // none
+    //
+    if (n.name () == "none" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< none_type > r (
+        none_traits::create (i, f, this));
+
+      if (!this->none_)
+      {
+        this->none_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // simple
+    //
+    if (n.name () == "simple" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< simple_type > r (
+        simple_traits::create (i, f, this));
+
+      if (!this->simple_)
+      {
+        this->simple_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // gradual
+    //
+    if (n.name () == "gradual" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< gradual_type > r (
+        gradual_traits::create (i, f, this));
+
+      if (!this->gradual_)
+      {
+        this->gradual_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    break;
+  }
+}
+
+ThermostatType* ThermostatType::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class ThermostatType (*this, f, c);
+}
+
+ThermostatType& ThermostatType::
+operator= (const ThermostatType& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->none_ = x.none_;
+    this->simple_ = x.simple_;
+    this->gradual_ = x.gradual_;
+  }
+
+  return *this;
+}
+
+ThermostatType::
+~ThermostatType ()
 {
 }
 
@@ -2733,10 +3324,7 @@ Simulation_t ()
   averageVelo_ (this),
   boundaries_ (this),
   cutoffRadius_ (this),
-  initTemperature_ (this),
-  targetTemperature_ (this),
-  maxTemperatureChange_ (this),
-  thermostatCycleLength_ (this),
+  thermostat_ (this),
   cuboid_ (this),
   sphere_ (this),
   base_name_ (this),
@@ -2758,10 +3346,7 @@ Simulation_t (const Simulation_t& x,
   averageVelo_ (x.averageVelo_, f, this),
   boundaries_ (x.boundaries_, f, this),
   cutoffRadius_ (x.cutoffRadius_, f, this),
-  initTemperature_ (x.initTemperature_, f, this),
-  targetTemperature_ (x.targetTemperature_, f, this),
-  maxTemperatureChange_ (x.maxTemperatureChange_, f, this),
-  thermostatCycleLength_ (x.thermostatCycleLength_, f, this),
+  thermostat_ (x.thermostat_, f, this),
   cuboid_ (x.cuboid_, f, this),
   sphere_ (x.sphere_, f, this),
   base_name_ (x.base_name_, f, this),
@@ -2783,10 +3368,7 @@ Simulation_t (const ::xercesc::DOMElement& e,
   averageVelo_ (this),
   boundaries_ (this),
   cutoffRadius_ (this),
-  initTemperature_ (this),
-  targetTemperature_ (this),
-  maxTemperatureChange_ (this),
-  thermostatCycleLength_ (this),
+  thermostat_ (this),
   cuboid_ (this),
   sphere_ (this),
   base_name_ (this),
@@ -2900,58 +3482,16 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
-    // initTemperature
+    // thermostat
     //
-    if (n.name () == "initTemperature" && n.namespace_ ().empty ())
+    if (n.name () == "thermostat" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< initTemperature_type > r (
-        initTemperature_traits::create (i, f, this));
+      ::std::unique_ptr< thermostat_type > r (
+        thermostat_traits::create (i, f, this));
 
-      if (!this->initTemperature_)
+      if (!this->thermostat_)
       {
-        this->initTemperature_.set (::std::move (r));
-        continue;
-      }
-    }
-
-    // targetTemperature
-    //
-    if (n.name () == "targetTemperature" && n.namespace_ ().empty ())
-    {
-      ::std::unique_ptr< targetTemperature_type > r (
-        targetTemperature_traits::create (i, f, this));
-
-      if (!this->targetTemperature_)
-      {
-        this->targetTemperature_.set (::std::move (r));
-        continue;
-      }
-    }
-
-    // maxTemperatureChange
-    //
-    if (n.name () == "maxTemperatureChange" && n.namespace_ ().empty ())
-    {
-      ::std::unique_ptr< maxTemperatureChange_type > r (
-        maxTemperatureChange_traits::create (i, f, this));
-
-      if (!this->maxTemperatureChange_)
-      {
-        this->maxTemperatureChange_.set (::std::move (r));
-        continue;
-      }
-    }
-
-    // thermostatCycleLength
-    //
-    if (n.name () == "thermostatCycleLength" && n.namespace_ ().empty ())
-    {
-      ::std::unique_ptr< thermostatCycleLength_type > r (
-        thermostatCycleLength_traits::create (i, f, this));
-
-      if (!this->thermostatCycleLength_)
-      {
-        this->thermostatCycleLength_.set (::std::move (r));
+        this->thermostat_.set (::std::move (r));
         continue;
       }
     }
@@ -3052,10 +3592,7 @@ operator= (const Simulation_t& x)
     this->averageVelo_ = x.averageVelo_;
     this->boundaries_ = x.boundaries_;
     this->cutoffRadius_ = x.cutoffRadius_;
-    this->initTemperature_ = x.initTemperature_;
-    this->targetTemperature_ = x.targetTemperature_;
-    this->maxTemperatureChange_ = x.maxTemperatureChange_;
-    this->thermostatCycleLength_ = x.thermostatCycleLength_;
+    this->thermostat_ = x.thermostat_;
     this->cuboid_ = x.cuboid_;
     this->sphere_ = x.sphere_;
     this->base_name_ = x.base_name_;

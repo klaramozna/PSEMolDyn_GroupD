@@ -5,8 +5,8 @@
 #include "Thermostat.h"
 #include <cmath>
 #include "../utils/VectorDouble3.h"
-#include "../utils/MaxwellBoltzmannDistribution.h"
 #include <stdexcept>
+#include "../utils/MaxwellBoltzmannDistribution.h"
 
 
 void Thermostat::updateState(const std::vector<Particle> &particles) {

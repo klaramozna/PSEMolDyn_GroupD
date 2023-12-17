@@ -5,7 +5,6 @@
 #ifndef PSEMOLDYN_GROUPD_THERMOSTAT_H
 #define PSEMOLDYN_GROUPD_THERMOSTAT_H
 
-
 #include "../Particles/Particle.h"
 
 class Thermostat {
@@ -17,7 +16,9 @@ public:
      * @param cycleLength Number of iterations after which the thermostat is applied.
      * @param dim Dimension used. Has to be between 1 and 3.
      */
-    Thermostat(double initTemperature, double targetTemperature, int cycleLength, int dim): initTemperature{initTemperature}, currentTemperature{0}, targetTemperature{targetTemperature}, dim{dim}, cycleLength{cycleLength}, currentIteration{0}{};
+    Thermostat(double initTemperature, double targetTemperature, int cycleLength, int dim): initTemperature{initTemperature}, currentTemperature{0}, targetTemperature{targetTemperature}, dim{dim}, cycleLength{cycleLength}, currentIteration{0}{}
+
+    Thermostat() = default;
 
     /**
      * @brief Changes the temperature of the given particle according to the type of the thermostat.

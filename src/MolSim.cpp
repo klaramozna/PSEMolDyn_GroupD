@@ -21,6 +21,10 @@
 
 #include "Simulation/SimpleThermostat.h"
 #include "Simulation/Physics/GravityForce.h"
+#include "Simulation/Thermostat.h"
+#include "Simulation/SimpleThermostat.h"
+#include "Simulation/GradualThermostat.h"
+#include "Simulation/FakeThermostat.h"
 
 /* Logging */
 #include "IO/Logger.h"
@@ -39,6 +43,7 @@ int main(int argc, char *argsv[]) {
     CL cl;
     std::unique_ptr<ParticleReader> reader;
     std::unique_ptr<ForceCalculation> forceCalculation;
+    std::unique_ptr<Thermostat> thermostat;
     GravityForce gravity{0};
 
 
@@ -103,6 +108,16 @@ int main(int argc, char *argsv[]) {
         Logger::console->info("Force set to Mixing Rule LennardJones");
     }
 
+    if(simParameters.getThermostatType() == "none"){
+        thermostat = std::make_unique<FakeThermostat>();
+    }
+    if(simParameters.getThermostatType() == "simple"){
+        thermostat = std::make_unique<SimpleThermostat>(simParameters.getInitTemperature(), simParameters.getTargetTemperature(), simParameters.getThermostatCycleLength(), 3);
+    }
+    if(simParameters.getThermostatType() == "gradual"){
+        thermostat = std::make_unique<GradualThermostat>(simParameters.getInitTemperature(), simParameters.getTargetTemperature(), simParameters.getThermostatCycleLength(), 3, simParameters.getMaxTemperatureChange());
+    }
+
     // Initializing boundary
     Boundary boundary(simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2],
              simParameters.getSigma(), simParameters.getBoundaryBehavior());
@@ -135,11 +150,7 @@ int main(int argc, char *argsv[]) {
     int iteration = 0;
     double current_time = simParameters.getStartTime();
 
-
-    //TODO: change once xml parameters adjusted
-    SimpleThermostat thermostat{20, 20, 50, 3};
-
-    Simulation simulation(simParameters.getDeltaT(), simParameters.getSigma(),  container, *forceCalculation, thermostat, simParameters.getAverageVelo(), boundary, gravity);
+    Simulation simulation(simParameters.getDeltaT(), simParameters.getSigma(),  container, *forceCalculation, *thermostat, simParameters.getAverageVelo(), boundary, gravity);
 
     // This is ugly and shouldn't be in main, but it is for a later refactor
     if (simParameters.isTesting()) {
