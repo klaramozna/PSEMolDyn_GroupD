@@ -44,7 +44,10 @@ Members:
 ### Pending WS3 ### 
 * Falling Drop Simulation:
   
-https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/7c6588ad-81f9-4af7-984c-f21e1e02fa5f
+
+
+https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/270aacd1-1df2-4ef6-997c-75fba459e1a4
+
 
 
 
