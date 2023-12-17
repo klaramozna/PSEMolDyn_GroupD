@@ -12,7 +12,7 @@
 SimParameters::SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                              bool testing_val, int log_level_val,
                              const std::string& input_path_val, const std::string& input_mode_val,
-                             const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, const std::string& thermostatType, double gravity_factor_val){
+                             const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency_val, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, const std::string& thermostatType, double gravity_factor_val){
     end_time =end_time_val;
     delta_t = delta_t_val;
     averageVelo = averageVelo_val;
@@ -24,6 +24,7 @@ SimParameters::SimParameters(double end_time_val, double delta_t_val, double ave
     sigma=sigma_val;
     epsilon = epsilon_val;
     base_name = base_name_val;
+    write_frequency = write_frequency_val;
     cutoffRadius = cutoffRadius_val;
     boxSize = boxSize_val;
     boundaryBehavior = boundaryBehavior_val;
@@ -38,7 +39,7 @@ SimParameters::SimParameters(double end_time_val, double delta_t_val, double ave
 SimParameters::SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                              bool testing_val, int log_level_val,
                              const std::string& input_path_val, const std::string& input_mode_val,
-                             const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val){
+                             const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency_val ){
     end_time =end_time_val;
     delta_t = delta_t_val;
     averageVelo = averageVelo_val;
@@ -50,6 +51,7 @@ SimParameters::SimParameters(double end_time_val, double delta_t_val, double ave
     sigma=sigma_val;
     epsilon = epsilon_val;
     base_name = base_name_val;
+    write_frequency = write_frequency_val;
 }
 
 bool SimParameters::operator==(const SimParameters &other) const {
@@ -64,6 +66,7 @@ bool SimParameters::operator==(const SimParameters &other) const {
            input_path == other.getInputPath() &&
            force == other.getForce() &&
            base_name == other.getBaseName() &&
+           write_frequency == other.getWriteFrequency() &&
            initTemperature == other.getInitTemperature() &&
            targetTemperature == other.getTargetTemperature() &&
            maxTemperatureChange == other.getMaxTemperatureChange() &&
