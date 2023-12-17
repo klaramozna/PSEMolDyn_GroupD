@@ -184,6 +184,13 @@ private:
       * @return True rue if the given particle is positioned outside of the grid, otherwise false.
       */
      bool particleOutOfGrid(const Particle& p);
+
+     /**
+      * @brief Returns (x,y,z) according to multi index
+      * @param index Integer specifying the multi index
+      * @return (x,y,z) int array
+      */
+     std::array<int,3> getCoordinateFromIndex(int index);
 };
 
 
