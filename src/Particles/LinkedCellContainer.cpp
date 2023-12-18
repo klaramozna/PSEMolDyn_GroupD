@@ -86,7 +86,6 @@ void LinkedCellContainer::moveParticle(const Particle &p1, int oldCell, int newC
 void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &function) {
     // Creating a vector for marking particles that need to be moved
     std::vector<std::pair<Particle, int>> particlesToBeMoved{}; // stores each particle that needs to be moved with the cell it's beeing moved from
-    particlesToBeMoved.reserve(size);
 
     // Applying given function to each particle and marking particles for movement
     for(int i = 0; i < grid.size(); i++){
@@ -175,12 +174,24 @@ int LinkedCellContainer::getParticleIndex(const Particle &p) {
 }
 
 void LinkedCellContainer::applyToBoundary(const std::function<void(Particle (&))> &function) {
+    // Creating a vector for marking particles that need to be moved
+    std::vector<std::pair<Particle, int>> particlesToBeMoved{}; // stores each particle that needs to be moved with the cell it's beeing moved from
+
     for (auto boundaryCell : boundaryCells_ptr) {
         if (boundaryCell != nullptr) {
             for (auto &particle : *boundaryCell) {
+                int currentCell = getParticleIndex(particle);
                 function(particle);
+                if(!isInCorrectCell(particle, currentCell)){
+                    particlesToBeMoved.emplace_back(particle, currentCell);
+                }
             }
         }
+    }
+
+    // Moving particles to their new cells
+    for(auto & particle : particlesToBeMoved){
+        moveParticle(particle.first, particle.second, getParticleIndex(particle.first));
     }
 }
 

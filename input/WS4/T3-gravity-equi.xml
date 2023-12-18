@@ -28,7 +28,8 @@
             <targetTemperature> 0.5 </targetTemperature>
             <thermostatCycleLength> 1000 </thermostatCycleLength>
         </simple>
-    </thermostat>    
+    </thermostat>
+    <brownian_motion>true</brownian_motion>
     
  <!-- Provide Particles (Cuboid) -->
  <cuboid>
