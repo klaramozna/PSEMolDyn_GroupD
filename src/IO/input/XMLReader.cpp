@@ -177,6 +177,10 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             SimParameters.setCutoffRadius(sim->cutoffRadius().get());
         }
 
+        Logger::console->debug("Reading brownian motion indicator {} from XML", sim->brownian_motion());
+        SimParameters.setBrownianMotion(sim->brownian_motion());
+
+
 
     }
     catch (const xml_schema::exception& e) {

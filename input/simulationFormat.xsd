@@ -137,7 +137,7 @@
         <xs:element name = "boundaries" type="Boundaries" minOccurs="0" maxOccurs="1"/>
         <xs:element name="cutoffRadius" type="common:nonNegativeDouble" minOccurs="0" maxOccurs="1" default="3.0"/>
           <xs:element name="thermostat" type="ThermostatType" minOccurs="0" maxOccurs="1"/>
-
+          <xs:element name="brownian_motion" type="xs:boolean"/>
         
         <!-- Provide Particles -->
         <xs:element name="cuboid" type="Cuboid" minOccurs="0" maxOccurs="unbounded"/>

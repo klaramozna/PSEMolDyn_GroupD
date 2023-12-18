@@ -1397,6 +1397,24 @@ thermostat (::std::unique_ptr< thermostat_type > x)
   this->thermostat_.set (std::move (x));
 }
 
+const Simulation_t::brownian_motion_type& Simulation_t::
+brownian_motion () const
+{
+  return this->brownian_motion_.get ();
+}
+
+Simulation_t::brownian_motion_type& Simulation_t::
+brownian_motion ()
+{
+  return this->brownian_motion_.get ();
+}
+
+void Simulation_t::
+brownian_motion (const brownian_motion_type& x)
+{
+  this->brownian_motion_.set (x);
+}
+
 const Simulation_t::cuboid_sequence& Simulation_t::
 cuboid () const
 {
@@ -3315,7 +3333,7 @@ const Simulation_t::base_name_type Simulation_t::base_name_default_value_ (
   "MD_vtk");
 
 Simulation_t::
-Simulation_t ()
+Simulation_t (const brownian_motion_type& brownian_motion)
 : ::xml_schema::type (),
   t_end_ (this),
   delta_t_ (this),
@@ -3325,6 +3343,7 @@ Simulation_t ()
   boundaries_ (this),
   cutoffRadius_ (this),
   thermostat_ (this),
+  brownian_motion_ (brownian_motion, this),
   cuboid_ (this),
   sphere_ (this),
   base_name_ (this),
@@ -3347,6 +3366,7 @@ Simulation_t (const Simulation_t& x,
   boundaries_ (x.boundaries_, f, this),
   cutoffRadius_ (x.cutoffRadius_, f, this),
   thermostat_ (x.thermostat_, f, this),
+  brownian_motion_ (x.brownian_motion_, f, this),
   cuboid_ (x.cuboid_, f, this),
   sphere_ (x.sphere_, f, this),
   base_name_ (x.base_name_, f, this),
@@ -3369,6 +3389,7 @@ Simulation_t (const ::xercesc::DOMElement& e,
   boundaries_ (this),
   cutoffRadius_ (this),
   thermostat_ (this),
+  brownian_motion_ (this),
   cuboid_ (this),
   sphere_ (this),
   base_name_ (this),
@@ -3496,6 +3517,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // brownian_motion
+    //
+    if (n.name () == "brownian_motion" && n.namespace_ ().empty ())
+    {
+      if (!brownian_motion_.present ())
+      {
+        this->brownian_motion_.set (brownian_motion_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     // cuboid
     //
     if (n.name () == "cuboid" && n.namespace_ ().empty ())
@@ -3570,6 +3602,13 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
 
     break;
   }
+
+  if (!brownian_motion_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "brownian_motion",
+      "");
+  }
 }
 
 Simulation_t* Simulation_t::
@@ -3593,6 +3632,7 @@ operator= (const Simulation_t& x)
     this->boundaries_ = x.boundaries_;
     this->cutoffRadius_ = x.cutoffRadius_;
     this->thermostat_ = x.thermostat_;
+    this->brownian_motion_ = x.brownian_motion_;
     this->cuboid_ = x.cuboid_;
     this->sphere_ = x.sphere_;
     this->base_name_ = x.base_name_;

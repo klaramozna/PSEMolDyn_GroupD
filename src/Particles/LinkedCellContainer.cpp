@@ -79,6 +79,7 @@ void LinkedCellContainer::moveParticle(const Particle &p1, int oldCell, int newC
         size--;
     }
     else{
+
         grid[newCell].addParticle(p1);
     }
 

@@ -12,6 +12,7 @@
         </lennard>
     </force>
     <averageVelo>0.1</averageVelo>
+    <brownian_motion>false</brownian_motion>
 
     <!-- Provide Particles (Cuboid) -->
     <cuboid>
