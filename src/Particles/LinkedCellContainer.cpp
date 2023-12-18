@@ -66,21 +66,19 @@ void LinkedCellContainer::updateCells() {
 void LinkedCellContainer::moveParticle(const Particle &p1, int oldCell, int newCell) {
     grid[oldCell].deleteParticle(p1);
 
-    // Check if particle needs to be dismarked
-    auto [x,y,z] = getCoordinateFromIndex(newCell);
-    if(!isBoundaryCell(x,y,z)){
-        Particle p2(p1);
-        p2.unmarkForDeletion();
-        grid[newCell].addParticle(p2);
-    }
-
     // Check if particle is outside
     if(particleOutOfGrid(p1)){
         size--;
-    }
-    else{
-
-        grid[newCell].addParticle(p1);
+    } else {
+        auto [x,y,z] = getCoordinateFromIndex(newCell);
+        // Check if we are in a boundary cell now
+        if(!isBoundaryCell(x,y,z)){
+            Particle p2(p1);
+            p2.unmarkForDeletion();
+            grid[newCell].addParticle(p2);
+        } else {
+            grid[newCell].addParticle(p1);
+        }
     }
 
 }
