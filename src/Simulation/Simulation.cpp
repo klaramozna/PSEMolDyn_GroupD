@@ -68,12 +68,7 @@ void Simulation::applyGravity(Particle& p) {
 }
 
 void Simulation::runIteration() {
-    // adjust temperature
-    thermostat.updateState(container.getParticleVector());
-    container.applyToAll([this](Particle& p){thermostat.updateTemperature(p);});
-    thermostat.updateIteration();
-
-    // calculate new x
+     // calculate new x
     container.applyToAll([this](Particle& p) { calculateX(p); });
 
     // calculate new f
@@ -89,6 +84,11 @@ void Simulation::runIteration() {
     container.applyToAll([this](Particle& p) { applyGravity(p); });
     // calculate new v
     container.applyToAll([this](Particle& p) { calculateV(p); });
+
+     // adjust temperature
+    thermostat.updateState(container.getParticleVector());
+    container.applyToAll([this](Particle& p){thermostat.updateTemperature(p);});
+    thermostat.updateIteration();
 }
 
 void Simulation::setOldForce(Particle& p) {

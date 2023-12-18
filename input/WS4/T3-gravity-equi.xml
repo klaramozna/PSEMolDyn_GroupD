@@ -12,7 +12,7 @@
     <averageVelo>0.1</averageVelo>
     <boundaries>
 
-    <BoxSize> <x>303</x> <y>180</y> <z>1</z></BoxSize>
+    <BoxSize> <x>303</x> <y>180</y> <z>4</z></BoxSize>
      <Front>Reflecting</Front>
      <Back>Reflecting</Back>
      <Top>Reflecting</Top>
@@ -36,7 +36,7 @@
     <lower-left-coord>
         <x>1.5</x>
         <y>2</y>
-        <z>0.0</z>
+        <z>2.0</z>
     </lower-left-coord>
     <number-of-particles>
         <x>250</x>
