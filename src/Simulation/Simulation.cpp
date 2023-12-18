@@ -13,25 +13,27 @@
 
 std::array<double, 3> maxwellBoltzmannDistributedVelocity(double averageVelocity, size_t dimensions);
 
-Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity) :
+Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion) :
                         container(container),
                         forceCalculation(calculation),
                         thermostat(thermostat),
                         boundaryEnforcer(sigma, container, boundary.getDimensions(), boundary.getBoundaryTypes(), forceCalculation),
                         gravity(gravity),
                         delta_t(delta_t),
-                        averageVelo(averageVelo) {
+                        averageVelo(averageVelo), applyBrownianMotion(applyBrownianMotion) {
     // Apply brownian motion
-    if(typeid(thermostat) == typeid(FakeThermostat())) {
-        container.applyToAll([&averageVelo](Particle &p) {
-            std::array velocity = maxwellBoltzmannDistributedVelocity(averageVelo, 3);
-            p.setV(velocity[0], velocity[1], velocity[2]);
-        });
-    }
-    else{
-        container.applyToAll([&thermostat](Particle &p) {
-            thermostat.initializeBrownianMotion(p);
-        });
+    if(applyBrownianMotion){
+        if(typeid(thermostat) == typeid(FakeThermostat())) {
+            container.applyToAll([&averageVelo](Particle &p) {
+                std::array velocity = maxwellBoltzmannDistributedVelocity(averageVelo, 3);
+                p.setV(velocity[0], velocity[1], velocity[2]);
+            });
+        }
+        else{
+            container.applyToAll([&thermostat](Particle &p) {
+                thermostat.initializeBrownianMotion(p);
+            });
+        }
     }
 }
 

@@ -80,6 +80,7 @@ void LinkedCellContainer::moveParticle(const Particle &p1, int oldCell, int newC
             grid[newCell].addParticle(p1);
         }
     }
+
 }
 
 void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &function) {

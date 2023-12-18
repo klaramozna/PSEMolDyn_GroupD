@@ -45,7 +45,7 @@ public:
     SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                   bool testing_val, int log_level_val,
                   const std::string& input_path_val, const std::string& input_mode_val,
-                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, const std::string& thermostatType, double gravity_factor_val  = 0);
+                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, const std::string& thermostatType, bool brownianMotion, double gravity_factor_val  = 0);
 
     SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                   bool testing_val, int log_level_val,
@@ -80,6 +80,7 @@ public:
     double getMaxTemperatureChange()const{return maxTemperatureChange;}
     double getGravityFactor() const {return gravity_factor;}
     std::string getThermostatType() const {return thermostatType;}
+    bool getBrownianMotion() const {return brownianMotion;}
 
     // Setters for modifying parameter values
     void setEndTime(double val) { end_time = val; }
@@ -105,6 +106,7 @@ public:
     void setMaxTemperatureChange(double val){maxTemperatureChange = val;}
     void setGravityFactor (double val) {gravity_factor = val;}
     void setThermostatType (const std::string& thermostatType_val){thermostatType = thermostatType_val;}
+    void setBrownianMotion(bool val){brownianMotion = val;}
     bool operator==(const SimParameters &other) const;
 
 
@@ -224,6 +226,11 @@ private:
      * @brief none, simple or gradual depending on the type of the thermostat.
      */
     std::string thermostatType;
+
+    /**
+     * @brief True - brownian motion should be applied, False - not applied
+     */
+    bool brownianMotion;
 
 
 };

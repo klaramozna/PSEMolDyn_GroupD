@@ -4918,6 +4918,53 @@ class Simulation_t: public ::xml_schema::type
   //@}
 
   /**
+   * @name brownian_motion
+   *
+   * @brief Accessor and modifier functions for the %brownian_motion
+   * required element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::xml_schema::boolean brownian_motion_type;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< brownian_motion_type, char > brownian_motion_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element.
+   *
+   * @return A constant reference to the element.
+   */
+  const brownian_motion_type&
+  brownian_motion () const;
+
+  /**
+   * @brief Return a read-write reference to the element.
+   *
+   * @return A reference to the element.
+   */
+  brownian_motion_type&
+  brownian_motion ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  brownian_motion (const brownian_motion_type& x);
+
+  //@}
+
+  /**
    * @name cuboid
    *
    * @brief Accessor and modifier functions for the %cuboid
@@ -5361,7 +5408,7 @@ class Simulation_t: public ::xml_schema::type
    * @brief Create an instance from the ultimate base and
    * initializers for required elements and attributes.
    */
-  Simulation_t ();
+  Simulation_t (const brownian_motion_type&);
 
   /**
    * @brief Create an instance from a DOM element.
@@ -5441,6 +5488,7 @@ class Simulation_t: public ::xml_schema::type
   boundaries_optional boundaries_;
   cutoffRadius_optional cutoffRadius_;
   thermostat_optional thermostat_;
+  ::xsd::cxx::tree::one< brownian_motion_type > brownian_motion_;
   cuboid_sequence cuboid_;
   sphere_sequence sphere_;
   base_name_optional base_name_;
