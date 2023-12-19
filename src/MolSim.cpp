@@ -119,6 +119,14 @@ int main(int argc, char *argsv[]) {
     }
 
     // Initializing boundary
+    double particlesShift = 0;
+
+    // Checking if container depth is too small
+    if(simParameters.getBoxSize()[2] <= 2 * simParameters.getCutoffRadius()){
+        simParameters.setBoxSize(std::array<double, 3>{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], 3 * simParameters.getCutoffRadius()});
+        particlesShift = 3 * simParameters.getCutoffRadius() / 2;
+    }
+
     Boundary boundary(simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2],
              simParameters.getSigma(), simParameters.getBoundaryBehavior());
 
@@ -135,6 +143,10 @@ int main(int argc, char *argsv[]) {
     LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
 
     /* To do: solve this dependency between readFile and container*/
+    if(particlesShift != 0){
+        container_h.applyToAll([&particlesShift](Particle& p){p.setX(p.getXVector() + VectorDouble3(std::array<double, 3>{0, 0, particlesShift}));});
+    }
+
     container.addParticles(container_h.getParticleVector());
 
 
