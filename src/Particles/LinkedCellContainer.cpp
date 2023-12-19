@@ -22,6 +22,18 @@ LinkedCellContainer::LinkedCellContainer(Boundary boundary, double cutoffRadius,
         gridShift[i] = (nc[i] * cellSize - boundary.getDimensions()[i]) / 2;
     }
 
+    // Populate lookup table for getGridIndex
+    gridIndexLookupTable.resize(nc[0]);
+    for(int x = 0; x < nc[0]; x++){
+        gridIndexLookupTable[x].resize(nc[1]);
+        for(int y = 0; y < nc[1]; y++){
+            gridIndexLookupTable[x][y].reserve(nc[2]);
+            for(int z = 0; z < nc[2]; z++){
+                gridIndexLookupTable[x][y][z] = getGridIndex(x, y, z);
+            }
+        }
+    }
+
     // Initialize grid
     grid.resize(nc[0] * nc[1] * nc[2]);
 
@@ -162,6 +174,10 @@ int LinkedCellContainer::getGridIndex(int x, int y, int z) const {
     return x + nc[0] * (y + nc[1] * z);
 }
 
+int LinkedCellContainer::getGridIndexTable(int x, int y, int z) const {
+    return gridIndexLookupTable[x][y][z];
+}
+
 bool LinkedCellContainer::particleWithinCutoff(const Particle &p1, const Particle &p2) const {
     return getDistance(p1.getXVector(), p2.getXVector()) <= cutoffRadius;
 }
@@ -250,6 +266,7 @@ bool LinkedCellContainer::particleOutOfGrid(const Particle &p) {
 std::array<int, 3> LinkedCellContainer::getCoordinateFromIndex(int index) {
     return {index % nc[0], (index / nc[0]) % nc[1], index / (nc[0] * nc[1])};
 }
+
 
 
 

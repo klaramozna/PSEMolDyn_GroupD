@@ -119,6 +119,11 @@ private:
     size_t size;
 
     /**
+     * @brief Look up table for values of the function getGridIndex.
+     */
+    std::vector<std::vector<std::vector<int>>> gridIndexLookupTable;
+
+    /**
      * @brief Deletes the given particle from the cell with the index oldCell and adds it to the cell with the index newCell
      * @param p1 Particle to be moved.
      * @param oldCell Index of the cell the particle is being moved from.
@@ -142,6 +147,15 @@ private:
      * @return Grid index of the cell with the given coordinates.
      */
     int getGridIndex(int x, int y, int z) const;
+
+    /**
+     * @brief Returns a the index in the grid of a cell with the given position - same as getGridIndex, but optimized using a lookup-table.
+     * @param x X position of the cell.
+     * @param y Y position of the cell.
+     * @param z Z position of the cell.
+     * @return Grid index of the cell with the given coordinates.
+     */
+    int getGridIndexTable(int x, int y, int z) const;
 
     /**
      * @brief Returns true, if the cell with the position (x, y, z) is within the cutoff radius of the given particle.
