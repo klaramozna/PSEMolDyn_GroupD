@@ -130,6 +130,7 @@ void BoundaryEnforcer::applyPeriodicBoundary(Particle &particle) {
 
                 if (isHaloParticle(mirroredX, mirroredY, mirroredZ)) {
                     Particle replicatedParticle(particle);
+                    replicatedParticle.unmarkForMirroring();
                     replicatedParticle.setX(mirroredX, mirroredY, mirroredZ);
                     replicatedParticle.setV(0,0,0);
                     container.addParticle(replicatedParticle);

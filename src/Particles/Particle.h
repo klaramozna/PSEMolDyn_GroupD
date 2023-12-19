@@ -80,7 +80,7 @@ public:
      * @param type The type of the particle.
      */
     Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg, double m_arg, double epsilon, double sigma,
-             int type = 0): x{x_arg}, v{v_arg}, f{0}, old_f{0}, m{m_arg}, type{type}, epsilon{epsilon}, sigma{sigma}{};
+             int type = 0): x{x_arg}, v{v_arg}, f{0}, old_f{0}, m{m_arg}, type{type}, epsilon{epsilon}, sigma{sigma} {};
 
     virtual ~Particle();
 
@@ -189,6 +189,14 @@ public:
      * @return
      */
     void markForMirroring();
+
+    /**
+     * @brief Sets the value of markedForMirroring to true
+     *
+     * @param other
+     * @return
+     */
+    void unmarkForMirroring();
 
     bool operator==(const Particle &other) const;
 

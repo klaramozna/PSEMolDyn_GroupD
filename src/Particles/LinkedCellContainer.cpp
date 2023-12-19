@@ -187,6 +187,7 @@ void LinkedCellContainer::deleteHaloParticles() {
             if(boundary.isOutside(particle)){
                 if (particle.isMarkedForMirroring()) {
                     Particle p2 = mirrorParticle(particle);
+                    p2.unmarkForMirroring();
                     addParticle(p2);
                     size++;
                 }

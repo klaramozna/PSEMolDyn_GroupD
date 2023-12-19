@@ -26,7 +26,7 @@ Particle::Particle(const Particle &other) {
     type = other.type;
     epsilon = other.epsilon;
     sigma = other.sigma;
-    markedForMirroring = false;
+    markedForMirroring = other.markedForMirroring;
 }
 
 Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
@@ -131,6 +131,10 @@ void Particle::markForMirroring() {
 
 bool Particle::isMarkedForMirroring() const {
     return markedForMirroring;
+}
+
+void Particle::unmarkForMirroring() {
+    markedForMirroring = false;
 }
 
 std::ostream &operator<<(std::ostream &stream, Particle &p) {
