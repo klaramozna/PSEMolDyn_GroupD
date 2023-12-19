@@ -94,6 +94,11 @@ Which parts of the code consume the most runtime?
 * We suspect the reason why this optimization did not speed up our simulation is that a lot more time is spent on calculating forces, creating VectorDoubles etc, compared to the ```updateState``` function, as we saw in the profiling results. So this optimization is not significant in the grand scheme of things.
 * Because this optimization did not change anything, we didn't merge it into ```main```. If you want to look at it, it is in the last commit (6a4f19a) on the branch ```thermostat-optimization```.
 
+### Particle optimization ### 
+* This optimization is based on the profiling results. The repeated construction of ```VectorDouble``` objects takes up around 5% of the time of the entire simulation. One reason we call the ```VectorDouble``` constructor so often is because the three-dimensional attributes in the ```Particle``` class (velocity, position...), are stored as an array. The ```Particle``` class offers a getters that return arrays, but most of the time, we do not just need the values, we need to perform calculations on attributes. For this reason, we most often use the ```get<attribute_name>Vector()``` getters that return a ```VectorDouble```. The same applies for the setters that take a ```VectorDouble``` as a parameter as well. 
+* This leads to very frequently needing to construct a ```VectorDouble``` from an array and vice versa. To reduce the amount of ```VectorDouble``` and ```std::array``` constructor calls, we decided to store the attributes in ```Particle``` as ```VectorDouble``` instead of an array.
+* This optimization yielded results. We measured the performance once again with the falling drop simulation, this time not using the thermostat. Even with -O3 turned on, we measured a runtime around 10% lower after the optimization - ca 77 milliseconds before and ca 87 milliseconds after. (We say around, not exact numbers, because we measured each simulation at least two times and took an average, so that we can confirm that the difference is not a result of for example different OS scheduling during the simulation.)
+
   
 # Misc #
 
