@@ -21,6 +21,10 @@
 
 #include "Simulation/SimpleThermostat.h"
 #include "Simulation/Physics/GravityForce.h"
+#include "Simulation/Thermostat.h"
+#include "Simulation/SimpleThermostat.h"
+#include "Simulation/GradualThermostat.h"
+#include "Simulation/FakeThermostat.h"
 
 /* Logging */
 #include "IO/Logger.h"
@@ -39,12 +43,13 @@ int main(int argc, char *argsv[]) {
     CL cl;
     std::unique_ptr<ParticleReader> reader;
     std::unique_ptr<ForceCalculation> forceCalculation;
+    std::unique_ptr<Thermostat> thermostat;
     GravityForce gravity{0};
 
 
     outputWriter::VTKWriter writer;
     SimParameters simParameters;
-    int status = cl.parse_arguments(argc, argsv, simParameters);
+    int status = cl.parse_input_path_and_mode_and_log(argc, argsv, simParameters);
 
     //any error in parsing
     if (status) {
@@ -83,6 +88,11 @@ int main(int argc, char *argsv[]) {
         reader->readFile(container_h, input_path);
     }
 
+    status = cl.parse_arguments(argc, argsv, simParameters);
+    if (status) {
+        return 1;
+    }
+
     if (simParameters.getForce() == "lennard") {
         forceCalculation = std::make_unique<LennardJones>(simParameters.getEpsilon(), simParameters.getSigma());
         Logger::console->info("Force set to lennard");
@@ -98,7 +108,25 @@ int main(int argc, char *argsv[]) {
         Logger::console->info("Force set to Mixing Rule LennardJones");
     }
 
+    if(simParameters.getThermostatType() == "none"){
+        thermostat = std::make_unique<FakeThermostat>();
+    }
+    if(simParameters.getThermostatType() == "simple"){
+        thermostat = std::make_unique<SimpleThermostat>(simParameters.getInitTemperature(), simParameters.getTargetTemperature(), simParameters.getThermostatCycleLength(), 3);
+    }
+    if(simParameters.getThermostatType() == "gradual"){
+        thermostat = std::make_unique<GradualThermostat>(simParameters.getInitTemperature(), simParameters.getTargetTemperature(), simParameters.getThermostatCycleLength(), 3, simParameters.getMaxTemperatureChange());
+    }
+
     // Initializing boundary
+    double particlesShift = 0;
+
+    // Checking if container depth is too small
+    if(simParameters.getBoxSize()[2] <= 2 * simParameters.getCutoffRadius()){
+        simParameters.setBoxSize(std::array<double, 3>{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], 3 * simParameters.getCutoffRadius()});
+        particlesShift = 3 * simParameters.getCutoffRadius() / 2;
+    }
+
     Boundary boundary(simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], simParameters.getBoxSize()[2],
              simParameters.getSigma(), simParameters.getBoundaryBehavior());
 
@@ -115,6 +143,10 @@ int main(int argc, char *argsv[]) {
     LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
 
     /* To do: solve this dependency between readFile and container*/
+    if(particlesShift != 0){
+        container_h.applyToAll([&particlesShift](Particle& p){p.setX(p.getXVector() + VectorDouble3(std::array<double, 3>{0, 0, particlesShift}));});
+    }
+
     container.addParticles(container_h.getParticleVector());
 
 
@@ -126,15 +158,11 @@ int main(int argc, char *argsv[]) {
     }
      
     Logger::console->info("Calculating ...");
-   
+    simParameters.print();
     int iteration = 0;
     double current_time = simParameters.getStartTime();
 
-
-    //TODO: change once xml parameters adjusted
-    SimpleThermostat thermostat{20, 20, 50, 3};
-
-    Simulation simulation(simParameters.getDeltaT(), simParameters.getSigma(),  container, *forceCalculation, thermostat, simParameters.getAverageVelo(), boundary, gravity);
+    Simulation simulation(simParameters.getDeltaT(), simParameters.getSigma(),  container, *forceCalculation, *thermostat, simParameters.getAverageVelo(), boundary, gravity, simParameters.getBrownianMotion());
 
     // This is ugly and shouldn't be in main, but it is for a later refactor
     if (simParameters.isTesting()) {
@@ -159,7 +187,7 @@ int main(int argc, char *argsv[]) {
             simulation.runIteration();
 
             iteration++;
-            if (iteration % 10 == 0) {
+            if (iteration % simParameters.getWriteFrequency() == 0) {
                 writer.plotParticles(simulation.getParticles(), simParameters.getBaseName(), iteration);
             }
 
@@ -175,7 +203,7 @@ int main(int argc, char *argsv[]) {
             c.writeCheckpoint(container, simParameters.getStoreCheckpoint());
         }
         
-        Logger::console->info("Output written. Terminating...");
+        Logger::console->info("Output written with frequency {}. Terminating...", simParameters.getWriteFrequency());
         return 0;
     }
 }

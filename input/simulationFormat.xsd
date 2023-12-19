@@ -45,6 +45,34 @@
   </xs:choice>
 </xs:complexType>
 
+<xs:complexType name="simpleThermostatType">
+    <xs:sequence>
+        <xs:element name="initTemperature" type="common:nonNegativeDouble"/>
+        <xs:element name="targetTemperature" type="common:nonNegativeDouble"/>
+        <xs:element name="thermostatCycleLength" type="common:nonNegativeInteger"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="gradualThermostatType">
+    <xs:sequence>
+        <xs:element name="initTemperature" type="common:nonNegativeDouble"/>
+        <xs:element name="targetTemperature" type="common:nonNegativeDouble"/>
+        <xs:element name="maxTemperatureChange" type="common:nonNegativeDouble"/>
+        <xs:element name="thermostatCycleLength" type="common:nonNegativeInteger"/>
+    </xs:sequence>
+</xs:complexType>
+
+
+    <!-- choose one thermostat type -->
+<xs:complexType name="ThermostatType">
+    <xs:choice>
+        <!-- first element is default -->
+        <xs:element name="none" type="xs:string"/>
+        <xs:element name="simple" type="simpleThermostatType"/>
+        <xs:element name="gradual" type="gradualThermostatType"/>
+    </xs:choice>
+</xs:complexType>
+
 
 <xs:complexType name="Cuboid">
     <xs:sequence>
@@ -108,11 +136,8 @@
         <xs:element name="averageVelo" type="xs:double" minOccurs="0" maxOccurs="1" default="0.1"/> <!-- Brownian Motion average velocity -->
         <xs:element name = "boundaries" type="Boundaries" minOccurs="0" maxOccurs="1"/>
         <xs:element name="cutoffRadius" type="common:nonNegativeDouble" minOccurs="0" maxOccurs="1" default="3.0"/>
-          <xs:element name="initTemperature" type="common:nonNegativeDouble" minOccurs="0" maxOccurs="1" default="10.0"/>
-          <xs:element name="targetTemperature" type="common:nonNegativeDouble" minOccurs="0" maxOccurs="1" default="10.0"/>
-          <xs:element name="maxTemperatureChange" type="common:nonNegativeDouble" minOccurs="0" maxOccurs="1" default="1.0"/>
-          <xs:element name="thermostatCycleLength" type="common:nonNegativeInteger" minOccurs="0" maxOccurs="1" default="3"/>
-
+          <xs:element name="thermostat" type="ThermostatType" minOccurs="0" maxOccurs="1"/>
+          <xs:element name="brownian_motion" type="xs:boolean"/>
         
         <!-- Provide Particles -->
         <xs:element name="cuboid" type="Cuboid" minOccurs="0" maxOccurs="unbounded"/>

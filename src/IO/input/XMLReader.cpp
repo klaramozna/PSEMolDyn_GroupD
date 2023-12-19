@@ -20,7 +20,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
     try {
         std::unique_ptr<Simulation_t> sim(Simulation(filename));
 
-        if (sim->log_level().present()) {
+        if (sim->log_level().present() && !Logger::is_log_level_set()) {
             SimParameters.setLogLevel(sim->log_level().get());
             Logger::init(sim->log_level().get());
         }
@@ -35,6 +35,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
 
         if (sim->writeFrequency().present()){
             Logger::console->debug("Reading Writing Frequency {} from XML", sim->writeFrequency().get());
+            SimParameters.setWriteFrequency(sim->writeFrequency().get());
         }
 
 
@@ -66,6 +67,29 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
                 Logger::console->debug("Reading force type 3 (Mixing Rule Lennard Jones) from XML");
                 SimParameters.setForce("MixingRuleLennardJones");
             } 
+        }
+
+        if (sim->thermostat()) {
+            if (sim->thermostat()->none()) {
+                Logger::console->debug("Reading thermostat type 1 (none) from XML");
+                SimParameters.setThermostatType("none");
+            } else if (sim->thermostat()->simple()) {
+                simpleThermostatType& thermostat = *(sim->thermostat()->simple());
+                Logger::console->debug("Reading thermostat type 2 (simple) from XML");
+                SimParameters.setThermostatType("simple");
+                SimParameters.setInitTemperature(thermostat.initTemperature());
+                SimParameters.setThermostatCycleLength(thermostat.thermostatCycleLength());
+                SimParameters.setTargetTemperature(thermostat.targetTemperature());
+            }
+            else if (sim->thermostat()->gradual()) {
+                gradualThermostatType& thermostat = *(sim->thermostat()->gradual());
+                Logger::console->debug("Reading thermostat type 3 (gradual) from XML");
+                SimParameters.setThermostatType("gradual");
+                SimParameters.setInitTemperature(thermostat.initTemperature());
+                SimParameters.setThermostatCycleLength(thermostat.thermostatCycleLength());
+                SimParameters.setTargetTemperature(thermostat.targetTemperature());
+                SimParameters.setMaxTemperatureChange(thermostat.maxTemperatureChange());
+            }
         }
 
         if (sim->gravity().present()) {
@@ -153,25 +177,9 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             SimParameters.setCutoffRadius(sim->cutoffRadius().get());
         }
 
-        if (sim->initTemperature().present()){
-            Logger::console->debug("Reading initTemperature {} from XML", sim->initTemperature().get());
-            SimParameters.setInitTemperature(sim->initTemperature().get());
-        }
+        Logger::console->debug("Reading brownian motion indicator {} from XML", sim->brownian_motion());
+        SimParameters.setBrownianMotion(sim->brownian_motion());
 
-        if (sim->targetTemperature().present()){
-            Logger::console->debug("Reading targetTemperature {} from XML", sim->targetTemperature().get());
-            SimParameters.setTargetTemperature(sim->targetTemperature().get());
-        }
-
-        if (sim->maxTemperatureChange().present()){
-            Logger::console->debug("Reading maxTemperatureChange {} from XML", sim->maxTemperatureChange().get());
-            SimParameters.setMaxTemperatureChange(sim->maxTemperatureChange().get());
-        }
-
-        if (sim->thermostatCycleLength().present()){
-            Logger::console->debug("Reading thermostatCycleLength {} from XML", sim->thermostatCycleLength().get());
-            SimParameters.setThermostatCycleLength(sim->thermostatCycleLength().get());
-        }
 
 
     }

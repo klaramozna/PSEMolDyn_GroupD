@@ -9,15 +9,33 @@
 
 #include "Particles/LinkedCellContainer.h"
 #include "Particles/BoundaryEnforcer.h"
+#include "Simulation/FakeThermostat.h"
 
-Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity) :
+std::array<double, 3> maxwellBoltzmannDistributedVelocity(double averageVelocity, size_t dimensions);
+
+Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion) :
                         container(container),
                         forceCalculation(calculation),
                         thermostat(thermostat),
                         boundaryEnforcer(sigma, container, boundary.getDimensions(), boundary.getBoundaryTypes(), forceCalculation),
                         gravity(gravity),
                         delta_t(delta_t),
-                        averageVelo(averageVelo) {}
+                        averageVelo(averageVelo), applyBrownianMotion(applyBrownianMotion) {
+    // Apply brownian motion
+    if(applyBrownianMotion){
+        if(typeid(thermostat) == typeid(FakeThermostat())) {
+            container.applyToAll([&averageVelo](Particle &p) {
+                std::array velocity = maxwellBoltzmannDistributedVelocity(averageVelo, 3);
+                p.setV(velocity[0], velocity[1], velocity[2]);
+            });
+        }
+        else{
+            container.applyToAll([&thermostat](Particle &p) {
+                thermostat.initializeBrownianMotion(p);
+            });
+        }
+    }
+}
 
 
 Simulation::~Simulation() = default;
@@ -50,10 +68,6 @@ void Simulation::applyGravity(Particle& p) {
 }
 
 void Simulation::runIteration() {
-    // adjust temperature
-    thermostat.updateState(container.getParticleVector());
-    container.applyToAll([this](Particle& p){thermostat.updateTemperature(p);});
-    thermostat.updateIteration();
 
     // calculate new x
     container.applyToAll([this](Particle& p) { calculateX(p); });
@@ -71,6 +85,11 @@ void Simulation::runIteration() {
     container.applyToAll([this](Particle& p) { applyGravity(p); });
     // calculate new v
     container.applyToAll([this](Particle& p) { calculateV(p); });
+
+    // adjust temperature
+    thermostat.updateState(container.getParticleVector());
+    container.applyToAll([this](Particle& p){thermostat.updateTemperature(p);});
+    thermostat.updateIteration();
 }
 
 void Simulation::setOldForce(Particle& p) {

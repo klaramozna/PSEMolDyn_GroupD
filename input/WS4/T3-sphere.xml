@@ -1,0 +1,58 @@
+<Simulation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../simulationFormat.xsd">
+
+    <!-- Simulation Arguments -->
+    <t_end>40</t_end>
+    <delta_t>0.0005</delta_t>
+    
+    <!-- Choose ForceType -->
+    <force>
+        <MixingRuleLennardJones></MixingRuleLennardJones>
+     </force>
+     <gravity> <gravity_factor> -12.44 </gravity_factor></gravity>
+   
+     <boundaries>
+
+        <BoxSize> <x>303</x> <y>180</y> <z>1</z></BoxSize>
+         <Front>Reflecting</Front>
+         <Back>Reflecting</Back>
+         <Top>Reflecting</Top>
+         <Right>Reflecting</Right>
+         <Bottom>Reflecting</Bottom>
+         <Left>Reflecting</Left>
+        
+        </boundaries>
+        <cutoffRadius>3</cutoffRadius>
+        <thermostat>
+            <none></none>
+        </thermostat>   
+
+    <!-- Provide Particles (Sphere) -->
+    <sphere>
+        <dimension>2D</dimension>
+        <center>
+            <x>150.0</x>
+            <y>150.0</y>
+            <z>0.0</z>
+        </center>
+        <radius>
+            20
+        </radius>
+        <distance>1.1225</distance>
+        <mass>1.0</mass>
+        <initial_velocity>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </initial_velocity>
+    </sphere>
+
+
+    <!-- IO -->
+    <base_name>MD_vtk</base_name>
+    <writeFrequency>100</writeFrequency>
+
+    <!-- Misc -->
+    <log_level>2</log_level>
+    <testing_mode>false</testing_mode>
+
+</Simulation>

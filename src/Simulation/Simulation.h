@@ -29,6 +29,7 @@ private:
 
     double delta_t;
     double averageVelo;
+    bool applyBrownianMotion;
 
     /**
     * @brief calculate the velocity of a particle
@@ -57,7 +58,7 @@ private:
 
 public:
 
-    Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity);
+    Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion);
 
     virtual ~Simulation();
 

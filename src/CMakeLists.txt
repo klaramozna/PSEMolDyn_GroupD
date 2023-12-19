@@ -43,6 +43,9 @@ Simulation/Physics/GravitationalForce.cpp
         Simulation/Physics/MixingRuleLennardJones.cpp
         Simulation/Physics/MixingRuleLennardJones.h
         Simulation/Physics/GravityForce.cpp
+        Simulation/FakeThermostat.cpp
+        Simulation/FakeThermostat.h
+        utils/MaxwellBoltzmannDistribution.h
 )
         
 ## Include directories specific to the 'src' directory, if needed
@@ -81,6 +84,7 @@ target_compile_features(MolSim
         PRIVATE
         cxx_std_17
 )
+
 
 
 
