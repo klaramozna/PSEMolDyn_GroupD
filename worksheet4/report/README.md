@@ -99,7 +99,12 @@ Which parts of the code consume the most runtime?
 * This leads to very frequently needing to construct a ```VectorDouble``` from an array and vice versa. To reduce the amount of ```VectorDouble``` and ```std::array``` constructor calls, we decided to store the attributes in ```Particle``` as ```VectorDouble``` instead of an array.
 * This optimization yielded results. We measured the performance once again with the falling drop simulation, this time not using the thermostat. Even with -O3 turned on, we measured a runtime around 10% lower after the optimization - ca 77 milliseconds before and ca 87 milliseconds after. (We say around, not exact numbers, because we measured each simulation at least two times and took an average, so that we can confirm that the difference is not a result of for example different OS scheduling during the simulation.)
 
-  
+### Lookup table for getGridIndex ### 
+* Next, we optimized the ```getGridIndex``` function in ```LinkedCellContainer```, as it was one of the functions relatively high up on the profiler in terms of percentage of time spent in this function during the simulation.
+* Instead of calculating the values on the spot every time this function is called, we precalculated all valid values for x, y, z with their corresponding indices in the grid and created a lookup table.
+* Unfortunately, this optimization did not speed up the simulation. We measured both the before and after with the -O3 optimization and both values fluctuated around 85 milliseconds (again, fluctuated because we performed each simulation multiple times). 
+* The reason this probably did not affect the execution time that much, is that although ```getGridIndex``` was one of the top functions in the profiler, it still only took about 2.7% of the total simulation. The ```getGridIndex``` calculation was already very simple and fast before the optimization, so the speedup from using a lookup table probably isn't that large. Even if we halved the time spent in this function, we would only reduce the original execution time by 1.35% so less than 1.2 seconds. The variability of the execution times within the same simulation was already around 1 second, so such a small difference would be very difficult to measure.
+
 # Misc #
 
 ### Pending WS3 ### 
