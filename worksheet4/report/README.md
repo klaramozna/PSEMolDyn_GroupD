@@ -49,8 +49,34 @@ https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/be2fdf83-d90f-40
 
 ## Task 4 “Performance Measurement and Profiling” ##
 
-* using: perf
-``` perf stat -o summary.txt -e cpu-cycles,cache-misses,cache-references ./src/MolSim -p ../input/<input_file> ```
+* With the profiling tool perf we used the following command to retrieve various performance metrics collected during the program's execution.
+``` perf stat -o summary.txt -e cpu-cycles,cache-misses,cache-references ./src/MolSim p ../input/fallingdrop_Wall.xml -t True ```  
+
+Results:  
+```# started on Tue Dec 19 18:05:19 2023
+
+
+ Performance counter stats for './src/MolSim -p ../input/fallingdrop_Wall.xml -t True':
+
+   288.977.433.085      cpu_core/cpu-cycles/                                                    (99,96%)
+   236.150.253.622      cpu_atom/cpu-cycles/                                                    (0,04%)
+         3.280.184      cpu_core/cache-misses/                                                  (99,96%)
+        29.063.767      cpu_atom/cache-misses/                                                  (0,04%)
+        11.522.469      cpu_core/cache-references/                                              (99,96%)
+       184.805.235      cpu_atom/cache-references/                                              (0,04%)
+
+      71,814849566 seconds time elapsed
+
+      71,682916000 seconds user
+       0,027987000 seconds sys
+```  
+Interpretation:  
+* It is clear that the program utilizes heavily the CPU as we are performing many calculations during many iterations.
+* Ratio of Cache Misses to Cache References: Cache references represent the total number of times the CPU accesses the cache memory, while cache misses occur when the CPU cannot find the needed data or instructions in the cache, resulting in a need to fetch the information from a slower memory level like RAM, impacting the program's speed due to increased latency.
+From the stats we can derive an average ```ratio of cache misses to cache references``` between the CPU core and CPU atom of approximately ```22%```. This ratio isn't extremely high but still it is a potential room for optimization to reduce cache miss rates and further enhance performance.  
+  
+Which parts of the code consume the most runtime?  
+
 * We used the ```perf``` profiler with the falling drop simulation to find out where our code needs more optimizations. The results were the following: (the picture bellow only includes functions with time percentages above 1%)
 <img src="profiling_result.png">
 * The most time by far was consumed by different array operations. This was expected, as most of the attributes that are simulated (velocity, position, force) are stored in arrays. Those attributes are accessed and changed many times for each particle in every iteration.
