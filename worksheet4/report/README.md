@@ -65,6 +65,7 @@ https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/270aacd1-1df2-4e
 
 https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/8e781b10-7655-4623-b6b6-fd95094c5686
 
-
+### CL arguments vs XML parameters Periority ###
+* We omitted the default parameters from WS1 that came with the command line arguments because they are no longer compatible and relevant for the simulations we do now, the default values should be provided through the xml files that we provide. That means now when the user starts the program with an xml file that we provide or a file the user writes compatible to our syntax ```/input/simulationFormat.xsd``` then the default values will be read from there. But we gave then periority to the command line arguments to allow the user to overwrite certain parameters in a fast way. Parameters (like end_time, delta_t, log level or force used ...) that were passed through command line arguments have periority over the ones from the provided xml file.
 
 
