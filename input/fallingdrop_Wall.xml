@@ -26,6 +26,7 @@
     </boundaries>
     <cutoffRadius>3.0</cutoffRadius>
     <thermostat><none>none</none></thermostat>
+    <brownian_motion>false</brownian_motion>
 
     <!-- Provide Particles (Sphere) -->
     <sphere>
