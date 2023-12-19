@@ -17,7 +17,7 @@ TEST_F(GradualThermostatTest, warming){
     for(auto correctTemp : correctTemperatures){
         thermostatWarming.updateState(containerWarming.getParticleVector());
         containerWarming.applyToAll([this](Particle& p){thermostatWarming.updateTemperature(p);});
-        thermostatWarming.updateState(containerWarming.getParticleVector());
+        thermostatWarming.updateStateTest(containerWarming.getParticleVector());
         EXPECT_DOUBLE_EQ(correctTemp, thermostatWarming.getCurrentTemperature());
         thermostatWarming.updateIteration();
     }
@@ -28,7 +28,7 @@ TEST_F(GradualThermostatTest, cooling){
     for(auto correctTemp : correctTemperatures){
         thermostatCooling.updateState(containerCooling.getParticleVector());
         containerCooling.applyToAll([this](Particle& p){thermostatCooling.updateTemperature(p);});
-        thermostatCooling.updateState(containerCooling.getParticleVector());
+        thermostatCooling.updateStateTest(containerCooling.getParticleVector());
         EXPECT_DOUBLE_EQ(correctTemp, thermostatCooling.getCurrentTemperature());
         thermostatCooling.updateIteration();
     }

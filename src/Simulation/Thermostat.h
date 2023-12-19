@@ -33,6 +33,12 @@ public:
     void updateState(const std::vector<Particle>& particles);
 
     /**
+     * @brief Same as updateState, but unoptimized. Should only be used for testing.
+     * @param particles The current state of the particles.
+     */
+    void updateStateTest(const std::vector<Particle>& particles);
+
+    /**
      * @brief Needs to be called exactly once per iteration, to help the thermostat keep track of the iterations. Needs to be called after calling updateTemperature.
      */
     void updateIteration();

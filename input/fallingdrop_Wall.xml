@@ -25,7 +25,12 @@
     
     </boundaries>
     <cutoffRadius>3.0</cutoffRadius>
-    <thermostat><none>none</none></thermostat>
+    <thermostat><simple>
+        <initTemperature>5</initTemperature>
+        <targetTemperature>5</targetTemperature>
+        <thermostatCycleLength>100</thermostatCycleLength>
+    </simple></thermostat>
+    <brownian_motion>false</brownian_motion>
 
     <!-- Provide Particles (Sphere) -->
     <sphere>
@@ -54,7 +59,7 @@
     <writeFrequency>100</writeFrequency>
 
     <!-- Misc -->
-    <log_level>2</log_level>
-    <testing_mode>false</testing_mode>
+    <log_level>6</log_level>
+    <testing_mode>true</testing_mode>
 
 </Simulation>

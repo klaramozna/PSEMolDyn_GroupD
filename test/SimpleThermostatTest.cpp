@@ -21,7 +21,7 @@ TEST_F(SimpleThermostatTest, updateTemperature){
         container.applyToAll([](Particle& p){p.setV(1, 1, 1);});
         thermostat.updateState(container.getParticleVector());
         container.applyToAll([this](Particle& p){thermostat.updateTemperature(p);});
-        thermostat.updateState(container.getParticleVector());
+        thermostat.updateStateTest(container.getParticleVector());
         EXPECT_DOUBLE_EQ(correctTemp, thermostat.getCurrentTemperature());
         thermostat.updateIteration();
     }

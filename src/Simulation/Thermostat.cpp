@@ -10,6 +10,13 @@
 
 
 void Thermostat::updateState(const std::vector<Particle> &particles) {
+    if(currentIteration % cycleLength == 0){
+        double kineticEnergy = getKineticEnergy(particles);
+        currentTemperature = getTemperature(kineticEnergy, particles.size());
+    }
+}
+
+void Thermostat::updateStateTest(const std::vector<Particle> &particles) {
     double kineticEnergy = getKineticEnergy(particles);
     currentTemperature = getTemperature(kineticEnergy, particles.size());
 }
