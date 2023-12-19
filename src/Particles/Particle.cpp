@@ -27,6 +27,7 @@ Particle::Particle(const Particle &other) {
     markedForDeletion = other.markedForDeletion;
     epsilon = other.epsilon;
     sigma = other.sigma;
+    sqrtEpsilon = other.sqrtEpsilon;
 }
 
 Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
@@ -38,6 +39,7 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
     epsilon = 1.0;
     sigma = 1.0;
     markedForDeletion = false;
+    sqrtEpsilon = 1.0;
 }
 
 Particle::~Particle() {}

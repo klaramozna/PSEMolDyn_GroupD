@@ -10,6 +10,7 @@
 #include <array>
 #include <string>
 #include "../utils/VectorDouble3.h"
+#include <cmath>
 
 class Particle {
 
@@ -60,6 +61,12 @@ private:
      */
     double sigma;
 
+    /**
+     * @brief square root of Epsilon for mixing rules lennard jones forces.
+     */
+    double sqrtEpsilon;
+    
+
 public:
     explicit Particle(int type = 0);
 
@@ -81,7 +88,9 @@ public:
      * @param type The type of the particle.
      */
     Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg, double m_arg, double epsilon, double sigma,
-             int type = 0): x{x_arg}, v{v_arg}, f{0}, old_f{0}, m{m_arg}, type{type}, epsilon{epsilon}, sigma{sigma}{};
+             int type = 0): x{x_arg}, v{v_arg}, f{0}, old_f{0}, m{m_arg}, type{type}, epsilon{epsilon}, sigma{sigma}{
+                sqrtEpsilon = sqrt(epsilon);
+             };
 
     virtual ~Particle();
 
@@ -98,6 +107,9 @@ public:
     double getEpsilon() const{return epsilon;}
 
     double getSigma() const{return sigma;}
+
+    double getSqrtEpsilon() const{return sqrtEpsilon;}
+
 
     /**
      * @brief Returns the position as a DoubleVector.

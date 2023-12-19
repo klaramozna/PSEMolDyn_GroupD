@@ -8,7 +8,7 @@
 VectorDouble3 MixingRuleLennardJones::CalculateForces(const Particle &p1, const Particle &p2) {
     VectorDouble3 result{};
     double sigma = (p1.getSigma() + p2.getSigma()) / 2;
-    double eps = sqrt(p1.getEpsilon() * p2.getEpsilon());
+    double eps = p1.getSqrtEpsilon() * p2.getSqrtEpsilon();
     //Cache Repeated Computations
     VectorDouble3 distance = p1.getXVector() - p2.getXVector();
     double distanceL2Norm = distance.getL2Norm();
