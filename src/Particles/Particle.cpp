@@ -14,7 +14,7 @@ Particle::Particle(int type_arg) {
     type = type_arg;
     f = {0., 0., 0.};
     old_f = {0., 0., 0.};
-    markedForDeletion = false;
+    markedForMirroring = false;
 }
 
 Particle::Particle(const Particle &other) {
@@ -24,9 +24,9 @@ Particle::Particle(const Particle &other) {
     old_f = other.old_f;
     m = other.m;
     type = other.type;
-    markedForDeletion = other.markedForDeletion;
     epsilon = other.epsilon;
     sigma = other.sigma;
+    markedForMirroring = false;
 }
 
 Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
@@ -37,7 +37,7 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
     type = type_arg;
     epsilon = 1.0;
     sigma = 1.0;
-    markedForDeletion = false;
+    markedForMirroring = false;
 }
 
 Particle::~Particle() {}
@@ -125,16 +125,12 @@ void Particle::setOldF(double x, double y, double z) {
     old_f[2] = z;
 }
 
-bool Particle::isMarkedForDeletion() const {
-    return markedForDeletion;
+void Particle::markForMirroring() {
+    markedForMirroring = true;
 }
 
-void Particle::markForDeletion() {
-    markedForDeletion = true;
-}
-
-void Particle::unmarkForDeletion() {
-    markedForDeletion = false;
+bool Particle::isMarkedForMirroring() const {
+    return markedForMirroring;
 }
 
 std::ostream &operator<<(std::ostream &stream, Particle &p) {

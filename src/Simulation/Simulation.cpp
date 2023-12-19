@@ -60,12 +60,12 @@ void Simulation::runIteration() {
 
     // calculate new f
     container.applyToAll([](Particle& p) { setOldForce(p); });
-    container.applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
 
     // apply boundary conditions
     container.applyToBoundary([this](Particle& p) { boundaryEnforcer.applyBoundaryConditionsForParticle(p); });
 
-    // delete markedParticles
+    container.applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
+
     container.deleteHaloParticles();
 
     container.applyToAll([this](Particle& p) { applyGravity(p); });

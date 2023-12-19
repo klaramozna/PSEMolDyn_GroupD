@@ -44,11 +44,10 @@ private:
      * molecules belonging to different bodies, matters, and so on)
      */
     int type;
-
     /**
-     *  Bool values that determines whether particle should be deleted
+     * Bool value that determines whether particle should be mirrored
      */
-    bool markedForDeletion;
+     bool markedForMirroring;
 
     /**
      * @brief Epsilon for lennard jones forces.
@@ -93,7 +92,7 @@ public:
 
     const std::array<double, 3> &getOldF() const;
 
-    bool isMarkedForDeletion() const;
+    bool isMarkedForMirroring() const;
 
     double getEpsilon() const{return epsilon;}
 
@@ -184,14 +183,12 @@ public:
     void setOldF(double x, double y, double z);
 
     /**
-     * @brief Sets the value of markedForDeletion to true
+     * @brief Sets the value of markedForMirroring to true
+     *
+     * @param other
+     * @return
      */
-    void markForDeletion();
-
-    /**
-     * @brief Sets the value of markedForDeletion to false
-     */
-    void unmarkForDeletion();
+    void markForMirroring();
 
     bool operator==(const Particle &other) const;
 
