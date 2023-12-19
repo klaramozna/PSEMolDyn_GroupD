@@ -14,8 +14,8 @@ Members:
 
 # Report #
 ## Task 1 “Thermostats” ##
-* We created a general ```Thermostat``` that implements some of the functionalities that thermostats have in common, such as calculating kinetic energy or calculating current temperature
-* We decided not to store a reference to the particles of the ```LinkedCellContainer``` in the thermostat. On one hand doing this would spare us some copying of the particles back and forth in each iteration. However, it would require us to keep track of when ```LinkedCellContaine```r and ```Thermostat``` are deleted and used, such as it does not come to any memory problems. We decided to try to make our code less error-prone and increase maintainability by using copies instead of references. In each iteration, we update the state of the thermostat by calling the function ```updateState``` in ```Thermostat```. This is costly as we need to copy all particles twice per iteration (once with ```getParticleVector``` and then with ```updateState```). We might change this later when we optimize. 
+* We created a general ```Thermostat``` that implements some of the functionalities that thermostats have in common, such as calculating kinetic energy or calculating current temperature.
+* We decided not to store a reference to the particles of the ```LinkedCellContainer``` in the thermostat. On one hand doing this would spare us some copying of the particles back and forth in each iteration. However, it would require us to keep track of when ```LinkedCellContainer``` and ```Thermostat``` are deleted and used, such as it does not come to any memory problems. We decided to try to make our code less error-prone and increase maintainability by using copies instead of references. In each iteration, we update the state of the thermostat by calling the function ```updateState``` in ```Thermostat```. This is costly as we need to copy all particles twice per iteration (once with ```getParticleVector``` and then with ```updateState```). We might change this later when we optimize. 
 * We implemented three types of Thermostats. The simple and gradual thermostat, as described in the worksheet. We also have another subclass, ```FakeThermostat```. This class does not implement any functionality. It simply overrides the functions of ```Thermostat``` with functions, that do not do anything. We decided that this will make our code in the ```Simulation``` class simpler and easier to read, compared to having many if conditions that check whether a thermostat is present or not.
 
 ## Task 2 “Simulation of the Rayleigh-Taylor instability” ##
@@ -26,7 +26,7 @@ Members:
 * We support also this new routine through the XML input. The gravity factor is intialized with 0 so that this force has no effect if the user does not specify it. The user can overwrite this value with the XML input. The syntax is the following ``` <gravity> gravity factor value </gravity> ```
 
 ### Mixing rules: ### 
-* We created a new class ```MixingRuleLennardJones``` that is used when multiple types of liquids interact with each other. We extended ```SphereGenerator``` and ```CuboidGenerator``` with the ability to optionally set the sigma and epsilon parameters of the liquids. Those values also have default values (1.0 for both) in order for the classes to be compatible with the rest of the project.
+* We created a new class ```MixingRuleLennardJones``` that is used when multiple types of liquids interact with each other. We extended ```SphereGenerator``` and ```CuboidGenerator``` with the ability to optionally set the sigma and epsilon parameters of the liquids. Those parameters also have default values (1.0 for both) in order for the classes to be compatible with the rest of the project.
 
 ## Task 3 “Simulation of a falling drop - Liquid” ##
 ### Checkpointing ###
@@ -80,13 +80,20 @@ Which parts of the code consume the most runtime?
 * We used the ```perf``` profiler with the falling drop simulation to find out where our code needs more optimizations. The results were the following: (the picture bellow only includes functions with time percentages above 1%)
 <img src="profiling_result.png">
 * The most time by far was consumed by different array operations. This was expected, as most of the attributes that are simulated (velocity, position, force) are stored in arrays. Those attributes are accessed and changed many times for each particle in every iteration.
-* Next comes the ```VectorDouble``` constructor. We use ```VectorDouble``` to perform operations on vectors, such as addition, scaling, calculating distances or norms etc. Each time we want to do an operation on a particle attribute. We need to create a ```VectorDouble``` that corresponds to the attribute of particle, as the particle are stored as arrays and not as ```VectorDouble```. These operations, again, are perform many times for each particle in each iteration.
+* Next comes the ```VectorDouble``` constructor. We use ```VectorDouble``` to perform operations on vectors, such as addition, scaling, calculating distances or norms etc. Each time we want to do an operation on a particle attribute. We need to create a ```VectorDouble``` that corresponds to the attribute of the particle, as the particles are stored as arrays and not as ```VectorDouble```. These operations, again, are performed many times for each particle in each iteration.
 * Another function that needs a lot of time is ```applyToPairs```. This is not too surprising as we need to iterate through many combinations of pairs of particles each iteration to calculate the forces. It might also be caused be the many index calculations (for example with the function getGridIndex() that also take up a lot of time).
 * The ```getL2Norm``` function is a candidate for optimization as well. The high time spent in this function is probably due to the square root computation and generally being used many times in an iteration.
 
-## Task 5 “Tuning the sequential Performance” ##  
+## Task 5 “Tuning the sequential Performance” ##
+### Thermostat optimization ### 
+* First, we tried to optimize our thermostat. As we explained in the beginning, thermostat does not store a reference to the particles, and needs to be updated in each iteration with ```updateState```. This requires the particles to first be copied in the ```getParticleVector``` function and then again in ```updateState``` - so all particles are copied twice per iterations. This presents a significant performance overhead, especially as the number of particles rises.
+* However, doing this copying operation is not necessary in every iteration, as the thermostat is not applied every time. The thermostat is typically only applied once every few hundreds of iterations, so the update is also only necessary in those iterations where the thermostat is actually applied.
+* For this optimization, we adjusted the ```updateState``` function to only be applied in the relevant iterations and created a new function ```updateStateTest``` that maintains the old functionality and compared those two using the falling drop simulation.
+* We first compared the measurements using the -O3 flag, applying the thermostat every 1000 iterations. The measurements for both functions were comparable, both very close to 100 milliseconds. To make sure that this was not caused by not applying the thermostat too infrequently, we tried again, applying the thermostat every 100 iteration, but with the same result - both functions had more or less the same runtime, once again around 100 milliseconds.
+* We thought that possibly -O3 already did this optimization for us which is why our optimization does not make a difference. However, we got the same results using -O0, with both versions taking around 1000 milliseconds.
+* We suspect the reason why this optimization did not speed up our simulation is that a lot more time is spent on calculating forces, creating VectorDoubles etc, compared to the ```updateState``` function, as we saw in the profiling results. So this optimization is not significant in the grand scheme of things.
+* Because this optimization did not change anything, we didn't merge it into ```main```. If you want to look at it, it is in the last commit (6a4f19a) on the branch ```thermostat-optimization```.
 
-* 
   
 # Misc #
 
