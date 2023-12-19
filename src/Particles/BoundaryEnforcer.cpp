@@ -141,12 +141,13 @@ void BoundaryEnforcer::applyPeriodicBoundary(Particle &particle) {
 }
 
 bool BoundaryEnforcer::isHaloParticle(double x, double y, double z) {
-    return (x > -container.getCellSize()[0] && x < 0) ||
-           (x > dimensions[0] && x < dimensions[0] + container.getCellSize()[0]) ||
-           (y > -container.getCellSize()[1] && y < 0) ||
-           (y> dimensions[1] && y < dimensions[1] + container.getCellSize()[1]) ||
-           (z > -container.getCellSize()[2] && z < 0) ||
-           (z > dimensions[2] && z < dimensions[2] + container.getCellSize()[2]);
+    bool xCond = (x < 0 && x > -container.getCellSize()[0]) || (x > dimensions[0] && x < dimensions[0] + container.getCellSize()[0]);
+    bool yCond = (y < 0 && y > -container.getCellSize()[1]) || (y > dimensions[1] && y < dimensions[1] + container.getCellSize()[1]);
+    bool zCond = (z < 0 && z > -container.getCellSize()[2]) || (z > dimensions[2] && z < dimensions[2] + container.getCellSize()[2]);
+
+    bool withinGrid = (x >= -container.getCellSize()[0]) && (x <= (dimensions[0] + container.getCellSize()[0])) && (y >= -container.getCellSize()[1]) && (y <= (dimensions[1] + container.getCellSize()[1])) && (z >= -container.getCellSize()[2]) && (z <= (dimensions[2] + container.getCellSize()[2]));
+
+    return (xCond || yCond || zCond) && withinGrid;
 }
 
 
