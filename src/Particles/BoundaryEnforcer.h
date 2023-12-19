@@ -24,8 +24,11 @@ private:
     double sigma;
     ForceCalculation &fc;
 
-    void applyReflectiveForce(Particle &p, BoundaryDirection boundaryofParticle);
+    void applyReflectiveForce(Particle &p, std::vector<BoundaryDirection> boundaryofParticle);
+    void applyPeriodicBoundary(Particle &p);
     std::vector<BoundaryDirection> getBoundariesOfParticle(Particle &particle);
+
+    bool isHaloParticle(double x, double y, double z);
 };
 
 

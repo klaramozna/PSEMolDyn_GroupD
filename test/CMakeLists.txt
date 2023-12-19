@@ -65,6 +65,8 @@ set(source_needed_for_test
         CheckpointTest.cpp
         MixingRuleLennardJonesTest.cpp
         MixingRuleLennardJonesTest.h
+        PeriodicBoundaryTest.cpp
+        PeriodicBoundaryTest.h
 )
 
 add_executable(
