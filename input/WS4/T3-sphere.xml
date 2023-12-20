@@ -12,7 +12,7 @@
    
      <boundaries>
 
-        <BoxSize> <x>303</x> <y>180</y> <z>1</z></BoxSize>
+        <BoxSize> <x>303</x> <y>180</y> <z>0</z></BoxSize>
          <Front>Reflecting</Front>
          <Back>Reflecting</Back>
          <Top>Reflecting</Top>
@@ -24,7 +24,8 @@
         <cutoffRadius>3</cutoffRadius>
         <thermostat>
             <none></none>
-        </thermostat>   
+        </thermostat>
+    <brownian_motion>false</brownian_motion>
 
     <!-- Provide Particles (Sphere) -->
     <sphere>
