@@ -37,7 +37,7 @@ protected:
     Particle boundary2{std::array<double, 3>{0.5, 1.5, 1.5}, std::array<double, 3>{}, 0};
     Particle boundaryChanged2{std::array<double, 3>{0.5, 1.5, 1.5}, std::array<double, 3>{50, 50, 50}, 0};
 
-    LinkedCellContainer wrongAlignmentContainer{Boundary(6, 5, 4.5, 1.0, {"Reflective", "Reflective","Reflective","Reflective","Reflective","Reflective"}), 1};
+    LinkedCellContainer wrongAlignmentContainer{Boundary(6, 5, 4.5, 1.0, {"Reflective", "Reflective","Reflective","Reflective","Reflective","Reflective"}), 1.5};
     Particle p1WrongAlignment{std::array<double, 3>{0.5, -0.00000001, 2.25}, std::array<double, 3>{}, 0};
     Particle p2WrongAlignment{std::array<double, 3>{1.7, 0.1, 2.25}, std::array<double, 3>{}, 0};
     Particle p3WrongAlignment{std::array<double, 3>{1.4, 3.2, 2.25}, std::array<double, 3>{}, 0};
