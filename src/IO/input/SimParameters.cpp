@@ -72,7 +72,8 @@ bool SimParameters::operator==(const SimParameters &other) const {
            initTemperature == other.getInitTemperature() &&
            targetTemperature == other.getTargetTemperature() &&
            maxTemperatureChange == other.getMaxTemperatureChange() &&
-           thermostatCycleLength == other.getThermostatCycleLength();
+           thermostatCycleLength == other.getThermostatCycleLength() &&
+           dim == other.dim;
 
 }
 
