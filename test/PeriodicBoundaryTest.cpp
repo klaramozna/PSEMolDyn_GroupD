@@ -1,5 +1,6 @@
 #include "PeriodicBoundaryTest.h"
 
+// Test case for mirroring particle placed in the left wall in the X-direction
 TEST_F(PeriodicBoundaryTest, MirroringLeftX) {
     Particle p = Particle({0.4, 1.5 , 3}, {}, 0);
     Particle pOpposite = Particle({5.4, 1.5, 3}, {}, 0);
@@ -11,6 +12,7 @@ TEST_F(PeriodicBoundaryTest, MirroringLeftX) {
     ASSERT_TRUE(std::find(container.getParticleVector().begin(), container.getParticleVector().end(), pOpposite) != container.getParticleVector().end());
 }
 
+// Test case for mirroring particle placed in the right wall in the X-direction
 TEST_F(PeriodicBoundaryTest, MirroringRightX) {
     Particle particle = Particle({4.7, 1.5 , 3}, {}, 0);
     Particle pOpposite = Particle({-0.3, 1.5, 3}, {}, 0);
@@ -27,6 +29,7 @@ TEST_F(PeriodicBoundaryTest, MirroringRightX) {
     ASSERT_TRUE(particleInVector != particles.end());
 }
 
+// Test case for mirroring particle placed in the top wall in the Y-direction
 TEST_F(PeriodicBoundaryTest, MirroringTopY) {
     Particle particle = Particle({1.5, 4.7, 3}, {}, 0);
     Particle pOpposite = Particle({1.5, -0.3 , 3}, {}, 0);
@@ -41,6 +44,7 @@ TEST_F(PeriodicBoundaryTest, MirroringTopY) {
     ASSERT_TRUE(particleInVector != particles.end());
 }
 
+// Test case for mirroring particle placed in the lower wall in the Y-direction
 TEST_F(PeriodicBoundaryTest, MirroringLowerY) {
     Particle particle = Particle({3.5, 0.1, 3}, {}, 0);
     Particle pOpposite = Particle({3.5, 5.1, 3}, {}, 0);
@@ -57,6 +61,7 @@ TEST_F(PeriodicBoundaryTest, MirroringLowerY) {
     ASSERT_TRUE(particleInVector != particles.end());
 }
 
+// Test case for mirroring particle placed in the top left wall in the XY intersection
 TEST_F(PeriodicBoundaryTest, MirroringTopLeftRow) {
     Particle particle = Particle({0.2, 4.4, 3}, {}, 0);
 
@@ -75,6 +80,7 @@ TEST_F(PeriodicBoundaryTest, MirroringTopLeftRow) {
     areParticlesContained(toFind, particles);
 }
 
+// Test case for mirroring particle placed in the top right wall in the XY intersection
 TEST_F(PeriodicBoundaryTest, MirroringTopRightRow) {
     Particle particle = Particle({4.9, 4.6, 3}, {}, 0);;
 
@@ -93,6 +99,7 @@ TEST_F(PeriodicBoundaryTest, MirroringTopRightRow) {
     areParticlesContained(toFind, particles);
 }
 
+// Test case for mirroring particle placed in the lower left wall in the XY intersection
 TEST_F(PeriodicBoundaryTest, MirroringLowerLeftRow) {
     Particle particle = Particle({0.2, 0.3, 3}, {}, 0);
 
@@ -111,6 +118,7 @@ TEST_F(PeriodicBoundaryTest, MirroringLowerLeftRow) {
     areParticlesContained(toFind, particles);
 }
 
+// Test case for mirroring particle placed in the lower right wall in the XY intersection
 TEST_F(PeriodicBoundaryTest, MirroringLowerRightRow) {
     Particle particle = Particle({4.8, 0.3, 3}, {}, 0);
 
@@ -129,6 +137,7 @@ TEST_F(PeriodicBoundaryTest, MirroringLowerRightRow) {
     areParticlesContained(toFind, particles);
 }
 
+// Test case for mirroring particle placed in the lower left corner in the XYZ boundary intersection
 TEST_F(PeriodicBoundaryTest, MirroringLowerLeftCorner) {
     Particle particle = Particle({0.2, 0.3, 0.9}, {}, 0);
 
@@ -151,7 +160,7 @@ TEST_F(PeriodicBoundaryTest, MirroringLowerLeftCorner) {
     areParticlesContained(toFind, particles);
 }
 
-
+// Test case for mirroring particle placed in the lower right corner in the XYZ intersection
 TEST_F(PeriodicBoundaryTest, MirroringLowerRightCorner) {
     Particle particle = Particle({4.6, 0.3, 0.9}, {}, 0);
 
