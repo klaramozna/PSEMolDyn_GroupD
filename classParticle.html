@@ -63,6 +63,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-attribs">Public Attributes</a> &#124;
 <a href="classParticle-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Particle Class Reference</div>  </div>
@@ -144,6 +145,10 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a86db9fff6c621d7970435fde767b4e2d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a86db9fff6c621d7970435fde767b4e2d">unmarkForMirroring</a> ()</td></tr>
 <tr class="memdesc:a86db9fff6c621d7970435fde767b4e2d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the value of markedForMirroring to true.  <a href="classParticle.html#a86db9fff6c621d7970435fde767b4e2d">More...</a><br /></td></tr>
 <tr class="separator:a86db9fff6c621d7970435fde767b4e2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00668c89465dbaaf09243922a4f5c257"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a00668c89465dbaaf09243922a4f5c257">markForDeleting</a> ()</td></tr>
+<tr class="separator:a00668c89465dbaaf09243922a4f5c257"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a283f0c8ea7acc38b6e3a681f226d0bcd"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a283f0c8ea7acc38b6e3a681f226d0bcd">isMarkedForDeleting</a> () const</td></tr>
+<tr class="separator:a283f0c8ea7acc38b6e3a681f226d0bcd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a124c38681fb8e7b09a623af3eb060f6a"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a124c38681fb8e7b09a623af3eb060f6a">operator==</a> (const <a class="el" href="classParticle.html">Particle</a> &amp;other) const</td></tr>
 <tr class="separator:a124c38681fb8e7b09a623af3eb060f6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a41f3a8baf5d8b29ec806681d63ab2f81"><td class="memItemLeft" align="right" valign="top">std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a41f3a8baf5d8b29ec806681d63ab2f81">toString</a> () const</td></tr>
@@ -151,6 +156,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab6af5a8641c3aae202d90bc14ae9ac47"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#ab6af5a8641c3aae202d90bc14ae9ac47">operator!=</a> (const <a class="el" href="classParticle.html">Particle</a> &amp;other) const</td></tr>
 <tr class="memdesc:ab6af5a8641c3aae202d90bc14ae9ac47"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks for inequality between two <a class="el" href="classParticle.html">Particle</a> objects.  <a href="classParticle.html#ab6af5a8641c3aae202d90bc14ae9ac47">More...</a><br /></td></tr>
 <tr class="separator:ab6af5a8641c3aae202d90bc14ae9ac47"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
+Public Attributes</h2></td></tr>
+<tr class="memitem:a560e780f724b77e28df48532a4a419a4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a560e780f724b77e28df48532a4a419a4">markedForDeleting</a></td></tr>
+<tr class="separator:a560e780f724b77e28df48532a4a419a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a866812d3dfb9c539e5e24593e596a8c9"></a>
@@ -568,6 +578,23 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a283f0c8ea7acc38b6e3a681f226d0bcd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a283f0c8ea7acc38b6e3a681f226d0bcd">&#9670;&nbsp;</a></span>isMarkedForDeleting()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Particle::isMarkedForDeleting </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ae8e3c0ef8f95a290e79928e080110e92"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae8e3c0ef8f95a290e79928e080110e92">&#9670;&nbsp;</a></span>isMarkedForMirroring()</h2>
 
@@ -579,6 +606,23 @@ Public Member Functions</h2></td></tr>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a00668c89465dbaaf09243922a4f5c257"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00668c89465dbaaf09243922a4f5c257">&#9670;&nbsp;</a></span>markForDeleting()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Particle::markForDeleting </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -976,6 +1020,21 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a560e780f724b77e28df48532a4a419a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a560e780f724b77e28df48532a4a419a4">&#9670;&nbsp;</a></span>markedForDeleting</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Particle::markedForDeleting</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>

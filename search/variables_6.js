@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['sigma_1248',['sigma',['../classBoundary.html#a793afa4e587dc1e2a19a6b4b07f0d6e0',1,'Boundary']]]
+  ['particles_1250',['particles',['../classParticleGenerator.html#a4c065631d36a8d5035ea4399d079b053',1,'ParticleGenerator']]]
 ];
