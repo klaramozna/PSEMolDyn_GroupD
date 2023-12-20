@@ -195,6 +195,10 @@ void LinkedCellContainer::deleteHaloParticles() {
     // Applying given function to each particle and marking particles for movement
     for(int i = 0; i < grid.size(); i++){
         for(auto & particle : grid[i]){
+            if (particle.isMarkedForDeleting()) {
+                particlesToBeDeleted.emplace_back(particle, i);
+                continue;
+            }
             if(boundary.isOutside(particle)){
                 if (particle.isMarkedForMirroring()) {
                     Particle p2 = mirrorParticle(particle);
