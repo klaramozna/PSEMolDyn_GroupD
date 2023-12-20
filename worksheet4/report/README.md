@@ -105,6 +105,11 @@ Which parts of the code consume the most runtime?
 * Unfortunately, this optimization did not speed up the simulation. We measured both the before and after with the -O3 optimization and both values fluctuated around 85 seconds (again, fluctuated because we performed each simulation multiple times). 
 * The reason this probably did not affect the execution time that much, is that although ```getGridIndex``` was one of the top functions in the profiler, it still only took about 2.7% of the total simulation. The ```getGridIndex``` calculation was already very simple and fast before the optimization, so the speedup from using a lookup table probably isn't that large. Even if we halved the time spent in this function, we would only reduce the original execution time by 1.35% so less than 1.2 seconds. The variability of the execution times within the same simulation was already around 1 second, so such a small difference would be very difficult to measure.
 
+### SIMD for VectorDouble ### 
+* Another optimization we attempted was using SIMD instructions in the + and * operator of ```VectorDouble```. We selected those two operation because they are the most commonly used ones. They are used thousands of times in each iteration in force, position, velocity calculation and more.
+* In each vector operation, for example addition, we need to do three calculations as the vectors are of size 3. Using SIMD instructions with registers that are 256 bits long (4 doubles fit in them), we could reduce the three operations to just one.
+* Unfortunately, this did not lead to the desired results. With -O3 on, the time before the change was 186 seconds and 187 seconds after. This might be because the overhead of using SIMD (for example loading data to and from the SIMD registers) is greater than the benefit of executing multiple instructions at once. Another explanation would be the use of the -O3 flag. With this optimization level, vectorization is enabled and it is possible that it was already performed by the compiler automatically.
+
 # Misc #
 
 ### Pending WS3 ### 
