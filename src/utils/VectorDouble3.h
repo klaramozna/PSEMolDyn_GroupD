@@ -25,7 +25,7 @@ private:
     /**
      * @brief Stores values of the vector.
      */
-    std::array<double, 3> values;
+    std::array<double, 4> values;
 public:
     VectorDouble3() = default;
 
@@ -112,6 +112,10 @@ public:
     */
     friend double getDotProduct(const VectorDouble3& v1, const VectorDouble3& v2);
 
+    friend VectorDouble3 addSIMD(const VectorDouble3& v1, const VectorDouble3 v2);
+
+    friend VectorDouble3 scaleSIMD(double scalar, const VectorDouble3 &vec);
+
 };
 
 /**
@@ -122,5 +126,9 @@ public:
  */
 double getDistance(const VectorDouble3& v1, const VectorDouble3& v2);
 
+VectorDouble3 addSIMD(const VectorDouble3& v1, const VectorDouble3 v2);
+
+VectorDouble3 scaleSIMD(double scalar, const VectorDouble3 &vec);
 
 #endif //PSEMOLDYN_GROUPD_VECTORDOUBLE3_H
+

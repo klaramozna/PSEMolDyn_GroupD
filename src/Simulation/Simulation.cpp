@@ -28,7 +28,7 @@ Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& contai
         if(typeid(thermostat) == typeid(FakeThermostat())) {
             container.applyToAll([&averageVelo, &dim](Particle &p) {
                 VectorDouble3 velocity = VectorDouble3(maxwellBoltzmannDistributedVelocity(averageVelo, dim));
-                p.setV(p.getVVector() + velocity);
+                p.setV(addSIMD(p.getVVector(), velocity));
             });
         }
         else{
@@ -50,25 +50,24 @@ std::vector<Particle> Simulation::getParticles() {
 void Simulation::calculateF(Particle& p1, Particle& p2) {
     VectorDouble3 result = this->forceCalculation.CalculateForces(p1,p2);
     if (!std::isnan(result.at(0)) && std::isnan(result.at(1)) && std::isnan(result.at(2))) {
-        p1.setF(p1.getFVector() + result);
+        p1.setF(addSIMD(p1.getFVector(), result));
         p2.setF(p2.getFVector() - result);
     }
 }
 
 void Simulation::calculateV(Particle& p) const {
-    VectorDouble3 v_i = p.getVVector() + (this->delta_t / (2. * p.getM()) * (p.getOldFVector() + p.getFVector()));
+    VectorDouble3 v_i = addSIMD(p.getVVector(), (scaleSIMD(this->delta_t / (2. * p.getM()), (addSIMD(p.getOldFVector(), p.getFVector())) )));
     p.setV(v_i);
 }
 
 void Simulation::calculateX(Particle& p) const {
-    VectorDouble3 x_i = p.getXVector() + delta_t * p.getVVector()
-            + ((delta_t * delta_t) / (2. * p.getM())) * p.getOldFVector();
+    VectorDouble3 x_i = addSIMD(p.getXVector(), addSIMD(scaleSIMD(delta_t, p.getVVector()), scaleSIMD((delta_t * delta_t) / (2. * p.getM()),  p.getOldFVector())));
     p.setX(x_i);
 }
 
 void Simulation::applyGravity(Particle& p) {
     VectorDouble3 result = gravity.CalculateForce(p);
-    p.setF(p.getFVector() + result);
+    p.setF(addSIMD(p.getFVector(), result));
 }
 
 void Simulation::runIteration() {

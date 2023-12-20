@@ -4,6 +4,7 @@
 
 #include "GradualThermostat.h"
 #include "cmath"
+#include "../utils/VectorDouble3.h"
 
 void GradualThermostat::updateTemperature(Particle &particle) {
     if(currentIteration % cycleLength == 0){
@@ -14,6 +15,6 @@ void GradualThermostat::updateTemperature(Particle &particle) {
             iterationTempTarget = targetTemperature >= currentTemperature ? currentTemperature + maxChange : currentTemperature - maxChange;
         }
         double beta = sqrt(iterationTempTarget / currentTemperature);
-        particle.setV(beta * particle.getVVector());
+        particle.setV(scaleSIMD(beta, particle.getVVector()));
     }
 }
