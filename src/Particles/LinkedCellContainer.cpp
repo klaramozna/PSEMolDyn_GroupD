@@ -96,10 +96,6 @@ void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &func
     }
 }
 
-std::array<double, 3> LinkedCellContainer::getCellSize() {
-    return {cellSize, cellSize,cellSize};
-}
-
 bool LinkedCellContainer::isInCorrectCell(const Particle &p, int currentIndex) {
     return getParticleIndex(p) == currentIndex;
 }
