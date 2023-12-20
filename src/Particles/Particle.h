@@ -201,8 +201,15 @@ public:
      */
     void unmarkForMirroring();
 
+    /**
+     * @brief Sets the value of markedForDeleting to true
+     */
     void markForDeleting();
 
+    /**
+     * @brief Returns the value of markedForDeleting
+     * @return bool
+     */
     bool isMarkedForDeleting() const;
 
     bool operator==(const Particle &other) const;
