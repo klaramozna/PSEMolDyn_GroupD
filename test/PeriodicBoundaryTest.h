@@ -2,7 +2,7 @@
 
 #include <gtest/gtest.h>
 
-#include "src/Particles/BoundaryEnforcer.h"
+#include "../src/Particles/BoundaryEnforcer.h"
 
 class MockForceCalculation : public ForceCalculation {
 public:
@@ -17,6 +17,8 @@ public:
 class PeriodicBoundaryTest : public ::testing::Test {
 public:
     LinkedCellContainer container{Boundary(5, 5, 5, 1, {}), 1};
-    BoundaryEnforcer boundaryEnforcer{1.0,container, {3.0, 3.0, 3.0}, {BoundaryType::PERIODIC, BoundaryType::PERIODIC,BoundaryType::PERIODIC,BoundaryType::PERIODIC, BoundaryType::PERIODIC,BoundaryType::PERIODIC},fc};
+    BoundaryEnforcer boundaryEnforcer{1.0,container, {5.0, 5.0, 5.0}, {BoundaryType::PERIODIC, BoundaryType::PERIODIC,BoundaryType::PERIODIC,BoundaryType::PERIODIC, BoundaryType::PERIODIC,BoundaryType::PERIODIC},fc};
     MockForceCalculation fc{};
+
+    void areParticlesContained(const std::vector<Particle>& toFind, const std::vector<Particle> &particles);
 };

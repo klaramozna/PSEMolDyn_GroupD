@@ -19,8 +19,8 @@ void Thermostat::initializeBrownianMotion(Particle &particle) const {
         throw std::runtime_error("The given particle has a invalid weight / mass. Weight has to be strictly greater than zero.");
     }
     double factor = sqrt(initTemperature / particle.getM());
-    std::array<double, 3> resultVelocity = maxwellBoltzmannDistributedVelocity(factor, dim);
-    particle.setV(resultVelocity[0], resultVelocity[1], resultVelocity[2]);
+    VectorDouble3 resultVelocity = VectorDouble3(maxwellBoltzmannDistributedVelocity(factor, dim));
+    particle.setV(particle.getVVector() + resultVelocity);
 }
 
 double Thermostat::getKineticEnergy(const std::vector<Particle> &particles) const {

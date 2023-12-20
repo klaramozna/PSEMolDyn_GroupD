@@ -15,7 +15,7 @@
 
     <boundaries>
 
-    <BoxSize> <x>120</x> <y>50</y> <z>3</z></BoxSize>
+    <BoxSize> <x>120</x> <y>50</y> <z>0</z></BoxSize>
      <Front>Reflecting</Front>
      <Back>Reflecting</Back>
      <Top>Reflecting</Top>
@@ -25,8 +25,15 @@
     
     </boundaries>
     <cutoffRadius>3.0</cutoffRadius>
-    <thermostat><none>none</none></thermostat>
-    <brownian_motion>false</brownian_motion>
+    <thermostat>
+        <gradual>
+            <initTemperature>0.5</initTemperature>
+            <targetTemperature>0.5</targetTemperature>
+            <maxTemperatureChange>0.1</maxTemperatureChange>
+            <thermostatCycleLength>1000</thermostatCycleLength>
+        </gradual>
+    </thermostat>
+    <brownian_motion>true</brownian_motion>
 
     <!-- Provide Particles (Sphere) -->
     <sphere>

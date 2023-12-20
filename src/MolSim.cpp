@@ -112,17 +112,17 @@ int main(int argc, char *argsv[]) {
         thermostat = std::make_unique<FakeThermostat>();
     }
     if(simParameters.getThermostatType() == "simple"){
-        thermostat = std::make_unique<SimpleThermostat>(simParameters.getInitTemperature(), simParameters.getTargetTemperature(), simParameters.getThermostatCycleLength(), 3);
+        thermostat = std::make_unique<SimpleThermostat>(simParameters.getInitTemperature(), simParameters.getTargetTemperature(), simParameters.getThermostatCycleLength(), simParameters.getDim());
     }
     if(simParameters.getThermostatType() == "gradual"){
-        thermostat = std::make_unique<GradualThermostat>(simParameters.getInitTemperature(), simParameters.getTargetTemperature(), simParameters.getThermostatCycleLength(), 3, simParameters.getMaxTemperatureChange());
+        thermostat = std::make_unique<GradualThermostat>(simParameters.getInitTemperature(), simParameters.getTargetTemperature(), simParameters.getThermostatCycleLength(), simParameters.getDim(), simParameters.getMaxTemperatureChange());
     }
 
     // Initializing boundary
     double particlesShift = 0;
 
     // Checking if container depth is too small
-    if(simParameters.getBoxSize()[2] <= 2 * simParameters.getCutoffRadius()){
+    if(simParameters.getDim() <= 2){
         simParameters.setBoxSize(std::array<double, 3>{simParameters.getBoxSize()[0], simParameters.getBoxSize()[1], 3 * simParameters.getCutoffRadius()});
         particlesShift = 3 * simParameters.getCutoffRadius() / 2;
     }
@@ -162,7 +162,7 @@ int main(int argc, char *argsv[]) {
     int iteration = 0;
     double current_time = simParameters.getStartTime();
 
-    Simulation simulation(simParameters.getDeltaT(), simParameters.getSigma(),  container, *forceCalculation, *thermostat, simParameters.getAverageVelo(), boundary, gravity, simParameters.getBrownianMotion());
+    Simulation simulation(simParameters.getDeltaT(), simParameters.getSigma(),  container, *forceCalculation, *thermostat, simParameters.getAverageVelo(), boundary, gravity, simParameters.getBrownianMotion(), simParameters.getDim());
 
     // This is ugly and shouldn't be in main, but it is for a later refactor
     if (simParameters.isTesting()) {

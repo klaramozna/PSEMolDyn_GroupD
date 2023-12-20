@@ -44,11 +44,10 @@ private:
      * molecules belonging to different bodies, matters, and so on)
      */
     int type;
-
     /**
-     *  Bool values that determines whether particle should be deleted
+     * Bool value that determines whether particle should be mirrored
      */
-    bool markedForDeletion;
+     bool markedForMirroring;
 
     /**
      * @brief Epsilon for lennard jones forces.
@@ -81,7 +80,10 @@ public:
      * @param type The type of the particle.
      */
     Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg, double m_arg, double epsilon, double sigma,
-             int type = 0): x{x_arg}, v{v_arg}, f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, m{m_arg}, type{type}, epsilon{epsilon}, sigma{sigma}{};
+             int type = 0): x{x_arg}, v{v_arg}, f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, m{m_arg}, type{type}, epsilon{epsilon}, sigma{sigma} {
+        markedForMirroring = false;
+        markedForDeleting = false;
+    };
 
     virtual ~Particle();
 
@@ -93,7 +95,7 @@ public:
 
     const std::array<double, 3> getOldF() const;
 
-    bool isMarkedForDeletion() const;
+    bool isMarkedForMirroring() const;
 
     double getEpsilon() const{return epsilon;}
 
@@ -184,14 +186,31 @@ public:
     void setOldF(double x, double y, double z);
 
     /**
-     * @brief Sets the value of markedForDeletion to true
+     * @brief Sets the value of markedForMirroring to true
+     *
+     * @param other
+     * @return
      */
-    void markForDeletion();
+    void markForMirroring();
 
     /**
-     * @brief Sets the value of markedForDeletion to false
+     * @brief Sets the value of markedForMirroring to true
+     *
+     * @param other
+     * @return
      */
-    void unmarkForDeletion();
+    void unmarkForMirroring();
+
+    /**
+     * @brief Sets the value of markedForDeleting to true
+     */
+    void markForDeleting();
+
+    /**
+     * @brief Returns the value of markedForDeleting
+     * @return bool
+     */
+    bool isMarkedForDeleting() const;
 
     bool operator==(const Particle &other) const;
 
@@ -204,6 +223,8 @@ public:
      * @return true if the Particle objects are not equal, false otherwise.
      */
     bool operator!=(const Particle& other) const;
+
+    bool markedForDeleting;
 };
 
 std::ostream &operator<<(std::ostream &stream, Particle &p);

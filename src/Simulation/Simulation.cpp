@@ -5,28 +5,30 @@
  *      Author: rodrigoflx
  */
 
+#include <cmath>
+#include <iostream>
 #include "Simulation.h"
 
 #include "Particles/LinkedCellContainer.h"
 #include "Particles/BoundaryEnforcer.h"
 #include "Simulation/FakeThermostat.h"
+#include "IO/Logger.h"
 
 std::array<double, 3> maxwellBoltzmannDistributedVelocity(double averageVelocity, size_t dimensions);
 
-Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion) :
+Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion, int dim) :
                         container(container),
                         forceCalculation(calculation),
                         thermostat(thermostat),
                         boundaryEnforcer(sigma, container, boundary.getDimensions(), boundary.getBoundaryTypes(), forceCalculation),
                         gravity(gravity),
-                        delta_t(delta_t),
-                        averageVelo(averageVelo), applyBrownianMotion(applyBrownianMotion) {
+                        delta_t(delta_t) {
     // Apply brownian motion
     if(applyBrownianMotion){
         if(typeid(thermostat) == typeid(FakeThermostat())) {
-            container.applyToAll([&averageVelo](Particle &p) {
-                std::array velocity = maxwellBoltzmannDistributedVelocity(averageVelo, 3);
-                p.setV(velocity[0], velocity[1], velocity[2]);
+            container.applyToAll([&averageVelo, &dim](Particle &p) {
+                VectorDouble3 velocity = VectorDouble3(maxwellBoltzmannDistributedVelocity(averageVelo, dim));
+                p.setV(p.getVVector() + velocity);
             });
         }
         else{
@@ -47,8 +49,10 @@ std::vector<Particle> Simulation::getParticles() {
 
 void Simulation::calculateF(Particle& p1, Particle& p2) {
     VectorDouble3 result = this->forceCalculation.CalculateForces(p1,p2);
-    p1.setF(p1.getFVector() + result);
-    p2.setF(p2.getFVector() - result);
+    if (!std::isnan(result.at(0)) && std::isnan(result.at(1)) && std::isnan(result.at(2))) {
+        p1.setF(p1.getFVector() + result);
+        p2.setF(p2.getFVector() - result);
+    }
 }
 
 void Simulation::calculateV(Particle& p) const {
@@ -68,18 +72,17 @@ void Simulation::applyGravity(Particle& p) {
 }
 
 void Simulation::runIteration() {
-
     // calculate new x
     container.applyToAll([this](Particle& p) { calculateX(p); });
 
     // calculate new f
     container.applyToAll([](Particle& p) { setOldForce(p); });
-    container.applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
 
     // apply boundary conditions
     container.applyToBoundary([this](Particle& p) { boundaryEnforcer.applyBoundaryConditionsForParticle(p); });
 
-    // delete markedParticles
+    container.applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
+
     container.deleteHaloParticles();
 
     container.applyToAll([this](Particle& p) { applyGravity(p); });

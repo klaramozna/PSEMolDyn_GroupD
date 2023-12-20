@@ -10,20 +10,22 @@
 LinkedCellContainer::LinkedCellContainer(Boundary boundary, double cutoffRadius,
                                          const std::vector<Particle>& particles) : boundary{boundary}, grid{}, cutoffRadius{cutoffRadius} {
     size = particles.size();
-    cellSize = cutoffRadius;
+
+    // Potencially slightly increase cell size (compared to cutoff radius)
+    for(int i = 0; i < 3; i++){
+        cellSize[i] = boundary.getDimensions()[i] / std::floor(boundary.getDimensions()[i] / cutoffRadius);
+    }
 
     // Calculate number of cells in each axis
     for (int i = 0; i < 3; i++) {
-        nc[i] = std::ceil(boundary.getDimensions()[i]/cellSize) + 2;
+        nc[i] = std::floor(boundary.getDimensions()[i] / cutoffRadius) + 2;
     }
 
     // Defines by how much each dimension in the grid needs to be shifted so that the grid is symmetrical to the boundary
-    for (int i = 0; i < 3; i++) {
-        gridShift[i] = (nc[i] * cellSize - boundary.getDimensions()[i]) / 2;
-    }
+    gridShift = cellSize;
 
     // Initialize grid
-    grid.resize(nc[0] * nc[1] * nc[2]);
+    grid.resize(nc[0] * nc[1] * nc[2], Cell{cutoffRadius});
 
     // Populate boundaryCells
     for (int x = 0; x < nc[0]; ++x) {
@@ -67,20 +69,11 @@ void LinkedCellContainer::moveParticle(const Particle &p1, int oldCell, int newC
     grid[oldCell].deleteParticle(p1);
 
     // Check if particle is outside
-    if(particleOutOfGrid(p1)){
+    if (particleOutOfGrid(p1)){
         size--;
     } else {
-        auto [x,y,z] = getCoordinateFromIndex(newCell);
-        // Check if we are in a boundary cell now
-        if(!isBoundaryCell(x,y,z)){
-            Particle p2(p1);
-            p2.unmarkForDeletion();
-            grid[newCell].addParticle(p2);
-        } else {
-            grid[newCell].addParticle(p1);
-        }
+        grid[newCell].addParticle(p1);
     }
-
 }
 
 void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &function) {
@@ -101,10 +94,6 @@ void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &func
     for(auto & particle : particlesToBeMoved){
         moveParticle(particle.first, particle.second, getParticleIndex(particle.first));
     }
-}
-
-std::array<double, 3> LinkedCellContainer::getCellSize() {
-    return {cellSize, cellSize,cellSize};
 }
 
 bool LinkedCellContainer::isInCorrectCell(const Particle &p, int currentIndex) {
@@ -167,9 +156,9 @@ bool LinkedCellContainer::particleWithinCutoff(const Particle &p1, const Particl
 }
 
 int LinkedCellContainer::getParticleIndex(const Particle &p) {
-    int x = floor((p.getX()[0] + gridShift[0]) / cellSize);
-    int y = floor((p.getX()[1] + gridShift[1]) / cellSize);
-    int z = floor((p.getX()[2] + gridShift[2]) / cellSize);
+    int x = floor((p.getX()[0] + gridShift[0]) / cellSize[0]);
+    int y = floor((p.getX()[1] + gridShift[1]) / cellSize[1]);
+    int z = floor((p.getX()[2] + gridShift[2]) / cellSize[2]);
     return getGridIndex(x, y, z);
 }
 
@@ -204,7 +193,17 @@ void LinkedCellContainer::deleteHaloParticles() {
     // Applying given function to each particle and marking particles for movement
     for(int i = 0; i < grid.size(); i++){
         for(auto & particle : grid[i]){
-            if(boundary.isOutside(particle) && particle.isMarkedForDeletion()){
+            if (particle.isMarkedForDeleting()) {
+                particlesToBeDeleted.emplace_back(particle, i);
+                continue;
+            }
+            if(boundary.isOutside(particle)){
+                if (particle.isMarkedForMirroring()) {
+                    Particle p2 = mirrorParticle(particle);
+                    p2.unmarkForMirroring();
+                    addParticle(p2);
+                    size++;
+                }
                 particlesToBeDeleted.emplace_back(particle, i);
             }
         }
@@ -218,7 +217,7 @@ void LinkedCellContainer::deleteHaloParticles() {
 }
 
 bool LinkedCellContainer::isBoundaryCell(int x, int y, int z) {
-    return x == 1 || x == nc[0] - 2 || y == 1 || y == nc[1] - 2 || z == 1 || z == nc[2] - 2;
+    return (x == 1 || x == nc[0] - 2 || y == 1 || y == nc[1] - 2 || z == 1 || z == nc[2] - 2) && !(x == 0 || y == 0 || z == 0);
 }
 
 void LinkedCellContainer::addParticle(const Particle &p) {
@@ -234,21 +233,43 @@ std::vector<Cell> LinkedCellContainer::getCells() {
 }
 
 bool LinkedCellContainer::cellWithinRadius(const Particle &p, int x, int y, int z) {
-    double middleX = x * cellSize - gridShift[0] + cellSize / 2;
-    double middleY = y * cellSize - gridShift[1] + cellSize / 2;
-    double middleZ = z * cellSize - gridShift[2] + cellSize / 2;
+    double middleX = x * cellSize[0] - gridShift[0] + cellSize[0] / 2;
+    double middleY = y * cellSize[1] - gridShift[1] + cellSize[1] / 2;
+    double middleZ = z * cellSize[2] - gridShift[2] + cellSize[2] / 2;
     return particleWithinCutoff(p, Particle{std::array<double, 3>{middleX, middleY, middleZ}, std::array<double, 3>{}, 0});
 }
 
 bool LinkedCellContainer::particleOutOfGrid(const Particle &p) {
-    int x = floor((p.getX()[0] + gridShift[0]) / cellSize);
-    int y = floor((p.getX()[1] + gridShift[1]) / cellSize);
-    int z = floor((p.getX()[2] + gridShift[2]) / cellSize);
+    int x = floor((p.getX()[0] + gridShift[0]) / cellSize[0]);
+    int y = floor((p.getX()[1] + gridShift[1]) / cellSize[1]);
+    int z = floor((p.getX()[2] + gridShift[2]) / cellSize[2]);
     return x < 0 || y < 0 || z < 0 || x >= nc[0] || y >= nc[1] || z >= nc[2];
 }
 
-std::array<int, 3> LinkedCellContainer::getCoordinateFromIndex(int index) {
-    return {index % nc[0], (index / nc[0]) % nc[1], index / (nc[0] * nc[1])};
+Particle LinkedCellContainer::mirrorParticle(const Particle &p) {
+    double x = p.getX()[0];
+    double y = p.getX()[1];
+    double z = p.getX()[2];
+
+    if (x < 0) {
+        x += boundary.getDimensions()[0];
+    } else if (x > boundary.getDimensions()[0]) {
+        x -= boundary.getDimensions()[0];
+    }
+
+    if (y < 0) {
+        y += boundary.getDimensions()[1];
+    } else if (y > boundary.getDimensions()[1]) {
+        y -= boundary.getDimensions()[1];
+    }
+
+    if (z < 0) {
+        z += boundary.getDimensions()[2];
+    } else if (z > boundary.getDimensions()[2]) {
+        z -= boundary.getDimensions()[2];
+    }
+
+    return Particle{std::array<double, 3>{x, y, z}, p.getV(), p.getM(), p.getEpsilon(), p.getSigma(), p.getType()};
 }
 
 

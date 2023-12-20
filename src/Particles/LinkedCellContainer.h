@@ -68,10 +68,10 @@ public:
     std::vector<Cell> getCells();
 
     /**
-     * @brief Returns the cell size of the container.
-     * @return The cell size of the container.
+     * @brief Returns the cell size in each dimension.
+     * @return Cell size in each dimension
      */
-    std::array<double,3> getCellSize();
+    std::array<double, 3> getCellSize() const {return cellSize;};
 
 private:
 
@@ -106,7 +106,7 @@ private:
      */
     std::array<double, 3> gridShift;
 
-    double cellSize;
+    std::array<double, 3> cellSize;
 
     /**
      * @brief Puts all particles in their correct cells after a change in position.
@@ -185,12 +185,7 @@ private:
       */
      bool particleOutOfGrid(const Particle& p);
 
-     /**
-      * @brief Returns (x,y,z) according to multi index
-      * @param index Integer specifying the multi index
-      * @return (x,y,z) int array
-      */
-     std::array<int,3> getCoordinateFromIndex(int index);
+    Particle mirrorParticle(const Particle& p);
 };
 
 

@@ -153,6 +153,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
         if (sim->boundaries()) {
             std::array <double,3> boxSize {sim->boundaries()->BoxSize().x(), sim->boundaries()->BoxSize().y(), sim->boundaries()->BoxSize().z()};
             SimParameters.setBoxSize(boxSize);
+            SimParameters.setDimension(SimParameters.getBoxSize()[2] == 0? 2 : 3);
             std::array<std::string, 6> bound_beh {sim->boundaries()->Front(),
                                                   sim->boundaries()->Back(),
                                                   sim->boundaries()->Top(),
