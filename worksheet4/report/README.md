@@ -40,6 +40,10 @@ And in order to respect the condition that not all boundaries are periodic, the 
 ### Mixing rules: ### 
 * We created a new class ```MixingRuleLennardJones``` that is used when multiple types of liquids interact with each other. We extended ```SphereGenerator``` and ```CuboidGenerator``` with the ability to optionally set the sigma and epsilon parameters of the liquids. Those parameters also have default values (1.0 for both) in order for the classes to be compatible with the rest of the project.
 
+### Small Rayleigh-Taylor instability experiment: ### 
+* The video of this experiment is in the file small-experiment-task2.ogv
+* In the video, we can  see that the two liquids mix together and start moving and bubbling.
+
 ## Task 3 “Simulation of a falling drop - Liquid” ##
 ### Checkpointing ###
 
@@ -98,10 +102,10 @@ Which parts of the code consume the most runtime?
 
 ## Task 5 “Tuning the sequential Performance” ##
 ### Thermostat optimization ### 
-* First, we tried to optimize our thermostat. As we explained in the beginning, thermostat does not store a reference to the particles, and needs to be updated in each iteration with ```updateState```. This requires the particles to first be copied in the ```getParticleVector``` function and then again in ```updateState``` - so all particles are copied twice per iterations. This presents a significant performance overhead, especially as the number of particles rises.
+* First, we tried to optimize our thermostat. As we explained in the beginning, thermostat does not store a reference to the particles, and needs to be updated in each iteration with ```updateState```. This requires the particles to first be copied in the ```getParticleVector``` function and then again in ```updateState``` - so all particles are copied twice per iteration. This presents a significant performance overhead, especially as the number of particles rises.
 * However, doing this copying operation is not necessary in every iteration, as the thermostat is not applied every time. The thermostat is typically only applied once every few hundreds of iterations, so the update is also only necessary in those iterations where the thermostat is actually applied.
 * For this optimization, we adjusted the ```updateState``` function to only be applied in the relevant iterations and created a new function ```updateStateTest``` that maintains the old functionality and compared those two using the falling drop simulation.
-* We first compared the measurements using the -O3 flag, applying the thermostat every 1000 iterations. The measurements for both functions were comparable, both very close to 100 seconds. To make sure that this was not caused by not applying the thermostat too infrequently, we tried again, applying the thermostat every 100 iteration, but with the same result - both functions had more or less the same runtime, once again around 100 seconds.
+* We first compared the measurements using the -O3 flag, applying the thermostat every 1000 iterations. The measurements for both functions were comparable, both very close to 100 seconds. To make sure that this was not caused by not applying the thermostat too infrequently, we tried again, applying the thermostat every 100 iterations, but with the same result - both functions had more or less the same runtime, once again around 100 seconds.
 * We thought that possibly -O3 already did this optimization for us which is why our optimization does not make a difference. However, we got the same results using -O0, with both versions taking around 1000 seconds.
 * We suspect the reason why this optimization did not speed up our simulation is that a lot more time is spent on calculating forces, creating VectorDoubles etc, compared to the ```updateState``` function, as we saw in the profiling results. So this optimization is not significant in the grand scheme of things.
 * Because this optimization did not change anything, we didn't merge it into ```main```. If you want to look at it, it is in the last commit (6a4f19a) on the branch ```thermostat-optimization```.
@@ -116,11 +120,14 @@ Which parts of the code consume the most runtime?
 * Instead of calculating the values on the spot every time this function is called, we precalculated all valid values for x, y, z with their corresponding indices in the grid and created a lookup table.
 * Unfortunately, this optimization did not speed up the simulation. We measured both the before and after with the -O3 optimization and both values fluctuated around 85 seconds (again, fluctuated because we performed each simulation multiple times). 
 * The reason this probably did not affect the execution time that much, is that although ```getGridIndex``` was one of the top functions in the profiler, it still only took about 2.7% of the total simulation. The ```getGridIndex``` calculation was already very simple and fast before the optimization, so the speedup from using a lookup table probably isn't that large. Even if we halved the time spent in this function, we would only reduce the original execution time by 1.35% so less than 1.2 seconds. The variability of the execution times within the same simulation was already around 1 second, so such a small difference would be very difficult to measure.
+* Because this optimization did not bring results, we didn't merge it into ```main```. If you want to look at it, it is in the last commit (ce1ac04) on the branch ```getgridindex-optimization```.
 
 ### SIMD for VectorDouble ### 
-* Another optimization we attempted was using SIMD instructions in the + and * operator of ```VectorDouble```. We selected those two operation because they are the most commonly used ones. They are used thousands of times in each iteration in force, position, velocity calculation and more.
+* Another optimization we attempted was using SIMD instructions in the +, * and - operators of ```VectorDouble```. We selected those three operators because they are the most commonly used ones. They are used thousands of times in each iteration in force, position, velocity calculation and more.
 * In each vector operation, for example addition, we need to do three calculations as the vectors are of size 3. Using SIMD instructions with registers that are 256 bits long (4 doubles fit in them), we could reduce the three operations to just one.
-* Unfortunately, this did not lead to the desired results. With -O3 on, the time before the change was 186 seconds and 187 seconds after. This might be because the overhead of using SIMD (for example loading data to and from the SIMD registers) is greater than the benefit of executing multiple instructions at once. Another explanation would be the use of the -O3 flag. With this optimization level, vectorization is enabled and it is possible that it was already performed by the compiler automatically.
+* Unfortunately, this did not lead to the desired results. With -O3 on, the time before the change was 186 seconds and 187 seconds after. We thought this might be because the overhead of using SIMD (for example loading data to and from the SIMD registers) is greater than the benefit of executing multiple instructions at once. Another explanation would be the use of the -O3 flag. With this optimization level, vectorization is enabled and it is possible that it was already performed by the compiler automatically.
+* To exclude this, we performed another simulation (a shorter one this time) using the -O0 flag. This brought even worse results, with the unoptimized version taking 453 seconds and the optimized one 508 seconds.
+* Because this optimization was not successful, we didn't merge it into ```main```. If you want to look at it, it is in the last commit (07be9d3) on the branch ```Simd-optimization```.
 
 # Misc #
 
