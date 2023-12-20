@@ -80,7 +80,10 @@ public:
      * @param type The type of the particle.
      */
     Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg, double m_arg, double epsilon, double sigma,
-             int type = 0): x{x_arg}, v{v_arg}, f{0}, old_f{0}, m{m_arg}, type{type}, epsilon{epsilon}, sigma{sigma} {};
+             int type = 0): x{x_arg}, v{v_arg}, f{0}, old_f{0}, m{m_arg}, type{type}, epsilon{epsilon}, sigma{sigma} {
+        markedForMirroring = false;
+        markedForDeleting = false;
+    };
 
     virtual ~Particle();
 
@@ -198,6 +201,10 @@ public:
      */
     void unmarkForMirroring();
 
+    void markForDeleting();
+
+    bool isMarkedForDeleting() const;
+
     bool operator==(const Particle &other) const;
 
     std::string toString() const;
@@ -209,6 +216,8 @@ public:
      * @return true if the Particle objects are not equal, false otherwise.
      */
     bool operator!=(const Particle& other) const;
+
+    bool markedForDeleting;
 };
 
 std::ostream &operator<<(std::ostream &stream, Particle &p);

@@ -5,11 +5,14 @@
  *      Author: rodrigoflx
  */
 
+#include <cmath>
+#include <iostream>
 #include "Simulation.h"
 
 #include "Particles/LinkedCellContainer.h"
 #include "Particles/BoundaryEnforcer.h"
 #include "Simulation/FakeThermostat.h"
+#include "IO/Logger.h"
 
 std::array<double, 3> maxwellBoltzmannDistributedVelocity(double averageVelocity, size_t dimensions);
 
@@ -47,8 +50,10 @@ std::vector<Particle> Simulation::getParticles() {
 
 void Simulation::calculateF(Particle& p1, Particle& p2) {
     VectorDouble3 result = this->forceCalculation.CalculateForces(p1,p2);
-    p1.setF(p1.getFVector() + result);
-    p2.setF(p2.getFVector() - result);
+    if (!std::isnan(result.at(0)) && std::isnan(result.at(1)) && std::isnan(result.at(2))) {
+        p1.setF(p1.getFVector() + result);
+        p2.setF(p2.getFVector() - result);
+    }
 }
 
 void Simulation::calculateV(Particle& p) const {
@@ -68,7 +73,6 @@ void Simulation::applyGravity(Particle& p) {
 }
 
 void Simulation::runIteration() {
-
     // calculate new x
     container.applyToAll([this](Particle& p) { calculateX(p); });
 
