@@ -12,8 +12,8 @@
 
 Particle::Particle(int type_arg) {
     type = type_arg;
-    f = {0., 0., 0.};
-    old_f = {0., 0., 0.};
+    f = VectorDouble3(std::array<double, 3>{0, 0, 0});
+    old_f = VectorDouble3(std::array<double, 3>{0, 0, 0});
     markedForMirroring = false;
     markedForDeleting = false;
 }
@@ -32,9 +32,9 @@ Particle::Particle(const Particle &other) {
 }
 
 Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
-                   double m_arg, int type_arg) : f{0., 0., 0.}, old_f{0., 0., 0.} {
-    x = x_arg;
-    v = v_arg;
+                   double m_arg, int type_arg) : f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})} {
+    x = VectorDouble3(x_arg);
+    v = VectorDouble3(v_arg);
     m = m_arg;
     type = type_arg;
     epsilon = 1.0;
@@ -45,13 +45,13 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
 
 Particle::~Particle() {}
 
-const std::array<double, 3> &Particle::getX() const { return x; }
+const std::array<double, 3> Particle::getX() const { return x.convertToArray(); }
 
-const std::array<double, 3> &Particle::getV() const { return v; }
+const std::array<double, 3> Particle::getV() const { return v.convertToArray(); }
 
-const std::array<double, 3> &Particle::getF() const { return f; }
+const std::array<double, 3> Particle::getF() const { return f.convertToArray(); }
 
-const std::array<double, 3> &Particle::getOldF() const { return old_f; }
+const std::array<double, 3> Particle::getOldF() const { return old_f.convertToArray(); }
 
 double Particle::getM() const { return m; }
 
@@ -59,8 +59,8 @@ int Particle::getType() const { return type; }
 
 std::string Particle::toString() const {
     std::stringstream stream;
-    stream << "Particle: X:" << x << " v: " << v << " f: " << f
-           << " old_f: " << old_f << " type: " << type;
+    stream << "Particle: X:" << x.convertToArray() << " v: " << v.convertToArray() << " f: " << f.convertToArray()
+           << " old_f: " << old_f.convertToArray() << " type: " << type;
     return stream.str();
 }
 
@@ -73,59 +73,51 @@ bool Particle::operator!=(const Particle& other) const {
 }
 
 VectorDouble3 Particle::getXVector() const {
-    return VectorDouble3(x);
+    return x;
 }
 
 VectorDouble3 Particle::getVVector() const {
-    return VectorDouble3(v);
+    return v;
 }
 
 VectorDouble3 Particle::getFVector() const {
-    return VectorDouble3(f);
+    return f;
 }
 
 VectorDouble3 Particle::getOldFVector() const {
-    return VectorDouble3(old_f);
+    return old_f;
 }
 
 void Particle::setX(const VectorDouble3 &position) {
-    x = position.convertToArray();
+    x = position;
 }
 
 void Particle::setV(const VectorDouble3 &velocity) {
-     v = velocity.convertToArray();
+     v = velocity;
 }
 
 void Particle::setF(const VectorDouble3 &force) {
-    f = force.convertToArray();
+    f = force;
 }
 
 void Particle::setOldF(const VectorDouble3 &oldForce) {
-    old_f = oldForce.convertToArray();
+    old_f = oldForce;
 }
 
 void Particle::setX(double x, double y, double z) {
-    (this->x)[0] = x;
-    (this->x)[1] = y;
-    (this->x)[2] = z;
+    this->x = VectorDouble3(std::array<double, 3>{x, y, z});
 }
 
 void Particle::setV(double x, double y, double z) {
-    v[0] = x;
-    v[1] = y;
-    v[2] = z;
+    this->v = VectorDouble3(std::array<double, 3>{x, y, z});
 }
 
 void Particle::setF(double x, double y, double z) {
-    f[0] = x;
-    f[1] = y;
-    f[2] = z;
+    this->f = VectorDouble3(std::array<double, 3>{x, y, z});
 }
 
 void Particle::setOldF(double x, double y, double z) {
-    old_f[0] = x;
-    old_f[1] = y;
-    old_f[2] = z;
+    this->old_f = VectorDouble3(std::array<double, 3>{x, y, z});
 }
 
 void Particle::markForMirroring() {

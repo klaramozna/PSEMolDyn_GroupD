@@ -17,22 +17,22 @@ private:
     /**
      * Position of the particle
      */
-    std::array<double, 3> x;
+    VectorDouble3 x;
 
     /**
      * Velocity of the particle
      */
-    std::array<double, 3> v;
+    VectorDouble3 v;
 
     /**
      * Force effective on this particle
      */
-    std::array<double, 3> f;
+    VectorDouble3 f;
 
     /**
      * Force which was effective on this particle
      */
-    std::array<double, 3> old_f;
+    VectorDouble3 old_f;
 
     /**
      * Mass of this particle
@@ -80,20 +80,20 @@ public:
      * @param type The type of the particle.
      */
     Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg, double m_arg, double epsilon, double sigma,
-             int type = 0): x{x_arg}, v{v_arg}, f{0}, old_f{0}, m{m_arg}, type{type}, epsilon{epsilon}, sigma{sigma} {
+             int type = 0): x{x_arg}, v{v_arg}, f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, m{m_arg}, type{type}, epsilon{epsilon}, sigma{sigma} {
         markedForMirroring = false;
         markedForDeleting = false;
     };
 
     virtual ~Particle();
 
-    const std::array<double, 3> &getX() const;
+    const std::array<double, 3> getX() const;
 
-    const std::array<double, 3> &getV() const;
+    const std::array<double, 3> getV() const;
 
-    const std::array<double, 3> &getF() const;
+    const std::array<double, 3> getF() const;
 
-    const std::array<double, 3> &getOldF() const;
+    const std::array<double, 3> getOldF() const;
 
     bool isMarkedForMirroring() const;
 
