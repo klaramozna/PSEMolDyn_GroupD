@@ -15,7 +15,7 @@
 
     <boundaries>
 
-    <BoxSize> <x>120</x> <y>50</y> <z>3</z></BoxSize>
+    <BoxSize> <x>120</x> <y>50</y> <z>0</z></BoxSize>
      <Front>Reflecting</Front>
      <Back>Reflecting</Back>
      <Top>Reflecting</Top>

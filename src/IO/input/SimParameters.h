@@ -81,6 +81,7 @@ public:
     double getGravityFactor() const {return gravity_factor;}
     std::string getThermostatType() const {return thermostatType;}
     bool getBrownianMotion() const {return brownianMotion;}
+    int getDim(){return dim;};
 
     // Setters for modifying parameter values
     void setEndTime(double val) { end_time = val; }
@@ -107,6 +108,7 @@ public:
     void setGravityFactor (double val) {gravity_factor = val;}
     void setThermostatType (const std::string& thermostatType_val){thermostatType = thermostatType_val;}
     void setBrownianMotion(bool val){brownianMotion = val;}
+    void setDimension(int val){dim = val;};
     bool operator==(const SimParameters &other) const;
 
 
@@ -231,6 +233,11 @@ private:
      * @brief True - brownian motion should be applied, False - not applied
      */
     bool brownianMotion;
+
+    /**
+     * @brief dimension of the simulation (2 or 3)
+     */
+     int dim;
 
 
 };
