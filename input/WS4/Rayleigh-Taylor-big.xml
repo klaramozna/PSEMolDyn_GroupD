@@ -14,7 +14,7 @@
 
     <boundaries>
 
-    <BoxSize> <x>300</x> <y>54</y> <z>0</z></BoxSize>
+    <BoxSize> <x>300</x> <y>54</y> <z>1</z></BoxSize>
      <Front>Periodic</Front>
      <Back>Periodic</Back>
      <Top>Reflecting</Top>
@@ -30,8 +30,7 @@
             <targetTemperature> 40 </targetTemperature>
             <thermostatCycleLength> 1000 </thermostatCycleLength>
         </simple>
-    </thermostat>
-    <brownian_motion>true</brownian_motion>
+    </thermostat>    
     
  <!-- Provide Particles (Cuboid) -->
  <cuboid>

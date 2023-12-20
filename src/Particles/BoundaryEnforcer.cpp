@@ -72,7 +72,7 @@ void BoundaryEnforcer::applyReflectiveForce(Particle &p, std::vector<BoundaryDir
     if (getDistance(VectorDouble3(particlePosition), VectorDouble3(opposingParticlePosition)) <= SIXTH_ROOT_OF_TWO * sigma) {
         auto opposingParticle = Particle(opposingParticlePosition, {0.0, 0.0, 0.0}, p.getM());
         auto result = fc.CalculateForces(p, opposingParticle);
-        p.setF(addSIMD(p.getFVector(),result));
+        p.setF(p.getFVector() + result);
     }
 }
 

@@ -12,7 +12,7 @@ VectorDouble3 GravitationalForce::CalculateForces(const Particle &p1, const Part
         double forceMagnitude = (p1.getM() * p2.getM()) / distance_pow3;
 
         // Calculate force components
-        result = scaleSIMD(forceMagnitude, (p2.getXVector() - p1.getXVector()));
+        result = forceMagnitude * (p2.getXVector() - p1.getXVector());
     }
 
     return result;

@@ -17,6 +17,6 @@ VectorDouble3 MixingRuleLennardJones::CalculateForces(const Particle &p1, const 
     double sigma_term_pow_6 = sigma_term_pow2 * sigma_term_pow2 * sigma_term_pow2;
     double sigma_term_pow_12 = sigma_term_pow_6 * sigma_term_pow_6;
     double distanceL2Norm_pow2 = distanceL2Norm * distanceL2Norm;
-    result = scaleSIMD((-24 * eps / distanceL2Norm_pow2) * (sigma_term_pow_6 - 2 * sigma_term_pow_12), distance);
+    result = (-24 * eps / distanceL2Norm_pow2) * (sigma_term_pow_6 - 2 * sigma_term_pow_12) * distance;
     return result;
 }

@@ -20,7 +20,7 @@ void Thermostat::initializeBrownianMotion(Particle &particle) const {
     }
     double factor = sqrt(initTemperature / particle.getM());
     VectorDouble3 resultVelocity = VectorDouble3(maxwellBoltzmannDistributedVelocity(factor, dim));
-    particle.setV(addSIMD(particle.getVVector(), resultVelocity));
+    particle.setV(particle.getVVector() + resultVelocity);
 }
 
 double Thermostat::getKineticEnergy(const std::vector<Particle> &particles) const {

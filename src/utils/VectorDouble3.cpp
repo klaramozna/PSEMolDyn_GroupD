@@ -5,7 +5,6 @@
 #include "VectorDouble3.h"
 #include <cmath>
 #include <iostream>
-#include <immintrin.h>
 
 using lui = long unsigned int;
 
@@ -68,7 +67,7 @@ VectorDouble3::VectorDouble3(const std::array<double, 3> &array): values{} {
 }
 
 std::array<double, 3> VectorDouble3::convertToArray() const {
-    return std::array<double, 3>{values[0], values[1], values[3]};
+    return values;
 }
 
 double VectorDouble3::at(int index) {
@@ -90,33 +89,4 @@ double getDotProduct(const VectorDouble3& v1, const VectorDouble3& v2){
         sum += v1.values[i] * v2.values[i];
     }
     return sum;
-}
-
-VectorDouble3 addSIMD(const VectorDouble3& v1, const VectorDouble3 v2){
-    // Load registers
-    __m256d simd_a = _mm256_loadu_pd(v1.values.data());
-    __m256d simd_b = _mm256_loadu_pd(v2.values.data());
-
-    // Calculate result
-    __m256d simd_result = _mm256_add_pd(simd_a, simd_b);
-
-    // Return results
-    std::array<double, 4> result{};
-    _mm256_storeu_pd(result.data(), simd_result);
-    return VectorDouble3(std::array<double, 3>{result[0], result[1], result[2]});
-}
-
-VectorDouble3 scaleSIMD(double scalar, const VectorDouble3 &vec) {
-    // Load registers
-    std::array<double, 4> scalarArray{scalar, scalar, scalar, scalar};
-    __m256d simd_a = _mm256_loadu_pd(vec.values.data());
-    __m256d simd_b = _mm256_loadu_pd(scalarArray.data());
-
-    // Calculate result
-    __m256d simd_result = _mm256_mul_pd(simd_a, simd_b);
-
-    // Return results
-    std::array<double, 4> result{};
-    _mm256_storeu_pd(result.data(), simd_result);
-    return VectorDouble3(std::array<double, 3>{result[0], result[1], result[2]});
 }
