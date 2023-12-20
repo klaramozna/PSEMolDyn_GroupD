@@ -20,6 +20,18 @@ Members:
 
 ## Task 2 “Simulation of the Rayleigh-Taylor instability” ##
 ### Periodic Boundaries: ###
+* The periodic boundary condition was implemented on top of the existing scheme for handling boundary conditions - meaning it also iterates over particles
+* Enforce this boundary for a particle consists of two steps:
+  1. Setting its internal markedForMirroring to true, so that later methods in LinkedCellContainer can mirror it
+  2. Adding mirrored particles according to the geometry of periodic boundaries
+
+The first step is trivial and the "leg work" was mostly done in ensuring that the particle to be mirrored gets deleted and a mirrored copy gets added instead
+
+The second step is more involved and consists of the following steps:
+  1. Calculating the shifted position of the particle
+  2. Checking whether the shifted position overlaps with the halo region
+
+And in order to respect the condition that not all boundaries are periodic, the shifted position is only calculated for the boundaries that are periodic.
   
 ### Gravity Force: ### 
 * The gravity Force is a single particle force so it was not possible to implement it as a subclass of ForceCalculation.h like Lennard Jones. So we added a new parent class ```OneParticleForceCalculation``` and implemented ```GravityForce``` as a subclass of it, the method offered by this class will then be used in the Simulation class wrapped with the applyToAll functionality in every iteration.
