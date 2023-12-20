@@ -25,7 +25,15 @@
     
     </boundaries>
     <cutoffRadius>3.0</cutoffRadius>
-    <thermostat><none>none</none></thermostat>
+    <thermostat>
+        <gradual>
+            <initTemperature>0.5</initTemperature>
+            <targetTemperature>0.5</targetTemperature>
+            <maxTemperatureChange>0.1</maxTemperatureChange>
+            <thermostatCycleLength>1000</thermostatCycleLength>
+        </gradual>
+    </thermostat>
+    <brownian_motion>true</brownian_motion>
 
     <!-- Provide Particles (Sphere) -->
     <sphere>

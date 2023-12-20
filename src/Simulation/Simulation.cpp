@@ -28,8 +28,8 @@ Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& contai
     if(applyBrownianMotion){
         if(typeid(thermostat) == typeid(FakeThermostat())) {
             container.applyToAll([&averageVelo](Particle &p) {
-                std::array velocity = maxwellBoltzmannDistributedVelocity(averageVelo, 3);
-                p.setV(velocity[0], velocity[1], velocity[2]);
+                VectorDouble3 velocity = VectorDouble3(maxwellBoltzmannDistributedVelocity(averageVelo, 3));
+                p.setV(p.getVVector() + velocity);
             });
         }
         else{
