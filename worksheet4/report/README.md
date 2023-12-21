@@ -42,6 +42,11 @@ And in order to respect the condition that not all boundaries are periodic, the 
 
 ### Small Rayleigh-Taylor instability experiment: ###
 
+
+https://github.com/klaramozna/PSEMolDyn_GroupD/assets/48733720/6e9a1a11-d2cf-47ae-b3b6-716c998e9e0d
+
+
+
 ## Task 3 “Simulation of a falling drop - Liquid” ##
 ### Checkpointing ###
 
