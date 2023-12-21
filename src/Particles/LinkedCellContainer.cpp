@@ -240,10 +240,10 @@ bool LinkedCellContainer::cellWithinRadius(const Particle &p, int x, int y, int 
 }
 
 bool LinkedCellContainer::particleOutOfGrid(const Particle &p) {
-    int x = floor((p.getX()[0] + gridShift[0]) / cellSize[0]);
-    int y = floor((p.getX()[1] + gridShift[1]) / cellSize[1]);
-    int z = floor((p.getX()[2] + gridShift[2]) / cellSize[2]);
-    return x < 0 || y < 0 || z < 0 || x >= nc[0] || y >= nc[1] || z >= nc[2];
+    std::array<double, 3> pos = p.getX();
+    return pos[0] < -cellSize[0] || pos[0] > boundary.getDimensions()[0] + cellSize[0]
+    || pos[1] < -cellSize[1] || pos[1] > boundary.getDimensions()[1] + cellSize[1]
+    || pos[2] < -cellSize[2] || pos[2] > boundary.getDimensions()[2] + cellSize[2];
 }
 
 Particle LinkedCellContainer::mirrorParticle(const Particle &p) {
