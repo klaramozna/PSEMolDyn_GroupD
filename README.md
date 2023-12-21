@@ -49,6 +49,7 @@ Bachelor Practical course:
   - Xerces-C library: ```sudo apt-get install libxerces-c-dev```
   - Boost program options: ```sudo apt-get install libboost-program-options-dev```
   - Boost test environment: ```sudo apt-get install libboost-test-dev ```
+  - Pkg-config: ``` sudo apt-get install pkg-config ```
 
 <a name="gettingStarted"></a>
 ### Getting Started
