@@ -40,9 +40,7 @@ And in order to respect the condition that not all boundaries are periodic, the 
 ### Mixing rules: ### 
 * We created a new class ```MixingRuleLennardJones``` that is used when multiple types of liquids interact with each other. We extended ```SphereGenerator``` and ```CuboidGenerator``` with the ability to optionally set the sigma and epsilon parameters of the liquids. Those parameters also have default values (1.0 for both) in order for the classes to be compatible with the rest of the project.
 
-### Small Rayleigh-Taylor instability experiment: ### 
-* The video of this experiment is in the file small-experiment-task2.ogv
-* In the video, we can  see that the two liquids mix together and start moving and bubbling.
+### Small Rayleigh-Taylor instability experiment: ###
 
 ## Task 3 “Simulation of a falling drop - Liquid” ##
 ### Checkpointing ###
