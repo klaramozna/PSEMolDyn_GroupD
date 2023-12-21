@@ -46,7 +46,11 @@ And in order to respect the condition that not all boundaries are periodic, the 
 
 https://github.com/klaramozna/PSEMolDyn_GroupD/assets/48733720/d93944b5-6c4e-4cca-b199-08d86c704d48
 
+### Rayleigh-Taylor instability big experiment: ###
 
+
+
+https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/05d0f0e9-53e7-4ea3-87b1-ec46292050f8
 
 
 
