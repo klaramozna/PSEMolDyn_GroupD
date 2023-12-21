@@ -8,6 +8,13 @@
 
 using lui = long unsigned int;
 
+double sqrtNewton(double x, double epsilon = 1e-9) {
+        double guess = x / 2.0; // Initial guess
+        while (std::fabs(guess * guess - x) > epsilon) {
+            guess = (guess + x / guess) / 2.0; // Newton's method iteration
+        }
+        return guess; 
+}
 VectorDouble3 VectorDouble3::operator+=(const VectorDouble3 &other) {
     for (lui i = 0; i < values.size(); i++) {
         values[i] += other.values[i];
@@ -27,7 +34,7 @@ double VectorDouble3::getL2Norm() const {
     for (auto value: values) {
         norm += value * value;
     }
-    return sqrt(norm);
+    return sqrtNewton(norm);
 }
 
 void VectorDouble3::print() const {
