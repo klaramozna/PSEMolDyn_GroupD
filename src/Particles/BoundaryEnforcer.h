@@ -50,7 +50,7 @@ private:
      * @param p: Reference to the particle to which reflective force is applied.
      * @param boundaryofParticle: Vector of BoundaryDirection indicating the particle's boundaries.
      */
-    void applyReflectiveForce(Particle &p, std::vector<BoundaryDirection> boundaryofParticle);
+    void applyReflectiveForce(Particle &p, const std::vector<BoundaryDirection>& boundaryofParticle);
 
     /**
      * @brief Applies periodic boundary conditions to a particle.
@@ -76,6 +76,8 @@ private:
      * @return True if the position is in the halo region; otherwise, false.
      */
     bool isHaloParticle(double x, double y, double z);
+
+    bool isInsideBound(const Particle &p);
 };
 
 

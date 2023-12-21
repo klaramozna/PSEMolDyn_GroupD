@@ -188,23 +188,29 @@ void LinkedCellContainer::applyToBoundary(const std::function<void(Particle (&))
 /* Not sure if this is a great idea, but alas */
 void LinkedCellContainer::deleteHaloParticles() {
     // Creating a vector for marking particles that need to be deleted
-    std::vector<std::pair<Particle, int>> particlesToBeDeleted{}; // stores each particle that needs to be deleted with the cell it's beeing deleted from
+    std::vector<std::pair<Particle, int>> particlesToBeDeleted{};
 
     // Applying given function to each particle and marking particles for movement
     for(int i = 0; i < grid.size(); i++){
         for(auto & particle : grid[i]){
+            // If it's marked for deletion, just delete
             if (particle.isMarkedForDeleting()) {
                 particlesToBeDeleted.emplace_back(particle, i);
                 continue;
             }
+            // If it's not marked for deletion but outside, it must either
+            // be mirrored back as in the case of a periodic boundary
+            // or be mirrored back into the simulation as in the case of a hard boundary
             if(boundary.isOutside(particle)){
+                particlesToBeDeleted.emplace_back(particle,i);
                 if (particle.isMarkedForMirroring()) {
-                    Particle p2 = mirrorParticle(particle);
+                    Particle p2 = mirrorParticleOpposite(particle);
                     p2.unmarkForMirroring();
                     addParticle(p2);
-                    size++;
+                } else {
+                    Particle p2 = mirrorParticle(particle);
+                    addParticle(p2);
                 }
-                particlesToBeDeleted.emplace_back(particle, i);
             }
         }
     }
@@ -240,13 +246,39 @@ bool LinkedCellContainer::cellWithinRadius(const Particle &p, int x, int y, int 
 }
 
 bool LinkedCellContainer::particleOutOfGrid(const Particle &p) {
-    int x = floor((p.getX()[0] + gridShift[0]) / cellSize[0]);
-    int y = floor((p.getX()[1] + gridShift[1]) / cellSize[1]);
-    int z = floor((p.getX()[2] + gridShift[2]) / cellSize[2]);
-    return x < 0 || y < 0 || z < 0 || x >= nc[0] || y >= nc[1] || z >= nc[2];
+    std::array<double, 3> pos = p.getX();
+    return pos[0] < -cellSize[0] || pos[0] > boundary.getDimensions()[0] + cellSize[0]
+           || pos[1] < -cellSize[1] || pos[1] > boundary.getDimensions()[1] + cellSize[1]
+           || pos[2] < -cellSize[2] || pos[2] > boundary.getDimensions()[2] + cellSize[2];
 }
 
 Particle LinkedCellContainer::mirrorParticle(const Particle &p) {
+    double x = p.getX()[0];
+    double y = p.getX()[1];
+    double z = p.getX()[2];
+
+    if (x < 0) {
+        x = -x;
+    } else if (x > boundary.getDimensions()[0]) {
+        x = boundary.getDimensions()[0] - std::abs(boundary.getDimensions()[0] - x);
+    }
+
+    if (y < 0) {
+        y = -y;
+    } else if (y > boundary.getDimensions()[1]) {
+        y = boundary.getDimensions()[1] - std::abs(boundary.getDimensions()[1] - y);
+    }
+
+    if (z < 0) {
+        z = -z;
+    } else if (z > boundary.getDimensions()[2]) {
+        z = boundary.getDimensions()[2] - std::abs(boundary.getDimensions()[2] - z);
+    }
+
+    return Particle{std::array<double, 3>{x, y, z}, p.getV(), p.getM(), p.getEpsilon(), p.getSigma(), p.getType()};
+}
+
+Particle LinkedCellContainer::mirrorParticleOpposite(const Particle &p) {
     double x = p.getX()[0];
     double y = p.getX()[1];
     double z = p.getX()[2];
@@ -271,6 +303,13 @@ Particle LinkedCellContainer::mirrorParticle(const Particle &p) {
 
     return Particle{std::array<double, 3>{x, y, z}, p.getV(), p.getM(), p.getEpsilon(), p.getSigma(), p.getType()};
 }
+
+
+
+
+
+
+
 
 
 

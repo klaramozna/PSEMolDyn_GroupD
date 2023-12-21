@@ -2,7 +2,9 @@
 // Created by rodff on 14.12.23.
 //
 
+#include <iostream>
 #include "BoundaryEnforcer.h"
+#include "Simulation/Physics/GravityForce.h"
 
 BoundaryEnforcer::BoundaryEnforcer(double sigma, LinkedCellContainer &container, std::array<double, 3> dimensions,
                                    std::array<BoundaryType, 6> boundaryTypes, ForceCalculation &fc) : container(container),
@@ -10,7 +12,6 @@ BoundaryEnforcer::BoundaryEnforcer(double sigma, LinkedCellContainer &container,
                                                                                 boundaryTypes(boundaryTypes),
                                                                                 sigma{sigma},
                                                                                 fc{fc} {}
-
 
 void BoundaryEnforcer::applyBoundaryConditionsForParticle(Particle &particle) {
     auto allBoundaries = getBoundariesOfParticle(particle);
@@ -36,13 +37,14 @@ void BoundaryEnforcer::applyBoundaryConditionsForParticle(Particle &particle) {
                     particle.markForMirroring();
                     break;
                 case BoundaryType::OUTFLOW:
+                    particle.markForDeleting();
                     break;
             }
         }
     }
 }
 
-void BoundaryEnforcer::applyReflectiveForce(Particle &p, std::vector<BoundaryDirection> directions) {
+void BoundaryEnforcer::applyReflectiveForce(Particle &p, const std::vector<BoundaryDirection>& directions) {
     std::array<double, 3> particlePosition = p.getX();
     std::array<double, 3> opposingParticlePosition = particlePosition;
 
@@ -67,12 +69,11 @@ void BoundaryEnforcer::applyReflectiveForce(Particle &p, std::vector<BoundaryDir
                 opposingParticlePosition[2] += 2 * std::abs(particlePosition[2] - dimensions[2]);
                 break;
         }
-    }
-
-    if (getDistance(VectorDouble3(particlePosition), VectorDouble3(opposingParticlePosition)) <= SIXTH_ROOT_OF_TWO * sigma) {
-        auto opposingParticle = Particle(opposingParticlePosition, {0.0, 0.0, 0.0}, p.getM());
-        auto result = fc.CalculateForces(p, opposingParticle);
-        p.setF(p.getFVector() + result);
+        if (getDistance(VectorDouble3(particlePosition), VectorDouble3(opposingParticlePosition)) <= SIXTH_ROOT_OF_TWO * sigma) {
+            auto opposingParticle = Particle(opposingParticlePosition, {0.0, 0.0, 0.0}, p.getM());
+            auto result = fc.CalculateForces(p, opposingParticle);
+            p.setF(p.getFVector() + result);
+        }
     }
 }
 

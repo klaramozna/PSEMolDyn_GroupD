@@ -185,7 +185,10 @@ private:
       */
      bool particleOutOfGrid(const Particle& p);
 
-    Particle mirrorParticle(const Particle& p);
+     Particle mirrorParticleOpposite(const Particle& p);
+
+     Particle mirrorParticle(const Particle& p);
+
 };
 
 
