@@ -12,7 +12,7 @@
     <averageVelo>0.1</averageVelo>
     <boundaries>
 
-    <BoxSize> <x>303</x> <y>180</y> <z>1</z></BoxSize>
+    <BoxSize> <x>303</x> <y>180</y> <z>0</z></BoxSize>
      <Front>Reflecting</Front>
      <Back>Reflecting</Back>
      <Top>Reflecting</Top>

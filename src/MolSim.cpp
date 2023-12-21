@@ -212,7 +212,7 @@ int main(int argc, char *argsv[]) {
             Logger::console->info("Storing checkpoint ...");
             c.writeCheckpoint(container, simParameters.getStoreCheckpoint());
         }
-        
+        Logger::console->info(container.getSize());
         Logger::console->info("Output written with frequency {}. Terminating...", simParameters.getWriteFrequency());
         return 0;
     }
