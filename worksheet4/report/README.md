@@ -100,6 +100,28 @@ Which parts of the code consume the most runtime?
 * Another function that needs a lot of time is ```applyToPairs```. This is not too surprising as we need to iterate through many combinations of pairs of particles each iteration to calculate the forces. It might also be caused be the many index calculations (for example with the function getGridIndex() that also take up a lot of time).
 * The ```getL2Norm``` function is a candidate for optimization as well. The high time spent in this function is probably due to the square root computation and generally being used many times in an iteration.
 
+### CoolMUC2  ###
+* we succefully performed the log in process to the linux cluster with the provided login credentials + 2FA.
+* At first we had problems compiling our program on the cluster because of the xerces library, we had to make some changes in our CMake files (we now use PkgConfig to check for xerces) to overcome that.
+* Those are the steps we perform on the linux cluster to compiler our code:   
+  1 - Copy project from local device to the cluser: ```$ scp -r ./PSEMolDyn_GroupD di29wav@lxlogin1.lrz.de:~/```   
+  2 - Load the needed modules on the cluster (gcc, cmake, boost, pkgconf, xerces-c): ```$ module load <module_name>```   
+  3- create a build folder, switch to it and compile without tests: ```$ cmake -DBUILD_GTESTS=OFF ..``` then ```$ make```   
+* To run for example the fluid equilibration we used the following script:  
+```
+#!/bin/bash
+#SBATCH -o ./%x.%j.%N.out
+#SBATCH -D ./
+#SBATCH --get-user-env
+#SBATCH --clusters=serial
+#SBATCH --partition=serial_std
+#SBATCH --mail-type=end
+#SBATCH --mail-user=rayen.manai@tum.de
+#SBATCH --export=ALL
+#SBATCH --time=01:15:00
+
+srun ./src/MolSim -p ../input/WS4/T3-gravity-equi.xml -t True
+``` 
 ## Task 5 “Tuning the sequential Performance” ##
 ### Thermostat optimization ### 
 * First, we tried to optimize our thermostat. As we explained in the beginning, thermostat does not store a reference to the particles, and needs to be updated in each iteration with ```updateState```. This requires the particles to first be copied in the ```getParticleVector``` function and then again in ```updateState``` - so all particles are copied twice per iteration. This presents a significant performance overhead, especially as the number of particles rises.
@@ -128,6 +150,12 @@ Which parts of the code consume the most runtime?
 * Unfortunately, this did not lead to the desired results. With -O3 on, the time before the change was 186 seconds and 187 seconds after. We thought this might be because the overhead of using SIMD (for example loading data to and from the SIMD registers) is greater than the benefit of executing multiple instructions at once. Another explanation would be the use of the -O3 flag. With this optimization level, vectorization is enabled and it is possible that it was already performed by the compiler automatically.
 * To exclude this, we performed another simulation (a shorter one this time) using the -O0 flag. This brought even worse results, with the unoptimized version taking 453 seconds and the optimized one 508 seconds.
 * Because this optimization was not successful, we didn't merge it into ```main```. If you want to look at it, it is in the last commit (07be9d3) on the branch ```Simd-optimization```.
+
+### Mixing Rules Optimization ###
+
+
+### cmath Sqrt vs Newton's Method ###
+
 
 # Misc #
 
