@@ -25,7 +25,7 @@ CL::CL() {
         ("velocity,v", po::value<double>(&averageVelo), "average Brownian motion velocity")
         ("force,f", po::value<std::string>(&force), "Select between force calculation engines (lennard or grav or MixingRuleLennardJones)")
         ("gravity,g", po::value<double>(&gravity_factor), "Select a gravity factor value")
-        ("testing,t", po::bool_switch(&testing), "enable testing mode for benchmarking")
+        ("testing,t", po::value<bool>(&testing), "enable testing mode for benchmarking")
         ("log_level,l", po::value<int>(&log_level)->notifier([this](const int& value) {
             this->validate_range(value, "log_level");
         }), "sets the log level (0: trace, 1: debug, 2: info, 3: warning, 4: error, 5: critical, 6: off)")

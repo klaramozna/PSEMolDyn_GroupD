@@ -181,20 +181,31 @@ int main(int argc, char *argsv[]) {
         benchmark.printBenchmarkResults(benchmark.getElapsedTimeInSeconds(), number_of_iterations ,container.getSize());
 
     } else {
+       
         writer.createMarkedDirectory();
-        // for this loop, we assume: current x, current f and current v are known
-        while (current_time < simParameters.getEndTime()) {
-            simulation.runIteration();
+        int total_iterations = static_cast<int>(simParameters.getEndTime() / simParameters.getDeltaT());
+        int percentage=0;
+        int old_percentage=0;
 
-            iteration++;
-            if (iteration % simParameters.getWriteFrequency() == 0) {
-                writer.plotParticles(simulation.getParticles(), simParameters.getBaseName(), iteration);
-            }
+    Logger::console->info("Progress: {}%", percentage);
+     // for this loop, we assume: current x, current f and current v are known
+    while (current_time < simParameters.getEndTime()) {
+        simulation.runIteration();
 
-            Logger::console->info("Iteration {} finished.", iteration);
-
-            current_time += simParameters.getDeltaT();
+        iteration++;
+        if (iteration % simParameters.getWriteFrequency() == 0) {
+            writer.plotParticles(simulation.getParticles(), simParameters.getBaseName(), iteration);
         }
+
+        current_time += simParameters.getDeltaT();
+
+        percentage = static_cast<int>((static_cast<double>(iteration) / total_iterations) * 100);
+
+        if (percentage % 10 == 0 && percentage > old_percentage && percentage != 0 && percentage <= 100) {
+            Logger::console->info("Progress: {}%", percentage);
+            old_percentage = percentage;
+        }
+    }
 
         /* store checkpoint if specified */
         if (!simParameters.getStoreCheckpoint().empty()) {

@@ -26,7 +26,7 @@ int Benchmark::getMoleculeUpdatesPerSecond(double elapsed_time, int iterations, 
 }
 
 void Benchmark::printBenchmarkResults(double elapsed_time, int iterations, int number_of_molecules) {
-    Logger::console->info("Time taken: {} milliseconds",  elapsed_time);
+    Logger::console->info("Time taken: {} seconds",  elapsed_time);
     double mups = getMoleculeUpdatesPerSecond(elapsed_time, iterations,number_of_molecules);
     double mmups = mups/ (1000000);
     Logger::console->info("MUPS = {}",  mups);

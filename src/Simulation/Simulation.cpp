@@ -49,7 +49,7 @@ std::vector<Particle> Simulation::getParticles() {
 
 void Simulation::calculateF(Particle& p1, Particle& p2) {
     VectorDouble3 result = this->forceCalculation.CalculateForces(p1,p2);
-    if (!std::isnan(result.at(0)) && std::isnan(result.at(1)) && std::isnan(result.at(2))) {
+    if (!std::isnan(result.at(0)) && !std::isnan(result.at(1)) && !std::isnan(result.at(2))) {
         p1.setF(p1.getFVector() + result);
         p2.setF(p2.getFVector() - result);
     }
