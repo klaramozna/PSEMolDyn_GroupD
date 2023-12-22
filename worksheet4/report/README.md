@@ -82,8 +82,10 @@ https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/be2fdf83-d90f-40
   This how it looks like when we load the checkpoint and add the sphere:  
   <img src =checkpoint_loaded.png>
 
-### Optional ### 
-* to do
+### Simulation of a falling drop - Liquid ### 
+* Unfortunately, we were not able to successfully perform this simulation.
+* The drop falls as expected, but once it makes contact with the liquid below, the particles explode and a large amount of them leave the simulation completely.
+* We have not been able to figure out the cause of this until now, however we will fix and debug this for the next worksheet.
 
 ## Task 4 “Performance Measurement and Profiling” ##
 
