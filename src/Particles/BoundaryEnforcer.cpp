@@ -67,13 +67,13 @@ void BoundaryEnforcer::applyReflectiveForce(Particle &p, std::vector<BoundaryDir
                 opposingParticlePosition[2] += 2 * std::abs(particlePosition[2] - dimensions[2]);
                 break;
         }
+        if (getDistance(VectorDouble3(particlePosition), VectorDouble3(opposingParticlePosition)) <= SIXTH_ROOT_OF_TWO * sigma) {
+            auto opposingParticle = Particle(opposingParticlePosition, {0.0, 0.0, 0.0}, p.getM());
+            opposingParticle.markForDeleting();
+            container.addParticle(opposingParticle);
+        }
     }
 
-    if (getDistance(VectorDouble3(particlePosition), VectorDouble3(opposingParticlePosition)) <= SIXTH_ROOT_OF_TWO * sigma) {
-        auto opposingParticle = Particle(opposingParticlePosition, {0.0, 0.0, 0.0}, p.getM());
-        auto result = fc.CalculateForces(p, opposingParticle);
-        p.setF(p.getFVector() + result);
-    }
 }
 
 std::vector<BoundaryDirection> BoundaryEnforcer::getBoundariesOfParticle(Particle &particle) {
