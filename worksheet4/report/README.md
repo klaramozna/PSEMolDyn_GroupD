@@ -7,10 +7,11 @@ Members:
 # Code #
 * Link:     https://github.com/klaramozna/PSEMolDyn_GroupD
 * Branch:   main
-* Revision: 
+* Revision: 1075f68
 * Compiler: g++ 11.4.0
 * Documentation: https://klaramozna.github.io/PSEMolDyn_GroupD/
-
+  
+> **Hint:** Please have a look at our report directly on the readme on the repository (Link: https://github.com/klaramozna/PSEMolDyn_GroupD/tree/presentations%2Breports/worksheet4/report) because we have videos embedded and it looks nicer there.
 
 # Report #
 
@@ -77,7 +78,9 @@ https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/be2fdf83-d90f-40
 
 
 * Sphere Drop accelerated by the gravity on the equilibrated liquid: run the program so to load the checkpoint and enter the sphere:  
-  ```./src/MolSim -p ../input/WS4/T3-sphere.xml -x ../input/Checkpoints/Checkpoint1.xml``` 
+  ```./src/MolSim -p ../input/WS4/T3-sphere.xml -x ../input/Checkpoints/Checkpoint1.xml```  
+  This how it looks like when we load the checkpoint and add the sphere:  
+  <img src =checkpoint_loaded.png>
 
 ### Optional ### 
 * to do
