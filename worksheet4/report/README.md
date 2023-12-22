@@ -13,6 +13,14 @@ Members:
 
 
 # Report #
+
+## Forewarning ##
+
+We modified the implementation of reflecting boundaries, so that now for each boundary and particle, one "ghost" particle gets added symmetricaly to the boundary.
+
+This has lead to the current test suite in ReflectiveForceTest failing, which as of now, we haven't had enough
+time to fix. This will be addressed for the next delivery.
+
 ## Task 1 “Thermostats” ##
 * We created a general ```Thermostat``` that implements some of the functionalities that thermostats have in common, such as calculating kinetic energy or calculating current temperature.
 * We decided not to store a reference to the particles of the ```LinkedCellContainer``` in the thermostat. On one hand doing this would spare us some copying of the particles back and forth in each iteration. However, it would require us to keep track of when ```LinkedCellContainer``` and ```Thermostat``` are deleted and used, such as it does not come to any memory problems. We decided to try to make our code less error-prone and increase maintainability by using copies instead of references. In each iteration, we update the state of the thermostat by calling the function ```updateState``` in ```Thermostat```. This is costly as we need to copy all particles twice per iteration (once with ```getParticleVector``` and then with ```updateState```). We might change this later when we optimize. 
