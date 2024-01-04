@@ -68,6 +68,10 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
                 Logger::console->debug("Reading force type 3 (Mixing Rule Lennard Jones) from XML");
                 SimParameters.setForce("MixingRuleLennardJones");
             } 
+            else if (sim->force()->TruncatedLennardJones()){
+                Logger::console->debug("Reading force type 4 (Truncated Lennard Jones) from XML");
+                SimParameters.setForce("TruncatedLennardJones");
+            }
         }
 
         if (sim->thermostat()) {

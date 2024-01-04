@@ -250,6 +250,36 @@ MixingRuleLennardJones (::std::unique_ptr< MixingRuleLennardJones_type > x)
   this->MixingRuleLennardJones_.set (std::move (x));
 }
 
+const ForceType::TruncatedLennardJones_optional& ForceType::
+TruncatedLennardJones () const
+{
+  return this->TruncatedLennardJones_;
+}
+
+ForceType::TruncatedLennardJones_optional& ForceType::
+TruncatedLennardJones ()
+{
+  return this->TruncatedLennardJones_;
+}
+
+void ForceType::
+TruncatedLennardJones (const TruncatedLennardJones_type& x)
+{
+  this->TruncatedLennardJones_.set (x);
+}
+
+void ForceType::
+TruncatedLennardJones (const TruncatedLennardJones_optional& x)
+{
+  this->TruncatedLennardJones_ = x;
+}
+
+void ForceType::
+TruncatedLennardJones (::std::unique_ptr< TruncatedLennardJones_type > x)
+{
+  this->TruncatedLennardJones_.set (std::move (x));
+}
+
 
 // simpleThermostatType
 // 
@@ -2441,7 +2471,8 @@ ForceType ()
 : ::xml_schema::type (),
   lennard_ (this),
   grav_ (this),
-  MixingRuleLennardJones_ (this)
+  MixingRuleLennardJones_ (this),
+  TruncatedLennardJones_ (this)
 {
 }
 
@@ -2452,7 +2483,8 @@ ForceType (const ForceType& x,
 : ::xml_schema::type (x, f, c),
   lennard_ (x.lennard_, f, this),
   grav_ (x.grav_, f, this),
-  MixingRuleLennardJones_ (x.MixingRuleLennardJones_, f, this)
+  MixingRuleLennardJones_ (x.MixingRuleLennardJones_, f, this),
+  TruncatedLennardJones_ (x.TruncatedLennardJones_, f, this)
 {
 }
 
@@ -2463,7 +2495,8 @@ ForceType (const ::xercesc::DOMElement& e,
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
   lennard_ (this),
   grav_ (this),
-  MixingRuleLennardJones_ (this)
+  MixingRuleLennardJones_ (this),
+  TruncatedLennardJones_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -2524,6 +2557,20 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // TruncatedLennardJones
+    //
+    if (n.name () == "TruncatedLennardJones" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< TruncatedLennardJones_type > r (
+        TruncatedLennardJones_traits::create (i, f, this));
+
+      if (!this->TruncatedLennardJones_)
+      {
+        this->TruncatedLennardJones_.set (::std::move (r));
+        continue;
+      }
+    }
+
     break;
   }
 }
@@ -2544,6 +2591,7 @@ operator= (const ForceType& x)
     this->lennard_ = x.lennard_;
     this->grav_ = x.grav_;
     this->MixingRuleLennardJones_ = x.MixingRuleLennardJones_;
+    this->TruncatedLennardJones_ = x.TruncatedLennardJones_;
   }
 
   return *this;

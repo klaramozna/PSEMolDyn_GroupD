@@ -45,6 +45,7 @@ Simulation/Physics/GravitationalForce.cpp
         Simulation/Physics/MixingRuleLennardJones.cpp
         Simulation/Physics/MixingRuleLennardJones.h
         Simulation/Physics/GravityForce.cpp
+        Simulation/Physics/TruncatedLennardJones.cpp
         Simulation/FakeThermostat.cpp
         Simulation/FakeThermostat.h
         utils/MaxwellBoltzmannDistribution.h

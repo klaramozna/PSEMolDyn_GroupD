@@ -92,6 +92,14 @@ VectorDouble3 Particle::getOldFVector() const {
     return old_f;
 }
 
+double Particle::getStiffness() const {
+    return stiffness;
+}
+
+double Particle::getBondLength() const {
+    return bond_length;
+}
+
 
 std::vector<int> Particle::getParallelNeighbours() const {
     return parallel_Neighbours;

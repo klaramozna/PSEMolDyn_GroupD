@@ -16,13 +16,13 @@
 
 std::array<double, 3> maxwellBoltzmannDistributedVelocity(double averageVelocity, size_t dimensions);
 
-Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion, int dim) :
+Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion, int dim, bool isMembrane) :
                         container(container),
                         forceCalculation(calculation),
                         thermostat(thermostat),
                         boundaryEnforcer(sigma, container, boundary.getDimensions(), boundary.getBoundaryTypes(), forceCalculation),
                         gravity(gravity),
-                        delta_t(delta_t) {
+                        delta_t(delta_t), isMembrane(isMembrane) {
     // Apply brownian motion
     if(applyBrownianMotion){
         if(typeid(thermostat) == typeid(FakeThermostat())) {
@@ -81,6 +81,10 @@ void Simulation::runIteration() {
     // apply boundary conditions
     container.applyToBoundary([this](Particle& p) { boundaryEnforcer.applyBoundaryConditionsForParticle(p); });
 
+    if (isMembrane) {
+        container.applyToAll([this](Particle& p) { applyHarmonicForces(p); });
+    }
+
     container.applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
 
     container.deleteHaloParticles();
@@ -98,4 +102,27 @@ void Simulation::runIteration() {
 void Simulation::setOldForce(Particle& p) {
     p.setOldF((p.getFVector()));
     p.setF(VectorDouble3());
+}
+
+void Simulation::applyHarmonicForces(Particle& p) {
+
+        double stiffness = p.getStiffness();
+        double averageBondLength = p.getBondLength();
+
+        for (int neighb_index : p.getParallelNeighbours())
+        {
+            double distance = (p.getXVector() - container.getParticleVector().at(neighb_index).getXVector()).getL2Norm();
+            auto result = (stiffness * (distance - averageBondLength) / distance) * (container.getParticleVector().at(neighb_index).getXVector() - p.getXVector());
+            p.setF(p.getFVector() + result);
+        }
+
+        double square_root_of_two = std::sqrt(2);
+
+        for (int neighb_index : p.getDiagonalNeighbours())
+        {
+            double distance = (p.getXVector() - container.getParticleVector().at(neighb_index).getXVector()).getL2Norm();
+            auto result = (stiffness * (distance - square_root_of_two * averageBondLength) / distance) * (container.getParticleVector().at(neighb_index).getXVector() - p.getXVector());
+            p.setF(p.getFVector() + result);
+        }
+
 }

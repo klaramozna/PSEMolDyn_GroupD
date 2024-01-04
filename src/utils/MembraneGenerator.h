@@ -16,14 +16,21 @@ public:
      * @param particleDistance is the distance between particles.
      * @param mass is the mass of each particle.
      * @param velocity is the initial velocity of each particle.
+     * @param stiffness
+     * @param bond_length
      */
-    MembraneGenerator(std::array<double, 3> corner, int n1, int n2, int n3, double particleDistance, double mass, std::array<double, 3> velocity, double epsilon = 1, double sigma = 1);
+    MembraneGenerator(std::array<double, 3> corner, int n1, int n2, int n3, double particleDistance, double mass, std::array<double, 3> velocity, double epsilon = 1, double sigma = 1, double stiffness = 300, double bond_length = 2.2);
 
     /**
      * @brief Generates a cuboid of particles.
      * @return A vector with the generated particles.
      */
     std::vector<Particle> generateParticles(int type = 0) override;
+
+    
+    std::vector<int> calculateParallelNeighbourIndices (int n1, int n2, int n3, int index);
+
+    std::vector<int> calculateDiagonalNeighbourIndices (int n1, int n2, int n3, int index);
 
 private:
 
@@ -71,5 +78,13 @@ private:
      * @brief Sigma of each particle.
      */
     double sigma;
+     /**
+     * @brief Stiffness constant of each particle.
+     */
+    double stiffness;
+     /**
+     * @brief Average bond length of each particle.
+     */
+    double bond_length;
 };
 

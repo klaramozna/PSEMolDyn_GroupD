@@ -16,6 +16,7 @@
 #include "Simulation/Physics/GravitationalForce.h"
 #include "Simulation/Physics/LennardJones.h"
 #include "Simulation/Physics/MixingRuleLennardJones.h"
+#include "Simulation/Physics/TruncatedLennardJones.h"
 
 #include "Particles/Boundary.h"
 
@@ -108,6 +109,11 @@ int main(int argc, char *argsv[]) {
         Logger::console->info("Force set to Mixing Rule LennardJones");
     }
 
+    if (simParameters.getForce() == "TruncatedLennardJones") {
+        forceCalculation = std::make_unique<TruncatedLennardJones>();
+        Logger::console->info("Force set to Truncated LennardJones");
+    }
+
     if(simParameters.getThermostatType() == "none"){
         thermostat = std::make_unique<FakeThermostat>();
     }
@@ -162,7 +168,7 @@ int main(int argc, char *argsv[]) {
     int iteration = 0;
     double current_time = simParameters.getStartTime();
 
-    Simulation simulation(simParameters.getDeltaT(), simParameters.getSigma(),  container, *forceCalculation, *thermostat, simParameters.getAverageVelo(), boundary, gravity, simParameters.getBrownianMotion(), simParameters.getDim());
+    Simulation simulation(simParameters.getDeltaT(), simParameters.getSigma(),  container, *forceCalculation, *thermostat, simParameters.getAverageVelo(), boundary, gravity, simParameters.getBrownianMotion(), simParameters.getDim(), simParameters.isMembrane());
 
     // This is ugly and shouldn't be in main, but it is for a later refactor
     if (simParameters.isTesting()) {

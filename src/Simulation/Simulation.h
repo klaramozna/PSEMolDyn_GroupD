@@ -28,6 +28,7 @@ private:
     GravityForce gravity;
 
     double delta_t;
+    bool isMembrane;
 
     /**
     * @brief calculate the velocity of a particle
@@ -52,11 +53,17 @@ private:
      * @brief applies the gravity
      */
     void applyGravity(Particle& p);
+    /**
+     * @brief applies harmonic Forces (for membrane)
+     */
+    void applyHarmonicForces(Particle& p);
+
+    
 
 
 public:
 
-    Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion, int dim);
+    Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion, int dim, bool isMembrane);
 
     virtual ~Simulation();
 

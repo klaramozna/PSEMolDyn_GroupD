@@ -1426,6 +1426,82 @@ class ForceType: public ::xml_schema::type
   //@}
 
   /**
+   * @name TruncatedLennardJones
+   *
+   * @brief Accessor and modifier functions for the %TruncatedLennardJones
+   * optional element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::xml_schema::string TruncatedLennardJones_type;
+
+  /**
+   * @brief Element optional container type.
+   */
+  typedef ::xsd::cxx::tree::optional< TruncatedLennardJones_type > TruncatedLennardJones_optional;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< TruncatedLennardJones_type, char > TruncatedLennardJones_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element
+   * container.
+   *
+   * @return A constant reference to the optional container.
+   */
+  const TruncatedLennardJones_optional&
+  TruncatedLennardJones () const;
+
+  /**
+   * @brief Return a read-write reference to the element container.
+   *
+   * @return A reference to the optional container.
+   */
+  TruncatedLennardJones_optional&
+  TruncatedLennardJones ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  TruncatedLennardJones (const TruncatedLennardJones_type& x);
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x An optional container with the new value to set.
+   *
+   * If the value is present in @a x then this function makes a copy 
+   * of this value and sets it as the new value of the element.
+   * Otherwise the element container is set the 'not present' state.
+   */
+  void
+  TruncatedLennardJones (const TruncatedLennardJones_optional& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly instead
+   * of making a copy.
+   */
+  void
+  TruncatedLennardJones (::std::unique_ptr< TruncatedLennardJones_type > p);
+
+  //@}
+
+  /**
    * @name Constructors
    */
   //@{
@@ -1509,6 +1585,7 @@ class ForceType: public ::xml_schema::type
   lennard_optional lennard_;
   grav_optional grav_;
   MixingRuleLennardJones_optional MixingRuleLennardJones_;
+  TruncatedLennardJones_optional TruncatedLennardJones_;
 
   //@endcond
 };
