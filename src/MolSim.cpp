@@ -44,7 +44,7 @@ int main(int argc, char *argsv[]) {
     std::unique_ptr<ParticleReader> reader;
     std::unique_ptr<ForceCalculation> forceCalculation;
     std::unique_ptr<Thermostat> thermostat;
-    GravityForce gravity{0};
+    GravityForce gravity{std::array<double,3>{0,0,0}};
 
 
     outputWriter::VTKWriter writer;
@@ -135,9 +135,9 @@ int main(int argc, char *argsv[]) {
         exit(-1);
     }
 
-    if (simParameters.getGravityFactor() != 0.0) {
+    if (simParameters.getGravityFactor() != std::array<double,3>{0, 0, 0}) {
         gravity.setGravityFactor(simParameters.getGravityFactor());
-        Logger::console->info("Gravity Force activated with factor {}", simParameters.getGravityFactor());
+        Logger::console->info("Gravity Force activated with factors x, y ,z: {} {} {}", simParameters.getGravityFactor().at(0), simParameters.getGravityFactor().at(1), simParameters.getGravityFactor().at(2));
     }
 
     LinkedCellContainer container(boundary, simParameters.getCutoffRadius());

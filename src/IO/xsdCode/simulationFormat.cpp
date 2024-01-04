@@ -150,6 +150,12 @@ gravity_factor (const gravity_factor_type& x)
   this->gravity_factor_.set (x);
 }
 
+void gravity_t::
+gravity_factor (::std::unique_ptr< gravity_factor_type > x)
+{
+  this->gravity_factor_.set (std::move (x));
+}
+
 
 // ForceType
 // 
@@ -1827,6 +1833,13 @@ gravity_t (const gravity_factor_type& gravity_factor)
 }
 
 gravity_t::
+gravity_t (::std::unique_ptr< gravity_factor_type > gravity_factor)
+: ::xml_schema::type (),
+  gravity_factor_ (std::move (gravity_factor), this)
+{
+}
+
+gravity_t::
 gravity_t (const gravity_t& x,
            ::xml_schema::flags f,
            ::xml_schema::container* c)
@@ -1863,9 +1876,12 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
     //
     if (n.name () == "gravity_factor" && n.namespace_ ().empty ())
     {
+      ::std::unique_ptr< gravity_factor_type > r (
+        gravity_factor_traits::create (i, f, this));
+
       if (!gravity_factor_.present ())
       {
-        this->gravity_factor_.set (gravity_factor_traits::create (i, f, this));
+        this->gravity_factor_.set (::std::move (r));
         continue;
       }
     }

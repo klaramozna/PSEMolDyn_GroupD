@@ -1041,12 +1041,12 @@ class gravity_t: public ::xml_schema::type
   /**
    * @brief Element type.
    */
-  typedef ::xml_schema::double_ gravity_factor_type;
+  typedef ::commonSchema::double_3d gravity_factor_type;
 
   /**
    * @brief Element traits type.
    */
-  typedef ::xsd::cxx::tree::traits< gravity_factor_type, char, ::xsd::cxx::tree::schema_type::double_ > gravity_factor_traits;
+  typedef ::xsd::cxx::tree::traits< gravity_factor_type, char > gravity_factor_traits;
 
   /**
    * @brief Return a read-only (constant) reference to the element.
@@ -1075,6 +1075,17 @@ class gravity_t: public ::xml_schema::type
   void
   gravity_factor (const gravity_factor_type& x);
 
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly
+   * instead of making a copy.
+   */
+  void
+  gravity_factor (::std::unique_ptr< gravity_factor_type > p);
+
   //@}
 
   /**
@@ -1087,6 +1098,16 @@ class gravity_t: public ::xml_schema::type
    * initializers for required elements and attributes.
    */
   gravity_t (const gravity_factor_type&);
+
+  /**
+   * @brief Create an instance from the ultimate base and
+   * initializers for required elements and attributes
+   * (::std::unique_ptr version).
+   *
+   * This constructor will try to use the passed values directly
+   * instead of making copies.
+   */
+  gravity_t (::std::unique_ptr< gravity_factor_type >);
 
   /**
    * @brief Create an instance from a DOM element.

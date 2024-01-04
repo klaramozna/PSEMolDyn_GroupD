@@ -31,7 +31,7 @@
 
 <xs:complexType name="gravity_t">
     <xs:sequence>
-        <xs:element name="gravity_factor" type="xs:double"/>
+        <xs:element name="gravity_factor" type="common:double_3d"/>
     </xs:sequence>
 </xs:complexType>
 

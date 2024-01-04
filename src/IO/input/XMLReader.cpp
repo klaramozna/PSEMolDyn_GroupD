@@ -94,8 +94,11 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
 
         if (sim->gravity().present()) {
                 Logger::console->debug("Reading Gravity froce from XML");
-                double gravity_factor = (sim->gravity()->gravity_factor());
-                Logger::console->debug("Reading gravity factor {} from XML", gravity_factor);
+                std::array<double,3> gravity_factor {sim->gravity()->gravity_factor().x(), sim->gravity()->gravity_factor().y(), sim->gravity()->gravity_factor().z()};
+                Logger::console->debug("Gravity Factors: x, y, z");
+                for (const auto& factor : gravity_factor) {
+                     Logger::console->debug("factor: {}", factor);
+                }
                 SimParameters.setGravityFactor(gravity_factor);
             }
 
