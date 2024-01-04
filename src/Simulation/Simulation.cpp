@@ -115,7 +115,7 @@ void Simulation::applyHarmonicForces(Particle& p) {
             auto result = (stiffness * (distance - averageBondLength) / distance) * (container.getParticleVector().at(neighb_index).getXVector() - p.getXVector());
             p.setF(p.getFVector() + result);
         }
-
+    
         double square_root_of_two = std::sqrt(2);
 
         for (int neighb_index : p.getDiagonalNeighbours())

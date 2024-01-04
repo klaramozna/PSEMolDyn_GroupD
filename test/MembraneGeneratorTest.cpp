@@ -70,6 +70,21 @@ TEST_F(MembraneGeneratorTest, Generating){
     ASSERT_EQ(parallel_neighbors_of_2, expected_parallel_neighbors_of_2);
     ASSERT_EQ(diagonal_neighbors_of_2, expected_diagonal_neighbors_of_2);
 
+     //particle at index 3
+
+    std::vector<int> parallel_neighbors_of_3 = {0, 4, 6};
+    std::vector<int> diagonal_neighbors_of_3 = {1, 7};
+
+     std::vector<int> expected_parallel_neighbors_of_3 = result[3].getParallelNeighbours();
+    std::sort(expected_parallel_neighbors_of_3.begin(),expected_parallel_neighbors_of_3.end());
+
+    std::vector<int> expected_diagonal_neighbors_of_3 = result[3].getDiagonalNeighbours();
+    std::sort(expected_diagonal_neighbors_of_3.begin(),expected_diagonal_neighbors_of_3.end());
+
+
+    ASSERT_EQ(parallel_neighbors_of_3, expected_parallel_neighbors_of_3);
+    ASSERT_EQ(diagonal_neighbors_of_3, expected_diagonal_neighbors_of_3);
+
 
 
     //particle at index 4
@@ -86,6 +101,50 @@ TEST_F(MembraneGeneratorTest, Generating){
     ASSERT_EQ(parallel_neighbors_of_4, expected_parallel_neighbors_of_4);
     ASSERT_EQ(diagonal_neighbors_of_4, expected_diagonal_neighbors_of_4);
 
+
+
+    //particle at index 5
+    std::vector<int> parallel_neighbors_of_5 = {2, 4, 8};
+    std::vector<int> diagonal_neighbors_of_5 = {1, 7};
+
+    std::vector<int> expected_parallel_neighbors_of_5 = result[5].getParallelNeighbours();
+    std::sort(expected_parallel_neighbors_of_5.begin(),expected_parallel_neighbors_of_5.end());
+
+    std::vector<int> expected_diagonal_neighbors_of_5 = result[5].getDiagonalNeighbours();
+    std::sort(expected_diagonal_neighbors_of_5.begin(),expected_diagonal_neighbors_of_5.end());
+
+
+    ASSERT_EQ(parallel_neighbors_of_5, expected_parallel_neighbors_of_5);
+    ASSERT_EQ(diagonal_neighbors_of_5, expected_diagonal_neighbors_of_5);
+
+
+    //particle at index 6
+    std::vector<int> parallel_neighbors_of_6 = {3, 7};
+    std::vector<int> diagonal_neighbors_of_6 = {4};
+
+    std::vector<int> expected_parallel_neighbors_of_6 = result[6].getParallelNeighbours();
+    std::sort(expected_parallel_neighbors_of_6.begin(),expected_parallel_neighbors_of_6.end());
+
+    std::vector<int> expected_diagonal_neighbors_of_6 = result[6].getDiagonalNeighbours();
+    std::sort(expected_diagonal_neighbors_of_6.begin(),expected_diagonal_neighbors_of_6.end());
+
+
+    ASSERT_EQ(parallel_neighbors_of_6, expected_parallel_neighbors_of_6);
+    ASSERT_EQ(diagonal_neighbors_of_6, expected_diagonal_neighbors_of_6);
+
+    //particle at index 7
+    std::vector<int> parallel_neighbors_of_7 = {4, 6, 8};
+    std::vector<int> diagonal_neighbors_of_7 = {3, 5};
+
+    std::vector<int> expected_parallel_neighbors_of_7 = result[7].getParallelNeighbours();
+    std::sort(expected_parallel_neighbors_of_7.begin(),expected_parallel_neighbors_of_7.end());
+
+    std::vector<int> expected_diagonal_neighbors_of_7 = result[7].getDiagonalNeighbours();
+    std::sort(expected_diagonal_neighbors_of_7.begin(),expected_diagonal_neighbors_of_7.end());
+
+
+    ASSERT_EQ(parallel_neighbors_of_7, expected_parallel_neighbors_of_7);
+    ASSERT_EQ(diagonal_neighbors_of_7, expected_diagonal_neighbors_of_7);
 
     //particle at index 8 
     std::vector<int> parallel_neighbors_of_8 = {5, 7};
