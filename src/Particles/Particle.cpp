@@ -29,6 +29,10 @@ Particle::Particle(const Particle &other) {
     sigma = other.sigma;
     markedForMirroring = other.markedForMirroring;
     markedForDeleting = other.markedForDeleting;
+    stiffness = other.stiffness;
+    bond_length= other.bond_length;
+    parallel_Neighbours = other.parallel_Neighbours;
+    diagonal_Neighbours = other.diagonal_Neighbours;
 }
 
 Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
@@ -88,6 +92,16 @@ VectorDouble3 Particle::getOldFVector() const {
     return old_f;
 }
 
+
+std::vector<int> Particle::getParallelNeighbours() const {
+    return parallel_Neighbours;
+}
+
+
+std::vector<int> Particle::getDiagonalNeighbours() const{
+    return diagonal_Neighbours;
+}
+
 void Particle::setX(const VectorDouble3 &position) {
     x = position;
 }
@@ -118,6 +132,21 @@ void Particle::setF(double x, double y, double z) {
 
 void Particle::setOldF(double x, double y, double z) {
     this->old_f = VectorDouble3(std::array<double, 3>{x, y, z});
+}
+
+void Particle::setParallelNeighbours(std::vector<int> indices_parallel){
+    parallel_Neighbours = indices_parallel;
+}
+
+void Particle::setDiagonalNeighbours(std::vector<int> indices_diagonal){
+    diagonal_Neighbours = indices_diagonal;
+}
+void Particle::setStiffness(double val) {
+    stiffness = val;
+}
+
+void Particle::setBondLength(double val){
+    bond_length = val;
 }
 
 void Particle::markForMirroring() {

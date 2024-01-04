@@ -1,0 +1,77 @@
+<Simulation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../simulationFormat.xsd">
+
+    <!-- Simulation Arguments -->
+    <t_end>500</t_end>
+    <delta_t>0.01</delta_t>
+    
+    <!-- Choose ForceType -->
+    <force>
+       <MixingRuleLennardJones>MixingRuleLennardJones</MixingRuleLennardJones>
+    </force>
+    <gravity> <gravity_factor> <x>0</x><y>0</y><z>-0.001</z></gravity_factor></gravity>
+    <averageVelo>0.1</averageVelo>
+
+    <boundaries>
+
+    <BoxSize> <x>148</x> <y>148</y> <z>148</z></BoxSize>
+     <Front>Reflecting</Front>
+     <Back>Reflecting</Back>
+     <Top>Outflow</Top>
+     <Right>Outflow</Right>
+     <Bottom>Outflow</Bottom>
+     <Left>Outflow</Left>
+    
+    </boundaries>
+
+    <cutoffRadius>4</cutoffRadius>
+    
+    <thermostat>
+        <none>none</none>
+    </thermostat>
+    <brownian_motion>true</brownian_motion>
+    
+ <!-- Provide Particles (Cuboid) -->
+ <membrane>
+    <lower-left-coord>
+        <x>15</x>
+        <y>15</y>
+        <z>15</z>
+    </lower-left-coord>
+    <number-of-particles>
+        <x>250</x>
+        <y>50</y>
+        <z>1</z>
+    </number-of-particles>
+    <distance>1.2</distance>
+    <mass>1.0</mass>
+    <initial_velocity>
+        <x>0.0</x>
+        <y>0.0</y>
+        <z>0.0</z>
+    </initial_velocity>
+    <epsilon_cuboid>1.0</epsilon_cuboid>
+    <sigma_cuboid>1.2</sigma_cuboid>
+    <stiffness>300</stiffness>
+    <bond_length>2.2</bond_length>
+    <hardcoded_force>
+        <end_time>150</end_time>
+        <force_factors><x>0</x> <y>0</y> <z>0</z> </force_factors>
+        <particles>
+            <indices><x>17</x><y>24</y><z>0</z></indices>
+            <indices><x>17</x><y>25</y><z>0</z></indices>
+            <indices><x>18</x><y>24</y><z>0</z></indices>
+            <indices><x>18</x><y>25</y><z>0</z></indices>
+       </particles>
+
+    </hardcoded_force>
+</membrane>
+
+    <!-- IO -->
+    <base_name>MD_vtk</base_name>
+    <writeFrequency>100</writeFrequency>
+
+    <!-- Misc -->
+    <log_level>2</log_level>
+    <testing_mode>false</testing_mode>
+
+</Simulation>

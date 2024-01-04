@@ -11,6 +11,7 @@
 #include "./../../Simulation/Simulation.h"
 #include "./../../utils/CuboidGenerator.h"
 #include "./../../utils/SphereGenerator.h"
+#include "./../../utils/MembraneGenerator.h"
 
 XMLReader::XMLReader() = default;
 
@@ -124,6 +125,31 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             std::vector<Particle> particles = generator.generateParticles(i);
             container.addParticles(particles);
             i++;
+        }
+        
+        i = 0;
+        for (const auto& membrane : sim->membrane()) {
+            Logger::console->debug("Reading Membrane number {} from XML", i);
+            std::array<double,3> lowerLeftCoord = {membrane.lower_left_coord().x(), membrane.lower_left_coord().y(), membrane.lower_left_coord().z()};
+            int n1 = membrane.number_of_particles().x();
+            int n2 = membrane.number_of_particles().y();
+            int n3 = membrane.number_of_particles().z();
+            double distance = membrane.distance();
+            double mass = membrane.mass();
+            double epsilon = membrane.epsilon_cuboid_default_value();
+            double sigma = membrane.sigma_cuboid_default_value();
+            if (membrane.epsilon_cuboid().present()){
+                epsilon = membrane.epsilon_cuboid().get();
+            }
+            if (membrane.sigma_cuboid().present()) {
+                sigma = membrane.sigma_cuboid().get();
+            }
+            std::array<double, 3> velocity = {membrane.initial_velocity().x(), membrane.initial_velocity().y(), membrane.initial_velocity().z()};
+            MembraneGenerator generator {lowerLeftCoord, n1, n2, n3, distance, mass, velocity, epsilon, sigma};
+            std::vector<Particle> particles = generator.generateParticles(i);
+            container.addParticles(particles);
+            i++;
+            // to do: read hard coded force and particles
         }
 
         i = 0;
