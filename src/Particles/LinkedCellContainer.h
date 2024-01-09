@@ -39,6 +39,13 @@ public:
     void applyToAll(const std::function<void(Particle&)>& function) override;
 
     /**
+     * @brief Applies the given function to the particles with ids in the given array
+     * @param function Function to be applied.
+     * @param ids Ids of particles that the function should be applied to.
+     */
+    void applyForIds(const std::function<void(Particle&)>& function, const std::vector<int>& ids);
+
+    /**
      * @brief Applies the given function to pairs of particles in neighbouring cells within the cutoff radius.
      * @param function The function to be applied to each pair, that does not change the position of the particles.
      */

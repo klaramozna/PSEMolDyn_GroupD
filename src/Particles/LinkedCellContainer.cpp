@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <cmath>
 #include <iostream>
+#include <algorithm>
 
 LinkedCellContainer::LinkedCellContainer(Boundary boundary, double cutoffRadius,
                                          const std::vector<Particle>& particles) : boundary{boundary}, grid{}, cutoffRadius{cutoffRadius} {
@@ -277,6 +278,29 @@ Particle LinkedCellContainer::mirrorParticle(const Particle &p) {
     }
 
     return Particle{std::array<double, 3>{x, y, z}, p.getV(), p.getM(), p.getEpsilon(), p.getSigma(), p.getType()};
+}
+
+void LinkedCellContainer::applyForIds(const std::function<void(Particle &)> &function, const std::vector<int> &ids) {
+    // Creating a vector for marking particles that need to be moved
+    std::vector<std::pair<Particle, int>> particlesToBeMoved{}; // stores each particle that needs to be moved with the cell it's beeing moved from
+
+    // Applying given function to each particle and marking particles for movement
+    for(int i = 0; i < grid.size(); i++){
+        for(auto & particle : grid[i]){
+            // Check if the particle corresponds to an id in the id array and apply function, if yes
+            if(std::find(ids.begin(), ids.end(), particle.getId()) != ids.end()){
+                function(particle);
+                if(!isInCorrectCell(particle, i)){
+                    particlesToBeMoved.emplace_back(particle, i);
+                }
+            }
+        }
+    }
+
+    // Moving particles to their new cells
+    for(auto & particle : particlesToBeMoved){
+        moveParticle(particle.first, particle.second, getParticleIndex(particle.first));
+    }
 }
 
 
