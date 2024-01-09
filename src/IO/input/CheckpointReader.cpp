@@ -27,9 +27,9 @@ void CheckpointReader::readFile(ParticleContainer &container, std::string &filen
             std::array<double,3>{p.x().x(), p.x().y(), p.x().z()},
             std::array<double,3>{p.v().x(), p.v().y(), p.v().z()},
             p.m(),
-            p.type(),
             p.epsilon(),
-            p.sigma()           
+            p.sigma(),
+            p.type()           
             );
             particle_from_xml.setOldF(p.old_f().x(), p.old_f().y(), p.old_f().z());
             particle_from_xml.setF(p.f().x(), p.f().y(), p.f().z());
