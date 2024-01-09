@@ -25,6 +25,7 @@ MembraneGenerator::MembraneGenerator(std::array<double, 3> corner, int n1, int n
 }
 
 std::vector<Particle> MembraneGenerator::generateParticles(int type) {
+    int id = 0;
     double xCorner = corner[0];
     double yCorner = corner[1];
     double zCorner = corner[2];
@@ -32,7 +33,8 @@ std::vector<Particle> MembraneGenerator::generateParticles(int type) {
         for(int y = 0; y < n2; y++){
             for(int z = 0; z < n3; z++){
                 std::array<double, 3> particlePosition{xCorner + particleDistance * x, yCorner + particleDistance * y, zCorner + particleDistance * z};
-                particles.emplace_back(particlePosition, velocity, mass, epsilon, sigma, stiffness, bond_length, std::vector<int>{}, std::vector<int>{}, type);
+                particles.emplace_back(particlePosition, velocity, mass, epsilon, sigma, stiffness, bond_length, std::vector<int>{}, std::vector<int>{}, id, type);
+                id ++;
             }
         }
     }

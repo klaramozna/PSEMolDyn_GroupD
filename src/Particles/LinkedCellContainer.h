@@ -51,6 +51,12 @@ public:
     std::vector<Particle> getParticleVector() override;
 
     /**
+     * @brief Returns the particle with a give id
+     * @return particle with id
+     */
+    Particle getParticleWithId(int id);
+
+    /**
      * @brief Applies the given function to each particle in the boundary
      * @param function
      */

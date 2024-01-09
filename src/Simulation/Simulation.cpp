@@ -111,8 +111,8 @@ void Simulation::applyHarmonicForces(Particle& p) {
 
         for (int neighb_index : p.getParallelNeighbours())
         {
-            double distance = (p.getXVector() - container.getParticleVector().at(neighb_index).getXVector()).getL2Norm();
-            auto result = (stiffness * (distance - averageBondLength) / distance) * (container.getParticleVector().at(neighb_index).getXVector() - p.getXVector());
+            double distance = (p.getXVector() - container.getParticleWithId(neighb_index).getXVector()).getL2Norm();
+            auto result = (stiffness * (distance - averageBondLength) / distance) * (container.getParticleWithId(neighb_index).getXVector() - p.getXVector());
             p.setF(p.getFVector() + result);
         }
     
@@ -120,8 +120,8 @@ void Simulation::applyHarmonicForces(Particle& p) {
 
         for (int neighb_index : p.getDiagonalNeighbours())
         {
-            double distance = (p.getXVector() - container.getParticleVector().at(neighb_index).getXVector()).getL2Norm();
-            auto result = (stiffness * (distance - square_root_of_two * averageBondLength) / distance) * (container.getParticleVector().at(neighb_index).getXVector() - p.getXVector());
+            double distance = (p.getXVector() - container.getParticleWithId(neighb_index).getXVector()).getL2Norm();
+            auto result = (stiffness * (distance - square_root_of_two * averageBondLength) / distance) * (container.getParticleWithId(neighb_index).getXVector() - p.getXVector());
             p.setF(p.getFVector() + result);
         }
 

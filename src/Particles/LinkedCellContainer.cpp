@@ -55,6 +55,13 @@ std::vector<Particle> LinkedCellContainer::getParticleVector() {
     return result;
 }
 
+Particle LinkedCellContainer::getParticleWithId(int id) {
+    for (auto &particle : getParticleVector()) {
+        if (particle.getId() == id) 
+            return particle;
+    }
+}
+
 void LinkedCellContainer::updateCells() {
     for(int i = 0; i < grid.size(); i++){
         for(auto & it : grid[i]){

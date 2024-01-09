@@ -33,6 +33,7 @@ Particle::Particle(const Particle &other) {
     bond_length= other.bond_length;
     parallel_Neighbours = other.parallel_Neighbours;
     diagonal_Neighbours = other.diagonal_Neighbours;
+    id = other.id;
 }
 
 Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
@@ -110,6 +111,10 @@ std::vector<int> Particle::getDiagonalNeighbours() const{
     return diagonal_Neighbours;
 }
 
+int Particle::getId() const{
+    return id;
+}
+
 void Particle::setX(const VectorDouble3 &position) {
     x = position;
 }
@@ -155,6 +160,10 @@ void Particle::setStiffness(double val) {
 
 void Particle::setBondLength(double val){
     bond_length = val;
+}
+
+void Particle::setId(int val) {
+    id = val;
 }
 
 void Particle::markForMirroring() {

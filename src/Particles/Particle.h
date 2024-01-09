@@ -78,7 +78,10 @@ private:
      * indices of the direct diagonal neighbours of this particle
      */
     std::vector<int> diagonal_Neighbours;
-
+    /**
+     * unique identifier of each particle (will be used in membrane to keep track of neighbours) 
+     */
+    int id;
 
 
 public:
@@ -118,10 +121,11 @@ public:
      * @param bond_length_arg diagonal neighbours
      * @param parallel_Neighbours_arg parallel neighbours 
      * @param diagonal_Neighbours_arg diagonal neighbours
+     * @param id_arg unique id of this particle
      * @param type The type of the particle.
      */
     Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg, double m_arg, double epsilon, double sigma,
-            double stiffness_arg, double bond_length_arg, std::vector<int> parallel_Neighbours_arg, std::vector<int> diagonal_Neighbours_arg, int type = 0): x{x_arg}, v{v_arg}, f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, m{m_arg}, epsilon{epsilon}, sigma{sigma},stiffness{stiffness_arg}, bond_length{bond_length_arg} ,parallel_Neighbours{parallel_Neighbours_arg}, diagonal_Neighbours{diagonal_Neighbours_arg}, type{type} {
+            double stiffness_arg, double bond_length_arg, std::vector<int> parallel_Neighbours_arg, std::vector<int> diagonal_Neighbours_arg, int id, int type = 0): x{x_arg}, v{v_arg}, f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, m{m_arg}, epsilon{epsilon}, sigma{sigma},stiffness{stiffness_arg}, bond_length{bond_length_arg} ,parallel_Neighbours{parallel_Neighbours_arg}, diagonal_Neighbours{diagonal_Neighbours_arg},id {id}, type{type} {
         markedForMirroring = false;
         markedForDeleting = false;
     };
@@ -173,6 +177,8 @@ public:
     double getStiffness() const;
 
     double getBondLength() const;
+
+    int getId() const;
 
     /**
      * @brief Returns a vector with the indices of the parallel neighbours of this particle
@@ -250,6 +256,8 @@ public:
     void setStiffness(double val);
 
     void setBondLength(double val);
+
+    void setId(int val);
 
 
     /**
