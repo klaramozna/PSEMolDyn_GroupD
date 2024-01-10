@@ -61,6 +61,10 @@ Particle LinkedCellContainer::getParticleWithId(int id) {
         if (particle.getId() == id) 
             return particle;
     }
+    //return fake particle
+    Particle p{};
+    p.setId(-1);
+    return p;
 }
 
 void LinkedCellContainer::updateCells() {
