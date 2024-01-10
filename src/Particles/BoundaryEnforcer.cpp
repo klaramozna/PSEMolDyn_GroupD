@@ -68,7 +68,7 @@ void BoundaryEnforcer::applyReflectiveForce(Particle &p, std::vector<BoundaryDir
                 break;
         }
         if (getDistance(VectorDouble3(particlePosition), VectorDouble3(opposingParticlePosition)) <= SIXTH_ROOT_OF_TWO * sigma) {
-            auto opposingParticle = Particle(opposingParticlePosition, {0.0, 0.0, 0.0}, p.getM());
+            auto opposingParticle = Particle(opposingParticlePosition, {0.0, 0.0, 0.0}, p.getM(), p.getEpsilon(), p.getSigma(), 0);
             opposingParticle.markForDeleting();
             container.addParticle(opposingParticle);
         }
