@@ -1,8 +1,8 @@
 <Simulation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../simulationFormat.xsd">
 
     <!-- Simulation Arguments -->
-    <t_end>500</t_end>
-    <delta_t>0.01</delta_t>
+    <t_end>10</t_end>
+    <delta_t>0.0001</delta_t>
     
     <!-- Choose ForceType -->
     <force>
@@ -38,8 +38,8 @@
         <z>15</z>
     </lower-left-coord>
     <number-of-particles>
-        <x>3</x>
-        <y>3</y>
+        <x>5</x>
+        <y>5</y>
         <z>1</z>
     </number-of-particles>
     <distance>1.2</distance>
