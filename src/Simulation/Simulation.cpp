@@ -81,15 +81,15 @@ void Simulation::runIteration() {
     // apply boundary conditions
     container.applyToBoundary([this](Particle& p) { boundaryEnforcer.applyBoundaryConditionsForParticle(p); });
 
-    if (isMembrane) {
-        container.applyToAll([this](Particle& p) { applyHarmonicForces(p); });
-    }
-
     container.applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
 
     container.deleteHaloParticles();
 
     container.applyToAll([this](Particle& p) { applyGravity(p); });
+
+    if (isMembrane) {
+        container.applyToAll([this](Particle& p) { applyHarmonicForces(p); });
+    }
     // calculate new v
     container.applyToAll([this](Particle& p) { calculateV(p); });
 
