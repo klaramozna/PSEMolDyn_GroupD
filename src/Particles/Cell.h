@@ -60,7 +60,6 @@ public:
      * @param function The function to be applied.
      */
     void applyToPairs(const std::function<void(Particle &, Particle &)> &function);
-
 private:
     /**
      * @brief Stores the particles of the cell.

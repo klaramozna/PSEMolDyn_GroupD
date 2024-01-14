@@ -3,7 +3,6 @@
 //
 
 #include "Cell.h"
-#include "../utils/VectorDouble3.h"
 
 Cell::iterator_type Cell::begin(){
     return particles.begin();
@@ -26,16 +25,14 @@ bool Cell::contains(Particle p) {
 }
 
 void Cell::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
-    for(auto outer = particles.begin(); outer != --particles.end(); outer++){
+    for(auto outer = particles.begin(); outer != particles.end(); outer++){
         auto inner = outer;
-        inner++;
-        for(auto in2 = inner; in2 != particles.end(); in2++){
-            if(getDistance(outer->getXVector(), in2->getXVector()) <= cutoffRadius){
-                function(*outer, *in2);
-            }
-
-        }
+             inner++;
+              for(auto in2 = inner; in2 != particles.end(); in2++){
+                  if(getDistance(outer->getXVector(), in2->getXVector()) <= cutoffRadius){
+                      function(*outer, *in2);
+                  }
+              }
     }
 }
-
 

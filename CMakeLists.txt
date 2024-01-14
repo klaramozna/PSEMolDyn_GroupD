@@ -10,7 +10,6 @@ list(APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake/modules)
 include(doxygen)
 include(gtest)
 
-
 # Set C++ requirements for the project
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -38,6 +37,11 @@ endif()
 find_package(Boost QUIET COMPONENTS program_options)
 if(NOT Boost_FOUND)
     message(FATAL_ERROR "Boost program options not found. You can install it with: sudo apt-get install libboost-program-options-dev")
+endif()
+
+find_package(OpenMP)
+if(NOT Boost_FOUND)
+    message(FATAL_ERROR "OpenMP was not found. You can install it with: sudo apt-get install libomp-dev. You should definitely switch compilers")
 endif()
 
 # Extend current CMake to /src

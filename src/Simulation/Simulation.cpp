@@ -6,13 +6,10 @@
  */
 
 #include <cmath>
-#include <iostream>
 #include "Simulation.h"
 
 #include "Particles/LinkedCellContainer.h"
-#include "Particles/BoundaryEnforcer.h"
 #include "Simulation/FakeThermostat.h"
-#include "IO/Logger.h"
 
 std::array<double, 3> maxwellBoltzmannDistributedVelocity(double averageVelocity, size_t dimensions);
 
