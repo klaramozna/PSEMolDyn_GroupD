@@ -5400,6 +5400,91 @@ class Simulation_t: public ::xml_schema::type
   //@}
 
   /**
+   * @name parallelization
+   *
+   * @brief Accessor and modifier functions for the %parallelization
+   * optional element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::xml_schema::string parallelization_type;
+
+  /**
+   * @brief Element optional container type.
+   */
+  typedef ::xsd::cxx::tree::optional< parallelization_type > parallelization_optional;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< parallelization_type, char > parallelization_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element
+   * container.
+   *
+   * @return A constant reference to the optional container.
+   */
+  const parallelization_optional&
+  parallelization () const;
+
+  /**
+   * @brief Return a read-write reference to the element container.
+   *
+   * @return A reference to the optional container.
+   */
+  parallelization_optional&
+  parallelization ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  parallelization (const parallelization_type& x);
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x An optional container with the new value to set.
+   *
+   * If the value is present in @a x then this function makes a copy 
+   * of this value and sets it as the new value of the element.
+   * Otherwise the element container is set the 'not present' state.
+   */
+  void
+  parallelization (const parallelization_optional& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly instead
+   * of making a copy.
+   */
+  void
+  parallelization (::std::unique_ptr< parallelization_type > p);
+
+  /**
+   * @brief Return the default value for the element.
+   *
+   * @return A read-only (constant) reference to the element's
+   * default value.
+   */
+  static const parallelization_type&
+  parallelization_default_value ();
+
+  //@}
+
+  /**
    * @name Constructors
    */
   //@{
@@ -5496,6 +5581,8 @@ class Simulation_t: public ::xml_schema::type
   writeFrequency_optional writeFrequency_;
   log_level_optional log_level_;
   testing_mode_optional testing_mode_;
+  parallelization_optional parallelization_;
+  static const parallelization_type parallelization_default_value_;
 
   //@endcond
 };

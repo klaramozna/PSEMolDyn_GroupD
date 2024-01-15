@@ -107,13 +107,12 @@ bool LinkedCellContainer::isInCorrectCell(const Particle &p, int currentIndex) {
 
 void LinkedCellContainer::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
     // Iterate over all cells
-    #pragma omp taskloop shared(grid, nc) firstprivate(function) collapse(3)
+    #pragma omp parallel loop default(none) shared(grid, nc) firstprivate(function) collapse(3)
     for (int z = 0; z < nc[2]; z++) {
         for (int y = 0; y < nc[1]; y++) {
             for (int x = 0; x < nc[0]; x++) {
                 // Find out where is the current cell in the grid vector
                 int currentGridIndex = getGridIndex(x, y, z);
-                #pragma omp task default(none) shared(grid, function) firstprivate(currentGridIndex, x, y, z)
                 {
                     // Apply function within current cell
                     #pragma omp critical

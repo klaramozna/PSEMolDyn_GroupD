@@ -1577,6 +1577,42 @@ testing_mode_default_value ()
   return testing_mode_type (false);
 }
 
+const Simulation_t::parallelization_optional& Simulation_t::
+parallelization () const
+{
+  return this->parallelization_;
+}
+
+Simulation_t::parallelization_optional& Simulation_t::
+parallelization ()
+{
+  return this->parallelization_;
+}
+
+void Simulation_t::
+parallelization (const parallelization_type& x)
+{
+  this->parallelization_.set (x);
+}
+
+void Simulation_t::
+parallelization (const parallelization_optional& x)
+{
+  this->parallelization_ = x;
+}
+
+void Simulation_t::
+parallelization (::std::unique_ptr< parallelization_type > x)
+{
+  this->parallelization_.set (std::move (x));
+}
+
+const Simulation_t::parallelization_type& Simulation_t::
+parallelization_default_value ()
+{
+  return parallelization_default_value_;
+}
+
 
 #include <xsd/cxx/xml/dom/parsing-source.hxx>
 
@@ -3332,6 +3368,9 @@ Boundaries::
 const Simulation_t::base_name_type Simulation_t::base_name_default_value_ (
   "MD_vtk");
 
+const Simulation_t::parallelization_type Simulation_t::parallelization_default_value_ (
+  "none");
+
 Simulation_t::
 Simulation_t (const brownian_motion_type& brownian_motion)
 : ::xml_schema::type (),
@@ -3349,7 +3388,8 @@ Simulation_t (const brownian_motion_type& brownian_motion)
   base_name_ (this),
   writeFrequency_ (this),
   log_level_ (this),
-  testing_mode_ (this)
+  testing_mode_ (this),
+  parallelization_ (this)
 {
 }
 
@@ -3372,7 +3412,8 @@ Simulation_t (const Simulation_t& x,
   base_name_ (x.base_name_, f, this),
   writeFrequency_ (x.writeFrequency_, f, this),
   log_level_ (x.log_level_, f, this),
-  testing_mode_ (x.testing_mode_, f, this)
+  testing_mode_ (x.testing_mode_, f, this),
+  parallelization_ (x.parallelization_, f, this)
 {
 }
 
@@ -3395,7 +3436,8 @@ Simulation_t (const ::xercesc::DOMElement& e,
   base_name_ (this),
   writeFrequency_ (this),
   log_level_ (this),
-  testing_mode_ (this)
+  testing_mode_ (this),
+  parallelization_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -3600,6 +3642,20 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // parallelization
+    //
+    if (n.name () == "parallelization" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< parallelization_type > r (
+        parallelization_traits::create (i, f, this));
+
+      if (!this->parallelization_)
+      {
+        this->parallelization_.set (::std::move (r));
+        continue;
+      }
+    }
+
     break;
   }
 
@@ -3639,6 +3695,7 @@ operator= (const Simulation_t& x)
     this->writeFrequency_ = x.writeFrequency_;
     this->log_level_ = x.log_level_;
     this->testing_mode_ = x.testing_mode_;
+    this->parallelization_ = x.parallelization_;
   }
 
   return *this;

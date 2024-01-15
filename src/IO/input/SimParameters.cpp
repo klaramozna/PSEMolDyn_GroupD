@@ -6,14 +6,15 @@
  */
 
 #include <string>
-#include"SimParameters.h"
-#include"../Logger.h"
+#include "SimParameters.h"
+#include "../Logger.h"
+#include "utils/ParallelizationStrategy.h"
 
 // Constructor to initialize the parameters
 SimParameters::SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                              bool testing_val, int log_level_val,
                              const std::string& input_path_val, const std::string& input_mode_val,
-                             const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency_val, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, const std::string& thermostatType, bool brownianMotion, double gravity_factor_val){
+                             const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency_val, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, const std::string& thermostatType, bool brownianMotion, double gravity_factor_val, ParallelizationStrategy parallelizationStrategy_val) {
     end_time =end_time_val;
     delta_t = delta_t_val;
     averageVelo = averageVelo_val;
@@ -36,6 +37,7 @@ SimParameters::SimParameters(double end_time_val, double delta_t_val, double ave
     gravity_factor = gravity_factor_val;
     this->thermostatType = thermostatType;
     this->brownianMotion = brownianMotion;
+    this->parallelizationStrat = parallelizationStrategy_val;
 }
 
 SimParameters::SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,

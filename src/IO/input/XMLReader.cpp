@@ -178,6 +178,18 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             SimParameters.setCutoffRadius(sim->cutoffRadius().get());
         }
 
+        if (sim->parallelization().present()){
+            Logger::console->debug("Reading parallelization {} from XML", sim->parallelization().get());
+            if (sim->parallelization().get() == "subdomain"){
+                SimParameters.setParallelizationStrategy(ParallelizationStrategy::SUBDOMAIN);
+            }
+            else if (sim->parallelization().get() == "cell"){
+                SimParameters.setParallelizationStrategy(ParallelizationStrategy::CELL);
+            } else {
+                SimParameters.setParallelizationStrategy(ParallelizationStrategy::NONE);
+            }
+        }
+
         Logger::console->debug("Reading brownian motion indicator {} from XML", sim->brownian_motion());
         SimParameters.setBrownianMotion(sim->brownian_motion());
 

@@ -151,8 +151,9 @@
 
         <xs:element name="log_level" type="log_level" minOccurs="0" maxOccurs="1" default="2"/>
         <xs:element name="testing_mode" type="xs:boolean" minOccurs="0" maxOccurs="1" default="false"/>
+        <xs:element name="parallelization" type="xs:string" minOccurs="0" maxOccurs="1" default="none"/>
 
-        
+
       </xs:sequence>
     </xs:complexType>
 
