@@ -7,8 +7,7 @@
 
 enum ParallelizationStrategy {
     SUBDOMAIN,
-    CELL,
-    NONE
+    CELL
 };
 
 #endif //PSEMOLDYN_GROUPD_PARALLELIZATIONSTRATEGY_H

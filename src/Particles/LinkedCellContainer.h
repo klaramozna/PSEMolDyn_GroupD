@@ -44,6 +44,8 @@ public:
      */
     void applyToPairs(const std::function<void(Particle&, Particle&)>& function) override;
 
+    void applyToPairsSubdomain(const std::function<void(Particle&, Particle&)>& function);
+
     /**
      * @brief Returns a vector of all particles in the container.
      * @return The vector with the particles of the container.
@@ -107,6 +109,10 @@ private:
     std::array<double, 3> gridShift;
 
     std::array<double, 3> cellSize;
+
+    int subdomainSizeX;
+    int subdomainSizeY;
+    int subdomainSizeZ;
 
     /**
      * @brief Puts all particles in their correct cells after a change in position.

@@ -40,6 +40,23 @@ LinkedCellContainer::LinkedCellContainer(Boundary boundary, double cutoffRadius,
     }
 
     addParticles(particles);
+
+#ifdef _OPENMP
+    const int totalCells = getCells().size();
+
+    int cellsPerThread = totalCells / omp_get_max_threads();
+
+    // Adjust subdomain size to achieve a balanced distribution
+    while (subdomainSizeX * subdomainSizeY * subdomainSizeZ < cellsPerThread) {
+        if (subdomainSizeX < nc[0]) subdomainSizeX++;
+        if (subdomainSizeY < nc[1]) subdomainSizeY++;
+        if (subdomainSizeZ < nc[2]) subdomainSizeZ++;
+    }
+#else
+    subdomainSizeX = 1;
+    subdomainSizeY = 1;
+    subdomainSizeZ = 1;
+#endif
 }
 
 
@@ -105,40 +122,52 @@ bool LinkedCellContainer::isInCorrectCell(const Particle &p, int currentIndex) {
     return getParticleIndex(p) == currentIndex;
 }
 
-void LinkedCellContainer::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
-    // Iterate over all cells
-    #pragma omp parallel for default(none) shared(grid, nc) firstprivate(function) collapse(3)
-    for (int z = 0; z < nc[2]; z++) {
-        for (int y = 0; y < nc[1]; y++) {
-            for (int x = 0; x < nc[0]; x++) {
-                // Find out where is the current cell in the grid vector
-                int currentGridIndex = getGridIndex(x, y, z);
-                {
-                    // Apply function within current cell
-                    #pragma omp critical
-                    {
-                        grid[currentGridIndex].applyToPairs(function);
-                    }
-                    // Iterate over current cell
-                    for (auto &pCurrent: grid[currentGridIndex]) {
-                        // Find neighbours
-                        for (int i = z - 1; i <= z + 1; i++) {
-                            for (int j = y - 1; j <= y + 1; j++) {
-                                for (int k = x - 1; k <= x + 1; k++) {
+void LinkedCellContainer::applyToPairsSubdomain(const std::function<void(Particle&, Particle&)>& function) {
+#pragma omp parallel for default(none) shared(grid) firstprivate(function, subdomainSizeX, subdomainSizeY, subdomainSizeZ) collapse(3) schedule(static,1)
+    for (int z = 0; z < nc[2]; z += subdomainSizeZ) {
+        for (int y = 0; y < nc[1]; y += subdomainSizeY) {
+            for (int x = 0; x < nc[0]; x += subdomainSizeX) {
 
-                                    int neighbourGridIndex = getGridIndex(k, j, i);
+                // Iterate over the cells within the current subdomain
+                for (int i = 0; i < subdomainSizeZ; i++) {
+                    for (int j = 0; j < subdomainSizeY; j++) {
+                        for (int k = 0; k < subdomainSizeX; k++) {
+                            int currentX = x + k;
+                            int currentY = y + j;
+                            int currentZ = z + i;
 
-                                    // Check if the neighbour has not yet been iterated over and if it is still inside of the grid
-                                    if (neighbourGridIndex > currentGridIndex &&
-                                        (k >= 0 && j >= 0 && i >= 0 && k < nc[0] && j < nc[1] && i < nc[2])) {
-                                        #pragma omp critical
-                                        {
-                                            // Iterate over neighbour
-                                            for (auto &pNeighbour: grid[getGridIndex(k, j, i)]) {
-                                                // Apply function
-                                                if (pCurrent != pNeighbour &&
-                                                    particleWithinCutoff(pCurrent, pNeighbour)) {
-                                                    function(pCurrent, pNeighbour);
+                            // Ensure that the current cell is within the domain
+                            if (currentX < nc[0] && currentY < nc[1] && currentZ < nc[2]) {
+                                // Find out where is the current cell in the grid vector
+                                int currentGridIndex = getGridIndex(currentX, currentY, currentZ);
+                                grid[currentGridIndex].applyToPairs(function);
+                                // Iterate over current cell
+                                for (auto& pCurrent : grid[currentGridIndex]) {
+                                    // Find neighbors
+                                    for (int m = currentZ - 1; m <= currentZ + 1; m++) {
+                                        for (int n = currentY - 1; n <= currentY + 1; n++) {
+                                            for (int o = currentX - 1; o <= currentX + 1; o++) {
+                                                int neighbourX = o;
+                                                int neighbourY = n;
+                                                int neighbourZ = m;
+
+                                                // Ensure that the neighbor is within the domain
+                                                if (neighbourX >= 0 && neighbourY >= 0 && neighbourZ >= 0 &&
+                                                    neighbourX < nc[0] && neighbourY < nc[1] && neighbourZ < nc[2]) {
+
+                                                    int neighbourGridIndex = getGridIndex(neighbourX, neighbourY, neighbourZ);
+
+                                                    // Check if the neighbor has not yet been iterated over
+                                                    if (neighbourGridIndex > currentGridIndex) {
+                                                        // Iterate over neighbor
+                                                        for (auto& pNeighbour : grid[neighbourGridIndex]) {
+                                                            // Apply function
+                                                            if (pCurrent != pNeighbour &&
+                                                                particleWithinCutoff(pCurrent, pNeighbour)) {
+                                                                function(pCurrent, pNeighbour);
+                                                            }
+                                                        }
+                                                    }
                                                 }
                                             }
                                         }
@@ -147,12 +176,52 @@ void LinkedCellContainer::applyToPairs(const std::function<void(Particle &, Part
                             }
                         }
                     }
-
                 }
             }
         }
     }
 }
+
+void LinkedCellContainer::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
+    // Iterate over all cells in parallel
+#pragma omp parallel for default(none) shared(grid) firstprivate(function) collapse(3)
+    for(int z = 0; z < nc[2]; z++) {
+        for (int y = 0; y < nc[1]; y++) {
+            for (int x = 0; x < nc[0]; x++) {
+                // Find out where is the current cell in the grid vector
+                int currentGridIndex = getGridIndex(x, y, z);
+
+                // Apply function within current cell
+                grid[currentGridIndex].applyToPairs(function);
+
+                for (auto& pCurrent : grid[currentGridIndex])
+                    // Find neighbours
+                    for (int i = z - 1; i <= z + 1; i++) {
+                        for (int j = y - 1; j <= y + 1; j++) {
+                            for (int k = x - 1; k <= x + 1; k++) {
+
+                                int neighbourGridIndex = getGridIndex(k, j, i);
+
+                                // Check if the neighbour has not yet been iterated over and if it is still inside of the grid
+                                if (neighbourGridIndex > currentGridIndex &&
+                                    (k >= 0 && j >= 0 && i >= 0 && k < nc[0] && j < nc[1] && i < nc[2])) {
+
+                                    // Iterate over neighbour
+                                    for (auto& pNeighbour : grid[neighbourGridIndex]) {
+                                        // Apply function
+                                        if (pCurrent != pNeighbour && particleWithinCutoff(pCurrent, pNeighbour)) {
+                                            function(pCurrent, pNeighbour);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
 int LinkedCellContainer::getGridIndex(int x, int y, int z) const {
     return x + nc[0] * (y + nc[1] * z);
@@ -173,13 +242,17 @@ void LinkedCellContainer::applyToBoundary(const std::function<void(Particle (&))
     // Creating a vector for marking particles that need to be moved
     std::vector<std::pair<Particle, int>> particlesToBeMoved{}; // stores each particle that needs to be moved with the cell it's beeing moved from
 
+    #pragma omp parallel for default(none) shared(boundaryCells_ptr, particlesToBeMoved), firstprivate(function)
     for (auto boundaryCell : boundaryCells_ptr) {
         if (boundaryCell != nullptr) {
             for (auto &particle : *boundaryCell) {
                 int currentCell = getParticleIndex(particle);
                 function(particle);
                 if(!isInCorrectCell(particle, currentCell)){
-                    particlesToBeMoved.emplace_back(particle, currentCell);
+                    #pragma omp critical
+                    {
+                        particlesToBeMoved.emplace_back(particle, currentCell);
+                    }
                 }
             }
         }

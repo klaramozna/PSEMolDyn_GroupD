@@ -185,8 +185,6 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             }
             else if (sim->parallelization().get() == "cell"){
                 SimParameters.setParallelizationStrategy(ParallelizationStrategy::CELL);
-            } else {
-                SimParameters.setParallelizationStrategy(ParallelizationStrategy::NONE);
             }
         }
 

@@ -13,13 +13,14 @@
 
 std::array<double, 3> maxwellBoltzmannDistributedVelocity(double averageVelocity, size_t dimensions);
 
-Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion, int dim) :
+Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion, int dim, ParallelizationStrategy parallelizationStrategy) :
                         container(container),
                         forceCalculation(calculation),
                         thermostat(thermostat),
                         boundaryEnforcer(sigma, container, boundary.getDimensions(), boundary.getBoundaryTypes(), forceCalculation),
                         gravity(gravity),
-                        delta_t(delta_t) {
+                        delta_t(delta_t),
+                        parallelizationStrategy(parallelizationStrategy) {
     // Apply brownian motion
     if(applyBrownianMotion){
         if(typeid(thermostat) == typeid(FakeThermostat())) {
@@ -78,7 +79,11 @@ void Simulation::runIteration() {
     // apply boundary conditions
     container.applyToBoundary([this](Particle& p) { boundaryEnforcer.applyBoundaryConditionsForParticle(p); });
 
-    container.applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
+    if (parallelizationStrategy == ParallelizationStrategy::SUBDOMAIN) {
+        container.applyToPairsSubdomain([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
+    } else {
+        container.applyToPairs([this](Particle &p1, Particle &p2) { calculateF(p1, p2); });
+    }
 
     container.deleteHaloParticles();
 
