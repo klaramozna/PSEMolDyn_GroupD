@@ -9,6 +9,7 @@
 #include "ParticleContainer.h"
 #include "Cell.h"
 #include "Boundary.h"
+#include <memory>
 
 class LinkedCellContainer : public ParticleContainer{
 public:
@@ -124,7 +125,7 @@ private:
      * @param oldCell Index of the cell the particle is being moved from.
      * @param newCell Index of the cell the particle is being moved to.
      */
-    void moveParticle(const Particle& p1, int oldCell, int newCell);
+    void moveParticle(std::shared_ptr<Particle> p1, int oldCell, int newCell);
 
     /**
      * @brief Returns true if the given particle is it's correct cell.

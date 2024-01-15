@@ -8,6 +8,7 @@
 #include <list>
 #include <functional>
 #include "Particle.h"
+#include <memory>
 
 class Cell {
 public:
@@ -15,14 +16,14 @@ public:
      * @brief Possible types of cells, Inner means inside of boundary, Boundary means on the boundary, Halo means outside of the boundary.
      */
 
-    using iterator_type = std::list<Particle>::iterator;
+    using iterator_type = std::list<std::shared_ptr<Particle>>::iterator;
 
     /**
      * @brief Creates a Cell object, initializing it with the given particles and type
      * @param p The particles in the cell. Empty of no vector is given
      * @param t The type of the cell, Inner of no type is given.
      */
-    explicit Cell(double cutoffRadius, const std::list<Particle>& p = {}): particles{p}, cutoffRadius{cutoffRadius}{};
+    explicit Cell(double cutoffRadius): particles{}, cutoffRadius{cutoffRadius}{};
 
     /**
      * @brief Returns an iterator pointing to the first particle.
@@ -40,20 +41,20 @@ public:
      * @brief Adds the given particle to the cell.
      * @param p The particle to be added.
      */
-    void addParticle(const Particle& p);
+    void addParticle(std::shared_ptr<Particle> p);
 
     /**
      * @brief Deletes the given particle from the cell.
      * @param p The particle to be deleted.
      */
-    void deleteParticle(const Particle& p);
+    void deleteParticle(std::shared_ptr<Particle> p);
 
     /**
      * @brief Returns true if the given particle is contained in this cell.
      * @param p The particle to be tested.
      * @return True if the particle is in this cell, false otherwise.
      */
-    bool contains(Particle p);
+    bool contains(std::shared_ptr<Particle> p);
 
     /**
      * @brief Applies the given function to each distinct pair of particles in the cell.
@@ -65,7 +66,7 @@ private:
     /**
      * @brief Stores the particles of the cell.
      */
-    std::list<Particle> particles;
+    std::list<std::shared_ptr<Particle>> particles;
 
     /**
      * @brief Maximum distance between particles that affect each other.
