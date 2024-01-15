@@ -21,8 +21,13 @@ void Cell::deleteParticle(std::shared_ptr<Particle> p) {
     particles.remove(p);
 }
 
-bool Cell::contains(std::shared_ptr<Particle> p) {
-    return std::find(particles.begin(), particles.end(), p) != particles.end();
+bool Cell::contains(const Particle& p) {
+    for(const auto& it : particles){
+        if(*it == p){
+            return true;
+        }
+    }
+    return false;
 }
 
 void Cell::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {

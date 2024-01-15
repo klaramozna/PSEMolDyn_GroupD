@@ -71,26 +71,26 @@ TEST_F(LinkedCellContainerTest, applyToPairs){
     std::vector<Cell> grid = container.getCells();
     for(auto & cell : grid){
         for(auto & p : cell){
-            if(p.getX() == p1.getX()){
-                ASSERT_EQ(p.getV()[0], 0) << "p1";
+            if(p->getX() == p1.getX()){
+                ASSERT_EQ(p->getV()[0], 0) << "p1";
             }
-            if(p.getX() == p2.getX()){
-                ASSERT_EQ(p.getV()[0], 2) << "p2";
+            if(p->getX() == p2.getX()){
+                ASSERT_EQ(p->getV()[0], 2) << "p2";
             }
-            if(p.getX() == p3.getX()){
-                ASSERT_EQ(p.getV()[0], 1)  << "p3";
+            if(p->getX() == p3.getX()){
+                ASSERT_EQ(p->getV()[0], 1)  << "p3";
             }
-            if(p.getX() == p4.getX()){
-                ASSERT_EQ(p.getV()[0], 0) << "p4";
+            if(p->getX() == p4.getX()){
+                ASSERT_EQ(p->getV()[0], 0) << "p4";
             }
-            if(p.getX() == neighbourP2_1.getX()){
-                ASSERT_EQ(p.getV()[0], 1) << "p2_1";
+            if(p->getX() == neighbourP2_1.getX()){
+                ASSERT_EQ(p->getV()[0], 1) << "p2_1";
             }
-            if(p.getX() == neighbourP2_2.getX()){
-                ASSERT_EQ(p.getV()[0], 1) << "p2_2";
+            if(p->getX() == neighbourP2_2.getX()){
+                ASSERT_EQ(p->getV()[0], 1) << "p2_2";
             }
-            if(p.getX() == neighbourP3_1.getX()){
-                ASSERT_EQ(p.getV()[0], 1) << "p3_1";
+            if(p->getX() == neighbourP3_1.getX()){
+                ASSERT_EQ(p->getV()[0], 1) << "p3_1";
             }
         }
     }

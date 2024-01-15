@@ -54,7 +54,7 @@ public:
      * @param p The particle to be tested.
      * @return True if the particle is in this cell, false otherwise.
      */
-    bool contains(std::shared_ptr<Particle> p);
+    bool contains(const Particle& p);
 
     /**
      * @brief Applies the given function to each distinct pair of particles in the cell.
