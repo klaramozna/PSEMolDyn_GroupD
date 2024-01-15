@@ -227,6 +227,7 @@ void LinkedCellContainer::addParticle(const Particle &p) {
     if(getParticleIndex(p) < 0 || getParticleIndex(p) >= grid.size()){
         throw std::runtime_error("Particle out of domain.");
     }
+
     grid[getParticleIndex(p)].addParticle(std::make_shared<Particle>(p));
     size++;
 }

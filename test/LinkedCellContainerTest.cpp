@@ -4,6 +4,7 @@
 
 #include "LinkedCellContainerTest.h"
 #include "../src/utils/ArrayUtils.h"
+#include <memory>
 
 
 TEST_F(LinkedCellContainerTest, Initialization){
@@ -145,6 +146,19 @@ TEST_F(LinkedCellContainerTest, wrongAlignmentBoundary){
     // Making sure other particles remained unchanged
     ASSERT_TRUE(grid[61].contains(p1WrongAlignment));
     ASSERT_EQ(wrongAlignmentContainer.getSize(), 3);
+}
+
+TEST_F(LinkedCellContainerTest, pointerTest){
+    Particle p{{-0.5, -0.5, -0.5}, {}, 1};
+    pointerContainer.addParticle(p);
+    auto pointerIterator = pointerContainer.getCells()[0].begin();
+    std::shared_ptr<Particle> pointer = *pointerIterator;
+    Particle *pAddress = &(*pointer);
+
+    pointerContainer.applyToAll([](Particle& p){p.setX(p.getXVector() + VectorDouble3({1, 0, 0}));});
+
+    ASSERT_EQ(pAddress, &(*(*(pointerContainer.getCells()[1].begin()))));
+
 }
 
 
