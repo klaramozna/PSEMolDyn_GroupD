@@ -4,6 +4,7 @@
 
 #include "LinkedCellContainerTest.h"
 #include "../src/utils/ArrayUtils.h"
+#include <memory>
 
 
 TEST_F(LinkedCellContainerTest, Initialization){
@@ -71,26 +72,26 @@ TEST_F(LinkedCellContainerTest, applyToPairs){
     std::vector<Cell> grid = container.getCells();
     for(auto & cell : grid){
         for(auto & p : cell){
-            if(p.getX() == p1.getX()){
-                ASSERT_EQ(p.getV()[0], 0) << "p1";
+            if(p->getX() == p1.getX()){
+                ASSERT_EQ(p->getV()[0], 0) << "p1";
             }
-            if(p.getX() == p2.getX()){
-                ASSERT_EQ(p.getV()[0], 2) << "p2";
+            if(p->getX() == p2.getX()){
+                ASSERT_EQ(p->getV()[0], 2) << "p2";
             }
-            if(p.getX() == p3.getX()){
-                ASSERT_EQ(p.getV()[0], 1)  << "p3";
+            if(p->getX() == p3.getX()){
+                ASSERT_EQ(p->getV()[0], 1)  << "p3";
             }
-            if(p.getX() == p4.getX()){
-                ASSERT_EQ(p.getV()[0], 0) << "p4";
+            if(p->getX() == p4.getX()){
+                ASSERT_EQ(p->getV()[0], 0) << "p4";
             }
-            if(p.getX() == neighbourP2_1.getX()){
-                ASSERT_EQ(p.getV()[0], 1) << "p2_1";
+            if(p->getX() == neighbourP2_1.getX()){
+                ASSERT_EQ(p->getV()[0], 1) << "p2_1";
             }
-            if(p.getX() == neighbourP2_2.getX()){
-                ASSERT_EQ(p.getV()[0], 1) << "p2_2";
+            if(p->getX() == neighbourP2_2.getX()){
+                ASSERT_EQ(p->getV()[0], 1) << "p2_2";
             }
-            if(p.getX() == neighbourP3_1.getX()){
-                ASSERT_EQ(p.getV()[0], 1) << "p3_1";
+            if(p->getX() == neighbourP3_1.getX()){
+                ASSERT_EQ(p->getV()[0], 1) << "p3_1";
             }
         }
     }
@@ -145,6 +146,26 @@ TEST_F(LinkedCellContainerTest, wrongAlignmentBoundary){
     // Making sure other particles remained unchanged
     ASSERT_TRUE(grid[61].contains(p1WrongAlignment));
     ASSERT_EQ(wrongAlignmentContainer.getSize(), 3);
+}
+
+TEST_F(LinkedCellContainerTest, pointerTest){
+    Particle p{{-0.5, -0.5, -0.5}, {}, 1};
+    pointerContainer.addParticle(p);
+    auto pointerIterator = pointerContainer.getCells()[0].begin();
+    std::shared_ptr<Particle> pointer = *pointerIterator;
+    Particle *pAddress = &(*pointer);
+
+    pointerContainer.applyToAll([](Particle& p){p.setX(p.getXVector() + VectorDouble3({1, 0, 0}));});
+
+    ASSERT_EQ(pAddress, &(*(*(pointerContainer.getCells()[1].begin()))));
+
+}
+
+TEST_F(LinkedCellContainerTest, pointerInMain){
+    std::shared_ptr<Particle> pointer = std::make_shared<Particle>(Particle{{-0.5, -0.5, -0.5}, {}, 1});
+    pointerContainer.addParticlePointer(pointer);
+    pointerContainer.applyToAll([](Particle& p){p.setX(p.getXVector() + VectorDouble3({1, 0, 0}));});
+    ASSERT_EQ(&(*pointer), &(*(*(pointerContainer.getCells()[1].begin()))));
 }
 
 

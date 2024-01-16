@@ -22,6 +22,7 @@ public:
 class LinkedCellContainerTest : public testing::Test{
 protected:
     LinkedCellContainer container{Boundary(8, 8, 2, 1.0, {"Reflective", "Reflective","Reflective","Reflective","Reflective","Reflective"}), 2};
+    LinkedCellContainer pointerContainer{Boundary(2, 2, 2, 1, {"Reflective", "Reflective","Reflective","Reflective","Reflective","Reflective"}), 1};
     Particle p1{std::array<double, 3>{2, 0, 0.5}, std::array<double, 3>{}, 0};
     Particle p2{std::array<double, 3>{6.5, -1.5, 0.5}, std::array<double, 3>{}, 0};
     Particle p3{std::array<double, 3>{5.25, 4.1, 0.5}, std::array<double, 3>{}, 0};
