@@ -161,6 +161,13 @@ TEST_F(LinkedCellContainerTest, pointerTest){
 
 }
 
+TEST_F(LinkedCellContainerTest, pointerInMain){
+    std::shared_ptr<Particle> pointer = std::make_shared<Particle>(Particle{{-0.5, -0.5, -0.5}, {}, 1});
+    pointerContainer.addParticlePointer(pointer);
+    pointerContainer.applyToAll([](Particle& p){p.setX(p.getXVector() + VectorDouble3({1, 0, 0}));});
+    ASSERT_EQ(&(*pointer), &(*(*(pointerContainer.getCells()[1].begin()))));
+}
+
 
 
 void LinkedCellContainerTest::SetUp() {
