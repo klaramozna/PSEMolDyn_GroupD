@@ -276,5 +276,21 @@ Particle LinkedCellContainer::mirrorParticle(const Particle &p) {
     return Particle{std::array<double, 3>{x, y, z}, p.getV(), p.getM(), p.getEpsilon(), p.getSigma(), p.getType()};
 }
 
+void LinkedCellContainer::addParticlePointer(std::shared_ptr<Particle> p) {
+    if(getParticleIndex(*p) < 0 || getParticleIndex(*p) >= grid.size()){
+        throw std::runtime_error("Particle out of domain.");
+    }
+
+    grid[getParticleIndex(*p)].addParticle(p);
+    size++;
+}
+
+void LinkedCellContainer::addParticlesPointer(std::vector<std::shared_ptr<Particle>> particles) {
+    for(auto const & pointer : particles){
+        addParticlePointer(pointer);
+        size++;
+    }
+}
+
 
 

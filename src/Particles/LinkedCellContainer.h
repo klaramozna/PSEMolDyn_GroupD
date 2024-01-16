@@ -28,6 +28,18 @@ public:
     void addParticle(const Particle& p) override;
 
     /**
+     * @brief Adds the given particle to the container (the given object, not a copy)
+     * @param p The particle to be added.
+     */
+    void addParticlePointer(std::shared_ptr<Particle> p);
+
+    /**
+     * @brief Adds the given particles to the container (the given objects, not copies)
+     * @param particles The particles to be added.
+     */
+    void addParticlesPointer(std::vector<std::shared_ptr<Particle>> particles);
+
+    /**
      * @brief Returns the number of particles in the container.
      * @return The number of particles in the container.
      */
