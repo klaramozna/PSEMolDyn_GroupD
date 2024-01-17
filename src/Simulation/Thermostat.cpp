@@ -10,8 +10,23 @@
 
 
 void Thermostat::updateState(const std::vector<Particle> &particles) {
+
+    // for task 4
+    VectorDouble3 avgVelo{{0, 0, 0}};
+    for(auto const & p : particles){
+        avgVelo += p.getVVector();
+    }
+
+    avgVelo = (1.0/particles.size()) * avgVelo;
+    this->particles = particles;
+    for(auto & p : this->particles){
+        p.setV(p.getVVector() - avgVelo);
+    }
+
+    // Original version
     double kineticEnergy = getKineticEnergy(particles);
     currentTemperature = getTemperature(kineticEnergy, particles.size());
+
 }
 
 void Thermostat::initializeBrownianMotion(Particle &particle) const {
@@ -43,3 +58,4 @@ double Thermostat::getCurrentTemperature() {
 void Thermostat::updateIteration() {
     currentIteration++;
 }
+

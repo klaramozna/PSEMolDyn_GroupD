@@ -103,6 +103,10 @@ protected:
      */
     double targetTemperature;
 
+    std::vector<Particle> particles;
+
+    VectorDouble3 avgVelo;
+
 
 };
 
