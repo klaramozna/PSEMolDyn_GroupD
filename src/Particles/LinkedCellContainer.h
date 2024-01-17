@@ -6,7 +6,6 @@
 #define PSEMOLDYN_GROUPD_LINKEDCELLCONTAINER_H
 
 
-#include <omp.h>
 #include "ParticleContainer.h"
 #include "Cell.h"
 #include "Boundary.h"
@@ -20,15 +19,6 @@ public:
      * @param particles The particles to be added to the container.
      */
     LinkedCellContainer(Boundary boundary, double cutoffRadius, const std::vector<Particle>& particles = {});
-
-    #ifdef _OPENMP
-    // Destructor to destroy locks
-    ~LinkedCellContainer() override {
-        for (auto & cellLock : cellLocks) {
-            omp_destroy_lock(&cellLock);
-        }
-    }
-    #endif
 
     /**
      * @brief Adds the given particle to the container.
@@ -127,13 +117,6 @@ private:
      * @brief Number of particles in the container.
      */
     size_t size;
-
-#ifdef _OPENMP
-    std::vector<omp_lock_t> cellLocks;
-    int subdomainSizeX;
-    int subdomainSizeY;
-    int subdomainSizeZ;
-#endif
 
     /**
      * @brief Deletes the given particle from the cell with the index oldCell and adds it to the cell with the index newCell

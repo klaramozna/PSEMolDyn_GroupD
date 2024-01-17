@@ -64,7 +64,6 @@ target_link_libraries(MolSim
         PUBLIC
                 PkgConfig::XERCESC
                 Boost::program_options
-                OpenMP::OpenMP_CXX
 )
 
 
