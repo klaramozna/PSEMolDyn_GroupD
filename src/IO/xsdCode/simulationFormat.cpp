@@ -710,6 +710,36 @@ sigma_cuboid_default_value ()
   return sigma_cuboid_type (1.0);
 }
 
+const Cuboid::wall_optional& Cuboid::
+wall () const
+{
+  return this->wall_;
+}
+
+Cuboid::wall_optional& Cuboid::
+wall ()
+{
+  return this->wall_;
+}
+
+void Cuboid::
+wall (const wall_type& x)
+{
+  this->wall_.set (x);
+}
+
+void Cuboid::
+wall (const wall_optional& x)
+{
+  this->wall_ = x;
+}
+
+Cuboid::wall_type Cuboid::
+wall_default_value ()
+{
+  return wall_type (false);
+}
+
 
 // Sphere
 // 
@@ -2477,7 +2507,8 @@ Cuboid (const lower_left_coord_type& lower_left_coord,
   mass_ (mass, this),
   initial_velocity_ (initial_velocity, this),
   epsilon_cuboid_ (this),
-  sigma_cuboid_ (this)
+  sigma_cuboid_ (this),
+  wall_ (this)
 {
 }
 
@@ -2494,7 +2525,8 @@ Cuboid (::std::unique_ptr< lower_left_coord_type > lower_left_coord,
   mass_ (mass, this),
   initial_velocity_ (std::move (initial_velocity), this),
   epsilon_cuboid_ (this),
-  sigma_cuboid_ (this)
+  sigma_cuboid_ (this),
+  wall_ (this)
 {
 }
 
@@ -2509,7 +2541,8 @@ Cuboid (const Cuboid& x,
   mass_ (x.mass_, f, this),
   initial_velocity_ (x.initial_velocity_, f, this),
   epsilon_cuboid_ (x.epsilon_cuboid_, f, this),
-  sigma_cuboid_ (x.sigma_cuboid_, f, this)
+  sigma_cuboid_ (x.sigma_cuboid_, f, this),
+  wall_ (x.wall_, f, this)
 {
 }
 
@@ -2524,7 +2557,8 @@ Cuboid (const ::xercesc::DOMElement& e,
   mass_ (this),
   initial_velocity_ (this),
   epsilon_cuboid_ (this),
-  sigma_cuboid_ (this)
+  sigma_cuboid_ (this),
+  wall_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -2641,6 +2675,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // wall
+    //
+    if (n.name () == "wall" && n.namespace_ ().empty ())
+    {
+      if (!this->wall_)
+      {
+        this->wall_.set (wall_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     break;
   }
 
@@ -2700,6 +2745,7 @@ operator= (const Cuboid& x)
     this->initial_velocity_ = x.initial_velocity_;
     this->epsilon_cuboid_ = x.epsilon_cuboid_;
     this->sigma_cuboid_ = x.sigma_cuboid_;
+    this->wall_ = x.wall_;
   }
 
   return *this;

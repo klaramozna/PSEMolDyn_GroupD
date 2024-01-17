@@ -16,6 +16,7 @@ Particle::Particle(int type_arg) {
     old_f = VectorDouble3(std::array<double, 3>{0, 0, 0});
     markedForMirroring = false;
     markedForDeleting = false;
+    isWall = false;
 }
 
 Particle::Particle(const Particle &other) {
@@ -29,10 +30,11 @@ Particle::Particle(const Particle &other) {
     sigma = other.sigma;
     markedForMirroring = other.markedForMirroring;
     markedForDeleting = other.markedForDeleting;
+    isWall = other.isWall;
 }
 
 Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
-                   double m_arg, int type_arg) : f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})} {
+                   double m_arg, int type_arg, bool wall) : f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})} {
     x = VectorDouble3(x_arg);
     v = VectorDouble3(v_arg);
     m = m_arg;
@@ -41,6 +43,7 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
     sigma = 1.0;
     markedForMirroring = false;
     markedForDeleting = false;
+    isWall = wall;
 }
 
 Particle::~Particle() {}

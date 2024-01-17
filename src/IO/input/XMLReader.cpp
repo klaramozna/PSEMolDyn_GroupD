@@ -110,6 +110,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             double mass = cuboid.mass();
             double epsilon = cuboid.epsilon_cuboid_default_value();
             double sigma = cuboid.sigma_cuboid_default_value();
+            bool isWall = cuboid.wall().present() ? cuboid.wall().get() : cuboid.wall_default_value();
             if (cuboid.epsilon_cuboid().present()){
                 epsilon = cuboid.epsilon_cuboid().get();
             }
@@ -117,7 +118,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
                 sigma = cuboid.sigma_cuboid().get();
             }
             std::array<double, 3> velocity = {cuboid.initial_velocity().x(), cuboid.initial_velocity().y(), cuboid.initial_velocity().z()};
-            CuboidGenerator generator {lowerLeftCoord, n1, n2, n3, distance, mass, velocity, epsilon, sigma};
+            CuboidGenerator generator {lowerLeftCoord, n1, n2, n3, distance, mass, velocity, epsilon, sigma, isWall};
             std::vector<Particle> particles = generator.generateParticles(i);
             container.addParticles(particles);
             i++;
