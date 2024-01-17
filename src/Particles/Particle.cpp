@@ -92,35 +92,54 @@ VectorDouble3 Particle::getOldFVector() const {
 }
 
 void Particle::setX(const VectorDouble3 &position) {
-    x = position;
+    if(!isWall){
+        x = position;
+    }
 }
 
 void Particle::setV(const VectorDouble3 &velocity) {
-     v = velocity;
+    if(!isWall){
+        v = velocity;
+    }
 }
 
 void Particle::setF(const VectorDouble3 &force) {
-    f = force;
+    if(!isWall){
+        f = force;
+    }
 }
 
 void Particle::setOldF(const VectorDouble3 &oldForce) {
-    old_f = oldForce;
+    if(!isWall){
+        old_f = oldForce;
+    }
 }
 
 void Particle::setX(double x, double y, double z) {
-    this->x = VectorDouble3(std::array<double, 3>{x, y, z});
+    if(!isWall){
+        this->x = VectorDouble3(std::array<double, 3>{x, y, z});
+    }
+
 }
 
 void Particle::setV(double x, double y, double z) {
-    this->v = VectorDouble3(std::array<double, 3>{x, y, z});
+    if(!isWall) {
+        this->v = VectorDouble3(std::array<double, 3>{x, y, z});
+    }
+
 }
 
 void Particle::setF(double x, double y, double z) {
-    this->f = VectorDouble3(std::array<double, 3>{x, y, z});
+    if(!isWall){
+        this->f = VectorDouble3(std::array<double, 3>{x, y, z});
+    }
+
 }
 
 void Particle::setOldF(double x, double y, double z) {
-    this->old_f = VectorDouble3(std::array<double, 3>{x, y, z});
+    if(!isWall){
+        this->old_f = VectorDouble3(std::array<double, 3>{x, y, z});
+    }
 }
 
 void Particle::markForMirroring() {
