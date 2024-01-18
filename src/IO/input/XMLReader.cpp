@@ -90,6 +90,14 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
                 SimParameters.setTargetTemperature(thermostat.targetTemperature());
                 SimParameters.setMaxTemperatureChange(thermostat.maxTemperatureChange());
             }
+            else if (sim->thermostat()->tempDiff()){
+                tempDiffThermostatType& thermostat = *(sim->thermostat()->tempDiff());
+                Logger::console->debug("Reading thermostat type 4 (tempDiff) from XML");
+                SimParameters.setThermostatType("tempDiff");
+                SimParameters.setInitTemperature(thermostat.initTemperature());
+                SimParameters.setThermostatCycleLength(thermostat.thermostatCycleLength());
+                SimParameters.setTargetTemperature(thermostat.targetTemperature());
+            }
         }
 
         if (sim->gravity().present()) {
