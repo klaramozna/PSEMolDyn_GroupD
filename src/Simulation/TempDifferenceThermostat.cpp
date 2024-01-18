@@ -4,6 +4,7 @@
 
 #include "TempDifferenceThermostat.h"
 #include <cmath>
+#include <algorithm>
 
 void TempDifferenceThermostat::updateTemperature(Particle &particle) {
     if(currentIteration % cycleLength == 0){
@@ -29,5 +30,6 @@ void TempDifferenceThermostat::updateState(const std::vector<Particle> &particle
 
     // Calculate current temperature with the modified particles
     double kineticEnergy = getKineticEnergy(particleDiffs);
-    currentTemperature = getTemperature(kineticEnergy, particleDiffs.size());
+    int numNonWallParticles = std::count_if(particles.begin(), particles.end(), [](Particle p){return !p.isWallParticle();});
+    currentTemperature = getTemperature(kineticEnergy, numNonWallParticles);
 }
