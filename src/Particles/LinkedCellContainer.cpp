@@ -172,10 +172,12 @@ void LinkedCellContainer::applyToBoundary(const std::function<void(Particle (&))
     for (auto boundaryCell : boundaryCells_ptr) {
         if (boundaryCell != nullptr) {
             for (auto &particle : *boundaryCell) {
-                int currentCell = getParticleIndex(*particle);
-                function(*particle);
-                if(!isInCorrectCell(*particle, currentCell)){
-                    particlesToBeMoved.emplace_back(particle, currentCell);
+                if(!particle->isWallParticle()){
+                    int currentCell = getParticleIndex(*particle);
+                    function(*particle);
+                    if(!isInCorrectCell(*particle, currentCell)){
+                        particlesToBeMoved.emplace_back(particle, currentCell);
+                    }
                 }
             }
         }
