@@ -15,12 +15,16 @@ void TempDifferenceThermostat::updateTemperature(Particle &particle) {
 }
 
 void TempDifferenceThermostat::updateState(const std::vector<Particle> &particles) {
+    int numNonWallParticles = std::count_if(particles.begin(), particles.end(), [](Particle p){return !p.isWallParticle();});
+
     // Calculate average temperature
     averageVelocity = VectorDouble3{{0, 0, 0}};
     for(auto const & p : particles){
-        averageVelocity += p.getVVector();
+        if(!p.isWallParticle()){
+            averageVelocity += p.getVVector();
+        }
     }
-    averageVelocity = (1.0/particles.size()) * averageVelocity;
+    averageVelocity = (1.0/numNonWallParticles) * averageVelocity;
 
     // Modify particles to store the difference between the average velocity and current velocity
     std::vector<Particle> particleDiffs = particles;
@@ -30,6 +34,5 @@ void TempDifferenceThermostat::updateState(const std::vector<Particle> &particle
 
     // Calculate current temperature with the modified particles
     double kineticEnergy = getKineticEnergy(particleDiffs);
-    int numNonWallParticles = std::count_if(particles.begin(), particles.end(), [](Particle p){return !p.isWallParticle();});
     currentTemperature = getTemperature(kineticEnergy, numNonWallParticles);
 }
