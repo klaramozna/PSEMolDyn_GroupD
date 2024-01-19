@@ -9,6 +9,7 @@
 
 #include <array>
 #include <string>
+#include <memory>
 #include "../utils/VectorDouble3.h"
 
 class Particle {
@@ -70,16 +71,16 @@ private:
     double bond_length;
 
     /**    
-     * indices of the direct parallel neighbours of this particle
+     * pointers to the direct parallel neighbours of this particle
      */
-    std::vector<int> parallel_Neighbours;
+    std::vector<std::shared_ptr<Particle>> parallel_Neighbours;
 
     /**
-     * indices of the direct diagonal neighbours of this particle
+     * pointers to the direct diagonal neighbours of this particle
      */
-    std::vector<int> diagonal_Neighbours;
+    std::vector<std::shared_ptr<Particle>> diagonal_Neighbours;
     /**
-     * unique identifier of each particle (will be used in membrane to keep track of neighbours) 
+     * unique identifier of each particle (can be used in membrane to keep track of neighbours) 
      */
     int id;
 
@@ -125,7 +126,7 @@ public:
      * @param type The type of the particle.
      */
     Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg, double m_arg, double epsilon, double sigma,
-            double stiffness_arg, double bond_length_arg, std::vector<int> parallel_Neighbours_arg, std::vector<int> diagonal_Neighbours_arg, int id, int type = 0): x{x_arg}, v{v_arg}, f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, m{m_arg}, epsilon{epsilon}, sigma{sigma},stiffness{stiffness_arg}, bond_length{bond_length_arg} ,parallel_Neighbours{parallel_Neighbours_arg}, diagonal_Neighbours{diagonal_Neighbours_arg},id {id}, type{type} {
+            double stiffness_arg, double bond_length_arg, std::vector<std::shared_ptr<Particle>> parallel_Neighbours_arg, std::vector<std::shared_ptr<Particle>> diagonal_Neighbours_arg, int id, int type = 0): x{x_arg}, v{v_arg}, f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, m{m_arg}, epsilon{epsilon}, sigma{sigma},stiffness{stiffness_arg}, bond_length{bond_length_arg} ,parallel_Neighbours{parallel_Neighbours_arg}, diagonal_Neighbours{diagonal_Neighbours_arg},id {id}, type{type} {
         markedForMirroring = false;
         markedForDeleting = false;
     };
@@ -181,16 +182,16 @@ public:
     int getId() const;
 
     /**
-     * @brief Returns a vector with the indices of the parallel neighbours of this particle
-     * @return Vector with these indices.
+     * @brief Returns a vector with the pointers to the parallel neighbours of this particle
+     * @return Vector with these pointers.
      */
-    std::vector<int> getParallelNeighbours() const;
+    std::vector<std::shared_ptr<Particle>> getParallelNeighbours() const;
 
     /**
-     * @brief Returns a vector with the indices of the diagonal neighbours of this particle
-     * @return Vector with these indices.
+     * @brief Returns a vector with the pointers to the diagonal neighbours of this particle
+     * @return Vector with these pointers.
      */
-    std::vector<int> getDiagonalNeighbours() const;
+    std::vector<std::shared_ptr<Particle>> getDiagonalNeighbours() const;
 
     /**
      * @brief Sets the values of the position based on the given vector.
@@ -249,9 +250,9 @@ public:
     void setOldF(double x, double y, double z);
 
 
-    void setParallelNeighbours(std::vector<int> indices_parallel);
+    void setParallelNeighbours(std::vector<std::shared_ptr<Particle>> pointers_parallel);
 
-    void setDiagonalNeighbours(std::vector<int> indices_diagonal);
+    void setDiagonalNeighbours(std::vector<std::shared_ptr<Particle>> pointers_diagonal);
 
     void setStiffness(double val);
 

@@ -102,12 +102,12 @@ double Particle::getBondLength() const {
 }
 
 
-std::vector<int> Particle::getParallelNeighbours() const {
+std::vector<std::shared_ptr<Particle>> Particle::getParallelNeighbours() const {
     return parallel_Neighbours;
 }
 
 
-std::vector<int> Particle::getDiagonalNeighbours() const{
+std::vector<std::shared_ptr<Particle>> Particle::getDiagonalNeighbours() const{
     return diagonal_Neighbours;
 }
 
@@ -147,12 +147,12 @@ void Particle::setOldF(double x, double y, double z) {
     this->old_f = VectorDouble3(std::array<double, 3>{x, y, z});
 }
 
-void Particle::setParallelNeighbours(std::vector<int> indices_parallel){
-    parallel_Neighbours = indices_parallel;
+void Particle::setParallelNeighbours(std::vector<std::shared_ptr<Particle>> pointers_parallel){
+    parallel_Neighbours = pointers_parallel;
 }
 
-void Particle::setDiagonalNeighbours(std::vector<int> indices_diagonal){
-    diagonal_Neighbours = indices_diagonal;
+void Particle::setDiagonalNeighbours(std::vector<std::shared_ptr<Particle>> pointers_diagonal){
+    diagonal_Neighbours = pointers_diagonal;
 }
 void Particle::setStiffness(double val) {
     stiffness = val;

@@ -2,10 +2,12 @@
 // Created by RayenManai on 04.01.24.
 //
 #pragma once
+#include <memory>
+#include <vector>
+#include "../Particles/Particle.h"
 
-#include "../Particles/ParticleGenerator.h"
 
-class MembraneGenerator : public ParticleGenerator{
+class MembraneGenerator {
 public:
     /**
      * @brief Creates a CuboidGenerator object initializing it with the given parameters.
@@ -25,14 +27,16 @@ public:
      * @brief Generates a cuboid of particles.
      * @return A vector with the generated particles.
      */
-    std::vector<Particle> generateParticles(int type = 0) override;
+    std::vector<std::shared_ptr<Particle>> generateParticles(int type = 0);
 
     
-    std::vector<int> calculateParallelNeighbourIndices (int n1, int n2, int n3, int index);
+    std::vector<std::shared_ptr<Particle>> calculateParallelNeighbourIndices (int n1, int n2, int n3, int index);
 
-    std::vector<int> calculateDiagonalNeighbourIndices (int n1, int n2, int n3, int index);
+    std::vector<std::shared_ptr<Particle>> calculateDiagonalNeighbourIndices (int n1, int n2, int n3, int index);
 
 private:
+
+    std::vector<std::shared_ptr<Particle>> particles;
 
     /**
      * @brief Coordinates of the left-lower corner of the front side of the cuboid.

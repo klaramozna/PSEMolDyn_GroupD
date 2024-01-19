@@ -151,8 +151,8 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             }
             std::array<double, 3> velocity = {membrane.initial_velocity().x(), membrane.initial_velocity().y(), membrane.initial_velocity().z()};
             MembraneGenerator generator {lowerLeftCoord, n1, n2, n3, distance, mass, velocity, epsilon, sigma, membrane.stiffness(), membrane.bond_length()};
-            std::vector<Particle> particles = generator.generateParticles(i);
-            container.addParticles(particles);
+            std::vector<std::shared_ptr<Particle>> particles = generator.generateParticles(i);
+            //container.addParticles(particles);
             i++;
             // to do: read hard coded force and particles
         }

@@ -24,7 +24,7 @@ MembraneGenerator::MembraneGenerator(std::array<double, 3> corner, int n1, int n
     this->bond_length = bond_length;
 }
 
-std::vector<Particle> MembraneGenerator::generateParticles(int type) {
+std::vector<std::shared_ptr<Particle>> MembraneGenerator::generateParticles(int type) {
     int id = 0;
     double xCorner = corner[0];
     double yCorner = corner[1];
@@ -33,7 +33,8 @@ std::vector<Particle> MembraneGenerator::generateParticles(int type) {
         for(int y = 0; y < n2; y++){
             for(int z = 0; z < n3; z++){
                 std::array<double, 3> particlePosition{xCorner + particleDistance * x, yCorner + particleDistance * y, zCorner + particleDistance * z};
-                particles.emplace_back(particlePosition, velocity, mass, epsilon, sigma, stiffness, bond_length, std::vector<int>{}, std::vector<int>{}, id, type);
+                std::shared_ptr<Particle> particlePtr = std::make_shared<Particle>(particlePosition, velocity, mass, epsilon, sigma, stiffness, bond_length, std::vector<std::shared_ptr<Particle>> {}, std::vector<std::shared_ptr<Particle>> {}, id, type);
+                particles.emplace_back(particlePtr);
                 id ++;
             }
         }
@@ -44,8 +45,8 @@ std::vector<Particle> MembraneGenerator::generateParticles(int type) {
             {
                 for (int y = 0; y < n2; y++)
                 {
-                    particles.at(index).setParallelNeighbours(calculateParallelNeighbourIndices(n1, n2, n3, index));
-                    particles.at(index).setDiagonalNeighbours(calculateDiagonalNeighbourIndices(n1, n2, n3, index));
+                    particles.at(index).get()->setParallelNeighbours(calculateParallelNeighbourIndices(n1, n2, n3, index));
+                    particles.at(index).get()->setDiagonalNeighbours(calculateDiagonalNeighbourIndices(n1, n2, n3, index));
                     index++;
                 }
             }
@@ -53,49 +54,49 @@ std::vector<Particle> MembraneGenerator::generateParticles(int type) {
     return particles;
 }
 
-std::vector<int> MembraneGenerator::calculateParallelNeighbourIndices (int n1, int n2, int n3, int index) {
-    std::vector<int> result;
+std::vector<std::shared_ptr<Particle>> MembraneGenerator::calculateParallelNeighbourIndices (int n1, int n2, int n3, int index) {
+    std::vector<std::shared_ptr<Particle>> result;
     
     int maxIndex = n1 * n2 -1;
     // check not top
     if (index + 1 <= maxIndex && (index + 1)% n2 != 0){
-        result.emplace_back(index + 1);
+        result.emplace_back(particles.at(index + 1));
     }
     //check not bottom
     if (index - 1 >= 0 && index % n2 != 0){
-        result.emplace_back(index - 1);
+        result.emplace_back(particles.at(index - 1));
     }
 
     if (index + n2 <= maxIndex){
-        result.emplace_back(index + n2);
+        result.emplace_back(particles.at(index + n2));
     }
 
     if (index -n2 >= 0 ){
-        result.emplace_back(index - n2);
+        result.emplace_back(particles.at(index - n2));
     }
     return result;
 }
 
 
-std::vector<int> MembraneGenerator::calculateDiagonalNeighbourIndices (int n1, int n2, int n3, int index) {
-    std::vector<int> result;
+std::vector<std::shared_ptr<Particle>> MembraneGenerator::calculateDiagonalNeighbourIndices (int n1, int n2, int n3, int index) {
+    std::vector<std::shared_ptr<Particle>>result;
     
     int maxIndex = n1 * n2 -1;
     //check not top
     if (index + n2 + 1 <= maxIndex && (index + 1)% n2 != 0){
-        result.emplace_back(index + n2 + 1);
+        result.emplace_back(particles.at(index + n2 + 1));
     }
     //check not bottom 
     if (index -n2 - 1 >= 0 && index % n2 != 0 ){
-        result.emplace_back(index -n2 - 1);
+        result.emplace_back(particles.at(index - n2 - 1));
     }
     //check not bottom
     if (index + n2 - 1 <= maxIndex && index % n2 != 0){
-        result.emplace_back(index + n2 - 1);
+        result.emplace_back(particles.at(index + n2 - 1));
     }
     // check not top
     if (index -n2 + 1>= 0 && (index + 1)% n2 != 0){
-        result.emplace_back(index - n2 + 1);
+        result.emplace_back(particles.at(index - n2 + 1));
     }
     return result;
 

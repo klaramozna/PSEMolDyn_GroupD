@@ -88,7 +88,7 @@ void Simulation::runIteration() {
     container.applyToAll([this](Particle& p) { applyGravity(p); });
 
     if (isMembrane) {
-        container.applyToAll([this](Particle& p) { applyHarmonicForces(p); });
+         container.applyToAll([this](Particle& p) { applyHarmonicForces(p); });
     }
     // calculate new v
     container.applyToAll([this](Particle& p) { calculateV(p); });
@@ -109,30 +109,24 @@ void Simulation::applyHarmonicForces(Particle& p) {
         double stiffness = p.getStiffness();
         double averageBondLength = p.getBondLength();
 
-        for (int neighb_index : p.getParallelNeighbours())
+        for (auto neighb : p.getParallelNeighbours())
         {
-            Particle pn = container.getParticleWithId(neighb_index);
-            if (pn.getId() != -1) {
-                double distance = (p.getXVector() - pn.getXVector()).getL2Norm();
-                auto result = (stiffness * (distance - averageBondLength) / distance) * (pn.getXVector() - p.getXVector());
+                double distance = (p.getXVector() - neighb.get()->getXVector()).getL2Norm();
+                auto result = (stiffness * (distance - averageBondLength) / distance) * (neighb.get()->getXVector() - p.getXVector());
                 if (!std::isnan(result.at(0)) && !std::isnan(result.at(1)) && !std::isnan(result.at(2))){
                 p.setF(p.getFVector() + result);
                 }           
-            }
         }
 
         double square_root_of_two = std::sqrt(2);
 
-        for (int neighb_index : p.getDiagonalNeighbours())
+        for (auto neighb : p.getDiagonalNeighbours())
         {
-            Particle pn = container.getParticleWithId(neighb_index);
-            if (pn.getId() != -1) {
-                double distance = (p.getXVector() - pn.getXVector()).getL2Norm();
-                auto result = (stiffness * (distance - square_root_of_two * averageBondLength) / distance) * (pn.getXVector() - p.getXVector());
+                double distance = (p.getXVector() - neighb.get()->getXVector()).getL2Norm();
+                auto result = (stiffness * (distance - square_root_of_two * averageBondLength) / distance) * (neighb.get()->getXVector() - p.getXVector());
                 if (!std::isnan(result.at(0)) && !std::isnan(result.at(1)) && !std::isnan(result.at(2))){
                 p.setF(p.getFVector() + result);
                 }
-            }
         }
 
 }
