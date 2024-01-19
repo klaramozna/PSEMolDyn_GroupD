@@ -9,6 +9,7 @@
 #include "ParticleContainer.h"
 #include "Cell.h"
 #include "Boundary.h"
+#include <memory>
 
 class LinkedCellContainer : public ParticleContainer{
 public:
@@ -25,6 +26,18 @@ public:
      * @param p The particle to be added.
      */
     void addParticle(const Particle& p) override;
+
+    /**
+     * @brief Adds the given particle to the container (the given object, not a copy)
+     * @param p The particle to be added.
+     */
+    void addParticlePointer(std::shared_ptr<Particle> p);
+
+    /**
+     * @brief Adds the given particles to the container (the given objects, not copies)
+     * @param particles The particles to be added.
+     */
+    void addParticlesPointer(std::vector<std::shared_ptr<Particle>> particles);
 
     /**
      * @brief Returns the number of particles in the container.
@@ -137,7 +150,7 @@ private:
      * @param oldCell Index of the cell the particle is being moved from.
      * @param newCell Index of the cell the particle is being moved to.
      */
-    void moveParticle(const Particle& p1, int oldCell, int newCell);
+    void moveParticle(std::shared_ptr<Particle> p1, int oldCell, int newCell);
 
     /**
      * @brief Returns true if the given particle is it's correct cell.
