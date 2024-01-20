@@ -26,23 +26,23 @@
     <cutoffRadius>4</cutoffRadius>
     
     <thermostat>
-        <none>none</none>
+       <none></none>
     </thermostat>
-    <brownian_motion>true</brownian_motion>
+    <brownian_motion>false</brownian_motion>
     
  <!-- Provide Particles (Cuboid) -->
  <membrane>
     <lower-left-coord>
         <x>15</x>
         <y>15</y>
-        <z>15</z>
+        <z>1.5</z>
     </lower-left-coord>
     <number-of-particles>
         <x>50</x>
         <y>50</y>
         <z>1</z>
     </number-of-particles>
-    <distance>1.2</distance>
+    <distance>2.2</distance>
     <mass>1.0</mass>
     <initial_velocity>
         <x>0.0</x>
@@ -50,7 +50,7 @@
         <z>0.0</z>
     </initial_velocity>
     <epsilon_cuboid>1.0</epsilon_cuboid>
-    <sigma_cuboid>1.2</sigma_cuboid>
+    <sigma_cuboid>1.0</sigma_cuboid>
     <stiffness>300</stiffness>
     <bond_length>2.2</bond_length>
     <hardcoded_force>
