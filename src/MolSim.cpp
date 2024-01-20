@@ -142,11 +142,11 @@ int main(int argc, char *argsv[]) {
 
     LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
 
-    if(particlesShift != 0){
-        container_h.applyToAll([&particlesShift](Particle& p){p.setX(p.getXVector() + VectorDouble3(std::array<double, 3>{0, 0, particlesShift}));});
-    }
-
     container.addParticlesPointer(xmlReader.getParticles());
+
+    if(particlesShift != 0){
+        container.applyToAll([&particlesShift](Particle& p){p.setX(p.getXVector() + VectorDouble3(std::array<double, 3>{0, 0, particlesShift}));});
+    }
 
 
     /* read checkpoint if available and update container */
@@ -164,8 +164,10 @@ int main(int argc, char *argsv[]) {
 
     Simulation simulation(simParameters, container, *forceCalculation, *thermostat, boundary, gravity, pullForce);
 
+    Logger::console->info("Number of particles before: {}", container.getParticleVector().size());
     simulation.runSimulation();
-
+    Logger::console->info("Number of particles after: {}", container.getParticleVector().size());
+    
     return 0;
    
 }
