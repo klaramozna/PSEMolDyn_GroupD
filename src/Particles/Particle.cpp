@@ -16,6 +16,7 @@ Particle::Particle(int type_arg) {
     old_f = VectorDouble3(std::array<double, 3>{0, 0, 0});
     markedForMirroring = false;
     markedForDeleting = false;
+    hardcode_flag = false;
 }
 
 Particle::Particle(const Particle &other) {
@@ -34,6 +35,7 @@ Particle::Particle(const Particle &other) {
     parallel_Neighbours = other.parallel_Neighbours;
     diagonal_Neighbours = other.diagonal_Neighbours;
     id = other.id;
+    hardcode_flag = other.hardcode_flag;
 }
 
 Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
@@ -46,6 +48,7 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
     sigma = 1.0;
     markedForMirroring = false;
     markedForDeleting = false;
+    hardcode_flag = false;
 }
 
 Particle::~Particle() {}
@@ -113,6 +116,10 @@ std::vector<std::shared_ptr<Particle>> Particle::getDiagonalNeighbours() const{
 
 int Particle::getId() const{
     return id;
+}
+
+bool Particle::getHardcodeFlag() const{
+    return hardcode_flag;
 }
 
 void Particle::setX(const VectorDouble3 &position) {

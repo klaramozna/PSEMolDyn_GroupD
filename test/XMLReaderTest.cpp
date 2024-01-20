@@ -24,7 +24,7 @@ TEST_F(XMLReaderTest, TestSimple1XMLReader) {
     XMLReader xmlreader;
 
     filename.append("simpleCuboid.xml");
-    xmlreader.readFile(receivedContainer, filename, receivedSimParameters);
+    xmlreader.readFile(filename, receivedSimParameters);
 
     expectedContainer = DirectSumContainer(simpleCube.generateParticles());
 

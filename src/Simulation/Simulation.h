@@ -10,6 +10,7 @@
 #include "../Particles/LinkedCellContainer.h"
 #include "./Physics/ForceCalculation.h"
 #include "./Physics/GravityForce.h"
+#include "./Physics/HardcodedPullForce.h"
 #include "Thermostat.h"
 #include "../Particles/Boundary.h"
 #include "../Particles/BoundaryEnforcer.h"
@@ -26,10 +27,11 @@ private:
 
     BoundaryEnforcer boundaryEnforcer;
     GravityForce gravity;
+    HardcodedPullForce pullForce;
 
     double delta_t;
     bool isMembrane;
-
+    double hardcoded_force_end_time;
     /**
     * @brief calculate the velocity of a particle
     */
@@ -58,16 +60,18 @@ private:
      */
     void applyHarmonicForces(Particle& p);
 
+    void applyPullForce(Particle& p);
+
     
 
 
 public:
 
-    Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion, int dim, bool isMembrane);
+    Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion, int dim, bool isMembrane, double hardcoded_force_end_time, HardcodedPullForce &hardcodedPullForce);
 
     virtual ~Simulation();
 
-    /**
+    /**getGravityFactor
      * @brief Returns a vector of particles.
      * @return Vector Container.
      */

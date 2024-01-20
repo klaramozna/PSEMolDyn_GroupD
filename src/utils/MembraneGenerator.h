@@ -21,7 +21,7 @@ public:
      * @param stiffness
      * @param bond_length
      */
-    MembraneGenerator(std::array<double, 3> corner, int n1, int n2, int n3, double particleDistance, double mass, std::array<double, 3> velocity, double epsilon = 1, double sigma = 1, double stiffness = 300, double bond_length = 2.2);
+    MembraneGenerator(std::array<double, 3> corner, int n1, int n2, int n3, double particleDistance, double mass, std::array<double, 3> velocity, double epsilon, double sigma, double stiffness, double bond_length, std::vector<std::array <int,3>> indices);
 
     /**
      * @brief Generates a cuboid of particles.
@@ -33,6 +33,8 @@ public:
     std::vector<std::shared_ptr<Particle>> calculateParallelNeighbourIndices (int n1, int n2, int n3, int index);
 
     std::vector<std::shared_ptr<Particle>> calculateDiagonalNeighbourIndices (int n1, int n2, int n3, int index);
+
+    bool isHardcoded(int x, int y, int z, std::vector<std::array<int,3>> indices);
 
 private:
 
@@ -90,5 +92,7 @@ private:
      * @brief Average bond length of each particle.
      */
     double bond_length;
+
+    std::vector<std::array <int,3>> indices;
 };
 

@@ -1,7 +1,6 @@
 //
 // Created by klara on 15.11.23.
 //
-
 #include "CuboidGeneratorTest.h"
 #include "../src/Particles/DirectSumContainer.h"
 

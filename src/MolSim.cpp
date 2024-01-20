@@ -22,6 +22,7 @@
 
 #include "Simulation/SimpleThermostat.h"
 #include "Simulation/Physics/GravityForce.h"
+#include "Simulation/Physics/HardcodedPullForce.h"
 #include "Simulation/Thermostat.h"
 #include "Simulation/SimpleThermostat.h"
 #include "Simulation/GradualThermostat.h"
@@ -43,10 +44,11 @@
 int main(int argc, char *argsv[]) {
     CL cl;
     std::unique_ptr<ParticleReader> reader;
+    XMLReader xmlReader {};
     std::unique_ptr<ForceCalculation> forceCalculation;
     std::unique_ptr<Thermostat> thermostat;
     GravityForce gravity{std::array<double,3>{0,0,0}};
-
+    HardcodedPullForce pullForce{std::array<double,3>{0,0,0}};
 
     outputWriter::VTKWriter writer;
     SimParameters simParameters;
@@ -65,28 +67,19 @@ int main(int argc, char *argsv[]) {
     }
 
     if (simParameters.getInputMode() == "particle") {
-         Logger::console->debug("Reading particle");
+        Logger::console->debug("Reading particle");
         reader = std::make_unique<FileReader>();
-    }
-
-    if (simParameters.getInputMode() == "xml") {
-        Logger::console->debug("Reading xml");
-        reader = std::make_unique<XMLReader>();
-    }
-
-    if (!reader) {
-        Logger::err_logger->error("Reader was not correctly initialized");
-        exit(-1);
     }
 
     /* To do: solve this dependency between readFile and container*/
     DirectSumContainer container_h;
 
     if (simParameters.getInputMode() == "xml") {
-        reader->readFile(container_h, input_path, simParameters);
+        Logger::console->debug("Reading xml");
+        xmlReader.readFile(input_path, simParameters);
     }
     else {
-        reader->readFile(container_h, input_path);
+        reader->readFile(input_path, simParameters);
     }
 
     status = cl.parse_arguments(argc, argsv, simParameters);
@@ -145,22 +138,26 @@ int main(int argc, char *argsv[]) {
         gravity.setGravityFactor(simParameters.getGravityFactor());
         Logger::console->info("Gravity Force activated with factors x, y ,z: {} {} {}", simParameters.getGravityFactor().at(0), simParameters.getGravityFactor().at(1), simParameters.getGravityFactor().at(2));
     }
+    if (simParameters.getHardcodedPullFactors() != std::array<double,3>{0, 0, 0}) {
+        pullForce.setPullFactors(simParameters.getGravityFactor());
+        Logger::console->info("Pull Force activated with factors x, y ,z: {} {} {}", simParameters.getHardcodedPullFactors().at(0), simParameters.getHardcodedPullFactors().at(1), simParameters.getHardcodedPullFactors().at(2));
+    }
 
     LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
 
-    /* To do: solve this dependency between readFile and container*/
     if(particlesShift != 0){
         container_h.applyToAll([&particlesShift](Particle& p){p.setX(p.getXVector() + VectorDouble3(std::array<double, 3>{0, 0, particlesShift}));});
     }
 
-    container.addParticles(container_h.getParticleVector());
+    container.addParticlesPointer(xmlReader.getParticles());
 
 
     /* read checkpoint if available and update container */
     if (!simParameters.getloadCheckpoint().empty()) {
         CheckpointReader cReader;
         std::string p = simParameters.getloadCheckpoint();
-        cReader.readFile(container, p, simParameters);
+        cReader.readFile(p, simParameters);
+        container.addParticlesPointer(cReader.getParticles());
     }
      
     Logger::console->info("Calculating ...");
@@ -168,7 +165,7 @@ int main(int argc, char *argsv[]) {
     int iteration = 0;
     double current_time = simParameters.getStartTime();
 
-    Simulation simulation(simParameters.getDeltaT(), simParameters.getSigma(),  container, *forceCalculation, *thermostat, simParameters.getAverageVelo(), boundary, gravity, simParameters.getBrownianMotion(), simParameters.getDim(), simParameters.isMembrane());
+    Simulation simulation(simParameters.getDeltaT(), simParameters.getSigma(),  container, *forceCalculation, *thermostat, simParameters.getAverageVelo(), boundary, gravity, simParameters.getBrownianMotion(), simParameters.getDim(), simParameters.isMembrane(), simParameters.getHardcodedForceEndTime(), pullForce);
 
     // This is ugly and shouldn't be in main, but it is for a later refactor
     if (simParameters.isTesting()) {

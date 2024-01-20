@@ -16,7 +16,7 @@ public:
      * @param type type of particles (helpful to differentiate)
      * @return A particle vector with the generated particles.
      */
-    virtual std::vector<Particle> generateParticles(int type=0) = 0;
+    virtual std::vector<std::shared_ptr<Particle>> generateParticles(int type=0) = 0;
 
     /**
      * @brief Destroys a ParticleGenerator object (allows deleting a pointer to ParticleGenerator without memory leaks).
@@ -27,7 +27,7 @@ protected:
     /**
      * @brief Stores the generated particles.
      */
-    std::vector<Particle> particles;
+    std::vector<std::shared_ptr<Particle>> particles;
 };
 
 

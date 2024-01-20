@@ -16,13 +16,14 @@
 
 std::array<double, 3> maxwellBoltzmannDistributedVelocity(double averageVelocity, size_t dimensions);
 
-Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion, int dim, bool isMembrane) :
+Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion, int dim, bool isMembrane, double hardcoded_force_end_time, HardcodedPullForce &hardcodedPullForce) :
                         container(container),
                         forceCalculation(calculation),
                         thermostat(thermostat),
                         boundaryEnforcer(sigma, container, boundary.getDimensions(), boundary.getBoundaryTypes(), forceCalculation),
                         gravity(gravity),
-                        delta_t(delta_t), isMembrane(isMembrane) {
+                        delta_t(delta_t), isMembrane(isMembrane), hardcoded_force_end_time(hardcoded_force_end_time),
+                        pullForce(hardcodedPullForce) {
     // Apply brownian motion
     if(applyBrownianMotion){
         if(typeid(thermostat) == typeid(FakeThermostat())) {
@@ -71,6 +72,14 @@ void Simulation::applyGravity(Particle& p) {
     p.setF(p.getFVector() + result);
 }
 
+void Simulation::applyPullForce(Particle& p) {
+    if (p.getHardcodeFlag() == true){
+        VectorDouble3 result = pullForce.CalculateForce(p);
+        p.setF(p.getFVector() + result);
+    }
+}
+
+
 void Simulation::runIteration() {
     // calculate new x
     container.applyToAll([this](Particle& p) { calculateX(p); });
@@ -88,6 +97,8 @@ void Simulation::runIteration() {
     container.applyToAll([this](Particle& p) { applyGravity(p); });
 
     if (isMembrane) {
+        // add if time check
+         container.applyToAll([this](Particle& p) { applyPullForce(p); });
          container.applyToAll([this](Particle& p) { applyHarmonicForces(p); });
     }
     // calculate new v
@@ -114,7 +125,7 @@ void Simulation::applyHarmonicForces(Particle& p) {
                 double distance = (p.getXVector() - neighb.get()->getXVector()).getL2Norm();
                 auto result = (stiffness * (distance - averageBondLength) / distance) * (neighb.get()->getXVector() - p.getXVector());
                 if (!std::isnan(result.at(0)) && !std::isnan(result.at(1)) && !std::isnan(result.at(2))){
-                p.setF(p.getFVector() + result);
+                    p.setF(p.getFVector() + result);
                 }           
         }
 
@@ -125,7 +136,7 @@ void Simulation::applyHarmonicForces(Particle& p) {
                 double distance = (p.getXVector() - neighb.get()->getXVector()).getL2Norm();
                 auto result = (stiffness * (distance - square_root_of_two * averageBondLength) / distance) * (neighb.get()->getXVector() - p.getXVector());
                 if (!std::isnan(result.at(0)) && !std::isnan(result.at(1)) && !std::isnan(result.at(2))){
-                p.setF(p.getFVector() + result);
+                    p.setF(p.getFVector() + result);
                 }
         }
 

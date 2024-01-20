@@ -25,7 +25,7 @@ public:
      * @brief Generates a cuboid of particles.
      * @return A vector with the generated particles.
      */
-    std::vector<Particle> generateParticles(int type = 0) override;
+    std::vector<std::shared_ptr<Particle>> generateParticles(int type = 0) override;
 
 private:
 

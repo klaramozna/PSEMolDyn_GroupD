@@ -22,13 +22,13 @@ public:
      * @brief Generates a sphere of particles.
      * @return A vector with the generated particles.
      */
-    std::vector<Particle> generateParticles(int type = 0) override;
+    std::vector<std::shared_ptr<Particle>> generateParticles(int type = 0) override;
 
      /**
      * @brief Generates a disk (2D) of particles.
      * @return A vector with the generated particles.
      */
-    std::vector<Particle> generateDisk(int type = 0);
+    std::vector<std::shared_ptr<Particle>> generateDisk(int type = 0);
 
 private:
 

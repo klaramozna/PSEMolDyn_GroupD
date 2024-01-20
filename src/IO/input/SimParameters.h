@@ -46,7 +46,7 @@ public:
     SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                   bool testing_val, int log_level_val,
                   const std::string& input_path_val, const std::string& input_mode_val,
-                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, const std::string& thermostatType, bool brownianMotion, std::array<double,3>  gravity_factor_val  = {0, 0, 0}, bool isMembrane_val= false);
+                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, const std::string& thermostatType, bool brownianMotion, std::array<double,3>  gravity_factor_val  = {0, 0, 0}, bool isMembrane_val= false, double hardcoded_force_end_time =150, std::array<double,3> hardcoded_pull_factors = {0, 0, 0});
 
     SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                   bool testing_val, int log_level_val,
@@ -84,6 +84,8 @@ public:
     bool getBrownianMotion() const {return brownianMotion;}
     int getDim(){return dim;};
     bool isMembrane() const {return is_Membrane;}
+    double getHardcodedForceEndTime() const {return hardcoded_force_end_time;}
+    std::array<double,3>  getHardcodedPullFactors() const {return hardcoded_pull_factors;}
 
     // Setters for modifying parameter values
     void setEndTime(double val) { end_time = val; }
@@ -112,7 +114,9 @@ public:
     void setBrownianMotion(bool val){brownianMotion = val;}
     void setDimension(int val){dim = val;};
     void setIsMembrane (bool val) {is_Membrane = val;}
+    void setHardcodedForceEndTime(double val) {hardcoded_force_end_time = val;}
     bool operator==(const SimParameters &other) const;
+    void setHardcodedPullFactors(std::array<double,3>  val) { hardcoded_pull_factors = val;}
 
 
 
@@ -245,6 +249,14 @@ private:
      * @brief membrane present or not
      */
     bool is_Membrane = false;
+    /**
+     * @brief end time of hard coded pull force
+     */
+    double hardcoded_force_end_time;
 
+    /**
+     * @brief pull force factors
+     */
+    std::array<double,3> hardcoded_pull_factors = {0, 0, 0};
 
 };

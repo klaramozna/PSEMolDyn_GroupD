@@ -13,7 +13,7 @@
 SimParameters::SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                              bool testing_val, int log_level_val,
                              const std::string& input_path_val, const std::string& input_mode_val,
-                             const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency_val, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, const std::string& thermostatType, bool brownianMotion, std::array<double,3> gravity_factor_val, bool isMembrane_val){
+                             const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency_val, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, const std::string& thermostatType, bool brownianMotion, std::array<double,3> gravity_factor_val, bool isMembrane_val, double hardcoded_force_end_time , std::array<double,3> hardcoded_pull_factors){
     end_time =end_time_val;
     delta_t = delta_t_val;
     averageVelo = averageVelo_val;
@@ -37,6 +37,8 @@ SimParameters::SimParameters(double end_time_val, double delta_t_val, double ave
     this->thermostatType = thermostatType;
     this->brownianMotion = brownianMotion;
     this->is_Membrane = isMembrane_val;
+    this->hardcoded_force_end_time = hardcoded_force_end_time;
+    this->hardcoded_pull_factors = hardcoded_pull_factors;
 }
 
 SimParameters::SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,

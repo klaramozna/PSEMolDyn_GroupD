@@ -17,7 +17,7 @@ SphereGenerator::SphereGenerator(std::array<double, 3> center, double particleDi
     this->sigma = sigma;
 }
 
-std::vector<Particle> SphereGenerator::generateParticles(int type) {
+std::vector<std::shared_ptr<Particle>> SphereGenerator::generateParticles(int type) {
 
     // Generate particles on the surface of the sphere
    for (int i = -radius; i <= radius; ++i) {
@@ -33,7 +33,8 @@ std::vector<Particle> SphereGenerator::generateParticles(int type) {
                 double distance = cord.getL2Norm();
                 if (distance <= radius * particleDistance) {
                     std::array<double, 3> particlePosition{x , y, z};
-                    particles.emplace_back(particlePosition, velocity, mass, epsilon, sigma, type);
+                    std::shared_ptr<Particle> particlePtr = std::make_shared<Particle>(particlePosition, velocity, mass, epsilon, sigma, type);
+                    particles.emplace_back(particlePtr);
                 }
             }
         }
@@ -41,7 +42,7 @@ std::vector<Particle> SphereGenerator::generateParticles(int type) {
     return particles;
 }
 
-std::vector<Particle> SphereGenerator::generateDisk(int type) {
+std::vector<std::shared_ptr<Particle>> SphereGenerator::generateDisk(int type) {
 
     double z = center[2];
  // Generate particles within the circular area
@@ -55,7 +56,8 @@ std::vector<Particle> SphereGenerator::generateDisk(int type) {
             double distance = sqrt((x - center[0]) * (x - center[0]) + (y - center[1]) * (y - center[1]));
                 if (distance <= radius * particleDistance) {
                     std::array<double, 3> particlePosition{x , y, z};
-                    particles.emplace_back(particlePosition, velocity, mass, epsilon, sigma, type);
+                    std::shared_ptr<Particle> particlePtr = std::make_shared<Particle>(particlePosition, velocity, mass, epsilon, sigma, type);
+                    particles.emplace_back(particlePtr);
                 }
             }
         }
