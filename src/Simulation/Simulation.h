@@ -14,12 +14,20 @@
 #include "Thermostat.h"
 #include "../Particles/Boundary.h"
 #include "../Particles/BoundaryEnforcer.h"
+#include "../IO/input/SimParameters.h"
+#include "../Benchmark.h"
+#include "../IO/Logger.h"
+#include "../IO/output/outputWriter/CheckpointWriter.h"
+#include "../IO/output/outputWriter/XYZWriter.h"
+#include "../IO/output/outputWriter/VTKWriter.h"
+
 
 #include <memory>
 
 class Simulation {
 private:
     static constexpr double start_time = 0;
+    double current_time;
 
     LinkedCellContainer& container;
     ForceCalculation &forceCalculation;
@@ -29,9 +37,7 @@ private:
     GravityForce gravity;
     HardcodedPullForce pullForce;
 
-    double delta_t;
-    bool isMembrane;
-    double hardcoded_force_end_time;
+    SimParameters simParameters;
     /**
     * @brief calculate the velocity of a particle
     */
@@ -62,25 +68,34 @@ private:
 
     void applyPullForce(Particle& p);
 
-    
+
+    double getCurrentTime() {
+        return current_time;
+    }
+
+     /**
+     * @brief run one iteration of the simulation, meaning position, force and then velocity
+     */
+    void runIteration();
+
 
 
 public:
 
-    Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion, int dim, bool isMembrane, double hardcoded_force_end_time, HardcodedPullForce &hardcodedPullForce);
+    Simulation(SimParameters& simParameters, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, Boundary &boundary, GravityForce &gravity, HardcodedPullForce &hardcodedPullForce);
 
     virtual ~Simulation();
 
-    /**getGravityFactor
+    /**
      * @brief Returns a vector of particles.
      * @return Vector Container.
      */
     std::vector<Particle> getParticles();
 
     /**
-     * @brief run one iteration of the simulation, meaning position, force and then velocity
+     * @brief run the simulation
      */
-    void runIteration();
+    void runSimulation();
 };
 
 #endif //PSEMOLDYN_GROUPD_SIMULATION_H

@@ -36,8 +36,7 @@
 #include "IO/output/outputWriter/CheckpointWriter.h"
 #include "IO/input/CheckpointReader.h"
 
-/* Benchmark */
-#include "Benchmark.h"
+
 
 
 
@@ -50,7 +49,6 @@ int main(int argc, char *argsv[]) {
     GravityForce gravity{std::array<double,3>{0,0,0}};
     HardcodedPullForce pullForce{std::array<double,3>{0,0,0}};
 
-    outputWriter::VTKWriter writer;
     SimParameters simParameters;
     int status = cl.parse_input_path_and_mode_and_log(argc, argsv, simParameters);
 
@@ -71,7 +69,6 @@ int main(int argc, char *argsv[]) {
         reader = std::make_unique<FileReader>();
     }
 
-    /* To do: solve this dependency between readFile and container*/
     DirectSumContainer container_h;
 
     if (simParameters.getInputMode() == "xml") {
@@ -165,59 +162,10 @@ int main(int argc, char *argsv[]) {
     int iteration = 0;
     double current_time = simParameters.getStartTime();
 
-    Simulation simulation(simParameters.getDeltaT(), simParameters.getSigma(),  container, *forceCalculation, *thermostat, simParameters.getAverageVelo(), boundary, gravity, simParameters.getBrownianMotion(), simParameters.getDim(), simParameters.isMembrane(), simParameters.getHardcodedForceEndTime(), pullForce);
+    Simulation simulation(simParameters, container, *forceCalculation, *thermostat, boundary, gravity, pullForce);
 
-    // This is ugly and shouldn't be in main, but it is for a later refactor
-    if (simParameters.isTesting()) {
+    simulation.runSimulation();
 
-        Benchmark benchmark;
-        benchmark.startBenchmark();
-
-        while (current_time < simParameters.getEndTime()) {
-            simulation.runIteration();
-            iteration++;
-            current_time += simParameters.getDeltaT();
-        }
-
-        benchmark.stopBenchmark();
-        int number_of_iterations = simParameters.getEndTime() / simParameters.getDeltaT();
-        benchmark.printBenchmarkResults(benchmark.getElapsedTimeInSeconds(), number_of_iterations ,container.getSize());
-
-    } else {
-       
-        writer.createMarkedDirectory();
-        int total_iterations = static_cast<int>(simParameters.getEndTime() / simParameters.getDeltaT());
-        int percentage=0;
-        int old_percentage=0;
-
-    Logger::console->info("Progress: {}%", percentage);
-     // for this loop, we assume: current x, current f and current v are known
-    while (current_time < simParameters.getEndTime()) {
-        simulation.runIteration();
-
-        iteration++;
-        if (iteration % simParameters.getWriteFrequency() == 0) {
-            writer.plotParticles(simulation.getParticles(), simParameters.getBaseName(), iteration);
-        }
-
-        current_time += simParameters.getDeltaT();
-
-        percentage = static_cast<int>((static_cast<double>(iteration) / total_iterations) * 100);
-
-        if (percentage % 10 == 0 && percentage > old_percentage && percentage != 0 && percentage <= 100) {
-            Logger::console->info("Progress: {}%", percentage);
-            old_percentage = percentage;
-        }
-    }
-
-        /* store checkpoint if specified */
-        if (!simParameters.getStoreCheckpoint().empty()) {
-            CheckpointWriter c;
-            Logger::console->info("Storing checkpoint ...");
-            c.writeCheckpoint(container, simParameters.getStoreCheckpoint());
-        }
-        
-        Logger::console->info("Output written with frequency {}. Terminating...", simParameters.getWriteFrequency());
-        return 0;
-    }
+    return 0;
+   
 }

@@ -92,8 +92,13 @@ void SimParameters::print(){
     Logger::console->debug("input path: {}", input_path);
     Logger::console->debug("base name: {}", base_name);
     Logger::console->debug("force: {}", force);
+    Logger::console->debug("Epsilon: {}", epsilon);
+    Logger::console->debug("Sigma: {}", sigma);
     Logger::console->debug("write frequency: {}", write_frequency);
     Logger::console->debug("Membrane Present: {}", is_Membrane);
+    if (isMembrane()){
+        Logger::console->debug("Hard Coded Force end time: {}", hardcoded_force_end_time); 
+    }
 
 }
 

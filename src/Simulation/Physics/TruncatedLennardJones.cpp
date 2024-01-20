@@ -10,7 +10,7 @@ VectorDouble3 TruncatedLennardJones::CalculateForces(const Particle &p1, const P
     VectorDouble3 distance = p1.getXVector() - p2.getXVector();
     double distanceL2Norm = distance.getL2Norm();
 
-    if (distanceL2Norm > std::pow(2, 1.0 / 6.0) * sigma) {
+    if (distanceL2Norm >= std::pow(2, 1.0 / 6.0) * sigma) {
         return result;
     }
 
