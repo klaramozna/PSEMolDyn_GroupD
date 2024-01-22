@@ -297,12 +297,5 @@ void LinkedCellContainer::addParticlePointer(std::shared_ptr<Particle> p) {
     size++;
 }
 
-void LinkedCellContainer::addParticlesPointer(std::vector<std::shared_ptr<Particle>> particles) {
-    for(auto const & pointer : particles){
-        addParticlePointer(pointer);
-        size++;
-    }
-}
-
 
 

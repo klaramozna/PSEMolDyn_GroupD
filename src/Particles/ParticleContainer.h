@@ -51,6 +51,18 @@ public:
      * @brief Destroys the ParticleContainer object.
      */
     virtual ~ParticleContainer() = default;
+
+    /**
+     * @brief Adds the given particles to the container (the given objects, not copies)
+     * @param particles The particles to be added.
+     */
+    virtual void addParticlesPointer(std::vector<std::shared_ptr<Particle>> particles) final;
+
+    /**
+     * @brief Adds the given particle to the container (the given object, not a copy)
+     * @param p The particle to be added.
+     */
+    virtual void addParticlePointer(std::shared_ptr<Particle> p) = 0;
 };
 
 

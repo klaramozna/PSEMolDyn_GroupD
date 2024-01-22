@@ -112,3 +112,7 @@ void DirectSumContainer::applyToPairs(const std::function<void(Particle &, Parti
         }
     }
 }
+
+void DirectSumContainer::addParticlePointer(std::shared_ptr<Particle> p) {
+    particles.push_back(*p);
+}
