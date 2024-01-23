@@ -83,6 +83,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:afc18f55ea7e516a7ba015fb8920d6551"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#afc18f55ea7e516a7ba015fb8920d6551">Particle</a> (std::array&lt; double, 3 &gt; x_arg, std::array&lt; double, 3 &gt; v_arg, double m_arg, double epsilon, double sigma, int <a class="el" href="classtype.html">type</a>=0)</td></tr>
 <tr class="memdesc:afc18f55ea7e516a7ba015fb8920d6551"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="classParticle.html">Particle</a> object using the given parameters.  <a href="classParticle.html#afc18f55ea7e516a7ba015fb8920d6551">More...</a><br /></td></tr>
 <tr class="separator:afc18f55ea7e516a7ba015fb8920d6551"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae9bee3db2efe14707ec532e326f60de6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#ae9bee3db2efe14707ec532e326f60de6">Particle</a> (std::array&lt; double, 3 &gt; x_arg, std::array&lt; double, 3 &gt; v_arg, double m_arg, double epsilon, double sigma, double stiffness_arg, double bond_length_arg, std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&gt; parallel_Neighbours_arg, std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&gt; diagonal_Neighbours_arg, int id, bool <a class="el" href="classParticle.html#a00ccf2ccf8e66465060ec5a8749c23f2">hardcode_flag</a>, int <a class="el" href="classtype.html">type</a>=0)</td></tr>
+<tr class="memdesc:ae9bee3db2efe14707ec532e326f60de6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="classParticle.html">Particle</a> object using the given parameters.  <a href="classParticle.html#ae9bee3db2efe14707ec532e326f60de6">More...</a><br /></td></tr>
+<tr class="separator:ae9bee3db2efe14707ec532e326f60de6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad030d0fe7b88cf81744b127c99244ff4"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#ad030d0fe7b88cf81744b127c99244ff4">~Particle</a> ()</td></tr>
 <tr class="separator:ad030d0fe7b88cf81744b127c99244ff4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af8ff1bcf784529afacd2b307d7cc5d2a"><td class="memItemLeft" align="right" valign="top">const std::array&lt; double, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#af8ff1bcf784529afacd2b307d7cc5d2a">getX</a> () const</td></tr>
@@ -115,6 +118,20 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa83367a14789f70d80fbf565530f52b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a806c077af237adf8b34dd0661cf92e5f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a806c077af237adf8b34dd0661cf92e5f">getType</a> () const</td></tr>
 <tr class="separator:a806c077af237adf8b34dd0661cf92e5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaa85c4ad970862e21643e68096ffcb74"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#aaa85c4ad970862e21643e68096ffcb74">getStiffness</a> () const</td></tr>
+<tr class="separator:aaa85c4ad970862e21643e68096ffcb74"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a34b299a61a8e73743e8b59ff59b9b126"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a34b299a61a8e73743e8b59ff59b9b126">getBondLength</a> () const</td></tr>
+<tr class="separator:a34b299a61a8e73743e8b59ff59b9b126"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4954712615601a01f84567b0768b4c0c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a4954712615601a01f84567b0768b4c0c">getId</a> () const</td></tr>
+<tr class="separator:a4954712615601a01f84567b0768b4c0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3aab5fa8187e739258cb750866c0648c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a3aab5fa8187e739258cb750866c0648c">getHardcodeFlag</a> () const</td></tr>
+<tr class="separator:a3aab5fa8187e739258cb750866c0648c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d1d6ba77fcc17445de5000cd9644828"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a5d1d6ba77fcc17445de5000cd9644828">getParallelNeighbours</a> () const</td></tr>
+<tr class="memdesc:a5d1d6ba77fcc17445de5000cd9644828"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a vector with the pointers to the parallel neighbours of this particle.  <a href="classParticle.html#a5d1d6ba77fcc17445de5000cd9644828">More...</a><br /></td></tr>
+<tr class="separator:a5d1d6ba77fcc17445de5000cd9644828"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0c7a36277c4ca19f06cc1233254a123a"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a0c7a36277c4ca19f06cc1233254a123a">getDiagonalNeighbours</a> () const</td></tr>
+<tr class="memdesc:a0c7a36277c4ca19f06cc1233254a123a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a vector with the pointers to the diagonal neighbours of this particle.  <a href="classParticle.html#a0c7a36277c4ca19f06cc1233254a123a">More...</a><br /></td></tr>
+<tr class="separator:a0c7a36277c4ca19f06cc1233254a123a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a01d5eab0c1a4575558e4717c7b94ce"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a4a01d5eab0c1a4575558e4717c7b94ce">setX</a> (const <a class="el" href="classVectorDouble3.html">VectorDouble3</a> &amp;position)</td></tr>
 <tr class="memdesc:a4a01d5eab0c1a4575558e4717c7b94ce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the values of the position based on the given vector.  <a href="classParticle.html#a4a01d5eab0c1a4575558e4717c7b94ce">More...</a><br /></td></tr>
 <tr class="separator:a4a01d5eab0c1a4575558e4717c7b94ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -139,6 +156,16 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:af2ac302392c0e2e95b6ee42c7b28c238"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#af2ac302392c0e2e95b6ee42c7b28c238">setOldF</a> (double x, double y, double z)</td></tr>
 <tr class="memdesc:af2ac302392c0e2e95b6ee42c7b28c238"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the values of force in the previous iteration according to the given parameters.  <a href="classParticle.html#af2ac302392c0e2e95b6ee42c7b28c238">More...</a><br /></td></tr>
 <tr class="separator:af2ac302392c0e2e95b6ee42c7b28c238"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6443d046c3c591484f913b3a9cc4a131"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a6443d046c3c591484f913b3a9cc4a131">setParallelNeighbours</a> (std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&gt; pointers_parallel)</td></tr>
+<tr class="separator:a6443d046c3c591484f913b3a9cc4a131"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad8cb2aedc1314e790a6698760da9bb8b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#ad8cb2aedc1314e790a6698760da9bb8b">setDiagonalNeighbours</a> (std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&gt; pointers_diagonal)</td></tr>
+<tr class="separator:ad8cb2aedc1314e790a6698760da9bb8b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aed9c7c36b6f3c14b92adb20b01668262"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#aed9c7c36b6f3c14b92adb20b01668262">setStiffness</a> (double val)</td></tr>
+<tr class="separator:aed9c7c36b6f3c14b92adb20b01668262"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6e5e75d708fa628b4e62b023b5976a13"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a6e5e75d708fa628b4e62b023b5976a13">setBondLength</a> (double val)</td></tr>
+<tr class="separator:a6e5e75d708fa628b4e62b023b5976a13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abb08f300fbe335ac4b88cdbd1b9d6bcf"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#abb08f300fbe335ac4b88cdbd1b9d6bcf">setId</a> (int val)</td></tr>
+<tr class="separator:abb08f300fbe335ac4b88cdbd1b9d6bcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:adda2d796937412523d265d3cf368876d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#adda2d796937412523d265d3cf368876d">markForMirroring</a> ()</td></tr>
 <tr class="memdesc:adda2d796937412523d265d3cf368876d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the value of markedForMirroring to true.  <a href="classParticle.html#adda2d796937412523d265d3cf368876d">More...</a><br /></td></tr>
 <tr class="separator:adda2d796937412523d265d3cf368876d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -163,10 +190,12 @@ Public Member Functions</h2></td></tr>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a560e780f724b77e28df48532a4a419a4"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a560e780f724b77e28df48532a4a419a4">markedForDeleting</a></td></tr>
 <tr class="separator:a560e780f724b77e28df48532a4a419a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a00ccf2ccf8e66465060ec5a8749c23f2"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a00ccf2ccf8e66465060ec5a8749c23f2">hardcode_flag</a></td></tr>
+<tr class="separator:a00ccf2ccf8e66465060ec5a8749c23f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a866812d3dfb9c539e5e24593e596a8c9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a866812d3dfb9c539e5e24593e596a8c9">&#9670;&nbsp;</a></span>Particle() <span class="overload">[1/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a866812d3dfb9c539e5e24593e596a8c9">&#9670;&nbsp;</a></span>Particle() <span class="overload">[1/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -192,7 +221,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="a24b04cb7c6f7ea4242d25c410f44ae56"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a24b04cb7c6f7ea4242d25c410f44ae56">&#9670;&nbsp;</a></span>Particle() <span class="overload">[2/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#a24b04cb7c6f7ea4242d25c410f44ae56">&#9670;&nbsp;</a></span>Particle() <span class="overload">[2/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -210,7 +239,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="abd17e9e13b8ed36738424c79aa14e127"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd17e9e13b8ed36738424c79aa14e127">&#9670;&nbsp;</a></span>Particle() <span class="overload">[3/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#abd17e9e13b8ed36738424c79aa14e127">&#9670;&nbsp;</a></span>Particle() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -250,7 +279,7 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <a id="afc18f55ea7e516a7ba015fb8920d6551"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc18f55ea7e516a7ba015fb8920d6551">&#9670;&nbsp;</a></span>Particle() <span class="overload">[4/4]</span></h2>
+<h2 class="memtitle"><span class="permalink"><a href="#afc18f55ea7e516a7ba015fb8920d6551">&#9670;&nbsp;</a></span>Particle() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -322,6 +351,120 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ae9bee3db2efe14707ec532e326f60de6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae9bee3db2efe14707ec532e326f60de6">&#9670;&nbsp;</a></span>Particle() <span class="overload">[5/5]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">Particle::Particle </td>
+          <td>(</td>
+          <td class="paramtype">std::array&lt; double, 3 &gt;&#160;</td>
+          <td class="paramname"><em>x_arg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::array&lt; double, 3 &gt;&#160;</td>
+          <td class="paramname"><em>v_arg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>m_arg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>epsilon</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>sigma</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>stiffness_arg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>bond_length_arg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&gt;&#160;</td>
+          <td class="paramname"><em>parallel_Neighbours_arg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&gt;&#160;</td>
+          <td class="paramname"><em>diagonal_Neighbours_arg</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>hardcode_flag</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>type</em> = <code>0</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Creates a <a class="el" href="classParticle.html">Particle</a> object using the given parameters. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">x_arg</td><td>The position of the particle. </td></tr>
+    <tr><td class="paramname">v_arg</td><td>The velocity of the particle. </td></tr>
+    <tr><td class="paramname">m_arg</td><td>The mass of the particle. </td></tr>
+    <tr><td class="paramname">epsilon</td><td>The epsilon (for Lennard-Jones calculation) of the particle. </td></tr>
+    <tr><td class="paramname">sigma</td><td>The sigma (for Lennard-Jones calculation) of the particle. </td></tr>
+    <tr><td class="paramname">stiffness_arg</td><td>parallel neighbours </td></tr>
+    <tr><td class="paramname">bond_length_arg</td><td>diagonal neighbours </td></tr>
+    <tr><td class="paramname">parallel_Neighbours_arg</td><td>parallel neighbours </td></tr>
+    <tr><td class="paramname">diagonal_Neighbours_arg</td><td>diagonal neighbours </td></tr>
+    <tr><td class="paramname">id_arg</td><td>unique id of this particle </td></tr>
+    <tr><td class="paramname">type</td><td>The type of the particle. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="ad030d0fe7b88cf81744b127c99244ff4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad030d0fe7b88cf81744b127c99244ff4">&#9670;&nbsp;</a></span>~Particle()</h2>
 
@@ -348,6 +491,43 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a34b299a61a8e73743e8b59ff59b9b126"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34b299a61a8e73743e8b59ff59b9b126">&#9670;&nbsp;</a></span>getBondLength()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Particle::getBondLength </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a0c7a36277c4ca19f06cc1233254a123a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0c7a36277c4ca19f06cc1233254a123a">&#9670;&nbsp;</a></span>getDiagonalNeighbours()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt; &gt; Particle::getDiagonalNeighbours </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a vector with the pointers to the diagonal neighbours of this particle. </p>
+<dl class="section return"><dt>Returns</dt><dd>Vector with these pointers. </dd></dl>
+
+</div>
+</div>
 <a id="accf978be56ac81112bc7e20562eedc97"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#accf978be56ac81112bc7e20562eedc97">&#9670;&nbsp;</a></span>getEpsilon()</h2>
 
@@ -410,6 +590,40 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a3aab5fa8187e739258cb750866c0648c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3aab5fa8187e739258cb750866c0648c">&#9670;&nbsp;</a></span>getHardcodeFlag()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Particle::getHardcodeFlag </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4954712615601a01f84567b0768b4c0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4954712615601a01f84567b0768b4c0c">&#9670;&nbsp;</a></span>getId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Particle::getId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="aa83367a14789f70d80fbf565530f52b8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa83367a14789f70d80fbf565530f52b8">&#9670;&nbsp;</a></span>getM()</h2>
 
@@ -464,6 +678,26 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a5d1d6ba77fcc17445de5000cd9644828"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d1d6ba77fcc17445de5000cd9644828">&#9670;&nbsp;</a></span>getParallelNeighbours()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt; &gt; Particle::getParallelNeighbours </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns a vector with the pointers to the parallel neighbours of this particle. </p>
+<dl class="section return"><dt>Returns</dt><dd>Vector with these pointers. </dd></dl>
+
+</div>
+</div>
 <a id="a1804384e5792dd766a5b7fad67903677"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a1804384e5792dd766a5b7fad67903677">&#9670;&nbsp;</a></span>getSigma()</h2>
 
@@ -485,6 +719,23 @@ Public Attributes</h2></td></tr>
 <span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaa85c4ad970862e21643e68096ffcb74"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaa85c4ad970862e21643e68096ffcb74">&#9670;&nbsp;</a></span>getStiffness()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Particle::getStiffness </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
 </div><div class="memdoc">
 
 </div>
@@ -707,6 +958,42 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a6e5e75d708fa628b4e62b023b5976a13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6e5e75d708fa628b4e62b023b5976a13">&#9670;&nbsp;</a></span>setBondLength()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Particle::setBondLength </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad8cb2aedc1314e790a6698760da9bb8b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad8cb2aedc1314e790a6698760da9bb8b">&#9670;&nbsp;</a></span>setDiagonalNeighbours()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Particle::setDiagonalNeighbours </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&gt;&#160;</td>
+          <td class="paramname"><em>pointers_diagonal</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a57e80da4467787dc1ca9d676fb1a5819"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a57e80da4467787dc1ca9d676fb1a5819">&#9670;&nbsp;</a></span>setF() <span class="overload">[1/2]</span></h2>
 
@@ -777,6 +1064,24 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="abb08f300fbe335ac4b88cdbd1b9d6bcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb08f300fbe335ac4b88cdbd1b9d6bcf">&#9670;&nbsp;</a></span>setId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Particle::setId </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a6172c307fb6bfe37309c751fb49ccba7"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6172c307fb6bfe37309c751fb49ccba7">&#9670;&nbsp;</a></span>setOldF() <span class="overload">[1/2]</span></h2>
 
@@ -844,6 +1149,42 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<a id="a6443d046c3c591484f913b3a9cc4a131"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6443d046c3c591484f913b3a9cc4a131">&#9670;&nbsp;</a></span>setParallelNeighbours()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Particle::setParallelNeighbours </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&gt;&#160;</td>
+          <td class="paramname"><em>pointers_parallel</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aed9c7c36b6f3c14b92adb20b01668262"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aed9c7c36b6f3c14b92adb20b01668262">&#9670;&nbsp;</a></span>setStiffness()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void Particle::setStiffness </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -1031,6 +1372,20 @@ Public Attributes</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a00ccf2ccf8e66465060ec5a8749c23f2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a00ccf2ccf8e66465060ec5a8749c23f2">&#9670;&nbsp;</a></span>hardcode_flag</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Particle::hardcode_flag</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a560e780f724b77e28df48532a4a419a4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a560e780f724b77e28df48532a4a419a4">&#9670;&nbsp;</a></span>markedForDeleting</h2>
 

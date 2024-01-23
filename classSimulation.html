@@ -73,20 +73,20 @@ $(function() {
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad70de23f2762059ac1e2416277386ee8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#ad70de23f2762059ac1e2416277386ee8">Simulation</a> (double delta_t, double sigma, <a class="el" href="classLinkedCellContainer.html">LinkedCellContainer</a> &amp;container, <a class="el" href="classForceCalculation.html">ForceCalculation</a> &amp;calculation, <a class="el" href="classThermostat.html">Thermostat</a> &amp;thermostat, double averageVelo, <a class="el" href="classBoundary.html">Boundary</a> &amp;boundary, <a class="el" href="classGravityForce.html">GravityForce</a> &amp;gravity, bool applyBrownianMotion, int dim)</td></tr>
-<tr class="separator:ad70de23f2762059ac1e2416277386ee8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a605ce81b598cde2a4b9a000652fdbd2d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#a605ce81b598cde2a4b9a000652fdbd2d">Simulation</a> (<a class="el" href="classSimParameters.html">SimParameters</a> &amp;simParameters, <a class="el" href="classLinkedCellContainer.html">LinkedCellContainer</a> &amp;container, <a class="el" href="classForceCalculation.html">ForceCalculation</a> &amp;calculation, <a class="el" href="classThermostat.html">Thermostat</a> &amp;thermostat, <a class="el" href="classBoundary.html">Boundary</a> &amp;boundary, <a class="el" href="classGravityForce.html">GravityForce</a> &amp;gravity, <a class="el" href="classHardcodedPullForce.html">HardcodedPullForce</a> &amp;hardcodedPullForce)</td></tr>
+<tr class="separator:a605ce81b598cde2a4b9a000652fdbd2d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a80fad3f57dfaf195a36f7bc49bc88279"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#a80fad3f57dfaf195a36f7bc49bc88279">~Simulation</a> ()</td></tr>
 <tr class="separator:a80fad3f57dfaf195a36f7bc49bc88279"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5cdd6d9d3a2e156d3f18759db18f4c22"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#a5cdd6d9d3a2e156d3f18759db18f4c22">getParticles</a> ()</td></tr>
 <tr class="memdesc:a5cdd6d9d3a2e156d3f18759db18f4c22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a vector of particles.  <a href="classSimulation.html#a5cdd6d9d3a2e156d3f18759db18f4c22">More...</a><br /></td></tr>
 <tr class="separator:a5cdd6d9d3a2e156d3f18759db18f4c22"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7809f13e6c8aed57a31fa2c01c020c07"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#a7809f13e6c8aed57a31fa2c01c020c07">runIteration</a> ()</td></tr>
-<tr class="memdesc:a7809f13e6c8aed57a31fa2c01c020c07"><td class="mdescLeft">&#160;</td><td class="mdescRight">run one iteration of the simulation, meaning position, force and then velocity  <a href="classSimulation.html#a7809f13e6c8aed57a31fa2c01c020c07">More...</a><br /></td></tr>
-<tr class="separator:a7809f13e6c8aed57a31fa2c01c020c07"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a616822b3292520c8322b7f7ddb484076"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimulation.html#a616822b3292520c8322b7f7ddb484076">runSimulation</a> ()</td></tr>
+<tr class="memdesc:a616822b3292520c8322b7f7ddb484076"><td class="mdescLeft">&#160;</td><td class="mdescRight">run the simulation  <a href="classSimulation.html#a616822b3292520c8322b7f7ddb484076">More...</a><br /></td></tr>
+<tr class="separator:a616822b3292520c8322b7f7ddb484076"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="ad70de23f2762059ac1e2416277386ee8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad70de23f2762059ac1e2416277386ee8">&#9670;&nbsp;</a></span>Simulation()</h2>
+<a id="a605ce81b598cde2a4b9a000652fdbd2d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a605ce81b598cde2a4b9a000652fdbd2d">&#9670;&nbsp;</a></span>Simulation()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -94,14 +94,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="memname">Simulation::Simulation </td>
           <td>(</td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>delta_t</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>sigma</em>, </td>
+          <td class="paramtype"><a class="el" href="classSimParameters.html">SimParameters</a> &amp;&#160;</td>
+          <td class="paramname"><em>simParameters</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -124,12 +118,6 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>averageVelo</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype"><a class="el" href="classBoundary.html">Boundary</a> &amp;&#160;</td>
           <td class="paramname"><em>boundary</em>, </td>
         </tr>
@@ -142,14 +130,8 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">bool&#160;</td>
-          <td class="paramname"><em>applyBrownianMotion</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>dim</em>&#160;</td>
+          <td class="paramtype"><a class="el" href="classHardcodedPullForce.html">HardcodedPullForce</a> &amp;&#160;</td>
+          <td class="paramname"><em>hardcodedPullForce</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -207,14 +189,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a7809f13e6c8aed57a31fa2c01c020c07"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7809f13e6c8aed57a31fa2c01c020c07">&#9670;&nbsp;</a></span>runIteration()</h2>
+<a id="a616822b3292520c8322b7f7ddb484076"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a616822b3292520c8322b7f7ddb484076">&#9670;&nbsp;</a></span>runSimulation()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Simulation::runIteration </td>
+          <td class="memname">void Simulation::runSimulation </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -222,7 +204,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>run one iteration of the simulation, meaning position, force and then velocity </p>
+<p>run the simulation </p>
 
 </div>
 </div>

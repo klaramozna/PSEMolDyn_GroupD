@@ -86,7 +86,7 @@ $(function() {
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160; </div>
 <div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classThermostat.html#a9b15f86ac302c5423724b8839a41c1c2">   27</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classThermostat.html#a9b15f86ac302c5423724b8839a41c1c2">updateTemperature</a>(<a class="code" href="classParticle.html">Particle</a>&amp; particle) = 0;</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classThermostat.html#ae176d3418380f65a171ccbdbd0728387">updateState</a>(<span class="keyword">const</span> std::vector&lt;Particle&gt;&amp; particles);</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classThermostat.html#ae176d3418380f65a171ccbdbd0728387">updateState</a>(<span class="keyword">const</span> std::vector&lt;Particle&gt;&amp; <a class="code" href="classparticles.html">particles</a>);</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160; </div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classThermostat.html#a4885a6792c134529407de0aec82038b9">updateIteration</a>();</div>
 <div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
@@ -102,7 +102,7 @@ $(function() {
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">int</span> dim;</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">double</span> getKineticEnergy(<span class="keyword">const</span> std::vector&lt;Particle&gt;&amp; particles) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">double</span> getKineticEnergy(<span class="keyword">const</span> std::vector&lt;Particle&gt;&amp; <a class="code" href="classparticles.html">particles</a>) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">double</span> getTemperature(<span class="keywordtype">double</span> kineticEnergy, <span class="keywordtype">int</span> numParticles) <span class="keyword">const</span>;</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
@@ -121,7 +121,7 @@ $(function() {
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160; </div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160; </div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//PSEMOLDYN_GROUPD_THERMOSTAT_H</span></div>
-<div class="ttc" id="aclassParticle_html"><div class="ttname"><a href="classParticle.html">Particle</a></div><div class="ttdef"><b>Definition:</b> Particle.h:14</div></div>
+<div class="ttc" id="aclassParticle_html"><div class="ttname"><a href="classParticle.html">Particle</a></div><div class="ttdef"><b>Definition:</b> Particle.h:15</div></div>
 <div class="ttc" id="aclassThermostat_html"><div class="ttname"><a href="classThermostat.html">Thermostat</a></div><div class="ttdef"><b>Definition:</b> Thermostat.h:10</div></div>
 <div class="ttc" id="aclassThermostat_html_a00e7765ee0e868eaf72990ea5b121323"><div class="ttname"><a href="classThermostat.html#a00e7765ee0e868eaf72990ea5b121323">Thermostat::cycleLength</a></div><div class="ttdeci">int cycleLength</div><div class="ttdoc">Number of iterations after which the thermostat is applied.</div><div class="ttdef"><b>Definition:</b> Thermostat.h:94</div></div>
 <div class="ttc" id="aclassThermostat_html_a1bd0da5938eb9afce65e0277ad8f3a1e"><div class="ttname"><a href="classThermostat.html#a1bd0da5938eb9afce65e0277ad8f3a1e">Thermostat::currentIteration</a></div><div class="ttdeci">int currentIteration</div><div class="ttdoc">The number of the current iteration.</div><div class="ttdef"><b>Definition:</b> Thermostat.h:89</div></div>
@@ -135,6 +135,7 @@ $(function() {
 <div class="ttc" id="aclassThermostat_html_a9b15f86ac302c5423724b8839a41c1c2"><div class="ttname"><a href="classThermostat.html#a9b15f86ac302c5423724b8839a41c1c2">Thermostat::updateTemperature</a></div><div class="ttdeci">virtual void updateTemperature(Particle &amp;particle)=0</div><div class="ttdoc">Changes the temperature of the given particle according to the type of the thermostat.</div></div>
 <div class="ttc" id="aclassThermostat_html_ad6b1be7cee21dbcae3f45b7a100116a6"><div class="ttname"><a href="classThermostat.html#ad6b1be7cee21dbcae3f45b7a100116a6">Thermostat::initializeBrownianMotion</a></div><div class="ttdeci">void initializeBrownianMotion(Particle &amp;particle) const</div><div class="ttdoc">Sets the velocity of the particle to a value according to the brownian motion.</div><div class="ttdef"><b>Definition:</b> Thermostat.cpp:17</div></div>
 <div class="ttc" id="aclassThermostat_html_ae176d3418380f65a171ccbdbd0728387"><div class="ttname"><a href="classThermostat.html#ae176d3418380f65a171ccbdbd0728387">Thermostat::updateState</a></div><div class="ttdeci">void updateState(const std::vector&lt; Particle &gt; &amp;particles)</div><div class="ttdoc">Updates the current temperature based on how the particles changed. Needs to be called whenever the p...</div><div class="ttdef"><b>Definition:</b> Thermostat.cpp:12</div></div>
+<div class="ttc" id="aclassparticles_html"><div class="ttname"><a href="classparticles.html">particles</a></div><div class="ttdoc">Class corresponding to the particles schema type.</div><div class="ttdef"><b>Definition:</b> simulationFormat.h:6992</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

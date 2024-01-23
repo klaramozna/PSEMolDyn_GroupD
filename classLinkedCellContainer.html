@@ -82,30 +82,33 @@ Inheritance diagram for LinkedCellContainer:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a65d50e8c922f9fdf2588e4dc706e4673"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLinkedCellContainer.html#a65d50e8c922f9fdf2588e4dc706e4673">LinkedCellContainer</a> (<a class="el" href="classBoundary.html">Boundary</a> boundary, double cutoffRadius, const std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt; &amp;particles={})</td></tr>
+<tr class="memitem:a65d50e8c922f9fdf2588e4dc706e4673"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLinkedCellContainer.html#a65d50e8c922f9fdf2588e4dc706e4673">LinkedCellContainer</a> (<a class="el" href="classBoundary.html">Boundary</a> boundary, double cutoffRadius, const std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt; &amp;<a class="el" href="classparticles.html">particles</a>={})</td></tr>
 <tr class="memdesc:a65d50e8c922f9fdf2588e4dc706e4673"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="classLinkedCellContainer.html">LinkedCellContainer</a> object using the given parameters.  <a href="classLinkedCellContainer.html#a65d50e8c922f9fdf2588e4dc706e4673">More...</a><br /></td></tr>
 <tr class="separator:a65d50e8c922f9fdf2588e4dc706e4673"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0d196a1d1a91e0ee1851113e745ab6f9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLinkedCellContainer.html#a0d196a1d1a91e0ee1851113e745ab6f9">addParticle</a> (const <a class="el" href="classParticle.html">Particle</a> &amp;p) override</td></tr>
 <tr class="memdesc:a0d196a1d1a91e0ee1851113e745ab6f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the given particle to the container.  <a href="classLinkedCellContainer.html#a0d196a1d1a91e0ee1851113e745ab6f9">More...</a><br /></td></tr>
 <tr class="separator:a0d196a1d1a91e0ee1851113e745ab6f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4563fd329cdf0736ca285aeeefc966aa"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLinkedCellContainer.html#a4563fd329cdf0736ca285aeeefc966aa">addParticlePointer</a> (std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt; p)</td></tr>
-<tr class="memdesc:a4563fd329cdf0736ca285aeeefc966aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the given particle to the container (the given object, not a copy)  <a href="classLinkedCellContainer.html#a4563fd329cdf0736ca285aeeefc966aa">More...</a><br /></td></tr>
-<tr class="separator:a4563fd329cdf0736ca285aeeefc966aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8beea6e66d7dc38d80cf79c8337e9ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLinkedCellContainer.html#ab8beea6e66d7dc38d80cf79c8337e9ff">addParticlesPointer</a> (std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&gt; particles)</td></tr>
-<tr class="memdesc:ab8beea6e66d7dc38d80cf79c8337e9ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the given particles to the container (the given objects, not copies)  <a href="classLinkedCellContainer.html#ab8beea6e66d7dc38d80cf79c8337e9ff">More...</a><br /></td></tr>
-<tr class="separator:ab8beea6e66d7dc38d80cf79c8337e9ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac12e4475f567b27f02beb418e90135b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLinkedCellContainer.html#aac12e4475f567b27f02beb418e90135b">addParticlePointer</a> (std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt; p) override</td></tr>
+<tr class="memdesc:aac12e4475f567b27f02beb418e90135b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the given particle to the container (the given object, not a copy)  <a href="classLinkedCellContainer.html#aac12e4475f567b27f02beb418e90135b">More...</a><br /></td></tr>
+<tr class="separator:aac12e4475f567b27f02beb418e90135b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a96b2b7107b89cd475d67dc9fc52c34f2"><td class="memItemLeft" align="right" valign="top">size_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLinkedCellContainer.html#a96b2b7107b89cd475d67dc9fc52c34f2">getSize</a> () override</td></tr>
 <tr class="memdesc:a96b2b7107b89cd475d67dc9fc52c34f2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of particles in the container.  <a href="classLinkedCellContainer.html#a96b2b7107b89cd475d67dc9fc52c34f2">More...</a><br /></td></tr>
 <tr class="separator:a96b2b7107b89cd475d67dc9fc52c34f2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a93cc82079e0c05aa035460d6495c10bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLinkedCellContainer.html#a93cc82079e0c05aa035460d6495c10bb">applyToAll</a> (const std::function&lt; void(<a class="el" href="classParticle.html">Particle</a> &amp;)&gt; &amp;function) override</td></tr>
 <tr class="memdesc:a93cc82079e0c05aa035460d6495c10bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the given function to all particles.  <a href="classLinkedCellContainer.html#a93cc82079e0c05aa035460d6495c10bb">More...</a><br /></td></tr>
 <tr class="separator:a93cc82079e0c05aa035460d6495c10bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7663d5893c0de33cb6ae5b3ff98daba5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLinkedCellContainer.html#a7663d5893c0de33cb6ae5b3ff98daba5">applyForIds</a> (const std::function&lt; void(<a class="el" href="classParticle.html">Particle</a> &amp;)&gt; &amp;function, const std::vector&lt; int &gt; &amp;ids)</td></tr>
+<tr class="memdesc:a7663d5893c0de33cb6ae5b3ff98daba5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the given function to the particles with ids in the given array.  <a href="classLinkedCellContainer.html#a7663d5893c0de33cb6ae5b3ff98daba5">More...</a><br /></td></tr>
+<tr class="separator:a7663d5893c0de33cb6ae5b3ff98daba5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa87cd6cf17202b142e769bae1b17a03d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLinkedCellContainer.html#aa87cd6cf17202b142e769bae1b17a03d">applyToPairs</a> (const std::function&lt; void(<a class="el" href="classParticle.html">Particle</a> &amp;, <a class="el" href="classParticle.html">Particle</a> &amp;)&gt; &amp;function) override</td></tr>
 <tr class="memdesc:aa87cd6cf17202b142e769bae1b17a03d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the given function to pairs of particles in neighbouring cells within the cutoff radius.  <a href="classLinkedCellContainer.html#aa87cd6cf17202b142e769bae1b17a03d">More...</a><br /></td></tr>
 <tr class="separator:aa87cd6cf17202b142e769bae1b17a03d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab6faa7c002062a175d458b717e8ca58e"><td class="memItemLeft" align="right" valign="top">std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLinkedCellContainer.html#ab6faa7c002062a175d458b717e8ca58e">getParticleVector</a> () override</td></tr>
 <tr class="memdesc:ab6faa7c002062a175d458b717e8ca58e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a vector of all particles in the container.  <a href="classLinkedCellContainer.html#ab6faa7c002062a175d458b717e8ca58e">More...</a><br /></td></tr>
 <tr class="separator:ab6faa7c002062a175d458b717e8ca58e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b0a2b7dc01477d4d2f3286c890f5c53"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classParticle.html">Particle</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLinkedCellContainer.html#a3b0a2b7dc01477d4d2f3286c890f5c53">getParticleWithId</a> (int id)</td></tr>
+<tr class="memdesc:a3b0a2b7dc01477d4d2f3286c890f5c53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the particle with a give id.  <a href="classLinkedCellContainer.html#a3b0a2b7dc01477d4d2f3286c890f5c53">More...</a><br /></td></tr>
+<tr class="separator:a3b0a2b7dc01477d4d2f3286c890f5c53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1aab68c81977805a5deb197a7ea1a68d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classLinkedCellContainer.html#a1aab68c81977805a5deb197a7ea1a68d">applyToBoundary</a> (const std::function&lt; void(<a class="el" href="classParticle.html">Particle</a>(&amp;))&gt; &amp;function)</td></tr>
 <tr class="memdesc:a1aab68c81977805a5deb197a7ea1a68d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the given function to each particle in the boundary.  <a href="classLinkedCellContainer.html#a1aab68c81977805a5deb197a7ea1a68d">More...</a><br /></td></tr>
 <tr class="separator:a1aab68c81977805a5deb197a7ea1a68d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -125,6 +128,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abb684a4e41103ffa70bbb1a1f9b0c596 inherit pub_methods_classParticleContainer"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleContainer.html#abb684a4e41103ffa70bbb1a1f9b0c596">~ParticleContainer</a> ()=default</td></tr>
 <tr class="memdesc:abb684a4e41103ffa70bbb1a1f9b0c596 inherit pub_methods_classParticleContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the <a class="el" href="classParticleContainer.html">ParticleContainer</a> object.  <a href="classParticleContainer.html#abb684a4e41103ffa70bbb1a1f9b0c596">More...</a><br /></td></tr>
 <tr class="separator:abb684a4e41103ffa70bbb1a1f9b0c596 inherit pub_methods_classParticleContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54e3969546d31e6560a0173021424626 inherit pub_methods_classParticleContainer"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleContainer.html#a54e3969546d31e6560a0173021424626">addParticlesPointer</a> (std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&gt; <a class="el" href="classparticles.html">particles</a>) final</td></tr>
+<tr class="memdesc:a54e3969546d31e6560a0173021424626 inherit pub_methods_classParticleContainer"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the given particles to the container (the given objects, not copies)  <a href="classParticleContainer.html#a54e3969546d31e6560a0173021424626">More...</a><br /></td></tr>
+<tr class="separator:a54e3969546d31e6560a0173021424626 inherit pub_methods_classParticleContainer"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a65d50e8c922f9fdf2588e4dc706e4673"></a>
@@ -208,11 +214,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a4563fd329cdf0736ca285aeeefc966aa"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4563fd329cdf0736ca285aeeefc966aa">&#9670;&nbsp;</a></span>addParticlePointer()</h2>
+<a id="aac12e4475f567b27f02beb418e90135b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac12e4475f567b27f02beb418e90135b">&#9670;&nbsp;</a></span>addParticlePointer()</h2>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void LinkedCellContainer::addParticlePointer </td>
@@ -222,6 +231,11 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Adds the given particle to the container (the given object, not a copy) </p>
@@ -232,28 +246,41 @@ Public Member Functions</h2></td></tr>
   </dd>
 </dl>
 
+<p>Implements <a class="el" href="classParticleContainer.html#a3336b4488dae85b3475dcbaf9a8fd889">ParticleContainer</a>.</p>
+
 </div>
 </div>
-<a id="ab8beea6e66d7dc38d80cf79c8337e9ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab8beea6e66d7dc38d80cf79c8337e9ff">&#9670;&nbsp;</a></span>addParticlesPointer()</h2>
+<a id="a7663d5893c0de33cb6ae5b3ff98daba5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7663d5893c0de33cb6ae5b3ff98daba5">&#9670;&nbsp;</a></span>applyForIds()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void LinkedCellContainer::addParticlesPointer </td>
+          <td class="memname">void LinkedCellContainer::applyForIds </td>
           <td>(</td>
-          <td class="paramtype">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&gt;&#160;</td>
-          <td class="paramname"><em>particles</em></td><td>)</td>
+          <td class="paramtype">const std::function&lt; void(<a class="el" href="classParticle.html">Particle</a> &amp;)&gt; &amp;&#160;</td>
+          <td class="paramname"><em>function</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
           <td></td>
+          <td class="paramtype">const std::vector&lt; int &gt; &amp;&#160;</td>
+          <td class="paramname"><em>ids</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Adds the given particles to the container (the given objects, not copies) </p>
+<p>Applies the given function to the particles with ids in the given array. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">particles</td><td>The particles to be added. </td></tr>
+    <tr><td class="paramname">function</td><td>Function to be applied. </td></tr>
+    <tr><td class="paramname">ids</td><td>Ids of particles that the function should be applied to. </td></tr>
   </table>
   </dd>
 </dl>
@@ -452,6 +479,27 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>The vector with the particles of the container. </dd></dl>
 
 <p>Implements <a class="el" href="classParticleContainer.html#ade9a7895091d5b0718df9ae2deab4086">ParticleContainer</a>.</p>
+
+</div>
+</div>
+<a id="a3b0a2b7dc01477d4d2f3286c890f5c53"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b0a2b7dc01477d4d2f3286c890f5c53">&#9670;&nbsp;</a></span>getParticleWithId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="classParticle.html">Particle</a> LinkedCellContainer::getParticleWithId </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the particle with a give id. </p>
+<dl class="section return"><dt>Returns</dt><dd>particle with id </dd></dl>
 
 </div>
 </div>

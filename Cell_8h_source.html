@@ -85,7 +85,7 @@ $(function() {
 <div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classCell.html#a03c03dbd4da8adfdcaeba3706b87ba20">   19</a></span>&#160;    <span class="keyword">using</span> <a class="code" href="classCell.html#a03c03dbd4da8adfdcaeba3706b87ba20">iterator_type</a> = std::list&lt;std::shared_ptr&lt;Particle&gt;&gt;::iterator;</div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classCell.html#a35d2cdf5929b2af1c5210ea1667f1f4f">   26</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classCell.html#a35d2cdf5929b2af1c5210ea1667f1f4f">Cell</a>(<span class="keywordtype">double</span> cutoffRadius): particles{}, cutoffRadius{cutoffRadius}{};</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="classCell.html#a35d2cdf5929b2af1c5210ea1667f1f4f">   26</a></span>&#160;    <span class="keyword">explicit</span> <a class="code" href="classCell.html#a35d2cdf5929b2af1c5210ea1667f1f4f">Cell</a>(<span class="keywordtype">double</span> cutoffRadius): <a class="code" href="classparticles.html">particles</a>{}, cutoffRadius{cutoffRadius}{};</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classCell.html#a03c03dbd4da8adfdcaeba3706b87ba20">iterator_type</a> <a class="code" href="classCell.html#a3b4315b8ae69482711c53ee6f41a22ec">begin</a>();</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160; </div>
@@ -100,7 +100,7 @@ $(function() {
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classCell.html#a92fda96a9376311cfb25cec4d1485b4b">applyToPairs</a>(<span class="keyword">const</span> std::function&lt;<span class="keywordtype">void</span>(<a class="code" href="classParticle.html">Particle</a> &amp;, <a class="code" href="classParticle.html">Particle</a> &amp;)&gt; &amp;<span class="keyword">function</span>);</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    std::list&lt;std::shared_ptr&lt;Particle&gt;&gt; particles;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    std::list&lt;std::shared_ptr&lt;Particle&gt;&gt; <a class="code" href="classparticles.html">particles</a>;</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    <span class="keywordtype">double</span> cutoffRadius;</div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
@@ -120,7 +120,8 @@ $(function() {
 <div class="ttc" id="aclassCell_html_a5bd0f8ee27c519f90aacdddb82f8933f"><div class="ttname"><a href="classCell.html#a5bd0f8ee27c519f90aacdddb82f8933f">Cell::addParticle</a></div><div class="ttdeci">void addParticle(std::shared_ptr&lt; Particle &gt; p)</div><div class="ttdoc">Adds the given particle to the cell.</div><div class="ttdef"><b>Definition:</b> Cell.cpp:16</div></div>
 <div class="ttc" id="aclassCell_html_a8cf0c2dd13477cb67badc450e4732342"><div class="ttname"><a href="classCell.html#a8cf0c2dd13477cb67badc450e4732342">Cell::contains</a></div><div class="ttdeci">bool contains(const Particle &amp;p)</div><div class="ttdoc">Returns true if the given particle is contained in this cell.</div><div class="ttdef"><b>Definition:</b> Cell.cpp:24</div></div>
 <div class="ttc" id="aclassCell_html_a92fda96a9376311cfb25cec4d1485b4b"><div class="ttname"><a href="classCell.html#a92fda96a9376311cfb25cec4d1485b4b">Cell::applyToPairs</a></div><div class="ttdeci">void applyToPairs(const std::function&lt; void(Particle &amp;, Particle &amp;)&gt; &amp;function)</div><div class="ttdoc">Applies the given function to each distinct pair of particles in the cell.</div><div class="ttdef"><b>Definition:</b> Cell.cpp:33</div></div>
-<div class="ttc" id="aclassParticle_html"><div class="ttname"><a href="classParticle.html">Particle</a></div><div class="ttdef"><b>Definition:</b> Particle.h:14</div></div>
+<div class="ttc" id="aclassParticle_html"><div class="ttname"><a href="classParticle.html">Particle</a></div><div class="ttdef"><b>Definition:</b> Particle.h:15</div></div>
+<div class="ttc" id="aclassparticles_html"><div class="ttname"><a href="classparticles.html">particles</a></div><div class="ttdoc">Class corresponding to the particles schema type.</div><div class="ttdef"><b>Definition:</b> simulationFormat.h:6992</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

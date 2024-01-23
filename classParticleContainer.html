@@ -104,6 +104,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:abb684a4e41103ffa70bbb1a1f9b0c596"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleContainer.html#abb684a4e41103ffa70bbb1a1f9b0c596">~ParticleContainer</a> ()=default</td></tr>
 <tr class="memdesc:abb684a4e41103ffa70bbb1a1f9b0c596"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the <a class="el" href="classParticleContainer.html">ParticleContainer</a> object.  <a href="classParticleContainer.html#abb684a4e41103ffa70bbb1a1f9b0c596">More...</a><br /></td></tr>
 <tr class="separator:abb684a4e41103ffa70bbb1a1f9b0c596"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a54e3969546d31e6560a0173021424626"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleContainer.html#a54e3969546d31e6560a0173021424626">addParticlesPointer</a> (std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&gt; <a class="el" href="classparticles.html">particles</a>) final</td></tr>
+<tr class="memdesc:a54e3969546d31e6560a0173021424626"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the given particles to the container (the given objects, not copies)  <a href="classParticleContainer.html#a54e3969546d31e6560a0173021424626">More...</a><br /></td></tr>
+<tr class="separator:a54e3969546d31e6560a0173021424626"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3336b4488dae85b3475dcbaf9a8fd889"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticleContainer.html#a3336b4488dae85b3475dcbaf9a8fd889">addParticlePointer</a> (std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt; p)=0</td></tr>
+<tr class="memdesc:a3336b4488dae85b3475dcbaf9a8fd889"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adds the given particle to the container (the given object, not a copy)  <a href="classParticleContainer.html#a3336b4488dae85b3475dcbaf9a8fd889">More...</a><br /></td></tr>
+<tr class="separator:a3336b4488dae85b3475dcbaf9a8fd889"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="abb684a4e41103ffa70bbb1a1f9b0c596"></a>
@@ -170,6 +176,42 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a3336b4488dae85b3475dcbaf9a8fd889"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3336b4488dae85b3475dcbaf9a8fd889">&#9670;&nbsp;</a></span>addParticlePointer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">virtual void ParticleContainer::addParticlePointer </td>
+          <td>(</td>
+          <td class="paramtype">std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&#160;</td>
+          <td class="paramname"><em>p</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds the given particle to the container (the given object, not a copy) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">p</td><td>The particle to be added. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Implemented in <a class="el" href="classLinkedCellContainer.html#aac12e4475f567b27f02beb418e90135b">LinkedCellContainer</a>, and <a class="el" href="classDirectSumContainer.html#af4113ee1d827d845407b4834988fc800">DirectSumContainer</a>.</p>
+
+</div>
+</div>
 <a id="ad7b8937e175b9c82a88cf565a8d08446"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad7b8937e175b9c82a88cf565a8d08446">&#9670;&nbsp;</a></span>addParticles()</h2>
 
@@ -198,6 +240,40 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">toAdd</td><td>The vector containing the particles to be added. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a54e3969546d31e6560a0173021424626"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a54e3969546d31e6560a0173021424626">&#9670;&nbsp;</a></span>addParticlesPointer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ParticleContainer::addParticlesPointer </td>
+          <td>(</td>
+          <td class="paramtype">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&gt;&#160;</td>
+          <td class="paramname"><em>particles</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">final</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Adds the given particles to the container (the given objects, not copies) </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">particles</td><td>The particles to be added. </td></tr>
   </table>
   </dd>
 </dl>

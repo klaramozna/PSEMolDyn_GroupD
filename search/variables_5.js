@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['markedfordeleting_1259',['markedForDeleting',['../classParticle.html#a560e780f724b77e28df48532a4a419a4',1,'Particle']]]
+  ['log_5flevel_5fset_1410',['log_level_set',['../namespaceLogger.html#a450392648f0b5e99fc71b3b657c07b0a',1,'Logger']]]
 ];

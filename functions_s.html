@@ -70,6 +70,9 @@ $(function() {
 <li>setBaseName()
 : <a class="el" href="classSimParameters.html#a013fe95f151acc258c6869d6422191b6">SimParameters</a>
 </li>
+<li>setBondLength()
+: <a class="el" href="classParticle.html#a6e5e75d708fa628b4e62b023b5976a13">Particle</a>
+</li>
 <li>setBoundaryBehavior()
 : <a class="el" href="classSimParameters.html#ae2c334db9a565dbabb9d203f8cd767a6">SimParameters</a>
 </li>
@@ -84,6 +87,9 @@ $(function() {
 </li>
 <li>setDeltaT()
 : <a class="el" href="classSimParameters.html#aaf587e77b62c8bedba94aeef9dce3a33">SimParameters</a>
+</li>
+<li>setDiagonalNeighbours()
+: <a class="el" href="classParticle.html#ad8cb2aedc1314e790a6698760da9bb8b">Particle</a>
 </li>
 <li>setDimension()
 : <a class="el" href="classSimParameters.html#a7577ff94f126de64b87dbf9a04c58f44">SimParameters</a>
@@ -102,8 +108,17 @@ $(function() {
 : <a class="el" href="classSimParameters.html#ab581ade9c09af066066bccbd70e6ef5b">SimParameters</a>
 </li>
 <li>setGravityFactor()
-: <a class="el" href="classGravityForce.html#a6b5acab841cea9bdf957bc183bcaa766">GravityForce</a>
-, <a class="el" href="classSimParameters.html#add38b48d3e45d8f5d4c27e65d032b928">SimParameters</a>
+: <a class="el" href="classGravityForce.html#a8d26a7091600c5a65fecc2fc5787daf7">GravityForce</a>
+, <a class="el" href="classSimParameters.html#abd38b28a4db8e7680bb1c754ddcdca54">SimParameters</a>
+</li>
+<li>setHardcodedForceEndTime()
+: <a class="el" href="classSimParameters.html#ae456f37592e4753df90773a205fa63a8">SimParameters</a>
+</li>
+<li>setHardcodedPullFactors()
+: <a class="el" href="classSimParameters.html#ab41f5f5bd7fbb9e4e52af50867878fd9">SimParameters</a>
+</li>
+<li>setId()
+: <a class="el" href="classParticle.html#abb08f300fbe335ac4b88cdbd1b9d6bcf">Particle</a>
 </li>
 <li>setInitTemperature()
 : <a class="el" href="classSimParameters.html#ac5f1b126c3775b7136c624ae4a5e2d32">SimParameters</a>
@@ -113,6 +128,9 @@ $(function() {
 </li>
 <li>setInputPath()
 : <a class="el" href="classSimParameters.html#a3ff5a982e2f02b1949d557bab53ba45c">SimParameters</a>
+</li>
+<li>setIsMembrane()
+: <a class="el" href="classSimParameters.html#a66cb5c7a612038fe074f351007997f2a">SimParameters</a>
 </li>
 <li>setLoadCheckpoint()
 : <a class="el" href="classSimParameters.html#a28efaeffb8f0afba8a0f10baa30fb759">SimParameters</a>
@@ -126,9 +144,18 @@ $(function() {
 <li>setOldF()
 : <a class="el" href="classParticle.html#a6172c307fb6bfe37309c751fb49ccba7">Particle</a>
 </li>
+<li>setParallelNeighbours()
+: <a class="el" href="classParticle.html#a6443d046c3c591484f913b3a9cc4a131">Particle</a>
+</li>
+<li>setPullFactors()
+: <a class="el" href="classHardcodedPullForce.html#a37e8610b333532a4aef84e0b5529f85e">HardcodedPullForce</a>
+</li>
 <li>setSigma()
 : <a class="el" href="classLennardJones.html#a07a4ee2ba44e9cc8d121ef210434691d">LennardJones</a>
 , <a class="el" href="classSimParameters.html#a2b340e011bcf7041e24f35be93f5c008">SimParameters</a>
+</li>
+<li>setStiffness()
+: <a class="el" href="classParticle.html#aed9c7c36b6f3c14b92adb20b01668262">Particle</a>
 </li>
 <li>setStoreCheckpoint()
 : <a class="el" href="classSimParameters.html#aaceb0c3c700a65fd93b4b2f68932685f">SimParameters</a>
@@ -161,25 +188,30 @@ $(function() {
 : <a class="el" href="classlennardJones__t.html#a7535ab6d1d18914261cdb843bec2f0c0">lennardJones_t</a>
 </li>
 <li>sigma()
-: <a class="el" href="classparticle__t.html#a982a4c64b54208eeecdc4051f5d75f6c">particle_t</a>
+: <a class="el" href="classparticle__t.html#a4362bd548ed9144b6b4c1167bca70977">particle_t</a>
 </li>
 <li>sigma_cuboid()
 : <a class="el" href="classCuboid.html#ab97b571b1ad21809bb337dd214528ca9">Cuboid</a>
+, <a class="el" href="classMembrane.html#a10abecdf5e27fef0bb3696245b0b5d61">Membrane</a>
 </li>
 <li>sigma_cuboid_default_value()
 : <a class="el" href="classCuboid.html#a6d60921e7de435b388cb0a5ed3ab8fbe">Cuboid</a>
+, <a class="el" href="classMembrane.html#a2bc73c1a54c9ad3eafceb5b653b0af40">Membrane</a>
 </li>
 <li>sigma_cuboid_optional
 : <a class="el" href="classCuboid.html#ac87e294780d5910c6b74e53678f9fafd">Cuboid</a>
+, <a class="el" href="classMembrane.html#aa39fede3872dabd3e870f2f74fe95944">Membrane</a>
 </li>
 <li>sigma_cuboid_traits
 : <a class="el" href="classCuboid.html#af85ecf8019e88e6ee0d4c259c5994b26">Cuboid</a>
+, <a class="el" href="classMembrane.html#af3d1808c3a5736ca059ed991877c5148">Membrane</a>
 </li>
 <li>sigma_cuboid_type
 : <a class="el" href="classCuboid.html#a416e5d9520fcaf5444ebdcce81056b80">Cuboid</a>
+, <a class="el" href="classMembrane.html#a4ed057924d9fd7913ebfd4a566717c3a">Membrane</a>
 </li>
 <li>sigma_sphere()
-: <a class="el" href="classSphere.html#ad3dd714c84578480bb226123bcd54fea">Sphere</a>
+: <a class="el" href="classSphere.html#a74adb1d756a9ffb6077d77888a4723a1">Sphere</a>
 </li>
 <li>sigma_sphere_default_value()
 : <a class="el" href="classSphere.html#a2e9e620ee0acf024879828261c23fbfe">Sphere</a>
@@ -206,7 +238,7 @@ $(function() {
 : <a class="el" href="classparticle__t.html#ac21aa3c77b1778a2f649a7b526c39535">particle_t</a>
 </li>
 <li>SimParameters()
-: <a class="el" href="classSimParameters.html#a6b812ffbb0b9b418c00e1f942a7f0bc4">SimParameters</a>
+: <a class="el" href="classSimParameters.html#a47a736217372daeda64c4c1399893f51">SimParameters</a>
 </li>
 <li>simple()
 : <a class="el" href="classThermostatType.html#a2fc19f962afdb1921dfa33f98d3b328a">ThermostatType</a>
@@ -227,16 +259,16 @@ $(function() {
 : <a class="el" href="classsimpleThermostatType.html#a68f478ecd360e0007bf1c784d6b7dec1">simpleThermostatType</a>
 </li>
 <li>Simulation()
-: <a class="el" href="classSimulation.html#ad70de23f2762059ac1e2416277386ee8">Simulation</a>
+: <a class="el" href="classSimulation.html#a605ce81b598cde2a4b9a000652fdbd2d">Simulation</a>
 </li>
 <li>Simulation_t()
 : <a class="el" href="classSimulation__t.html#af172ae451abf58353ceb748debb57421">Simulation_t</a>
 </li>
 <li>sphere()
-: <a class="el" href="classSimulation__t.html#a30736e2c8e0b622a23c763d9e5b7c3ad">Simulation_t</a>
+: <a class="el" href="classSimulation__t.html#a9b327e5865baa1055a54fa67523c960f">Simulation_t</a>
 </li>
 <li>Sphere()
-: <a class="el" href="classSphere.html#a116c32c332269c618f4ee0f63c5554f6">Sphere</a>
+: <a class="el" href="classSphere.html#aa8ba2c0ee6a097a7b358c17a706bc473">Sphere</a>
 </li>
 <li>sphere_const_iterator
 : <a class="el" href="classSimulation__t.html#af2e8fe9cf795e8a31cb9338b5988392a">Simulation_t</a>
@@ -258,6 +290,18 @@ $(function() {
 </li>
 <li>startBenchmark()
 : <a class="el" href="classBenchmark.html#a98bcefedb382395a8f9a9aa6e69a4a6f">Benchmark</a>
+</li>
+<li>stiffness()
+: <a class="el" href="classMembrane.html#a983098333710393e3ac20c30a3af8250">Membrane</a>
+</li>
+<li>stiffness_default_value()
+: <a class="el" href="classMembrane.html#a3287ae6b9867de80a15bda4f70d4826a">Membrane</a>
+</li>
+<li>stiffness_traits
+: <a class="el" href="classMembrane.html#a91f1694d5c924de53eb42de535064449">Membrane</a>
+</li>
+<li>stiffness_type
+: <a class="el" href="classMembrane.html#a418569ed7314ca7735df229338e6a21b">Membrane</a>
 </li>
 <li>stopBenchmark()
 : <a class="el" href="classBenchmark.html#abd427fe5651de4d8575be402097d8d30">Benchmark</a>

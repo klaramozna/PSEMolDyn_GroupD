@@ -78,31 +78,36 @@ $(function() {
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160; </div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#pragma once</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160; </div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="ParticleReader_8h.html">ParticleReader.h</a>&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;../../Particles/DirectSumContainer.h&quot;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="SimParameters_8h.html">SimParameters.h</a>&quot;</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &quot;../../Particles/DirectSumContainer.h&quot;</span></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="SimParameters_8h.html">SimParameters.h</a>&quot;</span></div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160; </div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classXMLReader.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classXMLReader.html">XMLReader</a> : <span class="keyword">public</span> <a class="code" href="classParticleReader.html">ParticleReader</a>  {</div>
+<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="classXMLReader.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classXMLReader.html">XMLReader</a>{</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="classXMLReader.html#a6f618ae88210ab36b17b6191664d0fa6">   19</a></span>&#160;    <a class="code" href="classXMLReader.html#a6f618ae88210ab36b17b6191664d0fa6">XMLReader</a>();</div>
 <div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="classXMLReader.html#a73065c7758f26ef69387e315c96d13ac">   20</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classXMLReader.html#a73065c7758f26ef69387e315c96d13ac">~XMLReader</a>();</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    </div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classXMLReader.html#a7964cdd16dec0925a15c9b342ef0a106">readFile</a> (<a class="code" href="classParticleContainer.html">ParticleContainer</a> &amp;<a class="code" href="namespacexml__schema.html#ada9aa30dc722e93ee2ed7243085402a5">container</a>, <a class="code" href="namespacexml__schema.html#ac0cec83a330f0024e4e318b3deac5104">std::string</a> &amp;filename, <a class="code" href="classSimParameters.html">SimParameters</a>&amp; simParameters) <span class="keyword">override</span>;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;};</div>
-<div class="ttc" id="aParticleReader_8h_html"><div class="ttname"><a href="ParticleReader_8h.html">ParticleReader.h</a></div></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classXMLReader.html#a5f33875d708dce9fdcc8ba52d881b341">readFile</a> (<a class="code" href="namespacexml__schema.html#ac0cec83a330f0024e4e318b3deac5104">std::string</a> &amp;filename, <a class="code" href="classSimParameters.html">SimParameters</a>&amp; simParameters);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
+<div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="classXMLReader.html#af8ba00907223c83e5c05b7b3d848a515">   29</a></span>&#160;    std::vector&lt;std::shared_ptr&lt;Particle&gt;&gt; <a class="code" href="classXMLReader.html#af8ba00907223c83e5c05b7b3d848a515">getParticles</a> () {</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;        <span class="keywordflow">return</span> <a class="code" href="classparticles.html">particles</a>;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    }</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="keyword">private</span>: </div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    std::vector&lt;std::shared_ptr&lt;Particle&gt;&gt; <a class="code" href="classparticles.html">particles</a>;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;};</div>
 <div class="ttc" id="aSimParameters_8h_html"><div class="ttname"><a href="SimParameters_8h.html">SimParameters.h</a></div></div>
-<div class="ttc" id="aclassParticleContainer_html"><div class="ttname"><a href="classParticleContainer.html">ParticleContainer</a></div><div class="ttdef"><b>Definition:</b> ParticleContainer.h:12</div></div>
-<div class="ttc" id="aclassParticleReader_html"><div class="ttname"><a href="classParticleReader.html">ParticleReader</a></div><div class="ttdef"><b>Definition:</b> ParticleReader.h:8</div></div>
 <div class="ttc" id="aclassSimParameters_html"><div class="ttname"><a href="classSimParameters.html">SimParameters</a></div><div class="ttdoc">Represents simulation parameters.</div><div class="ttdef"><b>Definition:</b> SimParameters.h:19</div></div>
 <div class="ttc" id="aclassXMLReader_html"><div class="ttname"><a href="classXMLReader.html">XMLReader</a></div><div class="ttdef"><b>Definition:</b> XMLReader.h:16</div></div>
+<div class="ttc" id="aclassXMLReader_html_a5f33875d708dce9fdcc8ba52d881b341"><div class="ttname"><a href="classXMLReader.html#a5f33875d708dce9fdcc8ba52d881b341">XMLReader::readFile</a></div><div class="ttdeci">void readFile(std::string &amp;filename, SimParameters &amp;simParameters)</div><div class="ttdoc">Reads a defined XML file containing the simulation arguments.</div><div class="ttdef"><b>Definition:</b> XMLReader.cpp:20</div></div>
 <div class="ttc" id="aclassXMLReader_html_a6f618ae88210ab36b17b6191664d0fa6"><div class="ttname"><a href="classXMLReader.html#a6f618ae88210ab36b17b6191664d0fa6">XMLReader::XMLReader</a></div><div class="ttdeci">XMLReader()</div></div>
 <div class="ttc" id="aclassXMLReader_html_a73065c7758f26ef69387e315c96d13ac"><div class="ttname"><a href="classXMLReader.html#a73065c7758f26ef69387e315c96d13ac">XMLReader::~XMLReader</a></div><div class="ttdeci">virtual ~XMLReader()</div></div>
-<div class="ttc" id="aclassXMLReader_html_a7964cdd16dec0925a15c9b342ef0a106"><div class="ttname"><a href="classXMLReader.html#a7964cdd16dec0925a15c9b342ef0a106">XMLReader::readFile</a></div><div class="ttdeci">void readFile(ParticleContainer &amp;container, std::string &amp;filename, SimParameters &amp;simParameters) override</div><div class="ttdoc">Reads a defined XML file containing the simulation arguments.</div><div class="ttdef"><b>Definition:</b> XMLReader.cpp:19</div></div>
+<div class="ttc" id="aclassXMLReader_html_af8ba00907223c83e5c05b7b3d848a515"><div class="ttname"><a href="classXMLReader.html#af8ba00907223c83e5c05b7b3d848a515">XMLReader::getParticles</a></div><div class="ttdeci">std::vector&lt; std::shared_ptr&lt; Particle &gt; &gt; getParticles()</div><div class="ttdef"><b>Definition:</b> XMLReader.h:29</div></div>
+<div class="ttc" id="aclassparticles_html"><div class="ttname"><a href="classparticles.html">particles</a></div><div class="ttdoc">Class corresponding to the particles schema type.</div><div class="ttdef"><b>Definition:</b> simulationFormat.h:6992</div></div>
 <div class="ttc" id="anamespacexml__schema_html_ac0cec83a330f0024e4e318b3deac5104"><div class="ttname"><a href="namespacexml__schema.html#ac0cec83a330f0024e4e318b3deac5104">xml_schema::string</a></div><div class="ttdeci">::xsd::cxx::tree::string&lt; char, simple_type &gt; string</div><div class="ttdoc">C++ type corresponding to the string XML Schema built-in type.</div><div class="ttdef"><b>Definition:</b> vtk-unstructured.h:269</div></div>
-<div class="ttc" id="anamespacexml__schema_html_ada9aa30dc722e93ee2ed7243085402a5"><div class="ttname"><a href="namespacexml__schema.html#ada9aa30dc722e93ee2ed7243085402a5">xml_schema::container</a></div><div class="ttdeci">::xsd::cxx::tree::type container</div><div class="ttdoc">Alias for the anyType type.</div><div class="ttdef"><b>Definition:</b> vtk-unstructured.h:129</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
