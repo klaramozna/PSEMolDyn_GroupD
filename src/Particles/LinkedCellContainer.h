@@ -10,6 +10,7 @@
 #include "ParticleContainer.h"
 #include "Cell.h"
 #include "Boundary.h"
+#include "../IO/Logger.h"
 
 class LinkedCellContainer : public ParticleContainer{
 public:
@@ -130,10 +131,10 @@ private:
 
 #ifdef _OPENMP
     std::vector<omp_lock_t> cellLocks;
-    int subdomainSizeX;
-    int subdomainSizeY;
-    int subdomainSizeZ;
 #endif
+    int subdomainSizeX = 1;
+    int subdomainSizeY = 1;
+    int subdomainSizeZ = 1;
 
     /**
      * @brief Deletes the given particle from the cell with the index oldCell and adds it to the cell with the index newCell

@@ -62,7 +62,7 @@
     <writeFrequency>100</writeFrequency>
 
     <!-- Misc -->
-    <log_level>2</log_level>
+    <log_level>1</log_level>
     <testing_mode>false</testing_mode>
 
 </Simulation>
