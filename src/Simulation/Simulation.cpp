@@ -17,13 +17,13 @@
 std::array<double, 3> maxwellBoltzmannDistributedVelocity(double averageVelocity, size_t dimensions);
 
 Simulation::Simulation(SimParameters& simParameters, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, Boundary &boundary, GravityForce &gravity, HardcodedPullForce &hardcodedPullForce) :
-                        simParameters(simParameters),
                         container(container),
                         forceCalculation(calculation),
                         thermostat(thermostat),
                         boundaryEnforcer(simParameters.getSigma(), container, boundary.getDimensions(), boundary.getBoundaryTypes(), forceCalculation),
                         gravity(gravity),
-                        pullForce(hardcodedPullForce) {
+                        pullForce(hardcodedPullForce),
+                        simParameters(simParameters) {
     // Apply brownian motion
     if(simParameters.getBrownianMotion()){
         if(typeid(thermostat) == typeid(FakeThermostat())) {
