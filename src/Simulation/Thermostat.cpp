@@ -7,11 +7,13 @@
 #include "../utils/VectorDouble3.h"
 #include <stdexcept>
 #include "../utils/MaxwellBoltzmannDistribution.h"
+#include <algorithm>
 
 
 void Thermostat::updateState(const std::vector<Particle> &particles) {
     double kineticEnergy = getKineticEnergy(particles);
-    currentTemperature = getTemperature(kineticEnergy, particles.size());
+    int numNonWallParticles = std::count_if(particles.begin(), particles.end(), [](Particle p){return !p.isWallParticle();});
+    currentTemperature = getTemperature(kineticEnergy, numNonWallParticles);
 }
 
 void Thermostat::initializeBrownianMotion(Particle &particle) const {
@@ -27,7 +29,9 @@ double Thermostat::getKineticEnergy(const std::vector<Particle> &particles) cons
     double sum = 0;
     VectorDouble3 v{};
     for(auto & particle : particles){
-        sum += (particle.getM() * getDotProduct(particle.getVVector(), particle.getVVector())) / 2.0;
+        if(!particle.isWallParticle()){
+            sum += (particle.getM() * getDotProduct(particle.getVVector(), particle.getVVector())) / 2.0;
+        }
     }
     return sum;
 }
@@ -43,3 +47,4 @@ double Thermostat::getCurrentTemperature() {
 void Thermostat::updateIteration() {
     currentIteration++;
 }
+

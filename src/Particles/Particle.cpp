@@ -16,6 +16,7 @@ Particle::Particle(int type_arg) {
     old_f = VectorDouble3(std::array<double, 3>{0, 0, 0});
     markedForMirroring = false;
     markedForDeleting = false;
+    isWall = false;
     hardcode_flag = false;
 }
 
@@ -30,6 +31,7 @@ Particle::Particle(const Particle &other) {
     sigma = other.sigma;
     markedForMirroring = other.markedForMirroring;
     markedForDeleting = other.markedForDeleting;
+    isWall = other.isWall;
     stiffness = other.stiffness;
     bond_length= other.bond_length;
     parallel_Neighbours = other.parallel_Neighbours;
@@ -39,7 +41,7 @@ Particle::Particle(const Particle &other) {
 }
 
 Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
-                   double m_arg, int type_arg) : f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})} {
+                   double m_arg, int type_arg, bool wall) : f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})} {
     x = VectorDouble3(x_arg);
     v = VectorDouble3(v_arg);
     m = m_arg;
@@ -48,6 +50,7 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
     sigma = 1.0;
     markedForMirroring = false;
     markedForDeleting = false;
+    isWall = wall;
     hardcode_flag = false;
 }
 
@@ -123,35 +126,54 @@ bool Particle::getHardcodeFlag() const{
 }
 
 void Particle::setX(const VectorDouble3 &position) {
-    x = position;
+    if(!isWall){
+        x = position;
+    }
 }
 
 void Particle::setV(const VectorDouble3 &velocity) {
-     v = velocity;
+    if(!isWall){
+        v = velocity;
+    }
 }
 
 void Particle::setF(const VectorDouble3 &force) {
-    f = force;
+    if(!isWall){
+        f = force;
+    }
 }
 
 void Particle::setOldF(const VectorDouble3 &oldForce) {
-    old_f = oldForce;
+    if(!isWall){
+        old_f = oldForce;
+    }
 }
 
 void Particle::setX(double x, double y, double z) {
-    this->x = VectorDouble3(std::array<double, 3>{x, y, z});
+    if(!isWall){
+        this->x = VectorDouble3(std::array<double, 3>{x, y, z});
+    }
+
 }
 
 void Particle::setV(double x, double y, double z) {
-    this->v = VectorDouble3(std::array<double, 3>{x, y, z});
+    if(!isWall) {
+        this->v = VectorDouble3(std::array<double, 3>{x, y, z});
+    }
+
 }
 
 void Particle::setF(double x, double y, double z) {
-    this->f = VectorDouble3(std::array<double, 3>{x, y, z});
+    if(!isWall){
+        this->f = VectorDouble3(std::array<double, 3>{x, y, z});
+    }
+
 }
 
 void Particle::setOldF(double x, double y, double z) {
-    this->old_f = VectorDouble3(std::array<double, 3>{x, y, z});
+    if(!isWall){
+        this->old_f = VectorDouble3(std::array<double, 3>{x, y, z});
+    }
 }
 
 void Particle::setParallelNeighbours(std::vector<std::shared_ptr<Particle>> pointers_parallel){

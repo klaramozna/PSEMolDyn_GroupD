@@ -50,6 +50,8 @@ Simulation/Physics/GravitationalForce.cpp
         Simulation/FakeThermostat.cpp
         Simulation/FakeThermostat.h
         utils/MaxwellBoltzmannDistribution.h
+        Simulation/TempDifferenceThermostat.cpp
+        Simulation/TempDifferenceThermostat.h
 )
         
 ## Include directories specific to the 'src' directory, if needed
