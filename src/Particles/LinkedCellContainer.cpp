@@ -8,6 +8,23 @@
 
 #include <omp.h>
 
+// Helper function to sort indices and acquire locks
+void acquireSortedLocks(std::vector<omp_lock_t>& cellLocks, const std::vector<int>& indices) {
+    std::vector<int> sortedIndices = indices;
+    std::sort(sortedIndices.begin(), sortedIndices.end());
+    for (int index : sortedIndices) {
+        omp_set_lock(&cellLocks[index]);
+    }
+}
+
+// Helper function to release locks
+void releaseLocks(std::vector<omp_lock_t>& cellLocks, const std::vector<int>& indices) {
+    for (int index : indices) {
+        omp_unset_lock(&cellLocks[index]);
+    }
+}
+
+
 LinkedCellContainer::LinkedCellContainer(Boundary boundary, double cutoffRadius,
                                          const std::vector<Particle>& particles) : boundary{boundary}, grid{}, cutoffRadius{cutoffRadius} {
     size = particles.size();
@@ -98,7 +115,7 @@ void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &func
     // Vector to store particles that need to be moved
     std::vector<std::vector<std::pair<Particle, int>>> localParticlesToBeMoved(omp_get_max_threads());
 
-    #pragma omp parallel for schedule(static) default(none) shared(grid, localParticlesToBeMoved, function)
+    #pragma omp parallel for schedule(static, 1) default(none) shared(grid, localParticlesToBeMoved, function)
     for (int i = 0; i < grid.size(); i++) {
         for (auto &particle: grid[i]) {
             int thread_id = omp_get_thread_num();
@@ -123,7 +140,7 @@ bool LinkedCellContainer::isInCorrectCell(const Particle &p, int currentIndex) {
 
 void LinkedCellContainer::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
     // Iterate over all cells
-    #pragma omp parallel for schedule(dynamic) default(none) shared(grid, Logger::console) firstprivate(function, subdomainSizeY, subdomainSizeZ, subdomainSizeX, nc) collapse(3)
+    #pragma omp parallel for schedule(static, 1) default(none) shared(grid, Logger::console) firstprivate(function, subdomainSizeY, subdomainSizeZ, subdomainSizeX, nc) collapse(3)
     for (int z = 0; z < nc[2]; z += subdomainSizeZ) {
         for (int y = 0; y < nc[1]; y += subdomainSizeY) {
             for (int x = 0; x < nc[0]; x += subdomainSizeX) {
@@ -145,9 +162,10 @@ void LinkedCellContainer::applyToPairs(const std::function<void(Particle &, Part
                                 grid[currentGridIndex].applyToPairs(function);
 #ifdef _OPENMP
                                 omp_unset_lock(&cellLocks[currentGridIndex]);
-#endif
                                 Logger::console->debug("Thread {} released lock on cell {}", omp_get_thread_num(),
                                                        currentGridIndex);
+#endif
+
                             }
                         }
                     }
@@ -166,6 +184,7 @@ void LinkedCellContainer::applyToPairs(const std::function<void(Particle &, Part
 
                             if (currentGridIndex < grid.size()) {
                                 for (auto &pCurrent: grid[currentGridIndex]) {
+                                    std::vector<int> indicesToLock{currentGridIndex};
                                     for (int m = currentZ - 1; m <= currentZ + 1; m++) {
                                         for (int n = currentY - 1; n <= currentY + 1; n++) {
                                             for (int o = currentX - 1; o <= currentX + 1; o++) {
@@ -179,15 +198,17 @@ void LinkedCellContainer::applyToPairs(const std::function<void(Particle &, Part
 
                                                     int neighbourGridIndex = getGridIndex(neighbourX, neighbourY,
                                                                                           neighbourZ);
+                                                    if (neighbourGridIndex != currentGridIndex) {
+                                                        indicesToLock.push_back(neighbourGridIndex);
+                                                    }
 
                                                     // Iterate over neighbour
 #ifdef _OPENMP
-                                                    Logger::console->debug("Thread {} is acquiring lock on cell {}",
-                                                                           omp_get_thread_num(), currentGridIndex);
-                                                    omp_set_lock(&cellLocks[neighbourGridIndex]);
-                                                    Logger::console->debug("Thread {} holds lock on cell {}",
-                                                                           omp_get_thread_num(), currentGridIndex);
-
+                                                    Logger::console->debug("Thread {} is acquiring locks on cells {}, {}", omp_get_thread_num(),
+                                                                           indicesToLock[0], indicesToLock[1]);
+                                                    acquireSortedLocks(cellLocks, indicesToLock);
+                                                    Logger::console->debug("Thread {} holds locks on cells {}, {}", omp_get_thread_num(),
+                                                                           indicesToLock[0], indicesToLock[1]);
 #endif
                                                     for (auto &pNeighbour: grid[neighbourGridIndex]) {
                                                         // Apply function
@@ -197,9 +218,9 @@ void LinkedCellContainer::applyToPairs(const std::function<void(Particle &, Part
                                                         }
                                                     }
 #ifdef _OPENMP
-                                                    omp_unset_lock(&cellLocks[neighbourGridIndex]);
-                                                    Logger::console->debug("Thread {} released lock on cell {}",
-                                                                           omp_get_thread_num(), currentGridIndex);
+                                                    releaseLocks(cellLocks, indicesToLock);
+                                                    Logger::console->debug("Thread {} released locks on cells {}, {}", omp_get_thread_num(),
+                                                                           indicesToLock[0], indicesToLock[1]);
 #endif
                                                 }
                                             }
@@ -238,7 +259,7 @@ void LinkedCellContainer::applyToBoundary(const std::function<void(Particle &)> 
     {
         int thread_id = omp_get_thread_num();
 
-        #pragma omp for nowait
+        #pragma omp for schedule(static,1) nowait
         for (auto boundaryCell : boundaryCells_ptr) {
             if (boundaryCell != nullptr) {
                 for (auto &particle : *boundaryCell) {
