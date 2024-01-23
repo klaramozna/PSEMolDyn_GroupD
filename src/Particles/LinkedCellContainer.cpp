@@ -9,8 +9,10 @@
 #include <memory>
 #include <algorithm>
 
+using lui = long unsigned int;
+
 LinkedCellContainer::LinkedCellContainer(Boundary boundary, double cutoffRadius,
-                                         const std::vector<Particle>& particles) : boundary{boundary}, grid{}, cutoffRadius{cutoffRadius} {
+                                         const std::vector<Particle>& particles) :grid{}, boundary{boundary}, cutoffRadius{cutoffRadius} {
     size = particles.size();
 
     // Potencially slightly increase cell size (compared to cutoff radius)
@@ -71,7 +73,7 @@ Particle LinkedCellContainer::getParticleWithId(int id) {
 }
 
 void LinkedCellContainer::updateCells() {
-    for(int i = 0; i < grid.size(); i++){
+    for(lui i = 0; i < grid.size(); i++){
         for(auto & it : grid[i]){
             if(getParticleIndex(*it) != i){  // particle isn't in the correct cell
                 moveParticle(it, i, getParticleIndex(*it));
@@ -96,7 +98,7 @@ void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &func
     std::vector<std::pair<std::shared_ptr<Particle>, int>> particlesToBeMoved{}; // stores each particle that needs to be moved with the cell it's beeing moved from
 
     // Applying given function to each particle and marking particles for movement
-    for(int i = 0; i < grid.size(); i++){
+    for(lui i = 0; i < grid.size(); i++){
         for(auto & particle : grid[i]){
             function(*particle);
             if(!isInCorrectCell(*particle, i)){
@@ -208,7 +210,7 @@ void LinkedCellContainer::deleteHaloParticles() {
     std::vector<std::pair<std::shared_ptr<Particle>, int>> particlesToBeDeleted{}; // stores each particle that needs to be deleted with the cell it's beeing deleted from
 
     // Applying given function to each particle and marking particles for movement
-    for(int i = 0; i < grid.size(); i++){
+    for(lui i = 0; i < grid.size(); i++){
         for(auto & particle : grid[i]){
             if ((*particle).isMarkedForDeleting()) {
                 particlesToBeDeleted.emplace_back(particle, i);
