@@ -10,8 +10,8 @@
 class XMLReaderTest : public testing::Test {
 protected:
     std::string filename;
-    LinkedCellContainer expectedContainer;
-    LinkedCellContainer receivedContainer;
+    DirectSumContainer expectedContainer;
+    DirectSumContainer receivedContainer;
     SimParameters receivedSimParameters;
 
     void SetUp() override;

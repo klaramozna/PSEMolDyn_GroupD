@@ -5,7 +5,8 @@
 #include "../src/Particles/DirectSumContainer.h"
 
 TEST_F(CuboidGeneratorTest, Generating){
-    DirectSumContainer container = DirectSumContainer(generator.generateParticles());
+    DirectSumContainer container = DirectSumContainer();
+    container.addParticlesPointer(generator.generateParticles());
     std::array<double, 3> velocity{};
     double mass = 1;
     std::vector<Particle> result = container.getParticleVector();

@@ -25,8 +25,9 @@ TEST_F(XMLReaderTest, TestSimple1XMLReader) {
 
     filename.append("simpleCuboid.xml");
     xmlreader.readFile(filename, receivedSimParameters);
+    receivedContainer.addParticlesPointer(xmlreader.getParticles());
 
-    expectedContainer = DirectSumContainer(simpleCube.generateParticles());
+    expectedContainer.addParticlesPointer(simpleCube.generateParticles());
 
     ASSERT_EQ(expectedContainer.getSize(), receivedContainer.getSize()) << "Containers didn't match in size";
 

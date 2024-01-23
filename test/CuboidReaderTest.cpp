@@ -29,9 +29,10 @@ TEST_F(CuboidReaderTest, TestSimple1Cuboid) {
     CuboidReader reader;
 
     filename.append("simpleCuboid.txt");
-    reader.readFile(receivedContainer, filename);
+    reader.readFile(filename, simParameters);
+    receivedContainer.addParticlesPointer(reader.getParticles());
 
-    expectedContainer = DirectSumContainer(simpleCube.generateParticles());
+    expectedContainer.addParticlesPointer(simpleCube.generateParticles());
 
     ASSERT_EQ(expectedContainer.getSize(), receivedContainer.getSize()) << "Containers didn't match in size";
 
@@ -55,7 +56,7 @@ TEST_F(CuboidReaderTest, TestEmptyFile) {
     filename.append("empty.txt");
 
     try {
-        reader.readFile(container, filename);
+        reader.readFile(filename, simParameters);
         FAIL() << "Expected std::runtime_error, but no exception was thrown.";
     } catch (const std::runtime_error& ex) {
         // Check the error message
@@ -75,7 +76,7 @@ TEST_F(CuboidReaderTest, TestOneWrongCuboid) {
     filename.append("tooLittleRows.txt");
 
     try {
-        reader.readFile(container, filename);
+        reader.readFile(filename, simParameters);
         FAIL() << "Expected std::runtime_error, but no exception was thrown.";
     } catch (const std::runtime_error& ex) {
         // Check the error message
@@ -96,7 +97,7 @@ TEST_F(CuboidReaderTest, TestTooManyRows) {
     filename.append("tooManyRows.txt");
 
     try {
-        reader.readFile(container, filename);
+        reader.readFile(filename, simParameters);
         FAIL() << "Expected std::runtime_error, but no exception was thrown.";
     } catch (const std::runtime_error& ex) {
         // Check the error message
@@ -130,10 +131,12 @@ TEST_F(CuboidReaderTest, TestTwoCorrectCuboids) {
     CuboidReader reader;
 
     filename.append("twoCuboids.txt");
-    reader.readFile(receivedContainer, filename);
+    reader.readFile(filename, simParameters);
+    receivedContainer.addParticlesPointer(reader.getParticles());
 
-    expectedContainer = DirectSumContainer(firstCube.generateParticles());
-    expectedContainer.addParticles(secondCube.generateParticles());
+    expectedContainer = DirectSumContainer();
+    expectedContainer.addParticlesPointer(firstCube.generateParticles());
+    expectedContainer.addParticlesPointer(secondCube.generateParticles());
 
     ASSERT_TRUE(expectedContainer.getSize() == receivedContainer.getSize()) << "Containers didn't match in size";
 

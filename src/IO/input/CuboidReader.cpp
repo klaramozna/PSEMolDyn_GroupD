@@ -50,7 +50,8 @@ void CuboidReader::readFile (std::string &filename, SimParameters& simParameters
             }
 
             CuboidGenerator generator = parseLine(line);
-            particles.insert(particles.end(), generator.generateParticles(i).begin(), generator.generateParticles(i).end());
+            std::vector<std::shared_ptr<Particle>> generatedParticles = generator.generateParticles(i);
+            particles.insert(particles.end(), generatedParticles.begin(), generatedParticles.end());
         }
     } catch (const std::exception &ex) {
         Logger::err_logger->error("Error: {}", ex.what());
