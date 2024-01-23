@@ -78,11 +78,11 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a866812d3dfb9c539e5e24593e596a8c9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a24b04cb7c6f7ea4242d25c410f44ae56"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a24b04cb7c6f7ea4242d25c410f44ae56">Particle</a> (const <a class="el" href="classParticle.html">Particle</a> &amp;other)</td></tr>
 <tr class="separator:a24b04cb7c6f7ea4242d25c410f44ae56"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abd17e9e13b8ed36738424c79aa14e127"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#abd17e9e13b8ed36738424c79aa14e127">Particle</a> (std::array&lt; double, 3 &gt; x_arg, std::array&lt; double, 3 &gt; v_arg, double m_arg, int <a class="el" href="classtype.html">type</a>=0)</td></tr>
-<tr class="separator:abd17e9e13b8ed36738424c79aa14e127"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afc18f55ea7e516a7ba015fb8920d6551"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#afc18f55ea7e516a7ba015fb8920d6551">Particle</a> (std::array&lt; double, 3 &gt; x_arg, std::array&lt; double, 3 &gt; v_arg, double m_arg, double epsilon, double sigma, int <a class="el" href="classtype.html">type</a>=0)</td></tr>
-<tr class="memdesc:afc18f55ea7e516a7ba015fb8920d6551"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="classParticle.html">Particle</a> object using the given parameters.  <a href="classParticle.html#afc18f55ea7e516a7ba015fb8920d6551">More...</a><br /></td></tr>
-<tr class="separator:afc18f55ea7e516a7ba015fb8920d6551"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a131fc34d7418e72dee1725f964bc6b0f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a131fc34d7418e72dee1725f964bc6b0f">Particle</a> (std::array&lt; double, 3 &gt; x_arg, std::array&lt; double, 3 &gt; v_arg, double m_arg, int <a class="el" href="classtype.html">type</a>=0, bool wall=false)</td></tr>
+<tr class="separator:a131fc34d7418e72dee1725f964bc6b0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad83220c40b0a3d020a067b6855f5a969"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#ad83220c40b0a3d020a067b6855f5a969">Particle</a> (std::array&lt; double, 3 &gt; x_arg, std::array&lt; double, 3 &gt; v_arg, double m_arg, double epsilon, double sigma, int <a class="el" href="classtype.html">type</a>=0, bool wall=false)</td></tr>
+<tr class="memdesc:ad83220c40b0a3d020a067b6855f5a969"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="classParticle.html">Particle</a> object using the given parameters.  <a href="classParticle.html#ad83220c40b0a3d020a067b6855f5a969">More...</a><br /></td></tr>
+<tr class="separator:ad83220c40b0a3d020a067b6855f5a969"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae9bee3db2efe14707ec532e326f60de6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#ae9bee3db2efe14707ec532e326f60de6">Particle</a> (std::array&lt; double, 3 &gt; x_arg, std::array&lt; double, 3 &gt; v_arg, double m_arg, double epsilon, double sigma, double stiffness_arg, double bond_length_arg, std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&gt; parallel_Neighbours_arg, std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt;&gt; diagonal_Neighbours_arg, int id, bool <a class="el" href="classParticle.html#a00ccf2ccf8e66465060ec5a8749c23f2">hardcode_flag</a>, int <a class="el" href="classtype.html">type</a>=0)</td></tr>
 <tr class="memdesc:ae9bee3db2efe14707ec532e326f60de6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="classParticle.html">Particle</a> object using the given parameters.  <a href="classParticle.html#ae9bee3db2efe14707ec532e326f60de6">More...</a><br /></td></tr>
 <tr class="separator:ae9bee3db2efe14707ec532e326f60de6"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -102,6 +102,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:accf978be56ac81112bc7e20562eedc97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1804384e5792dd766a5b7fad67903677"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a1804384e5792dd766a5b7fad67903677">getSigma</a> () const</td></tr>
 <tr class="separator:a1804384e5792dd766a5b7fad67903677"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad6535ce9f4e155a7cdbbcaa0c66935fe"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#ad6535ce9f4e155a7cdbbcaa0c66935fe">isWallParticle</a> () const</td></tr>
+<tr class="separator:ad6535ce9f4e155a7cdbbcaa0c66935fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a15fd35b4de0cdc64fbfbe8fe7ae36267"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classVectorDouble3.html">VectorDouble3</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classParticle.html#a15fd35b4de0cdc64fbfbe8fe7ae36267">getXVector</a> () const</td></tr>
 <tr class="memdesc:a15fd35b4de0cdc64fbfbe8fe7ae36267"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the position as a DoubleVector.  <a href="classParticle.html#a15fd35b4de0cdc64fbfbe8fe7ae36267">More...</a><br /></td></tr>
 <tr class="separator:a15fd35b4de0cdc64fbfbe8fe7ae36267"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -238,8 +240,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="abd17e9e13b8ed36738424c79aa14e127"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#abd17e9e13b8ed36738424c79aa14e127">&#9670;&nbsp;</a></span>Particle() <span class="overload">[3/5]</span></h2>
+<a id="a131fc34d7418e72dee1725f964bc6b0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a131fc34d7418e72dee1725f964bc6b0f">&#9670;&nbsp;</a></span>Particle() <span class="overload">[3/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -266,7 +268,13 @@ Public Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>type</em> = <code>0</code>&#160;</td>
+          <td class="paramname"><em>type</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>wall</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -278,8 +286,8 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="afc18f55ea7e516a7ba015fb8920d6551"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afc18f55ea7e516a7ba015fb8920d6551">&#9670;&nbsp;</a></span>Particle() <span class="overload">[4/5]</span></h2>
+<a id="ad83220c40b0a3d020a067b6855f5a969"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad83220c40b0a3d020a067b6855f5a969">&#9670;&nbsp;</a></span>Particle() <span class="overload">[4/5]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -321,7 +329,13 @@ Public Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>type</em> = <code>0</code>&#160;</td>
+          <td class="paramname"><em>type</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>wall</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -864,6 +878,31 @@ Public Attributes</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad6535ce9f4e155a7cdbbcaa0c66935fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6535ce9f4e155a7cdbbcaa0c66935fe">&#9670;&nbsp;</a></span>isWallParticle()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool Particle::isWallParticle </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 </div>

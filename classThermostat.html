@@ -63,6 +63,7 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="#pro-attribs">Protected Attributes</a> &#124;
 <a href="classThermostat-members.html">List of all members</a>  </div>
   <div class="headertitle">
@@ -77,9 +78,10 @@ Inheritance diagram for Thermostat:</div>
  <div class="center">
   <img src="classThermostat.png" usemap="#Thermostat_map" alt=""/>
   <map id="Thermostat_map" name="Thermostat_map">
-<area href="classFakeThermostat.html" alt="FakeThermostat" shape="rect" coords="0,56,118,80"/>
-<area href="classGradualThermostat.html" alt="GradualThermostat" shape="rect" coords="128,56,246,80"/>
-<area href="classSimpleThermostat.html" alt="SimpleThermostat" shape="rect" coords="256,56,374,80"/>
+<area href="classFakeThermostat.html" alt="FakeThermostat" shape="rect" coords="0,56,163,80"/>
+<area href="classGradualThermostat.html" alt="GradualThermostat" shape="rect" coords="173,56,336,80"/>
+<area href="classSimpleThermostat.html" alt="SimpleThermostat" shape="rect" coords="346,56,509,80"/>
+<area href="classTempDifferenceThermostat.html" alt="TempDifferenceThermostat" shape="rect" coords="519,56,682,80"/>
   </map>
 </div></div>
 <table class="memberdecls">
@@ -93,7 +95,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9b15f86ac302c5423724b8839a41c1c2"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a9b15f86ac302c5423724b8839a41c1c2">updateTemperature</a> (<a class="el" href="classParticle.html">Particle</a> &amp;particle)=0</td></tr>
 <tr class="memdesc:a9b15f86ac302c5423724b8839a41c1c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Changes the temperature of the given particle according to the type of the thermostat.  <a href="classThermostat.html#a9b15f86ac302c5423724b8839a41c1c2">More...</a><br /></td></tr>
 <tr class="separator:a9b15f86ac302c5423724b8839a41c1c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae176d3418380f65a171ccbdbd0728387"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#ae176d3418380f65a171ccbdbd0728387">updateState</a> (const std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt; &amp;<a class="el" href="classparticles.html">particles</a>)</td></tr>
+<tr class="memitem:ae176d3418380f65a171ccbdbd0728387"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#ae176d3418380f65a171ccbdbd0728387">updateState</a> (const std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt; &amp;<a class="el" href="classparticles.html">particles</a>)</td></tr>
 <tr class="memdesc:ae176d3418380f65a171ccbdbd0728387"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates the current temperature based on how the particles changed. Needs to be called whenever the particles change.  <a href="classThermostat.html#ae176d3418380f65a171ccbdbd0728387">More...</a><br /></td></tr>
 <tr class="separator:ae176d3418380f65a171ccbdbd0728387"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4885a6792c134529407de0aec82038b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a4885a6792c134529407de0aec82038b9">updateIteration</a> ()</td></tr>
@@ -108,6 +110,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a73b77b0e1f3aaf092e29ea539f93b15e"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a73b77b0e1f3aaf092e29ea539f93b15e">getCurrentTemperature</a> ()</td></tr>
 <tr class="memdesc:a73b77b0e1f3aaf092e29ea539f93b15e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the current temperature of the system.  <a href="classThermostat.html#a73b77b0e1f3aaf092e29ea539f93b15e">More...</a><br /></td></tr>
 <tr class="separator:a73b77b0e1f3aaf092e29ea539f93b15e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
+Protected Member Functions</h2></td></tr>
+<tr class="memitem:a3bc62f0f46d8a26c0614188988cb2a16"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a3bc62f0f46d8a26c0614188988cb2a16">getKineticEnergy</a> (const std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt; &amp;<a class="el" href="classparticles.html">particles</a>) const</td></tr>
+<tr class="memdesc:a3bc62f0f46d8a26c0614188988cb2a16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the kinetic energy of the given particles.  <a href="classThermostat.html#a3bc62f0f46d8a26c0614188988cb2a16">More...</a><br /></td></tr>
+<tr class="separator:a3bc62f0f46d8a26c0614188988cb2a16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab3bd8bf8e06c018200a8d069feb09b58"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#ab3bd8bf8e06c018200a8d069feb09b58">getTemperature</a> (double kineticEnergy, int numParticles) const</td></tr>
+<tr class="memdesc:ab3bd8bf8e06c018200a8d069feb09b58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the temperature based on the kinetic energy.  <a href="classThermostat.html#ab3bd8bf8e06c018200a8d069feb09b58">More...</a><br /></td></tr>
+<tr class="separator:ab3bd8bf8e06c018200a8d069feb09b58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
@@ -257,6 +268,87 @@ Protected Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a3bc62f0f46d8a26c0614188988cb2a16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bc62f0f46d8a26c0614188988cb2a16">&#9670;&nbsp;</a></span>getKineticEnergy()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Thermostat::getKineticEnergy </td>
+          <td>(</td>
+          <td class="paramtype">const std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>particles</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculates the kinetic energy of the given particles. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">particles</td><td>The particles that the energy is supposed to be calculated with. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The kinetic energy of all particles. </dd></dl>
+
+</div>
+</div>
+<a id="ab3bd8bf8e06c018200a8d069feb09b58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab3bd8bf8e06c018200a8d069feb09b58">&#9670;&nbsp;</a></span>getTemperature()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Thermostat::getTemperature </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>kineticEnergy</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>numParticles</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Calculates the temperature based on the kinetic energy. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">kineticEnergy</td><td>Kinetic energy of the system. </td></tr>
+    <tr><td class="paramname">numParticles</td><td>Number of particles. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The calculated temperature. </dd></dl>
+
+</div>
+</div>
 <a id="ad6b1be7cee21dbcae3f45b7a100116a6"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ad6b1be7cee21dbcae3f45b7a100116a6">&#9670;&nbsp;</a></span>initializeBrownianMotion()</h2>
 
@@ -307,6 +399,9 @@ Protected Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Thermostat::updateState </td>
@@ -316,6 +411,11 @@ Protected Attributes</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Updates the current temperature based on how the particles changed. Needs to be called whenever the particles change. </p>
@@ -325,6 +425,8 @@ Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>Reimplemented in <a class="el" href="classTempDifferenceThermostat.html#ac0cc723e41f4203d96e5e7f08cbe4877">TempDifferenceThermostat</a>.</p>
 
 </div>
 </div>
@@ -360,7 +462,7 @@ Protected Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p>Implemented in <a class="el" href="classSimpleThermostat.html#abf11e8537c15ac7362557c3a7eb14270">SimpleThermostat</a>, and <a class="el" href="classGradualThermostat.html#a9b564540fed5743fee9186f6d96ffd57">GradualThermostat</a>.</p>
+<p>Implemented in <a class="el" href="classTempDifferenceThermostat.html#ab54dc9087a985fccea84baf847e73275">TempDifferenceThermostat</a>, <a class="el" href="classSimpleThermostat.html#abf11e8537c15ac7362557c3a7eb14270">SimpleThermostat</a>, and <a class="el" href="classGradualThermostat.html#a9b564540fed5743fee9186f6d96ffd57">GradualThermostat</a>.</p>
 
 </div>
 </div>

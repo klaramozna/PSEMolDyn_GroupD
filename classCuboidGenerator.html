@@ -82,9 +82,9 @@ Inheritance diagram for CuboidGenerator:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a7c3dda26ef4d28b06f2631c752f76c2f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCuboidGenerator.html#a7c3dda26ef4d28b06f2631c752f76c2f">CuboidGenerator</a> (std::array&lt; double, 3 &gt; corner, int n1, int n2, int n3, double particleDistance, double mass, std::array&lt; double, 3 &gt; velocity, double epsilon=1, double sigma=1)</td></tr>
-<tr class="memdesc:a7c3dda26ef4d28b06f2631c752f76c2f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="classCuboidGenerator.html">CuboidGenerator</a> object initializing it with the given parameters.  <a href="classCuboidGenerator.html#a7c3dda26ef4d28b06f2631c752f76c2f">More...</a><br /></td></tr>
-<tr class="separator:a7c3dda26ef4d28b06f2631c752f76c2f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6633d29fb9f74aceb84e7c4d9bad00e0"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCuboidGenerator.html#a6633d29fb9f74aceb84e7c4d9bad00e0">CuboidGenerator</a> (std::array&lt; double, 3 &gt; corner, int n1, int n2, int n3, double particleDistance, double mass, std::array&lt; double, 3 &gt; velocity, double epsilon=1, double sigma=1, bool wall=false)</td></tr>
+<tr class="memdesc:a6633d29fb9f74aceb84e7c4d9bad00e0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="classCuboidGenerator.html">CuboidGenerator</a> object initializing it with the given parameters.  <a href="classCuboidGenerator.html#a6633d29fb9f74aceb84e7c4d9bad00e0">More...</a><br /></td></tr>
+<tr class="separator:a6633d29fb9f74aceb84e7c4d9bad00e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a46030b25028cfb7d3e7f4ff862e8a0ed"><td class="memItemLeft" align="right" valign="top">std::vector&lt; std::shared_ptr&lt; <a class="el" href="classParticle.html">Particle</a> &gt; &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classCuboidGenerator.html#a46030b25028cfb7d3e7f4ff862e8a0ed">generateParticles</a> (int <a class="el" href="classtype.html">type</a>=0) override</td></tr>
 <tr class="memdesc:a46030b25028cfb7d3e7f4ff862e8a0ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a cuboid of particles.  <a href="classCuboidGenerator.html#a46030b25028cfb7d3e7f4ff862e8a0ed">More...</a><br /></td></tr>
 <tr class="separator:a46030b25028cfb7d3e7f4ff862e8a0ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -104,8 +104,8 @@ Additional Inherited Members</h2></td></tr>
 <tr class="separator:aff225456632034f5d5c457a4e98dd8be inherit pro_attribs_classParticleGenerator"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a7c3dda26ef4d28b06f2631c752f76c2f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7c3dda26ef4d28b06f2631c752f76c2f">&#9670;&nbsp;</a></span>CuboidGenerator()</h2>
+<a id="a6633d29fb9f74aceb84e7c4d9bad00e0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6633d29fb9f74aceb84e7c4d9bad00e0">&#9670;&nbsp;</a></span>CuboidGenerator()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -162,7 +162,13 @@ Additional Inherited Members</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">double&#160;</td>
-          <td class="paramname"><em>sigma</em> = <code>1</code>&#160;</td>
+          <td class="paramname"><em>sigma</em> = <code>1</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>wall</em> = <code>false</code>&#160;</td>
         </tr>
         <tr>
           <td></td>

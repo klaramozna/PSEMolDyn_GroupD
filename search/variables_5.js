@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['log_5flevel_5fset_1410',['log_level_set',['../namespaceLogger.html#a450392648f0b5e99fc71b3b657c07b0a',1,'Logger']]]
+  ['log_5flevel_5fset_1439',['log_level_set',['../namespaceLogger.html#a450392648f0b5e99fc71b3b657c07b0a',1,'Logger']]]
 ];
