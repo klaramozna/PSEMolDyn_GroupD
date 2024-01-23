@@ -96,6 +96,12 @@ public:
     void applyToPairs(const std::function<void(Particle&, Particle&)>& function) override;
 
     /**
+     * @brief Adds the particle pointed to by the given pointer. IMPORTANT: copy is stored, not the given object
+     * @param p Pointer to the particle to be added.
+     */
+    void addParticlePointer(std::shared_ptr<Particle> p) override;
+
+    /**
      * @brief Implements an iterator that simulated a nested loop (two for loops), but skips the case where the particle in the outer loop is the same as the particle in the inner loop.
      */
     class PairIterator {

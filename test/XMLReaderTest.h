@@ -4,7 +4,7 @@
 #include <string>
 
 #include "../src/IO/input/XMLReader.h"
-#include "../src/Particles/DirectSumContainer.h"
+#include "../src/Particles/LinkedCellContainer.h"
 #include "../src/IO/input/SimParameters.h"
 
 class XMLReaderTest : public testing::Test {

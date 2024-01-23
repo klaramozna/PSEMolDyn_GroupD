@@ -40,12 +40,13 @@ public:
      * @param targetTemp Target temperature of molecules.
      * @param maxChange Maximum temperature change per iteration.
      * @param cycleLength The number of cycles in which thermostat is periodically applied.
-     * @param gravity_factor the gravity factor g_grav which adds a gravitational force G (along the y-axis)
+     * @param gravity_factor_val the gravity factor g_grav which adds a gravitational force G
+     * @param isMembrane_val boolean true when membrane is present 
      */
     SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                   bool testing_val, int log_level_val,
                   const std::string& input_path_val, const std::string& input_mode_val,
-                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, const std::string& thermostatType, bool brownianMotion, double gravity_factor_val  = 0);
+                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, const std::string& thermostatType, bool brownianMotion, std::array<double,3>  gravity_factor_val  = {0, 0, 0}, bool isMembrane_val= false, double hardcoded_force_end_time =150, std::array<double,3> hardcoded_pull_factors = {0, 0, 0});
 
     SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                   bool testing_val, int log_level_val,
@@ -78,10 +79,13 @@ public:
     double getThermostatCycleLength()const{return  thermostatCycleLength;}
     double getTargetTemperature()const{return targetTemperature;}
     double getMaxTemperatureChange()const{return maxTemperatureChange;}
-    double getGravityFactor() const {return gravity_factor;}
+    std::array<double,3>  getGravityFactor() const {return gravity_factor;}
     std::string getThermostatType() const {return thermostatType;}
     bool getBrownianMotion() const {return brownianMotion;}
     int getDim(){return dim;};
+    bool isMembrane() const {return is_Membrane;}
+    double getHardcodedForceEndTime() const {return hardcoded_force_end_time;}
+    std::array<double,3>  getHardcodedPullFactors() const {return hardcoded_pull_factors;}
 
     // Setters for modifying parameter values
     void setEndTime(double val) { end_time = val; }
@@ -105,11 +109,14 @@ public:
     void setThermostatCycleLength(int val){thermostatCycleLength = val;}
     void setTargetTemperature(double val){targetTemperature = val;}
     void setMaxTemperatureChange(double val){maxTemperatureChange = val;}
-    void setGravityFactor (double val) {gravity_factor = val;}
+    void setGravityFactor (std::array<double,3>  val) {gravity_factor = val;}
     void setThermostatType (const std::string& thermostatType_val){thermostatType = thermostatType_val;}
     void setBrownianMotion(bool val){brownianMotion = val;}
     void setDimension(int val){dim = val;};
+    void setIsMembrane (bool val) {is_Membrane = val;}
+    void setHardcodedForceEndTime(double val) {hardcoded_force_end_time = val;}
     bool operator==(const SimParameters &other) const;
+    void setHardcodedPullFactors(std::array<double,3>  val) { hardcoded_pull_factors = val;}
 
 
 
@@ -220,9 +227,9 @@ private:
     double maxTemperatureChange;
 
     /**
-     * @brief g_grav which adds a gravitational force G (along the y-axis)
+     * @brief g_grav which adds a gravitational force G 
      */
-    double gravity_factor = 0;
+    std::array<double,3>  gravity_factor = {0, 0, 0};
 
     /**
      * @brief none, simple or gradual depending on the type of the thermostat.
@@ -238,6 +245,18 @@ private:
      * @brief dimension of the simulation (2 or 3)
      */
      int dim;
+    /**
+     * @brief membrane present or not
+     */
+    bool is_Membrane = false;
+    /**
+     * @brief end time of hard coded pull force
+     */
+    double hardcoded_force_end_time;
 
+    /**
+     * @brief pull force factors
+     */
+    std::array<double,3> hardcoded_pull_factors = {0, 0, 0};
 
 };

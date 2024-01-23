@@ -9,6 +9,7 @@
 
 #include <array>
 #include <string>
+#include <memory>
 #include "../utils/VectorDouble3.h"
 
 class Particle {
@@ -57,7 +58,32 @@ private:
     /**
      * @brief Sigma for lennard jones forces.
      */
-    double sigma;
+    double sigma;   
+
+    /**
+     * @brief k: the stiffness constant
+     */
+    double stiffness;
+
+    /**
+     * @brief  r0: the average bond length of a molecule pair
+     */
+    double bond_length;
+
+    /**    
+     * pointers to the direct parallel neighbours of this particle
+     */
+    std::vector<std::shared_ptr<Particle>> parallel_Neighbours;
+
+    /**
+     * pointers to the direct diagonal neighbours of this particle
+     */
+    std::vector<std::shared_ptr<Particle>> diagonal_Neighbours;
+    /**
+     * unique identifier of each particle (can be used in membrane to keep track of neighbours) 
+     */
+    int id;
+
 
 public:
     explicit Particle(int type = 0);
@@ -81,6 +107,26 @@ public:
      */
     Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg, double m_arg, double epsilon, double sigma,
              int type = 0): x{x_arg}, v{v_arg}, f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, m{m_arg}, type{type}, epsilon{epsilon}, sigma{sigma} {
+        markedForMirroring = false;
+        markedForDeleting = false;
+    };
+
+    /**
+     * @brief Creates a Particle object using the given parameters.
+     * @param x_arg The position of the particle.
+     * @param v_arg The velocity of the particle.
+     * @param m_arg The mass of the particle.
+     * @param epsilon The epsilon (for Lennard-Jones calculation) of the particle.
+     * @param sigma The sigma (for Lennard-Jones calculation) of the particle.
+     * @param stiffness_arg parallel neighbours 
+     * @param bond_length_arg diagonal neighbours
+     * @param parallel_Neighbours_arg parallel neighbours 
+     * @param diagonal_Neighbours_arg diagonal neighbours
+     * @param id_arg unique id of this particle
+     * @param type The type of the particle.
+     */
+    Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg, double m_arg, double epsilon, double sigma,
+            double stiffness_arg, double bond_length_arg, std::vector<std::shared_ptr<Particle>> parallel_Neighbours_arg, std::vector<std::shared_ptr<Particle>> diagonal_Neighbours_arg, int id, bool hardcode_flag, int type = 0): x{x_arg}, v{v_arg}, f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, m{m_arg}, epsilon{epsilon}, sigma{sigma},stiffness{stiffness_arg}, bond_length{bond_length_arg} ,parallel_Neighbours{parallel_Neighbours_arg}, diagonal_Neighbours{diagonal_Neighbours_arg},id {id}, hardcode_flag{hardcode_flag}, type{type} {
         markedForMirroring = false;
         markedForDeleting = false;
     };
@@ -128,6 +174,26 @@ public:
     double getM() const;
 
     int getType() const;
+
+    double getStiffness() const;
+
+    double getBondLength() const;
+
+    int getId() const;
+
+    bool getHardcodeFlag() const;
+
+    /**
+     * @brief Returns a vector with the pointers to the parallel neighbours of this particle
+     * @return Vector with these pointers.
+     */
+    std::vector<std::shared_ptr<Particle>> getParallelNeighbours() const;
+
+    /**
+     * @brief Returns a vector with the pointers to the diagonal neighbours of this particle
+     * @return Vector with these pointers.
+     */
+    std::vector<std::shared_ptr<Particle>> getDiagonalNeighbours() const;
 
     /**
      * @brief Sets the values of the position based on the given vector.
@@ -185,6 +251,18 @@ public:
      */
     void setOldF(double x, double y, double z);
 
+
+    void setParallelNeighbours(std::vector<std::shared_ptr<Particle>> pointers_parallel);
+
+    void setDiagonalNeighbours(std::vector<std::shared_ptr<Particle>> pointers_diagonal);
+
+    void setStiffness(double val);
+
+    void setBondLength(double val);
+
+    void setId(int val);
+
+
     /**
      * @brief Sets the value of markedForMirroring to true
      *
@@ -225,6 +303,8 @@ public:
     bool operator!=(const Particle& other) const;
 
     bool markedForDeleting;
+
+    bool hardcode_flag;
 };
 
 std::ostream &operator<<(std::ostream &stream, Particle &p);

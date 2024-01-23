@@ -11,6 +11,8 @@ Simulation/Physics/GravitationalForce.cpp
         Particles/ParticleGenerator.h
         utils/CuboidGenerator.cpp
         utils/CuboidGenerator.h
+        utils/MembraneGenerator.cpp
+        utils/MembraneGenerator.h
         utils/SphereGenerator.cpp
         utils/SphereGenerator.h
         Particles/ParticleContainer.h
@@ -43,6 +45,8 @@ Simulation/Physics/GravitationalForce.cpp
         Simulation/Physics/MixingRuleLennardJones.cpp
         Simulation/Physics/MixingRuleLennardJones.h
         Simulation/Physics/GravityForce.cpp
+        Simulation/Physics/HardcodedPullForce.cpp
+        Simulation/Physics/TruncatedLennardJones.cpp
         Simulation/FakeThermostat.cpp
         Simulation/FakeThermostat.h
         utils/MaxwellBoltzmannDistribution.h

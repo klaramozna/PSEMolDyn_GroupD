@@ -7,6 +7,7 @@
 #include <cmath>
 #include <iostream>
 #include <memory>
+#include <algorithm>
 
 LinkedCellContainer::LinkedCellContainer(Boundary boundary, double cutoffRadius,
                                          const std::vector<Particle>& particles) : boundary{boundary}, grid{}, cutoffRadius{cutoffRadius} {
@@ -56,6 +57,17 @@ std::vector<Particle> LinkedCellContainer::getParticleVector() {
         }
     }
     return result;
+}
+
+Particle LinkedCellContainer::getParticleWithId(int id) {
+    for (auto &particle : getParticleVector()) {
+        if (particle.getId() == id) 
+            return particle;
+    }
+    //return fake particle
+    Particle p{};
+    p.setId(-1);
+    return p;
 }
 
 void LinkedCellContainer::updateCells() {
@@ -283,13 +295,6 @@ void LinkedCellContainer::addParticlePointer(std::shared_ptr<Particle> p) {
 
     grid[getParticleIndex(*p)].addParticle(p);
     size++;
-}
-
-void LinkedCellContainer::addParticlesPointer(std::vector<std::shared_ptr<Particle>> particles) {
-    for(auto const & pointer : particles){
-        addParticlePointer(pointer);
-        size++;
-    }
 }
 
 

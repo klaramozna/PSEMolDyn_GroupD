@@ -7,7 +7,12 @@
 
 class ParticleReader {
 public:
-    virtual void readFile(ParticleContainer &container, std::string &filename){};
-    virtual void readFile(ParticleContainer &container, std::string &filename, SimParameters& SimParameters){};
+    virtual void readFile (std::string &filename, SimParameters& simParameters){};
+
+    std::vector<std::shared_ptr<Particle>> getParticles () {
+        return particles;
+    }
+    
+    std::vector<std::shared_ptr<Particle>> particles;
 };
 

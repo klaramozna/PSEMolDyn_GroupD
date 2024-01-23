@@ -36,7 +36,7 @@ private:
     bool testing;
     int log_level;
     int write_frequency;
-    double gravity_factor;
+    std::array<double,3> gravity_factor;
     std::string force;
     std::string store_checkpoint_path;
     std::string load_checkpoint_path;

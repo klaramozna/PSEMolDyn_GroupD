@@ -31,7 +31,7 @@
 
 <xs:complexType name="gravity_t">
     <xs:sequence>
-        <xs:element name="gravity_factor" type="xs:double"/>
+        <xs:element name="gravity_factor" type="common:double_3d"/>
     </xs:sequence>
 </xs:complexType>
 
@@ -42,6 +42,7 @@
     <xs:element name="lennard" type="lennardJones_t"/>
     <xs:element name="grav" type="xs:string"/>
     <xs:element name="MixingRuleLennardJones" type="xs:string"/>
+    <xs:element name="TruncatedLennardJones" type="xs:string"/>
   </xs:choice>
 </xs:complexType>
 
@@ -84,6 +85,53 @@
         <xs:element name="epsilon_cuboid" type="common:nonNegativeDouble" minOccurs="0" default="1.0"/>
         <xs:element name="sigma_cuboid" type = "common:nonNegativeDouble" minOccurs="0" default="1.0"/>
     </xs:sequence>
+  </xs:complexType> 
+
+  <xs:complexType name="Membrane">
+    <xs:sequence>
+      <xs:element name="lower-left-coord" type="common:double_3d"/>
+      <xs:element name="number-of-particles" type="common:int_3d"/>
+      <xs:element name="distance" type="common:nonNegativeDouble"/>
+      <xs:element name="mass" type="common:nonNegativeDouble"/>
+      <xs:element name="initial_velocity" type="common:double_3d"/>
+      <xs:element name="epsilon_cuboid" type="common:nonNegativeDouble" minOccurs="0" default="1.0"/>
+      <xs:element name="sigma_cuboid" type = "common:nonNegativeDouble" minOccurs="0" default="1.0"/>
+      <xs:element name= "stiffness" type = "common:nonNegativeDouble" default="300"/>
+      <xs:element name= "bond_length" type = "common:nonNegativeDouble" default="2.2"/>
+      <!-- option to hard code a force: which particles, until which time and which force ? -->
+      <xs:element name="hardcoded_force" minOccurs="0" maxOccurs="unbounded">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="end_time" type="xs:double" maxOccurs="1" minOccurs="1" default="150"/>
+                <xs:element name="force_factors">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="x" type="xs:double" maxOccurs="1" minOccurs="1"/>
+                            <xs:element name="y" type="xs:double" maxOccurs="1" minOccurs="1"/>
+                            <xs:element name="z" type="xs:double" maxOccurs="1" minOccurs="1"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="particles" minOccurs="0" maxOccurs="1">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="indices" minOccurs="1" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="x" type="xs:int" maxOccurs="1" minOccurs="1"/>
+                                        <xs:element name="y" type="xs:int" maxOccurs="1" minOccurs="1"/>
+                                        <xs:element name="z" type="xs:int" maxOccurs="1" minOccurs="1"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+  </xs:sequence>
   </xs:complexType> 
 
   <xs:complexType name="Sphere">
@@ -142,6 +190,8 @@
         <!-- Provide Particles -->
         <xs:element name="cuboid" type="Cuboid" minOccurs="0" maxOccurs="unbounded"/>
         <xs:element name="sphere" type="Sphere" minOccurs="0" maxOccurs="unbounded"/>
+        <xs:element name="membrane" type="Membrane" minOccurs="0" maxOccurs="unbounded"/>
+
         
         <!-- IO -->
         <xs:element name="base_name" type="xs:string" minOccurs="0" maxOccurs="1" default="MD_vtk"/>

@@ -4,14 +4,14 @@
 
 class GravityForce: public OneParticleForceCalculation {
 public:
-    GravityForce(double gravity_factor);
+    GravityForce(std::array<double,3>  gravity_factor);
     VectorDouble3 CalculateForce(const Particle& p) override;
     ~GravityForce() = default;
 
-    double getGravityFactor() const {return gravity_factor;}
-    void setGravityFactor(double val) {gravity_factor = val;}
+    std::array<double,3> getGravityFactor() const {return gravity_factor;}
+    void setGravityFactor(std::array<double,3>  val) {gravity_factor = val;}
 private:
-    double gravity_factor;
+    std::array<double,3> gravity_factor;
 };
 
 

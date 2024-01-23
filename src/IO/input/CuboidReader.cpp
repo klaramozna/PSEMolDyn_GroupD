@@ -8,7 +8,7 @@
 #include "../Logger.h"
 
 
-void CuboidReader::readFile(ParticleContainer &container, std::string &filename) {
+void CuboidReader::readFile (std::string &filename, SimParameters& simParameters) {
     std::ifstream inputFile(filename);
     std::string line;
 
@@ -50,7 +50,8 @@ void CuboidReader::readFile(ParticleContainer &container, std::string &filename)
             }
 
             CuboidGenerator generator = parseLine(line);
-            container.addParticles(generator.generateParticles());
+            std::vector<std::shared_ptr<Particle>> generatedParticles = generator.generateParticles(i);
+            particles.insert(particles.end(), generatedParticles.begin(), generatedParticles.end());
         }
     } catch (const std::exception &ex) {
         Logger::err_logger->error("Error: {}", ex.what());

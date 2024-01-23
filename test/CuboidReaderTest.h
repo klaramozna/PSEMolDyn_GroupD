@@ -9,12 +9,14 @@
 
 #include "../src/IO/input/CuboidReader.h"
 #include "../src/Particles/DirectSumContainer.h"
+#include "../src/IO/input/SimParameters.h"
 
 class CuboidReaderTest : public testing::Test {
 protected:
     std::string filename;
     DirectSumContainer expectedContainer;
     DirectSumContainer receivedContainer;
+    SimParameters simParameters;
 
     void SetUp() override;
 };

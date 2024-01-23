@@ -24,7 +24,6 @@ CL::CL() {
         }), "step size between iterations")
         ("velocity,v", po::value<double>(&averageVelo), "average Brownian motion velocity")
         ("force,f", po::value<std::string>(&force), "Select between force calculation engines (lennard or grav or MixingRuleLennardJones)")
-        ("gravity,g", po::value<double>(&gravity_factor), "Select a gravity factor value")
         ("testing,t", po::value<bool>(&testing), "enable testing mode for benchmarking")
         ("log_level,l", po::value<int>(&log_level)->notifier([this](const int& value) {
             this->validate_range(value, "log_level");
@@ -170,9 +169,6 @@ int CL::parse_arguments(int argc, char *argsv[], SimParameters& simParameters){
     }
     if (vm.count("write_frequency")){
         simParameters.setWriteFrequency(write_frequency);
-    }
-    if (vm.count("gravity")){
-        simParameters.setGravityFactor(gravity_factor);
     }
     return 0;
 }
