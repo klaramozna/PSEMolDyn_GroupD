@@ -30,7 +30,7 @@ public:
      * @brief Updates the current temperature based on how the particles changed. Needs to be called whenever the particles change.
      * @param particles The current state of the particles.
      */
-    void updateState(const std::vector<Particle>& particles);
+    virtual void updateState(const std::vector<Particle>& particles);
 
     /**
      * @brief Needs to be called exactly once per iteration, to help the thermostat keep track of the iterations. Needs to be called after calling updateTemperature.
@@ -66,21 +66,6 @@ private:
      */
     int dim;
 
-    /**
-     * @brief Calculates the kinetic energy of the given particles.
-     * @param particles The particles that the energy is supposed to be calculated with.
-     * @return The kinetic energy of all particles.
-     */
-    double getKineticEnergy(const std::vector<Particle>& particles) const;
-
-    /**
-     * @brief Calculates the temperature based on the kinetic energy.
-     * @param kineticEnergy Kinetic energy of the system.
-     * @param numParticles Number of particles.
-     * @return The calculated temperature.
-     */
-    double getTemperature(double kineticEnergy, int numParticles) const;
-
 protected:
 
     /**
@@ -102,6 +87,21 @@ protected:
      * @brief Target temperature of the system.
      */
     double targetTemperature;
+
+    /**
+     * @brief Calculates the kinetic energy of the given particles.
+     * @param particles The particles that the energy is supposed to be calculated with.
+     * @return The kinetic energy of all particles.
+     */
+    double getKineticEnergy(const std::vector<Particle>& particles) const;
+
+    /**
+     * @brief Calculates the temperature based on the kinetic energy.
+     * @param kineticEnergy Kinetic energy of the system.
+     * @param numParticles Number of particles.
+     * @return The calculated temperature.
+     */
+    double getTemperature(double kineticEnergy, int numParticles) const;
 
 
 };

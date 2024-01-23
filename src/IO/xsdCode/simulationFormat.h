@@ -570,6 +570,7 @@ class gravity_t;
 class ForceType;
 class simpleThermostatType;
 class gradualThermostatType;
+class tempDiffThermostatType;
 class ThermostatType;
 class Cuboid;
 class Membrane;
@@ -2195,6 +2196,278 @@ class gradualThermostatType: public ::xml_schema::type
 };
 
 /**
+ * @brief Class corresponding to the %tempDiffThermostatType schema type.
+ *
+ * @nosubgrouping
+ */
+class tempDiffThermostatType: public ::xml_schema::type
+{
+  public:
+  /**
+   * @name initTemperature
+   *
+   * @brief Accessor and modifier functions for the %initTemperature
+   * required element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::commonSchema::nonNegativeDouble initTemperature_type;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< initTemperature_type, char > initTemperature_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element.
+   *
+   * @return A constant reference to the element.
+   */
+  const initTemperature_type&
+  initTemperature () const;
+
+  /**
+   * @brief Return a read-write reference to the element.
+   *
+   * @return A reference to the element.
+   */
+  initTemperature_type&
+  initTemperature ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  initTemperature (const initTemperature_type& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly
+   * instead of making a copy.
+   */
+  void
+  initTemperature (::std::unique_ptr< initTemperature_type > p);
+
+  //@}
+
+  /**
+   * @name targetTemperature
+   *
+   * @brief Accessor and modifier functions for the %targetTemperature
+   * required element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::commonSchema::nonNegativeDouble targetTemperature_type;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< targetTemperature_type, char > targetTemperature_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element.
+   *
+   * @return A constant reference to the element.
+   */
+  const targetTemperature_type&
+  targetTemperature () const;
+
+  /**
+   * @brief Return a read-write reference to the element.
+   *
+   * @return A reference to the element.
+   */
+  targetTemperature_type&
+  targetTemperature ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  targetTemperature (const targetTemperature_type& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly
+   * instead of making a copy.
+   */
+  void
+  targetTemperature (::std::unique_ptr< targetTemperature_type > p);
+
+  //@}
+
+  /**
+   * @name thermostatCycleLength
+   *
+   * @brief Accessor and modifier functions for the %thermostatCycleLength
+   * required element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::commonSchema::nonNegativeInteger thermostatCycleLength_type;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< thermostatCycleLength_type, char > thermostatCycleLength_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element.
+   *
+   * @return A constant reference to the element.
+   */
+  const thermostatCycleLength_type&
+  thermostatCycleLength () const;
+
+  /**
+   * @brief Return a read-write reference to the element.
+   *
+   * @return A reference to the element.
+   */
+  thermostatCycleLength_type&
+  thermostatCycleLength ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  thermostatCycleLength (const thermostatCycleLength_type& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly
+   * instead of making a copy.
+   */
+  void
+  thermostatCycleLength (::std::unique_ptr< thermostatCycleLength_type > p);
+
+  //@}
+
+  /**
+   * @name Constructors
+   */
+  //@{
+
+  /**
+   * @brief Create an instance from the ultimate base and
+   * initializers for required elements and attributes.
+   */
+  tempDiffThermostatType (const initTemperature_type&,
+                          const targetTemperature_type&,
+                          const thermostatCycleLength_type&);
+
+  /**
+   * @brief Create an instance from a DOM element.
+   *
+   * @param e A DOM element to extract the data from.
+   * @param f Flags to create the new instance with.
+   * @param c A pointer to the object that will contain the new
+   * instance.
+   */
+  tempDiffThermostatType (const ::xercesc::DOMElement& e,
+                          ::xml_schema::flags f = 0,
+                          ::xml_schema::container* c = 0);
+
+  /**
+   * @brief Copy constructor.
+   *
+   * @param x An instance to make a copy of.
+   * @param f Flags to create the copy with.
+   * @param c A pointer to the object that will contain the copy.
+   *
+   * For polymorphic object models use the @c _clone function instead.
+   */
+  tempDiffThermostatType (const tempDiffThermostatType& x,
+                          ::xml_schema::flags f = 0,
+                          ::xml_schema::container* c = 0);
+
+  /**
+   * @brief Copy the instance polymorphically.
+   *
+   * @param f Flags to create the copy with.
+   * @param c A pointer to the object that will contain the copy.
+   * @return A pointer to the dynamically allocated copy.
+   *
+   * This function ensures that the dynamic type of the instance is
+   * used for copying and should be used for polymorphic object
+   * models instead of the copy constructor.
+   */
+  virtual tempDiffThermostatType*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  /**
+   * @brief Copy assignment operator.
+   *
+   * @param x An instance to make a copy of.
+   * @return A reference to itself.
+   *
+   * For polymorphic object models use the @c _clone function instead.
+   */
+  tempDiffThermostatType&
+  operator= (const tempDiffThermostatType& x);
+
+  //@}
+
+  /**
+   * @brief Destructor.
+   */
+  virtual 
+  ~tempDiffThermostatType ();
+
+  // Implementation.
+  //
+
+  //@cond
+
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  ::xsd::cxx::tree::one< initTemperature_type > initTemperature_;
+  ::xsd::cxx::tree::one< targetTemperature_type > targetTemperature_;
+  ::xsd::cxx::tree::one< thermostatCycleLength_type > thermostatCycleLength_;
+
+  //@endcond
+};
+
+/**
  * @brief Class corresponding to the %ThermostatType schema type.
  *
  * @nosubgrouping
@@ -2431,6 +2704,82 @@ class ThermostatType: public ::xml_schema::type
   //@}
 
   /**
+   * @name tempDiff
+   *
+   * @brief Accessor and modifier functions for the %tempDiff
+   * optional element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::tempDiffThermostatType tempDiff_type;
+
+  /**
+   * @brief Element optional container type.
+   */
+  typedef ::xsd::cxx::tree::optional< tempDiff_type > tempDiff_optional;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< tempDiff_type, char > tempDiff_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element
+   * container.
+   *
+   * @return A constant reference to the optional container.
+   */
+  const tempDiff_optional&
+  tempDiff () const;
+
+  /**
+   * @brief Return a read-write reference to the element container.
+   *
+   * @return A reference to the optional container.
+   */
+  tempDiff_optional&
+  tempDiff ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  tempDiff (const tempDiff_type& x);
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x An optional container with the new value to set.
+   *
+   * If the value is present in @a x then this function makes a copy 
+   * of this value and sets it as the new value of the element.
+   * Otherwise the element container is set the 'not present' state.
+   */
+  void
+  tempDiff (const tempDiff_optional& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly instead
+   * of making a copy.
+   */
+  void
+  tempDiff (::std::unique_ptr< tempDiff_type > p);
+
+  //@}
+
+  /**
    * @name Constructors
    */
   //@{
@@ -2514,6 +2863,7 @@ class ThermostatType: public ::xml_schema::type
   none_optional none_;
   simple_optional simple_;
   gradual_optional gradual_;
+  tempDiff_optional tempDiff_;
 
   //@endcond
 };
@@ -2985,6 +3335,79 @@ class Cuboid: public ::xml_schema::type
   //@}
 
   /**
+   * @name wall
+   *
+   * @brief Accessor and modifier functions for the %wall
+   * optional element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::xml_schema::boolean wall_type;
+
+  /**
+   * @brief Element optional container type.
+   */
+  typedef ::xsd::cxx::tree::optional< wall_type > wall_optional;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< wall_type, char > wall_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element
+   * container.
+   *
+   * @return A constant reference to the optional container.
+   */
+  const wall_optional&
+  wall () const;
+
+  /**
+   * @brief Return a read-write reference to the element container.
+   *
+   * @return A reference to the optional container.
+   */
+  wall_optional&
+  wall ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  wall (const wall_type& x);
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x An optional container with the new value to set.
+   *
+   * If the value is present in @a x then this function makes a copy 
+   * of this value and sets it as the new value of the element.
+   * Otherwise the element container is set the 'not present' state.
+   */
+  void
+  wall (const wall_optional& x);
+
+  /**
+   * @brief Return the default value for the element.
+   *
+   * @return The element's default value.
+   */
+  static wall_type
+  wall_default_value ();
+
+  //@}
+
+  /**
    * @name Constructors
    */
   //@{
@@ -3090,6 +3513,7 @@ class Cuboid: public ::xml_schema::type
   ::xsd::cxx::tree::one< initial_velocity_type > initial_velocity_;
   epsilon_cuboid_optional epsilon_cuboid_;
   sigma_cuboid_optional sigma_cuboid_;
+  wall_optional wall_;
 
   //@endcond
 };

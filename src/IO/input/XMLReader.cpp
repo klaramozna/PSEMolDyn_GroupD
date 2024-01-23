@@ -95,6 +95,14 @@ void XMLReader::readFile(std::string &filename, SimParameters& SimParameters) {
                 SimParameters.setTargetTemperature(thermostat.targetTemperature());
                 SimParameters.setMaxTemperatureChange(thermostat.maxTemperatureChange());
             }
+            else if (sim->thermostat()->tempDiff()){
+                tempDiffThermostatType& thermostat = *(sim->thermostat()->tempDiff());
+                Logger::console->debug("Reading thermostat type 4 (tempDiff) from XML");
+                SimParameters.setThermostatType("tempDiff");
+                SimParameters.setInitTemperature(thermostat.initTemperature());
+                SimParameters.setThermostatCycleLength(thermostat.thermostatCycleLength());
+                SimParameters.setTargetTemperature(thermostat.targetTemperature());
+            }
         }
 
         if (sim->gravity().present()) {
@@ -118,6 +126,7 @@ void XMLReader::readFile(std::string &filename, SimParameters& SimParameters) {
             double mass = cuboid.mass();
             double epsilon = cuboid.epsilon_cuboid_default_value();
             double sigma = cuboid.sigma_cuboid_default_value();
+            bool isWall = cuboid.wall().present() ? cuboid.wall().get() : cuboid.wall_default_value();
             if (cuboid.epsilon_cuboid().present()){
                 epsilon = cuboid.epsilon_cuboid().get();
             }
@@ -125,7 +134,7 @@ void XMLReader::readFile(std::string &filename, SimParameters& SimParameters) {
                 sigma = cuboid.sigma_cuboid().get();
             }
             std::array<double, 3> velocity = {cuboid.initial_velocity().x(), cuboid.initial_velocity().y(), cuboid.initial_velocity().z()};
-            CuboidGenerator generator {lowerLeftCoord, n1, n2, n3, distance, mass, velocity, epsilon, sigma};
+            CuboidGenerator generator {lowerLeftCoord, n1, n2, n3, distance, mass, velocity, epsilon, sigma, isWall};
             particles = generator.generateParticles(i);
             i++;
         }

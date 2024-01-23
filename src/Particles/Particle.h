@@ -85,6 +85,11 @@ private:
     int id;
 
 
+    /**
+     * @brief Indicates if the particle is a wall-particle (not affected by thermostat, does not move etc.)
+     */
+    bool isWall;
+
 public:
     explicit Particle(int type = 0);
 
@@ -94,7 +99,7 @@ public:
             // for visualization, we need always 3 coordinates
             // -> in case of 2d, we use only the first and the second
             std::array<double, 3> x_arg, std::array<double, 3> v_arg, double m_arg,
-            int type = 0);
+            int type = 0, bool wall = false);
 
     /**
      * @brief Creates a Particle object using the given parameters.
@@ -106,9 +111,10 @@ public:
      * @param type The type of the particle.
      */
     Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg, double m_arg, double epsilon, double sigma,
-             int type = 0): x{x_arg}, v{v_arg}, f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, m{m_arg}, type{type}, epsilon{epsilon}, sigma{sigma} {
+             int type = 0, bool wall = false): x{x_arg}, v{v_arg}, f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, m{m_arg}, type{type}, epsilon{epsilon}, sigma{sigma} {
         markedForMirroring = false;
         markedForDeleting = false;
+        isWall = wall;
     };
 
     /**
@@ -146,6 +152,8 @@ public:
     double getEpsilon() const{return epsilon;}
 
     double getSigma() const{return sigma;}
+
+    bool isWallParticle() const{return isWall;};
 
     /**
      * @brief Returns the position as a DoubleVector.

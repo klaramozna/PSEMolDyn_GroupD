@@ -27,6 +27,7 @@
 #include "Simulation/SimpleThermostat.h"
 #include "Simulation/GradualThermostat.h"
 #include "Simulation/FakeThermostat.h"
+#include "Simulation/TempDifferenceThermostat.h"
 
 /* Logging */
 #include "IO/Logger.h"
@@ -112,6 +113,9 @@ int main(int argc, char *argsv[]) {
     }
     if(simParameters.getThermostatType() == "gradual"){
         thermostat = std::make_unique<GradualThermostat>(simParameters.getInitTemperature(), simParameters.getTargetTemperature(), simParameters.getThermostatCycleLength(), simParameters.getDim(), simParameters.getMaxTemperatureChange());
+    }
+    if(simParameters.getThermostatType() == "tempDiff"){
+        thermostat = std::make_unique<TempDifferenceThermostat>(simParameters.getInitTemperature(), simParameters.getTargetTemperature(), simParameters.getThermostatCycleLength(), simParameters.getDim());
     }
 
     // Initializing boundary

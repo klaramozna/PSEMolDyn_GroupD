@@ -457,6 +457,82 @@ thermostatCycleLength (::std::unique_ptr< thermostatCycleLength_type > x)
 }
 
 
+// tempDiffThermostatType
+// 
+
+const tempDiffThermostatType::initTemperature_type& tempDiffThermostatType::
+initTemperature () const
+{
+  return this->initTemperature_.get ();
+}
+
+tempDiffThermostatType::initTemperature_type& tempDiffThermostatType::
+initTemperature ()
+{
+  return this->initTemperature_.get ();
+}
+
+void tempDiffThermostatType::
+initTemperature (const initTemperature_type& x)
+{
+  this->initTemperature_.set (x);
+}
+
+void tempDiffThermostatType::
+initTemperature (::std::unique_ptr< initTemperature_type > x)
+{
+  this->initTemperature_.set (std::move (x));
+}
+
+const tempDiffThermostatType::targetTemperature_type& tempDiffThermostatType::
+targetTemperature () const
+{
+  return this->targetTemperature_.get ();
+}
+
+tempDiffThermostatType::targetTemperature_type& tempDiffThermostatType::
+targetTemperature ()
+{
+  return this->targetTemperature_.get ();
+}
+
+void tempDiffThermostatType::
+targetTemperature (const targetTemperature_type& x)
+{
+  this->targetTemperature_.set (x);
+}
+
+void tempDiffThermostatType::
+targetTemperature (::std::unique_ptr< targetTemperature_type > x)
+{
+  this->targetTemperature_.set (std::move (x));
+}
+
+const tempDiffThermostatType::thermostatCycleLength_type& tempDiffThermostatType::
+thermostatCycleLength () const
+{
+  return this->thermostatCycleLength_.get ();
+}
+
+tempDiffThermostatType::thermostatCycleLength_type& tempDiffThermostatType::
+thermostatCycleLength ()
+{
+  return this->thermostatCycleLength_.get ();
+}
+
+void tempDiffThermostatType::
+thermostatCycleLength (const thermostatCycleLength_type& x)
+{
+  this->thermostatCycleLength_.set (x);
+}
+
+void tempDiffThermostatType::
+thermostatCycleLength (::std::unique_ptr< thermostatCycleLength_type > x)
+{
+  this->thermostatCycleLength_.set (std::move (x));
+}
+
+
 // ThermostatType
 // 
 
@@ -548,6 +624,36 @@ void ThermostatType::
 gradual (::std::unique_ptr< gradual_type > x)
 {
   this->gradual_.set (std::move (x));
+}
+
+const ThermostatType::tempDiff_optional& ThermostatType::
+tempDiff () const
+{
+  return this->tempDiff_;
+}
+
+ThermostatType::tempDiff_optional& ThermostatType::
+tempDiff ()
+{
+  return this->tempDiff_;
+}
+
+void ThermostatType::
+tempDiff (const tempDiff_type& x)
+{
+  this->tempDiff_.set (x);
+}
+
+void ThermostatType::
+tempDiff (const tempDiff_optional& x)
+{
+  this->tempDiff_ = x;
+}
+
+void ThermostatType::
+tempDiff (::std::unique_ptr< tempDiff_type > x)
+{
+  this->tempDiff_.set (std::move (x));
 }
 
 
@@ -744,6 +850,36 @@ Cuboid::sigma_cuboid_type Cuboid::
 sigma_cuboid_default_value ()
 {
   return sigma_cuboid_type (1.0);
+}
+
+const Cuboid::wall_optional& Cuboid::
+wall () const
+{
+  return this->wall_;
+}
+
+Cuboid::wall_optional& Cuboid::
+wall ()
+{
+  return this->wall_;
+}
+
+void Cuboid::
+wall (const wall_type& x)
+{
+  this->wall_.set (x);
+}
+
+void Cuboid::
+wall (const wall_optional& x)
+{
+  this->wall_ = x;
+}
+
+Cuboid::wall_type Cuboid::
+wall_default_value ()
+{
+  return wall_type (false);
 }
 
 
@@ -2916,6 +3052,150 @@ gradualThermostatType::
 {
 }
 
+// tempDiffThermostatType
+//
+
+tempDiffThermostatType::
+tempDiffThermostatType (const initTemperature_type& initTemperature,
+                        const targetTemperature_type& targetTemperature,
+                        const thermostatCycleLength_type& thermostatCycleLength)
+: ::xml_schema::type (),
+  initTemperature_ (initTemperature, this),
+  targetTemperature_ (targetTemperature, this),
+  thermostatCycleLength_ (thermostatCycleLength, this)
+{
+}
+
+tempDiffThermostatType::
+tempDiffThermostatType (const tempDiffThermostatType& x,
+                        ::xml_schema::flags f,
+                        ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  initTemperature_ (x.initTemperature_, f, this),
+  targetTemperature_ (x.targetTemperature_, f, this),
+  thermostatCycleLength_ (x.thermostatCycleLength_, f, this)
+{
+}
+
+tempDiffThermostatType::
+tempDiffThermostatType (const ::xercesc::DOMElement& e,
+                        ::xml_schema::flags f,
+                        ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  initTemperature_ (this),
+  targetTemperature_ (this),
+  thermostatCycleLength_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void tempDiffThermostatType::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // initTemperature
+    //
+    if (n.name () == "initTemperature" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< initTemperature_type > r (
+        initTemperature_traits::create (i, f, this));
+
+      if (!initTemperature_.present ())
+      {
+        this->initTemperature_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // targetTemperature
+    //
+    if (n.name () == "targetTemperature" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< targetTemperature_type > r (
+        targetTemperature_traits::create (i, f, this));
+
+      if (!targetTemperature_.present ())
+      {
+        this->targetTemperature_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // thermostatCycleLength
+    //
+    if (n.name () == "thermostatCycleLength" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< thermostatCycleLength_type > r (
+        thermostatCycleLength_traits::create (i, f, this));
+
+      if (!thermostatCycleLength_.present ())
+      {
+        this->thermostatCycleLength_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    break;
+  }
+
+  if (!initTemperature_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "initTemperature",
+      "");
+  }
+
+  if (!targetTemperature_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "targetTemperature",
+      "");
+  }
+
+  if (!thermostatCycleLength_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "thermostatCycleLength",
+      "");
+  }
+}
+
+tempDiffThermostatType* tempDiffThermostatType::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class tempDiffThermostatType (*this, f, c);
+}
+
+tempDiffThermostatType& tempDiffThermostatType::
+operator= (const tempDiffThermostatType& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->initTemperature_ = x.initTemperature_;
+    this->targetTemperature_ = x.targetTemperature_;
+    this->thermostatCycleLength_ = x.thermostatCycleLength_;
+  }
+
+  return *this;
+}
+
+tempDiffThermostatType::
+~tempDiffThermostatType ()
+{
+}
+
 // ThermostatType
 //
 
@@ -2924,7 +3204,8 @@ ThermostatType ()
 : ::xml_schema::type (),
   none_ (this),
   simple_ (this),
-  gradual_ (this)
+  gradual_ (this),
+  tempDiff_ (this)
 {
 }
 
@@ -2935,7 +3216,8 @@ ThermostatType (const ThermostatType& x,
 : ::xml_schema::type (x, f, c),
   none_ (x.none_, f, this),
   simple_ (x.simple_, f, this),
-  gradual_ (x.gradual_, f, this)
+  gradual_ (x.gradual_, f, this),
+  tempDiff_ (x.tempDiff_, f, this)
 {
 }
 
@@ -2946,7 +3228,8 @@ ThermostatType (const ::xercesc::DOMElement& e,
 : ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
   none_ (this),
   simple_ (this),
-  gradual_ (this)
+  gradual_ (this),
+  tempDiff_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -3007,6 +3290,20 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // tempDiff
+    //
+    if (n.name () == "tempDiff" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< tempDiff_type > r (
+        tempDiff_traits::create (i, f, this));
+
+      if (!this->tempDiff_)
+      {
+        this->tempDiff_.set (::std::move (r));
+        continue;
+      }
+    }
+
     break;
   }
 }
@@ -3027,6 +3324,7 @@ operator= (const ThermostatType& x)
     this->none_ = x.none_;
     this->simple_ = x.simple_;
     this->gradual_ = x.gradual_;
+    this->tempDiff_ = x.tempDiff_;
   }
 
   return *this;
@@ -3053,7 +3351,8 @@ Cuboid (const lower_left_coord_type& lower_left_coord,
   mass_ (mass, this),
   initial_velocity_ (initial_velocity, this),
   epsilon_cuboid_ (this),
-  sigma_cuboid_ (this)
+  sigma_cuboid_ (this),
+  wall_ (this)
 {
 }
 
@@ -3070,7 +3369,8 @@ Cuboid (::std::unique_ptr< lower_left_coord_type > lower_left_coord,
   mass_ (mass, this),
   initial_velocity_ (std::move (initial_velocity), this),
   epsilon_cuboid_ (this),
-  sigma_cuboid_ (this)
+  sigma_cuboid_ (this),
+  wall_ (this)
 {
 }
 
@@ -3085,7 +3385,8 @@ Cuboid (const Cuboid& x,
   mass_ (x.mass_, f, this),
   initial_velocity_ (x.initial_velocity_, f, this),
   epsilon_cuboid_ (x.epsilon_cuboid_, f, this),
-  sigma_cuboid_ (x.sigma_cuboid_, f, this)
+  sigma_cuboid_ (x.sigma_cuboid_, f, this),
+  wall_ (x.wall_, f, this)
 {
 }
 
@@ -3100,7 +3401,8 @@ Cuboid (const ::xercesc::DOMElement& e,
   mass_ (this),
   initial_velocity_ (this),
   epsilon_cuboid_ (this),
-  sigma_cuboid_ (this)
+  sigma_cuboid_ (this),
+  wall_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -3217,6 +3519,17 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // wall
+    //
+    if (n.name () == "wall" && n.namespace_ ().empty ())
+    {
+      if (!this->wall_)
+      {
+        this->wall_.set (wall_traits::create (i, f, this));
+        continue;
+      }
+    }
+
     break;
   }
 
@@ -3276,6 +3589,7 @@ operator= (const Cuboid& x)
     this->initial_velocity_ = x.initial_velocity_;
     this->epsilon_cuboid_ = x.epsilon_cuboid_;
     this->sigma_cuboid_ = x.sigma_cuboid_;
+    this->wall_ = x.wall_;
   }
 
   return *this;
