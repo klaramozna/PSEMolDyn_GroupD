@@ -16,11 +16,13 @@
 #include "Simulation/Physics/GravitationalForce.h"
 #include "Simulation/Physics/LennardJones.h"
 #include "Simulation/Physics/MixingRuleLennardJones.h"
+#include "Simulation/Physics/TruncatedLennardJones.h"
 
 #include "Particles/Boundary.h"
 
 #include "Simulation/SimpleThermostat.h"
 #include "Simulation/Physics/GravityForce.h"
+#include "Simulation/Physics/HardcodedPullForce.h"
 #include "Simulation/Thermostat.h"
 #include "Simulation/SimpleThermostat.h"
 #include "Simulation/GradualThermostat.h"
@@ -35,20 +37,19 @@
 #include "IO/output/outputWriter/CheckpointWriter.h"
 #include "IO/input/CheckpointReader.h"
 
-/* Benchmark */
-#include "Benchmark.h"
+
 
 
 
 int main(int argc, char *argsv[]) {
     CL cl;
     std::unique_ptr<ParticleReader> reader;
+    XMLReader xmlReader {};
     std::unique_ptr<ForceCalculation> forceCalculation;
     std::unique_ptr<Thermostat> thermostat;
-    GravityForce gravity{0};
+    GravityForce gravity{std::array<double,3>{0,0,0}};
+    HardcodedPullForce pullForce{std::array<double,3>{0,0,0}};
 
-
-    outputWriter::VTKWriter writer;
     SimParameters simParameters;
     int status = cl.parse_input_path_and_mode_and_log(argc, argsv, simParameters);
 
@@ -65,28 +66,18 @@ int main(int argc, char *argsv[]) {
     }
 
     if (simParameters.getInputMode() == "particle") {
-         Logger::console->debug("Reading particle");
+        Logger::console->debug("Reading particle");
         reader = std::make_unique<FileReader>();
     }
 
-    if (simParameters.getInputMode() == "xml") {
-        Logger::console->debug("Reading xml");
-        reader = std::make_unique<XMLReader>();
-    }
-
-    if (!reader) {
-        Logger::err_logger->error("Reader was not correctly initialized");
-        exit(-1);
-    }
-
-    /* To do: solve this dependency between readFile and container*/
     DirectSumContainer container_h;
 
     if (simParameters.getInputMode() == "xml") {
-        reader->readFile(container_h, input_path, simParameters);
+        Logger::console->debug("Reading xml");
+        xmlReader.readFile(input_path, simParameters);
     }
     else {
-        reader->readFile(container_h, input_path);
+        reader->readFile(input_path, simParameters);
     }
 
     status = cl.parse_arguments(argc, argsv, simParameters);
@@ -107,6 +98,11 @@ int main(int argc, char *argsv[]) {
     if (simParameters.getForce() == "MixingRuleLennardJones") {
         forceCalculation = std::make_unique<MixingRuleLennardJones>();
         Logger::console->info("Force set to Mixing Rule LennardJones");
+    }
+
+    if (simParameters.getForce() == "TruncatedLennardJones") {
+        forceCalculation = std::make_unique<TruncatedLennardJones>();
+        Logger::console->info("Force set to Truncated LennardJones");
     }
 
     if(simParameters.getThermostatType() == "none"){
@@ -139,26 +135,30 @@ int main(int argc, char *argsv[]) {
         exit(-1);
     }
 
-    if (simParameters.getGravityFactor() != 0.0) {
+    if (simParameters.getGravityFactor() != std::array<double,3>{0, 0, 0}) {
         gravity.setGravityFactor(simParameters.getGravityFactor());
-        Logger::console->info("Gravity Force activated with factor {}", simParameters.getGravityFactor());
+        Logger::console->info("Gravity Force activated with factors x, y ,z: {} {} {}", simParameters.getGravityFactor().at(0), simParameters.getGravityFactor().at(1), simParameters.getGravityFactor().at(2));
+    }
+    if (simParameters.getHardcodedPullFactors() != std::array<double,3>{0, 0, 0}) {
+        pullForce.setPullFactors(simParameters.getGravityFactor());
+        Logger::console->info("Pull Force activated with factors x, y ,z: {} {} {}", simParameters.getHardcodedPullFactors().at(0), simParameters.getHardcodedPullFactors().at(1), simParameters.getHardcodedPullFactors().at(2));
     }
 
     LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
 
-    /* To do: solve this dependency between readFile and container*/
-    if(particlesShift != 0){
-        container_h.applyToAll([&particlesShift](Particle& p){p.setX(p.getXVector() + VectorDouble3(std::array<double, 3>{0, 0, particlesShift}));});
-    }
+    container.addParticlesPointer(xmlReader.getParticles());
 
-    container.addParticles(container_h.getParticleVector());
+    if(particlesShift != 0){
+        container.applyToAll([&particlesShift](Particle& p){p.setX(p.getXVector() + VectorDouble3(std::array<double, 3>{0, 0, particlesShift}));});
+    }
 
 
     /* read checkpoint if available and update container */
     if (!simParameters.getloadCheckpoint().empty()) {
         CheckpointReader cReader;
         std::string p = simParameters.getloadCheckpoint();
-        cReader.readFile(container, p, simParameters);
+        cReader.readFile(p, simParameters);
+        container.addParticlesPointer(cReader.getParticles());
     }
      
     Logger::console->info("Calculating ...");
@@ -166,59 +166,12 @@ int main(int argc, char *argsv[]) {
     int iteration = 0;
     double current_time = simParameters.getStartTime();
 
-    Simulation simulation(simParameters.getDeltaT(), simParameters.getSigma(),  container, *forceCalculation, *thermostat, simParameters.getAverageVelo(), boundary, gravity, simParameters.getBrownianMotion(), simParameters.getDim());
+    Simulation simulation(simParameters, container, *forceCalculation, *thermostat, boundary, gravity, pullForce);
 
-    // This is ugly and shouldn't be in main, but it is for a later refactor
-    if (simParameters.isTesting()) {
-
-        Benchmark benchmark;
-        benchmark.startBenchmark();
-
-        while (current_time < simParameters.getEndTime()) {
-            simulation.runIteration();
-            iteration++;
-            current_time += simParameters.getDeltaT();
-        }
-
-        benchmark.stopBenchmark();
-        int number_of_iterations = simParameters.getEndTime() / simParameters.getDeltaT();
-        benchmark.printBenchmarkResults(benchmark.getElapsedTimeInSeconds(), number_of_iterations ,container.getSize());
-
-    } else {
-       
-        writer.createMarkedDirectory();
-        int total_iterations = static_cast<int>(simParameters.getEndTime() / simParameters.getDeltaT());
-        int percentage=0;
-        int old_percentage=0;
-
-    Logger::console->info("Progress: {}%", percentage);
-     // for this loop, we assume: current x, current f and current v are known
-    while (current_time < simParameters.getEndTime()) {
-        simulation.runIteration();
-
-        iteration++;
-        if (iteration % simParameters.getWriteFrequency() == 0) {
-            writer.plotParticles(simulation.getParticles(), simParameters.getBaseName(), iteration);
-        }
-
-        current_time += simParameters.getDeltaT();
-
-        percentage = static_cast<int>((static_cast<double>(iteration) / total_iterations) * 100);
-
-        if (percentage % 10 == 0 && percentage > old_percentage && percentage != 0 && percentage <= 100) {
-            Logger::console->info("Progress: {}%", percentage);
-            old_percentage = percentage;
-        }
-    }
-
-        /* store checkpoint if specified */
-        if (!simParameters.getStoreCheckpoint().empty()) {
-            CheckpointWriter c;
-            Logger::console->info("Storing checkpoint ...");
-            c.writeCheckpoint(container, simParameters.getStoreCheckpoint());
-        }
-        
-        Logger::console->info("Output written with frequency {}. Terminating...", simParameters.getWriteFrequency());
-        return 0;
-    }
+    Logger::console->info("Number of particles before: {}", container.getParticleVector().size());
+    simulation.runSimulation();
+    Logger::console->info("Number of particles after: {}", container.getParticleVector().size());
+    
+    return 0;
+   
 }

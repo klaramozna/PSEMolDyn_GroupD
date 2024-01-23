@@ -17,6 +17,7 @@ Particle::Particle(int type_arg) {
     markedForMirroring = false;
     markedForDeleting = false;
     isWall = false;
+    hardcode_flag = false;
 }
 
 Particle::Particle(const Particle &other) {
@@ -31,6 +32,12 @@ Particle::Particle(const Particle &other) {
     markedForMirroring = other.markedForMirroring;
     markedForDeleting = other.markedForDeleting;
     isWall = other.isWall;
+    stiffness = other.stiffness;
+    bond_length= other.bond_length;
+    parallel_Neighbours = other.parallel_Neighbours;
+    diagonal_Neighbours = other.diagonal_Neighbours;
+    id = other.id;
+    hardcode_flag = other.hardcode_flag;
 }
 
 Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
@@ -44,6 +51,7 @@ Particle::Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg,
     markedForMirroring = false;
     markedForDeleting = false;
     isWall = wall;
+    hardcode_flag = false;
 }
 
 Particle::~Particle() {}
@@ -89,6 +97,32 @@ VectorDouble3 Particle::getFVector() const {
 
 VectorDouble3 Particle::getOldFVector() const {
     return old_f;
+}
+
+double Particle::getStiffness() const {
+    return stiffness;
+}
+
+double Particle::getBondLength() const {
+    return bond_length;
+}
+
+
+std::vector<std::shared_ptr<Particle>> Particle::getParallelNeighbours() const {
+    return parallel_Neighbours;
+}
+
+
+std::vector<std::shared_ptr<Particle>> Particle::getDiagonalNeighbours() const{
+    return diagonal_Neighbours;
+}
+
+int Particle::getId() const{
+    return id;
+}
+
+bool Particle::getHardcodeFlag() const{
+    return hardcode_flag;
 }
 
 void Particle::setX(const VectorDouble3 &position) {
@@ -140,6 +174,25 @@ void Particle::setOldF(double x, double y, double z) {
     if(!isWall){
         this->old_f = VectorDouble3(std::array<double, 3>{x, y, z});
     }
+}
+
+void Particle::setParallelNeighbours(std::vector<std::shared_ptr<Particle>> pointers_parallel){
+    parallel_Neighbours = pointers_parallel;
+}
+
+void Particle::setDiagonalNeighbours(std::vector<std::shared_ptr<Particle>> pointers_diagonal){
+    diagonal_Neighbours = pointers_diagonal;
+}
+void Particle::setStiffness(double val) {
+    stiffness = val;
+}
+
+void Particle::setBondLength(double val){
+    bond_length = val;
+}
+
+void Particle::setId(int val) {
+    id = val;
 }
 
 void Particle::markForMirroring() {

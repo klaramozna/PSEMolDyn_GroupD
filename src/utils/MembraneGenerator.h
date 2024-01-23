@@ -1,13 +1,13 @@
 //
-// Created by klara on 13.11.23.
+// Created by RayenManai on 04.01.24.
 //
+#pragma once
+#include <memory>
+#include <vector>
+#include "../Particles/Particle.h"
 
-#ifndef PSEMOLDYN_GROUPD_CUBOIDGENERATOR_H
-#define PSEMOLDYN_GROUPD_CUBOIDGENERATOR_H
 
-#include "../Particles/ParticleGenerator.h"
-
-class CuboidGenerator : public ParticleGenerator{
+class MembraneGenerator {
 public:
     /**
      * @brief Creates a CuboidGenerator object initializing it with the given parameters.
@@ -18,16 +18,27 @@ public:
      * @param particleDistance is the distance between particles.
      * @param mass is the mass of each particle.
      * @param velocity is the initial velocity of each particle.
+     * @param stiffness
+     * @param bond_length
      */
-    CuboidGenerator(std::array<double, 3> corner, int n1, int n2, int n3, double particleDistance, double mass, std::array<double, 3> velocity, double epsilon = 1, double sigma = 1, bool wall = false);
+    MembraneGenerator(std::array<double, 3> corner, int n1, int n2, int n3, double particleDistance, double mass, std::array<double, 3> velocity, double epsilon, double sigma, double stiffness, double bond_length, std::vector<std::array <int,3>> indices);
 
     /**
      * @brief Generates a cuboid of particles.
      * @return A vector with the generated particles.
      */
-    std::vector<std::shared_ptr<Particle>> generateParticles(int type = 0) override;
+    std::vector<std::shared_ptr<Particle>> generateParticles(int type = 0);
+
+    
+    std::vector<std::shared_ptr<Particle>> calculateParallelNeighbourIndices (int n1, int n2, int n3, int index);
+
+    std::vector<std::shared_ptr<Particle>> calculateDiagonalNeighbourIndices (int n1, int n2, int n3, int index);
+
+    bool isHardcoded(int x, int y, int z, std::vector<std::array<int,3>> indices);
 
 private:
+
+    std::vector<std::shared_ptr<Particle>> particles;
 
     /**
      * @brief Coordinates of the left-lower corner of the front side of the cuboid.
@@ -73,12 +84,15 @@ private:
      * @brief Sigma of each particle.
      */
     double sigma;
-
-    /**
-     * @brief Determines, if the particles are wall particles or not.
+     /**
+     * @brief Stiffness constant of each particle.
      */
-    bool isWall;
+    double stiffness;
+     /**
+     * @brief Average bond length of each particle.
+     */
+    double bond_length;
+
+    std::vector<std::array <int,3>> indices;
 };
 
-
-#endif //PSEMOLDYN_GROUPD_CUBOIDGENERATOR_H

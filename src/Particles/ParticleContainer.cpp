@@ -9,3 +9,9 @@ void ParticleContainer::addParticles(const std::vector<Particle>& toAdd) {
         addParticle(p);
     }
 }
+
+void ParticleContainer::addParticlesPointer(std::vector<std::shared_ptr<Particle>> particles) {
+    for(auto const & pointer : particles){
+        addParticlePointer(pointer);
+    }
+}

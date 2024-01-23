@@ -31,13 +31,7 @@ public:
      * @brief Adds the given particle to the container (the given object, not a copy)
      * @param p The particle to be added.
      */
-    void addParticlePointer(std::shared_ptr<Particle> p);
-
-    /**
-     * @brief Adds the given particles to the container (the given objects, not copies)
-     * @param particles The particles to be added.
-     */
-    void addParticlesPointer(std::vector<std::shared_ptr<Particle>> particles);
+    void addParticlePointer(std::shared_ptr<Particle> p) override;
 
     /**
      * @brief Returns the number of particles in the container.
@@ -52,6 +46,13 @@ public:
     void applyToAll(const std::function<void(Particle&)>& function) override;
 
     /**
+     * @brief Applies the given function to the particles with ids in the given array
+     * @param function Function to be applied.
+     * @param ids Ids of particles that the function should be applied to.
+     */
+    void applyForIds(const std::function<void(Particle&)>& function, const std::vector<int>& ids);
+
+    /**
      * @brief Applies the given function to pairs of particles in neighbouring cells within the cutoff radius.
      * @param function The function to be applied to each pair, that does not change the position of the particles.
      */
@@ -62,6 +63,12 @@ public:
      * @return The vector with the particles of the container.
      */
     std::vector<Particle> getParticleVector() override;
+
+    /**
+     * @brief Returns the particle with a give id
+     * @return particle with id
+     */
+    Particle getParticleWithId(int id);
 
     /**
      * @brief Applies the given function to each particle in the boundary
