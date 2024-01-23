@@ -41,11 +41,6 @@ private:
     double m;
 
     /**
-     * Type of the particle. Use it for whatever you want (e.g. to separate
-     * molecules belonging to different bodies, matters, and so on)
-     */
-    int type;
-    /**
      * Bool value that determines whether particle should be mirrored
      */
      bool markedForMirroring;
@@ -89,6 +84,17 @@ private:
      * @brief Indicates if the particle is a wall-particle (not affected by thermostat, does not move etc.)
      */
     bool isWall;
+    /**
+     * Type of the particle. Use it for whatever you want (e.g. to separate
+     * molecules belonging to different bodies, matters, and so on)
+     */
+    int type;
+
+    bool markedForDeleting;
+
+    
+    bool hardcode_flag;
+
 
 public:
     explicit Particle(int type = 0);
@@ -111,7 +117,7 @@ public:
      * @param type The type of the particle.
      */
     Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg, double m_arg, double epsilon, double sigma,
-             int type = 0, bool wall = false): x{x_arg}, v{v_arg}, f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, m{m_arg}, type{type}, epsilon{epsilon}, sigma{sigma} {
+             int type = 0, bool wall = false): x{x_arg}, v{v_arg}, f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, m{m_arg}, epsilon{epsilon}, sigma{sigma}, type{type} {
         markedForMirroring = false;
         markedForDeleting = false;
         isWall = wall;
@@ -132,7 +138,7 @@ public:
      * @param type The type of the particle.
      */
     Particle(std::array<double, 3> x_arg, std::array<double, 3> v_arg, double m_arg, double epsilon, double sigma,
-            double stiffness_arg, double bond_length_arg, std::vector<std::shared_ptr<Particle>> parallel_Neighbours_arg, std::vector<std::shared_ptr<Particle>> diagonal_Neighbours_arg, int id, bool hardcode_flag, int type = 0): x{x_arg}, v{v_arg}, f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, m{m_arg}, epsilon{epsilon}, sigma{sigma},stiffness{stiffness_arg}, bond_length{bond_length_arg} ,parallel_Neighbours{parallel_Neighbours_arg}, diagonal_Neighbours{diagonal_Neighbours_arg},id {id}, hardcode_flag{hardcode_flag}, type{type} {
+            double stiffness_arg, double bond_length_arg, std::vector<std::shared_ptr<Particle>> parallel_Neighbours_arg, std::vector<std::shared_ptr<Particle>> diagonal_Neighbours_arg, int id, bool hardcode_flag, int type = 0): x{x_arg}, v{v_arg}, f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, m{m_arg}, epsilon{epsilon}, sigma{sigma},stiffness{stiffness_arg}, bond_length{bond_length_arg} ,parallel_Neighbours{parallel_Neighbours_arg}, diagonal_Neighbours{diagonal_Neighbours_arg}, id{id}, type{type}, hardcode_flag{hardcode_flag}  {
         markedForMirroring = false;
         markedForDeleting = false;
     };
@@ -310,9 +316,7 @@ public:
      */
     bool operator!=(const Particle& other) const;
 
-    bool markedForDeleting;
-
-    bool hardcode_flag;
+ 
 };
 
 std::ostream &operator<<(std::ostream &stream, Particle &p);

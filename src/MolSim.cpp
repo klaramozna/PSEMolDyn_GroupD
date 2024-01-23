@@ -163,8 +163,6 @@ int main(int argc, char *argsv[]) {
      
     Logger::console->info("Calculating ...");
     simParameters.print();
-    int iteration = 0;
-    double current_time = simParameters.getStartTime();
 
     Simulation simulation(simParameters, container, *forceCalculation, *thermostat, boundary, gravity, pullForce);
 

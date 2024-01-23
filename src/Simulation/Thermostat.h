@@ -16,7 +16,7 @@ public:
      * @param cycleLength Number of iterations after which the thermostat is applied.
      * @param dim Dimension used. Has to be between 1 and 3.
      */
-    Thermostat(double initTemperature, double targetTemperature, int cycleLength, int dim): initTemperature{initTemperature}, currentTemperature{0}, targetTemperature{targetTemperature}, dim{dim}, cycleLength{cycleLength}, currentIteration{0}{}
+    Thermostat(double initTemperature, double targetTemperature, int cycleLength, int dim): initTemperature{initTemperature}, dim{dim}, currentIteration{0}, cycleLength{cycleLength}, currentTemperature{0}, targetTemperature{targetTemperature} {}
 
     Thermostat() = default;
 

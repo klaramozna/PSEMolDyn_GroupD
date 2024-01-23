@@ -11,6 +11,8 @@
 #include "Boundary.h"
 #include <memory>
 
+using lui = long unsigned int;
+
 class LinkedCellContainer : public ParticleContainer{
 public:
     /**

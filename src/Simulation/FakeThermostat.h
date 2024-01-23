@@ -21,7 +21,7 @@ class FakeThermostat : public Thermostat {
 
     void initializeBrownianMotion(Particle& particle) const{};
 
-    double getCurrentTemperature(){};
+    double getCurrentTemperature() = delete;
 
 
 
