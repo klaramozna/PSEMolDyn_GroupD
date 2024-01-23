@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['markedfordeleting_1440',['markedForDeleting',['../classParticle.html#a560e780f724b77e28df48532a4a419a4',1,'Particle']]]
+  ['sigma_1435',['sigma',['../classBoundary.html#a793afa4e587dc1e2a19a6b4b07f0d6e0',1,'Boundary']]]
 ];
