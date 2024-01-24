@@ -52,6 +52,8 @@ Simulation/Physics/GravitationalForce.cpp
         utils/MaxwellBoltzmannDistribution.h
         Simulation/TempDifferenceThermostat.cpp
         Simulation/TempDifferenceThermostat.h
+        Particles/ParticleStatistics.cpp
+        Particles/ParticleStatistics.h
 )
         
 ## Include directories specific to the 'src' directory, if needed
