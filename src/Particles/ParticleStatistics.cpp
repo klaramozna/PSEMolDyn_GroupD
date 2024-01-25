@@ -9,7 +9,7 @@ ParticleStatistics::ParticleStatistics(Boundary boundary, int n, int frequency):
     this->frequency = frequency;
     currentIteration = 0;
     binVolume = (boundary.getDimensions()[0] * boundary.getDimensions()[1] * boundary.getDimensions()[2]) / n;
-    outputFile.open("../particle_statistics.csv");
+    outputFile.open("particle_statistics.csv");
     if(!outputFile.is_open()){
         throw std::ios_base::failure("File could not be opened.");
     }
