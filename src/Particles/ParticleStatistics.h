@@ -2,6 +2,7 @@
 #define PSEMOLDYN_GROUPD_PARTICLESTATISTICS_H
 
 #include "Boundary.h"
+#include <fstream>
 
 
 class ParticleStatistics {
@@ -19,6 +20,11 @@ public:
      * @brief Calculates the average velocity and density for each bin and writes those to the csv file.
      */
     void calculateStatistics(const std::vector<Particle>& particles);
+
+    /**
+     * @brief Makes sure the file is closed correctly.
+     */
+    ~ParticleStatistics();
 
 private:
 
@@ -48,11 +54,22 @@ private:
     double binVolume;
 
     /**
+     * @brief Stream for outputting the statistics.
+     */
+    std::ofstream outputFile{};
+
+    /**
      * @brief Returns the bin index of the particle. The bins start at the top of the domain.
      * @param p Particle to be used for the calculation.
      * @return Index of the corresponding bin.
      */
     int getBinIndex(const Particle& p);
+
+    /**
+     * @brief Writes the statistics to a file.
+     * @param bins The average velocity and density of each bin.
+     */
+    void outputStatistics(const std::vector<std::pair<VectorDouble3, double>>& bins);
 };
 
 
