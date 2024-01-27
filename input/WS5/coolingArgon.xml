@@ -1,0 +1,44 @@
+<Simulation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../simulationFormat.xsd">
+
+    <!-- Simulation Arguments -->
+    <t_end>250</t_end>
+    <delta_t>0.001</delta_t>
+
+    <!-- Choose ForceType -->
+    <force>
+      <SmoothedLennardJones><r_c>2.3</r_c> <r_l>1.9</r_l></SmoothedLennardJones>
+    </force>
+    <averageVelo>0.1</averageVelo>
+    <boundaries>
+
+    <BoxSize> <x>9.2</x> <y>9.2</y> <z>9.2</z></BoxSize>
+     <Front>Periodic</Front>
+     <Back>Periodic</Back>
+     <Top>Periodic</Top>
+     <Right>Periodic</Right>
+     <Bottom>Periodic</Bottom>
+     <Left>Periodic</Left>
+
+    </boundaries>
+
+    <cutoffRadius>2.3</cutoffRadius>
+
+    <thermostat>
+        <gradual> 
+            <initTemperature> 3.0 </initTemperature>
+            <targetTemperature> 0.5 </targetTemperature>
+            <maxTemperatureChange>7.8e-4</maxTemperatureChange>
+            <thermostatCycleLength> 50 </thermostatCycleLength>
+        </gradual>
+    </thermostat>
+    <brownian_motion>false</brownian_motion>
+
+    <!-- IO -->
+    <base_name>MD_vtk</base_name>
+    <writeFrequency>100</writeFrequency>
+
+    <!-- Misc -->
+    <log_level>2</log_level>
+    <testing_mode>false</testing_mode>
+
+</Simulation> 

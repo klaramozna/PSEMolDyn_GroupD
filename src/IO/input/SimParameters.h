@@ -86,6 +86,7 @@ public:
     bool isMembrane() const {return is_Membrane;}
     double getHardcodedForceEndTime() const {return hardcoded_force_end_time;}
     std::array<double,3>  getHardcodedPullFactors() const {return hardcoded_pull_factors;}
+    double getR_l() {return r_l;}
 
     // Setters for modifying parameter values
     void setEndTime(double val) { end_time = val; }
@@ -117,7 +118,7 @@ public:
     void setHardcodedForceEndTime(double val) {hardcoded_force_end_time = val;}
     bool operator==(const SimParameters &other) const;
     void setHardcodedPullFactors(std::array<double,3>  val) { hardcoded_pull_factors = val;}
-
+    void setR_l(double val){r_l = val;};
 
 
 
@@ -258,5 +259,10 @@ private:
      * @brief pull force factors
      */
     std::array<double,3> hardcoded_pull_factors = {0, 0, 0};
+
+     /**
+     * @brief r_l for smoothed lennard Jones
+     */
+     double r_l;
 
 };

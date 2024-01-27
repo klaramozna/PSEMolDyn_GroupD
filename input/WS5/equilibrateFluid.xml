@@ -1,0 +1,67 @@
+<Simulation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../simulationFormat.xsd">
+
+    <!-- Simulation Arguments -->
+    <t_end>150</t_end>
+    <delta_t>0.001</delta_t>
+
+    <!-- Choose ForceType -->
+    <force>
+      <SmoothedLennardJones><r_c>2.3</r_c> <r_l>1.9</r_l></SmoothedLennardJones>
+    </force>
+    <averageVelo>0.1</averageVelo>
+    <boundaries>
+
+    <BoxSize> <x>9.2</x> <y>9.2</y> <z>9.2</z></BoxSize>
+     <Front>Periodic</Front>
+     <Back>Periodic</Back>
+     <Top>Periodic</Top>
+     <Right>Periodic</Right>
+     <Bottom>Periodic</Bottom>
+     <Left>Periodic</Left>
+
+    </boundaries>
+
+    <cutoffRadius>2.3</cutoffRadius>
+
+    <thermostat>
+        <gradual> 
+            <initTemperature> 0.01 </initTemperature>
+            <targetTemperature> 3.0 </targetTemperature>
+            <maxTemperatureChange>0.001</maxTemperatureChange>
+            <thermostatCycleLength> 40 </thermostatCycleLength>
+        </gradual>
+    </thermostat>
+    <brownian_motion>false</brownian_motion>
+
+ <!-- Provide Particles (Cuboid) -->
+ <cuboid>
+    <lower-left-coord>
+        <x>0.575</x>
+        <y>0.575</y>
+        <z>0.575</z>
+    </lower-left-coord>
+    <number-of-particles>
+        <x>8</x>
+        <y>8</y>
+        <z>8</z>
+    </number-of-particles>
+    <distance>1.15</distance>
+    <mass>1.0</mass>
+    <initial_velocity>
+        <x>0.0</x>
+        <y>0.0</y>
+        <z>0.0</z>
+    </initial_velocity>
+    <epsilon_cuboid>1.0</epsilon_cuboid>
+    <sigma_cuboid>1.0</sigma_cuboid>
+</cuboid>
+
+    <!-- IO -->
+    <base_name>MD_vtk</base_name>
+    <writeFrequency>100</writeFrequency>
+
+    <!-- Misc -->
+    <log_level>2</log_level>
+    <testing_mode>false</testing_mode>
+
+</Simulation>

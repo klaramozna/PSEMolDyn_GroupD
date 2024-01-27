@@ -72,6 +72,15 @@ void XMLReader::readFile(std::string &filename, SimParameters& SimParameters) {
                 Logger::console->debug("Reading force type 4 (Truncated Lennard Jones) from XML");
                 SimParameters.setForce("TruncatedLennardJones");
             }
+            else if (sim->force()->SmoothedLennardJones()) {
+                Logger::console->debug("Reading force type 5 (Smoothed Lennard Jones) from XML");
+                smoothedLennardJones_t& smoothedLennard = *(sim->force()->SmoothedLennardJones());
+                double r_c = smoothedLennard.r_c();
+                double r_l = smoothedLennard.r_l();
+                Logger::console->debug("Reading r_c {} and r_l {} from XML", r_c, r_l);
+                SimParameters.setForce("SmoothedLennardJones");
+                SimParameters.setR_l(r_l);
+            } 
         }
 
         if (sim->thermostat()) {

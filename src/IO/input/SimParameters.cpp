@@ -96,6 +96,7 @@ void SimParameters::print(){
     Logger::console->debug("Sigma: {}", sigma);
     Logger::console->debug("write frequency: {}", write_frequency);
     Logger::console->debug("Membrane Present: {}", is_Membrane);
+    Logger::console->debug("r_l: {}", r_l);
     if (isMembrane()){
         Logger::console->debug("Hard Coded Force end time: {}", hardcoded_force_end_time); 
     }

@@ -129,6 +129,46 @@ Sigma (const Sigma_type& x)
 }
 
 
+// smoothedLennardJones_t
+// 
+
+const smoothedLennardJones_t::r_c_type& smoothedLennardJones_t::
+r_c () const
+{
+  return this->r_c_.get ();
+}
+
+smoothedLennardJones_t::r_c_type& smoothedLennardJones_t::
+r_c ()
+{
+  return this->r_c_.get ();
+}
+
+void smoothedLennardJones_t::
+r_c (const r_c_type& x)
+{
+  this->r_c_.set (x);
+}
+
+const smoothedLennardJones_t::r_l_type& smoothedLennardJones_t::
+r_l () const
+{
+  return this->r_l_.get ();
+}
+
+smoothedLennardJones_t::r_l_type& smoothedLennardJones_t::
+r_l ()
+{
+  return this->r_l_.get ();
+}
+
+void smoothedLennardJones_t::
+r_l (const r_l_type& x)
+{
+  this->r_l_.set (x);
+}
+
+
 // gravity_t
 // 
 
@@ -278,6 +318,36 @@ void ForceType::
 TruncatedLennardJones (::std::unique_ptr< TruncatedLennardJones_type > x)
 {
   this->TruncatedLennardJones_.set (std::move (x));
+}
+
+const ForceType::SmoothedLennardJones_optional& ForceType::
+SmoothedLennardJones () const
+{
+  return this->SmoothedLennardJones_;
+}
+
+ForceType::SmoothedLennardJones_optional& ForceType::
+SmoothedLennardJones ()
+{
+  return this->SmoothedLennardJones_;
+}
+
+void ForceType::
+SmoothedLennardJones (const SmoothedLennardJones_type& x)
+{
+  this->SmoothedLennardJones_.set (x);
+}
+
+void ForceType::
+SmoothedLennardJones (const SmoothedLennardJones_optional& x)
+{
+  this->SmoothedLennardJones_ = x;
+}
+
+void ForceType::
+SmoothedLennardJones (::std::unique_ptr< SmoothedLennardJones_type > x)
+{
+  this->SmoothedLennardJones_.set (std::move (x));
 }
 
 
@@ -2500,6 +2570,118 @@ lennardJones_t::
 {
 }
 
+// smoothedLennardJones_t
+//
+
+smoothedLennardJones_t::
+smoothedLennardJones_t (const r_c_type& r_c,
+                        const r_l_type& r_l)
+: ::xml_schema::type (),
+  r_c_ (r_c, this),
+  r_l_ (r_l, this)
+{
+}
+
+smoothedLennardJones_t::
+smoothedLennardJones_t (const smoothedLennardJones_t& x,
+                        ::xml_schema::flags f,
+                        ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  r_c_ (x.r_c_, f, this),
+  r_l_ (x.r_l_, f, this)
+{
+}
+
+smoothedLennardJones_t::
+smoothedLennardJones_t (const ::xercesc::DOMElement& e,
+                        ::xml_schema::flags f,
+                        ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  r_c_ (this),
+  r_l_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void smoothedLennardJones_t::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // r_c
+    //
+    if (n.name () == "r_c" && n.namespace_ ().empty ())
+    {
+      if (!r_c_.present ())
+      {
+        this->r_c_.set (r_c_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // r_l
+    //
+    if (n.name () == "r_l" && n.namespace_ ().empty ())
+    {
+      if (!r_l_.present ())
+      {
+        this->r_l_.set (r_l_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    break;
+  }
+
+  if (!r_c_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "r_c",
+      "");
+  }
+
+  if (!r_l_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "r_l",
+      "");
+  }
+}
+
+smoothedLennardJones_t* smoothedLennardJones_t::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class smoothedLennardJones_t (*this, f, c);
+}
+
+smoothedLennardJones_t& smoothedLennardJones_t::
+operator= (const smoothedLennardJones_t& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->r_c_ = x.r_c_;
+    this->r_l_ = x.r_l_;
+  }
+
+  return *this;
+}
+
+smoothedLennardJones_t::
+~smoothedLennardJones_t ()
+{
+}
+
 // gravity_t
 //
 
@@ -2608,7 +2790,8 @@ ForceType ()
   lennard_ (this),
   grav_ (this),
   MixingRuleLennardJones_ (this),
-  TruncatedLennardJones_ (this)
+  TruncatedLennardJones_ (this),
+  SmoothedLennardJones_ (this)
 {
 }
 
@@ -2620,7 +2803,8 @@ ForceType (const ForceType& x,
   lennard_ (x.lennard_, f, this),
   grav_ (x.grav_, f, this),
   MixingRuleLennardJones_ (x.MixingRuleLennardJones_, f, this),
-  TruncatedLennardJones_ (x.TruncatedLennardJones_, f, this)
+  TruncatedLennardJones_ (x.TruncatedLennardJones_, f, this),
+  SmoothedLennardJones_ (x.SmoothedLennardJones_, f, this)
 {
 }
 
@@ -2632,7 +2816,8 @@ ForceType (const ::xercesc::DOMElement& e,
   lennard_ (this),
   grav_ (this),
   MixingRuleLennardJones_ (this),
-  TruncatedLennardJones_ (this)
+  TruncatedLennardJones_ (this),
+  SmoothedLennardJones_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -2707,6 +2892,20 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // SmoothedLennardJones
+    //
+    if (n.name () == "SmoothedLennardJones" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< SmoothedLennardJones_type > r (
+        SmoothedLennardJones_traits::create (i, f, this));
+
+      if (!this->SmoothedLennardJones_)
+      {
+        this->SmoothedLennardJones_.set (::std::move (r));
+        continue;
+      }
+    }
+
     break;
   }
 }
@@ -2728,6 +2927,7 @@ operator= (const ForceType& x)
     this->grav_ = x.grav_;
     this->MixingRuleLennardJones_ = x.MixingRuleLennardJones_;
     this->TruncatedLennardJones_ = x.TruncatedLennardJones_;
+    this->SmoothedLennardJones_ = x.SmoothedLennardJones_;
   }
 
   return *this;

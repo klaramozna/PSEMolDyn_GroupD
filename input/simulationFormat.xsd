@@ -29,6 +29,13 @@
     </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="smoothedLennardJones_t">
+    <xs:sequence>
+        <xs:element name="r_c" type="xs:double"/>
+        <xs:element name="r_l" type="xs:double"/>
+    </xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="gravity_t">
     <xs:sequence>
         <xs:element name="gravity_factor" type="common:double_3d"/>
@@ -43,6 +50,7 @@
     <xs:element name="grav" type="xs:string"/>
     <xs:element name="MixingRuleLennardJones" type="xs:string"/>
     <xs:element name="TruncatedLennardJones" type="xs:string"/>
+    <xs:element name="SmoothedLennardJones" type="smoothedLennardJones_t"/>
   </xs:choice>
 </xs:complexType>
 

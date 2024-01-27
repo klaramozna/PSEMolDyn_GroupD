@@ -566,6 +566,7 @@ namespace xml_schema
 class log_level;
 class Dimension;
 class lennardJones_t;
+class smoothedLennardJones_t;
 class gravity_t;
 class ForceType;
 class simpleThermostatType;
@@ -1024,6 +1025,196 @@ class lennardJones_t: public ::xml_schema::type
   protected:
   ::xsd::cxx::tree::one< Epsilon_type > Epsilon_;
   ::xsd::cxx::tree::one< Sigma_type > Sigma_;
+
+  //@endcond
+};
+
+/**
+ * @brief Class corresponding to the %smoothedLennardJones_t schema type.
+ *
+ * @nosubgrouping
+ */
+class smoothedLennardJones_t: public ::xml_schema::type
+{
+  public:
+  /**
+   * @name r_c
+   *
+   * @brief Accessor and modifier functions for the %r_c
+   * required element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::xml_schema::double_ r_c_type;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< r_c_type, char, ::xsd::cxx::tree::schema_type::double_ > r_c_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element.
+   *
+   * @return A constant reference to the element.
+   */
+  const r_c_type&
+  r_c () const;
+
+  /**
+   * @brief Return a read-write reference to the element.
+   *
+   * @return A reference to the element.
+   */
+  r_c_type&
+  r_c ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  r_c (const r_c_type& x);
+
+  //@}
+
+  /**
+   * @name r_l
+   *
+   * @brief Accessor and modifier functions for the %r_l
+   * required element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::xml_schema::double_ r_l_type;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< r_l_type, char, ::xsd::cxx::tree::schema_type::double_ > r_l_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element.
+   *
+   * @return A constant reference to the element.
+   */
+  const r_l_type&
+  r_l () const;
+
+  /**
+   * @brief Return a read-write reference to the element.
+   *
+   * @return A reference to the element.
+   */
+  r_l_type&
+  r_l ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  r_l (const r_l_type& x);
+
+  //@}
+
+  /**
+   * @name Constructors
+   */
+  //@{
+
+  /**
+   * @brief Create an instance from the ultimate base and
+   * initializers for required elements and attributes.
+   */
+  smoothedLennardJones_t (const r_c_type&,
+                          const r_l_type&);
+
+  /**
+   * @brief Create an instance from a DOM element.
+   *
+   * @param e A DOM element to extract the data from.
+   * @param f Flags to create the new instance with.
+   * @param c A pointer to the object that will contain the new
+   * instance.
+   */
+  smoothedLennardJones_t (const ::xercesc::DOMElement& e,
+                          ::xml_schema::flags f = 0,
+                          ::xml_schema::container* c = 0);
+
+  /**
+   * @brief Copy constructor.
+   *
+   * @param x An instance to make a copy of.
+   * @param f Flags to create the copy with.
+   * @param c A pointer to the object that will contain the copy.
+   *
+   * For polymorphic object models use the @c _clone function instead.
+   */
+  smoothedLennardJones_t (const smoothedLennardJones_t& x,
+                          ::xml_schema::flags f = 0,
+                          ::xml_schema::container* c = 0);
+
+  /**
+   * @brief Copy the instance polymorphically.
+   *
+   * @param f Flags to create the copy with.
+   * @param c A pointer to the object that will contain the copy.
+   * @return A pointer to the dynamically allocated copy.
+   *
+   * This function ensures that the dynamic type of the instance is
+   * used for copying and should be used for polymorphic object
+   * models instead of the copy constructor.
+   */
+  virtual smoothedLennardJones_t*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  /**
+   * @brief Copy assignment operator.
+   *
+   * @param x An instance to make a copy of.
+   * @return A reference to itself.
+   *
+   * For polymorphic object models use the @c _clone function instead.
+   */
+  smoothedLennardJones_t&
+  operator= (const smoothedLennardJones_t& x);
+
+  //@}
+
+  /**
+   * @brief Destructor.
+   */
+  virtual 
+  ~smoothedLennardJones_t ();
+
+  // Implementation.
+  //
+
+  //@cond
+
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  ::xsd::cxx::tree::one< r_c_type > r_c_;
+  ::xsd::cxx::tree::one< r_l_type > r_l_;
 
   //@endcond
 };
@@ -1503,6 +1694,82 @@ class ForceType: public ::xml_schema::type
   //@}
 
   /**
+   * @name SmoothedLennardJones
+   *
+   * @brief Accessor and modifier functions for the %SmoothedLennardJones
+   * optional element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::smoothedLennardJones_t SmoothedLennardJones_type;
+
+  /**
+   * @brief Element optional container type.
+   */
+  typedef ::xsd::cxx::tree::optional< SmoothedLennardJones_type > SmoothedLennardJones_optional;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< SmoothedLennardJones_type, char > SmoothedLennardJones_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element
+   * container.
+   *
+   * @return A constant reference to the optional container.
+   */
+  const SmoothedLennardJones_optional&
+  SmoothedLennardJones () const;
+
+  /**
+   * @brief Return a read-write reference to the element container.
+   *
+   * @return A reference to the optional container.
+   */
+  SmoothedLennardJones_optional&
+  SmoothedLennardJones ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  SmoothedLennardJones (const SmoothedLennardJones_type& x);
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x An optional container with the new value to set.
+   *
+   * If the value is present in @a x then this function makes a copy 
+   * of this value and sets it as the new value of the element.
+   * Otherwise the element container is set the 'not present' state.
+   */
+  void
+  SmoothedLennardJones (const SmoothedLennardJones_optional& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly instead
+   * of making a copy.
+   */
+  void
+  SmoothedLennardJones (::std::unique_ptr< SmoothedLennardJones_type > p);
+
+  //@}
+
+  /**
    * @name Constructors
    */
   //@{
@@ -1587,6 +1854,7 @@ class ForceType: public ::xml_schema::type
   grav_optional grav_;
   MixingRuleLennardJones_optional MixingRuleLennardJones_;
   TruncatedLennardJones_optional TruncatedLennardJones_;
+  SmoothedLennardJones_optional SmoothedLennardJones_;
 
   //@endcond
 };

@@ -47,6 +47,8 @@ Simulation/Physics/GravitationalForce.cpp
         Simulation/Physics/GravityForce.cpp
         Simulation/Physics/HardcodedPullForce.cpp
         Simulation/Physics/TruncatedLennardJones.cpp
+        Simulation/Physics/SmoothedLennardJones.cpp
+        Simulation/Physics/SmoothedLennardJones.h
         Simulation/FakeThermostat.cpp
         Simulation/FakeThermostat.h
         utils/MaxwellBoltzmannDistribution.h

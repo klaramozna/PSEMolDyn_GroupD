@@ -17,6 +17,7 @@
 #include "Simulation/Physics/LennardJones.h"
 #include "Simulation/Physics/MixingRuleLennardJones.h"
 #include "Simulation/Physics/TruncatedLennardJones.h"
+#include "Simulation/Physics/SmoothedLennardJones.h"
 
 #include "Particles/Boundary.h"
 
@@ -103,6 +104,11 @@ int main(int argc, char *argsv[]) {
     if (simParameters.getForce() == "TruncatedLennardJones") {
         forceCalculation = std::make_unique<TruncatedLennardJones>();
         Logger::console->info("Force set to Truncated LennardJones");
+    }
+
+    if (simParameters.getForce() == "SmoothedLennardJones") {
+        forceCalculation = std::make_unique<SmoothedLennardJones>(simParameters.getCutoffRadius(), simParameters.getR_l());
+        Logger::console->info("Force set to Smoothed LennardJones");
     }
 
     if(simParameters.getThermostatType() == "none"){
