@@ -39,6 +39,10 @@ The basic idea of these two methods can be seen in the following presentation:
 ## Task 4 ”Nano-scale flow simulation (Option A)” ##
 * 
 
+https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/9114c752-507f-451b-ae8c-396a3f36a02d
+
+
+
 ## Task 5 ”Crystallization of Argon (Option B)” ##
 
   
