@@ -13,7 +13,7 @@
 
     <boundaries>
 
-    <BoxSize> <x>148</x> <y>148</y> <z>148</z></BoxSize>
+    <BoxSize> <x>25</x> <y>25</y> <z>25</z></BoxSize>
      <Front>Reflecting</Front>
      <Back>Reflecting</Back>
      <Top>Outflow</Top>
@@ -33,13 +33,13 @@
  <!-- Provide Particles (Cuboid) -->
  <membrane>
     <lower-left-coord>
-        <x>15</x>
-        <y>15</y>
-        <z>1.5</z>
+        <x>10</x>
+        <y>10</y>
+        <z>10</z>
     </lower-left-coord>
     <number-of-particles>
-        <x>50</x>
-        <y>50</y>
+        <x>3</x>
+        <y>3</y>
         <z>1</z>
     </number-of-particles>
     <distance>2.2</distance>
@@ -53,17 +53,7 @@
     <sigma_cuboid>1.0</sigma_cuboid>
     <stiffness>300</stiffness>
     <bond_length>2.2</bond_length>
-    <hardcoded_force>
-        <end_time>150</end_time>
-        <force_factors><x>0</x> <y>0</y> <z>0.8</z></force_factors>
-        <particles>
-            <indices><x>17</x><y>24</y><z>0</z></indices>
-            <indices><x>17</x><y>25</y><z>0</z></indices>
-            <indices><x>18</x><y>24</y><z>0</z></indices>
-            <indices><x>18</x><y>25</y><z>0</z></indices>
-       </particles>
-
-    </hardcoded_force>
+    
 </membrane>
 
     <!-- IO -->
