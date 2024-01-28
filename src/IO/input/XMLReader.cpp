@@ -214,6 +214,7 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
                     ParallelizationSpec(
                         type,
                         sim->parallelization_spec_xml()->numThreads().get(),
+                        sim->parallelization_spec_xml()->chunksize().get(),
                         subdomain
                     )
             );

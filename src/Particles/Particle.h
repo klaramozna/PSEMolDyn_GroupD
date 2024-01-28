@@ -20,24 +20,24 @@ private:
     VectorDouble3 x;
 
     /**
+    * Mass of this particle
+    */
+    double m;
+
+    /**
+    * Force effective on this particle
+    */
+    VectorDouble3 f;
+
+    /**
      * Velocity of the particle
      */
     VectorDouble3 v;
 
     /**
-     * Force effective on this particle
-     */
-    VectorDouble3 f;
-
-    /**
      * Force which was effective on this particle
      */
     VectorDouble3 old_f;
-
-    /**
-     * Mass of this particle
-     */
-    double m;
 
     /**
      * Type of the particle. Use it for whatever you want (e.g. to separate

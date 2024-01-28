@@ -24,10 +24,11 @@ private:
     enum ParallelizationType type;
     int numThreads;
     std::array<int,3> subdomain;
+    int chunksize;
 
 public:
-    ParallelizationSpec(enum ParallelizationType type, int numThreads, std::array<int,3> subdomain) : type(type), numThreads(numThreads), subdomain(subdomain) {}
-    ParallelizationSpec() : type(None), numThreads(1), subdomain({1,1,1}) {}
+    ParallelizationSpec(enum ParallelizationType type, int numThreads, int chunksize, std::array<int,3> subdomain) : type(type), numThreads(numThreads), subdomain(subdomain), chunksize(chunksize) {}
+    ParallelizationSpec() : type(None), numThreads(1), subdomain({1,1,1}), chunksize(1) {}
 
     /** Getters **/
 
@@ -43,6 +44,10 @@ public:
         return subdomain;
     }
 
+    int getChunksize() const {
+        return chunksize;
+    }
+
     /** Setters **/
 
     void setType(enum ParallelizationType type_val) {
@@ -55,6 +60,10 @@ public:
 
     void setSubdomain(std::array<int,3> subdomain_val) {
         this->subdomain = subdomain_val;
+    }
+
+    void setChunksize(int chunksize_val) {
+        this->chunksize = chunksize_val;
     }
 
     static enum ParallelizationType getParallelizationTypeFromStr(const std::string& str) {

@@ -150,13 +150,13 @@ int main(int argc, char *argsv[]) {
     /** Define scheduling for OpenMP **/
     switch (simParameters.getSchedulerType()) {
         case Static:
-            omp_set_schedule(omp_sched_static, -1);
+            omp_set_schedule(omp_sched_static, simParameters.getParallelizationSpec().getChunksize());
             break;
         case Dynamic:
-            omp_set_schedule(omp_sched_dynamic, -1);
+            omp_set_schedule(omp_sched_dynamic, simParameters.getParallelizationSpec().getChunksize());
             break;
         case Guided:
-            omp_set_schedule(omp_sched_guided, -1);
+            omp_set_schedule(omp_sched_guided, simParameters.getParallelizationSpec().getChunksize());
     }
 #endif
 

@@ -1259,6 +1259,42 @@ schedule_default_value ()
   return schedule_default_value_;
 }
 
+const ParallelizationSpecXML::chunksize_optional& ParallelizationSpecXML::
+chunksize () const
+{
+  return this->chunksize_;
+}
+
+ParallelizationSpecXML::chunksize_optional& ParallelizationSpecXML::
+chunksize ()
+{
+  return this->chunksize_;
+}
+
+void ParallelizationSpecXML::
+chunksize (const chunksize_type& x)
+{
+  this->chunksize_.set (x);
+}
+
+void ParallelizationSpecXML::
+chunksize (const chunksize_optional& x)
+{
+  this->chunksize_ = x;
+}
+
+void ParallelizationSpecXML::
+chunksize (::std::unique_ptr< chunksize_type > x)
+{
+  this->chunksize_.set (std::move (x));
+}
+
+ParallelizationSpecXML::chunksize_type ParallelizationSpecXML::
+chunksize_default_value ()
+{
+  return chunksize_type (1LL);
+}
+
 const ParallelizationSpecXML::subDomain_optional& ParallelizationSpecXML::
 subDomain () const
 {
@@ -3513,6 +3549,7 @@ ParallelizationSpecXML ()
   numThreads_ (this),
   type_ (this),
   schedule_ (this),
+  chunksize_ (this),
   subDomain_ (this)
 {
 }
@@ -3525,6 +3562,7 @@ ParallelizationSpecXML (const ParallelizationSpecXML& x,
   numThreads_ (x.numThreads_, f, this),
   type_ (x.type_, f, this),
   schedule_ (x.schedule_, f, this),
+  chunksize_ (x.chunksize_, f, this),
   subDomain_ (x.subDomain_, f, this)
 {
 }
@@ -3537,6 +3575,7 @@ ParallelizationSpecXML (const ::xercesc::DOMElement& e,
   numThreads_ (this),
   type_ (this),
   schedule_ (this),
+  chunksize_ (this),
   subDomain_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
@@ -3598,6 +3637,20 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // chunksize
+    //
+    if (n.name () == "chunksize" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< chunksize_type > r (
+        chunksize_traits::create (i, f, this));
+
+      if (!this->chunksize_)
+      {
+        this->chunksize_.set (::std::move (r));
+        continue;
+      }
+    }
+
     // subDomain
     //
     if (n.name () == "subDomain" && n.namespace_ ().empty ())
@@ -3632,6 +3685,7 @@ operator= (const ParallelizationSpecXML& x)
     this->numThreads_ = x.numThreads_;
     this->type_ = x.type_;
     this->schedule_ = x.schedule_;
+    this->chunksize_ = x.chunksize_;
     this->subDomain_ = x.subDomain_;
   }
 

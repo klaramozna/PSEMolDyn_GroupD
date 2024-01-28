@@ -4566,6 +4566,90 @@ class ParallelizationSpecXML: public ::xml_schema::type
   //@}
 
   /**
+   * @name chunksize
+   *
+   * @brief Accessor and modifier functions for the %chunksize
+   * optional element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::commonSchema::nonNegativeInteger chunksize_type;
+
+  /**
+   * @brief Element optional container type.
+   */
+  typedef ::xsd::cxx::tree::optional< chunksize_type > chunksize_optional;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< chunksize_type, char > chunksize_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element
+   * container.
+   *
+   * @return A constant reference to the optional container.
+   */
+  const chunksize_optional&
+  chunksize () const;
+
+  /**
+   * @brief Return a read-write reference to the element container.
+   *
+   * @return A reference to the optional container.
+   */
+  chunksize_optional&
+  chunksize ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  chunksize (const chunksize_type& x);
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x An optional container with the new value to set.
+   *
+   * If the value is present in @a x then this function makes a copy 
+   * of this value and sets it as the new value of the element.
+   * Otherwise the element container is set the 'not present' state.
+   */
+  void
+  chunksize (const chunksize_optional& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly instead
+   * of making a copy.
+   */
+  void
+  chunksize (::std::unique_ptr< chunksize_type > p);
+
+  /**
+   * @brief Return the default value for the element.
+   *
+   * @return The element's default value.
+   */
+  static chunksize_type
+  chunksize_default_value ();
+
+  //@}
+
+  /**
    * @name subDomain
    *
    * @brief Accessor and modifier functions for the %subDomain
@@ -4727,6 +4811,7 @@ class ParallelizationSpecXML: public ::xml_schema::type
   static const type_type type_default_value_;
   schedule_optional schedule_;
   static const schedule_type schedule_default_value_;
+  chunksize_optional chunksize_;
   subDomain_optional subDomain_;
 
   //@endcond

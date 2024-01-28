@@ -127,6 +127,7 @@
         <xs:element name="numThreads" type="common:nonNegativeInteger" minOccurs="0" default="1"/>
         <xs:element name="type" type="xs:string" minOccurs="0" default="cell"/>
         <xs:element name="schedule" type="xs:string" minOccurs="0" default="static"/>
+        <xs:element name="chunksize" type="common:nonNegativeInteger" minOccurs="0" default="1"/>
         <xs:element name="subDomain" type="common:int_3d" minOccurs="0"/>
     </xs:sequence>
 </xs:complexType>
