@@ -5,6 +5,7 @@
 #include "ParallelizationStrategy.h"
 #include <omp.h>
 
+#ifdef _OPENMP
 void acquireSortedLocks(std::vector<omp_lock_t>& cellLocks, const std::vector<int>& indices) {
     std::vector<int> sortedIndices = indices;
     std::sort(sortedIndices.begin(), sortedIndices.end());
@@ -19,6 +20,8 @@ void releaseLocks(std::vector<omp_lock_t>& cellLocks, const std::vector<int>& in
         omp_unset_lock(&cellLocks[index]);
     }
 }
+
+#endif
 
 void CellwiseStrategy::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
     auto& grid = container.grid;
@@ -63,8 +66,9 @@ void CellwiseStrategy::applyToPairs(const std::function<void(Particle &, Particl
                                     // Check if the neighbour has not yet been iterated over and if it is still inside of the grid
                                     if (neighbourGridIndex > currentGridIndex &&
                                         (k >= 0 && j >= 0 && i >= 0 && k < nc[0] && j < nc[1] && i < nc[2])) {
-
+#ifdef _OPENMP
                                         acquireSortedLocks(container.cellLocks, indicesToLock);
+#endif
                                         // Iterate over neighbour
                                         for (auto &pNeighbour: grid[neighbourGridIndex]) {
                                             // Apply function
@@ -73,8 +77,9 @@ void CellwiseStrategy::applyToPairs(const std::function<void(Particle &, Particl
                                                 function(pCurrent, pNeighbour);
                                             }
                                         }
-
+#ifdef _OPENMP
                                         releaseLocks(container.cellLocks, indicesToLock);
+#endif
                                     }
                                 }
                             }
@@ -109,9 +114,13 @@ void SubdomainStrategy::applyToPairs(const std::function<void(Particle &, Partic
                                 // Find out where is the current cell in the grid vector
                                 int currentGridIndex = container.getGridIndex(currentX, currentY, currentZ);
 
+#ifdef _OPENMP
                                 omp_set_lock(&container.cellLocks[currentGridIndex]);
+#endif
                                 container.grid[currentGridIndex].applyToPairs(function);
+#ifdef _OPENMP
                                 omp_unset_lock(&container.cellLocks[currentGridIndex]);
+#endif
 
 
                                 std::vector<int> indicesToLock{currentGridIndex};
@@ -137,8 +146,9 @@ void SubdomainStrategy::applyToPairs(const std::function<void(Particle &, Partic
 
                                                     // Check if the neighbor has not yet been iterated over
                                                     if (neighbourGridIndex > currentGridIndex) {
+#ifdef _OPENMP
                                                         acquireSortedLocks(container.cellLocks, indicesToLock);
-
+#endif
                                                         // Iterate over neighbor
                                                         for (auto& pNeighbour : container.grid[neighbourGridIndex]) {
                                                             // Apply function
@@ -147,7 +157,9 @@ void SubdomainStrategy::applyToPairs(const std::function<void(Particle &, Partic
                                                                 function(pCurrent, pNeighbour);
                                                             }
                                                         }
+#ifdef _OPENMP
                                                         releaseLocks(container.cellLocks, indicesToLock);
+#endif
                                                     }
                                                 }
                                             }

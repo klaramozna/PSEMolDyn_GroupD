@@ -143,6 +143,7 @@ int main(int argc, char *argsv[]) {
         Logger::console->info("Gravity Force activated with factor {}", simParameters.getGravityFactor());
     }
 
+#ifdef _OPENMP
     /** Initializing number of threads **/
     omp_set_num_threads(simParameters.getParallelizationSpec().getNumThreads());
 
@@ -157,6 +158,7 @@ int main(int argc, char *argsv[]) {
         case Guided:
             omp_set_schedule(omp_sched_guided, -1);
     }
+#endif
 
     LinkedCellContainer container(boundary, simParameters.getCutoffRadius(), {}, simParameters.getParallelizationSpec().getSubdomain());
 
