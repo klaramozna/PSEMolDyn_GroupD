@@ -86,4 +86,16 @@
     <!-- Misc -->
     <log_level>2</log_level>
     <testing_mode>false</testing_mode>
+
+    <parallelization_spec_xml>
+        <numThreads>2</numThreads>
+        <type>subdomain</type>
+        <schedule>dynamic</schedule>
+        <subDomain>
+            <x>10</x>
+            <y>20</y>
+            <z>20</z>
+        </subDomain>
+    </parallelization_spec_xml>
+
 </Simulation>
