@@ -46,6 +46,8 @@ Simulation/Physics/GravitationalForce.cpp
         Simulation/FakeThermostat.cpp
         Simulation/FakeThermostat.h
         utils/MaxwellBoltzmannDistribution.h
+        Particles/ParallelizationStrategy.cpp
+        Particles/ParallelizationStrategy.h
 )
         
 ## Include directories specific to the 'src' directory, if needed

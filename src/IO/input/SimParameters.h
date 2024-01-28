@@ -9,7 +9,7 @@
 
 #include <string>
 #include <array>
-#include "utils/ParallelizationStrategy.h"
+#include "utils/ParallelizationSpec.h"
 
 /**
  * @brief Represents simulation parameters.
@@ -46,7 +46,7 @@ public:
     SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                   bool testing_val, int log_level_val,
                   const std::string& input_path_val, const std::string& input_mode_val,
-                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, const std::string& thermostatType, bool brownianMotion, double gravity_factor_val  = 0, ParallelizationStrategy parallelizationStrategy_val = ParallelizationStrategy::CELL);
+                  const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, const std::string& thermostatType, bool brownianMotion, double gravity_factor_val  = 0, ParallelizationSpec parallelizationStrategy_val = ParallelizationSpec());
 
     SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                   bool testing_val, int log_level_val,
@@ -83,7 +83,8 @@ public:
     std::string getThermostatType() const {return thermostatType;}
     bool getBrownianMotion() const {return brownianMotion;}
     int getDim(){return dim;};
-    ParallelizationStrategy getParallelizationStrategy() const {return parallelizationStrat;};
+    ParallelizationSpec getParallelizationSpec() const {return parallelizationSpec;};
+    SchedulerType getSchedulerType() const {return schedulerType;};
 
     // Setters for modifying parameter values
     void setEndTime(double val) { end_time = val; }
@@ -111,12 +112,12 @@ public:
     void setThermostatType (const std::string& thermostatType_val){thermostatType = thermostatType_val;}
     void setBrownianMotion(bool val){brownianMotion = val;}
     void setDimension(int val){dim = val;};
-    void setParallelizationStrategy(ParallelizationStrategy val) {parallelizationStrat = val;};
+    void setParallelizationStrategy(ParallelizationSpec val) {parallelizationSpec = val;};
+    void setSchedulerType(SchedulerType val) {schedulerType = val;};
     bool operator==(const SimParameters &other) const;
 
 
-
-
+    void setSchedulingType(SchedulerType type);
 
 private:
     /**
@@ -242,9 +243,16 @@ private:
      */
      int dim;
 
+     /** Parameters relevant for the Parallelization Strategy **\
+
      /**
       * @brief parallelization strategy: none, subdomaining or cell-list
       */
-     ParallelizationStrategy parallelizationStrat;
+     ParallelizationSpec parallelizationSpec;
+
+     /**
+      * @brief scheduling type: static, dynamic or guided
+      */
+     SchedulerType schedulerType;
 
 };

@@ -4,6 +4,7 @@
 
 #include "BoundaryEnforcer.h"
 
+
 BoundaryEnforcer::BoundaryEnforcer(double sigma, LinkedCellContainer &container, std::array<double, 3> dimensions,
                                    std::array<BoundaryType, 6> boundaryTypes, ForceCalculation &fc) : container(container),
                                                                                 dimensions(dimensions),
@@ -42,6 +43,7 @@ void BoundaryEnforcer::applyBoundaryConditionsForParticle(Particle &particle) {
     }
 }
 
+
 void BoundaryEnforcer::applyReflectiveForce(Particle &p, std::vector<BoundaryDirection> directions) {
     std::array<double, 3> particlePosition = p.getX();
     std::array<double, 3> opposingParticlePosition = particlePosition;
@@ -76,6 +78,7 @@ void BoundaryEnforcer::applyReflectiveForce(Particle &p, std::vector<BoundaryDir
 
 }
 
+
 std::vector<BoundaryDirection> BoundaryEnforcer::getBoundariesOfParticle(Particle &particle) {
     std::vector<BoundaryDirection> result;
 
@@ -101,6 +104,7 @@ std::vector<BoundaryDirection> BoundaryEnforcer::getBoundariesOfParticle(Particl
 
     return result;
 }
+
 
 void BoundaryEnforcer::applyPeriodicBoundary(Particle &particle) {
     std::array<double, 3> particlePosition = particle.getX();
@@ -140,6 +144,7 @@ void BoundaryEnforcer::applyPeriodicBoundary(Particle &particle) {
         }
     }
 }
+
 
 bool BoundaryEnforcer::isHaloParticle(double x, double y, double z) {
     bool xCond = (x < 0 && x > -container.getCellSize()[0]) || (x > dimensions[0] && x < dimensions[0] + container.getCellSize()[0]);

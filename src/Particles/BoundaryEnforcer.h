@@ -24,7 +24,7 @@ public:
      * @param boundaryTypes: Array representing the boundary types for each direction.
      * @param fc: Reference to the ForceCalculation object for calculating particle forces.
      */
-    BoundaryEnforcer(double sigma, LinkedCellContainer &container, std::array<double,3> dimensions, std::array<BoundaryType, 6> boundaryTypes, ForceCalculation &fc);
+    BoundaryEnforcer(double sigma, LinkedCellContainer& container, std::array<double,3> dimensions, std::array<BoundaryType, 6> boundaryTypes, ForceCalculation &fc);
 
      /**
      * @brief Applies boundary conditions to a particle.

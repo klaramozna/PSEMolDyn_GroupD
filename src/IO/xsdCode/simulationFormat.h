@@ -575,6 +575,7 @@ class Cuboid;
 class Sphere;
 class BoundaryBehavior;
 class Boundaries;
+class ParallelizationSpecXML;
 class Simulation_t;
 
 #include <memory>    // ::std::unique_ptr
@@ -4303,6 +4304,435 @@ class Boundaries: public ::xml_schema::type
 };
 
 /**
+ * @brief Class corresponding to the %ParallelizationSpecXML schema type.
+ *
+ * @nosubgrouping
+ */
+class ParallelizationSpecXML: public ::xml_schema::type
+{
+  public:
+  /**
+   * @name numThreads
+   *
+   * @brief Accessor and modifier functions for the %numThreads
+   * optional element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::commonSchema::nonNegativeInteger numThreads_type;
+
+  /**
+   * @brief Element optional container type.
+   */
+  typedef ::xsd::cxx::tree::optional< numThreads_type > numThreads_optional;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< numThreads_type, char > numThreads_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element
+   * container.
+   *
+   * @return A constant reference to the optional container.
+   */
+  const numThreads_optional&
+  numThreads () const;
+
+  /**
+   * @brief Return a read-write reference to the element container.
+   *
+   * @return A reference to the optional container.
+   */
+  numThreads_optional&
+  numThreads ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  numThreads (const numThreads_type& x);
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x An optional container with the new value to set.
+   *
+   * If the value is present in @a x then this function makes a copy 
+   * of this value and sets it as the new value of the element.
+   * Otherwise the element container is set the 'not present' state.
+   */
+  void
+  numThreads (const numThreads_optional& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly instead
+   * of making a copy.
+   */
+  void
+  numThreads (::std::unique_ptr< numThreads_type > p);
+
+  /**
+   * @brief Return the default value for the element.
+   *
+   * @return The element's default value.
+   */
+  static numThreads_type
+  numThreads_default_value ();
+
+  //@}
+
+  /**
+   * @name type
+   *
+   * @brief Accessor and modifier functions for the %type
+   * optional element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::xml_schema::string type_type;
+
+  /**
+   * @brief Element optional container type.
+   */
+  typedef ::xsd::cxx::tree::optional< type_type > type_optional;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< type_type, char > type_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element
+   * container.
+   *
+   * @return A constant reference to the optional container.
+   */
+  const type_optional&
+  type () const;
+
+  /**
+   * @brief Return a read-write reference to the element container.
+   *
+   * @return A reference to the optional container.
+   */
+  type_optional&
+  type ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  type (const type_type& x);
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x An optional container with the new value to set.
+   *
+   * If the value is present in @a x then this function makes a copy 
+   * of this value and sets it as the new value of the element.
+   * Otherwise the element container is set the 'not present' state.
+   */
+  void
+  type (const type_optional& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly instead
+   * of making a copy.
+   */
+  void
+  type (::std::unique_ptr< type_type > p);
+
+  /**
+   * @brief Return the default value for the element.
+   *
+   * @return A read-only (constant) reference to the element's
+   * default value.
+   */
+  static const type_type&
+  type_default_value ();
+
+  //@}
+
+  /**
+   * @name schedule
+   *
+   * @brief Accessor and modifier functions for the %schedule
+   * optional element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::xml_schema::string schedule_type;
+
+  /**
+   * @brief Element optional container type.
+   */
+  typedef ::xsd::cxx::tree::optional< schedule_type > schedule_optional;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< schedule_type, char > schedule_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element
+   * container.
+   *
+   * @return A constant reference to the optional container.
+   */
+  const schedule_optional&
+  schedule () const;
+
+  /**
+   * @brief Return a read-write reference to the element container.
+   *
+   * @return A reference to the optional container.
+   */
+  schedule_optional&
+  schedule ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  schedule (const schedule_type& x);
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x An optional container with the new value to set.
+   *
+   * If the value is present in @a x then this function makes a copy 
+   * of this value and sets it as the new value of the element.
+   * Otherwise the element container is set the 'not present' state.
+   */
+  void
+  schedule (const schedule_optional& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly instead
+   * of making a copy.
+   */
+  void
+  schedule (::std::unique_ptr< schedule_type > p);
+
+  /**
+   * @brief Return the default value for the element.
+   *
+   * @return A read-only (constant) reference to the element's
+   * default value.
+   */
+  static const schedule_type&
+  schedule_default_value ();
+
+  //@}
+
+  /**
+   * @name subDomain
+   *
+   * @brief Accessor and modifier functions for the %subDomain
+   * optional element.
+   */
+  //@{
+
+  /**
+   * @brief Element type.
+   */
+  typedef ::commonSchema::int_3d subDomain_type;
+
+  /**
+   * @brief Element optional container type.
+   */
+  typedef ::xsd::cxx::tree::optional< subDomain_type > subDomain_optional;
+
+  /**
+   * @brief Element traits type.
+   */
+  typedef ::xsd::cxx::tree::traits< subDomain_type, char > subDomain_traits;
+
+  /**
+   * @brief Return a read-only (constant) reference to the element
+   * container.
+   *
+   * @return A constant reference to the optional container.
+   */
+  const subDomain_optional&
+  subDomain () const;
+
+  /**
+   * @brief Return a read-write reference to the element container.
+   *
+   * @return A reference to the optional container.
+   */
+  subDomain_optional&
+  subDomain ();
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x A new value to set.
+   *
+   * This function makes a copy of its argument and sets it as
+   * the new value of the element.
+   */
+  void
+  subDomain (const subDomain_type& x);
+
+  /**
+   * @brief Set the element value.
+   *
+   * @param x An optional container with the new value to set.
+   *
+   * If the value is present in @a x then this function makes a copy 
+   * of this value and sets it as the new value of the element.
+   * Otherwise the element container is set the 'not present' state.
+   */
+  void
+  subDomain (const subDomain_optional& x);
+
+  /**
+   * @brief Set the element value without copying.
+   *
+   * @param p A new value to use.
+   *
+   * This function will try to use the passed value directly instead
+   * of making a copy.
+   */
+  void
+  subDomain (::std::unique_ptr< subDomain_type > p);
+
+  //@}
+
+  /**
+   * @name Constructors
+   */
+  //@{
+
+  /**
+   * @brief Create an instance from the ultimate base and
+   * initializers for required elements and attributes.
+   */
+  ParallelizationSpecXML ();
+
+  /**
+   * @brief Create an instance from a DOM element.
+   *
+   * @param e A DOM element to extract the data from.
+   * @param f Flags to create the new instance with.
+   * @param c A pointer to the object that will contain the new
+   * instance.
+   */
+  ParallelizationSpecXML (const ::xercesc::DOMElement& e,
+                          ::xml_schema::flags f = 0,
+                          ::xml_schema::container* c = 0);
+
+  /**
+   * @brief Copy constructor.
+   *
+   * @param x An instance to make a copy of.
+   * @param f Flags to create the copy with.
+   * @param c A pointer to the object that will contain the copy.
+   *
+   * For polymorphic object models use the @c _clone function instead.
+   */
+  ParallelizationSpecXML (const ParallelizationSpecXML& x,
+                          ::xml_schema::flags f = 0,
+                          ::xml_schema::container* c = 0);
+
+  /**
+   * @brief Copy the instance polymorphically.
+   *
+   * @param f Flags to create the copy with.
+   * @param c A pointer to the object that will contain the copy.
+   * @return A pointer to the dynamically allocated copy.
+   *
+   * This function ensures that the dynamic type of the instance is
+   * used for copying and should be used for polymorphic object
+   * models instead of the copy constructor.
+   */
+  virtual ParallelizationSpecXML*
+  _clone (::xml_schema::flags f = 0,
+          ::xml_schema::container* c = 0) const;
+
+  /**
+   * @brief Copy assignment operator.
+   *
+   * @param x An instance to make a copy of.
+   * @return A reference to itself.
+   *
+   * For polymorphic object models use the @c _clone function instead.
+   */
+  ParallelizationSpecXML&
+  operator= (const ParallelizationSpecXML& x);
+
+  //@}
+
+  /**
+   * @brief Destructor.
+   */
+  virtual 
+  ~ParallelizationSpecXML ();
+
+  // Implementation.
+  //
+
+  //@cond
+
+  protected:
+  void
+  parse (::xsd::cxx::xml::dom::parser< char >&,
+         ::xml_schema::flags);
+
+  protected:
+  numThreads_optional numThreads_;
+  type_optional type_;
+  static const type_type type_default_value_;
+  schedule_optional schedule_;
+  static const schedule_type schedule_default_value_;
+  subDomain_optional subDomain_;
+
+  //@endcond
+};
+
+/**
  * @brief Class corresponding to the %Simulation_t schema type.
  *
  * @nosubgrouping
@@ -5400,9 +5830,9 @@ class Simulation_t: public ::xml_schema::type
   //@}
 
   /**
-   * @name parallelization
+   * @name parallelization_spec_xml
    *
-   * @brief Accessor and modifier functions for the %parallelization
+   * @brief Accessor and modifier functions for the %parallelization_spec_xml
    * optional element.
    */
   //@{
@@ -5410,17 +5840,17 @@ class Simulation_t: public ::xml_schema::type
   /**
    * @brief Element type.
    */
-  typedef ::xml_schema::string parallelization_type;
+  typedef ::ParallelizationSpecXML parallelization_spec_xml_type;
 
   /**
    * @brief Element optional container type.
    */
-  typedef ::xsd::cxx::tree::optional< parallelization_type > parallelization_optional;
+  typedef ::xsd::cxx::tree::optional< parallelization_spec_xml_type > parallelization_spec_xml_optional;
 
   /**
    * @brief Element traits type.
    */
-  typedef ::xsd::cxx::tree::traits< parallelization_type, char > parallelization_traits;
+  typedef ::xsd::cxx::tree::traits< parallelization_spec_xml_type, char > parallelization_spec_xml_traits;
 
   /**
    * @brief Return a read-only (constant) reference to the element
@@ -5428,16 +5858,16 @@ class Simulation_t: public ::xml_schema::type
    *
    * @return A constant reference to the optional container.
    */
-  const parallelization_optional&
-  parallelization () const;
+  const parallelization_spec_xml_optional&
+  parallelization_spec_xml () const;
 
   /**
    * @brief Return a read-write reference to the element container.
    *
    * @return A reference to the optional container.
    */
-  parallelization_optional&
-  parallelization ();
+  parallelization_spec_xml_optional&
+  parallelization_spec_xml ();
 
   /**
    * @brief Set the element value.
@@ -5448,7 +5878,7 @@ class Simulation_t: public ::xml_schema::type
    * the new value of the element.
    */
   void
-  parallelization (const parallelization_type& x);
+  parallelization_spec_xml (const parallelization_spec_xml_type& x);
 
   /**
    * @brief Set the element value.
@@ -5460,7 +5890,7 @@ class Simulation_t: public ::xml_schema::type
    * Otherwise the element container is set the 'not present' state.
    */
   void
-  parallelization (const parallelization_optional& x);
+  parallelization_spec_xml (const parallelization_spec_xml_optional& x);
 
   /**
    * @brief Set the element value without copying.
@@ -5471,16 +5901,7 @@ class Simulation_t: public ::xml_schema::type
    * of making a copy.
    */
   void
-  parallelization (::std::unique_ptr< parallelization_type > p);
-
-  /**
-   * @brief Return the default value for the element.
-   *
-   * @return A read-only (constant) reference to the element's
-   * default value.
-   */
-  static const parallelization_type&
-  parallelization_default_value ();
+  parallelization_spec_xml (::std::unique_ptr< parallelization_spec_xml_type > p);
 
   //@}
 
@@ -5581,8 +6002,7 @@ class Simulation_t: public ::xml_schema::type
   writeFrequency_optional writeFrequency_;
   log_level_optional log_level_;
   testing_mode_optional testing_mode_;
-  parallelization_optional parallelization_;
-  static const parallelization_type parallelization_default_value_;
+  parallelization_spec_xml_optional parallelization_spec_xml_;
 
   //@endcond
 };

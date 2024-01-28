@@ -26,6 +26,8 @@
 #include "Simulation/GradualThermostat.h"
 #include "Simulation/FakeThermostat.h"
 
+#include "Particles/ParallelizationStrategy.h"
+
 /* Logging */
 #include "IO/Logger.h"
 #include <IO/CLparser/CL.h>
@@ -44,6 +46,7 @@ int main(int argc, char *argsv[]) {
     std::unique_ptr<ParticleReader> reader;
     std::unique_ptr<ForceCalculation> forceCalculation;
     std::unique_ptr<Thermostat> thermostat;
+
     GravityForce gravity{0};
 
 
@@ -140,13 +143,47 @@ int main(int argc, char *argsv[]) {
         Logger::console->info("Gravity Force activated with factor {}", simParameters.getGravityFactor());
     }
 
-    LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
+    /** Initializing number of threads **/
+    omp_set_num_threads(simParameters.getParallelizationSpec().getNumThreads());
+
+    /** Define scheduling for OpenMP **/
+    switch (simParameters.getSchedulerType()) {
+        case Static:
+            omp_set_schedule(omp_sched_static, -1);
+            break;
+        case Dynamic:
+            omp_set_schedule(omp_sched_dynamic, -1);
+            break;
+        case Guided:
+            omp_set_schedule(omp_sched_guided, -1);
+    }
+
+    LinkedCellContainer container(boundary, simParameters.getCutoffRadius(), {}, simParameters.getParallelizationSpec().getSubdomain());
+
+    /** Define container strategy **/
+    switch (simParameters.getParallelizationSpec().getType()) {
+        case None:
+            Logger::console->debug("No parallelization");
+            container.setStrategy(std::make_unique<NonParallelStrategy>(container));
+            break;
+        case Cellwise:
+            Logger::console->debug("Cellwise parallelization");
+            container.setStrategy(std::make_unique<CellwiseStrategy>(container));
+            break;
+        case Subdomain:
+            Logger::console->debug("Subdomain parallelization");
+            container.setStrategy(std::make_unique<SubdomainStrategy>(container));
+            break;
+    }
+
+    Logger::console->debug("Initializing Container", simParameters.getGravityFactor());
 
     /* To do: solve this dependency between readFile and container*/
     if(particlesShift != 0){
         container_h.applyToAll([&particlesShift](Particle& p){p.setX(p.getXVector() + VectorDouble3(std::array<double, 3>{0, 0, particlesShift}));});
     }
 
+    Logger::console->debug("Added particles to container", simParameters.getGravityFactor());
     container.addParticles(container_h.getParticleVector());
 
 
@@ -162,7 +199,7 @@ int main(int argc, char *argsv[]) {
     int iteration = 0;
     double current_time = simParameters.getStartTime();
 
-    Simulation simulation(simParameters.getDeltaT(), simParameters.getSigma(),  container, *forceCalculation, *thermostat, simParameters.getAverageVelo(), boundary, gravity, simParameters.getBrownianMotion(), simParameters.getDim(), simParameters.getParallelizationStrategy());
+    Simulation simulation(simParameters.getDeltaT(), simParameters.getSigma(),  container, *forceCalculation, *thermostat, simParameters.getAverageVelo(), boundary, gravity, simParameters.getBrownianMotion(), simParameters.getDim());
 
     // This is ugly and shouldn't be in main, but it is for a later refactor
     if (simParameters.isTesting()) {
@@ -171,6 +208,7 @@ int main(int argc, char *argsv[]) {
         benchmark.startBenchmark();
 
         while (current_time < simParameters.getEndTime()) {
+            Logger::console->debug("Running iteration {}", iteration);
             simulation.runIteration();
             iteration++;
             current_time += simParameters.getDeltaT();
@@ -190,6 +228,7 @@ int main(int argc, char *argsv[]) {
     Logger::console->info("Progress: {}%", percentage);
      // for this loop, we assume: current x, current f and current v are known
     while (current_time < simParameters.getEndTime()) {
+        Logger::console->debug("Running iteration {}", iteration);
         simulation.runIteration();
 
         iteration++;

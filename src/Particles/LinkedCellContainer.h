@@ -6,11 +6,23 @@
 #define PSEMOLDYN_GROUPD_LINKEDCELLCONTAINER_H
 
 
+#include <omp.h>
+#include <memory>
+
 #include "ParticleContainer.h"
 #include "Cell.h"
 #include "Boundary.h"
 
+class ParallelizationStrategy;
+class CellwiseStrategy;
+class SubdomainStrategy;
+class NonParallelStrategy;
+
 class LinkedCellContainer : public ParticleContainer{
+    friend class CellwiseStrategy;
+    friend class NonParallelStrategy;
+    friend class SubdomainStrategy;
+
 public:
     /**
      * @brief Creates a LinkedCellContainer object using the given parameters.
@@ -18,7 +30,12 @@ public:
      * @param cutoffRadius Radius in which the particles affect each other.
      * @param particles The particles to be added to the container.
      */
-    LinkedCellContainer(Boundary boundary, double cutoffRadius, const std::vector<Particle>& particles = {});
+    LinkedCellContainer(Boundary boundary, double cutoffRadius, const std::vector<Particle>& particles = {},  std::array<int,3> subdomain = {1,1,1});
+
+    /**
+     * @brief Non-default constructor for parallelization purposes
+     */
+    ~LinkedCellContainer() override;
 
     /**
      * @brief Adds the given particle to the container.
@@ -44,7 +61,7 @@ public:
      */
     void applyToPairs(const std::function<void(Particle&, Particle&)>& function) override;
 
-    void applyToPairsSubdomain(const std::function<void(Particle&, Particle&)>& function);
+    void setStrategy(std::unique_ptr<ParallelizationStrategy> newStrategy);
 
     /**
      * @brief Returns a vector of all particles in the container.
@@ -108,11 +125,28 @@ private:
      */
     std::array<double, 3> gridShift;
 
+    /**
+     * @brief Stores each dimension of a single cell
+     */
     std::array<double, 3> cellSize;
 
-    int subdomainSizeX;
-    int subdomainSizeY;
-    int subdomainSizeZ;
+
+    #ifdef _OPENMP
+        /**
+         * @brief Locks for synchronizing cell accesses
+         */
+        std::vector<omp_lock_t> cellLocks;
+    #endif
+
+    /**
+     * @brief Dimensions of a subdomain cuboid
+     */
+     std::array<int,3> subdomain;
+
+     /**
+      * @brief Parallelizatio strategy: Iteration over Cells, Iteration over Subdomains or Nonw
+      */
+      std::unique_ptr<ParallelizationStrategy> strategy_ptr;
 
     /**
      * @brief Puts all particles in their correct cells after a change in position.

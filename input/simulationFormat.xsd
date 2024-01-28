@@ -122,6 +122,15 @@
   </xs:sequence>
 </xs:complexType>
 
+<xs:complexType name="ParallelizationSpecXML">
+    <xs:sequence>
+        <xs:element name="numThreads" type="common:nonNegativeInteger" minOccurs="0" default="1"/>
+        <xs:element name="type" type="xs:string" minOccurs="0" default="cell"/>
+        <xs:element name="schedule" type="xs:string" minOccurs="0" default="static"/>
+        <xs:element name="subDomain" type="common:int_3d" minOccurs="0"/>
+    </xs:sequence>
+</xs:complexType>
+
 <!-- Specify Program Arguments -->
 
     <xs:complexType name="Simulation_t">
@@ -151,8 +160,9 @@
 
         <xs:element name="log_level" type="log_level" minOccurs="0" maxOccurs="1" default="2"/>
         <xs:element name="testing_mode" type="xs:boolean" minOccurs="0" maxOccurs="1" default="false"/>
-        <xs:element name="parallelization" type="xs:string" minOccurs="0" maxOccurs="1" default="none"/>
 
+        <!-- Parallelization -->
+        <xs:element name="parallelization_spec_xml" type="ParallelizationSpecXML" minOccurs="0" maxOccurs="1"/>
 
       </xs:sequence>
     </xs:complexType>

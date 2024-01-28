@@ -178,13 +178,53 @@ void XMLReader::readFile(ParticleContainer &container, std::string &filename, Si
             SimParameters.setCutoffRadius(sim->cutoffRadius().get());
         }
 
-        if (sim->parallelization().present()){
-            Logger::console->debug("Reading parallelization {} from XML", sim->parallelization().get());
-            if (sim->parallelization().get() == "subdomain"){
-                SimParameters.setParallelizationStrategy(ParallelizationStrategy::SUBDOMAIN);
+        if (sim->parallelization_spec_xml().present()){
+            std::array<int, 3> subdomain = {1, 1, 1};
+            ParallelizationType type;
+            long num_threads;
+
+            if (sim->parallelization_spec_xml()->type().present()) {
+                if (sim->parallelization_spec_xml()->type().get() == "subdomain" && !sim->parallelization_spec_xml()->subDomain().present()) {
+                    Logger::err_logger->error("Subdomain type requires subdomain to be specified");
+                    exit(-1);
+                }
             }
-            else if (sim->parallelization().get() == "cell"){
-                SimParameters.setParallelizationStrategy(ParallelizationStrategy::CELL);
+
+            if (sim->parallelization_spec_xml()->subDomain().present()) {
+                subdomain = {
+                        static_cast<int>(sim->parallelization_spec_xml()->subDomain().get().x()),
+                        static_cast<int>(sim->parallelization_spec_xml()->subDomain().get().y()),
+                        static_cast<int>(sim->parallelization_spec_xml()->subDomain().get().z())
+                };
+                Logger::console->debug("Reading subdomain [{}, {}, {}] from XML", subdomain[0], subdomain[1], subdomain[2]);
+            }
+
+            Logger::console->debug("Reading parallelization strategy type {} from XML", sim->parallelization_spec_xml()->type().get());
+
+            try {
+                type = ParallelizationSpec::getParallelizationTypeFromStr(sim->parallelization_spec_xml()->type().get());
+            } catch (const std::invalid_argument& e) {
+                Logger::err_logger->error("{}",e.what());
+                exit(-1);
+            }
+
+            Logger::console->debug("Reading number of threads({}) from XML", sim->parallelization_spec_xml().get().numThreads().get());
+
+            SimParameters.setParallelizationStrategy(
+                    ParallelizationSpec(
+                        type,
+                        sim->parallelization_spec_xml()->numThreads().get(),
+                        subdomain
+                    )
+            );
+
+            Logger::console->debug("Reading scheduling type {} from XML", sim->parallelization_spec_xml()->schedule().get());
+
+            try {
+                SimParameters.setSchedulingType(ParallelizationSpec::getSchedulerTypeFromStr(sim->parallelization_spec_xml()->schedule().get()));
+            } catch (const std::invalid_argument& e) {
+                Logger::err_logger->error("{}",e.what());
+                exit(-1);
             }
         }
 

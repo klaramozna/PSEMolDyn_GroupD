@@ -8,13 +8,13 @@
 #include <string>
 #include "SimParameters.h"
 #include "../Logger.h"
-#include "utils/ParallelizationStrategy.h"
+#include "utils/ParallelizationSpec.h"
 
 // Constructor to initialize the parameters
 SimParameters::SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
                              bool testing_val, int log_level_val,
                              const std::string& input_path_val, const std::string& input_mode_val,
-                             const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency_val, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, const std::string& thermostatType, bool brownianMotion, double gravity_factor_val, ParallelizationStrategy parallelizationStrategy_val) {
+                             const std::string& force_val, const double sigma_val, const double epsilon_val, const std::string& base_name_val, const int write_frequency_val, const double cutoffRadius_val, const std::array<double,3>& boxSize_val, const std::array<std::string, 6>& boundaryBehavior_val, double initTemp, double targetTemp, double maxChange, int cycleLength, const std::string& thermostatType, bool brownianMotion, double gravity_factor_val, ParallelizationSpec parallelizationSpec_val) {
     end_time =end_time_val;
     delta_t = delta_t_val;
     averageVelo = averageVelo_val;
@@ -37,7 +37,7 @@ SimParameters::SimParameters(double end_time_val, double delta_t_val, double ave
     gravity_factor = gravity_factor_val;
     this->thermostatType = thermostatType;
     this->brownianMotion = brownianMotion;
-    this->parallelizationStrat = parallelizationStrategy_val;
+    this->parallelizationSpec = parallelizationSpec_val;
 }
 
 SimParameters::SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
@@ -90,5 +90,9 @@ void SimParameters::print(){
     Logger::console->debug("base name: {}", base_name);
     Logger::console->debug("force: {}", force);
     Logger::console->debug("write frequency: {}", write_frequency);
+}
+
+void SimParameters::setSchedulingType(SchedulerType type) {
+
 }
 

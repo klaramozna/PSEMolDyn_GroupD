@@ -13,7 +13,7 @@
 #include "Thermostat.h"
 #include "../Particles/Boundary.h"
 #include "../Particles/BoundaryEnforcer.h"
-#include "utils/ParallelizationStrategy.h"
+#include "utils/ParallelizationSpec.h"
 
 #include <memory>
 
@@ -56,8 +56,7 @@ private:
 
 
 public:
-
-    Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion, int dim, ParallelizationStrategy parallelizationStrategy);
+    Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion, int dim);
 
     virtual ~Simulation();
 
@@ -71,8 +70,6 @@ public:
      * @brief run one iteration of the simulation, meaning position, force and then velocity
      */
     void runIteration();
-
-    ParallelizationStrategy parallelizationStrategy;
 };
 
 #endif //PSEMOLDYN_GROUPD_SIMULATION_H

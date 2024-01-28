@@ -13,14 +13,14 @@
 
 std::array<double, 3> maxwellBoltzmannDistributedVelocity(double averageVelocity, size_t dimensions);
 
-Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion, int dim, ParallelizationStrategy parallelizationStrategy) :
+
+Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, double averageVelo, Boundary &boundary, GravityForce &gravity, bool applyBrownianMotion, int dim) :
                         container(container),
                         forceCalculation(calculation),
                         thermostat(thermostat),
                         boundaryEnforcer(sigma, container, boundary.getDimensions(), boundary.getBoundaryTypes(), forceCalculation),
                         gravity(gravity),
-                        delta_t(delta_t),
-                        parallelizationStrategy(parallelizationStrategy) {
+                        delta_t(delta_t) {
     // Apply brownian motion
     if(applyBrownianMotion){
         if(typeid(thermostat) == typeid(FakeThermostat())) {
@@ -38,11 +38,14 @@ Simulation::Simulation(double delta_t, double sigma, LinkedCellContainer& contai
 }
 
 
+
 Simulation::~Simulation() = default;
+
 
 std::vector<Particle> Simulation::getParticles() {
     return container.getParticleVector();
 }
+
 
 
 void Simulation::calculateF(Particle& p1, Particle& p2) {
@@ -53,16 +56,19 @@ void Simulation::calculateF(Particle& p1, Particle& p2) {
     }
 }
 
+
 void Simulation::calculateV(Particle& p) const {
     VectorDouble3 v_i = p.getVVector() + (this->delta_t / (2. * p.getM()) * (p.getOldFVector() + p.getFVector()));
     p.setV(v_i);
 }
+
 
 void Simulation::calculateX(Particle& p) const {
     VectorDouble3 x_i = p.getXVector() + delta_t * p.getVVector()
             + ((delta_t * delta_t) / (2. * p.getM())) * p.getOldFVector();
     p.setX(x_i);
 }
+
 
 void Simulation::applyGravity(Particle& p) {
     VectorDouble3 result = gravity.CalculateForce(p);
@@ -79,11 +85,7 @@ void Simulation::runIteration() {
     // apply boundary conditions
     container.applyToBoundary([this](Particle& p) { boundaryEnforcer.applyBoundaryConditionsForParticle(p); });
 
-    if (parallelizationStrategy == ParallelizationStrategy::SUBDOMAIN) {
-        container.applyToPairsSubdomain([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
-    } else {
-        container.applyToPairs([this](Particle &p1, Particle &p2) { calculateF(p1, p2); });
-    }
+    container.applyToPairs([this](Particle &p1, Particle &p2) { calculateF(p1, p2); });
 
     container.deleteHaloParticles();
 
@@ -96,6 +98,7 @@ void Simulation::runIteration() {
     container.applyToAll([this](Particle& p){thermostat.updateTemperature(p);});
     thermostat.updateIteration();
 }
+
 
 void Simulation::setOldForce(Particle& p) {
     p.setOldF((p.getFVector()));

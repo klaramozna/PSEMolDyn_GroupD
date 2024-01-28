@@ -5,3 +5,6 @@ build/
 documentation
 Simulation_*
 /scripts/
+/input/fallingdrop_Wall_cell_8.xml
+/input/fallingdrop_Wall_cell_10.xml
+/input/fallingdrop_Wall_cell_64.xml

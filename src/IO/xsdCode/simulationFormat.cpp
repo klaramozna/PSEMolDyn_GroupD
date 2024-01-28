@@ -1148,6 +1148,148 @@ Left (::std::unique_ptr< Left_type > x)
 }
 
 
+// ParallelizationSpecXML
+// 
+
+const ParallelizationSpecXML::numThreads_optional& ParallelizationSpecXML::
+numThreads () const
+{
+  return this->numThreads_;
+}
+
+ParallelizationSpecXML::numThreads_optional& ParallelizationSpecXML::
+numThreads ()
+{
+  return this->numThreads_;
+}
+
+void ParallelizationSpecXML::
+numThreads (const numThreads_type& x)
+{
+  this->numThreads_.set (x);
+}
+
+void ParallelizationSpecXML::
+numThreads (const numThreads_optional& x)
+{
+  this->numThreads_ = x;
+}
+
+void ParallelizationSpecXML::
+numThreads (::std::unique_ptr< numThreads_type > x)
+{
+  this->numThreads_.set (std::move (x));
+}
+
+ParallelizationSpecXML::numThreads_type ParallelizationSpecXML::
+numThreads_default_value ()
+{
+  return numThreads_type (1LL);
+}
+
+const ParallelizationSpecXML::type_optional& ParallelizationSpecXML::
+type () const
+{
+  return this->type_;
+}
+
+ParallelizationSpecXML::type_optional& ParallelizationSpecXML::
+type ()
+{
+  return this->type_;
+}
+
+void ParallelizationSpecXML::
+type (const type_type& x)
+{
+  this->type_.set (x);
+}
+
+void ParallelizationSpecXML::
+type (const type_optional& x)
+{
+  this->type_ = x;
+}
+
+void ParallelizationSpecXML::
+type (::std::unique_ptr< type_type > x)
+{
+  this->type_.set (std::move (x));
+}
+
+const ParallelizationSpecXML::type_type& ParallelizationSpecXML::
+type_default_value ()
+{
+  return type_default_value_;
+}
+
+const ParallelizationSpecXML::schedule_optional& ParallelizationSpecXML::
+schedule () const
+{
+  return this->schedule_;
+}
+
+ParallelizationSpecXML::schedule_optional& ParallelizationSpecXML::
+schedule ()
+{
+  return this->schedule_;
+}
+
+void ParallelizationSpecXML::
+schedule (const schedule_type& x)
+{
+  this->schedule_.set (x);
+}
+
+void ParallelizationSpecXML::
+schedule (const schedule_optional& x)
+{
+  this->schedule_ = x;
+}
+
+void ParallelizationSpecXML::
+schedule (::std::unique_ptr< schedule_type > x)
+{
+  this->schedule_.set (std::move (x));
+}
+
+const ParallelizationSpecXML::schedule_type& ParallelizationSpecXML::
+schedule_default_value ()
+{
+  return schedule_default_value_;
+}
+
+const ParallelizationSpecXML::subDomain_optional& ParallelizationSpecXML::
+subDomain () const
+{
+  return this->subDomain_;
+}
+
+ParallelizationSpecXML::subDomain_optional& ParallelizationSpecXML::
+subDomain ()
+{
+  return this->subDomain_;
+}
+
+void ParallelizationSpecXML::
+subDomain (const subDomain_type& x)
+{
+  this->subDomain_.set (x);
+}
+
+void ParallelizationSpecXML::
+subDomain (const subDomain_optional& x)
+{
+  this->subDomain_ = x;
+}
+
+void ParallelizationSpecXML::
+subDomain (::std::unique_ptr< subDomain_type > x)
+{
+  this->subDomain_.set (std::move (x));
+}
+
+
 // Simulation_t
 // 
 
@@ -1577,40 +1719,34 @@ testing_mode_default_value ()
   return testing_mode_type (false);
 }
 
-const Simulation_t::parallelization_optional& Simulation_t::
-parallelization () const
+const Simulation_t::parallelization_spec_xml_optional& Simulation_t::
+parallelization_spec_xml () const
 {
-  return this->parallelization_;
+  return this->parallelization_spec_xml_;
 }
 
-Simulation_t::parallelization_optional& Simulation_t::
-parallelization ()
+Simulation_t::parallelization_spec_xml_optional& Simulation_t::
+parallelization_spec_xml ()
 {
-  return this->parallelization_;
-}
-
-void Simulation_t::
-parallelization (const parallelization_type& x)
-{
-  this->parallelization_.set (x);
+  return this->parallelization_spec_xml_;
 }
 
 void Simulation_t::
-parallelization (const parallelization_optional& x)
+parallelization_spec_xml (const parallelization_spec_xml_type& x)
 {
-  this->parallelization_ = x;
+  this->parallelization_spec_xml_.set (x);
 }
 
 void Simulation_t::
-parallelization (::std::unique_ptr< parallelization_type > x)
+parallelization_spec_xml (const parallelization_spec_xml_optional& x)
 {
-  this->parallelization_.set (std::move (x));
+  this->parallelization_spec_xml_ = x;
 }
 
-const Simulation_t::parallelization_type& Simulation_t::
-parallelization_default_value ()
+void Simulation_t::
+parallelization_spec_xml (::std::unique_ptr< parallelization_spec_xml_type > x)
 {
-  return parallelization_default_value_;
+  this->parallelization_spec_xml_.set (std::move (x));
 }
 
 
@@ -3362,14 +3498,156 @@ Boundaries::
 {
 }
 
+// ParallelizationSpecXML
+//
+
+const ParallelizationSpecXML::type_type ParallelizationSpecXML::type_default_value_ (
+  "cell");
+
+const ParallelizationSpecXML::schedule_type ParallelizationSpecXML::schedule_default_value_ (
+  "static");
+
+ParallelizationSpecXML::
+ParallelizationSpecXML ()
+: ::xml_schema::type (),
+  numThreads_ (this),
+  type_ (this),
+  schedule_ (this),
+  subDomain_ (this)
+{
+}
+
+ParallelizationSpecXML::
+ParallelizationSpecXML (const ParallelizationSpecXML& x,
+                        ::xml_schema::flags f,
+                        ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  numThreads_ (x.numThreads_, f, this),
+  type_ (x.type_, f, this),
+  schedule_ (x.schedule_, f, this),
+  subDomain_ (x.subDomain_, f, this)
+{
+}
+
+ParallelizationSpecXML::
+ParallelizationSpecXML (const ::xercesc::DOMElement& e,
+                        ::xml_schema::flags f,
+                        ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  numThreads_ (this),
+  type_ (this),
+  schedule_ (this),
+  subDomain_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void ParallelizationSpecXML::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // numThreads
+    //
+    if (n.name () == "numThreads" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< numThreads_type > r (
+        numThreads_traits::create (i, f, this));
+
+      if (!this->numThreads_)
+      {
+        this->numThreads_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // type
+    //
+    if (n.name () == "type" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< type_type > r (
+        type_traits::create (i, f, this));
+
+      if (!this->type_)
+      {
+        this->type_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // schedule
+    //
+    if (n.name () == "schedule" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< schedule_type > r (
+        schedule_traits::create (i, f, this));
+
+      if (!this->schedule_)
+      {
+        this->schedule_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // subDomain
+    //
+    if (n.name () == "subDomain" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< subDomain_type > r (
+        subDomain_traits::create (i, f, this));
+
+      if (!this->subDomain_)
+      {
+        this->subDomain_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    break;
+  }
+}
+
+ParallelizationSpecXML* ParallelizationSpecXML::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class ParallelizationSpecXML (*this, f, c);
+}
+
+ParallelizationSpecXML& ParallelizationSpecXML::
+operator= (const ParallelizationSpecXML& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->numThreads_ = x.numThreads_;
+    this->type_ = x.type_;
+    this->schedule_ = x.schedule_;
+    this->subDomain_ = x.subDomain_;
+  }
+
+  return *this;
+}
+
+ParallelizationSpecXML::
+~ParallelizationSpecXML ()
+{
+}
+
 // Simulation_t
 //
 
 const Simulation_t::base_name_type Simulation_t::base_name_default_value_ (
   "MD_vtk");
-
-const Simulation_t::parallelization_type Simulation_t::parallelization_default_value_ (
-  "none");
 
 Simulation_t::
 Simulation_t (const brownian_motion_type& brownian_motion)
@@ -3389,7 +3667,7 @@ Simulation_t (const brownian_motion_type& brownian_motion)
   writeFrequency_ (this),
   log_level_ (this),
   testing_mode_ (this),
-  parallelization_ (this)
+  parallelization_spec_xml_ (this)
 {
 }
 
@@ -3413,7 +3691,7 @@ Simulation_t (const Simulation_t& x,
   writeFrequency_ (x.writeFrequency_, f, this),
   log_level_ (x.log_level_, f, this),
   testing_mode_ (x.testing_mode_, f, this),
-  parallelization_ (x.parallelization_, f, this)
+  parallelization_spec_xml_ (x.parallelization_spec_xml_, f, this)
 {
 }
 
@@ -3437,7 +3715,7 @@ Simulation_t (const ::xercesc::DOMElement& e,
   writeFrequency_ (this),
   log_level_ (this),
   testing_mode_ (this),
-  parallelization_ (this)
+  parallelization_spec_xml_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -3642,16 +3920,16 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
-    // parallelization
+    // parallelization_spec_xml
     //
-    if (n.name () == "parallelization" && n.namespace_ ().empty ())
+    if (n.name () == "parallelization_spec_xml" && n.namespace_ ().empty ())
     {
-      ::std::unique_ptr< parallelization_type > r (
-        parallelization_traits::create (i, f, this));
+      ::std::unique_ptr< parallelization_spec_xml_type > r (
+        parallelization_spec_xml_traits::create (i, f, this));
 
-      if (!this->parallelization_)
+      if (!this->parallelization_spec_xml_)
       {
-        this->parallelization_.set (::std::move (r));
+        this->parallelization_spec_xml_.set (::std::move (r));
         continue;
       }
     }
@@ -3695,7 +3973,7 @@ operator= (const Simulation_t& x)
     this->writeFrequency_ = x.writeFrequency_;
     this->log_level_ = x.log_level_;
     this->testing_mode_ = x.testing_mode_;
-    this->parallelization_ = x.parallelization_;
+    this->parallelization_spec_xml_ = x.parallelization_spec_xml_;
   }
 
   return *this;
