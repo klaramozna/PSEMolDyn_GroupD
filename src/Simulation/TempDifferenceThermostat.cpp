@@ -3,10 +3,11 @@
 //
 
 #include "TempDifferenceThermostat.h"
-#include "utils/MaxwellBoltzmannDistribution.h"
 #include <cmath>
 #include <algorithm>
 #include <stdexcept>
+
+std::array<double, 3> maxwellBoltzmannDistributedVelocity(double averageVelocity, size_t dimensions);
 
 void TempDifferenceThermostat::updateTemperature(Particle &particle) {
     if(currentIteration % cycleLength == 0){
