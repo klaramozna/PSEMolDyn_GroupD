@@ -20,6 +20,7 @@
 #include "../IO/output/outputWriter/CheckpointWriter.h"
 #include "../IO/output/outputWriter/XYZWriter.h"
 #include "../IO/output/outputWriter/VTKWriter.h"
+#include "../Particles/ParticleStatistics.h"
 
 
 #include <memory>
@@ -36,8 +37,11 @@ private:
     BoundaryEnforcer boundaryEnforcer;
     GravityForce gravity;
     HardcodedPullForce pullForce;
+    ParticleStatistics statistics;
+    bool outputStatistics;
 
     SimParameters simParameters;
+
     /**
     * @brief calculate the velocity of a particle
     */

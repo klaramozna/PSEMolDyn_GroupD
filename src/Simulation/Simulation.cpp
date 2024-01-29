@@ -23,7 +23,9 @@ Simulation::Simulation(SimParameters& simParameters, LinkedCellContainer& contai
                         boundaryEnforcer(simParameters.getSigma(), container, boundary.getDimensions(), boundary.getBoundaryTypes(), forceCalculation),
                         gravity(gravity),
                         pullForce(hardcodedPullForce),
-                        simParameters(simParameters) {
+                        simParameters(simParameters),
+                        statistics(boundary, simParameters.getNumBins(), simParameters.getStatisticsFrequency()),
+                        outputStatistics{simParameters.getOutputStatistics()}{
     // Apply brownian motion
     if(simParameters.getBrownianMotion()){
         if(typeid(thermostat) == typeid(FakeThermostat())) {
@@ -111,6 +113,11 @@ void Simulation::runIteration() {
     thermostat.updateState(container.getParticleVector());
     container.applyToAll([this](Particle& p){thermostat.updateTemperature(p);});
     thermostat.updateIteration();
+
+    // output statistics
+    if(outputStatistics){
+        statistics.calculateStatistics(container.getParticleVector());
+    }
 }
 
 void Simulation::setOldForce(Particle& p) {
