@@ -71,6 +71,13 @@
         </xs:sequence>
     </xs:complexType>
 
+    <xs:complexType name="csvStatisticsType">
+        <xs:sequence>
+            <xs:element name="numBins" type="xs:nonNegativeInteger"/>
+            <xs:element name="applicationFrequency" type="xs:nonNegativeInteger"/>
+        </xs:sequence>
+    </xs:complexType>
+
 
     <!-- choose one thermostat type -->
 <xs:complexType name="ThermostatType">
@@ -82,6 +89,13 @@
         <xs:element name="tempDiff" type="tempDiffThermostatType"/>
     </xs:choice>
 </xs:complexType>
+
+    <xs:complexType name="statisticsType">
+        <xs:choice>
+            <xs:element name="none" type="xs:string"/>
+            <xs:element name="csv-output" type="csvStatisticsType"/>
+        </xs:choice>
+    </xs:complexType>
 
 
 <xs:complexType name="Cuboid">
@@ -180,6 +194,7 @@
   </xs:sequence>
 </xs:complexType>
 
+
 <!-- Specify Program Arguments -->
 
     <xs:complexType name="Simulation_t">
@@ -211,6 +226,7 @@
 
         <xs:element name="log_level" type="log_level" minOccurs="0" maxOccurs="1" default="2"/>
         <xs:element name="testing_mode" type="xs:boolean" minOccurs="0" maxOccurs="1" default="false"/>
+          <xs:element name="statistics" type="statisticsType" minOccurs="0" maxOccurs="1"/>
 
         
       </xs:sequence>

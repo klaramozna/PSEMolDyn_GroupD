@@ -86,6 +86,9 @@ public:
     bool isMembrane() const {return is_Membrane;}
     double getHardcodedForceEndTime() const {return hardcoded_force_end_time;}
     std::array<double,3>  getHardcodedPullFactors() const {return hardcoded_pull_factors;}
+    bool getOutputStatistics() const {return outputStatistics;}
+    bool getNumBins() const {return numBins;}
+    bool getStatisticsFrequency() const {return statisticsFrequency;};
 
     // Setters for modifying parameter values
     void setEndTime(double val) { end_time = val; }
@@ -117,6 +120,9 @@ public:
     void setHardcodedForceEndTime(double val) {hardcoded_force_end_time = val;}
     bool operator==(const SimParameters &other) const;
     void setHardcodedPullFactors(std::array<double,3>  val) { hardcoded_pull_factors = val;}
+    void setOutputStatistics(bool value){outputStatistics = value;}
+    void setNumBins(int val){numBins = val;}
+    void setStatisticsFrequency(int val){statisticsFrequency = val;}
 
 
 
@@ -258,5 +264,20 @@ private:
      * @brief pull force factors
      */
     std::array<double,3> hardcoded_pull_factors = {0, 0, 0};
+
+    /**
+     * @brief If true, particle statistics will be outputted to a csv file.
+     */
+    bool outputStatistics;
+
+    /**
+     * @brief Number of bins for particle statistics.
+     */
+    int numBins;
+
+    /**
+     * @brief Number of iterations, per which particle statistics should be outputted.
+     */
+    int statisticsFrequency;
 
 };
