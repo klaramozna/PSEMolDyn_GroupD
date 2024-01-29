@@ -41,7 +41,7 @@ public:
      * @brief Sets the velocity of the particle to a value according to the brownian motion.
      * @param particle The particle to which brownian motion is being applied.
      */
-    void initializeBrownianMotion(Particle& particle) const;
+    virtual void initializeBrownianMotion(Particle& particle) const;
 
     /**
      * @brief Destroys the thermostat object.
@@ -54,19 +54,17 @@ public:
      */
     double getCurrentTemperature();
 
-private:
 
-    /**
-     * @brief The temperature that particles should be initialized with.
-     */
-    double initTemperature;
-
+protected:
     /**
      * @brief Dimension used. Has to be between 1 and 3
      */
     int dim;
 
-protected:
+    /**
+     * @brief The temperature that particles should be initialized with.
+     */
+    double initTemperature;
 
     /**
      * @brief The number of the current iteration.

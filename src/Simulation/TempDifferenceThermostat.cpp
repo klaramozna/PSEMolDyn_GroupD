@@ -3,8 +3,10 @@
 //
 
 #include "TempDifferenceThermostat.h"
+#include "utils/MaxwellBoltzmannDistribution.h"
 #include <cmath>
 #include <algorithm>
+#include <stdexcept>
 
 void TempDifferenceThermostat::updateTemperature(Particle &particle) {
     if(currentIteration % cycleLength == 0){
@@ -35,4 +37,13 @@ void TempDifferenceThermostat::updateState(const std::vector<Particle> &particle
     // Calculate current temperature with the modified particles
     double kineticEnergy = getKineticEnergy(particleDiffs);
     currentTemperature = getTemperature(kineticEnergy, numNonWallParticles);
+}
+
+void TempDifferenceThermostat::initializeBrownianMotion(Particle &particle) const {
+    if(particle.getM() <= 0){
+        throw std::runtime_error("The given particle has a invalid weight / mass. Weight has to be strictly greater than zero.");
+    }
+    double factor = sqrt(initTemperature / particle.getM());
+    VectorDouble3 resultVelocity = VectorDouble3(maxwellBoltzmannDistributedVelocity(factor, dim));
+    particle.setV((particle.getVVector() - averageVelocity) + resultVelocity);
 }
