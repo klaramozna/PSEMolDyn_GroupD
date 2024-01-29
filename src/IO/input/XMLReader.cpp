@@ -148,7 +148,8 @@ void XMLReader::readFile(std::string &filename, SimParameters& SimParameters) {
             }
             std::array<double, 3> velocity = {cuboid.initial_velocity().x(), cuboid.initial_velocity().y(), cuboid.initial_velocity().z()};
             CuboidGenerator generator {lowerLeftCoord, n1, n2, n3, distance, mass, velocity, epsilon, sigma, isWall};
-            particles = generator.generateParticles(i);
+            auto ps = generator.generateParticles(i);
+            particles.insert(particles.end(), ps.begin(), ps.end());
             i++;
         }
 
@@ -188,7 +189,8 @@ void XMLReader::readFile(std::string &filename, SimParameters& SimParameters) {
             }
             std::array<double, 3> velocity = {membrane.initial_velocity().x(), membrane.initial_velocity().y(), membrane.initial_velocity().z()};
             MembraneGenerator generator {lowerLeftCoord, n1, n2, n3, distance, mass, velocity, epsilon, sigma, membrane.stiffness(), membrane.bond_length(), indices};
-            particles = generator.generateParticles(i);
+            auto ps = generator.generateParticles(i);
+            particles.insert(particles.end(), ps.begin(), ps.end());
         }
         
         i = 0;
@@ -209,10 +211,12 @@ void XMLReader::readFile(std::string &filename, SimParameters& SimParameters) {
             std::array<double, 3> velocity = {sphere.initial_velocity().x(), sphere.initial_velocity().y(), sphere.initial_velocity().z()};
             SphereGenerator generator {center, distance, radius, mass, velocity, epsilon, sigma};
             if (sphere.dimension() == "3D"){
-                particles = generator.generateParticles(i);
+                auto ps = generator.generateParticles(i);
+                particles.insert(particles.end(), ps.begin(), ps.end());
             }
             else {
-                particles = generator.generateDisk(i);
+                auto ps = generator.generateDisk(i);
+                particles.insert(particles.end(), ps.begin(), ps.end());
             }
             i++;
         }

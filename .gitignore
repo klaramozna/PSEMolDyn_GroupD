@@ -4,3 +4,8 @@ build/
 .vscode/
 documentation
 Simulation_*
+/input/fallingdrop_Wall_cell_8.xml
+/input/fallingdrop_Wall_cell_10.xml
+/input/fallingdrop_Wall_cell_64.xml
+/input/fallingdrop_Wall_cell_2.xml
+/input/fallingdrop_Wall_cell_4.xml
