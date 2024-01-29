@@ -61,3 +61,25 @@ void ParticleStatistics::outputStatistics(const std::vector<std::pair<VectorDoub
         outputFile << (iteration + "-" + binNr + "-" + "density:" + density + ",");
     }
 }
+
+std::vector<std::pair<VectorDouble3, double>>
+ParticleStatistics::calculateStatisticsTest(const std::vector<Particle> &particles) {
+    // Array of bins. The first part of the pair is the bin velocity average. The second part is the density average
+    std::vector<std::pair<VectorDouble3, double>> bins;
+    bins.resize(n, std::pair<VectorDouble3, double>{VectorDouble3(), 0});
+
+    // Calculating the total sum of all velocities and total number of particles in each bin
+    for (auto const &p: particles) {
+        if (boundary.isInside(p)) {
+            bins[getBinIndex(p)].first += p.getVVector();
+            bins[getBinIndex(p)].second++;
+        }
+    }
+
+    // Calculating the final averages from the total values
+    for (auto &bin: bins) {
+        bin.first = (1 / bin.second) * bin.first;
+        bin.second = bin.second / binVolume;
+    }
+    return bins;
+}

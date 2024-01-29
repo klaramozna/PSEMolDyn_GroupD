@@ -26,6 +26,13 @@ public:
      */
     ~ParticleStatistics();
 
+    /**
+     * @brief Returns a vector containing the average velocity and density of each bin from top to bottom. Primarily for testing purposes.
+     * @param particles Particles that the statistics should be calculated on.
+     * @return The statistics for each bin top to bottom of the domain. First component of the pair is average velocity, the second density.
+     */
+    std::vector<std::pair<VectorDouble3, double>> calculateStatisticsTest(const std::vector<Particle>& particles);
+
 private:
 
     /**
