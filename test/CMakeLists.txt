@@ -54,6 +54,8 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Particles/BoundaryEnforcer.h
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/MixingRuleLennardJones.h
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/MixingRuleLennardJones.cpp
+        ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/TruncatedLennardJones.h
+        ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/TruncatedLennardJones.cpp
         CuboidGeneratorTest.cpp
         CuboidGeneratorTest.h
         LinkedCellContainerTest.cpp
