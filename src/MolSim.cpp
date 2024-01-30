@@ -210,7 +210,6 @@ int main(int argc, char *argsv[]) {
         benchmark.startBenchmark();
 
         while (current_time < simParameters.getEndTime()) {
-            Logger::console->debug("Running iteration {}", iteration);
             simulation.runIteration();
             iteration++;
             current_time += simParameters.getDeltaT();

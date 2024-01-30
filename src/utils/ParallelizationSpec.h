@@ -27,7 +27,6 @@ private:
     int chunksize;
 
 public:
-    ParallelizationSpec(enum ParallelizationType type, int numThreads, int chunksize, std::array<int,3> subdomain) : type(type), numThreads(numThreads), subdomain(subdomain), chunksize(chunksize) {}
     ParallelizationSpec() : type(None), numThreads(1), subdomain({1,1,1}), chunksize(1) {}
 
     /** Getters **/
