@@ -1,0 +1,115 @@
+<Simulation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../simulationFormat.xsd">
+
+    <!-- Simulation Arguments -->
+    <t_end>500</t_end>
+    <delta_t>0.0005</delta_t>
+
+    <!-- Choose ForceType -->
+    <force>
+        <MixingRuleLennardJones>MixingRuleLennardJones</MixingRuleLennardJones>
+    </force>
+    <gravity> <gravity_factor> <x>0</x><y>-0.8</y> <z>0</z> </gravity_factor></gravity>
+
+    <averageVelo>0.1</averageVelo>
+
+    <boundaries>
+
+        <BoxSize> <x>30</x> <y>30</y> <z>12</z></BoxSize>
+        <Front>Periodic</Front>
+        <Back>Periodic</Back>
+        <Top>Periodic</Top>
+        <Right>Outflow</Right>
+        <Bottom>Periodic</Bottom>
+        <Left>Outflow</Left>
+
+    </boundaries>
+    <cutoffRadius>2.75</cutoffRadius>
+    <thermostat>
+        <simple>
+            <initTemperature> 40 </initTemperature>
+            <targetTemperature> 40 </targetTemperature>
+            <thermostatCycleLength> 10 </thermostatCycleLength>
+        </simple>
+    </thermostat>
+
+    <brownian_motion>true</brownian_motion>
+
+    <!-- Provide Particles (Cuboid) -->
+    <cuboid>
+        <lower-left-coord>
+            <x>1.0</x>
+            <y>0.5</y>
+            <z>0.5</z>
+        </lower-left-coord>
+        <number-of-particles>
+            <x>2</x>
+            <y>30</y>
+            <z>12</z>
+        </number-of-particles>
+        <distance>1.0</distance>
+        <mass>1.0</mass>
+        <initial_velocity>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </initial_velocity>
+        <epsilon_cuboid>2.0</epsilon_cuboid>
+        <sigma_cuboid>1.1</sigma_cuboid>
+        <wall>true</wall>
+    </cuboid>
+
+    <cuboid>
+        <lower-left-coord>
+            <x>27.2</x>
+            <y>0.5</y>
+            <z>0.5</z>
+        </lower-left-coord>
+        <number-of-particles>
+            <x>2</x>
+            <y>30</y>
+            <z>12</z>
+        </number-of-particles>
+        <distance>1.0</distance>
+        <mass>1.0</mass>
+        <initial_velocity>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </initial_velocity>
+        <epsilon_cuboid>2.0</epsilon_cuboid>
+        <sigma_cuboid>1.1</sigma_cuboid>
+        <wall>true</wall>
+    </cuboid>
+
+    <cuboid>
+        <lower-left-coord>
+            <x>3.2</x>
+            <y>0.6</y>
+            <z>0.6</z>
+        </lower-left-coord>
+        <number-of-particles>
+            <x>20</x>
+            <y>25</y>
+            <z>10</z>
+        </number-of-particles>
+        <distance>1.2</distance>
+        <mass>1.0</mass>
+        <initial_velocity>
+            <x>0.0</x>
+            <y>0.0</y>
+            <z>0.0</z>
+        </initial_velocity>
+        <epsilon_cuboid>1.0</epsilon_cuboid>
+        <sigma_cuboid>1.0</sigma_cuboid>
+        <wall>false</wall>
+    </cuboid>
+
+    <!-- IO -->
+    <base_name>MD_vtk</base_name>
+    <writeFrequency>100</writeFrequency>
+
+    <!-- Misc -->
+    <log_level>2</log_level>
+    <testing_mode>false</testing_mode>
+
+</Simulation>

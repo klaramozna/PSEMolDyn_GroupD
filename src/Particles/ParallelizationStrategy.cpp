@@ -82,9 +82,9 @@ void CellwiseStrategy::applyToPairs(const std::function<void(Particle &, Particl
                                         // Iterate over neighbour
                                         for (auto &pNeighbour: grid[neighbourGridIndex]) {
                                             // Apply function
-                                            if (pCurrent != pNeighbour &&
-                                                container.particleWithinCutoff(pCurrent, pNeighbour)) {
-                                                function(pCurrent, pNeighbour);
+                                            if (*pCurrent != *pNeighbour &&
+                                                container.particleWithinCutoff(*pCurrent, *pNeighbour)) {
+                                                function(*pCurrent, *pNeighbour);
                                             }
                                         }
 #ifdef _OPENMP
@@ -164,8 +164,8 @@ void SubdomainStrategy::applyToPairs(const std::function<void(Particle &, Partic
                                                         for (auto& pNeighbour : container.grid[neighbourGridIndex]) {
                                                             // Apply function
                                                             if (pCurrent != pNeighbour &&
-                                                                    container.particleWithinCutoff(pCurrent, pNeighbour)) {
-                                                                function(pCurrent, pNeighbour);
+                                                                    container.particleWithinCutoff(*pCurrent, *pNeighbour)) {
+                                                                function(*pCurrent, *pNeighbour);
                                                             }
                                                         }
 #ifdef _OPENMP

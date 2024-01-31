@@ -12,6 +12,9 @@
 #include "ParticleContainer.h"
 #include "Cell.h"
 #include "Boundary.h"
+#include <memory>
+
+using lui = long unsigned int;
 
 class ParallelizationStrategy;
 class CellwiseStrategy;
@@ -44,6 +47,12 @@ public:
     void addParticle(const Particle& p) override;
 
     /**
+     * @brief Adds the given particle to the container (the given object, not a copy)
+     * @param p The particle to be added.
+     */
+    void addParticlePointer(std::shared_ptr<Particle> p) override;
+
+    /**
      * @brief Returns the number of particles in the container.
      * @return The number of particles in the container.
      */
@@ -54,6 +63,13 @@ public:
      * @param function Function that is applied to each particle.
      */
     void applyToAll(const std::function<void(Particle&)>& function) override;
+
+    /**
+     * @brief Applies the given function to the particles with ids in the given array
+     * @param function Function to be applied.
+     * @param ids Ids of particles that the function should be applied to.
+     */
+    void applyForIds(const std::function<void(Particle&)>& function, const std::vector<int>& ids);
 
     /**
      * @brief Applies the given function to pairs of particles in neighbouring cells within the cutoff radius.
@@ -68,6 +84,12 @@ public:
      * @return The vector with the particles of the container.
      */
     std::vector<Particle> getParticleVector() override;
+
+    /**
+     * @brief Returns the particle with a give id
+     * @return particle with id
+     */
+    Particle getParticleWithId(int id);
 
     /**
      * @brief Applies the given function to each particle in the boundary
@@ -164,7 +186,7 @@ private:
      * @param oldCell Index of the cell the particle is being moved from.
      * @param newCell Index of the cell the particle is being moved to.
      */
-    void moveParticle(const Particle& p1, int oldCell, int newCell);
+    void moveParticle(std::shared_ptr<Particle> p1, int oldCell, int newCell);
 
     /**
      * @brief Returns true if the given particle is it's correct cell.

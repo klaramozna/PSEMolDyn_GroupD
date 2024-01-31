@@ -87,10 +87,12 @@
     <log_level>2</log_level>
     <testing_mode>true</testing_mode>
 
+
     <parallelization_spec_xml>
         <numThreads>1</numThreads>
         <type>subdomain</type>
         <schedule>static</schedule>
+        <chunksize>1</chunksize>
         <subDomain>
             <x>20</x>
             <y>20</y>

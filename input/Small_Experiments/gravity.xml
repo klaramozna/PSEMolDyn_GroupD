@@ -1,0 +1,65 @@
+<Simulation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../simulationFormat.xsd">
+
+    <!-- Simulation Arguments -->
+    <t_end>15</t_end>
+    <delta_t>0.0005</delta_t>
+    
+    <!-- Choose ForceType -->
+    <force>
+       <MixingRuleLennardJones>MixingRuleLennardJones</MixingRuleLennardJones>
+    </force>
+    <gravity> <gravity_factor> <x>-6</x><y>0</y><z>0</z></gravity_factor></gravity>
+    <averageVelo>0.1</averageVelo>
+    <boundaries>
+
+    <BoxSize> <x>303</x> <y>180</y> <z>0</z></BoxSize>
+     <Front>Reflecting</Front>
+     <Back>Reflecting</Back>
+     <Top>Reflecting</Top>
+     <Right>Reflecting</Right>
+     <Bottom>Reflecting</Bottom>
+     <Left>Reflecting</Left>
+    
+    </boundaries>
+    <cutoffRadius>3</cutoffRadius>
+    <thermostat>
+        <simple> 
+            <initTemperature> 0.5 </initTemperature>
+            <targetTemperature> 0.5 </targetTemperature>
+            <thermostatCycleLength> 1000 </thermostatCycleLength>
+        </simple>
+    </thermostat>
+    <brownian_motion>true</brownian_motion>
+    
+ <!-- Provide Particles (Cuboid) -->
+ <cuboid>
+    <lower-left-coord>
+        <x>15</x>
+        <y>20</y>
+        <z>0.0</z>
+    </lower-left-coord>
+    <number-of-particles>
+        <x>10</x>
+        <y>10</y>
+        <z>1</z>
+    </number-of-particles>
+    <distance>1.2</distance>
+    <mass>1.0</mass>
+    <initial_velocity>
+        <x>0.0</x>
+        <y>0.0</y>
+        <z>0.0</z>
+    </initial_velocity>
+    <epsilon_cuboid>1.0</epsilon_cuboid>
+    <sigma_cuboid>1.2</sigma_cuboid>
+</cuboid>
+
+    <!-- IO -->
+    <base_name>MD_vtk</base_name>
+    <writeFrequency>100</writeFrequency>
+
+    <!-- Misc -->
+    <log_level>2</log_level>
+    <testing_mode>false</testing_mode>
+
+</Simulation>

@@ -16,7 +16,7 @@ FileReader::FileReader() = default;
 
 FileReader::~FileReader() = default;
 
-void FileReader::readFile(ParticleContainer &container, std::string &filename) {
+void FileReader::readFile(std::string &filename, SimParameters& simParameters) {
   std::array<double, 3> x;
   std::array<double, 3> v;
   double m;
@@ -58,8 +58,11 @@ void FileReader::readFile(ParticleContainer &container, std::string &filename) {
             }
             datastream >> m;
 
-            Particle newParticle = Particle(x,v,m);
-            container.addParticle(newParticle);
+            std::shared_ptr<Particle> particlePtr = std::make_shared<Particle>(x, v, m);
+            particles.emplace_back(particlePtr);
+
+            //Particle newParticle = Particle(x,v,m);
+            //container.addParticle(newParticle);
 
             getline(input_file, tmp_string);
             std::cout << "Read line: " << tmp_string << std::endl;

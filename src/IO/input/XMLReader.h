@@ -7,13 +7,13 @@
 
 #pragma once
 
-#include "ParticleReader.h"
 #include "../../Particles/DirectSumContainer.h"
 #include "SimParameters.h"
 
 #include <array>
+#include <memory>
 
-class XMLReader : public ParticleReader  {
+class XMLReader{
 
 public:
     XMLReader();
@@ -21,9 +21,15 @@ public:
     
      /**
      * @brief Reads a defined XML file containing the simulation arguments 
-     * @param container ParticleContainer that will receive the read-in particles
      * @param filename Input file
      * @param simParamteres instance of SimParameters class to store the simulation arguments read from the file
      * */
-    void readFile (ParticleContainer &container, std::string &filename, SimParameters& simParameters) override;
+    void readFile (std::string &filename, SimParameters& simParameters);
+
+    std::vector<std::shared_ptr<Particle>> getParticles () {
+        return particles;
+    }
+
+private: 
+    std::vector<std::shared_ptr<Particle>> particles;
 };

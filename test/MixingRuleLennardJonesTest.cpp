@@ -10,9 +10,9 @@ TEST_F(MixingRuleLennardJonesTest, calculation){
     ASSERT_EQ(result, expected);
 }
 TEST_F(MixingRuleLennardJonesTest, parametersCuboidGenerator){
-    std::vector<Particle> particles = cuboidGenerator.generateParticles(0);
+    std::vector<std::shared_ptr<Particle>> particles = cuboidGenerator.generateParticles(0);
     for(const auto& p : particles){
-        ASSERT_EQ(p.getEpsilon(), 3);
-        ASSERT_EQ(p.getSigma(), 4);
+        ASSERT_EQ(p->getEpsilon(), 3);
+        ASSERT_EQ(p->getSigma(), 4);
     }
 }

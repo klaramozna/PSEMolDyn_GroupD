@@ -19,13 +19,13 @@ public:
      * @param mass is the mass of each particle.
      * @param velocity is the initial velocity of each particle.
      */
-    CuboidGenerator(std::array<double, 3> corner, int n1, int n2, int n3, double particleDistance, double mass, std::array<double, 3> velocity, double epsilon = 1, double sigma = 1);
+    CuboidGenerator(std::array<double, 3> corner, int n1, int n2, int n3, double particleDistance, double mass, std::array<double, 3> velocity, double epsilon = 1, double sigma = 1, bool wall = false);
 
     /**
      * @brief Generates a cuboid of particles.
      * @return A vector with the generated particles.
      */
-    std::vector<Particle> generateParticles(int type = 0) override;
+    std::vector<std::shared_ptr<Particle>> generateParticles(int type = 0) override;
 
 private:
 
@@ -73,6 +73,11 @@ private:
      * @brief Sigma of each particle.
      */
     double sigma;
+
+    /**
+     * @brief Determines, if the particles are wall particles or not.
+     */
+    bool isWall;
 };
 
 

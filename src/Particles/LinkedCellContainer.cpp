@@ -6,13 +6,18 @@
 #include "ParallelizationStrategy.h"
 #include "IO/Logger.h"
 
+#include <iostream>
+#include <memory>
+#include <algorithm>
+
 #include <stdexcept>
 #include <cmath>
 #include <omp.h>
-
+using lui = long unsigned int;
 
 LinkedCellContainer::LinkedCellContainer(Boundary boundary, double cutoffRadius,
                                          const std::vector<Particle>& particles, std::array<int,3> subdomain) : grid{}, boundary{boundary}, cutoffRadius{cutoffRadius}, subdomain{subdomain} {
+
     size = particles.size();
 
     // Potencially slightly increase cell size (compared to cutoff radius)
@@ -81,28 +86,38 @@ size_t LinkedCellContainer::getSize() {
 std::vector<Particle> LinkedCellContainer::getParticleVector() {
     std::vector<Particle> result{};
     for(auto & it : grid){
-        result.insert(result.end(), it.begin(), it.end());
+        for(const auto& itInner : it){
+            result.push_back(*itInner);
+        }
     }
     return result;
 }
 
+Particle LinkedCellContainer::getParticleWithId(int id) {
+    for (auto &particle : getParticleVector()) {
+        if (particle.getId() == id) 
+            return particle;
+    }
+    //return fake particle
+    Particle p{};
+    p.setId(-1);
+    return p;
+}
 
 void LinkedCellContainer::updateCells() {
-    for(int i = 0; i < grid.size(); i++){
+    for(lui i = 0; i < grid.size(); i++){
         for(auto & it : grid[i]){
-            if(getParticleIndex(it) != i){  // particle isn't in the correct cell
-                moveParticle(it, i, getParticleIndex(it));
+            if(getParticleIndex(*it) != i){  // particle isn't in the correct cell
+                moveParticle(it, i, getParticleIndex(*it));
             }
         }
     }
 }
 
-
-void LinkedCellContainer::moveParticle(const Particle &p1, int oldCell, int newCell) {
+void LinkedCellContainer::moveParticle(std::shared_ptr<Particle> p1, int oldCell, int newCell) {
     grid[oldCell].deleteParticle(p1);
-
     // Check if particle is outside
-    if (particleOutOfGrid(p1)){
+    if (particleOutOfGrid(*p1)){
         size--;
     } else {
         grid[newCell].addParticle(p1);
@@ -112,14 +127,14 @@ void LinkedCellContainer::moveParticle(const Particle &p1, int oldCell, int newC
 
 void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &function) {
     // Creating a vector for marking particles that need to be moved
-    std::vector<std::pair<Particle, int>> particlesToBeMoved{}; // stores each particle that needs to be moved with the cell it's beeing moved from
+    std::vector<std::pair<std::shared_ptr<Particle>, int>> particlesToBeMoved{}; // stores each particle that needs to be moved with the cell it's beeing moved from
 
     // Applying given function to each particle and marking particles for movement
     #pragma omp parallel for default(none) shared(grid, particlesToBeMoved), firstprivate(function)
-    for(int i = 0; i < grid.size(); i++){
-        for(auto & particle : grid[i]){
-            function(particle);
-            if(!isInCorrectCell(particle, i)){
+    for(lui i = 0; i < grid.size(); i++) {
+        for (auto &particle: grid[i]) {
+            function(*particle);
+            if (!isInCorrectCell(*particle, i)) {
                 #pragma omp critical
                 {
                     particlesToBeMoved.emplace_back(particle, i);
@@ -130,7 +145,7 @@ void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &func
 
     // Moving particles to their new cells
     for(auto & particle : particlesToBeMoved){
-        moveParticle(particle.first, particle.second, getParticleIndex(particle.first));
+        moveParticle(particle.first, particle.second, getParticleIndex(*(particle.first)));
     }
 }
 
@@ -138,7 +153,6 @@ void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &func
 bool LinkedCellContainer::isInCorrectCell(const Particle &p, int currentIndex) {
     return getParticleIndex(p) == currentIndex;
 }
-
 
 int LinkedCellContainer::getGridIndex(int x, int y, int z) const {
     return x + nc[0] * (y + nc[1] * z);
@@ -160,18 +174,20 @@ int LinkedCellContainer::getParticleIndex(const Particle &p) {
 
 void LinkedCellContainer::applyToBoundary(const std::function<void(Particle (&))> &function) {
     // Creating a vector for marking particles that need to be moved
-    std::vector<std::pair<Particle, int>> particlesToBeMoved{}; // stores each particle that needs to be moved with the cell it's beeing moved from
+    std::vector<std::pair<std::shared_ptr<Particle>, int>> particlesToBeMoved{}; // stores each particle that needs to be moved with the cell it's beeing moved from
 
     #pragma omp parallel for default(none) shared(boundaryCells_ptr, particlesToBeMoved), firstprivate(function)
     for (auto boundaryCell : boundaryCells_ptr) {
         if (boundaryCell != nullptr) {
             for (auto &particle : *boundaryCell) {
-                int currentCell = getParticleIndex(particle);
-                function(particle);
-                if(!isInCorrectCell(particle, currentCell)){
-                    #pragma omp critical
-                    {
-                        particlesToBeMoved.emplace_back(particle, currentCell);
+                if(!particle->isWallParticle()){
+                    int currentCell = getParticleIndex(*particle);
+                    function(*particle);
+                    if(!isInCorrectCell(*particle, currentCell)) {
+                        #pragma omp critical
+                        {
+                            particlesToBeMoved.emplace_back(particle, currentCell);
+                        }
                     }
                 }
             }
@@ -180,27 +196,26 @@ void LinkedCellContainer::applyToBoundary(const std::function<void(Particle (&))
 
     // Moving particles to their new cells
     for(auto & particle : particlesToBeMoved){
-        moveParticle(particle.first, particle.second, getParticleIndex(particle.first));
+        moveParticle(particle.first, particle.second, getParticleIndex(*(particle.first)));
     }
 }
 
 
 /* Not sure if this is a great idea, but alas */
-
 void LinkedCellContainer::deleteHaloParticles() {
     // Creating a vector for marking particles that need to be deleted
-    std::vector<std::pair<Particle, int>> particlesToBeDeleted{}; // stores each particle that needs to be deleted with the cell it's beeing deleted from
+    std::vector<std::pair<std::shared_ptr<Particle>, int>> particlesToBeDeleted{}; // stores each particle that needs to be deleted with the cell it's beeing deleted from
 
     // Applying given function to each particle and marking particles for movement
-    for(int i = 0; i < grid.size(); i++){
+    for(lui i = 0; i < grid.size(); i++){
         for(auto & particle : grid[i]){
-            if (particle.isMarkedForDeleting()) {
+            if ((*particle).isMarkedForDeleting()) {
                 particlesToBeDeleted.emplace_back(particle, i);
                 continue;
             }
-            if(boundary.isOutside(particle)){
-                if (particle.isMarkedForMirroring()) {
-                    Particle p2 = mirrorParticle(particle);
+            if(boundary.isOutside(*particle)){
+                if ((*particle).isMarkedForMirroring()) {
+                    Particle p2 = mirrorParticle(*particle);
                     p2.unmarkForMirroring();
                     addParticle(p2);
                     size++;
@@ -225,7 +240,8 @@ void LinkedCellContainer::addParticle(const Particle &p) {
     if(getParticleIndex(p) < 0 || getParticleIndex(p) >= grid.size()){
         throw std::runtime_error("Particle out of domain.");
     }
-    grid[getParticleIndex(p)].addParticle(p);
+
+    grid[getParticleIndex(p)].addParticle(std::make_shared<Particle>(p));
     size++;
 }
 
@@ -271,6 +287,15 @@ Particle LinkedCellContainer::mirrorParticle(const Particle &p) {
     }
 
     return Particle{std::array<double, 3>{x, y, z}, p.getV(), p.getM(), p.getEpsilon(), p.getSigma(), p.getType()};
+}
+
+void LinkedCellContainer::addParticlePointer(std::shared_ptr<Particle> p) {
+    if(getParticleIndex(*p) < 0 || getParticleIndex(*p) >= grid.size()){
+        throw std::runtime_error("Particle out of domain.");
+    }
+
+    grid[getParticleIndex(*p)].addParticle(p);
+    size++;
 }
 
 

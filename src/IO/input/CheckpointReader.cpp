@@ -14,7 +14,7 @@ CheckpointReader::CheckpointReader() = default;
 
 CheckpointReader::~CheckpointReader() = default;
 
-void CheckpointReader::readFile(ParticleContainer &container, std::string &filename, SimParameters& SimParameters) {
+void CheckpointReader::readFile (std::string &filename, SimParameters& simParameters) {
     /* Reading from checkpoints */
     try {  
         
@@ -33,7 +33,8 @@ void CheckpointReader::readFile(ParticleContainer &container, std::string &filen
             );
             particle_from_xml.setOldF(p.old_f().x(), p.old_f().y(), p.old_f().z());
             particle_from_xml.setF(p.f().x(), p.f().y(), p.f().z());
-            container.addParticle(particle_from_xml);
+            std::shared_ptr<Particle> particlePtr = std::make_shared<Particle>(particle_from_xml);
+            particles.emplace_back(particlePtr);
             i++;
 
     }

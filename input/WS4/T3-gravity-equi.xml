@@ -8,7 +8,7 @@
     <force>
        <MixingRuleLennardJones>MixingRuleLennardJones</MixingRuleLennardJones>
     </force>
-    <gravity> <gravity_factor> -12.44 </gravity_factor></gravity>
+    <gravity> <gravity_factor> <x>0</x><y>-12.44</y><z>0</z></gravity_factor></gravity>
     <averageVelo>0.1</averageVelo>
     <boundaries>
 
