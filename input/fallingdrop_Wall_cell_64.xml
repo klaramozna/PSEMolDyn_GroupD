@@ -65,9 +65,10 @@
     <testing_mode>true</testing_mode>
 
     <parallelization_spec_xml>
-        <numThreads>4</numThreads>
+        <numThreads>64</numThreads>
         <type>cellwise</type>
-        <schedule>dynamic</schedule>
+        <schedule>static</schedule>
+        <chunksize>1</chunksize>
         <subDomain>
             <x>7</x>
             <y>9</y>

@@ -3,7 +3,6 @@
 //
 
 #include "Cell.h"
-#include "../utils/VectorDouble3.h"
 
 Cell::iterator_type Cell::begin(){
     return particles.begin();
@@ -14,11 +13,11 @@ Cell::iterator_type Cell::end(){
 }
 
 void Cell::addParticle(std::shared_ptr<Particle> p) {
-    particles.insert(particles.end(), p);
+    particles.push_back(p);
 }
 
 void Cell::deleteParticle(std::shared_ptr<Particle> p) {
-    particles.remove(p);
+    particles.erase(std::remove(particles.begin(), particles.end(), p), particles.end());
 }
 
 bool Cell::contains(const Particle& p) {
@@ -31,7 +30,7 @@ bool Cell::contains(const Particle& p) {
 }
 
 void Cell::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
-    for(auto outer = particles.begin(); outer != --particles.end(); outer++){
+    for(auto outer = particles.begin(); outer != particles.end(); outer++){
         auto inner = outer;
         inner++;
         for(auto in2 = inner; in2 != particles.end(); in2++){
@@ -43,4 +42,11 @@ void Cell::applyToPairs(const std::function<void(Particle &, Particle &)> &funct
     }
 }
 
+Cell::Cell(const Cell &c) {
+    this->cutoffRadius = c.cutoffRadius;
+    // Deep copy of the particles vector
+    for (const auto& particle : c.particles) {
+        particles.push_back(particle); // Assuming Particle has a copy constructor
+    }
+}
 

@@ -9,6 +9,7 @@
 
 #include <string>
 #include <array>
+#include "utils/ParallelizationSpec.h"
 
 /**
  * @brief Represents simulation parameters.
@@ -83,6 +84,8 @@ public:
     std::string getThermostatType() const {return thermostatType;}
     bool getBrownianMotion() const {return brownianMotion;}
     int getDim(){return dim;};
+    ParallelizationSpec& getParallelizationSpec() { return parallelizationSpec; }
+    SchedulerType getSchedulerType() const {return schedulerType;};
     bool isMembrane() const {return is_Membrane;}
     double getHardcodedForceEndTime() const {return hardcoded_force_end_time;}
     std::array<double,3>  getHardcodedPullFactors() const {return hardcoded_pull_factors;}
@@ -113,14 +116,11 @@ public:
     void setThermostatType (const std::string& thermostatType_val){thermostatType = thermostatType_val;}
     void setBrownianMotion(bool val){brownianMotion = val;}
     void setDimension(int val){dim = val;};
+    void setSchedulerType(SchedulerType val) {schedulerType = val;};
     void setIsMembrane (bool val) {is_Membrane = val;}
     void setHardcodedForceEndTime(double val) {hardcoded_force_end_time = val;}
     bool operator==(const SimParameters &other) const;
     void setHardcodedPullFactors(std::array<double,3>  val) { hardcoded_pull_factors = val;}
-
-
-
-
 
 private:
     /**
@@ -254,9 +254,19 @@ private:
      */
     double hardcoded_force_end_time;
 
+     /** Parameters relevant for the Parallelization Strategy **\
+
+     /**
+      * @brief parallelization strategy: none, subdomaining or cell-list
+      */
+     ParallelizationSpec parallelizationSpec;
+
+     /**
+      * @brief scheduling type: static, dynamic or guided
+      */
+     SchedulerType schedulerType;
     /**
      * @brief pull force factors
      */
     std::array<double,3> hardcoded_pull_factors = {0, 0, 0};
-
 };

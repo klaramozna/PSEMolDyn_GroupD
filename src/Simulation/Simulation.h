@@ -14,13 +14,16 @@
 #include "Thermostat.h"
 #include "../Particles/Boundary.h"
 #include "../Particles/BoundaryEnforcer.h"
+#include "utils/ParallelizationSpec.h"
+#include "FakeThermostat.h"
+
+/** Related to IO, Benchmarking **/
 #include "../IO/input/SimParameters.h"
 #include "../Benchmark.h"
 #include "../IO/Logger.h"
 #include "../IO/output/outputWriter/CheckpointWriter.h"
 #include "../IO/output/outputWriter/XYZWriter.h"
 #include "../IO/output/outputWriter/VTKWriter.h"
-
 
 #include <memory>
 
@@ -81,7 +84,6 @@ private:
 
 
 public:
-
     Simulation(SimParameters& simParameters, LinkedCellContainer& container, ForceCalculation &calculation, Thermostat& thermostat, Boundary &boundary, GravityForce &gravity, HardcodedPullForce &hardcodedPullForce);
 
     virtual ~Simulation();

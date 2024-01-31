@@ -50,6 +50,8 @@ Simulation/Physics/GravitationalForce.cpp
         Simulation/FakeThermostat.cpp
         Simulation/FakeThermostat.h
         utils/MaxwellBoltzmannDistribution.h
+        Particles/ParallelizationStrategy.cpp
+        Particles/ParallelizationStrategy.h
         Simulation/TempDifferenceThermostat.cpp
         Simulation/TempDifferenceThermostat.h
 )
@@ -70,6 +72,7 @@ target_link_libraries(MolSim
         PUBLIC
                 PkgConfig::XERCESC
                 Boost::program_options
+                OpenMP::OpenMP_CXX
 )
 
 
@@ -90,7 +93,6 @@ target_compile_features(MolSim
         PRIVATE
         cxx_std_17
 )
-
 
 
 

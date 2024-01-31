@@ -21,14 +21,19 @@ private:
     VectorDouble3 x;
 
     /**
+    * Mass of this particle
+    */
+    double m;
+
+    /**
+    * Force effective on this particle
+    */
+    VectorDouble3 f;
+
+    /**
      * Velocity of the particle
      */
     VectorDouble3 v;
-
-    /**
-     * Force effective on this particle
-     */
-    VectorDouble3 f;
 
     /**
      * Force which was effective on this particle
@@ -36,9 +41,11 @@ private:
     VectorDouble3 old_f;
 
     /**
-     * Mass of this particle
+     * Type of the particle. Use it for whatever you want (e.g. to separate
+     * molecules belonging to different bodies, matters, and so on)
      */
-    double m;
+
+    int type;
 
     /**
      * Bool value that determines whether particle should be mirrored
@@ -84,14 +91,8 @@ private:
      * @brief Indicates if the particle is a wall-particle (not affected by thermostat, does not move etc.)
      */
     bool isWall;
-    /**
-     * Type of the particle. Use it for whatever you want (e.g. to separate
-     * molecules belonging to different bodies, matters, and so on)
-     */
-    int type;
 
     bool markedForDeleting;
-
     
     bool hardcode_flag;
 

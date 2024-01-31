@@ -90,7 +90,8 @@
     <parallelization_spec_xml>
         <numThreads>8</numThreads>
         <type>subdomain</type>
-        <schedule>dynamic</schedule>
+        <schedule>static</schedule>
+        <chunksize>1</chunksize>
         <subDomain>
             <x>10</x>
             <y>10</y>

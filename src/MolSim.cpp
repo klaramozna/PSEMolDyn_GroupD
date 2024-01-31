@@ -3,9 +3,6 @@
 #include "IO/input/CuboidReader.h"
 #include "IO/input/ParticleReader.h"
 
-#include "IO/output/outputWriter/XYZWriter.h"
-#include "IO/output/outputWriter/VTKWriter.h"
-
 #include "IO/input/SimParameters.h"
 #include "IO/input/XMLReader.h"
 
@@ -24,22 +21,18 @@
 #include "Simulation/Physics/GravityForce.h"
 #include "Simulation/Physics/HardcodedPullForce.h"
 #include "Simulation/Thermostat.h"
-#include "Simulation/SimpleThermostat.h"
 #include "Simulation/GradualThermostat.h"
 #include "Simulation/FakeThermostat.h"
 #include "Simulation/TempDifferenceThermostat.h"
+
+#include "Particles/ParallelizationStrategy.h"
 
 /* Logging */
 #include "IO/Logger.h"
 #include <IO/CLparser/CL.h>
 
 /* Checkpoint */
-#include "IO/output/outputWriter/CheckpointWriter.h"
 #include "IO/input/CheckpointReader.h"
-
-
-
-
 
 int main(int argc, char *argsv[]) {
     CL cl;
@@ -144,14 +137,51 @@ int main(int argc, char *argsv[]) {
         Logger::console->info("Pull Force activated with factors x, y ,z: {} {} {}", simParameters.getHardcodedPullFactors().at(0), simParameters.getHardcodedPullFactors().at(1), simParameters.getHardcodedPullFactors().at(2));
     }
 
-    LinkedCellContainer container(boundary, simParameters.getCutoffRadius());
+#ifdef _OPENMP
+    /** Initializing number of threads **/
+    omp_set_num_threads(simParameters.getParallelizationSpec().getNumThreads());
+
+    /** Define scheduling for OpenMP **/
+    switch (simParameters.getSchedulerType()) {
+        case Static:
+            omp_set_schedule(omp_sched_static, simParameters.getParallelizationSpec().getChunksize());
+            break;
+        case Dynamic:
+            omp_set_schedule(omp_sched_dynamic, simParameters.getParallelizationSpec().getChunksize());
+            break;
+        case Guided:
+            omp_set_schedule(omp_sched_guided, simParameters.getParallelizationSpec().getChunksize());
+    }
+#endif
+
+    LinkedCellContainer container(boundary, simParameters.getCutoffRadius(), {}, simParameters.getParallelizationSpec().getSubdomain());
+
+    /** Define container strategy **/
+    switch (simParameters.getParallelizationSpec().getType()) {
+        case None:
+            Logger::console->debug("No parallelization");
+            container.setStrategy(std::make_unique<NonParallelStrategy>(container));
+            break;
+        case Cellwise:
+            Logger::console->debug("Cellwise parallelization");
+            container.setStrategy(std::make_unique<CellwiseStrategy>(container));
+            break;
+        case Subdomain:
+            Logger::console->debug("Subdomain parallelization");
+            container.setStrategy(std::make_unique<SubdomainStrategy>(container));
+            break;
+    }
+
+    Logger::console->debug("Initializing Container");
 
     container.addParticlesPointer(xmlReader.getParticles());
+
+    Logger::console->debug("Added particles to container");
+    container.addParticles(container_h.getParticleVector());
 
     if(particlesShift != 0){
         container.applyToAll([&particlesShift](Particle& p){p.setX(p.getXVector() + VectorDouble3(std::array<double, 3>{0, 0, particlesShift}));});
     }
-
 
     /* read checkpoint if available and update container */
     if (!simParameters.getloadCheckpoint().empty()) {
@@ -166,10 +196,9 @@ int main(int argc, char *argsv[]) {
 
     Simulation simulation(simParameters, container, *forceCalculation, *thermostat, boundary, gravity, pullForce);
 
-    Logger::console->info("Number of particles before: {}", container.getParticleVector().size());
+    Logger::console->debug("Number of particles before: {}", container.getParticleVector().size());
     simulation.runSimulation();
-    Logger::console->info("Number of particles after: {}", container.getParticleVector().size());
+    Logger::console->debug("Number of particles after: {}", container.getParticleVector().size());
     
     return 0;
-   
 }

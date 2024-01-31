@@ -91,6 +91,7 @@
         <numThreads>56</numThreads>
         <type>subdomain</type>
         <schedule>dynamic</schedule>
+        <chunksize>1</chunksize>
         <subDomain>
             <x>5</x>
             <y>5</y>

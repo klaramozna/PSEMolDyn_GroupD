@@ -6,8 +6,9 @@
  */
 
 #include <string>
-#include"SimParameters.h"
-#include"../Logger.h"
+#include "SimParameters.h"
+#include "../Logger.h"
+#include "utils/ParallelizationSpec.h"
 
 // Constructor to initialize the parameters
 SimParameters::SimParameters(double end_time_val, double delta_t_val, double averageVelo_val,
@@ -36,6 +37,7 @@ SimParameters::SimParameters(double end_time_val, double delta_t_val, double ave
     gravity_factor = gravity_factor_val;
     this->thermostatType = thermostatType;
     this->brownianMotion = brownianMotion;
+    this->parallelizationSpec = ParallelizationSpec();
     this->is_Membrane = isMembrane_val;
     this->hardcoded_force_end_time = hardcoded_force_end_time;
     this->hardcoded_pull_factors = hardcoded_pull_factors;
@@ -79,7 +81,6 @@ bool SimParameters::operator==(const SimParameters &other) const {
            thermostatCycleLength == other.getThermostatCycleLength() &&
            dim == other.dim &&
            is_Membrane == other.is_Membrane;
-
 }
 
 void SimParameters::print(){

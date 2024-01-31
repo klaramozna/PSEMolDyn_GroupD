@@ -68,10 +68,11 @@
         <numThreads>4</numThreads>
         <type>cellwise</type>
         <schedule>dynamic</schedule>
+        <chunksize>567</chunksize>
         <subDomain>
             <x>7</x>
             <y>9</y>
-            <z>5</z>
+            <z>3</z>
         </subDomain>
     </parallelization_spec_xml>
 

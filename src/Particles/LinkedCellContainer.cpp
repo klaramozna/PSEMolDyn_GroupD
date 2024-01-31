@@ -3,16 +3,21 @@
 //
 
 #include "LinkedCellContainer.h"
-#include <stdexcept>
-#include <cmath>
+#include "ParallelizationStrategy.h"
+#include "IO/Logger.h"
+
 #include <iostream>
 #include <memory>
 #include <algorithm>
 
+#include <stdexcept>
+#include <cmath>
+#include <omp.h>
 using lui = long unsigned int;
 
 LinkedCellContainer::LinkedCellContainer(Boundary boundary, double cutoffRadius,
-                                         const std::vector<Particle>& particles) :grid{}, boundary{boundary}, cutoffRadius{cutoffRadius} {
+                                         const std::vector<Particle>& particles, std::array<int,3> subdomain) : grid{}, boundary{boundary}, cutoffRadius{cutoffRadius}, subdomain{subdomain} {
+
     size = particles.size();
 
     // Potencially slightly increase cell size (compared to cutoff radius)
@@ -23,6 +28,14 @@ LinkedCellContainer::LinkedCellContainer(Boundary boundary, double cutoffRadius,
     // Calculate number of cells in each axis
     for (int i = 0; i < 3; i++) {
         nc[i] = std::floor(boundary.getDimensions()[i] / cutoffRadius) + 2;
+    }
+
+    /** Checking if number of cells in each axis is a multiple of the number of subdomains in each axis **/
+    for (int i = 0; i < 3; i++) {
+        if (nc[i] % subdomain[i] != 0) {
+            Logger::err_logger->error("Number of cells in each axis must be a multiple of the number of subdomains in each axis. nc[" + std::to_string(i) + "]:" + std::to_string(nc[i]) + "subdomain[" + std::to_string(i) + "]:" + std::to_string(subdomain[i]));
+            exit(-1);
+        }
     }
 
     // Defines by how much each dimension in the grid needs to be shifted so that the grid is symmetrical to the boundary
@@ -43,13 +56,32 @@ LinkedCellContainer::LinkedCellContainer(Boundary boundary, double cutoffRadius,
     }
 
     addParticles(particles);
+
+#ifdef _OPENMP
+    cellLocks.resize(grid.size());
+    for (auto &lock : cellLocks) {
+        omp_init_lock(&lock);
+    }
+#else
+    Logger::console->warn("OpenMP not enabled. Parallelization will not work.");
+#endif
 }
+
+LinkedCellContainer::~LinkedCellContainer() {
+#ifdef _OPENMP
+    for (auto & cellLock : cellLocks) {
+        omp_destroy_lock(&cellLock);
+    }
+#endif
+}
+
 
 
 
 size_t LinkedCellContainer::getSize() {
     return size;
 }
+
 
 std::vector<Particle> LinkedCellContainer::getParticleVector() {
     std::vector<Particle> result{};
@@ -84,7 +116,6 @@ void LinkedCellContainer::updateCells() {
 
 void LinkedCellContainer::moveParticle(std::shared_ptr<Particle> p1, int oldCell, int newCell) {
     grid[oldCell].deleteParticle(p1);
-
     // Check if particle is outside
     if (particleOutOfGrid(*p1)){
         size--;
@@ -93,16 +124,21 @@ void LinkedCellContainer::moveParticle(std::shared_ptr<Particle> p1, int oldCell
     }
 }
 
+
 void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &function) {
     // Creating a vector for marking particles that need to be moved
     std::vector<std::pair<std::shared_ptr<Particle>, int>> particlesToBeMoved{}; // stores each particle that needs to be moved with the cell it's beeing moved from
 
     // Applying given function to each particle and marking particles for movement
-    for(lui i = 0; i < grid.size(); i++){
-        for(auto & particle : grid[i]){
+    #pragma omp parallel for default(none) shared(grid, particlesToBeMoved), firstprivate(function)
+    for(lui i = 0; i < grid.size(); i++) {
+        for (auto &particle: grid[i]) {
             function(*particle);
-            if(!isInCorrectCell(*particle, i)){
-                particlesToBeMoved.emplace_back(particle, i);
+            if (!isInCorrectCell(*particle, i)) {
+                #pragma omp critical
+                {
+                    particlesToBeMoved.emplace_back(particle, i);
+                }
             }
         }
     }
@@ -113,64 +149,20 @@ void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &func
     }
 }
 
+
 bool LinkedCellContainer::isInCorrectCell(const Particle &p, int currentIndex) {
     return getParticleIndex(p) == currentIndex;
-}
-
-void LinkedCellContainer::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
-    // Iterate over all cells
-    for(int z = 0; z < nc[2]; z++) {
-        for (int y = 0; y < nc[1]; y++) {
-            for (int x = 0; x < nc[0]; x++) {
-
-
-                // Find out where is the current cell in the grid vector
-                int currentGridIndex = getGridIndex(x, y, z);
-
-                // Apply function within current cell
-                grid[currentGridIndex].applyToPairs(function);
-
-                // Iterate over current cell
-                for (auto &pCurrent: grid[currentGridIndex]) {
-
-                    // Find neighbours
-                    for (int i = z - 1; i <= z + 1; i++) {
-                        for (int j = y - 1; j <= y + 1; j++) {
-                            for (int k = x - 1; k <= x + 1; k++) {
-
-                                int neighbourGridIndex = getGridIndex(k, j, i);
-
-                                // Check if the neighbour has not yet been iterated over and if it is still inside of the grid
-                                if (neighbourGridIndex > currentGridIndex &&
-                                    (k >= 0 && j >= 0 && i >= 0 && k < nc[0] && j < nc[1] && i < nc[2])) {
-
-                                    // Iterate over neighbour
-                                    for (auto &pNeighbour: grid[getGridIndex(k, j, i)]) {
-                                        // Apply function
-                                        if (pCurrent != pNeighbour && particleWithinCutoff(*pCurrent, *pNeighbour)) {
-                                            function(*pCurrent, *pNeighbour);
-                                        }
-                                    }
-                                }
-
-
-                            }
-                        }
-                    }
-                }
-
-            }
-        }
-    }
 }
 
 int LinkedCellContainer::getGridIndex(int x, int y, int z) const {
     return x + nc[0] * (y + nc[1] * z);
 }
 
+
 bool LinkedCellContainer::particleWithinCutoff(const Particle &p1, const Particle &p2) const {
     return getDistance(p1.getXVector(), p2.getXVector()) <= cutoffRadius;
 }
+
 
 int LinkedCellContainer::getParticleIndex(const Particle &p) {
     int x = floor((p.getX()[0] + gridShift[0]) / cellSize[0]);
@@ -179,18 +171,23 @@ int LinkedCellContainer::getParticleIndex(const Particle &p) {
     return getGridIndex(x, y, z);
 }
 
+
 void LinkedCellContainer::applyToBoundary(const std::function<void(Particle (&))> &function) {
     // Creating a vector for marking particles that need to be moved
     std::vector<std::pair<std::shared_ptr<Particle>, int>> particlesToBeMoved{}; // stores each particle that needs to be moved with the cell it's beeing moved from
 
+    #pragma omp parallel for default(none) shared(boundaryCells_ptr, particlesToBeMoved), firstprivate(function)
     for (auto boundaryCell : boundaryCells_ptr) {
         if (boundaryCell != nullptr) {
             for (auto &particle : *boundaryCell) {
                 if(!particle->isWallParticle()){
                     int currentCell = getParticleIndex(*particle);
                     function(*particle);
-                    if(!isInCorrectCell(*particle, currentCell)){
-                        particlesToBeMoved.emplace_back(particle, currentCell);
+                    if(!isInCorrectCell(*particle, currentCell)) {
+                        #pragma omp critical
+                        {
+                            particlesToBeMoved.emplace_back(particle, currentCell);
+                        }
                     }
                 }
             }
@@ -302,4 +299,10 @@ void LinkedCellContainer::addParticlePointer(std::shared_ptr<Particle> p) {
 }
 
 
+void LinkedCellContainer::applyToPairs(const std::function<void(Particle &, Particle &)> &function) {
+    strategy_ptr->applyToPairs(function);
+}
 
+void LinkedCellContainer::setStrategy(std::unique_ptr<ParallelizationStrategy> newStrategy) {
+    strategy_ptr = std::move(newStrategy);
+}

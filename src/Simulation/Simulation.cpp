@@ -6,13 +6,7 @@
  */
 
 #include <cmath>
-#include <iostream>
 #include "Simulation.h"
-
-#include "Particles/LinkedCellContainer.h"
-#include "Particles/BoundaryEnforcer.h"
-#include "Simulation/FakeThermostat.h"
-#include "IO/Logger.h"
 
 std::array<double, 3> maxwellBoltzmannDistributedVelocity(double averageVelocity, size_t dimensions);
 
@@ -43,11 +37,14 @@ Simulation::Simulation(SimParameters& simParameters, LinkedCellContainer& contai
 }
 
 
+
 Simulation::~Simulation() = default;
+
 
 std::vector<Particle> Simulation::getParticles() {
     return container.getParticleVector();
 }
+
 
 
 void Simulation::calculateF(Particle& p1, Particle& p2) {
@@ -58,16 +55,19 @@ void Simulation::calculateF(Particle& p1, Particle& p2) {
     }
 }
 
+
 void Simulation::calculateV(Particle& p) const {
     VectorDouble3 v_i = p.getVVector() + (simParameters.getDeltaT()/ (2. * p.getM()) * (p.getOldFVector() + p.getFVector()));
     p.setV(v_i);
 }
+
 
 void Simulation::calculateX(Particle& p) const {
     VectorDouble3 x_i = p.getXVector() + simParameters.getDeltaT() * p.getVVector()
             + ((simParameters.getDeltaT() * simParameters.getDeltaT()) / (2. * p.getM())) * p.getOldFVector();
     p.setX(x_i);
 }
+
 
 void Simulation::applyGravity(Particle& p) {
     VectorDouble3 result = gravity.CalculateForce(p);
@@ -92,7 +92,7 @@ void Simulation::runIteration() {
     // apply boundary conditions
     container.applyToBoundary([this](Particle& p) { boundaryEnforcer.applyBoundaryConditionsForParticle(p); });
 
-    container.applyToPairs([this](Particle& p1, Particle& p2) { calculateF(p1, p2); });
+    container.applyToPairs([this](Particle &p1, Particle &p2) { calculateF(p1, p2); });
 
     container.deleteHaloParticles();
 
@@ -112,6 +112,7 @@ void Simulation::runIteration() {
     container.applyToAll([this](Particle& p){thermostat.updateTemperature(p);});
     thermostat.updateIteration();
 }
+
 
 void Simulation::setOldForce(Particle& p) {
     p.setOldF((p.getFVector()));

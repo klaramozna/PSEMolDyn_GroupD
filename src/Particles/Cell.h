@@ -15,15 +15,19 @@ public:
     /**
      * @brief Possible types of cells, Inner means inside of boundary, Boundary means on the boundary, Halo means outside of the boundary.
      */
-
-    using iterator_type = std::list<std::shared_ptr<Particle>>::iterator;
+    using iterator_type = std::vector<std::shared_ptr<Particle>>::iterator;
 
     /**
      * @brief Creates a Cell object, initializing it with the given particles and type
      * @param p The particles in the cell. Empty of no vector is given
      * @param t The type of the cell, Inner of no type is given.
      */
-    explicit Cell(double cutoffRadius): particles{}, cutoffRadius{cutoffRadius}{};
+    explicit Cell(double cutoffRadius, const std::vector<std::shared_ptr<Particle>>& p = {}): particles{p}, cutoffRadius{cutoffRadius}{};
+
+    /**
+     * @brief Copy constructor for Cell.
+     */
+     Cell(const Cell& c);
 
     /**
      * @brief Returns an iterator pointing to the first particle.
@@ -62,11 +66,18 @@ public:
      */
     void applyToPairs(const std::function<void(Particle &, Particle &)> &function);
 
+    /**
+     * @brief Merges the given cell into this cell by substitution
+     */
+    void merge(const Cell& c) {
+        particles = c.particles;
+    }
+
 private:
     /**
      * @brief Stores the particles of the cell.
      */
-    std::list<std::shared_ptr<Particle>> particles;
+    std::vector<std::shared_ptr<Particle>> particles;
 
     /**
      * @brief Maximum distance between particles that affect each other.
