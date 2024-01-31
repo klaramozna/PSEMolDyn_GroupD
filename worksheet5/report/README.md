@@ -29,6 +29,11 @@ The basic idea of these two methods can be seen in the following presentation:
   
 <img src="membrane_initialization.png">
 
+#### Tests #####
+* To test that the neighbours are correctly intialised we wrote tests in ```MembraneGeneratorTest.cpp```, that generate a 3*3 Membrane and then check all neighbours of all 9 particles.
+* In ```MembraneForcesTest.cpp``` we tested some values of one iteration of Harmonic Forces against hand calculated values, as well as for Truncated (repulsive) Lennard Jones.  
+
+
 ## Task 2 ”Parallelization” + Task 3 "Rayleigh-Taylor in 3D" ##
 
 ### Starting with OpenMP ###
@@ -50,6 +55,11 @@ With this in mind, we opted for
 
 1. Domain Decomposition
 2. Disjoint iteration over cells
+#### Tests #####
+* To test that the neighbours are correctly intialised we wrote tests in ```MembraneGeneratorTest.cpp```, that generate a 3*3 Membrane and then check all neighbours of all 9 particles.
+* In ```MembraneForcesTest.cpp``` we tested some values of one iteration of Harmonic Forces against hand calculated values, as well as for Truncated (repulsive) Lennard Jones.  
+
+## Task 2 ”Parallelization” ##
 
 ### Critical Sections ###
 * To fix the complications found in the first implementation, we used critical sections to ensure that only one thread can access a given cell at a time
@@ -92,3 +102,10 @@ https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/9114c752-507f-45
 # Misc #
 * We did a lot of refactor work to be able to integrate the new functionalities of this worksheet: TODO
 
+#### Solve dependency between ParticleReader and ParticleContainer ####
+* We had from previous implementations the design flaw that caused a circular dependeny between ParticleReaders (for example the XMLReader) and the ParticleContainer (for example LinkedCellContainer): the problem was that the method readFile expects a ParticleContainer as argument and then fills that container with the particles read from the file, this was problematic because the linked cell container can first be instantiated after reading the needed parameters for it from readFile (like size, boundaries, cutoff radius ...), we avoided that before with some workarounds but now we fixed the design by breaking this dependency: ParticleReaders now have an intern vector of shared pointers to the Particles, when readFile is called the vector is filled with the read particles (+ of course simulation parameters are stored in SimParameters) and then when we instantiate the LinkedCellContainer for example we call getParticles from the reader to get the vector of particles and add them to the container.
+
+
+#### Simulation Iterations to the right place #####
+* Before we had the simulation iterations logic in the main file (MolSim.cpp), this was clearly a bad design and also made it hard to integrate the membrane implementation (the pull force), because in the Simulation class we would we need to keep track of the current time to know if this pull force is still active or not (as it has a different end time then the whole simulation).
+* We made the needed refactor to move all the simulation Logic to the Simulation Class.
