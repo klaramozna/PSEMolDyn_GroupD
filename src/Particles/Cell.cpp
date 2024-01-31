@@ -42,11 +42,3 @@ void Cell::applyToPairs(const std::function<void(Particle &, Particle &)> &funct
     }
 }
 
-Cell::Cell(const Cell &c) {
-    this->cutoffRadius = c.cutoffRadius;
-    // Deep copy of the particles vector
-    for (const auto& particle : c.particles) {
-        particles.push_back(particle); // Assuming Particle has a copy constructor
-    }
-}
-

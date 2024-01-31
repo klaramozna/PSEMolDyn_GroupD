@@ -25,11 +25,6 @@ public:
     explicit Cell(double cutoffRadius, const std::vector<std::shared_ptr<Particle>>& p = {}): particles{p}, cutoffRadius{cutoffRadius}{};
 
     /**
-     * @brief Copy constructor for Cell.
-     */
-     Cell(const Cell& c);
-
-    /**
      * @brief Returns an iterator pointing to the first particle.
      * @return Iterator pointing to the first particle.
      */

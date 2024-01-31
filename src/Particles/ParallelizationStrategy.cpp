@@ -36,15 +36,7 @@ void CellwiseStrategy::applyToPairs(const std::function<void(Particle &, Particl
                 for (int x = 0; x < nc[0]; x++) {
                     // Find out where is the current cell in the grid vector
                     int currentGridIndex = container.getGridIndex(x, y, z);
-                    Cell localCell(grid[currentGridIndex]);
-
-                    // Apply function within current cell
-                    localCell.applyToPairs(function);
-                    #pragma omp critical
-                    {
-                        grid[currentGridIndex].merge(localCell); // Merge the changes back
-                    }
-
+                    grid[currentGridIndex].applyToPairs(function);
                 }
             }
         }
@@ -127,9 +119,7 @@ void SubdomainStrategy::applyToPairs(const std::function<void(Particle &, Partic
 #ifdef _OPENMP
                                 omp_set_lock(&container.cellLocks[currentGridIndex]);
 #endif
-                                Cell localCell(container.grid[currentGridIndex]);
-                                localCell.applyToPairs(function);
-                                grid[currentGridIndex].merge(localCell);
+                                grid[currentGridIndex].applyToPairs(function);
 #ifdef _OPENMP
                                 omp_unset_lock(&container.cellLocks[currentGridIndex]);
 #endif
