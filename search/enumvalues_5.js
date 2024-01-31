@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['outflow_1749',['Outflow',['../classBoundaryBehavior.html#a0738df9b21952379aba8783722610b9ca652c14f0d527fbd53da81219aae4ae46',1,'BoundaryBehavior']]],
-  ['outflow_1750',['OUTFLOW',['../BoundaryTypes_8h.html#af75d5dd7322fa39ed0af4e7839e600f8abfcb976304836f3d329c3b7c8b7dbb63',1,'BoundaryTypes.h']]]
+  ['int16_1864',['Int16',['../classtype.html#a83781d700ce124b4224c316326a5a975a8d3d044c5da17c4e92e2c61c2f0ea556',1,'type']]],
+  ['int32_1865',['Int32',['../classtype.html#a83781d700ce124b4224c316326a5a975a62e1ad64aa38ad0b50e1a6bd9b9ae25e',1,'type']]],
+  ['int64_1866',['Int64',['../classtype.html#a83781d700ce124b4224c316326a5a975a2cc7bf870db9a3b5e9e580a58b6c1308',1,'type']]],
+  ['int8_1867',['Int8',['../classtype.html#a83781d700ce124b4224c316326a5a975ad559d992c88431b0a1cb90b340929d4e',1,'type']]]
 ];

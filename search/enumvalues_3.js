@@ -1,7 +1,6 @@
 var searchData=
 [
-  ['int16_1744',['Int16',['../classtype.html#a83781d700ce124b4224c316326a5a975a8d3d044c5da17c4e92e2c61c2f0ea556',1,'type']]],
-  ['int32_1745',['Int32',['../classtype.html#a83781d700ce124b4224c316326a5a975a62e1ad64aa38ad0b50e1a6bd9b9ae25e',1,'type']]],
-  ['int64_1746',['Int64',['../classtype.html#a83781d700ce124b4224c316326a5a975a2cc7bf870db9a3b5e9e580a58b6c1308',1,'type']]],
-  ['int8_1747',['Int8',['../classtype.html#a83781d700ce124b4224c316326a5a975ad559d992c88431b0a1cb90b340929d4e',1,'type']]]
+  ['float32_1860',['Float32',['../classtype.html#a83781d700ce124b4224c316326a5a975a1b5e448b6fc2bafbc9b5f8e4cc582834',1,'type']]],
+  ['float64_1861',['Float64',['../classtype.html#a83781d700ce124b4224c316326a5a975a72818204734582235e144a1e64563947',1,'type']]],
+  ['front_1862',['FRONT',['../BoundaryDirection_8h.html#ad7fd84facffe94a4ab2c8d2909748a2ca76bd5ec6ea9d8a1b582d8d5e43102a02',1,'BoundaryDirection.h']]]
 ];
