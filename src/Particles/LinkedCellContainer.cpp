@@ -108,6 +108,9 @@ Particle LinkedCellContainer::getParticleWithId(int id) {
 void LinkedCellContainer::updateCells() {
     for(lui i = 0; i < grid.size(); i++){
         for(auto & it : grid[i]){
+            if (it == nullptr) {
+                continue;
+            }
             if(getParticleIndex(*it) != i){  // particle isn't in the correct cell
                 moveParticle(it, i, getParticleIndex(*it));
             }
@@ -300,6 +303,10 @@ Particle LinkedCellContainer::mirrorParticle(const Particle &p) {
 }
 
 void LinkedCellContainer::addParticlePointer(std::shared_ptr<Particle> p) {
+    if (p == nullptr) {
+        return;
+    }
+
     if(getParticleIndex(*p) < 0 || getParticleIndex(*p) >= grid.size()){
         throw std::runtime_error("Particle out of domain.");
     }
