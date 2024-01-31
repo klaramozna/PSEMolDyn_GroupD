@@ -29,12 +29,55 @@ The basic idea of these two methods can be seen in the following presentation:
   
 <img src="membrane_initialization.png">
 
-## Task 2 ”Parallelization” ##
+## Task 2 ”Parallelization” + Task 3 "Rayleigh-Taylor in 3D" ##
 
+### Starting with OpenMP ###
+* Introduces parallel blocks and thread management. The first approach tried as heavily based around the fork-join model, which is a data-centric approach to parallelization.
+* A more naive first implementation is straightforward enough, with a collapse loop over the 3 dimensions of the domain over each cell, but has scalability issues and data inconsistency on the particles
 
-## Task 3 "Rayleigh-Taylor instability in 3D" ##
-*
+### Literature Review ###
+* We then did a literature review to find out how to best parallelize the application, and found that the best approach would be to use a domain decomposition approach, where each thread is responsible for a locally adjacent set of cells.
 
+Examples of literature can be found at 
+
+1. Chapter 4 of the book "Numerical Simulation in Molecular Dynamics: Numerics, Algorithms, Parallelization, Applications" by Michael Griebel, Stephan Knapek, and Gerhard Zumbusch
+2. D. Beazley and P. Lomdahl, Message-passing multi-cell molecular dynamics on the Connection Machine 5, Parallel Comp., 20 (1994), pp. 173–195.
+3. S. Gupta, Computing aspects of molecular dynamics simulations, Comp.
+   Phys. Comm., 70 (1992), pp. 243–270.
+
+### Approaches ###
+With this in mind, we opted for
+
+1. Domain Decomposition
+2. Disjoint iteration over cells
+
+### Critical Sections ###
+* To fix the complications found in the first implementation, we used critical sections to ensure that only one thread can access a given cell at a time
+* This implementation is however severely limited since we found the application to be memory bound, meaning that most time spent on the critical section was writing to memory.
+
+### Naive Locking ###
+* To improve the parallelism of the application, we then implemented cell-wide locking, where each cell has a lock that is acquired before reading or writing to the cell.
+* This implementation is much more scalable, but still has issues with deadlocks. This has taken a lot of development time, since at the time, we weren't aware of techniques to break lock conditions
+* Much time was spent figuring out why and how locking was happening and how to fix it. Not only that, but performance was suffering as well
+* To look for solutions, ```Helgrind``` and ```perf``` were used to find out where the bottlenecks and data conflicts were, which was unfortunately not of much help.
+* After using a toy example, we were able to find that the unordered locking during neighbour pairwise force calculation was causing deadlocks.
+
+### Sort and Lock ###
+To solve this problem, we implemented a sort and lock approach, where we sort the cells by their index, and then lock them in order. This ensures that no deadlocks can occur, since the locks are always acquired in the same order.
+
+### Considerations on memory locality ###
+* At the beginning of this last sprint, we were still having performance issues, and we found that the main bottlenecks were memory locality and lock contention
+* To solve memory locality, we implemented thread-local storage for the cells and reduction like task loops for completely disjoint operations (such as applyToAll)
+* This helped some with cache misses, but was later scratched due to the choice of using shared pointers for the particles, meaning that local copies wouldn't be deep/couldn't easily be rewritten onto the global copy.
+
+### Running on the cluster ###
+We then performed the Rayleigh 3D experiment on the cluster, obtaining the following results:
+<This is where the graph comes in>
+
+As you can see, there is more or less a linear relation at the beginning of the graph, but with increasing threads, the speed up starts dropping of,
+as indicates Amdahl's law.
+
+And to answer the question of the worksheet, we see that the type of job influences how much speed up we can get from parallelization. A simulation such as the falling drop is very heterogeneously distributed, meaning that the speed up is limited by the sequential part of the code. On the other hand, the Rayleigh 3D simulation is very homogeneously distributed, meaning that the speed up is limited by the parallel part of the code.
 
 ## Task 4 ”Nano-scale flow simulation (Option A)” ##
 * 
