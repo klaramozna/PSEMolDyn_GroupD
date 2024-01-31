@@ -87,7 +87,8 @@ std::vector<Particle> LinkedCellContainer::getParticleVector() {
     std::vector<Particle> result{};
     for(auto & it : grid){
         for(const auto& itInner : it){
-            result.push_back(*itInner);
+            if (itInner != nullptr)
+                result.push_back(*itInner);
         }
     }
     return result;
@@ -133,6 +134,9 @@ void LinkedCellContainer::applyToAll(const std::function<void(Particle &)> &func
     #pragma omp parallel for default(none) shared(grid, particlesToBeMoved), firstprivate(function)
     for(lui i = 0; i < grid.size(); i++) {
         for (auto &particle: grid[i]) {
+            if (particle == nullptr) {
+                continue;
+            }
             function(*particle);
             if (!isInCorrectCell(*particle, i)) {
                 #pragma omp critical
@@ -180,6 +184,9 @@ void LinkedCellContainer::applyToBoundary(const std::function<void(Particle (&))
     for (auto boundaryCell : boundaryCells_ptr) {
         if (boundaryCell != nullptr) {
             for (auto &particle : *boundaryCell) {
+                if (particle == nullptr) {
+                    continue;
+                }
                 if(!particle->isWallParticle()){
                     int currentCell = getParticleIndex(*particle);
                     function(*particle);
@@ -209,6 +216,9 @@ void LinkedCellContainer::deleteHaloParticles() {
     // Applying given function to each particle and marking particles for movement
     for(lui i = 0; i < grid.size(); i++){
         for(auto & particle : grid[i]){
+            if (particle == nullptr) {
+                continue;
+            }
             if ((*particle).isMarkedForDeleting()) {
                 particlesToBeDeleted.emplace_back(particle, i);
                 continue;

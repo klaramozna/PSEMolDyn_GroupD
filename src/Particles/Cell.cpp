@@ -34,10 +34,11 @@ void Cell::applyToPairs(const std::function<void(Particle &, Particle &)> &funct
         auto inner = outer;
         inner++;
         for(auto in2 = inner; in2 != particles.end(); in2++){
-            if(getDistance((*outer)->getXVector(), (*in2)->getXVector()) <= cutoffRadius){
-                function(*(*outer), *(*in2));
+            if ((*outer) != nullptr && (*in2) != nullptr) {
+                if (getDistance((*outer)->getXVector(), (*in2)->getXVector()) <= cutoffRadius) {
+                    function(*(*outer), *(*in2));
+                }
             }
-
         }
     }
 }

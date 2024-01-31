@@ -73,10 +73,12 @@ void CellwiseStrategy::applyToPairs(const std::function<void(Particle &, Particl
 #endif
                                         // Iterate over neighbour
                                         for (auto &pNeighbour: grid[neighbourGridIndex]) {
-                                            // Apply function
-                                            if (*pCurrent != *pNeighbour &&
-                                                container.particleWithinCutoff(*pCurrent, *pNeighbour)) {
-                                                function(*pCurrent, *pNeighbour);
+                                            if (pCurrent != nullptr && pNeighbour != nullptr) {
+                                                // Apply function
+                                                if (*pCurrent != *pNeighbour &&
+                                                    container.particleWithinCutoff(*pCurrent, *pNeighbour)) {
+                                                    function(*pCurrent, *pNeighbour);
+                                                }
                                             }
                                         }
 #ifdef _OPENMP
@@ -151,11 +153,13 @@ void SubdomainStrategy::applyToPairs(const std::function<void(Particle &, Partic
                                                         acquireSortedLocks(container.cellLocks, indicesToLock);
 #endif
                                                         // Iterate over neighbor
-                                                        for (auto& pNeighbour : container.grid[neighbourGridIndex]) {
-                                                            // Apply function
-                                                            if (pCurrent != pNeighbour &&
+                                                        for (auto &pNeighbour: grid[neighbourGridIndex]) {
+                                                            if (pCurrent != nullptr && pNeighbour != nullptr) {
+                                                                // Apply function
+                                                                if (*pCurrent != *pNeighbour &&
                                                                     container.particleWithinCutoff(*pCurrent, *pNeighbour)) {
-                                                                function(*pCurrent, *pNeighbour);
+                                                                    function(*pCurrent, *pNeighbour);
+                                                                }
                                                             }
                                                         }
 #ifdef _OPENMP
