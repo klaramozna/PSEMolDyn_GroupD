@@ -1,0 +1,15 @@
+[2024-01-31 17:56:16.009] [console] [info] Force set to lennard
+[2024-01-31 17:56:16.010] [console] [info] Calculating ...
+[2024-01-31 17:56:16.022] [console] [info] Directory created successfully: Simulation_31.01.2024:17:56
+[2024-01-31 17:56:16.022] [console] [info] Progress: 0%
+[2024-01-31 17:57:53.293] [console] [info] Progress: 10%
+[2024-01-31 17:59:30.467] [console] [info] Progress: 20%
+[2024-01-31 18:01:11.623] [console] [info] Progress: 30%
+[2024-01-31 18:03:59.223] [console] [info] Progress: 40%
+[2024-01-31 18:05:44.462] [console] [info] Progress: 50%
+[2024-01-31 18:07:28.137] [console] [info] Progress: 60%
+[2024-01-31 18:09:12.216] [console] [info] Progress: 70%
+[2024-01-31 18:10:50.884] [console] [info] Progress: 80%
+[2024-01-31 18:13:09.519] [console] [info] Progress: 90%
+[2024-01-31 18:14:44.413] [console] [info] Progress: 100%
+[2024-01-31 18:14:44.418] [console] [info] Output written with frequency 100. Terminating...

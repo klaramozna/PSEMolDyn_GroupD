@@ -1,0 +1,4 @@
+[2024-01-30 23:29:42.589] [console] [info] Force set to Mixing Rule LennardJones
+[2024-01-30 23:29:42.590] [console] [info] Gravity Force activated with factor -12.44
+[2024-01-30 23:29:42.621] [console] [info] Calculating ...
+slurmstepd: error: *** JOB 605997 ON i23r01c03s04 CANCELLED AT 2024-01-31T07:30:05 DUE TO TIME LIMIT ***
