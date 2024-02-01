@@ -87,7 +87,7 @@ public:
     double getHardcodedForceEndTime() const {return hardcoded_force_end_time;}
     std::array<double,3>  getHardcodedPullFactors() const {return hardcoded_pull_factors;}
     bool getOutputStatistics() const {return outputStatistics;}
-    bool getNumBins() const {return numBins;}
+    int getNumBins() const {return numBins;}
     bool getStatisticsFrequency() const {return statisticsFrequency;};
 
     // Setters for modifying parameter values
