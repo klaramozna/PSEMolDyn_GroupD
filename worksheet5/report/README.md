@@ -37,15 +37,14 @@ The basic idea of these two methods can be seen in the following presentation:
 * When we run the simulation with the provided parameters in the worksheet(```input/WS5/membrane.xml```), the simulation explodes quickly and we lose all particles. This can be because of some follow-up errors. That's why we had the tests of membrane as some proof of concept which seem to work fine.
 * When we run the simulation with some other parameters (especially smaller time step delta_t), we got the following simulation:
   
+    ./src/MolSim -p ../input/WS5/membrane-2.xml   
 
 https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/2a9c04d2-9240-4e43-9038-ed21da9da1a5
 
 
+   ./src/MolSim -p ../input/WS5/membrane-3.xml   
 
 https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/af0d5af9-99e4-4637-ad5c-13b4d184bdac
-
-
-
 
 
 
