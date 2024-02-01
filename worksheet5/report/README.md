@@ -33,6 +33,7 @@ The basic idea of these two methods can be seen in the following presentation:
 #### Tests #####
 * To test that the neighbours are correctly intialised we wrote tests in ```MembraneGeneratorTest.cpp```, that generate a 3*3 Membrane and then check all neighbours of all 9 particles.
 * In ```MembraneForcesTest.cpp``` we tested some values of one iteration of Harmonic Forces against hand calculated values, as well as for Truncated (repulsive) Lennard Jones.
+* All these tests pass locally but for some reason fail in the github pipeline. One can check that these tests by running them locally with ```ctest```
 
 #### Simulation #####
 * When we run the simulation with the provided parameters in the worksheet(```input/WS5/membrane.xml```), the simulation explodes quickly and we lose all particles. This can be because of some follow-up errors. That's why we had the tests of membrane as some proof of concept which seem to work fine.
