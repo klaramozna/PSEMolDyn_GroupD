@@ -14,7 +14,7 @@
 #include "Thermostat.h"
 #include "../Particles/Boundary.h"
 #include "../Particles/BoundaryEnforcer.h"
-#include "utils/ParallelizationSpec.h"
+#include "../utils/ParallelizationSpec.h"
 #include "FakeThermostat.h"
 
 /** Related to IO, Benchmarking **/

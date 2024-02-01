@@ -9,7 +9,7 @@
 
 #include <string>
 #include <array>
-#include "utils/ParallelizationSpec.h"
+#include "../../utils/ParallelizationSpec.h"
 
 /**
  * @brief Represents simulation parameters.

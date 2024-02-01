@@ -4,9 +4,8 @@
 
 #include "LinkedCellContainer.h"
 #include "ParallelizationStrategy.h"
-#include "IO/Logger.h"
+#include "../IO/Logger.h"
 
-#include <iostream>
 #include <memory>
 #include <algorithm>
 

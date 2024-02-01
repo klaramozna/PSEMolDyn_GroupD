@@ -56,6 +56,7 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/MixingRuleLennardJones.cpp
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/TruncatedLennardJones.h
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/TruncatedLennardJones.cpp
+        ${PROJECT_SOURCE_DIR}/src/utils/ParallelizationSpec.h
         CuboidGeneratorTest.cpp
         CuboidGeneratorTest.h
         LinkedCellContainerTest.cpp
