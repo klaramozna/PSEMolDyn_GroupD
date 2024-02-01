@@ -31,8 +31,7 @@ The basic idea of these two methods can be seen in the following presentation:
 
 #### Tests #####
 * To test that the neighbours are correctly intialised we wrote tests in ```MembraneGeneratorTest.cpp```, that generate a 3*3 Membrane and then check all neighbours of all 9 particles.
-* In ```MembraneForcesTest.cpp``` we tested some values of one iteration of Harmonic Forces against hand calculated values, as well as for Truncated (repulsive) Lennard Jones.  
-
+* In ```MembraneForcesTest.cpp``` we tested some values of one iteration of Harmonic Forces against hand calculated values, as well as for Truncated (repulsive) Lennard Jones.
 
 ## Task 2 ”Parallelization” + Task 3 "Rayleigh-Taylor in 3D" ##
 
@@ -43,7 +42,7 @@ The basic idea of these two methods can be seen in the following presentation:
 ### Literature Review ###
 * We then did a literature review to find out how to best parallelize the application, and found that the best approach would be to use a domain decomposition approach, where each thread is responsible for a locally adjacent set of cells.
 
-Examples of literature can be found at 
+Examples of literature can be found at
 
 1. Chapter 4 of the book "Numerical Simulation in Molecular Dynamics: Numerics, Algorithms, Parallelization, Applications" by Michael Griebel, Stephan Knapek, and Gerhard Zumbusch
 2. D. Beazley and P. Lomdahl, Message-passing multi-cell molecular dynamics on the Connection Machine 5, Parallel Comp., 20 (1994), pp. 173–195.
@@ -55,11 +54,6 @@ With this in mind, we opted for
 
 1. Domain Decomposition
 2. Disjoint iteration over cells
-#### Tests #####
-* To test that the neighbours are correctly intialised we wrote tests in ```MembraneGeneratorTest.cpp```, that generate a 3*3 Membrane and then check all neighbours of all 9 particles.
-* In ```MembraneForcesTest.cpp``` we tested some values of one iteration of Harmonic Forces against hand calculated values, as well as for Truncated (repulsive) Lennard Jones.  
-
-## Task 2 ”Parallelization” ##
 
 ### Critical Sections ###
 * To fix the complications found in the first implementation, we used critical sections to ensure that only one thread can access a given cell at a time
@@ -81,11 +75,18 @@ To solve this problem, we implemented a sort and lock approach, where we sort th
 * This helped some with cache misses, but was later scratched due to the choice of using shared pointers for the particles, meaning that local copies wouldn't be deep/couldn't easily be rewritten onto the global copy.
 
 ### Running on the cluster ###
-We then performed the Rayleigh 3D experiment on the cluster, obtaining the following results:
-<This is where the graph comes in>
+We then performed the Rayleigh 3D experiment on the cluster, obtaining results which can be seen on the video linked together with the report. The video shows the simulation running fine for the first ~10 seconds, but then a reasonable number of particles get deleted. The reason for this behaviour was unfortunately not further explored
 
-As you can see, there is more or less a linear relation at the beginning of the graph, but with increasing threads, the speed up starts dropping of,
-as indicates Amdahl's law.
+Below are the results of a 10 second run on the cluster, with different thread counts.
+
+<img src="graph_rayleigh.png">
+
+As you can see, there is more or less a linear relation at the beginning of the (strong scaling) graph, but with increasing threads, the speed up starts dropping of,
+as indicates Amdahl's law. We found out that 8 threads however had a disproportionally high speedup, which we could not quite explain.
+
+For comparison reasons, we did the same experiment on the falling drop simulation, which is highly heterogeneous, and obtained the following results:
+
+<img src="graph_falling_drop.png">
 
 And to answer the question of the worksheet, we see that the type of job influences how much speed up we can get from parallelization. A simulation such as the falling drop is very heterogeneously distributed, meaning that the speed up is limited by the sequential part of the code. On the other hand, the Rayleigh 3D simulation is very homogeneously distributed, meaning that the speed up is limited by the parallel part of the code.
 
