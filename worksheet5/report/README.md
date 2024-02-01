@@ -42,6 +42,13 @@ https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/2a9c04d2-9240-4e
 
 
 
+https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/af0d5af9-99e4-4637-ad5c-13b4d184bdac
+
+
+
+
+
+
 ## Task 2 ”Parallelization” + Task 3 "Rayleigh-Taylor in 3D" ##
 
 ### Starting with OpenMP ###
