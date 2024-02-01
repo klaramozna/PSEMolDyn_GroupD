@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['periodic_1872',['Periodic',['../classBoundaryBehavior.html#a0738df9b21952379aba8783722610b9ca32a271c2ba6eddeb41147ac335b27cc3',1,'BoundaryBehavior']]],
-  ['periodic_1873',['PERIODIC',['../BoundaryTypes_8h.html#af75d5dd7322fa39ed0af4e7839e600f8ae4379d044711537d9ce3b3b58c575c58',1,'BoundaryTypes.h']]]
+  ['uint16_1757',['UInt16',['../classtype.html#a83781d700ce124b4224c316326a5a975a36b08866238b21675704f38517929e69',1,'type']]],
+  ['uint32_1758',['UInt32',['../classtype.html#a83781d700ce124b4224c316326a5a975acfca6c13984dbb7ac515cff88a01826e',1,'type']]],
+  ['uint64_1759',['UInt64',['../classtype.html#a83781d700ce124b4224c316326a5a975a64538f1914f2fd739bc876253b75fe4c',1,'type']]],
+  ['uint8_1760',['UInt8',['../classtype.html#a83781d700ce124b4224c316326a5a975a82bbc808c985056ed74b30bcca131fad',1,'type']]]
 ];

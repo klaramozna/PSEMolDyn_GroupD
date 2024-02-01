@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['left_1868',['LEFT',['../BoundaryDirection_8h.html#ad7fd84facffe94a4ab2c8d2909748a2cadb45120aafd37a973140edee24708065',1,'BoundaryDirection.h']]]
+  ['periodic_1751',['Periodic',['../classBoundaryBehavior.html#a0738df9b21952379aba8783722610b9ca32a271c2ba6eddeb41147ac335b27cc3',1,'BoundaryBehavior']]],
+  ['periodic_1752',['PERIODIC',['../BoundaryTypes_8h.html#af75d5dd7322fa39ed0af4e7839e600f8ae4379d044711537d9ce3b3b58c575c58',1,'BoundaryTypes.h']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['cellwisestrategy_1884',['CellwiseStrategy',['../classLinkedCellContainer.html#aabcec1f6e0ff0acd4878d7e67f2aeaea',1,'LinkedCellContainer']]]
+  ['getdotproduct_1761',['getDotProduct',['../classVectorDouble3.html#a197fb131847c4937ee881281ebbf84c4',1,'VectorDouble3']]]
 ];
