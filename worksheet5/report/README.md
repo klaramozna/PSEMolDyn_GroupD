@@ -50,6 +50,7 @@ https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/af0d5af9-99e4-46
 
 
 ## Task 2 ”Parallelization” + Task 3 "Rayleigh-Taylor in 3D" ##
+> **Hint:** implementation of parallelization ideas can be found on the branch ```openMP```, please check it there and not in main (as it was not merged)
 
 ### Starting with OpenMP ###
 * Introduces parallel blocks and thread management. The first approach tried as heavily based around the fork-join model, which is a data-centric approach to parallelization.
