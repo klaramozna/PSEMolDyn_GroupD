@@ -40,7 +40,7 @@ if(NOT Boost_FOUND)
 endif()
 
 find_package(OpenMP)
-if(NOT Boost_FOUND)
+if(NOT OpenMP_FOUND)
     message(FATAL_ERROR "OpenMP was not found. You can install it with: sudo apt-get install libomp-dev. You should definitely switch compilers")
 endif()
 
