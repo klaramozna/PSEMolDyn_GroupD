@@ -74,6 +74,19 @@ void XMLReader::readFile(std::string &filename, SimParameters& SimParameters) {
             }
         }
 
+        if(sim->statistics()){
+            if (sim->statistics()->none()) {
+                Logger::console->debug("Reading statistics type 1 (none) from XML");
+                SimParameters.setOutputStatistics(false);
+            } else if (sim->statistics()->csv_output()) {
+                csvStatisticsType& stats = *(sim->statistics()->csv_output());
+                Logger::console->debug("Reading statistics type 2 (csv output) from XML");
+                SimParameters.setOutputStatistics(true);
+                SimParameters.setNumBins(stats.numBins());
+                SimParameters.setStatisticsFrequency(stats.applicationFrequency());
+            }
+        }
+
         if (sim->thermostat()) {
             if (sim->thermostat()->none()) {
                 Logger::console->debug("Reading thermostat type 1 (none) from XML");
