@@ -38,6 +38,10 @@ The basic idea of these two methods can be seen in the following presentation:
 * When we run the simulation with some other parameters (especially smaller time step delta_t), we got the following simulation:
   
 
+https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/2a9c04d2-9240-4e43-9038-ed21da9da1a5
+
+
+
 ## Task 2 ”Parallelization” + Task 3 "Rayleigh-Taylor in 3D" ##
 
 ### Starting with OpenMP ###
@@ -131,4 +135,9 @@ https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/9114c752-507f-45
 
 ### Pending Worksheet 4 ###
 * After fixing some typo mistakes (for example when generating a disk we were hard coding the z coordinate and not reading it from the input file), the simulation of the falling drop and the equilibrated liquid (checkpoint) worked fine for the most time but it exploded at the very end (as you can see in the following simulation video):
+
+
+
+https://github.com/klaramozna/PSEMolDyn_GroupD/assets/101558922/508df741-f059-4ca1-8c43-7fdb5d14f1cd
+
 
