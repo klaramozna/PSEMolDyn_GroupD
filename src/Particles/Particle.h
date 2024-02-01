@@ -141,6 +141,7 @@ public:
             double stiffness_arg, double bond_length_arg, std::vector<std::shared_ptr<Particle>> parallel_Neighbours_arg, std::vector<std::shared_ptr<Particle>> diagonal_Neighbours_arg, int id, bool hardcode_flag, int type = 0): x{x_arg}, v{v_arg}, f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, old_f{VectorDouble3(std::array<double, 3>{0, 0, 0})}, m{m_arg}, epsilon{epsilon}, sigma{sigma},stiffness{stiffness_arg}, bond_length{bond_length_arg} ,parallel_Neighbours{parallel_Neighbours_arg}, diagonal_Neighbours{diagonal_Neighbours_arg}, id{id}, type{type}, hardcode_flag{hardcode_flag}  {
         markedForMirroring = false;
         markedForDeleting = false;
+        isWall = false;
     };
 
     virtual ~Particle();

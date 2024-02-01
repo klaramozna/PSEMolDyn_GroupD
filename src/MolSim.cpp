@@ -166,9 +166,9 @@ int main(int argc, char *argsv[]) {
 
     Simulation simulation(simParameters, container, *forceCalculation, *thermostat, boundary, gravity, pullForce);
 
-    Logger::console->info("Number of particles before: {}", container.getParticleVector().size());
+    Logger::console->debug("Number of particles before: {}", container.getParticleVector().size());
     simulation.runSimulation();
-    Logger::console->info("Number of particles after: {}", container.getParticleVector().size());
+    Logger::console->debug("Number of particles after: {}", container.getParticleVector().size());
     
     return 0;
    
