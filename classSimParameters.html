@@ -143,6 +143,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab23cc8423b537040a91eda11955c918f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7ac8037373a41484c7713db85279064a"><td class="memItemLeft" align="right" valign="top">std::array&lt; double, 3 &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimParameters.html#a7ac8037373a41484c7713db85279064a">getHardcodedPullFactors</a> () const</td></tr>
 <tr class="separator:a7ac8037373a41484c7713db85279064a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a52b2339a3f5f81248d7cbfb3ad788576"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimParameters.html#a52b2339a3f5f81248d7cbfb3ad788576">getOutputStatistics</a> () const</td></tr>
+<tr class="separator:a52b2339a3f5f81248d7cbfb3ad788576"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2c0595b87a875efcd320799a46793e0f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimParameters.html#a2c0595b87a875efcd320799a46793e0f">getNumBins</a> () const</td></tr>
+<tr class="separator:a2c0595b87a875efcd320799a46793e0f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a304a45c177003cac5c52f154ff81bdd1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimParameters.html#a304a45c177003cac5c52f154ff81bdd1">getStatisticsFrequency</a> () const</td></tr>
+<tr class="separator:a304a45c177003cac5c52f154ff81bdd1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad836425ed48d019687fc00099a3bf86f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimParameters.html#ad836425ed48d019687fc00099a3bf86f">setEndTime</a> (double val)</td></tr>
 <tr class="separator:ad836425ed48d019687fc00099a3bf86f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf587e77b62c8bedba94aeef9dce3a33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimParameters.html#aaf587e77b62c8bedba94aeef9dce3a33">setDeltaT</a> (double val)</td></tr>
@@ -201,6 +207,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a04cca0bc9a3f818483cdab4d50adae89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab41f5f5bd7fbb9e4e52af50867878fd9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimParameters.html#ab41f5f5bd7fbb9e4e52af50867878fd9">setHardcodedPullFactors</a> (std::array&lt; double, 3 &gt; val)</td></tr>
 <tr class="separator:ab41f5f5bd7fbb9e4e52af50867878fd9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aba331f70fb0e068b823bac79351c1ca2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimParameters.html#aba331f70fb0e068b823bac79351c1ca2">setOutputStatistics</a> (bool value)</td></tr>
+<tr class="separator:aba331f70fb0e068b823bac79351c1ca2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a76007e027bad6a3e26aa224109dab07b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimParameters.html#a76007e027bad6a3e26aa224109dab07b">setNumBins</a> (int val)</td></tr>
+<tr class="separator:a76007e027bad6a3e26aa224109dab07b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aea9db895a176dd02a21055812d7ef1e2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classSimParameters.html#aea9db895a176dd02a21055812d7ef1e2">setStatisticsFrequency</a> (int val)</td></tr>
+<tr class="separator:aea9db895a176dd02a21055812d7ef1e2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Represents simulation parameters. </p>
@@ -1014,6 +1026,56 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a2c0595b87a875efcd320799a46793e0f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2c0595b87a875efcd320799a46793e0f">&#9670;&nbsp;</a></span>getNumBins()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int SimParameters::getNumBins </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a52b2339a3f5f81248d7cbfb3ad788576"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52b2339a3f5f81248d7cbfb3ad788576">&#9670;&nbsp;</a></span>getOutputStatistics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimParameters::getOutputStatistics </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="ae21ade438d122ec0cacfad2610ea041b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae21ade438d122ec0cacfad2610ea041b">&#9670;&nbsp;</a></span>getSigma()</h2>
 
@@ -1058,6 +1120,31 @@ Public Member Functions</h2></td></tr>
   </td>
   <td class="mlabels-right">
 <span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a304a45c177003cac5c52f154ff81bdd1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a304a45c177003cac5c52f154ff81bdd1">&#9670;&nbsp;</a></span>getStatisticsFrequency()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool SimParameters::getStatisticsFrequency </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1820,6 +1907,58 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a76007e027bad6a3e26aa224109dab07b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a76007e027bad6a3e26aa224109dab07b">&#9670;&nbsp;</a></span>setNumBins()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimParameters::setNumBins </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aba331f70fb0e068b823bac79351c1ca2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aba331f70fb0e068b823bac79351c1ca2">&#9670;&nbsp;</a></span>setOutputStatistics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimParameters::setOutputStatistics </td>
+          <td>(</td>
+          <td class="paramtype">bool&#160;</td>
+          <td class="paramname"><em>value</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a2b340e011bcf7041e24f35be93f5c008"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2b340e011bcf7041e24f35be93f5c008">&#9670;&nbsp;</a></span>setSigma()</h2>
 
@@ -1833,6 +1972,32 @@ Public Member Functions</h2></td></tr>
           <td class="memname">void SimParameters::setSigma </td>
           <td>(</td>
           <td class="paramtype">const double&#160;</td>
+          <td class="paramname"><em>val</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aea9db895a176dd02a21055812d7ef1e2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aea9db895a176dd02a21055812d7ef1e2">&#9670;&nbsp;</a></span>setStatisticsFrequency()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void SimParameters::setStatisticsFrequency </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>val</em></td><td>)</td>
           <td></td>
         </tr>

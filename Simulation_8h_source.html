@@ -91,57 +91,61 @@ $(function() {
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="preprocessor">#include &quot;../IO/output/outputWriter/CheckpointWriter.h&quot;</span></div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#include &quot;../IO/output/outputWriter/XYZWriter.h&quot;</span></div>
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;../IO/output/outputWriter/VTKWriter.h&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160; </div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &quot;../Particles/ParticleStatistics.h&quot;</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160; </div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
-<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="classSimulation.html">   27</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSimulation.html">Simulation</a> {</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keyword">private</span>:</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">double</span> start_time = 0;</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">double</span> current_time;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classLinkedCellContainer.html">LinkedCellContainer</a>&amp; container;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="classForceCalculation.html">ForceCalculation</a> &amp;forceCalculation;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="classThermostat.html">Thermostat</a>&amp; thermostat;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160; </div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <a class="code" href="classBoundaryEnforcer.html">BoundaryEnforcer</a> boundaryEnforcer;</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="classGravityForce.html">GravityForce</a> gravity;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="classHardcodedPullForce.html">HardcodedPullForce</a> pullForce;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="classSimParameters.html">SimParameters</a> simParameters;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="keywordtype">void</span> calculateV(<a class="code" href="classParticle.html">Particle</a>&amp; p) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    <span class="keywordtype">void</span> calculateX(<a class="code" href="classParticle.html">Particle</a>&amp; p) <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160; </div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> calculateF(<a class="code" href="classParticle.html">Particle</a>&amp; p1, <a class="code" href="classParticle.html">Particle</a>&amp; p2);</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> setOldForce(<a class="code" href="classParticle.html">Particle</a>&amp; p);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordtype">void</span> applyGravity(<a class="code" href="classParticle.html">Particle</a>&amp; p);</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">void</span> applyHarmonicForces(<a class="code" href="classParticle.html">Particle</a>&amp; p);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    <span class="keywordtype">void</span> applyPullForce(<a class="code" href="classParticle.html">Particle</a>&amp; p);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    <span class="keywordtype">double</span> getCurrentTime() {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <span class="keywordflow">return</span> current_time;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="classSimulation.html">   28</a></span>&#160;<span class="keyword">class </span><a class="code" href="classSimulation.html">Simulation</a> {</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">private</span>:</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keyword">static</span> constexpr <span class="keywordtype">double</span> start_time = 0;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    <span class="keywordtype">double</span> current_time;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <a class="code" href="classLinkedCellContainer.html">LinkedCellContainer</a>&amp; container;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    <a class="code" href="classForceCalculation.html">ForceCalculation</a> &amp;forceCalculation;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <a class="code" href="classThermostat.html">Thermostat</a>&amp; thermostat;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160; </div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <a class="code" href="classBoundaryEnforcer.html">BoundaryEnforcer</a> boundaryEnforcer;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <a class="code" href="classGravityForce.html">GravityForce</a> gravity;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    <a class="code" href="classHardcodedPullForce.html">HardcodedPullForce</a> pullForce;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <a class="code" href="classParticleStatistics.html">ParticleStatistics</a> statistics;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    <span class="keywordtype">bool</span> outputStatistics;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <a class="code" href="classSimParameters.html">SimParameters</a> simParameters;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> calculateV(<a class="code" href="classParticle.html">Particle</a>&amp; p) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160; </div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keywordtype">void</span> calculateX(<a class="code" href="classParticle.html">Particle</a>&amp; p) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordtype">void</span> calculateF(<a class="code" href="classParticle.html">Particle</a>&amp; p1, <a class="code" href="classParticle.html">Particle</a>&amp; p2);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> setOldForce(<a class="code" href="classParticle.html">Particle</a>&amp; p);</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordtype">void</span> applyGravity(<a class="code" href="classParticle.html">Particle</a>&amp; p);</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordtype">void</span> applyHarmonicForces(<a class="code" href="classParticle.html">Particle</a>&amp; p);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordtype">void</span> applyPullForce(<a class="code" href="classParticle.html">Particle</a>&amp; p);</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160; </div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160; </div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">void</span> runIteration();</div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    <span class="keywordtype">double</span> getCurrentTime() {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        <span class="keywordflow">return</span> current_time;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    <span class="keywordtype">void</span> runIteration();</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    <a class="code" href="classSimulation.html#a605ce81b598cde2a4b9a000652fdbd2d">Simulation</a>(<a class="code" href="classSimParameters.html">SimParameters</a>&amp; simParameters, <a class="code" href="classLinkedCellContainer.html">LinkedCellContainer</a>&amp; container, <a class="code" href="classForceCalculation.html">ForceCalculation</a> &amp;calculation, <a class="code" href="classThermostat.html">Thermostat</a>&amp; thermostat, <a class="code" href="classBoundary.html">Boundary</a> &amp;boundary, <a class="code" href="classGravityForce.html">GravityForce</a> &amp;gravity, <a class="code" href="classHardcodedPullForce.html">HardcodedPullForce</a> &amp;hardcodedPullForce);</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160; </div>
-<div class="line"><a name="l00087"></a><span class="lineno"><a class="line" href="classSimulation.html#a80fad3f57dfaf195a36f7bc49bc88279">   87</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classSimulation.html#a80fad3f57dfaf195a36f7bc49bc88279">~Simulation</a>();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160; </div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    std::vector&lt;Particle&gt; <a class="code" href="classSimulation.html#a5cdd6d9d3a2e156d3f18759db18f4c22">getParticles</a>();</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classSimulation.html#a616822b3292520c8322b7f7ddb484076">runSimulation</a>();</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;};</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160; </div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//PSEMOLDYN_GROUPD_SIMULATION_H</span></div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <a class="code" href="classSimulation.html#a605ce81b598cde2a4b9a000652fdbd2d">Simulation</a>(<a class="code" href="classSimParameters.html">SimParameters</a>&amp; simParameters, <a class="code" href="classLinkedCellContainer.html">LinkedCellContainer</a>&amp; container, <a class="code" href="classForceCalculation.html">ForceCalculation</a> &amp;calculation, <a class="code" href="classThermostat.html">Thermostat</a>&amp; thermostat, <a class="code" href="classBoundary.html">Boundary</a> &amp;boundary, <a class="code" href="classGravityForce.html">GravityForce</a> &amp;gravity, <a class="code" href="classHardcodedPullForce.html">HardcodedPullForce</a> &amp;hardcodedPullForce);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00091"></a><span class="lineno"><a class="line" href="classSimulation.html#a80fad3f57dfaf195a36f7bc49bc88279">   91</a></span>&#160;    <span class="keyword">virtual</span> <a class="code" href="classSimulation.html#a80fad3f57dfaf195a36f7bc49bc88279">~Simulation</a>();</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;    std::vector&lt;Particle&gt; <a class="code" href="classSimulation.html#a5cdd6d9d3a2e156d3f18759db18f4c22">getParticles</a>();</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160; </div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classSimulation.html#a616822b3292520c8322b7f7ddb484076">runSimulation</a>();</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;};</div>
+<div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//PSEMOLDYN_GROUPD_SIMULATION_H</span></div>
 <div class="ttc" id="aForceCalculation_8h_html"><div class="ttname"><a href="ForceCalculation_8h.html">ForceCalculation.h</a></div></div>
 <div class="ttc" id="aGravityForce_8h_html"><div class="ttname"><a href="GravityForce_8h.html">GravityForce.h</a></div></div>
 <div class="ttc" id="aHardcodedPullForce_8h_html"><div class="ttname"><a href="HardcodedPullForce_8h.html">HardcodedPullForce.h</a></div></div>
@@ -152,12 +156,13 @@ $(function() {
 <div class="ttc" id="aclassGravityForce_html"><div class="ttname"><a href="classGravityForce.html">GravityForce</a></div><div class="ttdef"><b>Definition:</b> GravityForce.h:5</div></div>
 <div class="ttc" id="aclassHardcodedPullForce_html"><div class="ttname"><a href="classHardcodedPullForce.html">HardcodedPullForce</a></div><div class="ttdef"><b>Definition:</b> HardcodedPullForce.h:5</div></div>
 <div class="ttc" id="aclassLinkedCellContainer_html"><div class="ttname"><a href="classLinkedCellContainer.html">LinkedCellContainer</a></div><div class="ttdef"><b>Definition:</b> LinkedCellContainer.h:16</div></div>
+<div class="ttc" id="aclassParticleStatistics_html"><div class="ttname"><a href="classParticleStatistics.html">ParticleStatistics</a></div><div class="ttdef"><b>Definition:</b> ParticleStatistics.h:8</div></div>
 <div class="ttc" id="aclassParticle_html"><div class="ttname"><a href="classParticle.html">Particle</a></div><div class="ttdef"><b>Definition:</b> Particle.h:15</div></div>
 <div class="ttc" id="aclassSimParameters_html"><div class="ttname"><a href="classSimParameters.html">SimParameters</a></div><div class="ttdoc">Represents simulation parameters.</div><div class="ttdef"><b>Definition:</b> SimParameters.h:19</div></div>
-<div class="ttc" id="aclassSimulation_html"><div class="ttname"><a href="classSimulation.html">Simulation</a></div><div class="ttdef"><b>Definition:</b> Simulation.h:27</div></div>
-<div class="ttc" id="aclassSimulation_html_a5cdd6d9d3a2e156d3f18759db18f4c22"><div class="ttname"><a href="classSimulation.html#a5cdd6d9d3a2e156d3f18759db18f4c22">Simulation::getParticles</a></div><div class="ttdeci">std::vector&lt; Particle &gt; getParticles()</div><div class="ttdoc">Returns a vector of particles.</div><div class="ttdef"><b>Definition:</b> Simulation.cpp:48</div></div>
+<div class="ttc" id="aclassSimulation_html"><div class="ttname"><a href="classSimulation.html">Simulation</a></div><div class="ttdef"><b>Definition:</b> Simulation.h:28</div></div>
+<div class="ttc" id="aclassSimulation_html_a5cdd6d9d3a2e156d3f18759db18f4c22"><div class="ttname"><a href="classSimulation.html#a5cdd6d9d3a2e156d3f18759db18f4c22">Simulation::getParticles</a></div><div class="ttdeci">std::vector&lt; Particle &gt; getParticles()</div><div class="ttdoc">Returns a vector of particles.</div><div class="ttdef"><b>Definition:</b> Simulation.cpp:50</div></div>
 <div class="ttc" id="aclassSimulation_html_a605ce81b598cde2a4b9a000652fdbd2d"><div class="ttname"><a href="classSimulation.html#a605ce81b598cde2a4b9a000652fdbd2d">Simulation::Simulation</a></div><div class="ttdeci">Simulation(SimParameters &amp;simParameters, LinkedCellContainer &amp;container, ForceCalculation &amp;calculation, Thermostat &amp;thermostat, Boundary &amp;boundary, GravityForce &amp;gravity, HardcodedPullForce &amp;hardcodedPullForce)</div><div class="ttdef"><b>Definition:</b> Simulation.cpp:19</div></div>
-<div class="ttc" id="aclassSimulation_html_a616822b3292520c8322b7f7ddb484076"><div class="ttname"><a href="classSimulation.html#a616822b3292520c8322b7f7ddb484076">Simulation::runSimulation</a></div><div class="ttdeci">void runSimulation()</div><div class="ttdoc">run the simulation</div><div class="ttdef"><b>Definition:</b> Simulation.cpp:148</div></div>
+<div class="ttc" id="aclassSimulation_html_a616822b3292520c8322b7f7ddb484076"><div class="ttname"><a href="classSimulation.html#a616822b3292520c8322b7f7ddb484076">Simulation::runSimulation</a></div><div class="ttdeci">void runSimulation()</div><div class="ttdoc">run the simulation</div><div class="ttdef"><b>Definition:</b> Simulation.cpp:155</div></div>
 <div class="ttc" id="aclassSimulation_html_a80fad3f57dfaf195a36f7bc49bc88279"><div class="ttname"><a href="classSimulation.html#a80fad3f57dfaf195a36f7bc49bc88279">Simulation::~Simulation</a></div><div class="ttdeci">virtual ~Simulation()</div></div>
 <div class="ttc" id="aclassThermostat_html"><div class="ttname"><a href="classThermostat.html">Thermostat</a></div><div class="ttdef"><b>Definition:</b> Thermostat.h:10</div></div>
 </div><!-- fragment --></div><!-- contents -->

@@ -87,7 +87,7 @@ Inheritance diagram for Thermostat:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a396f75481544345e6176524178dc5b93"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a396f75481544345e6176524178dc5b93">Thermostat</a> (double initTemperature, double <a class="el" href="classThermostat.html#a1f922c971579730eb8347692bde4ecb9">targetTemperature</a>, int <a class="el" href="classThermostat.html#a00e7765ee0e868eaf72990ea5b121323">cycleLength</a>, int dim)</td></tr>
+<tr class="memitem:a396f75481544345e6176524178dc5b93"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a396f75481544345e6176524178dc5b93">Thermostat</a> (double <a class="el" href="classThermostat.html#aa0e6613d6ef7a7991e12bd2c0fe0e2f3">initTemperature</a>, double <a class="el" href="classThermostat.html#a1f922c971579730eb8347692bde4ecb9">targetTemperature</a>, int <a class="el" href="classThermostat.html#a00e7765ee0e868eaf72990ea5b121323">cycleLength</a>, int <a class="el" href="classThermostat.html#afaa5ae8a06a5a5323b607f4b36f36faa">dim</a>)</td></tr>
 <tr class="memdesc:a396f75481544345e6176524178dc5b93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a thermostat object based on the given parameters.  <a href="classThermostat.html#a396f75481544345e6176524178dc5b93">More...</a><br /></td></tr>
 <tr class="separator:a396f75481544345e6176524178dc5b93"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a277a57c01ed56b68ff32c2d00e3bb164"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a277a57c01ed56b68ff32c2d00e3bb164">Thermostat</a> ()=default</td></tr>
@@ -101,7 +101,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4885a6792c134529407de0aec82038b9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a4885a6792c134529407de0aec82038b9">updateIteration</a> ()</td></tr>
 <tr class="memdesc:a4885a6792c134529407de0aec82038b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Needs to be called exactly once per iteration, to help the thermostat keep track of the iterations. Needs to be called after calling updateTemperature.  <a href="classThermostat.html#a4885a6792c134529407de0aec82038b9">More...</a><br /></td></tr>
 <tr class="separator:a4885a6792c134529407de0aec82038b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6b1be7cee21dbcae3f45b7a100116a6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#ad6b1be7cee21dbcae3f45b7a100116a6">initializeBrownianMotion</a> (<a class="el" href="classParticle.html">Particle</a> &amp;particle) const</td></tr>
+<tr class="memitem:ad6b1be7cee21dbcae3f45b7a100116a6"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#ad6b1be7cee21dbcae3f45b7a100116a6">initializeBrownianMotion</a> (<a class="el" href="classParticle.html">Particle</a> &amp;particle) const</td></tr>
 <tr class="memdesc:ad6b1be7cee21dbcae3f45b7a100116a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the velocity of the particle to a value according to the brownian motion.  <a href="classThermostat.html#ad6b1be7cee21dbcae3f45b7a100116a6">More...</a><br /></td></tr>
 <tr class="separator:ad6b1be7cee21dbcae3f45b7a100116a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50aa875ffa8d5556111b0dd777b117b2"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a50aa875ffa8d5556111b0dd777b117b2">~Thermostat</a> ()=default</td></tr>
@@ -122,6 +122,12 @@ Protected Member Functions</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
 Protected Attributes</h2></td></tr>
+<tr class="memitem:afaa5ae8a06a5a5323b607f4b36f36faa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#afaa5ae8a06a5a5323b607f4b36f36faa">dim</a></td></tr>
+<tr class="memdesc:afaa5ae8a06a5a5323b607f4b36f36faa"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classDimension.html" title="Enumeration class corresponding to the Dimension schema type.">Dimension</a> used. Has to be between 1 and 3.  <a href="classThermostat.html#afaa5ae8a06a5a5323b607f4b36f36faa">More...</a><br /></td></tr>
+<tr class="separator:afaa5ae8a06a5a5323b607f4b36f36faa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0e6613d6ef7a7991e12bd2c0fe0e2f3"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#aa0e6613d6ef7a7991e12bd2c0fe0e2f3">initTemperature</a></td></tr>
+<tr class="memdesc:aa0e6613d6ef7a7991e12bd2c0fe0e2f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">The temperature that particles should be initialized with.  <a href="classThermostat.html#aa0e6613d6ef7a7991e12bd2c0fe0e2f3">More...</a><br /></td></tr>
+<tr class="separator:aa0e6613d6ef7a7991e12bd2c0fe0e2f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bd0da5938eb9afce65e0277ad8f3a1e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a1bd0da5938eb9afce65e0277ad8f3a1e">currentIteration</a></td></tr>
 <tr class="memdesc:a1bd0da5938eb9afce65e0277ad8f3a1e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of the current iteration.  <a href="classThermostat.html#a1bd0da5938eb9afce65e0277ad8f3a1e">More...</a><br /></td></tr>
 <tr class="separator:a1bd0da5938eb9afce65e0277ad8f3a1e"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -354,6 +360,9 @@ Protected Attributes</h2></td></tr>
 
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">void Thermostat::initializeBrownianMotion </td>
@@ -363,6 +372,11 @@ Protected Attributes</h2></td></tr>
           <td> const</td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Sets the velocity of the particle to a value according to the brownian motion. </p>
@@ -372,6 +386,8 @@ Protected Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+<p>Reimplemented in <a class="el" href="classTempDifferenceThermostat.html#af1dedae37581aa9a15b39910d2de426b">TempDifferenceThermostat</a>.</p>
 
 </div>
 </div>
@@ -536,6 +552,54 @@ Protected Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Number of iterations after which the thermostat is applied. </p>
+
+</div>
+</div>
+<a id="afaa5ae8a06a5a5323b607f4b36f36faa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afaa5ae8a06a5a5323b607f4b36f36faa">&#9670;&nbsp;</a></span>dim</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int Thermostat::dim</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="classDimension.html" title="Enumeration class corresponding to the Dimension schema type.">Dimension</a> used. Has to be between 1 and 3. </p>
+
+</div>
+</div>
+<a id="aa0e6613d6ef7a7991e12bd2c0fe0e2f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0e6613d6ef7a7991e12bd2c0fe0e2f3">&#9670;&nbsp;</a></span>initTemperature</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">double Thermostat::initTemperature</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>The temperature that particles should be initialized with. </p>
 
 </div>
 </div>

@@ -82,7 +82,7 @@ Inheritance diagram for TempDifferenceThermostat:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a0eced185e67fe7e557d5e4975952faf1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTempDifferenceThermostat.html#a0eced185e67fe7e557d5e4975952faf1">TempDifferenceThermostat</a> (double initTemperature, double <a class="el" href="classThermostat.html#a1f922c971579730eb8347692bde4ecb9">targetTemperature</a>, int <a class="el" href="classThermostat.html#a00e7765ee0e868eaf72990ea5b121323">cycleLength</a>, int dim)</td></tr>
+<tr class="memitem:a0eced185e67fe7e557d5e4975952faf1"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTempDifferenceThermostat.html#a0eced185e67fe7e557d5e4975952faf1">TempDifferenceThermostat</a> (double <a class="el" href="classThermostat.html#aa0e6613d6ef7a7991e12bd2c0fe0e2f3">initTemperature</a>, double <a class="el" href="classThermostat.html#a1f922c971579730eb8347692bde4ecb9">targetTemperature</a>, int <a class="el" href="classThermostat.html#a00e7765ee0e868eaf72990ea5b121323">cycleLength</a>, int <a class="el" href="classThermostat.html#afaa5ae8a06a5a5323b607f4b36f36faa">dim</a>)</td></tr>
 <tr class="memdesc:a0eced185e67fe7e557d5e4975952faf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="classTempDifferenceThermostat.html">TempDifferenceThermostat</a> object based on the given parameters.  <a href="classTempDifferenceThermostat.html#a0eced185e67fe7e557d5e4975952faf1">More...</a><br /></td></tr>
 <tr class="separator:a0eced185e67fe7e557d5e4975952faf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab54dc9087a985fccea84baf847e73275"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTempDifferenceThermostat.html#ab54dc9087a985fccea84baf847e73275">updateTemperature</a> (<a class="el" href="classParticle.html">Particle</a> &amp;particle) override</td></tr>
@@ -91,8 +91,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac0cc723e41f4203d96e5e7f08cbe4877"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTempDifferenceThermostat.html#ac0cc723e41f4203d96e5e7f08cbe4877">updateState</a> (const std::vector&lt; <a class="el" href="classParticle.html">Particle</a> &gt; &amp;<a class="el" href="classparticles.html">particles</a>) override</td></tr>
 <tr class="memdesc:ac0cc723e41f4203d96e5e7f08cbe4877"><td class="mdescLeft">&#160;</td><td class="mdescRight">Updates state of the thermostat.  <a href="classTempDifferenceThermostat.html#ac0cc723e41f4203d96e5e7f08cbe4877">More...</a><br /></td></tr>
 <tr class="separator:ac0cc723e41f4203d96e5e7f08cbe4877"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af1dedae37581aa9a15b39910d2de426b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classTempDifferenceThermostat.html#af1dedae37581aa9a15b39910d2de426b">initializeBrownianMotion</a> (<a class="el" href="classParticle.html">Particle</a> &amp;particle) const override</td></tr>
+<tr class="memdesc:af1dedae37581aa9a15b39910d2de426b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes particle with brownian motion.  <a href="classTempDifferenceThermostat.html#af1dedae37581aa9a15b39910d2de426b">More...</a><br /></td></tr>
+<tr class="separator:af1dedae37581aa9a15b39910d2de426b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_classThermostat"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classThermostat')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="classThermostat.html">Thermostat</a></td></tr>
-<tr class="memitem:a396f75481544345e6176524178dc5b93 inherit pub_methods_classThermostat"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a396f75481544345e6176524178dc5b93">Thermostat</a> (double initTemperature, double <a class="el" href="classThermostat.html#a1f922c971579730eb8347692bde4ecb9">targetTemperature</a>, int <a class="el" href="classThermostat.html#a00e7765ee0e868eaf72990ea5b121323">cycleLength</a>, int dim)</td></tr>
+<tr class="memitem:a396f75481544345e6176524178dc5b93 inherit pub_methods_classThermostat"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a396f75481544345e6176524178dc5b93">Thermostat</a> (double <a class="el" href="classThermostat.html#aa0e6613d6ef7a7991e12bd2c0fe0e2f3">initTemperature</a>, double <a class="el" href="classThermostat.html#a1f922c971579730eb8347692bde4ecb9">targetTemperature</a>, int <a class="el" href="classThermostat.html#a00e7765ee0e868eaf72990ea5b121323">cycleLength</a>, int <a class="el" href="classThermostat.html#afaa5ae8a06a5a5323b607f4b36f36faa">dim</a>)</td></tr>
 <tr class="memdesc:a396f75481544345e6176524178dc5b93 inherit pub_methods_classThermostat"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a thermostat object based on the given parameters.  <a href="classThermostat.html#a396f75481544345e6176524178dc5b93">More...</a><br /></td></tr>
 <tr class="separator:a396f75481544345e6176524178dc5b93 inherit pub_methods_classThermostat"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a277a57c01ed56b68ff32c2d00e3bb164 inherit pub_methods_classThermostat"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a277a57c01ed56b68ff32c2d00e3bb164">Thermostat</a> ()=default</td></tr>
@@ -100,9 +103,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a4885a6792c134529407de0aec82038b9 inherit pub_methods_classThermostat"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a4885a6792c134529407de0aec82038b9">updateIteration</a> ()</td></tr>
 <tr class="memdesc:a4885a6792c134529407de0aec82038b9 inherit pub_methods_classThermostat"><td class="mdescLeft">&#160;</td><td class="mdescRight">Needs to be called exactly once per iteration, to help the thermostat keep track of the iterations. Needs to be called after calling updateTemperature.  <a href="classThermostat.html#a4885a6792c134529407de0aec82038b9">More...</a><br /></td></tr>
 <tr class="separator:a4885a6792c134529407de0aec82038b9 inherit pub_methods_classThermostat"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6b1be7cee21dbcae3f45b7a100116a6 inherit pub_methods_classThermostat"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#ad6b1be7cee21dbcae3f45b7a100116a6">initializeBrownianMotion</a> (<a class="el" href="classParticle.html">Particle</a> &amp;particle) const</td></tr>
-<tr class="memdesc:ad6b1be7cee21dbcae3f45b7a100116a6 inherit pub_methods_classThermostat"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the velocity of the particle to a value according to the brownian motion.  <a href="classThermostat.html#ad6b1be7cee21dbcae3f45b7a100116a6">More...</a><br /></td></tr>
-<tr class="separator:ad6b1be7cee21dbcae3f45b7a100116a6 inherit pub_methods_classThermostat"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a50aa875ffa8d5556111b0dd777b117b2 inherit pub_methods_classThermostat"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a50aa875ffa8d5556111b0dd777b117b2">~Thermostat</a> ()=default</td></tr>
 <tr class="memdesc:a50aa875ffa8d5556111b0dd777b117b2 inherit pub_methods_classThermostat"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroys the thermostat object.  <a href="classThermostat.html#a50aa875ffa8d5556111b0dd777b117b2">More...</a><br /></td></tr>
 <tr class="separator:a50aa875ffa8d5556111b0dd777b117b2 inherit pub_methods_classThermostat"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -120,6 +120,12 @@ Additional Inherited Members</h2></td></tr>
 <tr class="memdesc:ab3bd8bf8e06c018200a8d069feb09b58 inherit pro_methods_classThermostat"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates the temperature based on the kinetic energy.  <a href="classThermostat.html#ab3bd8bf8e06c018200a8d069feb09b58">More...</a><br /></td></tr>
 <tr class="separator:ab3bd8bf8e06c018200a8d069feb09b58 inherit pro_methods_classThermostat"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pro_attribs_classThermostat"><td colspan="2" onclick="javascript:toggleInherit('pro_attribs_classThermostat')"><img src="closed.png" alt="-"/>&#160;Protected Attributes inherited from <a class="el" href="classThermostat.html">Thermostat</a></td></tr>
+<tr class="memitem:afaa5ae8a06a5a5323b607f4b36f36faa inherit pro_attribs_classThermostat"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#afaa5ae8a06a5a5323b607f4b36f36faa">dim</a></td></tr>
+<tr class="memdesc:afaa5ae8a06a5a5323b607f4b36f36faa inherit pro_attribs_classThermostat"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classDimension.html" title="Enumeration class corresponding to the Dimension schema type.">Dimension</a> used. Has to be between 1 and 3.  <a href="classThermostat.html#afaa5ae8a06a5a5323b607f4b36f36faa">More...</a><br /></td></tr>
+<tr class="separator:afaa5ae8a06a5a5323b607f4b36f36faa inherit pro_attribs_classThermostat"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa0e6613d6ef7a7991e12bd2c0fe0e2f3 inherit pro_attribs_classThermostat"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#aa0e6613d6ef7a7991e12bd2c0fe0e2f3">initTemperature</a></td></tr>
+<tr class="memdesc:aa0e6613d6ef7a7991e12bd2c0fe0e2f3 inherit pro_attribs_classThermostat"><td class="mdescLeft">&#160;</td><td class="mdescRight">The temperature that particles should be initialized with.  <a href="classThermostat.html#aa0e6613d6ef7a7991e12bd2c0fe0e2f3">More...</a><br /></td></tr>
+<tr class="separator:aa0e6613d6ef7a7991e12bd2c0fe0e2f3 inherit pro_attribs_classThermostat"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1bd0da5938eb9afce65e0277ad8f3a1e inherit pro_attribs_classThermostat"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classThermostat.html#a1bd0da5938eb9afce65e0277ad8f3a1e">currentIteration</a></td></tr>
 <tr class="memdesc:a1bd0da5938eb9afce65e0277ad8f3a1e inherit pro_attribs_classThermostat"><td class="mdescLeft">&#160;</td><td class="mdescRight">The number of the current iteration.  <a href="classThermostat.html#a1bd0da5938eb9afce65e0277ad8f3a1e">More...</a><br /></td></tr>
 <tr class="separator:a1bd0da5938eb9afce65e0277ad8f3a1e inherit pro_attribs_classThermostat"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -194,6 +200,42 @@ Additional Inherited Members</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="af1dedae37581aa9a15b39910d2de426b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af1dedae37581aa9a15b39910d2de426b">&#9670;&nbsp;</a></span>initializeBrownianMotion()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void TempDifferenceThermostat::initializeBrownianMotion </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classParticle.html">Particle</a> &amp;&#160;</td>
+          <td class="paramname"><em>particle</em></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">override</span><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Initializes particle with brownian motion. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">particle</td><td><a class="el" href="classParticle.html">Particle</a> to be updated. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Reimplemented from <a class="el" href="classThermostat.html#ad6b1be7cee21dbcae3f45b7a100116a6">Thermostat</a>.</p>
+
+</div>
+</div>
 <a id="ac0cc723e41f4203d96e5e7f08cbe4877"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac0cc723e41f4203d96e5e7f08cbe4877">&#9670;&nbsp;</a></span>updateState()</h2>
 

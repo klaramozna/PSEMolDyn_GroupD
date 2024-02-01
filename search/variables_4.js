@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['log_5flevel_5fset_1433',['log_level_set',['../namespaceLogger.html#a450392648f0b5e99fc71b3b657c07b0a',1,'Logger']]]
+  ['inittemperature_1481',['initTemperature',['../classThermostat.html#aa0e6613d6ef7a7991e12bd2c0fe0e2f3',1,'Thermostat']]]
 ];
