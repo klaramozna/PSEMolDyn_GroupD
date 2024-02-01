@@ -11,6 +11,7 @@ Members:
 * Compiler: g++ 11.4.0
 * Documentation: https://klaramozna.github.io/PSEMolDyn_GroupD/
 
+> **Hint:** Please have a look at our report directly on the readme on the repository (Link: https://github.com/klaramozna/PSEMolDyn_GroupD/blob/presentations%2Breports/worksheet5/report/README.md ) because we have videos embedded and it looks nicer there.
 
 # Report #
 ## Task 1 ”Simulation of a membrane” ##
