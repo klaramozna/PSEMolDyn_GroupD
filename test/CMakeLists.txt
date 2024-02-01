@@ -48,12 +48,16 @@ set(source_needed_for_test
         ${PROJECT_SOURCE_DIR}/src/Simulation/SimpleThermostat.cpp
         ${PROJECT_SOURCE_DIR}/src/Simulation/GradualThermostat.h
         ${PROJECT_SOURCE_DIR}/src/Simulation/GradualThermostat.cpp
+        ${PROJECT_SOURCE_DIR}/src/Simulation/TempDifferenceThermostat.h
+        ${PROJECT_SOURCE_DIR}/src/Simulation/TempDifferenceThermostat.cpp
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/GravitationalForce.h
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/GravitationalForce.cpp
         ${PROJECT_SOURCE_DIR}/src/Particles/BoundaryEnforcer.cpp
         ${PROJECT_SOURCE_DIR}/src/Particles/BoundaryEnforcer.h
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/MixingRuleLennardJones.h
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/MixingRuleLennardJones.cpp
+        ${PROJECT_SOURCE_DIR}/src/Particles/ParticleStatistics.h
+        ${PROJECT_SOURCE_DIR}/src/Particles/ParticleStatistics.cpp
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/TruncatedLennardJones.h
         ${PROJECT_SOURCE_DIR}/src/Simulation/Physics/TruncatedLennardJones.cpp
         CuboidGeneratorTest.cpp
@@ -71,6 +75,10 @@ set(source_needed_for_test
         MixingRuleLennardJonesTest.h
         PeriodicBoundaryTest.cpp
         PeriodicBoundaryTest.h
+        TempDiffrenceThermostatTest.cpp
+        TempDiffrenceThermostatTest.h
+        ParticleStatisticsTest.cpp
+        ParticleStatisticsTest.h
 )
 
 add_executable(

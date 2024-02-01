@@ -32,6 +32,12 @@ public:
       */
      void updateState(const std::vector<Particle>& particles) override;
 
+     /**
+      * @brief Initializes particle with brownian motion.
+      * @param particle Particle to be updated.
+      */
+     void initializeBrownianMotion(Particle& particle) const override;
+
 private:
 
     /**

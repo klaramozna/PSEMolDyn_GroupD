@@ -533,6 +533,46 @@ thermostatCycleLength (::std::unique_ptr< thermostatCycleLength_type > x)
 }
 
 
+// csvStatisticsType
+// 
+
+const csvStatisticsType::numBins_type& csvStatisticsType::
+numBins () const
+{
+  return this->numBins_.get ();
+}
+
+csvStatisticsType::numBins_type& csvStatisticsType::
+numBins ()
+{
+  return this->numBins_.get ();
+}
+
+void csvStatisticsType::
+numBins (const numBins_type& x)
+{
+  this->numBins_.set (x);
+}
+
+const csvStatisticsType::applicationFrequency_type& csvStatisticsType::
+applicationFrequency () const
+{
+  return this->applicationFrequency_.get ();
+}
+
+csvStatisticsType::applicationFrequency_type& csvStatisticsType::
+applicationFrequency ()
+{
+  return this->applicationFrequency_.get ();
+}
+
+void csvStatisticsType::
+applicationFrequency (const applicationFrequency_type& x)
+{
+  this->applicationFrequency_.set (x);
+}
+
+
 // ThermostatType
 // 
 
@@ -654,6 +694,70 @@ void ThermostatType::
 tempDiff (::std::unique_ptr< tempDiff_type > x)
 {
   this->tempDiff_.set (std::move (x));
+}
+
+
+// statisticsType
+// 
+
+const statisticsType::none_optional& statisticsType::
+none () const
+{
+  return this->none_;
+}
+
+statisticsType::none_optional& statisticsType::
+none ()
+{
+  return this->none_;
+}
+
+void statisticsType::
+none (const none_type& x)
+{
+  this->none_.set (x);
+}
+
+void statisticsType::
+none (const none_optional& x)
+{
+  this->none_ = x;
+}
+
+void statisticsType::
+none (::std::unique_ptr< none_type > x)
+{
+  this->none_.set (std::move (x));
+}
+
+const statisticsType::csv_output_optional& statisticsType::
+csv_output () const
+{
+  return this->csv_output_;
+}
+
+statisticsType::csv_output_optional& statisticsType::
+csv_output ()
+{
+  return this->csv_output_;
+}
+
+void statisticsType::
+csv_output (const csv_output_type& x)
+{
+  this->csv_output_.set (x);
+}
+
+void statisticsType::
+csv_output (const csv_output_optional& x)
+{
+  this->csv_output_ = x;
+}
+
+void statisticsType::
+csv_output (::std::unique_ptr< csv_output_type > x)
+{
+  this->csv_output_.set (std::move (x));
 }
 
 
@@ -2041,6 +2145,36 @@ testing_mode_default_value ()
   return testing_mode_type (false);
 }
 
+const Simulation_t::statistics_optional& Simulation_t::
+statistics () const
+{
+  return this->statistics_;
+}
+
+Simulation_t::statistics_optional& Simulation_t::
+statistics ()
+{
+  return this->statistics_;
+}
+
+void Simulation_t::
+statistics (const statistics_type& x)
+{
+  this->statistics_.set (x);
+}
+
+void Simulation_t::
+statistics (const statistics_optional& x)
+{
+  this->statistics_ = x;
+}
+
+void Simulation_t::
+statistics (::std::unique_ptr< statistics_type > x)
+{
+  this->statistics_.set (std::move (x));
+}
+
 
 // hardcoded_force
 // 
@@ -3196,6 +3330,118 @@ tempDiffThermostatType::
 {
 }
 
+// csvStatisticsType
+//
+
+csvStatisticsType::
+csvStatisticsType (const numBins_type& numBins,
+                   const applicationFrequency_type& applicationFrequency)
+: ::xml_schema::type (),
+  numBins_ (numBins, this),
+  applicationFrequency_ (applicationFrequency, this)
+{
+}
+
+csvStatisticsType::
+csvStatisticsType (const csvStatisticsType& x,
+                   ::xml_schema::flags f,
+                   ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  numBins_ (x.numBins_, f, this),
+  applicationFrequency_ (x.applicationFrequency_, f, this)
+{
+}
+
+csvStatisticsType::
+csvStatisticsType (const ::xercesc::DOMElement& e,
+                   ::xml_schema::flags f,
+                   ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  numBins_ (this),
+  applicationFrequency_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void csvStatisticsType::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // numBins
+    //
+    if (n.name () == "numBins" && n.namespace_ ().empty ())
+    {
+      if (!numBins_.present ())
+      {
+        this->numBins_.set (numBins_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    // applicationFrequency
+    //
+    if (n.name () == "applicationFrequency" && n.namespace_ ().empty ())
+    {
+      if (!applicationFrequency_.present ())
+      {
+        this->applicationFrequency_.set (applicationFrequency_traits::create (i, f, this));
+        continue;
+      }
+    }
+
+    break;
+  }
+
+  if (!numBins_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "numBins",
+      "");
+  }
+
+  if (!applicationFrequency_.present ())
+  {
+    throw ::xsd::cxx::tree::expected_element< char > (
+      "applicationFrequency",
+      "");
+  }
+}
+
+csvStatisticsType* csvStatisticsType::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class csvStatisticsType (*this, f, c);
+}
+
+csvStatisticsType& csvStatisticsType::
+operator= (const csvStatisticsType& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->numBins_ = x.numBins_;
+    this->applicationFrequency_ = x.applicationFrequency_;
+  }
+
+  return *this;
+}
+
+csvStatisticsType::
+~csvStatisticsType ()
+{
+}
+
 // ThermostatType
 //
 
@@ -3332,6 +3578,109 @@ operator= (const ThermostatType& x)
 
 ThermostatType::
 ~ThermostatType ()
+{
+}
+
+// statisticsType
+//
+
+statisticsType::
+statisticsType ()
+: ::xml_schema::type (),
+  none_ (this),
+  csv_output_ (this)
+{
+}
+
+statisticsType::
+statisticsType (const statisticsType& x,
+                ::xml_schema::flags f,
+                ::xml_schema::container* c)
+: ::xml_schema::type (x, f, c),
+  none_ (x.none_, f, this),
+  csv_output_ (x.csv_output_, f, this)
+{
+}
+
+statisticsType::
+statisticsType (const ::xercesc::DOMElement& e,
+                ::xml_schema::flags f,
+                ::xml_schema::container* c)
+: ::xml_schema::type (e, f | ::xml_schema::flags::base, c),
+  none_ (this),
+  csv_output_ (this)
+{
+  if ((f & ::xml_schema::flags::base) == 0)
+  {
+    ::xsd::cxx::xml::dom::parser< char > p (e, true, false, false);
+    this->parse (p, f);
+  }
+}
+
+void statisticsType::
+parse (::xsd::cxx::xml::dom::parser< char >& p,
+       ::xml_schema::flags f)
+{
+  for (; p.more_content (); p.next_content (false))
+  {
+    const ::xercesc::DOMElement& i (p.cur_element ());
+    const ::xsd::cxx::xml::qualified_name< char > n (
+      ::xsd::cxx::xml::dom::name< char > (i));
+
+    // none
+    //
+    if (n.name () == "none" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< none_type > r (
+        none_traits::create (i, f, this));
+
+      if (!this->none_)
+      {
+        this->none_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    // csv-output
+    //
+    if (n.name () == "csv-output" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< csv_output_type > r (
+        csv_output_traits::create (i, f, this));
+
+      if (!this->csv_output_)
+      {
+        this->csv_output_.set (::std::move (r));
+        continue;
+      }
+    }
+
+    break;
+  }
+}
+
+statisticsType* statisticsType::
+_clone (::xml_schema::flags f,
+        ::xml_schema::container* c) const
+{
+  return new class statisticsType (*this, f, c);
+}
+
+statisticsType& statisticsType::
+operator= (const statisticsType& x)
+{
+  if (this != &x)
+  {
+    static_cast< ::xml_schema::type& > (*this) = x;
+    this->none_ = x.none_;
+    this->csv_output_ = x.csv_output_;
+  }
+
+  return *this;
+}
+
+statisticsType::
+~statisticsType ()
 {
 }
 
@@ -4561,7 +4910,8 @@ Simulation_t (const brownian_motion_type& brownian_motion)
   base_name_ (this),
   writeFrequency_ (this),
   log_level_ (this),
-  testing_mode_ (this)
+  testing_mode_ (this),
+  statistics_ (this)
 {
 }
 
@@ -4585,7 +4935,8 @@ Simulation_t (const Simulation_t& x,
   base_name_ (x.base_name_, f, this),
   writeFrequency_ (x.writeFrequency_, f, this),
   log_level_ (x.log_level_, f, this),
-  testing_mode_ (x.testing_mode_, f, this)
+  testing_mode_ (x.testing_mode_, f, this),
+  statistics_ (x.statistics_, f, this)
 {
 }
 
@@ -4609,7 +4960,8 @@ Simulation_t (const ::xercesc::DOMElement& e,
   base_name_ (this),
   writeFrequency_ (this),
   log_level_ (this),
-  testing_mode_ (this)
+  testing_mode_ (this),
+  statistics_ (this)
 {
   if ((f & ::xml_schema::flags::base) == 0)
   {
@@ -4825,6 +5177,20 @@ parse (::xsd::cxx::xml::dom::parser< char >& p,
       }
     }
 
+    // statistics
+    //
+    if (n.name () == "statistics" && n.namespace_ ().empty ())
+    {
+      ::std::unique_ptr< statistics_type > r (
+        statistics_traits::create (i, f, this));
+
+      if (!this->statistics_)
+      {
+        this->statistics_.set (::std::move (r));
+        continue;
+      }
+    }
+
     break;
   }
 
@@ -4865,6 +5231,7 @@ operator= (const Simulation_t& x)
     this->writeFrequency_ = x.writeFrequency_;
     this->log_level_ = x.log_level_;
     this->testing_mode_ = x.testing_mode_;
+    this->statistics_ = x.statistics_;
   }
 
   return *this;
